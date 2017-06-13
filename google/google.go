@@ -9,7 +9,3 @@ import(
 type Google struct{
   GCE
 }
-
-
-
-

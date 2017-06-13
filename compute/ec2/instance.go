@@ -11,7 +11,7 @@ import(
 	"net/http/httputil"
 	"strconv"
 	"time"
-	"reflect"
+	//"reflect"
 
 )
 
@@ -63,8 +63,8 @@ func (ec2 *EC2) TerminateInstances(instIds []string) (resp *TerminateInstancesRe
 
 
 
-func (ec2 *EC2) Createnode(variable interface{})(resp interface{}, err error){
-
+func (ec2 *EC2) Createnode(options interface{})(resp interface{}, err error){
+/*
 	var options RunInstances
 
 	fmt.Println(variable)
@@ -86,8 +86,8 @@ func (ec2 *EC2) Createnode(variable interface{})(resp interface{}, err error){
 
 	 r := reflect.ValueOf(variable)
 
-         ImageId := reflect.Indirect(r).FieldByName("ImageId")
-	 InstanceType := reflect.Indirect(r).FieldByName("InstanceType")
+  ImageId := reflect.Indirect(r).FieldByName("ImageId")
+	InstanceType := reflect.Indirect(r).FieldByName("InstanceType")
 	(options).ImageId = ImageId.String()
 	(options).InstanceType = InstanceType.String()
 	fmt.Println(options)
@@ -169,8 +169,8 @@ func (ec2 *EC2) Createnode(variable interface{})(resp interface{}, err error){
 	if err != nil {
 		return nil, err
 	}
+*/
 	return
-
 }
 
 

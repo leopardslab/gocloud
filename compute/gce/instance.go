@@ -2,10 +2,12 @@ package gce
 
 import(
   "fmt"
-  //"net"
+  "net"
   "net/http"
   "io/ioutil"
   "bytes"
+  "reflect"
+ "encoding/json"
 )
 
 
@@ -32,12 +34,13 @@ func (gce *GCE)describenode(options interface{})(resp interface{},err error){
   return
 }
 
+/*
 func (gce *GCE)Createnode(options interface{})(resp interface{},err error){
 
 
 	 token := sign()
 
-  	client := &http.Client{}
+  client := &http.Client{}
 
 	var jsonStr2 = []byte(`{
   "disks":[
@@ -85,6 +88,7 @@ func (gce *GCE)Createnode(options interface{})(resp interface{},err error){
 
 }
 
+*/
 
 
 func (gce *GCE)deletenode(options interface{})(resp interface{},err error){
@@ -167,4 +171,135 @@ func (gce *GCE)startnode(options interface{})(resp interface{},err error){
 
 	fmt.Println("\n\n\n\n\n\n\n\n\n\n")
 
+}
+
+
+
+
+
+
+func (gce *GCE)Createnode(options interface{})(resp interface{},err error){
+
+    var gceinstance GCE
+
+    var projectid string
+
+    param := make(map[string]interface{})
+
+    param = options.(map[string]interface{})
+
+    for key,value := range param{
+        switch key {
+             case "projectid":
+                projectid,_ = value.(string)
+
+              case "Zone":
+                 Zone,_ := value.(string)
+                 gceinstance.Zone = Zone
+
+              case "selfLink":
+                  selfLink,_ := value.(string)
+                  gceinstance.selfLink = selfLink
+
+              case "Description":
+                    Description,_ := value.(string)
+                    gceinstance.Description = Description
+
+              case "CanIPForward":
+                      CanIPForward,_ := value.(bool)
+                      gceinstance.CanIPForward = CanIPForward
+
+              case "Name":
+                    Name,_ := value.(string)
+                    gceinstance.Name = Name
+
+              case "MachineType":
+                    MachineType,_ := value.(string)
+                    gceinstance.MachineType = "https://www.googleapis.com/compute/v1/projects/" + projectid + "zones/" +  gceinstance.Zone + "machineTypes/" +  MachineType
+
+              case "disk":
+                     diskparam,_ := value.([]map[string]interface{})
+                     var disk Disk
+                     var initializeParam InitializeParam
+                     for i := 0; i < len(diskparam); i++{
+                        for diskparamkey,diskparamvalue := range diskparam[i]{
+                                switch diskparamkey{
+                                   case "Type":
+                                        disk.Type =diskparamvalue.(string)
+                                    case "Boot":
+                                        disk.Boot =diskparamvalue.(bool)
+                                    case "Mode":
+                                        disk.Mode =diskparamvalue.(string)
+                                      case "AutoDelete":
+                                          disk.AutoDelete =diskparamvalue.(bool)
+                                      case "DeviceName":
+                                          disk.DeviceName =diskparamvalue.(string)
+                                     case "InitializeParams":
+                                         InitializeParams,_ := diskparamvalue.(map[string]string)
+                                         initializeParam.SourceImage=InitializeParams["SourceImage"]
+                                         initializeParam.DiskType=InitializeParams["DiskType"]
+                                         initializeParam.DiskSizeGb=InitializeParams["DiskSizeGb"]
+
+                               }
+                     }
+                     gceinstance.Disks = append(gceinstance.Disks,Disk{ Type:disk.Type,
+                                                                        Boot:disk.Boot,
+                                                                        Mode:disk.Mode,
+                                                                        AutoDelete:disk.AutoDelete,
+                                                                        DeviceName:disk.DeviceName,
+                                                                        InitializeParams:InitializeParam{
+                                                                                  SourceImage:initializeParam.SourceImage,
+                                                                                  DiskType:initializeParam.DiskType,
+                                                                                  DiskSizeGb : initializeParam.DiskSizeGb,
+                                                                                  }})
+
+                   }
+                   case "NetworkInterfaces":
+                       NetworkInterfacesparam,_ := value.([]map[string]interface{})
+                       for i := 0; i < len(NetworkInterfacesparam); i++{
+                         var networkInterfaceParam NetworkInterface
+                         for NetworkInterfaceparamkey,NetworkInterfaceparamvalue := range NetworkInterfacesparam[i]{
+                            switch NetworkInterfaceparamkey{
+                            case "Network":
+                              networkInterfaceParam.Network = NetworkInterfaceparamvalue.(string)
+
+                            case "Subnetwork":
+                              networkInterfaceParam.Subnetwork = NetworkInterfaceparamvalue.(string)
+
+                            case "AccessConfigs":
+                                 AccessConfigsparam,_ := NetworkInterfaceparamvalue.([]map[string]string)
+                                  for i := 0; i < len(AccessConfigsparam); i++{
+                                         var accessConfigParam accessConfig
+                                                  accessConfigParam.Name =AccessConfigsparam[i]["Name"]
+                                                  accessConfigParam.Type =AccessConfigsparam[i]["Type"]
+                                  networkInterfaceParam.AccessConfigs = append(networkInterfaceParam.AccessConfigs,accessConfigParam)
+                                  }
+                            }
+                          }
+                          gceinstance.NetworkInterfaces = append(gceinstance.NetworkInterfaces,networkInterfaceParam)
+                        }
+
+                    case "scheduling":
+                    schedulingparam,_ := value.(map[string]interface{})
+                    for key,value := range schedulingparam {
+                        switch key {
+                            case "Preemptible":
+                                Preemptible,_ := value.(bool)
+                                gceinstance.Scheduling.Preemptible = Preemptible
+
+                              case "onHostMaintenance":
+                                 onHostMaintenance,_ := value.(string)
+                                 gceinstance.Scheduling.OnHostMaintenance = onHostMaintenance
+
+                              case "automaticRestart":
+                                  automaticRestart,_ := value.(bool)
+                                  gceinstance.Scheduling.AutomaticRestart = automaticRestart
+                        }
+                    }
+
+                 }
+
+}
+
+    fmt.Println(gceinstance)
 }

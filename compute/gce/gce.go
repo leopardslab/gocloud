@@ -9,48 +9,49 @@ type GCE struct {
 
 	MachineType string `json:"machineType"`
 
-	Metadata struct {
-		Items []interface{} `json:"items"`
-	} `json:"metadata"`
+	Disks []Disk  `json:"disks"`
 
-	Tags struct {Items []interface{} `json:"items"`} `json:"tags"`
+	CanIPForward bool `json:"canIpForward"`
 
-	Disks []struct {
+	NetworkInterfaces []NetworkInterface `json:"networkInterfaces"`
+
+	Description string `json:"description"`
+
+	selfLink string `json:"selfLink"`
+
+  Scheduling `json:"scheduling"`
+}
+
+type Disk struct {
 		Type string `json:"type"`
 		Boot bool `json:"boot"`
 		Mode string `json:"mode"`
 		AutoDelete bool `json:"autoDelete"`
 		DeviceName string `json:"deviceName"`
+    InitializeParams InitializeParam `json:"initializeParams"`
 
-		InitializeParams struct {
-			SourceImage string `json:"sourceImage"`
-			DiskType string `json:"diskType"`
-			DiskSizeGb string `json:"diskSizeGb"`
-		} `json:"initializeParams"`
+	}
 
-	} `json:"disks"`
+type InitializeParam struct {
+    SourceImage string `json:"sourceImage"`
+    DiskType string `json:"diskType"`
+    DiskSizeGb string `json:"diskSizeGb"`
+}
 
-	CanIPForward bool `json:"canIpForward"`
+type NetworkInterface struct {
+  Network string `json:"network"`
+  Subnetwork string `json:"subnetwork"`
+  AccessConfigs []accessConfig `json:"accessConfigs"`
 
-	NetworkInterfaces []struct {
-		Network string `json:"network"`
+}
 
-		Subnetwork string `json:"subnetwork"`
+type accessConfig struct {
+  Name string `json:"name"`
+  Type string `json:"type"`
+}
 
-		AccessConfigs []struct {
-			Name string `json:"name"`
-			Type string `json:"type"`
-		} `json:"accessConfigs"`
-	} `json:"networkInterfaces"`
-
-	Description string `json:"description"`
-
-	Labels struct {
-	} `json:"labels"`
-
-	Scheduling struct {
-		Preemptible bool `json:"preemptible"`
-		OnHostMaintenance string `json:"onHostMaintenance"`
-		AutomaticRestart bool `json:"automaticRestart"`
-	} `json:"scheduling"`
+type Scheduling struct {
+  Preemptible bool `json:"preemptible"`
+  OnHostMaintenance string `json:"onHostMaintenance"`
+  AutomaticRestart bool `json:"automaticRestart"`
 }

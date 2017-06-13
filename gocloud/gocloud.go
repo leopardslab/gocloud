@@ -28,7 +28,6 @@ func CloudProvider(provider,Secretkey,secretid string)(Gocloud, error){
     case Googleprovider:
        return new(google.Google), nil
 
-
       default:
         return nil, errors.New(fmt.Sprintf("provider %s not recognized\n",provider))
     }

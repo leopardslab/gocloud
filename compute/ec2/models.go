@@ -27,6 +27,40 @@ type RunInstances struct {
 }
 
 
+type SecurityGroup struct {
+	Id   string `xml:"groupId"`
+	Name string `xml:"groupName"`
+}
+
+type BlockDeviceMapping struct {
+	DeviceName          string `xml:"deviceName"`
+	VirtualName         string `xml:"virtualName"`
+	SnapshotId          string `xml:"ebs>snapshotId"`
+	VolumeType          string `xml:"ebs>volumeType"`
+	VolumeSize          int64  `xml:"ebs>volumeSize"`
+	DeleteOnTermination bool   `xml:"ebs>deleteOnTermination"`
+	IOPS int64 `xml:"ebs>iops"`
+}
+
+
+type RunNetworkInterface struct {
+	Id                      string
+	DeviceIndex             int
+	SubnetId                string
+	Description             string
+	PrivateIPs              []PrivateIP
+	SecurityGroupIds        []string
+	DeleteOnTermination     bool
+	SecondaryPrivateIPCount int
+}
+
+
+type PrivateIP struct {
+	Address   string `xml:"privateIpAddress"`
+	DNSName   string `xml:"privateDnsName"`
+	IsPrimary bool   `xml:"primary"`
+}
+
 
 
 type RunInstancesResp struct {
@@ -80,41 +114,6 @@ type SimpleResp struct {
 type TerminateInstancesResp struct {
 	RequestId    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
-}
-
-
-type SecurityGroup struct {
-	Id   string `xml:"groupId"`
-	Name string `xml:"groupName"`
-}
-
-
-type BlockDeviceMapping struct {
-	DeviceName          string `xml:"deviceName"`
-	VirtualName         string `xml:"virtualName"`
-	SnapshotId          string `xml:"ebs>snapshotId"`
-	VolumeType          string `xml:"ebs>volumeType"`
-	VolumeSize          int64  `xml:"ebs>volumeSize"`
-	DeleteOnTermination bool   `xml:"ebs>deleteOnTermination"`
-	IOPS int64 `xml:"ebs>iops"`
-}
-
-
-type PrivateIP struct {
-	Address   string `xml:"privateIpAddress"`
-	DNSName   string `xml:"privateDnsName"`
-	IsPrimary bool   `xml:"primary"`
-}
-
-type RunNetworkInterface struct {
-	Id                      string
-	DeviceIndex             int
-	SubnetId                string
-	Description             string
-	PrivateIPs              []PrivateIP
-	SecurityGroupIds        []string
-	DeleteOnTermination     bool
-	SecondaryPrivateIPCount int
 }
 
 
