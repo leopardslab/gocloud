@@ -51,125 +51,118 @@ func (ec2 *EC2) RebootInstances(ids ...string) (resp *SimpleResp, err error) {
 
 
 func (ec2 *EC2) TerminateInstances(instIds []string) (resp *TerminateInstancesResp, err error) {
-	params := makeParams("TerminateInstances")
-	addParamsList(params, "InstanceId", instIds)
-	resp = &TerminateInstancesResp{}
-	err = ec2.query(params, resp)
-	if err != nil {
-		return nil, err
-	}
-	return
-}
 
+	var ec2 RunInstances
 
+	param := make(map[string]interface{})
 
-func (ec2 *EC2) Createnode(options interface{})(resp interface{}, err error){
-/*
-	var options RunInstances
+	param = options.(map[string]interface{})
 
-	fmt.Println(variable)
-	ps := reflect.ValueOf(variable)
-	fmt.Println(ps)
-	//fmt.Println(s)
+   	for key,value := range param{
+		    switch key {
+			      case "ImageId":
+						    ImageId,_ := value.(string)
+							  ec2.ImageId = ImageId
 
+						case "MinCount":
+							  MinCount,_ := value.(int)
+								ec2.MinCount = MinCount
 
-	s := reflect.ValueOf(variable).Elem()
-	typeOfT := s.Type()
+						case "MaxCount":
+								MaxCount,_ := value.(int)
+								ec2.MaxCount = MaxCount
 
-	for i := 0; i < s.NumField(); i++ {
-	    f := s.Field(i)
-    		fmt.Printf("%s\t  %v\t\n",typeOfT.Field(i).Name, f.Interface())
-		//options.
-	}
+						case "KeyName":
+								KeyName,_ := value.(string)
+								ec2.KeyName = KeyName
 
+						case "KernelId":
+								KernelId,_ := value.(string)
+								ec2.KernelId = KernelId
 
+						case "InstanceType":
+								InstanceType,_ := value.(string)
+								ec2.InstanceType = InstanceType
 
-	 r := reflect.ValueOf(variable)
+							case "RamdiskId":
+							    RamdiskId,_ := value.(string)
+								  ec2.RamdiskId = RamdiskId
 
-  ImageId := reflect.Indirect(r).FieldByName("ImageId")
-	InstanceType := reflect.Indirect(r).FieldByName("InstanceType")
-	(options).ImageId = ImageId.String()
-	(options).InstanceType = InstanceType.String()
-	fmt.Println(options)
-	//params := prepareRunParams(*options)
-	params := makeParams("RunInstances")
+							case "AvailZone":
+								  AvailZone,_ := value.(string)
+									ec2.AvailZone = AvailZone
 
+							case "PlacementGroupName":
+									PlacementGroupName,_ := value.(string)
+									ec2.PlacementGroupName = PlacementGroupName
 
-	params["ImageId"] = options.ImageId
-	params["InstanceType"] = options.InstanceType
-	var min, max int
-	if options.MinCount == 0 && options.MaxCount == 0 {
-		min = 1
-		max = 1
-	} else if options.MaxCount == 0 {
-		min = options.MinCount
-		max = min
-	} else {
-		min = options.MinCount
-		max = options.MaxCount
-	}
-	params["MinCount"] = strconv.Itoa(min)
-	params["MaxCount"] = strconv.Itoa(max)
-	i, j := 1, 1
-	for _, g := range options.SecurityGroups {
-		if g.Id != "" {
-			params["SecurityGroupId."+strconv.Itoa(i)] = g.Id
-			i++
-		} else {
-			params["SecurityGroup."+strconv.Itoa(j)] = g.Name
-			j++
-		}
-	}
-	prepareBlockDevices(params, options.BlockDeviceMappings)
-	prepareNetworkInterfaces(params, options.NetworkInterfaces)
-	token, err := clientToken()
-	if err != nil {
-		return nil, err
-	}
-	params["ClientToken"] = token
+							case "Monitoring":
+									Monitoring,_ := value.(bool)
+									ec2.Monitoring = Monitoring
 
-	if options.KeyName != "" {
-		params["KeyName"] = options.KeyName
-	}
-	if options.KernelId != "" {
-		params["KernelId"] = options.KernelId
-	}
-	if options.RamdiskId != "" {
-		params["RamdiskId"] = options.RamdiskId
-	}
-	if options.UserData != nil {
-		userData := make([]byte, base64.StdEncoding.EncodedLen(len(options.UserData)))
-		base64.StdEncoding.Encode(userData, options.UserData)
-		params["UserData"] = string(userData)
-	}
-	if options.AvailZone != "" {
-		params["Placement.AvailabilityZone"] = options.AvailZone
-	}
-	if options.PlacementGroupName != "" {
-		params["Placement.GroupName"] = options.PlacementGroupName
-	}
-	if options.Monitoring {
-		params["Monitoring.Enabled"] = "true"
-	}
-	if options.SubnetId != "" {
-		params["SubnetId"] = options.SubnetId
-	}
-	if options.DisableAPITermination {
-		params["DisableApiTermination"] = "true"
-	}
-	if options.ShutdownBehavior != "" {
-		params["InstanceInitiatedShutdownBehavior"] = options.ShutdownBehavior
-	}
-	if options.PrivateIPAddress != "" {
-		params["PrivateIpAddress"] = options.PrivateIPAddress
-	}
+							case "SubnetId":
+									SubnetId,_ := value.(string)
+									ec2.SubnetId = SubnetId
 
-	resp = &RunInstancesResp{}
-	err = ec2.query(params, resp)
-	if err != nil {
-		return nil, err
-	}
-*/
+							case "DisableAPITermination":
+									DisableAPITermination,_ := value.(bool)
+									ec2.DisableAPITermination = DisableAPITermination
+
+							case "ShutdownBehavior":
+									ShutdownBehavior,_ := value.(string)
+									ec2.ShutdownBehavior = ShutdownBehavior
+
+							case "PrivateIPAddress":
+									PrivateIPAddress,_ := value.(string)
+									ec2.PrivateIPAddress = PrivateIPAddress
+
+							case "SecurityGroup":
+									SecurityGroupparam,_ := value.([]map[string]string)
+									//fmt.Println(SecurityGroupparam)
+									for i := 0; i < len(SecurityGroupparam); i++{
+										    var securityGroup SecurityGroup
+										    securityGroup.Id = SecurityGroupparam[i]["Id"]
+											  securityGroup.Name =SecurityGroupparam[i]["Name"]
+						 					  ec2.SecurityGroups = append(ec2.SecurityGroups,securityGroup)
+								 }
+
+						 case "BlockDevice":
+						    BlockDeviceparam,_ := value.([]map[string]interface{})
+								for i := 0; i < len(BlockDeviceparam); i++{
+									var BlockDeviceMappingParam BlockDeviceMapping
+									    for BlockDeviceparamkey,BlockDeviceparamvalue := range BlockDeviceparam[i]{
+										     switch BlockDeviceparamkey{
+										         case "DeviceName":
+											         BlockDeviceMappingParam.DeviceName = BlockDeviceparamvalue.(string)
+
+										         case "VirtualName":
+											         BlockDeviceMappingParam.VirtualName = BlockDeviceparamvalue.(string)
+
+														 case "SnapshotId":
+											         BlockDeviceMappingParam.SnapshotId = BlockDeviceparamvalue.(string)
+
+										         case "VolumeType":
+											         BlockDeviceMappingParam.VolumeType = BlockDeviceparamvalue.(string)
+
+														 case "VolumeSize":
+											         BlockDeviceMappingParam.VolumeSize = BlockDeviceparamvalue.(int64)
+
+										         case "DeleteOnTermination":
+											         BlockDeviceMappingParam.DeleteOnTermination = BlockDeviceparamvalue.(bool)
+
+														 case "IOPS":
+											         BlockDeviceMappingParam.IOPS = BlockDeviceparamvalue.(int64)
+
+												 }
+							        }
+								 ec2.BlockDeviceMappings = append(ec2.BlockDeviceMappings,BlockDeviceMappingParam)
+
+			         }
+
+        }
+    }
+
+		
 	return
 }
 
@@ -300,3 +293,18 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 	return xml.NewDecoder(r.Body).Decode(resp)
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
