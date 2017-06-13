@@ -28,9 +28,8 @@ type Disk struct {
 		Mode string `json:"mode"`
 		AutoDelete bool `json:"autoDelete"`
 		DeviceName string `json:"deviceName"`
-    InitializeParams InitializeParam `json:"initializeParams"`
-
-	}
+                InitializeParams InitializeParam `json:"initializeParams"`
+}
 
 type InitializeParam struct {
     SourceImage string `json:"sourceImage"`
