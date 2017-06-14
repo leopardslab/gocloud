@@ -4,7 +4,7 @@ import(
 	"strconv"
 )
 
-
+// prepareRunParams base on vps or legacy params
 func prepareRunParams(options RunInstances) map[string]string {
 	if options.SubnetId != "" || len(options.NetworkInterfaces) > 0 {
 		return makeParamsVPC("RunInstances")
@@ -12,6 +12,7 @@ func prepareRunParams(options RunInstances) map[string]string {
 		return makeParams("RunInstances")
 	}
 }
+
 
 func makeParams(action string) map[string]string {
 	return makeParamsWithVersion(action, legacyAPIVersion)
@@ -21,6 +22,7 @@ func makeParamsVPC(action string) map[string]string {
 	return makeParamsWithVersion(action, vpcAPIVersion)
 }
 
+//add version to params
 func makeParamsWithVersion(action, version string) map[string]string {
 	params := make(map[string]string)
 	params["Action"] = action
@@ -28,7 +30,7 @@ func makeParamsWithVersion(action, version string) map[string]string {
 	return params
 }
 
-
+// prepare Block Devices add into request param
 func prepareBlockDevices(params map[string]string, blockDevs []BlockDeviceMapping) {
 	for i, b := range blockDevs {
 		n := strconv.Itoa(i + 1)
@@ -56,6 +58,8 @@ func prepareBlockDevices(params map[string]string, blockDevs []BlockDeviceMappin
 		}
 	}
 }
+
+// prepareNetworkInterfaces add to request param
 
 func prepareNetworkInterfaces(params map[string]string, nics []RunNetworkInterface) {
 	for i, ni := range nics {
@@ -91,11 +95,9 @@ func prepareNetworkInterfaces(params map[string]string, nics []RunNetworkInterfa
 	}
 }
 
-
+// use to create params to start stop and reboot, terminate instance
 func addParamsList(params map[string]string, label string, ids []string) {
 	for i, id := range ids {
 		params[label+"."+strconv.Itoa(i+1)] = id
 	}
 }
-
-

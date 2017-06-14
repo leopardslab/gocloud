@@ -5,6 +5,8 @@ import(
 )
 
 
+//runinstance to store all attribute to create EC2 instance
+
 type RunInstances struct {
 	ImageId               string
 	MinCount              int
@@ -27,10 +29,15 @@ type RunInstances struct {
 }
 
 
+//SecurityGroup struct
+
 type SecurityGroup struct {
 	Id   string `xml:"groupId"`
 	Name string `xml:"groupName"`
 }
+
+
+// BlockDevice struct to attach device
 
 type BlockDeviceMapping struct {
 	DeviceName          string `xml:"deviceName"`
@@ -42,6 +49,7 @@ type BlockDeviceMapping struct {
 	IOPS int64 `xml:"ebs>iops"`
 }
 
+//NetworkInterface struct for Ec2
 
 type RunNetworkInterface struct {
 	Id                      string
@@ -55,6 +63,8 @@ type RunNetworkInterface struct {
 }
 
 
+//Private ip to assign PrivateIP
+
 type PrivateIP struct {
 	Address   string `xml:"privateIpAddress"`
 	DNSName   string `xml:"privateDnsName"`
@@ -62,6 +72,7 @@ type PrivateIP struct {
 }
 
 
+// run instance response
 
 type RunInstancesResp struct {
 	RequestId      string          `xml:"requestId"`
@@ -71,7 +82,7 @@ type RunInstancesResp struct {
 	Instances      []Instance      `xml:"instancesSet>item"`
 }
 
-
+// this struct repersents running instance
 
 type Instance struct {
 	InstanceId         string             `xml:"instanceId"`
@@ -99,6 +110,8 @@ type Instance struct {
 
 
 
+//This stuct repersents instance state change
+
 type InstanceStateChange struct {
 	InstanceId    string        `xml:"instanceId"`
 	CurrentState  InstanceState `xml:"currentState"`
@@ -106,22 +119,28 @@ type InstanceStateChange struct {
 }
 
 
+
 type SimpleResp struct {
 	XMLName   xml.Name
 	RequestId string `xml:"requestId"`
 }
+
+//struct to TerminateInstance
 
 type TerminateInstancesResp struct {
 	RequestId    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
+// InstanceState struct
 
 type InstanceState struct {
 	Code int    `xml:"code"`
 	Name string `xml:"name"`
 }
 
+
+//reperent ruuing instance NetworkInterface
 
 type NetworkInterface struct {
 	Id               string                     `xml:"networkInterfaceId"`
@@ -154,17 +173,20 @@ type NetworkInterfaceAttachment struct {
 	DeleteOnTermination bool   `xml:"deleteOnTermination"`
 }
 
-
+// reperent tag assgin to instance
 type Tag struct {
 	Key   string `xml:"key"`
 	Value string `xml:"value"`
 }
 
+//start instance response
 
 type StartInstanceResp struct {
 	RequestId    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
+
+//stop instances response
 
 type StopInstanceResp struct {
 	RequestId    string                `xml:"requestId"`

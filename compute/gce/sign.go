@@ -12,6 +12,9 @@ import (
 //"errors"
 )
 
+
+//GCE signature it give URL to get Autorization code on which we it generate auth token and pass in each request in request header
+
 func sign()(token *oauth2.Token) {
 
 conf := &oauth2.Config{
@@ -45,7 +48,6 @@ conf := &oauth2.Config{
 		    log.Fatal(err)
 	}
 
-	//token = new(oauth2.Token)
 
 	token, err := conf.Exchange(oauth2.NoContext, code)
 	if err != nil {

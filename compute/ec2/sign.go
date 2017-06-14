@@ -18,6 +18,8 @@ import(
 
 )
 
+//Sign v2 method for Authenticating request
+
 func SignV2(req *http.Request, auth Auth) (err error) {
 	queryVals := req.URL.Query()
 	queryVals.Set("AWSAccessKeyId", auth.AccessKey)
@@ -62,7 +64,6 @@ func canonicalQueryString(queryVals url.Values) (string, error) {
 
 	return strings.Replace(queryVals.Encode(), "+", "%20", -1), nil
 }
-
 
 
 

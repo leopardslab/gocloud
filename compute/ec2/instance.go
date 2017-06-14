@@ -15,6 +15,9 @@ import(
 
 )
 
+// start ec2 instance accept array of instance-id
+
+
 func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 	ids := request.([]string)
 	params := makeParams("StartInstances")
@@ -26,6 +29,8 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 	}
 	return resp, nil
 }
+
+// stop ec2 instance accept array of instance-id
 
 func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error){
 	ids := request.([]string)
@@ -40,6 +45,8 @@ func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error){
 }
 
 
+// reboot ec2 instance accept array of instance-id
+
 func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error){
 	ids := request.([]string)
 	params := makeParams("RebootInstances")
@@ -52,6 +59,8 @@ func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error){
 	return resp, nil
 }
 
+
+// delete ec2 instance accept array of instance-id
 
 func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 	  instIds := request.([]string)
@@ -66,88 +75,8 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 }
 
 
-func (ec2 *EC2) RunInstances(options *RunInstances) (resp *RunInstancesResp, err error) {
-	params := prepareRunParams(*options)
-	params["ImageId"] = options.ImageId
-	params["InstanceType"] = options.InstanceType
-	var min, max int
-	if options.MinCount == 0 && options.MaxCount == 0 {
-		min = 1
-		max = 1
-	} else if options.MaxCount == 0 {
-		min = options.MinCount
-		max = min
-	} else {
-		min = options.MinCount
-		max = options.MaxCount
-	}
-	params["MinCount"] = strconv.Itoa(min)
-	params["MaxCount"] = strconv.Itoa(max)
-	i, j := 1, 1
-	for _, g := range options.SecurityGroups {
-		if g.Id != "" {
-			params["SecurityGroupId."+strconv.Itoa(i)] = g.Id
-			i++
-		} else {
-			params["SecurityGroup."+strconv.Itoa(j)] = g.Name
-			j++
-		}
-	}
-	prepareBlockDevices(params, options.BlockDeviceMappings)
-	prepareNetworkInterfaces(params, options.NetworkInterfaces)
-	token, err := clientToken()
-	if err != nil {
-		return nil, err
-	}
-	params["ClientToken"] = token
 
-	if options.KeyName != "" {
-		params["KeyName"] = options.KeyName
-	}
-	if options.KernelId != "" {
-		params["KernelId"] = options.KernelId
-	}
-	if options.RamdiskId != "" {
-		params["RamdiskId"] = options.RamdiskId
-	}
-	if options.UserData != nil {
-		userData := make([]byte, base64.StdEncoding.EncodedLen(len(options.UserData)))
-		base64.StdEncoding.Encode(userData, options.UserData)
-		params["UserData"] = string(userData)
-	}
-	if options.AvailZone != "" {
-		params["Placement.AvailabilityZone"] = options.AvailZone
-	}
-	if options.PlacementGroupName != "" {
-		params["Placement.GroupName"] = options.PlacementGroupName
-	}
-	if options.Monitoring {
-		params["Monitoring.Enabled"] = "true"
-	}
-	if options.SubnetId != "" {
-		params["SubnetId"] = options.SubnetId
-	}
-	if options.DisableAPITermination {
-		params["DisableApiTermination"] = "true"
-	}
-	if options.ShutdownBehavior != "" {
-		params["InstanceInitiatedShutdownBehavior"] = options.ShutdownBehavior
-	}
-	if options.PrivateIPAddress != "" {
-		params["PrivateIpAddress"] = options.PrivateIPAddress
-	}
-
-	resp = &RunInstancesResp{}
-	err = ec2.query(params, resp)
-	if err != nil {
-		return nil, err
-	}
-	return
-}
-
-
-
-
+//pass the param to query and add signature to it base on secret key and acces key
 
 func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 
@@ -193,6 +122,8 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 
 }
 
+
+//create Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation
 
 func (ec2 *EC2) Createnode(request interface{})(resp interface{}, err error){
 

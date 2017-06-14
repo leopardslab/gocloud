@@ -7,6 +7,8 @@ import(
   "errors"
 )
 
+//gocloud is a interface which hide differece between different cloud providers
+
 type Gocloud interface{
   Createnode(request interface{})(resp interface{},err error)
   Startnode(request interface{}) (resp interface{}, err error)
@@ -15,6 +17,7 @@ type Gocloud interface{
   Rebootnode(request interface{}) (resp interface{}, err error)
 }
 
+
 const(
   Amazonprovider = "aws"
   Googleprovider = "google"
@@ -22,6 +25,9 @@ const(
   Secretid = "dummy"
 )
 
+
+//cloud provider return the instance of respepted cloud and map to the Gocloud so we can call the method like createnote on CloudProvider instance
+//this is a delegation of cloud provider
 
 func CloudProvider(provider,Secretkey,secretid string)(Gocloud, error){
 

@@ -1,5 +1,6 @@
 package ec2
 
+// repersents error
 type Error struct {
 	StatusCode int
 
@@ -9,4 +10,3 @@ type Error struct {
 
 	RequestId string `xml:"RequestID"`
 }
-

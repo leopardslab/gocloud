@@ -111,6 +111,7 @@ func main(){
 */
     //googlecloud.Rebootnode(reboot)
 
+/*
     delete := map[string]string{
       "projectid":"sheltermap-1493101612061",
       "instance":"instance-10",
@@ -118,7 +119,7 @@ func main(){
     }
 
     googlecloud.Deletenode(delete)
-
+*/
 /*
   ec2 := map[string]interface{}{
     "ImageId"     : "ami-ccf405a5",
@@ -146,6 +147,43 @@ func main(){
   amazoncloud.Rebootnode(reboot)
 */
 
+    InitializeParams := map[string]string{
+        "SourceImage" : "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160301",
+    }
 
+    disk := []map[string]interface{}{
+     {
+        "Boot":  true,
+        "InitializeParams": InitializeParams,
+     },
+     }
+
+
+
+    AccessConfigs := []map[string]string{{
+        "Name" : "external-nat",
+        "Type" :  "ONE_TO_ONE_NAT",
+    },
+   }
+
+   NetworkInterfaces := []map[string]interface{}{
+  {
+        "Network": "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/global/networks/default",
+        "Subnetwork": "",
+        "AccessConfigs": AccessConfigs,
+   },
+   }
+
+
+gce := map[string]interface{}{
+    "projectid":"sheltermap-1493101612061",
+    "Name": "scorelab",
+    "MachineType":"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/machineTypes/n1-standard-1",
+    "Zone":"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c",
+    "disk": disk,
+    "NetworkInterfaces": NetworkInterfaces,
+    }
+
+googlecloud.Createnode(gce)
 
 }

@@ -8,6 +8,7 @@ import(
   "bytes"
 )
 
+//create gce instance
 
 func (gce *GCE)Createnode(request interface{})(resp interface{},err error){
 
@@ -234,6 +235,8 @@ func (gce *GCE)Startnode(request interface{}) (resp interface{}, err error){
   return
 }
 
+//stop gce instance currentnly running
+//accept projectid, zone, instance
 
 func (gce *GCE)Stopnode(request interface{}) (resp interface{}, err error){
 
@@ -262,6 +265,10 @@ func (gce *GCE)Stopnode(request interface{}) (resp interface{}, err error){
   return
 }
 
+
+//delete gce instance currentnly running
+//accept projectid, zone, instance
+
 func (gce *GCE)Deletenode(request interface{}) (resp interface{}, err error){
 
   options := request.(map[string]string)
@@ -289,6 +296,8 @@ func (gce *GCE)Deletenode(request interface{}) (resp interface{}, err error){
   return
 }
 
+//reboot/reset gce instance currentnly ***running***
+//accept projectid, zone, instance
 
 func (gce *GCE)Rebootnode(request interface{}) (resp interface{}, err error){
 
@@ -319,6 +328,10 @@ func (gce *GCE)Rebootnode(request interface{}) (resp interface{}, err error){
 
   return
 }
+
+
+//list gce instance currentnly created
+//accept projectid, zone
 
 func (gce *GCE)listnode(request interface{})(resp interface{},err error){
 
