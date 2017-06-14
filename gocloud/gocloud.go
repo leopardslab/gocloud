@@ -8,7 +8,11 @@ import(
 )
 
 type Gocloud interface{
-  Createnode(options interface{})(resp interface{},err error)
+  Createnode(request interface{})(resp interface{},err error)
+  Startnode(request interface{}) (resp interface{}, err error)
+  Stopnode(request interface{}) (resp interface{}, err error)
+  Deletenode(request interface{}) (resp interface{}, err error)
+  Rebootnode(request interface{}) (resp interface{}, err error)
 }
 
 const(

@@ -7,6 +7,7 @@ import(
 
 func main(){
 
+    /*
     InitializeParams := map[string]string{
     "SourceImage" : "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160301",
     "DiskType" :  "1",
@@ -74,16 +75,42 @@ func main(){
     "Zone":"us-east4-c",
     "disk": disk,
     "NetworkInterfaces": NetworkInterfaces,
-    "description":""
+    "description":"",
     "scheduling" : scheduling,
     }
 
-
-
-
-
   googlecloud, _ := CloudProvider(Googleprovider,Secretkey,Secretid)
   googlecloud.Createnode(gce)
+
+  */
+
+/*
+  ec2 := map[string]interface{}{
+    "ImageId"     : "ami-ccf405a5",
+    "InstanceType": "t1.micro",
+  }
+*/
+  amazoncloud, _ := CloudProvider(Amazonprovider,Secretkey,Secretid)
+//  amazoncloud.Createnode(ec2)
+
+
+  reboot := []string{
+      "i-0ce8be9072b64fe84",
+  }
+
+//  amazoncloud.Stopnode(stop)
+
+  start := []string{
+      "i-002ebb744a5fc48e0",
+  }
+  //amazoncloud.Startnode(start)
+
+
+  //amazoncloud.Deletenode(start)
+
+  amazoncloud.Rebootnode(reboot)
+
+
 
 
 }

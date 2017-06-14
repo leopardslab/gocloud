@@ -1,5 +1,26 @@
 package gce
 
+
+
+func (gce *GCE)Createnode(request interface{})(resp interface{},err error){
+
+ return
+}
+
+
+func (gce *GCE)Startnode(request interface{}) (resp interface{}, err error){
+  return
+}
+func (gce *GCE)Stopnode(request interface{}) (resp interface{}, err error){
+return
+}
+func (gce *GCE)Deletenode(request interface{}) (resp interface{}, err error){
+  return
+}
+func (gce *GCE)Rebootnode(request interface{}) (resp interface{}, err error){
+  return
+}
+/*
 import(
   "fmt"
   "net"
@@ -34,7 +55,7 @@ func (gce *GCE)describenode(options interface{})(resp interface{},err error){
   return
 }
 
-/*
+
 func (gce *GCE)Createnode(options interface{})(resp interface{},err error){
 
 
@@ -88,7 +109,7 @@ func (gce *GCE)Createnode(options interface{})(resp interface{},err error){
 
 }
 
-*/
+
 
 
 func (gce *GCE)deletenode(options interface{})(resp interface{},err error){
@@ -303,3 +324,5 @@ func (gce *GCE)Createnode(options interface{})(resp interface{},err error){
 
     fmt.Println(gceinstance)
 }
+
+*/
