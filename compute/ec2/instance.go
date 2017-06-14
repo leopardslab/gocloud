@@ -164,7 +164,7 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 	query.Add("Timestamp", timeNow().In(time.UTC).Format(time.RFC3339))
 	req.URL.RawQuery = query.Encode()
 
-	auth := Auth{"AKIAISVVIAORTLZ6HEZA","OlKgmb8Q5lnvPJRTszzlGozFBZTWtfyotloDTctj"}
+	auth := Auth{"dummy","dummy"}
 
 
 	SignV2(req,auth)
