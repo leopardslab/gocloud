@@ -1,5 +1,10 @@
 package gce
 
+import(
+  "fmt"
+  "net/http"
+  "io/ioutil"
+)
 
 
 func (gce *GCE)Createnode(request interface{})(resp interface{},err error){
@@ -9,17 +14,149 @@ func (gce *GCE)Createnode(request interface{})(resp interface{},err error){
 
 
 func (gce *GCE)Startnode(request interface{}) (resp interface{}, err error){
+
+    options := request.(map[string]string)
+
+    url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/"+ options["Zone"] + "/instances/" + options["instance"] + "/start"
+
+
+    token := sign()
+
+    client := &http.Client{}
+
+    Startnoderequest, err := http.NewRequest("POST",url, nil)
+
+    Startnoderequest.Header.Set("Content-Type", "application/json")
+
+    token.SetAuthHeader(Startnoderequest)
+
+    Startnoderesp, err := client.Do(Startnoderequest)
+
+    defer Startnoderesp.Body.Close()
+
+    body, err := ioutil.ReadAll(Startnoderesp.Body)
+
+    fmt.Println(string(body))
+
   return
 }
+
+
 func (gce *GCE)Stopnode(request interface{}) (resp interface{}, err error){
-return
+
+  options := request.(map[string]string)
+
+  url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/"+ options["Zone"] + "/instances/" + options["instance"] + "/stop"
+
+  token := sign()
+
+  client := &http.Client{}
+
+  Stopnoderequest, err := http.NewRequest("POST",url, nil)
+
+  Stopnoderequest.Header.Set("Content-Type", "application/json")
+
+  token.SetAuthHeader(Stopnoderequest)
+
+  Stopnoderesp, err := client.Do(Stopnoderequest)
+
+  defer Stopnoderesp.Body.Close()
+
+  body, err := ioutil.ReadAll(Stopnoderesp.Body)
+
+  fmt.Println(string(body))
+
+  return
 }
+
 func (gce *GCE)Deletenode(request interface{}) (resp interface{}, err error){
+
+  options := request.(map[string]string)
+
+  url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/"+ options["Zone"] + "/instances/" + options["instance"]
+
+  token := sign()
+
+  client := &http.Client{}
+
+  Deletenoderequest, err := http.NewRequest("DELETE",url, nil)
+
+  Deletenoderequest.Header.Set("Content-Type", "application/json")
+
+  token.SetAuthHeader(Deletenoderequest)
+
+  Deletenoderesp, err := client.Do(Deletenoderequest)
+
+  defer Deletenoderesp.Body.Close()
+
+  body, err := ioutil.ReadAll(Deletenoderesp.Body)
+
+  fmt.Println(string(body))
+
   return
 }
+
+
 func (gce *GCE)Rebootnode(request interface{}) (resp interface{}, err error){
+
+  options := request.(map[string]string)
+
+  url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/"+ options["Zone"] + "/instances/" + options["instance"] + "/reset"
+
+  fmt.Println(url)
+
+  token := sign()
+
+  client := &http.Client{}
+
+  Rebootnoderequest, err := http.NewRequest("POST",url, nil)
+
+  Rebootnoderequest.Header.Set("Content-Type", "application/json")
+
+  token.SetAuthHeader(Rebootnoderequest)
+
+  Rebootnoderesp, err := client.Do(Rebootnoderequest)
+
+  defer Rebootnoderesp.Body.Close()
+
+  body, err := ioutil.ReadAll(Rebootnoderesp.Body)
+
+  fmt.Println(string(body))
+
+
   return
 }
+
+func (gce *GCE)listnode(request interface{})(resp interface{},err error){
+
+  options := request.(map[string]string)
+
+  url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/"+ options["Zone"] + "/instances/"
+
+  fmt.Println(url)
+
+  token := sign()
+
+  client := &http.Client{}
+
+  listnoderequest, err := http.NewRequest("POST",url, nil)
+
+  listnoderequest.Header.Set("Content-Type", "application/json")
+
+  token.SetAuthHeader(listnoderequest)
+
+  listnoderesp, err := client.Do(listnoderequest)
+
+  defer listnoderesp.Body.Close()
+
+  body, err := ioutil.ReadAll(listnoderesp.Body)
+
+  fmt.Println(string(body))
+
+  return
+}
+
+
 /*
 import(
   "fmt"
@@ -34,7 +171,7 @@ import(
 
 
 
-func (gce *GCE)describenode(options interface{})(resp interface{},err error){
+func (gce *GCE)listnode(options interface{})(resp interface{},err error){
 
 
   token := sign()
@@ -185,7 +322,6 @@ func (gce *GCE)startnode(options interface{})(resp interface{},err error){
 
 	body3, err := ioutil.ReadAll(resp3.Body)
 
-	fmt.Println("\n\n\n\n\n\n\n\n\n\n")
 
 	fmt.Println(string(body3))
 

@@ -16,9 +16,9 @@ func sign()(token *oauth2.Token) {
 
 conf := &oauth2.Config{
 
-	ClientID: "",
+	ClientID: "enterhere",
 
-  ClientSecret: "",
+  ClientSecret: "enterhere",
 
 	RedirectURL: "urn:ietf:wg:oauth:2.0:oob",
 
@@ -47,10 +47,11 @@ conf := &oauth2.Config{
 
 	//token = new(oauth2.Token)
 
-	tok, err := conf.Exchange(oauth2.NoContext, code)
+	token, err := conf.Exchange(oauth2.NoContext, code)
 	if err != nil {
     		log.Fatal(err)
 	}
 
-	return tok
+//	fmt.Println(token)
+	return token
 }

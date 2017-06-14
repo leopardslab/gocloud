@@ -78,38 +78,73 @@ func main(){
     "description":"",
     "scheduling" : scheduling,
     }
+*/
 
-  googlecloud, _ := CloudProvider(Googleprovider,Secretkey,Secretid)
-  googlecloud.Createnode(gce)
+/*
+    start := map[string]string{
+      "projectid":"sheltermap-1493101612061",
+      "instance":"instance-10",
+      "Zone": "us-west1-c",
 
-  */
+    }
+*/
+    googlecloud, _ := CloudProvider(Googleprovider,Secretkey,Secretid)
+  //  googlecloud.Startnode(start)
+
+/*
+    stop := map[string]string{
+      "projectid":"sheltermap-1493101612061",
+      "instance":"instance-10",
+      "Zone": "us-west1-c",
+
+    }
+*/
+    //  googlecloud.Stopnode(stop)
+
+/*
+    reboot := map[string]string{
+      "projectid":"sheltermap-1493101612061",
+      "instance":"instance-10",
+      "Zone": "us-west1-c",
+
+    }
+*/
+    //googlecloud.Rebootnode(reboot)
+
+    delete := map[string]string{
+      "projectid":"sheltermap-1493101612061",
+      "instance":"instance-10",
+      "Zone": "us-west1-c",
+    }
+
+    googlecloud.Deletenode(delete)
 
 /*
   ec2 := map[string]interface{}{
     "ImageId"     : "ami-ccf405a5",
     "InstanceType": "t1.micro",
   }
-*/
+
   amazoncloud, _ := CloudProvider(Amazonprovider,Secretkey,Secretid)
-//  amazoncloud.Createnode(ec2)
+  amazoncloud.Createnode(ec2)
 
 
   reboot := []string{
       "i-0ce8be9072b64fe84",
   }
 
-//  amazoncloud.Stopnode(stop)
+ amazoncloud.Stopnode(stop)
 
   start := []string{
       "i-002ebb744a5fc48e0",
   }
-  //amazoncloud.Startnode(start)
+  amazoncloud.Startnode(start)
 
 
-  //amazoncloud.Deletenode(start)
+  amazoncloud.Deletenode(start)
 
   amazoncloud.Rebootnode(reboot)
-
+*/
 
 
 
