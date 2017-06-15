@@ -134,68 +134,23 @@ func (gce *GCE)Createnode(request interface{})(resp interface{},err error){
 
 }
 
-    gceinstancejson, _ := json.Marshal(gceinstance)
-    gceinstancejsonstring := string(gceinstancejson)
-    fmt.Println(gceinstancejsonstring)
-    fmt.Println("********************")
+     gceinstancejson, _ := json.Marshal(gceinstance)
+
+     gceinstancejsonstring := string(gceinstancejson)
+
      var gceinstancejsonstringbyte = []byte(gceinstancejsonstring)
-     fmt.Println(gceinstancejsonstringbyte)
-     fmt.Println("########################################")
-     var jsonStr2 = []byte(`{
-	"name": "1",
-	"zone": "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c",
-	"machineType": "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/machineTypes/n1-standard-1",
-	"disks": [{
-		"boot": true,
-		"initializeParams": {
-			"sourceImage": "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160301"
-		}
-	}],
-	"networkInterfaces": [{
-		"network": "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/global/networks/default",
-		"accessConfigs": [{
-			"name": "external-nat",
-			"type": "ONE_TO_ONE_NAT"
-		}]
-	}],
-  "scheduling":{"preemptible":false,"onHostMaintenance":"","automaticRestart":false}
-}`)
 
-    fmt.Println("jsonStr2:\n",jsonStr2)
-
-    jsonStr3:= []byte(`{
-	"name": "scorelab-20",
-	"zone": "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c",
-	"machineType": "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/machineTypes/n1-standard-1",
-	"disks": [{
-		"boot": true,
-		"autoDelete": false,
-		"initializeParams": {
-			"sourceImage": "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160301"
-		}
-	}],
-	"canIpForward": false,
-	"networkInterfaces": [{
-		"network": "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/global/networks/default",
-		"accessConfigs": [{
-			"name": "external-nat",
-			"type": "ONE_TO_ONE_NAT"
-		}]
-	}]
-}`)
-
-     fmt.Println(jsonStr3)
      client := &http.Client{}
 
-	   Createnoderequest, err := http.NewRequest("POST", "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/instances", bytes.NewBuffer(jsonStr3))
+	   Createnoderequest, err := http.NewRequest("POST", "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/instances", bytes.NewBuffer(gceinstancejsonstringbyte))
 
 	   Createnoderequest.Header.Set("Content-Type", "application/json")
 
      token := sign()
 
-	   token.SetAuthHeader( Createnoderequest)
+	   token.SetAuthHeader(Createnoderequest)
 
-	    Createnoderesp, err := client.Do( Createnoderequest)
+	    Createnoderesp, err := client.Do(Createnoderequest)
 
 	    defer  Createnoderesp.Body.Close()
 

@@ -149,11 +149,17 @@ func main(){
 
     InitializeParams := map[string]string{
         "SourceImage" : "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160301",
+        "DiskType": "projects/sheltermap-1493101612061/zones/us-east4-c/diskTypes/pd-standard",
+  			"DiskSizeGb": "10",
     }
 
     disk := []map[string]interface{}{
      {
         "Boot":  true,
+        "AutoDelete": false,
+    	"DeviceName": "bokya",
+        "Type": "PERSISTENT",
+        "Mode": "READ_WRITE",
         "InitializeParams": InitializeParams,
      },
      }
@@ -169,7 +175,7 @@ func main(){
    NetworkInterfaces := []map[string]interface{}{
   {
         "Network": "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/global/networks/default",
-        "Subnetwork": "",
+        "Subnetwork": "projects/sheltermap-1493101612061/regions/us-east4/subnetworks/default",
         "AccessConfigs": AccessConfigs,
    },
    }
@@ -177,7 +183,7 @@ func main(){
 
 gce := map[string]interface{}{
     "projectid":"sheltermap-1493101612061",
-    "Name": "scorelab",
+    "Name": "bokya",
     "MachineType":"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/machineTypes/n1-standard-1",
     "Zone":"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c",
     "disk": disk,

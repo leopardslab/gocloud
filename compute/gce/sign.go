@@ -38,7 +38,7 @@ conf := &oauth2.Config{
 
 	url := conf.AuthCodeURL("state", oauth2.AccessTypeOffline)
 
-	fmt.Printf("Visit the URL for Autorization \n: %v", url)
+	fmt.Printf("\nVisit the URL for Autorization \n: %v", url)
 
   fmt.Printf("\nEnter Autorization code :\n")
 
@@ -54,6 +54,5 @@ conf := &oauth2.Config{
     		log.Fatal(err)
 	}
 
-//	fmt.Println(token)
 	return token
 }
