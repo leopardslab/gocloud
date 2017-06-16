@@ -77,7 +77,7 @@ type RunInstancesResp struct {
 	Instances      []Instance      `xml:"instancesSet>item"`
 }
 
-// this struct repersents running instance
+// this struct represents running instance
 
 type Instance struct {
 	InstanceId         string             `xml:"instanceId"`
@@ -103,7 +103,7 @@ type Instance struct {
 	NetworkInterfaces  []NetworkInterface `xml:"networkInterfaceSet>item"`
 }
 
-//This stuct repersents instance state change
+//This stuct represents instance state change
 
 type InstanceStateChange struct {
 	InstanceId    string        `xml:"instanceId"`
