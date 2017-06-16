@@ -6,7 +6,7 @@ type Error struct {
 
 	Code string
 
-	Message   string
+	Message string
 
 	RequestId string `xml:"RequestID"`
 }

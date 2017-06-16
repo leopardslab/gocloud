@@ -1,4 +1,5 @@
 package auth
 
-type Googleauth struct{
-  ClientID,
+type Googleauth struct {
+	ClientID, SecretKey string
+}

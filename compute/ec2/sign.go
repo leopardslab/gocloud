@@ -1,21 +1,19 @@
 package ec2
 
-import(
-
+import (
+	"bytes"
+	"crypto/hmac"
 	"crypto/rand"
+	"crypto/sha256"
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/xml"
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
-	"time"
-	"bytes"
-	"crypto/hmac"
-	"crypto/sha256"
-	"io"
 	"strings"
-
+	"time"
 )
 
 //Sign v2 method for Authenticating request
@@ -57,17 +55,10 @@ func SignV2(req *http.Request, auth Auth) (err error) {
 	return nil
 }
 
-
-
-
 func canonicalQueryString(queryVals url.Values) (string, error) {
 
 	return strings.Replace(queryVals.Encode(), "+", "%20", -1), nil
 }
-
-
-
-
 
 func clientToken() (string, error) {
 
@@ -78,9 +69,6 @@ func clientToken() (string, error) {
 	}
 	return hex.EncodeToString(buf), nil
 }
-
-
-
 
 func fprintfWrapper(w io.Writer, format string, vals ...interface{}) func() error {
 	return func() error {
@@ -146,7 +134,6 @@ func requestMethodVerb(rawMethod string) (verb string) {
 	return verb
 }
 
-
 func buildError(r *http.Response) error {
 	errors := xmlErrors{}
 	xml.NewDecoder(r.Body).Decode(&errors)
@@ -162,15 +149,12 @@ func buildError(r *http.Response) error {
 	return &err
 }
 
-
 type xmlErrors struct {
 	RequestId string  `xml:"RequestID"`
 	Errors    []Error `xml:"Errors>Error"`
 }
 
 var timeNow = time.Now
-
-
 
 func (err *Error) Error() string {
 	if err.Code == "" {
@@ -179,8 +163,6 @@ func (err *Error) Error() string {
 
 	return fmt.Sprintf("%s (%s)", err.Message, err.Code)
 }
-
-
 
 const (
 	ISO8601BasicFormat      = "20060102T150405Z"

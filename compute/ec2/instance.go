@@ -1,8 +1,6 @@
 package ec2
 
-
-import(
-
+import (
 	"encoding/base64"
 	"encoding/xml"
 	"fmt"
@@ -11,12 +9,9 @@ import(
 	"net/http/httputil"
 	"strconv"
 	"time"
-	//"reflect"
-
 )
 
 // start ec2 instance accept array of instance-id
-
 
 func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 	ids := request.([]string)
@@ -32,7 +27,7 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 
 // stop ec2 instance accept array of instance-id
 
-func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error){
+func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
 	ids := request.([]string)
 	params := makeParams("StopInstances")
 	addParamsList(params, "InstanceId", ids)
@@ -44,10 +39,9 @@ func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error){
 	return resp, nil
 }
 
-
 // reboot ec2 instance accept array of instance-id
 
-func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error){
+func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 	ids := request.([]string)
 	params := makeParams("RebootInstances")
 	addParamsList(params, "InstanceId", ids)
@@ -59,22 +53,19 @@ func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error){
 	return resp, nil
 }
 
-
 // delete ec2 instance accept array of instance-id
 
 func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
-	  instIds := request.([]string)
-   	params := makeParams("TerminateInstances")
-		addParamsList(params, "InstanceId", instIds)
-		resp = &TerminateInstancesResp{}
-		err = ec2.query(params, resp)
-		if err != nil {
-			return nil, err
-		}
-		return
+	instIds := request.([]string)
+	params := makeParams("TerminateInstances")
+	addParamsList(params, "InstanceId", instIds)
+	resp = &TerminateInstancesResp{}
+	err = ec2.query(params, resp)
+	if err != nil {
+		return nil, err
+	}
+	return
 }
-
-
 
 //pass the param to query and add signature to it base on secret key and acces key
 
@@ -93,10 +84,9 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 	query.Add("Timestamp", timeNow().In(time.UTC).Format(time.RFC3339))
 	req.URL.RawQuery = query.Encode()
 
-	auth := Auth{"dummy","dummy"}
+	auth := Auth{"dummy", "dummy"}
 
-
-	SignV2(req,auth)
+	SignV2(req, auth)
 
 	fmt.Println(req)
 
@@ -122,171 +112,170 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 
 }
 
-
 //create Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation
 
-func (ec2 *EC2) Createnode(request interface{})(resp interface{}, err error){
+func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 
-		var options RunInstances
+	var options RunInstances
 
-		param := make(map[string]interface{})
+	param := make(map[string]interface{})
 
-		param = request.(map[string]interface{})
+	param = request.(map[string]interface{})
 
-	   	for key,value := range param{
-			    switch key {
-				      case "ImageId":
-							    ImageId,_ := value.(string)
-								  options.ImageId = ImageId
+	for key, value := range param {
+		switch key {
+		case "ImageId":
+			ImageId, _ := value.(string)
+			options.ImageId = ImageId
 
-							case "MinCount":
-								  MinCount,_ := value.(int)
-									options.MinCount = MinCount
+		case "MinCount":
+			MinCount, _ := value.(int)
+			options.MinCount = MinCount
 
-							case "MaxCount":
-									MaxCount,_ := value.(int)
-									options.MaxCount = MaxCount
+		case "MaxCount":
+			MaxCount, _ := value.(int)
+			options.MaxCount = MaxCount
 
-							case "KeyName":
-									KeyName,_ := value.(string)
-									options.KeyName = KeyName
+		case "KeyName":
+			KeyName, _ := value.(string)
+			options.KeyName = KeyName
 
-							case "KernelId":
-									KernelId,_ := value.(string)
-									options.KernelId = KernelId
+		case "KernelId":
+			KernelId, _ := value.(string)
+			options.KernelId = KernelId
 
-							case "InstanceType":
-									InstanceType,_ := value.(string)
-									options.InstanceType = InstanceType
+		case "InstanceType":
+			InstanceType, _ := value.(string)
+			options.InstanceType = InstanceType
 
-								case "RamdiskId":
-								    RamdiskId,_ := value.(string)
-									  options.RamdiskId = RamdiskId
+		case "RamdiskId":
+			RamdiskId, _ := value.(string)
+			options.RamdiskId = RamdiskId
 
-								case "AvailZone":
-									  AvailZone,_ := value.(string)
-										options.AvailZone = AvailZone
+		case "AvailZone":
+			AvailZone, _ := value.(string)
+			options.AvailZone = AvailZone
 
-								case "PlacementGroupName":
-										PlacementGroupName,_ := value.(string)
-										options.PlacementGroupName = PlacementGroupName
+		case "PlacementGroupName":
+			PlacementGroupName, _ := value.(string)
+			options.PlacementGroupName = PlacementGroupName
 
-								case "Monitoring":
-										Monitoring,_ := value.(bool)
-										options.Monitoring = Monitoring
+		case "Monitoring":
+			Monitoring, _ := value.(bool)
+			options.Monitoring = Monitoring
 
-								case "SubnetId":
-										SubnetId,_ := value.(string)
-										options.SubnetId = SubnetId
+		case "SubnetId":
+			SubnetId, _ := value.(string)
+			options.SubnetId = SubnetId
 
-								case "DisableAPITermination":
-										DisableAPITermination,_ := value.(bool)
-										options.DisableAPITermination = DisableAPITermination
+		case "DisableAPITermination":
+			DisableAPITermination, _ := value.(bool)
+			options.DisableAPITermination = DisableAPITermination
 
-								case "ShutdownBehavior":
-										ShutdownBehavior,_ := value.(string)
-										options.ShutdownBehavior = ShutdownBehavior
+		case "ShutdownBehavior":
+			ShutdownBehavior, _ := value.(string)
+			options.ShutdownBehavior = ShutdownBehavior
 
-								case "PrivateIPAddress":
-										PrivateIPAddress,_ := value.(string)
-										options.PrivateIPAddress = PrivateIPAddress
+		case "PrivateIPAddress":
+			PrivateIPAddress, _ := value.(string)
+			options.PrivateIPAddress = PrivateIPAddress
 
-								case "SecurityGroup":
-										SecurityGroupparam,_ := value.([]map[string]string)
-										//fmt.Println(SecurityGroupparam)
-										for i := 0; i < len(SecurityGroupparam); i++{
-											    var securityGroup SecurityGroup
-											    securityGroup.Id = SecurityGroupparam[i]["Id"]
-												  securityGroup.Name =SecurityGroupparam[i]["Name"]
-							 					  options.SecurityGroups = append(options.SecurityGroups,securityGroup)
-									 }
+		case "SecurityGroup":
+			SecurityGroupparam, _ := value.([]map[string]string)
+			//fmt.Println(SecurityGroupparam)
+			for i := 0; i < len(SecurityGroupparam); i++ {
+				var securityGroup SecurityGroup
+				securityGroup.Id = SecurityGroupparam[i]["Id"]
+				securityGroup.Name = SecurityGroupparam[i]["Name"]
+				options.SecurityGroups = append(options.SecurityGroups, securityGroup)
+			}
 
-							 case "BlockDevice":
-							    BlockDeviceparam,_ := value.([]map[string]interface{})
-									for i := 0; i < len(BlockDeviceparam); i++{
-										var BlockDeviceMappingParam BlockDeviceMapping
-										    for BlockDeviceparamkey,BlockDeviceparamvalue := range BlockDeviceparam[i]{
-											     switch BlockDeviceparamkey{
-											         case "DeviceName":
-												         BlockDeviceMappingParam.DeviceName = BlockDeviceparamvalue.(string)
+		case "BlockDevice":
+			BlockDeviceparam, _ := value.([]map[string]interface{})
+			for i := 0; i < len(BlockDeviceparam); i++ {
+				var BlockDeviceMappingParam BlockDeviceMapping
+				for BlockDeviceparamkey, BlockDeviceparamvalue := range BlockDeviceparam[i] {
+					switch BlockDeviceparamkey {
+					case "DeviceName":
+						BlockDeviceMappingParam.DeviceName = BlockDeviceparamvalue.(string)
 
-											         case "VirtualName":
-												         BlockDeviceMappingParam.VirtualName = BlockDeviceparamvalue.(string)
+					case "VirtualName":
+						BlockDeviceMappingParam.VirtualName = BlockDeviceparamvalue.(string)
 
-															 case "SnapshotId":
-												         BlockDeviceMappingParam.SnapshotId = BlockDeviceparamvalue.(string)
+					case "SnapshotId":
+						BlockDeviceMappingParam.SnapshotId = BlockDeviceparamvalue.(string)
 
-											         case "VolumeType":
-												         BlockDeviceMappingParam.VolumeType = BlockDeviceparamvalue.(string)
+					case "VolumeType":
+						BlockDeviceMappingParam.VolumeType = BlockDeviceparamvalue.(string)
 
-															 case "VolumeSize":
-												         BlockDeviceMappingParam.VolumeSize = BlockDeviceparamvalue.(int64)
+					case "VolumeSize":
+						BlockDeviceMappingParam.VolumeSize = BlockDeviceparamvalue.(int64)
 
-											         case "DeleteOnTermination":
-												         BlockDeviceMappingParam.DeleteOnTermination = BlockDeviceparamvalue.(bool)
+					case "DeleteOnTermination":
+						BlockDeviceMappingParam.DeleteOnTermination = BlockDeviceparamvalue.(bool)
 
-															 case "IOPS":
-												         BlockDeviceMappingParam.IOPS = BlockDeviceparamvalue.(int64)
+					case "IOPS":
+						BlockDeviceMappingParam.IOPS = BlockDeviceparamvalue.(int64)
 
-													 }
-								        }
-									 options.BlockDeviceMappings = append(options.BlockDeviceMappings,BlockDeviceMappingParam)
+					}
+				}
+				options.BlockDeviceMappings = append(options.BlockDeviceMappings, BlockDeviceMappingParam)
 
-				         }
+			}
 
-	             case "RunNetworkInterface":
-	                RunNetworkInterfaceparam,_ := value.([]map[string]interface{})
-	                //fmt.Println(RunNetworkInterfaceparam)
-	                var runNetworkInterface RunNetworkInterface
-	                for i := 0; i < len(RunNetworkInterfaceparam); i++{
-	                    //fmt.Println(RunNetworkInterfaceparam[i])
-	                    for RunNetworkInterfaceparamkey,RunNetworkInterfaceparamvalue := range RunNetworkInterfaceparam[i]{
-	                       switch RunNetworkInterfaceparamkey{
-	                           case "Id":
-	                             runNetworkInterface.Id = RunNetworkInterfaceparamvalue.(string)
-	                           case "DeviceIndex":
-	                             runNetworkInterface.DeviceIndex = RunNetworkInterfaceparamvalue.(int)
-	                           case "SubnetId":
-	                             runNetworkInterface.Id = RunNetworkInterfaceparamvalue.(string)
-	                           case "Description":
-	                             runNetworkInterface.Description = RunNetworkInterfaceparamvalue.(string)
-	                           case "DeleteOnTermination":
-	                             runNetworkInterface.DeleteOnTermination = RunNetworkInterfaceparamvalue.(bool)
-	                           case "SecondaryPrivateIPCount":
-	                             runNetworkInterface.SecondaryPrivateIPCount = RunNetworkInterfaceparamvalue.(int)
-	                           case "SecurityGroupIds":
-	                             securityGroupIds,_ := RunNetworkInterfaceparamvalue.([]string)
-	                             runNetworkInterface.SecurityGroupIds = securityGroupIds
+		case "RunNetworkInterface":
+			RunNetworkInterfaceparam, _ := value.([]map[string]interface{})
+			//fmt.Println(RunNetworkInterfaceparam)
+			var runNetworkInterface RunNetworkInterface
+			for i := 0; i < len(RunNetworkInterfaceparam); i++ {
+				//fmt.Println(RunNetworkInterfaceparam[i])
+				for RunNetworkInterfaceparamkey, RunNetworkInterfaceparamvalue := range RunNetworkInterfaceparam[i] {
+					switch RunNetworkInterfaceparamkey {
+					case "Id":
+						runNetworkInterface.Id = RunNetworkInterfaceparamvalue.(string)
+					case "DeviceIndex":
+						runNetworkInterface.DeviceIndex = RunNetworkInterfaceparamvalue.(int)
+					case "SubnetId":
+						runNetworkInterface.Id = RunNetworkInterfaceparamvalue.(string)
+					case "Description":
+						runNetworkInterface.Description = RunNetworkInterfaceparamvalue.(string)
+					case "DeleteOnTermination":
+						runNetworkInterface.DeleteOnTermination = RunNetworkInterfaceparamvalue.(bool)
+					case "SecondaryPrivateIPCount":
+						runNetworkInterface.SecondaryPrivateIPCount = RunNetworkInterfaceparamvalue.(int)
+					case "SecurityGroupIds":
+						securityGroupIds, _ := RunNetworkInterfaceparamvalue.([]string)
+						runNetworkInterface.SecurityGroupIds = securityGroupIds
 
-	                           case "PrivateIPs":
-	                             privateIPsParam,_ := RunNetworkInterfaceparamvalue.([]map[string]interface{})
-	                             for i := 0; i < len(privateIPsParam); i++{
-	                                 var privateIP PrivateIP
-	                                 for privateIPsParamkey,privateIPsParamvalue := range privateIPsParam[i]{
-	                                    switch privateIPsParamkey{
-	                                        case "Address":
-	                                          privateIP.Address = privateIPsParamvalue.(string)
-	                                        case  "DNSName":
-	                                          privateIP.DNSName = privateIPsParamvalue.(string)
-	                                        case  "IsPrimary":
-	                                          privateIP.IsPrimary = privateIPsParamvalue.(bool)
-	                                    }
+					case "PrivateIPs":
+						privateIPsParam, _ := RunNetworkInterfaceparamvalue.([]map[string]interface{})
+						for i := 0; i < len(privateIPsParam); i++ {
+							var privateIP PrivateIP
+							for privateIPsParamkey, privateIPsParamvalue := range privateIPsParam[i] {
+								switch privateIPsParamkey {
+								case "Address":
+									privateIP.Address = privateIPsParamvalue.(string)
+								case "DNSName":
+									privateIP.DNSName = privateIPsParamvalue.(string)
+								case "IsPrimary":
+									privateIP.IsPrimary = privateIPsParamvalue.(bool)
+								}
 
-	                                 }
-	                                 runNetworkInterface.PrivateIPs = append(runNetworkInterface.PrivateIPs,privateIP)
-	                              }
+							}
+							runNetworkInterface.PrivateIPs = append(runNetworkInterface.PrivateIPs, privateIP)
+						}
 
-	                       }
+					}
 
-	                    }
-	                    options.NetworkInterfaces = append(options.NetworkInterfaces,runNetworkInterface)
-	                    }
-	                    case "UserData":
-	                        options.UserData = value.([]byte)
-	        }
-	    }
+				}
+				options.NetworkInterfaces = append(options.NetworkInterfaces, runNetworkInterface)
+			}
+		case "UserData":
+			options.UserData = value.([]byte)
+		}
+	}
 
-	  fmt.Println(options)
+	fmt.Println(options)
 
 	params := makeParams("RunInstances")
 

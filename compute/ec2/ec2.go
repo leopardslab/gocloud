@@ -1,6 +1,5 @@
 package ec2
 
-
 const (
 	debug = false
 
@@ -8,7 +7,6 @@ const (
 
 	vpcAPIVersion = "2013-10-15"
 )
-
 
 //Authentication struct to store AccessKey and SecretKey
 type Auth struct {
@@ -26,5 +24,5 @@ type EC2 struct {
 
 // Function return EC2 instance
 func New2(auth Auth, region Region) *EC2 {
-	return &EC2{auth,region, 0}
+	return &EC2{auth, region, 0}
 }

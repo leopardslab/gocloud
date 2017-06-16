@@ -1,318 +1,313 @@
 package gce
 
-import(
-  "fmt"
-  "net/http"
-  "io/ioutil"
-  "encoding/json"
-  "bytes"
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"net/http"
 )
 
 //create gce instance
 
-func (gce *GCE)Createnode(request interface{})(resp interface{},err error){
+func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 
-    var gceinstance GCE
+	var gceinstance GCE
 
-    var projectid string
+	var projectid string
 
-    param := make(map[string]interface{})
+	param := make(map[string]interface{})
 
-    param = request.(map[string]interface{})
+	param = request.(map[string]interface{})
 
-    for key,value := range param{
-        switch key {
-             case "projectid":
-                projectid,_ = value.(string)
-                fmt.Println(projectid)
+	for key, value := range param {
+		switch key {
+		case "projectid":
+			projectid, _ = value.(string)
+			fmt.Println(projectid)
 
-              case "Zone":
-                 Zone,_ := value.(string)
-                 gceinstance.Zone = Zone
+		case "Zone":
+			Zone, _ := value.(string)
+			gceinstance.Zone = Zone
 
-              case "selfLink":
-                  selfLink,_ := value.(string)
-                  gceinstance.selfLink = selfLink
+		case "selfLink":
+			selfLink, _ := value.(string)
+			gceinstance.selfLink = selfLink
 
-              case "Description":
-                    Description,_ := value.(string)
-                    gceinstance.Description = Description
+		case "Description":
+			Description, _ := value.(string)
+			gceinstance.Description = Description
 
-              case "CanIPForward":
-                      CanIPForward,_ := value.(bool)
-                      gceinstance.CanIPForward = CanIPForward
+		case "CanIPForward":
+			CanIPForward, _ := value.(bool)
+			gceinstance.CanIPForward = CanIPForward
 
-              case "Name":
-                    Name,_ := value.(string)
-                    gceinstance.Name = Name
+		case "Name":
+			Name, _ := value.(string)
+			gceinstance.Name = Name
 
-              case "MachineType":
-                    MachineType,_ := value.(string)
-                    gceinstance.MachineType = MachineType
+		case "MachineType":
+			MachineType, _ := value.(string)
+			gceinstance.MachineType = MachineType
 
-              case "disk":
-                     diskparam,_ := value.([]map[string]interface{})
-                     var disk Disk
-                     var initializeParam InitializeParam
-                     for i := 0; i < len(diskparam); i++{
-                        for diskparamkey,diskparamvalue := range diskparam[i]{
-                                switch diskparamkey{
-                                   case "Type":
-                                        disk.Type =diskparamvalue.(string)
-                                    case "Boot":
-                                        disk.Boot =diskparamvalue.(bool)
-                                    case "Mode":
-                                        disk.Mode =diskparamvalue.(string)
-                                      case "AutoDelete":
-                                          disk.AutoDelete =diskparamvalue.(bool)
-                                      case "DeviceName":
-                                          disk.DeviceName =diskparamvalue.(string)
-                                     case "InitializeParams":
-                                         InitializeParams,_ := diskparamvalue.(map[string]string)
-                                         initializeParam.SourceImage=InitializeParams["SourceImage"]
-                                         initializeParam.DiskType=InitializeParams["DiskType"]
-                                         initializeParam.DiskSizeGb=InitializeParams["DiskSizeGb"]
+		case "disk":
+			diskparam, _ := value.([]map[string]interface{})
+			var disk Disk
+			var initializeParam InitializeParam
+			for i := 0; i < len(diskparam); i++ {
+				for diskparamkey, diskparamvalue := range diskparam[i] {
+					switch diskparamkey {
+					case "Type":
+						disk.Type = diskparamvalue.(string)
+					case "Boot":
+						disk.Boot = diskparamvalue.(bool)
+					case "Mode":
+						disk.Mode = diskparamvalue.(string)
+					case "AutoDelete":
+						disk.AutoDelete = diskparamvalue.(bool)
+					case "DeviceName":
+						disk.DeviceName = diskparamvalue.(string)
+					case "InitializeParams":
+						InitializeParams, _ := diskparamvalue.(map[string]string)
+						initializeParam.SourceImage = InitializeParams["SourceImage"]
+						initializeParam.DiskType = InitializeParams["DiskType"]
+						initializeParam.DiskSizeGb = InitializeParams["DiskSizeGb"]
 
-                               }
-                     }
-                     gceinstance.Disks = append(gceinstance.Disks,Disk{ Type:disk.Type,
-                                                                        Boot:disk.Boot,
-                                                                        Mode:disk.Mode,
-                                                                        AutoDelete:disk.AutoDelete,
-                                                                        DeviceName:disk.DeviceName,
-                                                                        InitializeParams:InitializeParam{
-                                                                                  SourceImage:initializeParam.SourceImage,
-                                                                                  DiskType:initializeParam.DiskType,
-                                                                                  DiskSizeGb : initializeParam.DiskSizeGb,
-                                                                                  }})
+					}
+				}
+				gceinstance.Disks = append(gceinstance.Disks, Disk{Type: disk.Type,
+					Boot:       disk.Boot,
+					Mode:       disk.Mode,
+					AutoDelete: disk.AutoDelete,
+					DeviceName: disk.DeviceName,
+					InitializeParams: InitializeParam{
+						SourceImage: initializeParam.SourceImage,
+						DiskType:    initializeParam.DiskType,
+						DiskSizeGb:  initializeParam.DiskSizeGb,
+					}})
 
-                   }
-                   case "NetworkInterfaces":
-                       NetworkInterfacesparam,_ := value.([]map[string]interface{})
-                       for i := 0; i < len(NetworkInterfacesparam); i++{
-                         var networkInterfaceParam NetworkInterface
-                         for NetworkInterfaceparamkey,NetworkInterfaceparamvalue := range NetworkInterfacesparam[i]{
-                            switch NetworkInterfaceparamkey{
-                            case "Network":
-                              networkInterfaceParam.Network = NetworkInterfaceparamvalue.(string)
+			}
+		case "NetworkInterfaces":
+			NetworkInterfacesparam, _ := value.([]map[string]interface{})
+			for i := 0; i < len(NetworkInterfacesparam); i++ {
+				var networkInterfaceParam NetworkInterface
+				for NetworkInterfaceparamkey, NetworkInterfaceparamvalue := range NetworkInterfacesparam[i] {
+					switch NetworkInterfaceparamkey {
+					case "Network":
+						networkInterfaceParam.Network = NetworkInterfaceparamvalue.(string)
 
-                            case "Subnetwork":
-                              networkInterfaceParam.Subnetwork = NetworkInterfaceparamvalue.(string)
+					case "Subnetwork":
+						networkInterfaceParam.Subnetwork = NetworkInterfaceparamvalue.(string)
 
-                            case "AccessConfigs":
-                                 AccessConfigsparam,_ := NetworkInterfaceparamvalue.([]map[string]string)
-                                  for i := 0; i < len(AccessConfigsparam); i++{
-                                         var accessConfigParam accessConfig
-                                                  accessConfigParam.Name =AccessConfigsparam[i]["Name"]
-                                                  accessConfigParam.Type =AccessConfigsparam[i]["Type"]
-                                  networkInterfaceParam.AccessConfigs = append(networkInterfaceParam.AccessConfigs,accessConfigParam)
-                                  }
-                            }
-                          }
-                          gceinstance.NetworkInterfaces = append(gceinstance.NetworkInterfaces,networkInterfaceParam)
-                        }
+					case "AccessConfigs":
+						AccessConfigsparam, _ := NetworkInterfaceparamvalue.([]map[string]string)
+						for i := 0; i < len(AccessConfigsparam); i++ {
+							var accessConfigParam accessConfig
+							accessConfigParam.Name = AccessConfigsparam[i]["Name"]
+							accessConfigParam.Type = AccessConfigsparam[i]["Type"]
+							networkInterfaceParam.AccessConfigs = append(networkInterfaceParam.AccessConfigs, accessConfigParam)
+						}
+					}
+				}
+				gceinstance.NetworkInterfaces = append(gceinstance.NetworkInterfaces, networkInterfaceParam)
+			}
 
-                    case "scheduling":
-                    schedulingparam,_ := value.(map[string]interface{})
-                    for key,value := range schedulingparam {
-                        switch key {
-                            case "Preemptible":
-                                Preemptible,_ := value.(bool)
-                                gceinstance.Scheduling.Preemptible = Preemptible
+		case "scheduling":
+			schedulingparam, _ := value.(map[string]interface{})
+			for key, value := range schedulingparam {
+				switch key {
+				case "Preemptible":
+					Preemptible, _ := value.(bool)
+					gceinstance.Scheduling.Preemptible = Preemptible
 
-                              case "onHostMaintenance":
-                                 onHostMaintenance,_ := value.(string)
-                                 gceinstance.Scheduling.OnHostMaintenance = onHostMaintenance
+				case "onHostMaintenance":
+					onHostMaintenance, _ := value.(string)
+					gceinstance.Scheduling.OnHostMaintenance = onHostMaintenance
 
-                              case "automaticRestart":
-                                  automaticRestart,_ := value.(bool)
-                                  gceinstance.Scheduling.AutomaticRestart = automaticRestart
-                        }
-                    }
+				case "automaticRestart":
+					automaticRestart, _ := value.(bool)
+					gceinstance.Scheduling.AutomaticRestart = automaticRestart
+				}
+			}
 
-                 }
+		}
 
+	}
+
+	gceinstancejson, _ := json.Marshal(gceinstance)
+
+	gceinstancejsonstring := string(gceinstancejson)
+
+	var gceinstancejsonstringbyte = []byte(gceinstancejsonstring)
+
+	client := &http.Client{}
+
+	Createnoderequest, err := http.NewRequest("POST", "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/instances", bytes.NewBuffer(gceinstancejsonstringbyte))
+
+	Createnoderequest.Header.Set("Content-Type", "application/json")
+
+	token := sign()
+
+	token.SetAuthHeader(Createnoderequest)
+
+	Createnoderesp, err := client.Do(Createnoderequest)
+
+	defer Createnoderesp.Body.Close()
+
+	body, err := ioutil.ReadAll(Createnoderesp.Body)
+
+	fmt.Println(string(body))
+
+	return
 }
 
-     gceinstancejson, _ := json.Marshal(gceinstance)
+func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 
-     gceinstancejsonstring := string(gceinstancejson)
+	options := request.(map[string]string)
 
-     var gceinstancejsonstringbyte = []byte(gceinstancejsonstring)
+	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/start"
 
-     client := &http.Client{}
+	token := sign()
 
-	   Createnoderequest, err := http.NewRequest("POST", "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/instances", bytes.NewBuffer(gceinstancejsonstringbyte))
+	client := &http.Client{}
 
-	   Createnoderequest.Header.Set("Content-Type", "application/json")
+	Startnoderequest, err := http.NewRequest("POST", url, nil)
 
-     token := sign()
+	Startnoderequest.Header.Set("Content-Type", "application/json")
 
-	   token.SetAuthHeader(Createnoderequest)
+	token.SetAuthHeader(Startnoderequest)
 
-	    Createnoderesp, err := client.Do(Createnoderequest)
+	Startnoderesp, err := client.Do(Startnoderequest)
 
-	    defer  Createnoderesp.Body.Close()
+	defer Startnoderesp.Body.Close()
 
-	    body, err := ioutil.ReadAll( Createnoderesp.Body)
+	body, err := ioutil.ReadAll(Startnoderesp.Body)
 
-	    fmt.Println(string(body))
+	fmt.Println(string(body))
 
-    return
-}
-
-
-func (gce *GCE)Startnode(request interface{}) (resp interface{}, err error){
-
-    options := request.(map[string]string)
-
-    url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/"+ options["Zone"] + "/instances/" + options["instance"] + "/start"
-
-
-    token := sign()
-
-    client := &http.Client{}
-
-    Startnoderequest, err := http.NewRequest("POST",url, nil)
-
-    Startnoderequest.Header.Set("Content-Type", "application/json")
-
-    token.SetAuthHeader(Startnoderequest)
-
-    Startnoderesp, err := client.Do(Startnoderequest)
-
-    defer Startnoderesp.Body.Close()
-
-    body, err := ioutil.ReadAll(Startnoderesp.Body)
-
-    fmt.Println(string(body))
-
-  return
+	return
 }
 
 //stop gce instance currentnly running
 //accept projectid, zone, instance
 
-func (gce *GCE)Stopnode(request interface{}) (resp interface{}, err error){
+func (gce *GCE) Stopnode(request interface{}) (resp interface{}, err error) {
 
-  options := request.(map[string]string)
+	options := request.(map[string]string)
 
-  url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/"+ options["Zone"] + "/instances/" + options["instance"] + "/stop"
+	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/stop"
 
-  token := sign()
+	token := sign()
 
-  client := &http.Client{}
+	client := &http.Client{}
 
-  Stopnoderequest, err := http.NewRequest("POST",url, nil)
+	Stopnoderequest, err := http.NewRequest("POST", url, nil)
 
-  Stopnoderequest.Header.Set("Content-Type", "application/json")
+	Stopnoderequest.Header.Set("Content-Type", "application/json")
 
-  token.SetAuthHeader(Stopnoderequest)
+	token.SetAuthHeader(Stopnoderequest)
 
-  Stopnoderesp, err := client.Do(Stopnoderequest)
+	Stopnoderesp, err := client.Do(Stopnoderequest)
 
-  defer Stopnoderesp.Body.Close()
+	defer Stopnoderesp.Body.Close()
 
-  body, err := ioutil.ReadAll(Stopnoderesp.Body)
+	body, err := ioutil.ReadAll(Stopnoderesp.Body)
 
-  fmt.Println(string(body))
+	fmt.Println(string(body))
 
-  return
+	return
 }
-
 
 //delete gce instance currentnly running
 //accept projectid, zone, instance
 
-func (gce *GCE)Deletenode(request interface{}) (resp interface{}, err error){
+func (gce *GCE) Deletenode(request interface{}) (resp interface{}, err error) {
 
-  options := request.(map[string]string)
+	options := request.(map[string]string)
 
-  url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/"+ options["Zone"] + "/instances/" + options["instance"]
+	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"]
 
-  token := sign()
+	token := sign()
 
-  client := &http.Client{}
+	client := &http.Client{}
 
-  Deletenoderequest, err := http.NewRequest("DELETE",url, nil)
+	Deletenoderequest, err := http.NewRequest("DELETE", url, nil)
 
-  Deletenoderequest.Header.Set("Content-Type", "application/json")
+	Deletenoderequest.Header.Set("Content-Type", "application/json")
 
-  token.SetAuthHeader(Deletenoderequest)
+	token.SetAuthHeader(Deletenoderequest)
 
-  Deletenoderesp, err := client.Do(Deletenoderequest)
+	Deletenoderesp, err := client.Do(Deletenoderequest)
 
-  defer Deletenoderesp.Body.Close()
+	defer Deletenoderesp.Body.Close()
 
-  body, err := ioutil.ReadAll(Deletenoderesp.Body)
+	body, err := ioutil.ReadAll(Deletenoderesp.Body)
 
-  fmt.Println(string(body))
+	fmt.Println(string(body))
 
-  return
+	return
 }
 
 //reboot/reset gce instance currentnly ***running***
 //accept projectid, zone, instance
 
-func (gce *GCE)Rebootnode(request interface{}) (resp interface{}, err error){
+func (gce *GCE) Rebootnode(request interface{}) (resp interface{}, err error) {
 
-  options := request.(map[string]string)
+	options := request.(map[string]string)
 
-  url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/"+ options["Zone"] + "/instances/" + options["instance"] + "/reset"
+	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/reset"
 
-  fmt.Println(url)
+	fmt.Println(url)
 
-  token := sign()
+	token := sign()
 
-  client := &http.Client{}
+	client := &http.Client{}
 
-  Rebootnoderequest, err := http.NewRequest("POST",url, nil)
+	Rebootnoderequest, err := http.NewRequest("POST", url, nil)
 
-  Rebootnoderequest.Header.Set("Content-Type", "application/json")
+	Rebootnoderequest.Header.Set("Content-Type", "application/json")
 
-  token.SetAuthHeader(Rebootnoderequest)
+	token.SetAuthHeader(Rebootnoderequest)
 
-  Rebootnoderesp, err := client.Do(Rebootnoderequest)
+	Rebootnoderesp, err := client.Do(Rebootnoderequest)
 
-  defer Rebootnoderesp.Body.Close()
+	defer Rebootnoderesp.Body.Close()
 
-  body, err := ioutil.ReadAll(Rebootnoderesp.Body)
+	body, err := ioutil.ReadAll(Rebootnoderesp.Body)
 
-  fmt.Println(string(body))
+	fmt.Println(string(body))
 
-
-  return
+	return
 }
-
 
 //list gce instance currentnly created
 //accept projectid, zone
 
-func (gce *GCE)listnode(request interface{})(resp interface{},err error){
+func (gce *GCE) listnode(request interface{}) (resp interface{}, err error) {
 
-  options := request.(map[string]string)
+	options := request.(map[string]string)
 
-  url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/"+ options["Zone"] + "/instances/"
+	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/"
 
-  fmt.Println(url)
+	fmt.Println(url)
 
-  token := sign()
+	token := sign()
 
-  client := &http.Client{}
+	client := &http.Client{}
 
-  listnoderequest, err := http.NewRequest("POST",url, nil)
+	listnoderequest, err := http.NewRequest("POST", url, nil)
 
-  listnoderequest.Header.Set("Content-Type", "application/json")
+	listnoderequest.Header.Set("Content-Type", "application/json")
 
-  token.SetAuthHeader(listnoderequest)
+	token.SetAuthHeader(listnoderequest)
 
-  listnoderesp, err := client.Do(listnoderequest)
+	listnoderesp, err := client.Do(listnoderequest)
 
-  defer listnoderesp.Body.Close()
+	defer listnoderesp.Body.Close()
 
-  body, err := ioutil.ReadAll(listnoderesp.Body)
+	body, err := ioutil.ReadAll(listnoderesp.Body)
 
-  fmt.Println(string(body))
+	fmt.Println(string(body))
 
-  return
+	return
 }

@@ -1,10 +1,10 @@
 package google
 
-import(
-      .	"github.com/scorelab/gocloud-v2/compute/gce"
+import (
+	gce "github.com/scorelab/gocloud/compute/gce"
 )
 
 //struct repersents Google cloud
-type Google struct{
-  GCE
+type Google struct {
+	gce.GCE
 }

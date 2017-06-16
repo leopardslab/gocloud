@@ -1,9 +1,8 @@
 package ec2
 
-import(
+import (
 	"encoding/xml"
 )
-
 
 //runinstance to store all attribute to create EC2 instance
 
@@ -28,14 +27,12 @@ type RunInstances struct {
 	NetworkInterfaces     []RunNetworkInterface
 }
 
-
 //SecurityGroup struct
 
 type SecurityGroup struct {
 	Id   string `xml:"groupId"`
 	Name string `xml:"groupName"`
 }
-
 
 // BlockDevice struct to attach device
 
@@ -46,7 +43,7 @@ type BlockDeviceMapping struct {
 	VolumeType          string `xml:"ebs>volumeType"`
 	VolumeSize          int64  `xml:"ebs>volumeSize"`
 	DeleteOnTermination bool   `xml:"ebs>deleteOnTermination"`
-	IOPS int64 `xml:"ebs>iops"`
+	IOPS                int64  `xml:"ebs>iops"`
 }
 
 //NetworkInterface struct for Ec2
@@ -62,7 +59,6 @@ type RunNetworkInterface struct {
 	SecondaryPrivateIPCount int
 }
 
-
 //Private ip to assign PrivateIP
 
 type PrivateIP struct {
@@ -70,7 +66,6 @@ type PrivateIP struct {
 	DNSName   string `xml:"privateDnsName"`
 	IsPrimary bool   `xml:"primary"`
 }
-
 
 // run instance response
 
@@ -108,8 +103,6 @@ type Instance struct {
 	NetworkInterfaces  []NetworkInterface `xml:"networkInterfaceSet>item"`
 }
 
-
-
 //This stuct repersents instance state change
 
 type InstanceStateChange struct {
@@ -117,8 +110,6 @@ type InstanceStateChange struct {
 	CurrentState  InstanceState `xml:"currentState"`
 	PreviousState InstanceState `xml:"previousState"`
 }
-
-
 
 type SimpleResp struct {
 	XMLName   xml.Name
@@ -138,7 +129,6 @@ type InstanceState struct {
 	Code int    `xml:"code"`
 	Name string `xml:"name"`
 }
-
 
 //reperent ruuing instance NetworkInterface
 
@@ -161,7 +151,6 @@ type NetworkInterface struct {
 	Tags             []Tag                      `xml:"tagSet>item"`
 	PrivateIPs       []PrivateIP                `xml:"privateIpAddressesSet>item"`
 }
-
 
 type NetworkInterfaceAttachment struct {
 	Id                  string `xml:"attachmentId"`

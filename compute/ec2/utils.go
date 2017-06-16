@@ -1,6 +1,6 @@
 package ec2
 
-import(
+import (
 	"strconv"
 )
 
@@ -12,7 +12,6 @@ func prepareRunParams(options RunInstances) map[string]string {
 		return makeParams("RunInstances")
 	}
 }
-
 
 func makeParams(action string) map[string]string {
 	return makeParamsWithVersion(action, legacyAPIVersion)

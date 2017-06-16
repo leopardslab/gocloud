@@ -1,4 +1,4 @@
-# gocloud-v2
+#gocloud
 Cloud services library
 
 

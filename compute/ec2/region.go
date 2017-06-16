@@ -2,10 +2,9 @@ package ec2
 
 //repersents Region
 type Region struct {
-	Name                 string
-	EC2Endpoint          string
+	Name        string
+	EC2Endpoint string
 }
-
 
 var USEast = Region{
 	"us-east-1",
