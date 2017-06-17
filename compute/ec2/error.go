@@ -1,6 +1,6 @@
 package ec2
 
-// represents error
+// Error represents error in EC2 instance creation.
 type Error struct {
 	StatusCode int
 
