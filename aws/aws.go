@@ -4,7 +4,7 @@ import (
 	ec2 "github.com/scorelab/gocloud-v2/compute/ec2"
 )
 
-// type represents AWS struct.
+//AWS struct reperents amazon cloud provider.
 type AWS struct {
 	ec2.EC2
 }
