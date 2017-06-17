@@ -4,7 +4,7 @@ import (
 	gce "github.com/scorelab/gocloud/compute/gce"
 )
 
-//struct represents Google cloud
+//Google  struct represents google cloud provider.
 type Google struct {
 	gce.GCE
 }
