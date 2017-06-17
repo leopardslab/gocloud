@@ -8,5 +8,5 @@ type Error struct {
 
 	Message string
 
-	RequestId string `xml:"RequestID"`
+	RequestId string `xml:"RequestId"`
 }
