@@ -4,8 +4,7 @@ import (
 	"encoding/xml"
 )
 
-//runinstance to store all attribute to create EC2 instance
-
+//RunInstances to store all attribute to create EC2 instance.
 type RunInstances struct {
 	ImageID               string
 	MinCount              int
@@ -19,7 +18,7 @@ type RunInstances struct {
 	AvailZone             string
 	PlacementGroupName    string
 	Monitoring            bool
-	SubnetId              string
+	SubnetID              string
 	DisableAPITermination bool
 	ShutdownBehavior      string
 	PrivateIPAddress      string
@@ -27,8 +26,7 @@ type RunInstances struct {
 	NetworkInterfaces     []RunNetworkInterface
 }
 
-//SecurityGroup struct
-
+//SecurityGroup struct.
 type SecurityGroup struct {
 	Id   string `xml:"groupId"`
 	Name string `xml:"groupName"`
@@ -46,8 +44,7 @@ type BlockDeviceMapping struct {
 	IOPS                int64  `xml:"ebs>iops"`
 }
 
-//NetworkInterface struct for Ec2
-
+//RunNetworkInterface struct for Ec2.
 type RunNetworkInterface struct {
 	Id                      string
 	DeviceIndex             int
@@ -59,16 +56,14 @@ type RunNetworkInterface struct {
 	SecondaryPrivateIPCount int
 }
 
-//Private ip to assign PrivateIP
-
+//PrivateIP to assign PrivateIP.
 type PrivateIP struct {
 	Address   string `xml:"privateIpAddress"`
 	DNSName   string `xml:"privateDnsName"`
 	IsPrimary bool   `xml:"primary"`
 }
 
-// run instance response
-
+//RunInstancesResp response.
 type RunInstancesResp struct {
 	RequestId      string          `xml:"requestId"`
 	ReservationId  string          `xml:"reservationId"`
@@ -77,8 +72,7 @@ type RunInstancesResp struct {
 	Instances      []Instance      `xml:"instancesSet>item"`
 }
 
-// this struct represents running instance
-
+//Instance struct represents running instance.
 type Instance struct {
 	InstanceId         string             `xml:"instanceId"`
 	InstanceType       string             `xml:"instanceType"`
@@ -103,35 +97,32 @@ type Instance struct {
 	NetworkInterfaces  []NetworkInterface `xml:"networkInterfaceSet>item"`
 }
 
-//This stuct represents instance state change
-
+//InstanceStateChange stuct represents instance state change.
 type InstanceStateChange struct {
 	InstanceId    string        `xml:"instanceId"`
 	CurrentState  InstanceState `xml:"currentState"`
 	PreviousState InstanceState `xml:"previousState"`
 }
 
+//SimpleResp stuct represents SimpleResp.
 type SimpleResp struct {
 	XMLName   xml.Name
 	RequestId string `xml:"requestId"`
 }
 
-//struct to TerminateInstance
-
+//TerminateInstance struct represents TerminateInstance response.
 type TerminateInstancesResp struct {
 	RequestId    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
-// InstanceState struct
-
+//InstanceState struct represents InstanceState.
 type InstanceState struct {
 	Code int    `xml:"code"`
 	Name string `xml:"name"`
 }
 
-//reperent ruuing instance NetworkInterface
-
+//NetworkInterface reperents running instance NetworkInterface.
 type NetworkInterface struct {
 	Id               string                     `xml:"networkInterfaceId"`
 	SubnetId         string                     `xml:"subnetId"`
@@ -152,6 +143,7 @@ type NetworkInterface struct {
 	PrivateIPs       []PrivateIP                `xml:"privateIpAddressesSet>item"`
 }
 
+//NetworkInterfaceAttachment represents running instance
 type NetworkInterfaceAttachment struct {
 	Id                  string `xml:"attachmentId"`
 	InstanceId          string `xml:"instanceId"`
@@ -162,21 +154,19 @@ type NetworkInterfaceAttachment struct {
 	DeleteOnTermination bool   `xml:"deleteOnTermination"`
 }
 
-// reperent tag assgin to instance
+//Tag reperent tag assgin to instance
 type Tag struct {
 	Key   string `xml:"key"`
 	Value string `xml:"value"`
 }
 
-//start instance response
-
+//StartInstanceResp response.
 type StartInstanceResp struct {
 	RequestId    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
-//stop instances response
-
+//StopInstanceResp response.
 type StopInstanceResp struct {
 	RequestId    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
