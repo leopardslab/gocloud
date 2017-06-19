@@ -109,7 +109,7 @@ type SimpleResp struct {
 	RequestID string `xml:"requestId"`
 }
 
-//TerminateInstance struct represents TerminateInstance response.
+//TerminateInstancesResp struct represents TerminateInstance response.
 type TerminateInstancesResp struct {
 	RequestID    string                `xml:"requestID"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
@@ -124,8 +124,8 @@ type InstanceState struct {
 //NetworkInterface reperents running instance NetworkInterface.
 type NetworkInterface struct {
 	ID               string                     `xml:"networkInterfaceID"`
-	SubnetId         string                     `xml:"subnetId"`
-	VPCId            string                     `xml:"vpcId"`
+	SubnetID         string                     `xml:"subnetID"`
+	VPCID            string                     `xml:"vpcID"`
 	AvailZone        string                     `xml:"availabilityZone"`
 	Description      string                     `xml:"description"`
 	OwnerID          string                     `xml:"OwnerID"`
@@ -146,7 +146,7 @@ type NetworkInterface struct {
 type NetworkInterfaceAttachment struct {
 	ID                  string `xml:"attachmentIDs"`
 	InstanceID          string `xml:"instanceID"`
-	InstanceOwnerId     string `xml:"instanceOwnerId"`
+	InstanceOwnerID     string `xml:"instanceOwnerID"`
 	DeviceIndex         int    `xml:"deviceIndex"`
 	Status              string `xml:"status"`
 	AttachTime          string `xml:"attachTime"`
