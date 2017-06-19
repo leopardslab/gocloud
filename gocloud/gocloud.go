@@ -17,13 +17,15 @@ type Gocloud interface {
 }
 
 const (
+	//Amazonprovider reperents Amazon cloud.
 	Amazonprovider = "aws"
+	//Googleprovider reperents Google cloud.
 	Googleprovider = "google"
 	Secretkey      = "SECRET_KEY"
 	Secretid       = "SECRET_ID"
 )
 
-//cloud provider return the instance of respepted cloud and map to the Gocloud so we can call the method like createnote on CloudProvider instance
+//CloudProvider return the instance of respepted cloud and map to the Gocloud so we can call the method like createnote on CloudProvider instance
 //this is a delegation of cloud provider.
 func CloudProvider(provider, Secretkey, secretid string) (Gocloud, error) {
 

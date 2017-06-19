@@ -17,9 +17,7 @@ func sign() (token *oauth2.Token) {
 
 		ClientID: "os.genenv()",
 
-		ClientID: "os.genenv()",
-
-		ClientSecret: "enterhere",
+		ClientSecret: "os.genenv()",
 
 		RedirectURL: "urn:ietf:wg:oauth:2.0:oob",
 
