@@ -96,8 +96,6 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 	}
 	defer r.Body.Close()
 
-	//fmt.Println(string(r.Body))
-
 	if debug {
 		dump, _ := httputil.DumpResponse(r, true)
 		log.Printf("response:\n")

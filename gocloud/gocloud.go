@@ -7,8 +7,7 @@ import (
 	"github.com/scorelab/gocloud/google"
 )
 
-//gocloud is a interface which hide differece between different cloud providers
-
+//Gocloud is a interface which hide differece between different cloud providers.
 type Gocloud interface {
 	Createnode(request interface{}) (resp interface{}, err error)
 	Startnode(request interface{}) (resp interface{}, err error)
@@ -25,8 +24,7 @@ const (
 )
 
 //cloud provider return the instance of respepted cloud and map to the Gocloud so we can call the method like createnote on CloudProvider instance
-//this is a delegation of cloud provider
-
+//this is a delegation of cloud provider.
 func CloudProvider(provider, Secretkey, secretid string) (Gocloud, error) {
 
 	switch provider {
