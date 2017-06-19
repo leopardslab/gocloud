@@ -20,8 +20,8 @@ type Gocloud interface {
 const (
 	Amazonprovider = "aws"
 	Googleprovider = "google"
-	Secretkey      = "dummy"
-	Secretid       = "dummy"
+	Secretkey      = "SECRET_KEY"
+	Secretid       = "SECRET_ID"
 )
 
 //cloud provider return the instance of respepted cloud and map to the Gocloud so we can call the method like createnote on CloudProvider instance

@@ -2,23 +2,22 @@ package gce
 
 import (
 	"fmt"
-	//"io/ioutil"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"log"
-	//"net"
-	//"net/http"
-	//"bytes"
-	//"errors"
 )
 
-//GCE signature it give URL to get Autorization code on which we it generate auth token and pass in each request in request header
-
+//sign() GCE signature it give URL to get Autorization code on which we it generate auth token and pass in each request in request header
 func sign() (token *oauth2.Token) {
 
 	conf := &oauth2.Config{
 
-		ClientID: "enterhere",
+
+		//json file
+
+		ClientID: "os.genenv()",
+
+		ClientID: "os.genenv()",
 
 		ClientSecret: "enterhere",
 
@@ -35,13 +34,10 @@ func sign() (token *oauth2.Token) {
 	}
 
 	url := conf.AuthCodeURL("state", oauth2.AccessTypeOffline)
-
 	fmt.Printf("\nVisit the URL for Autorization \n: %v", url)
-
 	fmt.Printf("\nEnter Autorization code :\n")
 
 	var code string
-
 	if _, err := fmt.Scan(&code); err != nil {
 		log.Fatal(err)
 	}
