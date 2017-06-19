@@ -117,8 +117,8 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "ImageId":
-			ImageId, _ := value.(string)
-			options.ImageId = ImageId
+			ImageID, _ := value.(string)
+			options.ImageID = ImageID
 
 		case "MinCount":
 			MinCount, _ := value.(int)
@@ -132,17 +132,17 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 			KeyName, _ := value.(string)
 			options.KeyName = KeyName
 
-		case "KernelId":
-			KernelId, _ := value.(string)
-			options.KernelId = KernelId
+		case "KernelID":
+			KernelID, _ := value.(string)
+			options.KernelID = KernelID
 
 		case "InstanceType":
 			InstanceType, _ := value.(string)
 			options.InstanceType = InstanceType
 
-		case "RamdiskId":
-			RamdiskId, _ := value.(string)
-			options.RamdiskId = RamdiskId
+		case "RamdiskID":
+			RamdiskID, _ := value.(string)
+			options.RamdiskID = RamdiskID
 
 		case "AvailZone":
 			AvailZone, _ := value.(string)
@@ -156,9 +156,9 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 			Monitoring, _ := value.(bool)
 			options.Monitoring = Monitoring
 
-		case "SubnetId":
-			SubnetId, _ := value.(string)
-			options.SubnetId = SubnetId
+		case "SubnetID":
+			SubnetID, _ := value.(string)
+			options.SubnetID = SubnetID
 
 		case "DisableAPITermination":
 			DisableAPITermination, _ := value.(bool)

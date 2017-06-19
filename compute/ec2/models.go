@@ -7,14 +7,14 @@ import (
 //runinstance to store all attribute to create EC2 instance
 
 type RunInstances struct {
-	ImageId               string
+	ImageID               string
 	MinCount              int
 	MaxCount              int
 	KeyName               string
 	InstanceType          string
 	SecurityGroups        []SecurityGroup
-	KernelId              string
-	RamdiskId             string
+	KernelID              string
+	RamdiskID             string
 	UserData              []byte
 	AvailZone             string
 	PlacementGroupName    string
