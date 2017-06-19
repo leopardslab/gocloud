@@ -11,8 +11,7 @@ import (
 	"time"
 )
 
-// start ec2 instance accept array of instance-id
-
+//Startnode ec2 instance accept array of instance-id.
 func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 	ids := request.([]string)
 	params := makeParams("StartInstances")
@@ -25,8 +24,7 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 	return resp, nil
 }
 
-// stop ec2 instance accept array of instance-id
-
+//Stopnode ec2 instance accept array of instance-id.
 func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
 	ids := request.([]string)
 	params := makeParams("StopInstances")
@@ -39,8 +37,7 @@ func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
 	return resp, nil
 }
 
-// reboot ec2 instance accept array of instance-id
-
+//Rebootnode ec2 instance accept array of instance-id.
 func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 	ids := request.([]string)
 	params := makeParams("RebootInstances")
@@ -53,8 +50,7 @@ func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 	return resp, nil
 }
 
-// delete ec2 instance accept array of instance-id
-
+//Deletenode ec2 instance accept array of instance-id.
 func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 	instIds := request.([]string)
 	params := makeParams("TerminateInstances")
@@ -67,8 +63,7 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 	return
 }
 
-//pass the param to query and add signature to it base on secret key and acces key
-
+//query pass the param to query and add signature to it base on secret key and acces key.
 func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 
 	req, err := http.NewRequest("GET", USEast.EC2Endpoint, nil)
@@ -110,8 +105,7 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 
 }
 
-//create Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation
-
+//Createnode Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation.
 func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 
 	var options RunInstances
