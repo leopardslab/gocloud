@@ -111,7 +111,7 @@ type SimpleResp struct {
 
 //TerminateInstance struct represents TerminateInstance response.
 type TerminateInstancesResp struct {
-	RequestID    string                `xml:"requestId"`
+	RequestID    string                `xml:"requestID"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
@@ -123,13 +123,13 @@ type InstanceState struct {
 
 //NetworkInterface reperents running instance NetworkInterface.
 type NetworkInterface struct {
-	Id               string                     `xml:"networkInterfaceId"`
+	ID               string                     `xml:"networkInterfaceID"`
 	SubnetId         string                     `xml:"subnetId"`
 	VPCId            string                     `xml:"vpcId"`
 	AvailZone        string                     `xml:"availabilityZone"`
 	Description      string                     `xml:"description"`
-	OwnerId          string                     `xml:"ownerId"`
-	RequesterId      string                     `xml:"requesterId"`
+	OwnerID          string                     `xml:"OwnerID"`
+	RequesterID      string                     `xml:"requesterID"`
 	RequesterManaged bool                       `xml:"requesterManaged"`
 	Status           string                     `xml:"status"`
 	MACAddress       string                     `xml:"macAddress"`
@@ -144,8 +144,8 @@ type NetworkInterface struct {
 
 //NetworkInterfaceAttachment represents running instance
 type NetworkInterfaceAttachment struct {
-	Id                  string `xml:"attachmentId"`
-	InstanceId          string `xml:"instanceId"`
+	ID                  string `xml:"attachmentIDs"`
+	InstanceID          string `xml:"instanceID"`
 	InstanceOwnerId     string `xml:"instanceOwnerId"`
 	DeviceIndex         int    `xml:"deviceIndex"`
 	Status              string `xml:"status"`
@@ -161,12 +161,12 @@ type Tag struct {
 
 //StartInstanceResp response.
 type StartInstanceResp struct {
-	RequestId    string                `xml:"requestId"`
+	RequestID    string                `xml:"requestID"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
 //StopInstanceResp response.
 type StopInstanceResp struct {
-	RequestId    string                `xml:"requestId"`
+	RequestID    string                `xml:"requestID"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
