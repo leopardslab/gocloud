@@ -177,7 +177,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 			//fmt.Println(SecurityGroupparam)
 			for i := 0; i < len(SecurityGroupparam); i++ {
 				var securityGroup SecurityGroup
-				securityGroup.Id = SecurityGroupparam[i]["Id"]
+				securityGroup.ID = SecurityGroupparam[i]["ID"]
 				securityGroup.Name = SecurityGroupparam[i]["Name"]
 				options.SecurityGroups = append(options.SecurityGroups, securityGroup)
 			}
@@ -194,8 +194,8 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 					case "VirtualName":
 						BlockDeviceMappingParam.VirtualName = BlockDeviceparamvalue.(string)
 
-					case "SnapshotId":
-						BlockDeviceMappingParam.SnapshotId = BlockDeviceparamvalue.(string)
+					case "SnapshotID":
+						BlockDeviceMappingParam.SnapshotID = BlockDeviceparamvalue.(string)
 
 					case "VolumeType":
 						BlockDeviceMappingParam.VolumeType = BlockDeviceparamvalue.(string)
@@ -223,12 +223,12 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 				//fmt.Println(RunNetworkInterfaceparam[i])
 				for RunNetworkInterfaceparamkey, RunNetworkInterfaceparamvalue := range RunNetworkInterfaceparam[i] {
 					switch RunNetworkInterfaceparamkey {
-					case "Id":
-						runNetworkInterface.Id = RunNetworkInterfaceparamvalue.(string)
+					case "ID":
+						runNetworkInterface.ID = RunNetworkInterfaceparamvalue.(string)
 					case "DeviceIndex":
 						runNetworkInterface.DeviceIndex = RunNetworkInterfaceparamvalue.(int)
-					case "SubnetId":
-						runNetworkInterface.Id = RunNetworkInterfaceparamvalue.(string)
+					case "SubnetID":
+						runNetworkInterface.SubnetID = RunNetworkInterfaceparamvalue.(string)
 					case "Description":
 						runNetworkInterface.Description = RunNetworkInterfaceparamvalue.(string)
 					case "DeleteOnTermination":

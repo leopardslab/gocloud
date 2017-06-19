@@ -28,16 +28,15 @@ type RunInstances struct {
 
 //SecurityGroup struct.
 type SecurityGroup struct {
-	Id   string `xml:"groupId"`
+	ID   string `xml:"groupID"`
 	Name string `xml:"groupName"`
 }
 
-// BlockDevice struct to attach device
-
+//BlockDeviceMapping struct to attach device
 type BlockDeviceMapping struct {
 	DeviceName          string `xml:"deviceName"`
 	VirtualName         string `xml:"virtualName"`
-	SnapshotId          string `xml:"ebs>snapshotId"`
+	SnapshotID          string `xml:"ebs>snapshotID"`
 	VolumeType          string `xml:"ebs>volumeType"`
 	VolumeSize          int64  `xml:"ebs>volumeSize"`
 	DeleteOnTermination bool   `xml:"ebs>deleteOnTermination"`
@@ -46,9 +45,9 @@ type BlockDeviceMapping struct {
 
 //RunNetworkInterface struct for Ec2.
 type RunNetworkInterface struct {
-	Id                      string
+	ID                     string
 	DeviceIndex             int
-	SubnetId                string
+	SubnetID               string
 	Description             string
 	PrivateIPs              []PrivateIP
 	SecurityGroupIds        []string
@@ -65,24 +64,24 @@ type PrivateIP struct {
 
 //RunInstancesResp response.
 type RunInstancesResp struct {
-	RequestId      string          `xml:"requestId"`
-	ReservationId  string          `xml:"reservationId"`
-	OwnerId        string          `xml:"ownerId"`
+	RequestID      string          `xml:"RequestID"`
+	ReservationID string          `xml:"ReservationID"`
+	OwnerID        string          `xml:"OwnerID"`
 	SecurityGroups []SecurityGroup `xml:"groupSet>item"`
 	Instances      []Instance      `xml:"instancesSet>item"`
 }
 
 //Instance struct represents running instance.
 type Instance struct {
-	InstanceId         string             `xml:"instanceId"`
+	InstanceID         string             `xml:"instanceID"`
 	InstanceType       string             `xml:"instanceType"`
-	ImageId            string             `xml:"imageId"`
+	ImageID            string             `xml:"imageId"`
 	PrivateDNSName     string             `xml:"privateDnsName"`
 	DNSName            string             `xml:"dnsName"`
 	IPAddress          string             `xml:"ipAddress"`
 	PrivateIPAddress   string             `xml:"privateIpAddress"`
-	SubnetId           string             `xml:"subnetId"`
-	VPCId              string             `xml:"vpcId"`
+	SubnetID           string             `xml:"subnetId"`
+	VPCID              string             `xml:"vpcID"`
 	SourceDestCheck    bool               `xml:"sourceDestCheck"`
 	KeyName            string             `xml:"keyName"`
 	AMILaunchIndex     int                `xml:"amiLaunchIndex"`
@@ -99,7 +98,7 @@ type Instance struct {
 
 //InstanceStateChange stuct represents instance state change.
 type InstanceStateChange struct {
-	InstanceId    string        `xml:"instanceId"`
+	InstanceID    string        `xml:"instanceId"`
 	CurrentState  InstanceState `xml:"currentState"`
 	PreviousState InstanceState `xml:"previousState"`
 }
@@ -107,12 +106,12 @@ type InstanceStateChange struct {
 //SimpleResp stuct represents SimpleResp.
 type SimpleResp struct {
 	XMLName   xml.Name
-	RequestId string `xml:"requestId"`
+	RequestID string `xml:"requestId"`
 }
 
 //TerminateInstance struct represents TerminateInstance response.
 type TerminateInstancesResp struct {
-	RequestId    string                `xml:"requestId"`
+	RequestID    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
