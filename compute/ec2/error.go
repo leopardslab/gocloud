@@ -1,6 +1,6 @@
 package ec2
 
-// Error represents error in EC2 instance creation.
+// represents error
 type Error struct {
 	StatusCode int
 
@@ -8,5 +8,5 @@ type Error struct {
 
 	Message string
 
-	RequestID string `xml:"RequestID"`
+	RequestId string `xml:"RequestID"`
 }

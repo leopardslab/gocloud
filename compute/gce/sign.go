@@ -5,7 +5,7 @@ import (
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"log"
-	"github.com/scorelab/gocloud/auth"
+	"github.com/scorelab/gocloud-v2/auth"
 )
 
 //sign() GCE signature it give URL to get Autorization code on which we it generate auth token and pass in each request in request header

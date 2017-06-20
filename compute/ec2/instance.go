@@ -9,10 +9,11 @@ import (
 	"net/http/httputil"
 	"strconv"
 	"time"
-	"github.com/scorelab/gocloud/auth"
+	"github.com/scorelab/gocloud-v2/auth"
 )
 
-//Startnode ec2 instance accept array of instance-id.
+// start ec2 instance accept array of instance-id
+
 func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 	ids := request.([]string)
 	params := makeParams("StartInstances")
@@ -25,7 +26,8 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 	return resp, nil
 }
 
-//Stopnode ec2 instance accept array of instance-id.
+// stop ec2 instance accept array of instance-id
+
 func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
 	ids := request.([]string)
 	params := makeParams("StopInstances")
@@ -38,7 +40,8 @@ func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
 	return resp, nil
 }
 
-//Rebootnode ec2 instance accept array of instance-id.
+// reboot ec2 instance accept array of instance-id
+
 func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 	ids := request.([]string)
 	params := makeParams("RebootInstances")
@@ -51,7 +54,8 @@ func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 	return resp, nil
 }
 
-//Deletenode ec2 instance accept array of instance-id.
+// delete ec2 instance accept array of instance-id
+
 func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 	instIds := request.([]string)
 	params := makeParams("TerminateInstances")
@@ -64,7 +68,8 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 	return
 }
 
-//query pass the param to query and add signature to it base on secret key and acces key.
+//pass the param to query and add signature to it base on secret key and acces key
+
 func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 
 	req, err := http.NewRequest("GET", USEast.EC2Endpoint, nil)
@@ -80,20 +85,20 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 	query.Add("Timestamp", timeNow().In(time.UTC).Format(time.RFC3339))
 	req.URL.RawQuery = query.Encode()
 
-	auth := Auth{"AccessKey": auth.Config.AWSAccessKeyID,"SecretKey": auth.Config.AWSAccessKeyID}
 
-	fmt.Println("auth is printing...")
-	fmt.Println(auth.AccessKey)
-
+	auth := Auth{AccessKey:auth.Config.AWSAccessKeyID,SecretKey:auth.Config.AWSSecretKey}
+	
 	SignV2(req, auth)
 
-	//fmt.Println(req)
+	fmt.Println(req)
 
 	r, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return err
 	}
 	defer r.Body.Close()
+
+	//fmt.Println(string(r.Body))
 
 	if debug {
 		dump, _ := httputil.DumpResponse(r, true)
@@ -104,15 +109,14 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 		return buildError(r)
 	}
 
-	//fmt.Println(xml.NewDecoder(r.Body).Decode(resp))
+	fmt.Println(xml.NewDecoder(r.Body).Decode(resp))
 	return xml.NewDecoder(r.Body).Decode(resp)
 
 }
 
-//Createnode Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation.
-func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
+//create Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation
 
-    fgdsfghhh
+func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 
 	var options RunInstances
 
@@ -123,8 +127,8 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "ImageId":
-			ImageID, _ := value.(string)
-			options.ImageID = ImageID
+			ImageId, _ := value.(string)
+			options.ImageId = ImageId
 
 		case "MinCount":
 			MinCount, _ := value.(int)
@@ -138,17 +142,17 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 			KeyName, _ := value.(string)
 			options.KeyName = KeyName
 
-		case "KernelID":
-			KernelID, _ := value.(string)
-			options.KernelID = KernelID
+		case "KernelId":
+			KernelId, _ := value.(string)
+			options.KernelId = KernelId
 
 		case "InstanceType":
 			InstanceType, _ := value.(string)
 			options.InstanceType = InstanceType
 
-		case "RamdiskID":
-			RamdiskID, _ := value.(string)
-			options.RamdiskID = RamdiskID
+		case "RamdiskId":
+			RamdiskId, _ := value.(string)
+			options.RamdiskId = RamdiskId
 
 		case "AvailZone":
 			AvailZone, _ := value.(string)
@@ -162,9 +166,9 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 			Monitoring, _ := value.(bool)
 			options.Monitoring = Monitoring
 
-		case "SubnetID":
-			SubnetID, _ := value.(string)
-			options.SubnetID = SubnetID
+		case "SubnetId":
+			SubnetId, _ := value.(string)
+			options.SubnetId = SubnetId
 
 		case "DisableAPITermination":
 			DisableAPITermination, _ := value.(bool)
@@ -183,7 +187,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 			//fmt.Println(SecurityGroupparam)
 			for i := 0; i < len(SecurityGroupparam); i++ {
 				var securityGroup SecurityGroup
-				securityGroup.ID = SecurityGroupparam[i]["ID"]
+				securityGroup.Id = SecurityGroupparam[i]["Id"]
 				securityGroup.Name = SecurityGroupparam[i]["Name"]
 				options.SecurityGroups = append(options.SecurityGroups, securityGroup)
 			}
@@ -200,8 +204,8 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 					case "VirtualName":
 						BlockDeviceMappingParam.VirtualName = BlockDeviceparamvalue.(string)
 
-					case "SnapshotID":
-						BlockDeviceMappingParam.SnapshotID = BlockDeviceparamvalue.(string)
+					case "SnapshotId":
+						BlockDeviceMappingParam.SnapshotId = BlockDeviceparamvalue.(string)
 
 					case "VolumeType":
 						BlockDeviceMappingParam.VolumeType = BlockDeviceparamvalue.(string)
@@ -229,12 +233,12 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 				//fmt.Println(RunNetworkInterfaceparam[i])
 				for RunNetworkInterfaceparamkey, RunNetworkInterfaceparamvalue := range RunNetworkInterfaceparam[i] {
 					switch RunNetworkInterfaceparamkey {
-					case "ID":
-						runNetworkInterface.ID = RunNetworkInterfaceparamvalue.(string)
+					case "Id":
+						runNetworkInterface.Id = RunNetworkInterfaceparamvalue.(string)
 					case "DeviceIndex":
 						runNetworkInterface.DeviceIndex = RunNetworkInterfaceparamvalue.(int)
-					case "SubnetID":
-						runNetworkInterface.SubnetID = RunNetworkInterfaceparamvalue.(string)
+					case "SubnetId":
+						runNetworkInterface.Id = RunNetworkInterfaceparamvalue.(string)
 					case "Description":
 						runNetworkInterface.Description = RunNetworkInterfaceparamvalue.(string)
 					case "DeleteOnTermination":
@@ -273,7 +277,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 		}
 	}
 
-	//fmt.Println(options)
+	fmt.Println(options)
 
 	params := makeParams("RunInstances")
 
@@ -345,13 +349,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 	}
 	if options.PrivateIPAddress != "" {
 		params["PrivateIpAddress"] = options.PrivateIPAddress
-
-	fmt.Println("I am here")
-
-  fkdmfkmhdkhmdhm
-	dlgmdlfghgjh
-
-
+	}
 
 	resp = &RunInstancesResp{}
 	err = ec2.query(params, resp)

@@ -1,7 +1,7 @@
 package main
 
 import (
-	 "github.com/scorelab/gocloud/gocloud"
+	 "github.com/scorelab/gocloud-v2/gocloud"
 )
 
 func main() {
@@ -192,7 +192,7 @@ func main() {
 */
 
 	ec2 := map[string]interface{}{
- 	 "ImageID"     : "ami-ccf405a5",
+ 	 "ImageId"     : "ami-ccf405a5",
  	 "InstanceType": "t1.micro",
   }
 
