@@ -3,9 +3,9 @@ package gocloud
 import (
 	"errors"
 	"fmt"
+	"github.com/scorelab/gocloud-v2/auth"
 	"github.com/scorelab/gocloud-v2/aws"
 	"github.com/scorelab/gocloud-v2/google"
-  "github.com/scorelab/gocloud-v2/auth"
 )
 
 //Gocloud is a interface which hide differece between different cloud providers.
@@ -23,7 +23,6 @@ const (
 	//Googleprovider reperents Google cloud.
 	Googleprovider = "google"
 )
-
 
 func init() {
 	auth.LoadConfig()

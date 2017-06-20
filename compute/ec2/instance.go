@@ -87,10 +87,10 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 
 
 	auth := Auth{AccessKey:auth.Config.AWSAccessKeyID,SecretKey:auth.Config.AWSSecretKey}
-	
+
 	SignV2(req, auth)
 
-	fmt.Println(req)
+	//fmt.Println(req)
 
 	r, err := http.DefaultClient.Do(req)
 	if err != nil {
@@ -109,9 +109,7 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 		return buildError(r)
 	}
 
-	fmt.Println(xml.NewDecoder(r.Body).Decode(resp))
 	return xml.NewDecoder(r.Body).Decode(resp)
-
 }
 
 //create Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation
@@ -353,8 +351,21 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 
 	resp = &RunInstancesResp{}
 	err = ec2.query(params, resp)
+	fmt.Println(resp)
+	respq,_ := resp.(*RunInstancesResp)
+
+	fmt.Println(respq)
+
+	printres(respq)
 	if err != nil {
 		return nil, err
 	}
 	return
+}
+
+
+func printres(resp *RunInstancesResp){
+	for _, instance := range resp.Instances {
+			println("Now running", instance.InstanceId)
+	}
 }

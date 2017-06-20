@@ -1,7 +1,8 @@
 package main
 
 import (
-	 "github.com/scorelab/gocloud-v2/gocloud"
+	"fmt"
+	"github.com/scorelab/gocloud-v2/gocloud"
 )
 
 func main() {
@@ -146,57 +147,59 @@ func main() {
 	    amazoncloud.Rebootnode(reboot)
 	*/
 
-/*
-	InitializeParams := map[string]string{
-		"SourceImage": "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160301",
-		"DiskType":    "projects/sheltermap-1493101612061/zones/us-east4-c/diskTypes/pd-standard",
-		"DiskSizeGb":  "10",
-	}
+	/*
+		InitializeParams := map[string]string{
+			"SourceImage": "https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-8-jessie-v20160301",
+			"DiskType":    "projects/sheltermap-1493101612061/zones/us-east4-c/diskTypes/pd-standard",
+			"DiskSizeGb":  "10",
+		}
 
-	disk := []map[string]interface{}{
-		{
-			"Boot":             true,
-			"AutoDelete":       false,
-			"DeviceName":       "bokya",
-			"Type":             "PERSISTENT",
-			"Mode":             "READ_WRITE",
-			"InitializeParams": InitializeParams,
+		disk := []map[string]interface{}{
+			{
+				"Boot":             true,
+				"AutoDelete":       false,
+				"DeviceName":       "bokya",
+				"Type":             "PERSISTENT",
+				"Mode":             "READ_WRITE",
+				"InitializeParams": InitializeParams,
+			},
+		}
+
+		AccessConfigs := []map[string]string{{
+			"Name": "external-nat",
+			"Type": "ONE_TO_ONE_NAT",
 		},
-	}
+		}
 
-	AccessConfigs := []map[string]string{{
-		"Name": "external-nat",
-		"Type": "ONE_TO_ONE_NAT",
-	},
-	}
+		NetworkInterfaces := []map[string]interface{}{
+			{
+				"Network":       "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/global/networks/default",
+				"Subnetwork":    "projects/sheltermap-1493101612061/regions/us-east4/subnetworks/default",
+				"AccessConfigs": AccessConfigs,
+			},
+		}
 
-	NetworkInterfaces := []map[string]interface{}{
-		{
-			"Network":       "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/global/networks/default",
-			"Subnetwork":    "projects/sheltermap-1493101612061/regions/us-east4/subnetworks/default",
-			"AccessConfigs": AccessConfigs,
-		},
-	}
+		gce := map[string]interface{}{
+			"projectid":         "sheltermap-1493101612061",
+			"Name":              "sumesh-10",
+			"MachineType":       "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/machineTypes/n1-standard-1",
+			"Zone":              "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c",
+			"disk":              disk,
+			"NetworkInterfaces": NetworkInterfaces,
+		}
 
-	gce := map[string]interface{}{
-		"projectid":         "sheltermap-1493101612061",
-		"Name":              "sumesh-10",
-		"MachineType":       "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/machineTypes/n1-standard-1",
-		"Zone":              "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c",
-		"disk":              disk,
-		"NetworkInterfaces": NetworkInterfaces,
-	}
-
-	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
-	googlecloud.Createnode(gce)
-*/
+		googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+		googlecloud.Createnode(gce)
+	*/
 
 	ec2 := map[string]interface{}{
- 	 "ImageId"     : "ami-ccf405a5",
- 	 "InstanceType": "t1.micro",
-  }
+		"ImageId":      "ami-ccf405a5",
+		"InstanceType": "t1.micro",
+	}
 
-  amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
-  amazoncloud.Createnode(ec2)
+	amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 
+	amazoncloud.Createnode(ec2)
+
+	fmt.Println("Hello Bokya")
 }
