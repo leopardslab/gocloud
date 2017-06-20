@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/scorelab/gocloud/aws"
 	"github.com/scorelab/gocloud/google"
-	"github.com/scorelab/gocloud/auth"
+//"github.com/scorelab/gocloud/auth"
 )
 
 //Gocloud is a interface which hide differece between different cloud providers.
@@ -24,10 +24,11 @@ const (
 	Googleprovider = "google"
 )
 
+/*
 func init() {
 	auth.LoadConfig()
 }
-
+*/
 //CloudProvider return the instance of respepted cloud and map to the Gocloud so we can call the method like createnote on CloudProvider instance
 //this is a delegation of cloud provider.
 func CloudProvider(provider string) (Gocloud, error) {
