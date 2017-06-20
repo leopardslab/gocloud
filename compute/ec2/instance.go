@@ -9,6 +9,7 @@ import (
 	"net/http/httputil"
 	"strconv"
 	"time"
+	"github.com/scorelab/gocloud/auth"
 )
 
 //Startnode ec2 instance accept array of instance-id.
@@ -79,11 +80,13 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 	query.Add("Timestamp", timeNow().In(time.UTC).Format(time.RFC3339))
 	req.URL.RawQuery = query.Encode()
 
-	auth := Auth{"dummy", "dummy"}
+	auth := Auth{"AccessKey": auth.Config.AWSAccessKeyID,"SecretKey": auth.Config.AWSAccessKeyID}
+
+	fmt.Println(auth.AccessKey)
 
 	SignV2(req, auth)
 
-	fmt.Println(req)
+	//fmt.Println(req)
 
 	r, err := http.DefaultClient.Do(req)
 	if err != nil {
@@ -100,7 +103,7 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 		return buildError(r)
 	}
 
-	fmt.Println(xml.NewDecoder(r.Body).Decode(resp))
+	//fmt.Println(xml.NewDecoder(r.Body).Decode(resp))
 	return xml.NewDecoder(r.Body).Decode(resp)
 
 }

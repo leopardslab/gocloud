@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/scorelab/gocloud/aws"
 	"github.com/scorelab/gocloud/google"
+	"github.com/scorelab/gocloud/auth"
 )
 
 //Gocloud is a interface which hide differece between different cloud providers.
@@ -21,13 +22,15 @@ const (
 	Amazonprovider = "aws"
 	//Googleprovider reperents Google cloud.
 	Googleprovider = "google"
-	Secretkey      = "SECRET_KEY"
-	Secretid       = "SECRET_ID"
 )
+
+func init() {
+	auth.LoadConfig()
+}
 
 //CloudProvider return the instance of respepted cloud and map to the Gocloud so we can call the method like createnote on CloudProvider instance
 //this is a delegation of cloud provider.
-func CloudProvider(provider, Secretkey, secretid string) (Gocloud, error) {
+func CloudProvider(provider string) (Gocloud, error) {
 
 	switch provider {
 	case Amazonprovider:

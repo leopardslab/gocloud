@@ -15,14 +15,7 @@ type Auth struct {
 }
 
 //Ec2 struct
-
 type EC2 struct {
-	Auth
 	Region
 	Private byte
-}
-
-// Function return EC2 instance
-func New2(auth Auth, region Region) *EC2 {
-	return &EC2{auth, region, 0}
 }
