@@ -4,7 +4,7 @@ import(
 	"os"
 	"encoding/json"
 	"log"
-	"fmt"
+	//"fmt"
 )
 
 //Configuration struct reperesnts.
@@ -29,5 +29,5 @@ func LoadConfig() {
   if err != nil {
     log.Fatalln("Cannot get configuration from file", err)
   }
-	fmt.Println(Config)
+	//fmt.Println(Config)
 }

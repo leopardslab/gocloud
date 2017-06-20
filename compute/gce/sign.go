@@ -5,6 +5,7 @@ import (
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"log"
+	"github.com/scorelab/gocloud/auth"
 )
 
 //sign() GCE signature it give URL to get Autorization code on which we it generate auth token and pass in each request in request header
@@ -12,12 +13,9 @@ func sign() (token *oauth2.Token) {
 
 	conf := &oauth2.Config{
 
+		ClientID: auth.Config.GoogleClientID,
 
-		//json file
-
-		ClientID: "os.genenv()",
-
-		ClientSecret: "os.genenv()",
+		ClientSecret: auth.Config.GoogleClientSecret,
 
 		RedirectURL: "urn:ietf:wg:oauth:2.0:oob",
 

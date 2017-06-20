@@ -42,4 +42,5 @@ func CloudProvider(provider string) (Gocloud, error) {
 	default:
 		return nil, errors.New(fmt.Sprintf("provider %s not recognized\n", provider))
 	}
+
 }

@@ -82,6 +82,7 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 
 	auth := Auth{"AccessKey": auth.Config.AWSAccessKeyID,"SecretKey": auth.Config.AWSAccessKeyID}
 
+	fmt.Println("auth is printing...")
 	fmt.Println(auth.AccessKey)
 
 	SignV2(req, auth)
@@ -110,6 +111,8 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 
 //Createnode Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation.
 func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
+
+    fgdsfghhh
 
 	var options RunInstances
 
@@ -270,7 +273,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 		}
 	}
 
-	fmt.Println(options)
+	//fmt.Println(options)
 
 	params := makeParams("RunInstances")
 
@@ -342,7 +345,13 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 	}
 	if options.PrivateIPAddress != "" {
 		params["PrivateIpAddress"] = options.PrivateIPAddress
-	}
+
+	fmt.Println("I am here")
+
+  fkdmfkmhdkhmdhm
+	dlgmdlfghgjh
+
+
 
 	resp = &RunInstancesResp{}
 	err = ec2.query(params, resp)

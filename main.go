@@ -180,21 +180,23 @@ func main() {
 
 	gce := map[string]interface{}{
 		"projectid":         "sheltermap-1493101612061",
-		"Name":              "bokya",
+		"Name":              "sumesh-10",
 		"MachineType":       "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/machineTypes/n1-standard-1",
 		"Zone":              "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c",
 		"disk":              disk,
 		"NetworkInterfaces": NetworkInterfaces,
 	}
 
+	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 	googlecloud.Createnode(gce)
 */
 
 	ec2 := map[string]interface{}{
- 	 "ImageId"     : "ami-ccf405a5",
- 	 "InstanceType": "t1.micr",
+ 	 "ImageID"     : "ami-ccf405a5",
+ 	 "InstanceType": "t1.micro",
   }
 
-  amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider,gocloud.Secretkey,gocloud.Secretid)
+  amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
   amazoncloud.Createnode(ec2)
+
 }
