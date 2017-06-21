@@ -4,12 +4,12 @@ import (
 	"encoding/base64"
 	"encoding/xml"
 	"fmt"
+	"github.com/scorelab/gocloud-v2/auth"
 	"log"
 	"net/http"
 	"net/http/httputil"
 	"strconv"
 	"time"
-	"github.com/scorelab/gocloud-v2/auth"
 )
 
 // start ec2 instance accept array of instance-id
@@ -85,8 +85,7 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 	query.Add("Timestamp", timeNow().In(time.UTC).Format(time.RFC3339))
 	req.URL.RawQuery = query.Encode()
 
-
-	auth := Auth{AccessKey:auth.Config.AWSAccessKeyID,SecretKey:auth.Config.AWSSecretKey}
+	auth := Auth{AccessKey: auth.Config.AWSAccessKeyID, SecretKey: auth.Config.AWSSecretKey}
 
 	SignV2(req, auth)
 
@@ -352,7 +351,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 	resp = &RunInstancesResp{}
 	err = ec2.query(params, resp)
 	fmt.Println(resp)
-	respq,_ := resp.(*RunInstancesResp)
+	respq, _ := resp.(*RunInstancesResp)
 
 	fmt.Println(respq)
 
@@ -363,9 +362,8 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 	return
 }
 
-
-func printres(resp *RunInstancesResp){
+func printres(resp *RunInstancesResp) {
 	for _, instance := range resp.Instances {
-			println("Now running", instance.InstanceId)
+		println("Now running", instance.InstanceId)
 	}
 }

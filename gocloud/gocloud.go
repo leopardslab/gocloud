@@ -15,6 +15,8 @@ type Gocloud interface {
 	Stopnode(request interface{}) (resp interface{}, err error)
 	Deletenode(request interface{}) (resp interface{}, err error)
 	Rebootnode(request interface{}) (resp interface{}, err error)
+	Createdisk(request interface{}) (resp interface{}, err error)
+	Deletedisk(request interface{}) (resp interface{}, err error)
 }
 
 const (

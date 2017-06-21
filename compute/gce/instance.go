@@ -168,12 +168,22 @@ func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 	Startnoderequest.Header.Set("Content-Type", "application/json")
 
 	token.SetAuthHeader(Startnoderequest)
+
 	Startnoderesp, err := client.Do(Startnoderequest)
 
 	defer Startnoderesp.Body.Close()
+
 	body, err := ioutil.ReadAll(Startnoderesp.Body)
 
 	fmt.Println(string(body))
+
+	//respq := GCEResponse{}
+
+	//json.Unmarshal(body, &respq)
+
+	//fmt.Printf("%T",respq)
+
+	//resp = respq.(map[string]interface{})
 
 	return
 }
@@ -285,4 +295,8 @@ func (gce *GCE) listnode(request interface{}) (resp interface{}, err error) {
 	fmt.Println(string(body))
 
 	return
+}
+
+func ADD(a, b int) int {
+	return a + b
 }

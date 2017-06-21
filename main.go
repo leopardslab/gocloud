@@ -191,15 +191,49 @@ func main() {
 		googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		googlecloud.Createnode(gce)
 	*/
+	/*
+		ec2 := map[string]interface{}{
+			"ImageId":      "ami-ccf405a5",
+			"InstanceType": "t1.micro",
+		}
 
-	ec2 := map[string]interface{}{
-		"ImageId":      "ami-ccf405a5",
-		"InstanceType": "t1.micro",
+		amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
+
+		amazoncloud.Createnode(ec2)
+
+
+
+	*/
+	/*
+	   	start := map[string]string{
+	   		"projectid":"sheltermap-1493101612061",
+	   		"instance":"sumesh-10",
+	   		"Zone": "us-east4-c",
+
+	   	}
+	     googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+
+	     googlecloud.Startnode(start)
+	*/
+	fmt.Println("********************")
+
+	disk := map[string]interface{}{
+		"projectid": "sheltermap-1493101612061",
+		"Name":      "disk-11",
+		"Type":      "pd-standard",
+		"Zone":      "us-east4-c",
 	}
 
-	amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
+	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+	googlecloud.Createdisk(disk)
 
-	amazoncloud.Createnode(ec2)
+	fmt.Println("")
 
-	fmt.Println("Hello Bokya")
+	diskDeletedisk := map[string]string{
+		"projectid": "sheltermap-1493101612061",
+		"disk":      "disk-10",
+		"Zone":      "us-east4-c",
+	}
+
+	googlecloud.Deletedisk(diskDeletedisk)
 }

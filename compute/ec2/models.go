@@ -183,78 +183,74 @@ type StopInstanceResp struct {
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
-
-
-
-
 type Responsestruct struct {
 	RunInstancesResponse struct {
-		Xmlns string `json:"-xmlns"`
-		RequestID string `json:"requestId"`
+		Xmlns         string `json:"-xmlns"`
+		RequestID     string `json:"requestId"`
 		ReservationID string `json:"reservationId"`
-		OwnerID string `json:"ownerId"`
-		InstancesSet struct {
+		OwnerID       string `json:"ownerId"`
+		InstancesSet  struct {
 			Item struct {
-				InstanceID string `json:"instanceId"`
-				ImageID string `json:"imageId"`
+				InstanceID    string `json:"instanceId"`
+				ImageID       string `json:"imageId"`
 				InstanceState struct {
 					Code string `json:"code"`
 					Name string `json:"name"`
 				} `json:"instanceState"`
-				PrivateDNSName string `json:"privateDnsName"`
-				AmiLaunchIndex string `json:"amiLaunchIndex"`
-				InstanceType string `json:"instanceType"`
-				LaunchTime time.Time `json:"launchTime"`
-				Placement struct {
+				PrivateDNSName string    `json:"privateDnsName"`
+				AmiLaunchIndex string    `json:"amiLaunchIndex"`
+				InstanceType   string    `json:"instanceType"`
+				LaunchTime     time.Time `json:"launchTime"`
+				Placement      struct {
 					AvailabilityZone string `json:"availabilityZone"`
-					Tenancy string `json:"tenancy"`
+					Tenancy          string `json:"tenancy"`
 				} `json:"placement"`
-				KernelID string `json:"kernelId"`
+				KernelID   string `json:"kernelId"`
 				Monitoring struct {
 					State string `json:"state"`
 				} `json:"monitoring"`
-				SubnetID string `json:"subnetId"`
-				VpcID string `json:"vpcId"`
+				SubnetID         string `json:"subnetId"`
+				VpcID            string `json:"vpcId"`
 				PrivateIPAddress string `json:"privateIpAddress"`
-				SourceDestCheck string `json:"sourceDestCheck"`
-				GroupSet struct {
+				SourceDestCheck  string `json:"sourceDestCheck"`
+				GroupSet         struct {
 					Item struct {
-						GroupID string `json:"groupId"`
+						GroupID   string `json:"groupId"`
 						GroupName string `json:"groupName"`
 					} `json:"item"`
 				} `json:"groupSet"`
 				StateReason struct {
-					Code string `json:"code"`
+					Code    string `json:"code"`
 					Message string `json:"message"`
 				} `json:"stateReason"`
-				Architecture string `json:"architecture"`
-				RootDeviceType string `json:"rootDeviceType"`
-				RootDeviceName string `json:"rootDeviceName"`
-				VirtualizationType string `json:"virtualizationType"`
-				ClientToken string `json:"clientToken"`
-				Hypervisor string `json:"hypervisor"`
+				Architecture        string `json:"architecture"`
+				RootDeviceType      string `json:"rootDeviceType"`
+				RootDeviceName      string `json:"rootDeviceName"`
+				VirtualizationType  string `json:"virtualizationType"`
+				ClientToken         string `json:"clientToken"`
+				Hypervisor          string `json:"hypervisor"`
 				NetworkInterfaceSet struct {
 					Item struct {
 						NetworkInterfaceID string `json:"networkInterfaceId"`
-						SubnetID string `json:"subnetId"`
-						VpcID string `json:"vpcId"`
-						OwnerID string `json:"ownerId"`
-						Status string `json:"status"`
-						PrivateIPAddress string `json:"privateIpAddress"`
-						PrivateDNSName string `json:"privateDnsName"`
-						SourceDestCheck string `json:"sourceDestCheck"`
-						GroupSet struct {
+						SubnetID           string `json:"subnetId"`
+						VpcID              string `json:"vpcId"`
+						OwnerID            string `json:"ownerId"`
+						Status             string `json:"status"`
+						PrivateIPAddress   string `json:"privateIpAddress"`
+						PrivateDNSName     string `json:"privateDnsName"`
+						SourceDestCheck    string `json:"sourceDestCheck"`
+						GroupSet           struct {
 							Item struct {
-								GroupID string `json:"groupId"`
+								GroupID   string `json:"groupId"`
 								GroupName string `json:"groupName"`
 							} `json:"item"`
 						} `json:"groupSet"`
 						Attachment struct {
-							AttachmentID string `json:"attachmentId"`
-							DeviceIndex string `json:"deviceIndex"`
-							Status string `json:"status"`
-							AttachTime time.Time `json:"attachTime"`
-							DeleteOnTermination string `json:"deleteOnTermination"`
+							AttachmentID        string    `json:"attachmentId"`
+							DeviceIndex         string    `json:"deviceIndex"`
+							Status              string    `json:"status"`
+							AttachTime          time.Time `json:"attachTime"`
+							DeleteOnTermination string    `json:"deleteOnTermination"`
 						} `json:"attachment"`
 					} `json:"item"`
 				} `json:"networkInterfaceSet"`
