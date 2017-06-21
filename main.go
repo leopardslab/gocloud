@@ -209,31 +209,50 @@ func main() {
 	   		"projectid":"sheltermap-1493101612061",
 	   		"instance":"sumesh-10",
 	   		"Zone": "us-east4-c",
-
 	   	}
 	     googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 
 	     googlecloud.Startnode(start)
 	*/
 	fmt.Println("********************")
+	/*
+		disk := map[string]interface{}{
+			"projectid": "sheltermap-1493101612061",
+			"Name":      "disk-11",
+			"Type":      "pd-standard",
+			"Zone":      "us-east4-c",
+		}
 
-	disk := map[string]interface{}{
-		"projectid": "sheltermap-1493101612061",
-		"Name":      "disk-11",
-		"Type":      "pd-standard",
-		"Zone":      "us-east4-c",
-	}
+		googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+		googlecloud.Createdisk(disk)
 
+		fmt.Println("")
+
+		diskDeletedisk := map[string]string{
+			"projectid": "sheltermap-1493101612061",
+			"disk":      "disk-10",
+			"Zone":      "us-east4-c",
+		}
+
+		googlecloud.Deletedisk(diskDeletedisk)
+	*/
+	/*
+		createsnapshot := map[string]interface{}{
+			"projectid": "sheltermap-1493101612061",
+			"disk":      "disk-11",
+			"Zone":      "us-east4-c",
+			"Name":      "disk-12",
+		}
+	*/
 	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
-	googlecloud.Createdisk(disk)
 
-	fmt.Println("")
+	//	googlecloud.Createsnapshot(createsnapshot)
 
-	diskDeletedisk := map[string]string{
+	deletesnapshot := map[string]string{
 		"projectid": "sheltermap-1493101612061",
-		"disk":      "disk-10",
-		"Zone":      "us-east4-c",
+		"snapshot":  "gg",
 	}
 
-	googlecloud.Deletedisk(diskDeletedisk)
+	googlecloud.Deletesnapshot(deletesnapshot)
+
 }
