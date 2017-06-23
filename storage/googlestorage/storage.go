@@ -188,3 +188,97 @@ func (googlestorage *GoogleStorage) Deletesnapshot(request interface{}) (resp in
 
 	return
 }
+
+
+
+
+func (googlestorage *GoogleStorage)Attachdisk(request interface{}) (resp interface{}, err error) {
+
+	var attachdisk Attachdisk
+	var Projectid string
+	var Zone string
+	var Instance string
+
+	param := request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "projectid":
+			Projectid, _ = value.(string)
+			fmt.Println("Projectid", Projectid)
+
+		case "Zone":
+			ZoneV, _ := value.(string)
+			Zone = ZoneV
+
+		case "Source":
+			source, _ := value.(string)
+			attachdisk.Source = source
+
+		case "instance":
+			instanceV, _ := value.(string)
+			Instance = instanceV
+
+		default:
+			fmt.Println("Incorrect Value")
+
+		}
+	}
+
+	fmt.Println(attachdisk)
+
+	attachdiskjson, _ := json.Marshal(attachdisk)
+	attachdiskjsonstring := string(attachdiskjson)
+	fmt.Println(attachdiskjsonstring)
+	var attachdiskjsonstringbyte = []byte(attachdiskjsonstring)
+
+	url := "https://www.googleapis.com/compute/v1/projects/" + Projectid + "/zones/" + Zone + "/instances/" + Instance + "/attachDisk"
+
+	fmt.Println(url)
+
+	client := &http.Client{}
+	attachdiskrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(attachdiskjsonstringbyte))
+	attachdiskrequest.Header.Set("Content-Type", "application/json")
+
+	token := googleauth.Sign()
+
+	token.SetAuthHeader(attachdiskrequest)
+
+	attachdiskresp, err := client.Do(attachdiskrequest)
+	defer attachdiskresp.Body.Close()
+
+	body, err := ioutil.ReadAll(attachdiskresp.Body)
+	fmt.Println(string(body))
+
+	return
+}
+
+
+
+
+func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interface{}, err error) {
+
+	options := request.(map[string]string)
+
+	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/detachDisk"
+
+	fmt.Println(url)
+
+	token := googleauth.Sign()
+
+	client := &http.Client{}
+
+	detachdiskrequest, err := http.NewRequest("POST", url, nil)
+	detachdiskrequest.Header.Set("Content-Type", "application/json")
+
+	token.SetAuthHeader(detachdiskrequest)
+
+	detachdiskresp, err := client.Do(detachdiskrequest)
+
+	defer detachdiskresp.Body.Close()
+	body, err := ioutil.ReadAll(detachdiskresp.Body)
+
+	fmt.Println(string(body))
+
+	return
+}

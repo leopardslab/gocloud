@@ -244,6 +244,7 @@ func main() {
 			"Name":      "disk-12",
 		}
 	*/
+/*
 	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 
 	//	googlecloud.Createsnapshot(createsnapshot)
@@ -254,5 +255,17 @@ func main() {
 	}
 
 	googlecloud.Deletesnapshot(deletesnapshot)
+*/
 
+
+
+googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+
+	attachdisk := map[string]interface{}{
+		"projectid": "sheltermap-1493101612061",
+		"instance":      "sumesh-10",
+		"Zone":      "us-east4-c",
+		"Source":"projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
+	}
+	googlecloud.Attachdisk(attachdisk)
 }

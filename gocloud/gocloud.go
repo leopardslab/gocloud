@@ -19,6 +19,7 @@ type Gocloud interface {
 	Deletedisk(request interface{}) (resp interface{}, err error)
 	Createsnapshot(request interface{}) (resp interface{}, err error)
 	Deletesnapshot(request interface{}) (resp interface{}, err error)
+	Attachdisk(request interface{}) (resp interface{}, err error)
 }
 
 const (
