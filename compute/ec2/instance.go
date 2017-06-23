@@ -15,11 +15,17 @@ import (
 // start ec2 instance accept array of instance-id
 
 func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
-	ids := request.([]string)
+
+	param := request.(map[string]string)
+	ids := []string{}
+	ids = append(ids, param["instance-id"])
+	Region := param["Region"]
+
 	params := makeParams("StartInstances")
+
 	addParamsList(params, "InstanceId", ids)
 	resp = &StartInstanceResp{}
-	err = ec2.query(params, resp)
+	err = ec2.query(params,Region,resp)
 	if err != nil {
 		return nil, err
 	}
@@ -29,11 +35,17 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 // stop ec2 instance accept array of instance-id
 
 func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
-	ids := request.([]string)
+
+	param := request.(map[string]string)
+	ids := []string{}
+	ids = append(ids, param["instance-id"])
+	Region := param["Region"]
+
 	params := makeParams("StopInstances")
 	addParamsList(params, "InstanceId", ids)
 	resp = &StopInstanceResp{}
-	err = ec2.query(params, resp)
+
+	err = ec2.query(params,Region ,resp)
 	if err != nil {
 		return nil, err
 	}
@@ -43,11 +55,16 @@ func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
 // reboot ec2 instance accept array of instance-id
 
 func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
-	ids := request.([]string)
+
+	param := request.(map[string]string)
+	ids := []string{}
+	ids = append(ids, param["instance-id"])
+	Region := param["Region"]
+
 	params := makeParams("RebootInstances")
 	addParamsList(params, "InstanceId", ids)
 	resp = &SimpleResp{}
-	err = ec2.query(params, resp)
+	err = ec2.query(params, Region,resp)
 	if err != nil {
 		return nil, err
 	}
@@ -57,11 +74,15 @@ func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 // delete ec2 instance accept array of instance-id
 
 func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
-	instIds := request.([]string)
+	param := request.(map[string]string)
+	instIds := []string{}
+	instIds = append(instIds, param["instance-id"])
+	Region := param["Region"]
+
 	params := makeParams("TerminateInstances")
 	addParamsList(params, "InstanceId", instIds)
 	resp = &TerminateInstancesResp{}
-	err = ec2.query(params, resp)
+	err = ec2.query(params,Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -70,9 +91,11 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 
 //pass the param to query and add signature to it base on secret key and acces key
 
-func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
+func (ec2 *EC2) query(params map[string]string,Region string, resp interface{}) error {
 
-	req, err := http.NewRequest("GET", USEast.EC2Endpoint, nil)
+	EC2Endpoint := "https://ec2." + Region + ".amazonaws.com"
+
+  req, err := http.NewRequest("GET", EC2Endpoint, nil)
 	if err != nil {
 		return err
 	}
@@ -116,6 +139,7 @@ func (ec2 *EC2) query(params map[string]string, resp interface{}) error {
 func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 
 	var options RunInstances
+	var Region string
 
 	param := make(map[string]interface{})
 
@@ -123,6 +147,11 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 
 	for key, value := range param {
 		switch key {
+
+		case "Region":
+			regionV, _ := value.(string)
+			Region = regionV
+
 		case "ImageId":
 			ImageId, _ := value.(string)
 			options.ImageId = ImageId
@@ -274,7 +303,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 		}
 	}
 
-	fmt.Println(options)
+	fmt.Println(Region)
 
 	params := makeParams("RunInstances")
 
@@ -349,7 +378,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 	}
 
 	resp = &RunInstancesResp{}
-	err = ec2.query(params, resp)
+	err = ec2.query(params,Region,resp)
 	fmt.Println(resp)
 	respq, _ := resp.(*RunInstancesResp)
 

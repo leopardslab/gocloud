@@ -258,8 +258,8 @@ func main() {
 */
 
 
-
-googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+/*
+	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 
 	attachdisk := map[string]interface{}{
 		"projectid": "sheltermap-1493101612061",
@@ -268,4 +268,31 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"Source":"projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
 	}
 	googlecloud.Attachdisk(attachdisk)
+
+*/
+
+/*
+	ec2 := map[string]interface{}{
+ 	 "ImageId"     : "ami-ccf405a5",
+ 	 "InstanceType": "t1.micro",
+	 "Region" :"us-east-1",
+
+  }
+
+  amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
+  amazoncloud.Createnode(ec2)
+*/
+
+	start := map[string]string{
+		"instance-id":	"i-000a82ec542e29693",
+		"Region"     :	"us-east-1",
+	}
+	amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
+	amazoncloud.Deletenode(start)
+
+	stop := map[string]string{
+		"instance-id":	"i-0ec61e05211ceadad",
+		"Region"     :	"us-east-1",
+	}
+  amazoncloud.Stopnode(stop)
 }

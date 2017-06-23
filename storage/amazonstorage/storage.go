@@ -1,31 +1,21 @@
 package amazonstorage
 
 import (
-	"encoding/xml"
-	awsauth "github.com/scorelab/gocloud-v2/awsauth"
-	auth "github.com/scorelab/gocloud-v2/auth"
+	//"encoding/xml"
+	//awsauth "github.com/scorelab/gocloud-v2/awsauth"
+	//auth "github.com/scorelab/gocloud-v2/auth"
 	//"log"
-	"net/http"
+//"net/http"
 	//"net/http/httputil"
-	"strconv"
-	"time"
+	//"strconv"
+//"time"
 )
-
-type Region struct {
-	Name        string
-	EC2Endpoint string
-}
-
-var USEast = Region{
-	"us-east-1",
-	"https://ec2.us-east-1.amazonaws.com",
-}
 
 
 type Amazonstorage struct {
 }
 
-/*
+
 func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interface{}, err error) {
 
 	return
@@ -34,7 +24,7 @@ func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interf
 func (amazonstorage *Amazonstorage) Deletedisk(request interface{}) (resp interface{}, err error) {
 	return
 }
-*/
+
 
 func (amazonstorage *Amazonstorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
 	return
@@ -45,15 +35,17 @@ func (amazonstorage *Amazonstorage) Deletesnapshot(request interface{}) (resp in
 	return
 }
 
-/*
-func (amazonstorage *Amazonstorage)Attachdisk (request interface{}) (resp interface{}, err error){
+
+func (amazonstorage *Amazonstorage)Attachdisk(request interface{}) (resp interface{}, err error){
 
 	return
 }
 
+func (amazonstorage *Amazonstorage) Detachdisk(request interface{}) (resp interface{}, err error) {
+ return
+}
 
-
-*/
+/*
 
 const (
 	debug = false
@@ -64,8 +56,15 @@ const (
 )
 
 
+type Region struct {
+	Name        string
+	EC2Endpoint string
+}
 
-
+var USEast = Region{
+	"us-east-1",
+	"https://ec2.us-east-1.amazonaws.com",
+}
 
 
 type CreateVolume struct {
@@ -302,3 +301,4 @@ type CreateSnapshotResp struct {
 	RequestId string `xml:"requestId"`
 	Snapshot
 }
+*/
