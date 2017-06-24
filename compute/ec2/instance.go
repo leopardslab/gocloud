@@ -303,7 +303,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 		}
 	}
 
-	fmt.Println(Region)
+	//fmt.Println(Region)
 
 	params := makeParams("RunInstances")
 
