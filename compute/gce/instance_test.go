@@ -2,7 +2,7 @@ package gce
 
 import "testing"
 
-import "fmt"
+//import "fmt"
 
 func TestStartnode(t *testing.T) {
 	var gce GCE
@@ -11,6 +11,6 @@ func TestStartnode(t *testing.T) {
 		"instance":  "sumesh-10",
 		"Zone":      "us-east4-c",
 	}
-	resp, _ := gce.Startnode(start)
-	fmt.Println(resp)
+	gce.Startnode(start)
+
 }

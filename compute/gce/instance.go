@@ -142,9 +142,9 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 	Createnoderequest, err := http.NewRequest("POST", "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/instances", bytes.NewBuffer(gceinstancejsonstringbyte))
 	Createnoderequest.Header.Set("Content-Type", "application/json")
 
-	token := sign()
+	//token := sign()
 
-	token.SetAuthHeader(Createnoderequest)
+	//token.SetAuthHeader(Createnoderequest)
 
 	Createnoderesp, err := client.Do(Createnoderequest)
 	defer Createnoderesp.Body.Close()
@@ -155,6 +155,7 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 	return
 }
 
+/*
 func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -164,7 +165,9 @@ func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 	token := sign()
 
 	client := &http.Client{}
+
 	Startnoderequest, err := http.NewRequest("POST", url, nil)
+
 	Startnoderequest.Header.Set("Content-Type", "application/json")
 
 	token.SetAuthHeader(Startnoderequest)
@@ -188,6 +191,7 @@ func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 	return
 }
 
+*/
 //stop gce instance currentnly running
 //accept projectid, zone, instance
 
@@ -297,6 +301,36 @@ func (gce *GCE) listnode(request interface{}) (resp interface{}, err error) {
 	return
 }
 
-func ADD(a, b int) int {
-	return a + b
+func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
+
+	options := request.(map[string]string)
+
+	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/start"
+
+	client := SignJWT()
+
+
+	Startnoderequest, err := http.NewRequest("POST", url, nil)
+
+	Startnoderequest.Header.Set("Content-Type", "application/json")
+
+	//token.SetAuthHeader(Startnoderequest)
+
+	Startnoderesp, err := client.Do(Startnoderequest)
+
+	defer Startnoderesp.Body.Close()
+
+	body, err := ioutil.ReadAll(Startnoderesp.Body)
+
+	fmt.Println(string(body))
+
+	//respq := GCEResponse{}
+
+	//json.Unmarshal(body, &respq)
+
+	//fmt.Printf("%T",respq)
+
+	//resp = respq.(map[string]interface{})
+
+	return
 }

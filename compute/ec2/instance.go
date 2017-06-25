@@ -25,7 +25,7 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 
 	addParamsList(params, "InstanceId", ids)
 	resp = &StartInstanceResp{}
-	err = ec2.query(params,Region,resp)
+	err = ec2.query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
 	addParamsList(params, "InstanceId", ids)
 	resp = &StopInstanceResp{}
 
-	err = ec2.query(params,Region ,resp)
+	err = ec2.query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 	params := makeParams("RebootInstances")
 	addParamsList(params, "InstanceId", ids)
 	resp = &SimpleResp{}
-	err = ec2.query(params, Region,resp)
+	err = ec2.query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 	params := makeParams("TerminateInstances")
 	addParamsList(params, "InstanceId", instIds)
 	resp = &TerminateInstancesResp{}
-	err = ec2.query(params,Region, resp)
+	err = ec2.query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -91,11 +91,11 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 
 //pass the param to query and add signature to it base on secret key and acces key
 
-func (ec2 *EC2) query(params map[string]string,Region string, resp interface{}) error {
+func (ec2 *EC2) query(params map[string]string, Region string, resp interface{}) error {
 
 	EC2Endpoint := "https://ec2." + Region + ".amazonaws.com"
 
-  req, err := http.NewRequest("GET", EC2Endpoint, nil)
+	req, err := http.NewRequest("GET", EC2Endpoint, nil)
 	if err != nil {
 		return err
 	}
@@ -378,7 +378,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 	}
 
 	resp = &RunInstancesResp{}
-	err = ec2.query(params,Region,resp)
+	err = ec2.query(params, Region, resp)
 	fmt.Println(resp)
 	respq, _ := resp.(*RunInstancesResp)
 
