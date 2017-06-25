@@ -1,10 +1,11 @@
-#gocloud
-Cloud services library
+gocloud
+=======
 
+Cloud services library for golang.
 
 gocloud is a golang library which hides differences between different cloud providers(AWS,GCP etc) APIs and allows you to manage different cloud resources through a unified and easy to use API.
 
-Service Types
+## Service Types
 
 Compute allows you to manage cloud and virtual servers
 
