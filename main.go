@@ -338,6 +338,7 @@ func main() {
 		"NetworkInterfaces": NetworkInterfaces,
 	}
 */
+/*
 	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 
 //	googlecloud.Createnode(gce)
@@ -350,4 +351,24 @@ func main() {
 	}
 
   googlecloud.Startnode(start)
+*/
+
+
+
+createdisk := map[string]interface{}{
+	"IOPS"        : int64(3000),
+	"AvailZone" :  "us-east-1a",
+	"VolumeType" : "gp2",
+	"VolumeSize": 10,
+	"Encrypted" : true,
+}
+
+	amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
+  amazoncloud.Createdisk(createdisk)
+
+	deletedisk := map[string]string{
+		"VolumeId":"vol-0fde9859a183e0fe2",
+	}
+
+	amazoncloud.Deletedisk(deletedisk)
 }
