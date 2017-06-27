@@ -317,6 +317,7 @@ func (amazonstorage *Amazonstorage) Detachdisk(request interface{}) (resp interf
 	if param["Force"] =="true" {
 		params["Force"] = "true"
 	}
+
 	resp = &VolumeAttachmentResp{}
 	err = amazonstorage.query(params, resp)
 	if err != nil {
