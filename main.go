@@ -408,4 +408,18 @@ func main() {
 		"Force": "true",
 	}
 	amazoncloud.Detachdisk(detachdisk)
+
+
+  fmt.Println("##########################################")
+
+	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+
+	detachdiskg := map[string]string{
+		"projectid": "sheltermap-1493101612061",
+		"instance":  "sumesh-10",
+		"Zone":      "us-east4-c",
+		"deviceName":"projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
+	}
+
+	googlecloud.Detachdisk(detachdiskg)
 }

@@ -263,13 +263,23 @@ func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interf
 	client := &http.Client{}
 
 	detachdiskrequest, err := http.NewRequest("POST", url, nil)
+
+	q := detachdiskrequest.URL.Query()
+
+	q.Add("deviceName", options["deviceName"])
+
+	detachdiskrequest.URL.RawQuery = q.Encode()
+
 	detachdiskrequest.Header.Set("Content-Type", "application/json")
 
 	token.SetAuthHeader(detachdiskrequest)
 
+	fmt.Println(detachdiskrequest)
+
 	detachdiskresp, err := client.Do(detachdiskrequest)
 
 	defer detachdiskresp.Body.Close()
+
 	body, err := ioutil.ReadAll(detachdiskresp.Body)
 
 	fmt.Println(string(body))
