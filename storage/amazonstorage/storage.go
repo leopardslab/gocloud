@@ -183,88 +183,6 @@ type CreateSnapshotResp struct {
 	Snapshot
 }
 
-/*
-//volumeId, description string
-func (amazonstorage *Amazonstorage) Createsnapshot(volumeId, description string) (resp *CreateSnapshotResp, err error) {
-	params := makeParams("CreateSnapshot")
-	params["VolumeId"] = volumeId
-	params["Description"] = description
-
-	resp = &CreateSnapshotResp{}
-	err = ec2.query(params, resp)
-	if err != nil {
-		return nil, err
-	}
-	return`
-}
-
-
-//ids []string
-
-func (amazonstorage *Amazonstorage) Deletesnapshot(ids []string) (resp *SimpleResp, err error) {
-	params := makeParams("DeleteSnapshot")
-	for i, id := range ids {
-		params["SnapshotId."+strconv.Itoa(i+1)] = id
-	}
-
-	resp = &SimpleResp{}
-	err = ec2.query(params, resp)
-	if err != nil {
-		return nil, err
-	}
-	return
-}
-
-
-
-
-//id string
-func (amazonstorage *Amazonstorage) Deletedisk(request interface{}) (resp interface{}, err error) {
-	params := makeParams("DeleteVolume")
-	params["VolumeId"] = id
-	resp = &SimpleResp{}
-	err = amazonstorage.query(params, resp)
-	if err != nil {
-		return nil, err
-	}
-	return resp, nil
-}
-
-
-//volumeId, instanceId, device string
-func (amazonstorage *Amazonstorage)Attachdisk (request interface{}) (resp interface{}, err error){
-	params := makeParams("AttachVolume")
-	params["VolumeId"] = volumeId
-	params["InstanceId"] = instanceId
-	params["Device"] = device`
-	resp = &VolumeAttachmentResp{}
-	err = amazonstorage.query(params, resp)
-	if err != nil {
-		return nil, err
-	}
-	return resp, nil
-}
-
-// volumeId, instanceId, device string, force bool
-func (amazonstorage *Amazonstorage) Detachdisk(request interface{}) (resp interface{}, err error) {
-	params := makeParams("DetachVolume")
-	params["VolumeId"] = volumeId
-	params["InstanceId"] = instanceId
-	params["Device"] = device
-	if force {
-		params["Force"] = "true"
-	}
-	resp = &VolumeAttachmentResp{}
-	err = amazonstorage.query(params, resp)
-	if err != nil {
-		return nil, err
-	}
-	return resp, nil
-}
-
-*/
-//CreateVolume
-
 func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interface{}, err error) {
 
 	param, _ := request.(map[string]interface{})
@@ -342,8 +260,8 @@ func (amazonstorage *Amazonstorage) Deletedisk(request interface{}) (resp interf
 func (amazonstorage *Amazonstorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
 
 	param, _ := request.(map[string]string)
-
 	params := makeParams("CreateSnapshot")
+
 	params["VolumeId"] = param["VolumeId"]
 	params["Description"] = param["Description"]
 
@@ -373,7 +291,6 @@ func (amazonstorage *Amazonstorage) Deletesnapshot(request interface{}) (resp in
 	}
 	return
 }
-
 
 
 func (amazonstorage *Amazonstorage)Attachdisk (request interface{}) (resp interface{}, err error){
