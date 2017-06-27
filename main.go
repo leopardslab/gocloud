@@ -393,10 +393,19 @@ func main() {
 	 amazoncloud.Createnode(ec2)
 
 
-//	attachdisk := map[string]string{
-	//	"VolumeId":"vol-047d011f7536d2b7c",
-	  //"InstanceId":"",
-	 // "Device":"",
-//	}
+	attachdisk := map[string]string{
+		"VolumeId":"vol-049426a70587418d7",
+	  "InstanceId":"i-07737a0121fba7b0c",
+	  "Device":"/dev/sdh",
+	}
 
+	amazoncloud.Attachdisk(attachdisk)
+
+	detachdisk := map[string]string{
+		"VolumeId":"vol-049426a70587418d7",
+	  "InstanceId":"i-07737a0121fba7b0c",
+	  "Device":"/dev/sdh",
+		"Force": "true",
+	}
+	amazoncloud.Detachdisk(detachdisk)
 }

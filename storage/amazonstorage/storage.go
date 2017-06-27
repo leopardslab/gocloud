@@ -16,11 +16,6 @@ import (
 type Amazonstorage struct {
 }
 
-
-func (amazonstorage *Amazonstorage) Detachdisk(request interface{}) (resp interface{}, err error) {
-	return
-}
-
 const (
 	debug = false
 
@@ -387,6 +382,24 @@ func (amazonstorage *Amazonstorage)Attachdisk (request interface{}) (resp interf
 	params["VolumeId"] = param["VolumeId"]
 	params["InstanceId"] = param["InstanceId"]
 	params["Device"] = param["Device"]
+	resp = &VolumeAttachmentResp{}
+	err = amazonstorage.query(params, resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+
+func (amazonstorage *Amazonstorage) Detachdisk(request interface{}) (resp interface{}, err error) {
+	param, _ := request.(map[string]string)
+	params := makeParams("DetachVolume")
+	params["VolumeId"] = param["VolumeId"]
+	params["InstanceId"] =  param["InstanceId"]
+	params["Device"] =  param["Device"]
+	if param["Force"] =="true" {
+		params["Force"] = "true"
+	}
 	resp = &VolumeAttachmentResp{}
 	err = amazonstorage.query(params, resp)
 	if err != nil {
