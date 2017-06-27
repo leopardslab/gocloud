@@ -14,7 +14,6 @@ type Attachdisk struct {
 	Source string `json:"source"`
 }
 
-
 /*
 type Snapshot struct {
 		CreationTimestamp string `json:"creationTimestamp"`
@@ -43,7 +42,6 @@ type Snapshot struct {
 		StorageBytesStatus string `json:"storageBytesStatus"`
 	}
 */
-
 
 /*
 

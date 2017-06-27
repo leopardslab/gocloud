@@ -309,7 +309,6 @@ func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 
 	client := SignJWT()
 
-
 	Startnoderequest, err := http.NewRequest("POST", url, nil)
 
 	Startnoderequest.Header.Set("Content-Type", "application/json")

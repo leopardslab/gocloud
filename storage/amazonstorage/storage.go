@@ -2,52 +2,24 @@ package amazonstorage
 
 import (
 	"encoding/xml"
-	awsauth "github.com/scorelab/gocloud-v2/awsauth"
 	auth "github.com/scorelab/gocloud-v2/auth"
+	awsauth "github.com/scorelab/gocloud-v2/awsauth"
 	//"log"
 	"net/http"
 	//"net/http/httputil"
+	"fmt"
 	"strconv"
 	"time"
-	"fmt"
+	"io/ioutil"
 )
-
 
 type Amazonstorage struct {
 }
 
-/*
-func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interface{}, err error) {
-
-	return
-}
-
-
-func (amazonstorage *Amazonstorage) Deletedisk(request interface{}) (resp interface{}, err error) {
-	return
-}
-
-*/
-func (amazonstorage *Amazonstorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
-	return
-}
-
-func (amazonstorage *Amazonstorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
-
-	return
-}
-
-
-func (amazonstorage *Amazonstorage)Attachdisk(request interface{}) (resp interface{}, err error){
-
-	return
-}
 
 func (amazonstorage *Amazonstorage) Detachdisk(request interface{}) (resp interface{}, err error) {
- return
+	return
 }
-
-
 
 const (
 	debug = false
@@ -56,7 +28,6 @@ const (
 
 	vpcAPIVersion = "2013-10-15"
 )
-
 
 type Region struct {
 	Name        string
@@ -68,14 +39,13 @@ var USEast = Region{
 	"https://ec2.us-east-1.amazonaws.com",
 }
 
-
 type CreateVolume struct {
 	AvailZone  string
 	SnapshotId string
 	VolumeType string
 	VolumeSize int // Size is given in GB
 	Encrypted  bool
-	IOPS int64
+	IOPS       int64
 }
 
 type Volume struct {
@@ -110,7 +80,6 @@ type CreateVolumeResp struct {
 	Volume
 }
 
-
 func prepareVolume(params map[string]string, volume CreateVolume) {
 	params["AvailabilityZone"] = volume.AvailZone
 	if volume.SnapshotId != "" {
@@ -130,8 +99,6 @@ func prepareVolume(params map[string]string, volume CreateVolume) {
 	}
 }
 
-
-
 type SimpleResp struct {
 	XMLName   xml.Name
 	RequestId string `xml:"requestId"`
@@ -145,8 +112,6 @@ type VolumeAttachmentResp struct {
 	Status     string `xml:"status"`
 	AttachTime string `xml:"attachTime"`
 }
-
-
 
 func makeParams(action string) map[string]string {
 	return makeParamsWithVersion(action, legacyAPIVersion)
@@ -163,8 +128,6 @@ func makeParamsWithVersion(action, version string) map[string]string {
 	params["Version"] = version
 	return params
 }
-
-
 
 func (amazonstorage *Amazonstorage) query(params map[string]string, resp interface{}) error {
 
@@ -193,12 +156,14 @@ func (amazonstorage *Amazonstorage) query(params map[string]string, resp interfa
 	}
 	defer r.Body.Close()
 
+
+	body, err := ioutil.ReadAll(r.Body)
+
+	fmt.Println(string(body))
+
+
 	return xml.NewDecoder(r.Body).Decode(resp)
 }
-
-
-
-
 
 type SnapshotsResp struct {
 	RequestId string     `xml:"requestId"`
@@ -218,7 +183,6 @@ type Snapshot struct {
 	Tags        []Tag  `xml:"tagSet>item"`
 }
 
-
 type CreateSnapshotResp struct {
 	RequestId string `xml:"requestId"`
 	Snapshot
@@ -236,7 +200,7 @@ func (amazonstorage *Amazonstorage) Createsnapshot(volumeId, description string)
 	if err != nil {
 		return nil, err
 	}
-	return
+	return`
 }
 
 
@@ -277,7 +241,7 @@ func (amazonstorage *Amazonstorage)Attachdisk (request interface{}) (resp interf
 	params := makeParams("AttachVolume")
 	params["VolumeId"] = volumeId
 	params["InstanceId"] = instanceId
-	params["Device"] = device
+	params["Device"] = device`
 	resp = &VolumeAttachmentResp{}
 	err = amazonstorage.query(params, resp)
 	if err != nil {
@@ -308,7 +272,7 @@ func (amazonstorage *Amazonstorage) Detachdisk(request interface{}) (resp interf
 
 func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interface{}, err error) {
 
-	param,_ := request.(map[string]interface{})
+	param, _ := request.(map[string]interface{})
 
 	fmt.Println(param)
 
@@ -340,21 +304,22 @@ func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interf
 		case "SnapshotId":
 			SnapshotIdV, _ := value.(string)
 			createvolume.SnapshotId = SnapshotIdV
+		}
 	}
-}
 
 	fmt.Println(createvolume)
 
 	volume1 := CreateVolume{
 		AvailZone:  "us-east-1a",
 		VolumeType: "gp2",
-		VolumeSize: 10,
-		IOPS:     3000,
+		VolumeSize: 100,
+		IOPS:       3000,
 		Encrypted:  true,
 	}
+  fmt.Println(volume1)
 
 	params := makeParams("CreateVolume")
-	prepareVolume(params, volume1)
+	prepareVolume(params, createvolume)
 	resp = &CreateVolumeResp{}
 	err = amazonstorage.query(params, resp)
 	if err != nil {
@@ -366,15 +331,63 @@ func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interf
 	return resp, nil
 }
 
-
-
-
-
 func (amazonstorage *Amazonstorage) Deletedisk(request interface{}) (resp interface{}, err error) {
-	param,_ := request.(map[string]string)
+	param, _ := request.(map[string]string)
 	params := makeParams("DeleteVolume")
 	params["VolumeId"] = param["VolumeId"]
 	resp = &SimpleResp{}
+	err = amazonstorage.query(params, resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+//volumeId, description string
+func (amazonstorage *Amazonstorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
+
+	param, _ := request.(map[string]string)
+
+	params := makeParams("CreateSnapshot")
+	params["VolumeId"] = param["VolumeId"]
+	params["Description"] = param["Description"]
+
+	resp = &CreateSnapshotResp{}
+	err = amazonstorage.query(params, resp)
+	if err != nil {
+		return nil, err
+	}
+	return
+}
+
+
+
+func (amazonstorage *Amazonstorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
+	ids := []string{}
+	param, _ := request.(map[string]string)
+	ids=append(ids,param["SnapshotId"])
+	params := makeParams("DeleteSnapshot")
+	for i, id := range ids {
+		params["SnapshotId."+strconv.Itoa(i+1)] = id
+	}
+
+	resp = &SimpleResp{}
+	err = amazonstorage.query(params, resp)
+	if err != nil {
+		return nil, err
+	}
+	return
+}
+
+
+
+func (amazonstorage *Amazonstorage)Attachdisk (request interface{}) (resp interface{}, err error){
+	param, _ := request.(map[string]string)
+	params := makeParams("AttachVolume")
+	params["VolumeId"] = param["VolumeId"]
+	params["InstanceId"] = param["InstanceId"]
+	params["Device"] = param["Device"]
+	resp = &VolumeAttachmentResp{}
 	err = amazonstorage.query(params, resp)
 	if err != nil {
 		return nil, err

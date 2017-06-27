@@ -19,7 +19,7 @@ import (
 //Sign v2 method for Authenticating request
 
 func SignV2(req *http.Request, Auth interface{}) (err error) {
-  auth, _ := Auth.(map[string]string)
+	auth, _ := Auth.(map[string]string)
 	queryVals := req.URL.Query()
 	queryVals.Set("AWSAccessKeyId", auth["AccessKey"])
 	queryVals.Set("SignatureVersion", "2")
@@ -169,7 +169,6 @@ const (
 	ISO8601BasicFormat      = "20060102T150405Z"
 	ISO8601BasicFormatShort = "20060102"
 )
-
 
 type Error struct {
 	StatusCode int

@@ -5,8 +5,8 @@ import (
 	"github.com/scorelab/gocloud-v2/auth"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
-	"log"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -48,7 +48,6 @@ func sign() (token *oauth2.Token) {
 	return token
 }
 
-
 func SignJWT() (client *http.Client) {
 
 	data, err := ioutil.ReadFile("/home/rootmonk/workspace-gocloud-v2/src/github.com/jsonconfig/ShelterMap-547a11815320.json")
@@ -56,7 +55,7 @@ func SignJWT() (client *http.Client) {
 		log.Fatal(err)
 	}
 
-	conf, err := google.JWTConfigFromJSON(data, "https://www.googleapis.com/auth/compute","https://www.googleapis.com/auth/devstorage.full_control")
+	conf, err := google.JWTConfigFromJSON(data, "https://www.googleapis.com/auth/compute", "https://www.googleapis.com/auth/devstorage.full_control")
 	if err != nil {
 		log.Fatal(err)
 	}

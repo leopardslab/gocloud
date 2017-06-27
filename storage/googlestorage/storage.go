@@ -189,10 +189,7 @@ func (googlestorage *GoogleStorage) Deletesnapshot(request interface{}) (resp in
 	return
 }
 
-
-
-
-func (googlestorage *GoogleStorage)Attachdisk(request interface{}) (resp interface{}, err error) {
+func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interface{}, err error) {
 
 	var attachdisk Attachdisk
 	var Projectid string
@@ -252,9 +249,6 @@ func (googlestorage *GoogleStorage)Attachdisk(request interface{}) (resp interfa
 
 	return
 }
-
-
-
 
 func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interface{}, err error) {
 
