@@ -433,19 +433,21 @@ func main() {
 		googlecloud.Attachdisk(attachdisk)
 	*/
 
-SourceImageEncryptionKeys := map[string]string{
-	"RawKey" : "1",
-   "Sha256": "2",
-}
+	SourceImageEncryptionKeys := map[string]string{
+		"RawKey": "1",
+		"Sha256": "2",
+	}
 
+	Licenses := []string{"GPL", "apache"}
 
 	disk := map[string]interface{}{
-		"projectid": "sheltermap-1493101612061",
-		"Name":      "disk-21",
-		"Type":      "pd-standard",
-		"Zone":      "us-east4-c",
-		"SizeGb":    "20",
-		"SourceImageEncryptionKeys":SourceImageEncryptionKeys,
+		"projectid":                 "sheltermap-1493101612061",
+		"Name":                      "disk-21",
+		"Type":                      "pd-standard",
+		"Zone":                      "us-east4-c",
+		"SizeGb":                    "20",
+		"Licenses":                  Licenses,
+		"SourceImageEncryptionKeys": SourceImageEncryptionKeys,
 	}
 
 	googlecloud.Createdisk(disk)
