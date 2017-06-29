@@ -11,7 +11,7 @@ import (
 
 func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interface{}, err error) {
 
-	//var googlestorage GoogleStorage
+	var option Creatdisk
 	var Projectid string
 	var Zone string
 	var Type string
@@ -26,7 +26,7 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 
 		case "Name":
 			name, _ := value.(string)
-			googlestorage.Name = name
+			option.Name = name
 
 		case "Zone":
 			ZoneV, _ := value.(string)
@@ -36,6 +36,20 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 			TypeV, _ := value.(string)
 			Type = TypeV
 
+		case "SizeGb":
+			SizeGbV, _ := value.(string)
+			option.SizeGb = SizeGbV
+/*
+		case "SourceImageEncryptionKeys":
+			SourceImageEncryptionKeysV, _ := value.(map[string]string)
+			option.SourceImageEncryptionKeys.RawKey = SourceImageEncryptionKeysV["RawKey"]
+		  option.SourceImageEncryptionKeys.Sha256 = SourceImageEncryptionKeysV["Sha256"]
+
+		case "DiskEncryptionKeys":
+			DiskEncryptionKeysV, _ := value.(map[string]string)
+			option.DiskEncryptionKeys.RawKey = DiskEncryptionKeysV["RawKey"]
+		  option.DiskEncryptionKeys.Sha256 = DiskEncryptionKeysV["Sha256"]
+*/
 		default:
 			fmt.Println("Incorrect Value")
 
@@ -43,24 +57,31 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 	}
 
 	zonevalue := "projects/" + Projectid + "/zones/" + Zone
-	googlestorage.Zone = zonevalue
+	option.Zone = zonevalue
 
 	Typevalue := "projects/" + Projectid + "/zones/" + Zone + "/diskTypes/" + Type
-	googlestorage.Type = Typevalue
+	option.Type = Typevalue
 
-	fmt.Println(googlestorage.Name)
+//	fmt.Println(option)
 
-	googlestoragejson, _ := json.Marshal(googlestorage)
-	googlestoragejsonstring := string(googlestoragejson)
-	fmt.Println(googlestoragejsonstring)
-	var googlestoragejsonstringbyte = []byte(googlestoragejsonstring)
+	Creatdiskjsonmap := make(map[string]interface{})
+
+	dictnoaryconvert(option,Creatdiskjsonmap)
+
+	//fmt.Println("Creatdiskjsonmap :\n", Creatdiskjsonmap)
+
+	Creatdiskjson, _ := json.Marshal(Creatdiskjsonmap)
+	Creatdiskjsonstring := string(Creatdiskjson)
+//	fmt.Println("Creatdiskjsonstring:\n",Creatdiskjsonstring)
+	var Creatdiskjsonstringbyte = []byte(Creatdiskjsonstring)
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + Projectid + "/zones/" + Zone + "/disks"
 
 	fmt.Println(url)
 
 	client := &http.Client{}
-	Creatediskrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(googlestoragejsonstringbyte))
+	Creatediskrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Creatdiskjsonstringbyte))
+
 	Creatediskrequest.Header.Set("Content-Type", "application/json")
 
 	token := googleauth.Sign()
@@ -71,9 +92,36 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 	defer Creatediskresp.Body.Close()
 
 	body, err := ioutil.ReadAll(Creatediskresp.Body)
-	fmt.Println(string(body))
+	//fmt.Println(string(body))
 
-	return
+	return (string(body))
+}
+
+func dictnoaryconvert(option Creatdisk, Creatdiskjsonmap map[string]interface{}){
+
+	if option.Name != "" {
+		Creatdiskjsonmap["name"] = option.Name
+	}
+
+	if option.Type != "" {
+		Creatdiskjsonmap["type"] = option.Type
+	}
+
+	if option.Zone != "" {
+		Creatdiskjsonmap["zone"] = option.Zone
+	}
+
+	if option.SizeGb != "" {
+		Creatdiskjsonmap["sizeGb"] = option.SizeGb
+	}
+
+	if option.SourceImageEncryptionKeys != (SourceImageEncryptionKey{}) {
+		Creatdiskjsonmap["sourceImageEncryptionKey"] = option.sourceImageEncryptionKeys
+	}
+	if option.DiskEncryptionKeys != (DiskEncryptionKey{}) {
+		Creatdiskjsonmap["diskEncryptionKey"] = option.DiskEncryptionKeys
+	}
+
 }
 
 func (googlestorage *GoogleStorage) Deletedisk(request interface{}) (resp interface{}, err error) {

@@ -9,7 +9,6 @@ import (
 	"encoding/hex"
 	"encoding/xml"
 	"fmt"
-	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -18,46 +17,55 @@ import (
 
 //Sign v2 method for Authenticating request
 
-func SignV2(req *http.Request, auth Auth) (err error) {
+func SignatureV2(req *http.Request, auth Auth) (err error) {
+
 	queryVals := req.URL.Query()
+
 	queryVals.Set("AWSAccessKeyId", auth.AccessKey)
+
 	queryVals.Set("SignatureVersion", "2")
+
 	queryVals.Set("SignatureMethod", "HmacSHA256")
 
 	queryStr, err := canonicalQueryString(queryVals)
 	if err != nil {
 		return err
 	}
-
+	fmt.Println(queryStr)
 	path := req.URL.Path
 	if path == "" {
 		path = "/"
 	}
 
 	payload := new(bytes.Buffer)
-	if err := errorCollector(
-		fprintfWrapper(payload, "%s\n", requestMethodVerb(req.Method)),
-		fprintfWrapper(payload, "%s\n", req.Host),
-		fprintfWrapper(payload, "%s\n", path),
-		fprintfWrapper(payload, "%s", queryStr),
-	); err != nil {
-		return err
-	}
+	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+
+	fmt.Println("req.Method:\n", req.Method)
+
+	payloadstring := checkrequestMethod(req.Method) + "\n" + req.Host + "\n" + path + "\n" + queryStr
+
+	fmt.Fprintf(payload, "%s", payloadstring)
+
+	fmt.Println("payload\n", payload)
 
 	hash := hmac.New(sha256.New, []byte(auth.SecretKey))
+
 	hash.Write(payload.Bytes())
+
 	signature := make([]byte, base64.StdEncoding.EncodedLen(hash.Size()))
+
 	base64.StdEncoding.Encode(signature, hash.Sum(nil))
 
 	queryVals.Set("Signature", string(signature))
+
 	req.URL.RawQuery = queryVals.Encode()
 
 	return nil
 }
 
-func canonicalQueryString(queryVals url.Values) (string, error) {
+func canonicalQueryString(queryString url.Values) (string, error) {
 
-	return strings.Replace(queryVals.Encode(), "+", "%20", -1), nil
+	return strings.Replace(queryString.Encode(), "+", "%20", -1), nil
 }
 
 func clientToken() (string, error) {
@@ -70,6 +78,7 @@ func clientToken() (string, error) {
 	return hex.EncodeToString(buf), nil
 }
 
+/*
 func fprintfWrapper(w io.Writer, format string, vals ...interface{}) func() error {
 	return func() error {
 		_, err := fmt.Fprintf(w, format, vals...)
@@ -77,6 +86,8 @@ func fprintfWrapper(w io.Writer, format string, vals ...interface{}) func() erro
 	}
 }
 
+*/
+/*
 func errorCollector(writers ...func() error) error {
 	for _, writer := range writers {
 		if err := writer(); err != nil {
@@ -86,50 +97,16 @@ func errorCollector(writers ...func() error) error {
 
 	return nil
 }
+*/
 
-var timeFormats = []string{
-	time.RFC822,
-	ISO8601BasicFormat,
-	time.RFC1123,
-	time.ANSIC,
-	time.UnixDate,
-	time.RubyDate,
-	time.RFC822Z,
-	time.RFC850,
-	time.RFC1123Z,
-	time.RFC3339,
-	time.RFC3339Nano,
-	time.Kitchen,
-}
-
-func requestTime(req *http.Request) (time.Time, error) {
-
-	var date string
-	if date = req.Header.Get("x-amz-date"); date == "" {
-		if date = req.Header.Get("date"); date == "" {
-			return time.Time{}, fmt.Errorf(`Could not retrieve a request date. Please provide one in either "x-amz-date", or "date".`)
-		}
-	}
-
-	for _, format := range timeFormats {
-		if parsedTime, err := time.Parse(format, date); err == nil {
-			return parsedTime, nil
-		}
-	}
-
-	return time.Time{}, fmt.Errorf(
-		"Could not parse the given date. Please utilize on of the following formats: %s",
-		strings.Join(timeFormats, ","),
-	)
-}
-
-func requestMethodVerb(rawMethod string) (verb string) {
-	verbPlus := strings.SplitN(rawMethod, " ", 2)
+func checkrequestMethod(rawMethod string) (verb string) {
+	fmt.Println(rawMethod)
+	rawMethodverb := strings.SplitN(rawMethod, " ", 2)
 	switch {
-	case len(verbPlus) == 0:
+	case len(rawMethodverb) == 0:
 		verb = "GET"
 	default:
-		verb = verbPlus[0]
+		verb = rawMethodverb[0]
 	}
 	return verb
 }
@@ -163,8 +140,3 @@ func (err *Error) Error() string {
 
 	return fmt.Sprintf("%s (%s)", err.Message, err.Code)
 }
-
-const (
-	ISO8601BasicFormat      = "20060102T150405Z"
-	ISO8601BasicFormatShort = "20060102"
-)

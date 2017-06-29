@@ -1,9 +1,10 @@
 package googlestorage
 
 type GoogleStorage struct {
-	Name string `json:"name"`
-	Type string `json:"type"`
-	Zone string `json:"zone"`
+	Name   string `json:"name"`
+	Type   string `json:"type"`
+	Zone   string `json:"zone"`
+	SizeGb string `json:"sizeGb"`
 }
 
 type Snapshot struct {
@@ -72,3 +73,61 @@ type Attachdisk struct {
 	Type string `json:"type"`
 }
 */
+
+
+
+type Creatdisk struct {
+	Name   string `json:"name"`
+	Type   string `json:"type"`
+	Zone   string `json:"zone"`
+	SizeGb string `json:"sizeGb"`
+	SourceImageEncryptionKeys SourceImageEncryptionKey `json:"sourceImageEncryptionKey"`
+	DiskEncryptionKeys DiskEncryptionKey `json:"diskEncryptionKey"`
+}
+
+type SourceImageEncryptionKey struct {
+	RawKey string `json:"rawKey"`
+	Sha256 string `json:"sha256"`
+}
+
+
+type DiskEncryptionKey struct {
+	RawKey string `json:"rawKey"`
+	Sha256 string `json:"sha256"`
+} `json:"diskEncryptionKey"`
+
+
+
+type Creatdisk1 struct {
+	CreationTimestamp string `json:"creationTimestamp"`
+	Description       string `json:"description"`
+	DiskEncryptionKey struct {
+		RawKey string `json:"rawKey"`
+		Sha256 string `json:"sha256"`
+	} `json:"diskEncryptionKey"`
+	ID               string `json:"id"`
+	Kind             string `json:"kind"`
+	LabelFingerprint string `json:"labelFingerprint"`
+	Labels           struct {
+		string `json:""`
+	} `json:"labels"`
+	Zone                        string   `json:"zone"`
+	SourceSnapshotID            string   `json:"sourceSnapshotId"`
+	Status                      string   `json:"status"`
+	LastAttachTimestamp         string   `json:"lastAttachTimestamp"`
+	LastDetachTimestamp         string   `json:"lastDetachTimestamp"`
+	Licenses                    []string `json:"licenses"`
+	Name                        string   `json:"name"`
+	Options                     string   `json:"options"`
+	SelfLink                    string   `json:"selfLink"`
+	SizeGb                      string   `json:"sizeGb"`
+	SourceImage                 string   `json:"sourceImage"`
+	SourceImageID               string   `json:"sourceImageId"`
+	SourceSnapshot              string   `json:"sourceSnapshot"`
+	SourceSnapshotEncryptionKey struct {
+		RawKey string `json:"rawKey"`
+		Sha256 string `json:"sha256"`
+	} `json:"sourceSnapshotEncryptionKey"`
+	Type  string   `json:"type"`
+	Users []string `json:"users"`
+}

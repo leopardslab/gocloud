@@ -351,75 +351,102 @@ func main() {
 
 	     googlecloud.Startnode(start)
 	*/
-/*
-	createdisk := map[string]interface{}{
-	//	"IOPS":       int64(3000),
-		"AvailZone":  "us-east-1a",
-	//	"VolumeType": "gp2",
-	  "VolumeSize": 100,
-	}
-*/
-	amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
+	/*
+		createdisk := map[string]interface{}{
+		//	"IOPS":       int64(3000),
+			"AvailZone":  "us-east-1a",
+		//	"VolumeType": "gp2",
+		  "VolumeSize": 100,
+		}
+	*/
+	//amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 	//amazoncloud.Createdisk(createdisk)
 
-/*
-	deletedisk := map[string]string{
-		"VolumeId": "vol-05371175f10d2e6a4",
-	}
+	/*
+		deletedisk := map[string]string{
+			"VolumeId": "vol-05371175f10d2e6a4",
+		}
 
-	amazoncloud.Deletedisk(deletedisk)
+		amazoncloud.Deletedisk(deletedisk)
 	*/
-/*
-	createsnapshot := map[string]string{
-		"VolumeId": "vol-047d011f7536d2b7c",
-		"Description":"",
-	}
+	/*
+		createsnapshot := map[string]string{
+			"VolumeId": "vol-047d011f7536d2b7c",
+			"Description":"",
+		}
 
-	amazoncloud.Createsnapshot(createsnapshot)
-*/
-	deletesnapshot := map[string]string{
-		"SnapshotId": "snap-0f0839076356ce6cb",
-	}
-	amazoncloud.Deletesnapshot(deletesnapshot)
+		amazoncloud.Createsnapshot(createsnapshot)
+	*/
 
+	/*
+		deletesnapshot := map[string]string{
+			"SnapshotId": "snap-0f0839076356ce6cb",
+		}
+		amazoncloud.Deletesnapshot(deletesnapshot)
 
-	ec2 := map[string]interface{}{
-		 "ImageId"     : "ami-ccf405a5",
-		 "InstanceType": "t1.micro",
-	 "Region" :"us-east-1",
+		ec2 := map[string]interface{}{
+			"ImageId":      "ami-ccf405a5",
+			"InstanceType": "t1.micro",
+			"Region":       "us-east-1",
+		}
 
-	 }
+		amazoncloud.Createnode(ec2)
 
-	 amazoncloud.Createnode(ec2)
+		attachdisk := map[string]string{
+			"VolumeId":   "vol-049426a70587418d7",
+			"InstanceId": "i-07737a0121fba7b0c",
+			"Device":     "/dev/sdh",
+		}
 
+		amazoncloud.Attachdisk(attachdisk)
 
-	attachdisk := map[string]string{
-		"VolumeId":"vol-049426a70587418d7",
-	  "InstanceId":"i-07737a0121fba7b0c",
-	  "Device":"/dev/sdh",
-	}
-
-	amazoncloud.Attachdisk(attachdisk)
-
-	detachdisk := map[string]string{
-		"VolumeId":"vol-049426a70587418d7",
-	  "InstanceId":"i-07737a0121fba7b0c",
-	  "Device":"/dev/sdh",
-		"Force": "true",
-	}
-	amazoncloud.Detachdisk(detachdisk)
-
-
-  fmt.Println("##########################################")
+		detachdisk := map[string]string{
+			"VolumeId":   "vol-049426a70587418d7",
+			"InstanceId": "i-07737a0121fba7b0c",
+			"Device":     "/dev/sdh",
+			"Force":      "true",
+		}
+		amazoncloud.Detachdisk(detachdisk)
+	*/
+	fmt.Println("##########################################")
 
 	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 
-	detachdiskg := map[string]string{
+	/*
+		detachdiskg := map[string]string{
+			"projectid":  "sheltermap-1493101612061",
+			"instance":   "sumesh-10",
+			"Zone":       "us-east4-c",
+			"deviceName": "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
+		}
+
+		googlecloud.Detachdisk(detachdiskg)
+	*/
+
+	/*
+		attachdisk := map[string]interface{}{
+			"projectid": "sheltermap-1493101612061",
+			"instance":  "sumesh-10",
+			"Zone"    :  "us-east4-c",
+			"Source"  :  "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
+		}
+		googlecloud.Attachdisk(attachdisk)
+	*/
+
+SourceImageEncryptionKeys := map[string]string{
+	"RawKey" : "1",
+   "Sha256": "2",
+}
+
+
+	disk := map[string]interface{}{
 		"projectid": "sheltermap-1493101612061",
-		"instance":  "sumesh-10",
+		"Name":      "disk-21",
+		"Type":      "pd-standard",
 		"Zone":      "us-east4-c",
-		"deviceName":"projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
+		"SizeGb":    "20",
+		"SourceImageEncryptionKeys":SourceImageEncryptionKeys,
 	}
 
-	googlecloud.Detachdisk(detachdiskg)
+	googlecloud.Createdisk(disk)
 }

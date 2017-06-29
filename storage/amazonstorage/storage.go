@@ -8,9 +8,9 @@ import (
 	"net/http"
 	//"net/http/httputil"
 	"fmt"
+	"io/ioutil"
 	"strconv"
 	"time"
-	"io/ioutil"
 )
 
 type Amazonstorage struct {
@@ -38,7 +38,7 @@ type CreateVolume struct {
 	AvailZone  string
 	SnapshotId string
 	VolumeType string
-	VolumeSize int // Size is given in GB
+	VolumeSize int
 	Encrypted  bool
 	IOPS       int64
 }
@@ -151,11 +151,9 @@ func (amazonstorage *Amazonstorage) query(params map[string]string, resp interfa
 	}
 	defer r.Body.Close()
 
-
 	body, err := ioutil.ReadAll(r.Body)
 
 	fmt.Println(string(body))
-
 
 	return xml.NewDecoder(r.Body).Decode(resp)
 }
@@ -229,7 +227,7 @@ func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interf
 		IOPS:       3000,
 		Encrypted:  true,
 	}
-  fmt.Println(volume1)
+	fmt.Println(volume1)
 
 	params := makeParams("CreateVolume")
 	prepareVolume(params, createvolume)
@@ -273,12 +271,10 @@ func (amazonstorage *Amazonstorage) Createsnapshot(request interface{}) (resp in
 	return
 }
 
-
-
 func (amazonstorage *Amazonstorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
 	ids := []string{}
 	param, _ := request.(map[string]string)
-	ids=append(ids,param["SnapshotId"])
+	ids = append(ids, param["SnapshotId"])
 	params := makeParams("DeleteSnapshot")
 	for i, id := range ids {
 		params["SnapshotId."+strconv.Itoa(i+1)] = id
@@ -292,8 +288,7 @@ func (amazonstorage *Amazonstorage) Deletesnapshot(request interface{}) (resp in
 	return
 }
 
-
-func (amazonstorage *Amazonstorage)Attachdisk (request interface{}) (resp interface{}, err error){
+func (amazonstorage *Amazonstorage) Attachdisk(request interface{}) (resp interface{}, err error) {
 	param, _ := request.(map[string]string)
 	params := makeParams("AttachVolume")
 	params["VolumeId"] = param["VolumeId"]
@@ -307,14 +302,13 @@ func (amazonstorage *Amazonstorage)Attachdisk (request interface{}) (resp interf
 	return resp, nil
 }
 
-
 func (amazonstorage *Amazonstorage) Detachdisk(request interface{}) (resp interface{}, err error) {
 	param, _ := request.(map[string]string)
 	params := makeParams("DetachVolume")
 	params["VolumeId"] = param["VolumeId"]
-	params["InstanceId"] =  param["InstanceId"]
-	params["Device"] =  param["Device"]
-	if param["Force"] =="true" {
+	params["InstanceId"] = param["InstanceId"]
+	params["Device"] = param["Device"]
+	if param["Force"] == "true" {
 		params["Force"] = "true"
 	}
 

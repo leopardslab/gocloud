@@ -5,9 +5,10 @@ import (
 	"encoding/xml"
 	"fmt"
 	"github.com/scorelab/gocloud-v2/auth"
-	"log"
+	//"log"
 	"net/http"
-	"net/http/httputil"
+	//"net/http/httputil"
+	"io/ioutil"
 	"strconv"
 	"time"
 )
@@ -25,7 +26,7 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 
 	addParamsList(params, "InstanceId", ids)
 	resp = &StartInstanceResp{}
-	err = ec2.query(params, Region, resp)
+	err = ec2.PrepareSignatureV2query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +46,7 @@ func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
 	addParamsList(params, "InstanceId", ids)
 	resp = &StopInstanceResp{}
 
-	err = ec2.query(params, Region, resp)
+	err = ec2.PrepareSignatureV2query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +65,7 @@ func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 	params := makeParams("RebootInstances")
 	addParamsList(params, "InstanceId", ids)
 	resp = &SimpleResp{}
-	err = ec2.query(params, Region, resp)
+	err = ec2.PrepareSignatureV2query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +83,7 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 	params := makeParams("TerminateInstances")
 	addParamsList(params, "InstanceId", instIds)
 	resp = &TerminateInstancesResp{}
-	err = ec2.query(params, Region, resp)
+	err = ec2.PrepareSignatureV2query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +92,7 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 
 //pass the param to query and add signature to it base on secret key and acces key
 
-func (ec2 *EC2) query(params map[string]string, Region string, resp interface{}) error {
+func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string, resp interface{}) error {
 
 	EC2Endpoint := "https://ec2." + Region + ".amazonaws.com"
 
@@ -106,11 +107,12 @@ func (ec2 *EC2) query(params map[string]string, Region string, resp interface{})
 		query.Add(varName, varVal)
 	}
 	query.Add("Timestamp", timeNow().In(time.UTC).Format(time.RFC3339))
+
 	req.URL.RawQuery = query.Encode()
 
 	auth := Auth{AccessKey: auth.Config.AWSAccessKeyID, SecretKey: auth.Config.AWSSecretKey}
 
-	SignV2(req, auth)
+	SignatureV2(req, auth)
 
 	//fmt.Println(req)
 
@@ -120,16 +122,9 @@ func (ec2 *EC2) query(params map[string]string, Region string, resp interface{})
 	}
 	defer r.Body.Close()
 
-	//fmt.Println(string(r.Body))
+	body, err := ioutil.ReadAll(r.Body)
 
-	if debug {
-		dump, _ := httputil.DumpResponse(r, true)
-		log.Printf("response:\n")
-		log.Printf("%v\n}\n", string(dump))
-	}
-	if r.StatusCode != 200 {
-		return buildError(r)
-	}
+	fmt.Println(string(body))
 
 	return xml.NewDecoder(r.Body).Decode(resp)
 }
@@ -378,7 +373,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 	}
 
 	resp = &RunInstancesResp{}
-	err = ec2.query(params, Region, resp)
+	err = ec2.PrepareSignatureV2query(params, Region, resp)
 	fmt.Println(resp)
 	respq, _ := resp.(*RunInstancesResp)
 
