@@ -469,12 +469,12 @@ func main() {
 	}
 
 	attachdisk := map[string]interface{}{
-		"projectid":        "sheltermap-1493101612061",
-		"instance":         "sumesh-10",
-		"Zone":             "us-east4-c",
-		"Source":           "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
-		"Licenses":         Licenses,
-		"InitializeParams": InitializeParams,
+		"projectid":       "sheltermap-1493101612061",
+		"instance":        "sumesh-10",
+		"Zone":            "us-east4-c",
+		"Source":          "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
+		"Licenses":        Licenses,
+		"InitializeParam": InitializeParams,
 	}
 	googlecloud.Attachdisk(attachdisk)
 

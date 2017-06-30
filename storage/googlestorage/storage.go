@@ -585,7 +585,7 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 
 		case "InitializeParam":
 			InitializeParamV, _ := value.(map[string]interface{})
-
+			fmt.Println("InitializeParamV", InitializeParamV)
 			for key, value := range InitializeParamV {
 				switch key {
 				case "DiskName":
@@ -616,6 +616,8 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 
 		}
 	}
+
+	fmt.Println("attachdisk.InitializeParam", attachdisk.InitializeParam)
 
 	Attachdiskjsonmap := make(map[string]interface{})
 
@@ -694,6 +696,48 @@ func Attachdiskdictnoaryconvert(option Attachdisk, Attachdiskjsonmap map[string]
 
 	if option.Type != "" {
 		Attachdiskjsonmap["type"] = option.Type
+	}
+
+	if option.Type != "" {
+		Attachdiskjsonmap["type"] = option.Type
+	}
+
+	if option.InitializeParam != (InitializeParams{}) {
+
+			InitializeParammap := make(map[string]interface{})
+
+			if(option.InitializeParam.DiskName!=""){
+				InitializeParammap["diskName"] = option.InitializeParam.DiskName
+			}
+
+			if(option.InitializeParam.DiskType!=""){
+				InitializeParammap["diskType"] = option.InitializeParam.DiskType
+			}
+
+
+			if(option.InitializeParam.DiskSizeGb!=""){
+				InitializeParammap["diskSizeGb"] = option.InitializeParam.DiskSizeGb
+			}
+
+			if(option.InitializeParam.SourceImage!=""){
+				InitializeParammap["sourceImage"] = option.InitializeParam.SourceImage
+			}
+
+			if(option.InitializeParam.SourceImageEncryptionKeys!= SourceImageEncryptionKey{}){
+
+					SourceImageEncryptionKeysmmap := make(map[string]interface{})
+
+					if(option.InitializeParam.SourceImageEncryptionKeys.RawKey!=""){
+							SourceImageEncryptionKeysmmap["rawKey"] = option.InitializeParam.SourceImageEncryptionKeys.RawKey
+						}
+						if(option.InitializeParam.SourceImageEncryptionKeys.RawKey!=""){
+							SourceImageEncryptionKeysmmap["sha256"] =  option.InitializeParam.SourceImageEncryptionKeys.Sha256
+						}
+
+					InitializeParammap["sourceImage"] = SourceImageEncryptionKeysmmap
+			}
+
+		Attachdiskjsonmap["initializeParams"] = InitializeParammap
 	}
 
 }
