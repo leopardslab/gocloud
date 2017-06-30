@@ -455,12 +455,26 @@ func main() {
 
 	Licenses := []string{"GPL", "apache"}
 
+	SourceImageEncryptionKeys := map[string]string{
+		"RawKey": "12",
+		"Sha256": "14",
+	}
+
+	InitializeParams := map[string]interface{}{
+		"DiskName":                  "DiskName",
+		"DiskType":                  "DiskType",
+		"DiskSizeGb":                "DiskSizeGb",
+		"SourceImage":               "SourceImage",
+		"SourceImageEncryptionKeys": SourceImageEncryptionKeys,
+	}
+
 	attachdisk := map[string]interface{}{
-		"projectid": "sheltermap-1493101612061",
-		"instance":  "sumesh-10",
-		"Zone":      "us-east4-c",
-		"Source":    "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
-		"Licenses":  Licenses,
+		"projectid":        "sheltermap-1493101612061",
+		"instance":         "sumesh-10",
+		"Zone":             "us-east4-c",
+		"Source":           "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
+		"Licenses":         Licenses,
+		"InitializeParams": InitializeParams,
 	}
 	googlecloud.Attachdisk(attachdisk)
 

@@ -551,19 +551,17 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 			attachdisk.DiskEncryptionKeys.RawKey = DiskEncryptionKeysV["RawKey"]
 			attachdisk.DiskEncryptionKeys.Sha256 = DiskEncryptionKeysV["Sha256"]
 
-
 		case "Mode":
 			ModeV, _ := value.(string)
 			attachdisk.Mode = ModeV
 
 		case "Type":
 			TypeV, _ := value.(string)
-			attachdisk.Type  =TypeV
+			attachdisk.Type = TypeV
 
 		case "Kind":
 			KindV, _ := value.(string)
 			attachdisk.Kind = KindV
-
 
 		case "Interface":
 			InterfaceV, _ := value.(string)
@@ -585,13 +583,39 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 			DeviceNameV, _ := value.(string)
 			attachdisk.DeviceName = DeviceNameV
 
+		case "InitializeParam":
+			InitializeParamV, _ := value.(map[string]interface{})
+
+			for key, value := range InitializeParamV {
+				switch key {
+				case "DiskName":
+					DiskNameV, _ := value.(string)
+					attachdisk.InitializeParam.DiskName = DiskNameV
+
+				case "DiskType":
+					DiskTypeV, _ := value.(string)
+					attachdisk.InitializeParam.DiskType = DiskTypeV
+
+				case "DiskSizeGb":
+					DiskSizeGbV, _ := value.(string)
+					attachdisk.InitializeParam.DiskSizeGb = DiskSizeGbV
+
+				case "SourceImage":
+					SourceImageV, _ := value.(string)
+					attachdisk.InitializeParam.SourceImage = SourceImageV
+
+				case "SourceImageEncryptionKeys":
+					SourceImageEncryptionKeysV, _ := value.(map[string]string)
+					attachdisk.InitializeParam.SourceImageEncryptionKeys.RawKey = SourceImageEncryptionKeysV["RawKey"]
+					attachdisk.InitializeParam.SourceImageEncryptionKeys.Sha256 = SourceImageEncryptionKeysV["Sha256"]
+				}
+			}
+
 		default:
 			fmt.Println("Incorrect Value")
 
 		}
 	}
-
-	//fmt.Println(attachdisk)
 
 	Attachdiskjsonmap := make(map[string]interface{})
 
@@ -627,6 +651,7 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 }
 
 func Attachdiskdictnoaryconvert(option Attachdisk, Attachdiskjsonmap map[string]interface{}) {
+
 	if len(option.Licenses) != 0 {
 		Attachdiskjsonmap["licenses"] = option.Licenses
 	}
@@ -635,7 +660,41 @@ func Attachdiskdictnoaryconvert(option Attachdisk, Attachdiskjsonmap map[string]
 		Attachdiskjsonmap["diskEncryptionKey"] = option.DiskEncryptionKeys
 	}
 
+	if option.Source != "" {
+		Attachdiskjsonmap["source"] = option.Source
+	}
 
+	if option.DeviceName != "" {
+		Attachdiskjsonmap["deviceName"] = option.DeviceName
+	}
+
+	if option.AutoDelete {
+		Attachdiskjsonmap["autoDelete"] = option.AutoDelete
+	}
+
+	if option.Boot {
+		Attachdiskjsonmap["boot"] = option.Boot
+	}
+
+	if option.Index != 0 {
+		Attachdiskjsonmap["index"] = option.Index
+	}
+
+	if option.Interface != "" {
+		Attachdiskjsonmap["interface"] = option.Interface
+	}
+
+	if option.Kind != "" {
+		Attachdiskjsonmap["kind"] = option.Kind
+	}
+
+	if option.Mode != "" {
+		Attachdiskjsonmap["mode"] = option.Mode
+	}
+
+	if option.Type != "" {
+		Attachdiskjsonmap["type"] = option.Type
+	}
 
 }
 

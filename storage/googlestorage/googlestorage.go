@@ -48,22 +48,9 @@ type Attachdisk struct {
 	Licenses           []string          `json:"licenses"`
 	Mode               string            `json:"mode"`
 	Type               string            `json:"type"`
+	InitializeParam    InitializeParams  `json:"initializeParams"`
 }
 
-type Attachdisk1 struct {
-	InitializeParam    InitializeParams  `json:"initializeParams"`
-	DeviceName         string            `json:"deviceName"`
-	AutoDelete         bool              `json:"autoDelete"`
-	Boot               bool              `json:"boot"`
-	DiskEncryptionKeys DiskEncryptionKey `json:"diskEncryptionKey"`
-	Index              int               `json:"index"`
-	Interface          string            `json:"interface"`
-	Kind               string            `json:"kind"`
-	Licenses           []string          `json:"licenses"`
-	Mode               string            `json:"mode"`
-	Source             string            `json:"source"`
-	Type               string            `json:"type"`
-}
 type InitializeParams struct {
 	DiskName                  string                   `json:"diskName"`
 	DiskType                  string                   `json:"diskType"`
