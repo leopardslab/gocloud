@@ -31,22 +31,19 @@ func SignatureV2(req *http.Request, auth Auth) (err error) {
 	if err != nil {
 		return err
 	}
-	fmt.Println(queryStr)
+
 	path := req.URL.Path
 	if path == "" {
 		path = "/"
 	}
 
 	payload := new(bytes.Buffer)
-	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
 
 	fmt.Println("req.Method:\n", req.Method)
 
 	payloadstring := checkrequestMethod(req.Method) + "\n" + req.Host + "\n" + path + "\n" + queryStr
 
 	fmt.Fprintf(payload, "%s", payloadstring)
-
-	fmt.Println("payload\n", payload)
 
 	hash := hmac.New(sha256.New, []byte(auth.SecretKey))
 
@@ -77,27 +74,6 @@ func clientToken() (string, error) {
 	}
 	return hex.EncodeToString(buf), nil
 }
-
-/*
-func fprintfWrapper(w io.Writer, format string, vals ...interface{}) func() error {
-	return func() error {
-		_, err := fmt.Fprintf(w, format, vals...)
-		return err
-	}
-}
-
-*/
-/*
-func errorCollector(writers ...func() error) error {
-	for _, writer := range writers {
-		if err := writer(); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-*/
 
 func checkrequestMethod(rawMethod string) (verb string) {
 	fmt.Println(rawMethod)

@@ -197,7 +197,6 @@ func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp in
 		switch key {
 		case "projectid":
 			Projectid, _ = value.(string)
-			fmt.Println("Projectid", Projectid)
 
 		case "Name":
 			NameV, _ := value.(string)
@@ -339,7 +338,6 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 		switch key {
 		case "projectid":
 			Projectid, _ = value.(string)
-			fmt.Println("Projectid", Projectid)
 
 		case "Zone":
 			ZoneV, _ := value.(string)
