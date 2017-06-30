@@ -1,7 +1,5 @@
 package googlestorage
 
-
-
 func Creatediskdictnoaryconvert(option Creatdisk, Creatdiskjsonmap map[string]interface{}) {
 
 	if option.Name != "" {
@@ -96,8 +94,6 @@ func Creatediskdictnoaryconvert(option Creatdisk, Creatdiskjsonmap map[string]in
 
 }
 
-
-
 func Createsnapshotdictnoaryconvert(option Snapshot, Createsnapshotjsonmap map[string]interface{}) {
 
 	if len(option.Licenses) != 0 {
@@ -166,7 +162,6 @@ func Createsnapshotdictnoaryconvert(option Snapshot, Createsnapshotjsonmap map[s
 
 }
 
-
 func Attachdiskdictnoaryconvert(option Attachdisk, Attachdiskjsonmap map[string]interface{}) {
 
 	if len(option.Licenses) != 0 {
@@ -219,38 +214,37 @@ func Attachdiskdictnoaryconvert(option Attachdisk, Attachdiskjsonmap map[string]
 
 	if option.InitializeParam != (InitializeParams{}) {
 
-			InitializeParammap := make(map[string]interface{})
+		InitializeParammap := make(map[string]interface{})
 
-			if(option.InitializeParam.DiskName!=""){
-				InitializeParammap["diskName"] = option.InitializeParam.DiskName
+		if option.InitializeParam.DiskName != "" {
+			InitializeParammap["diskName"] = option.InitializeParam.DiskName
+		}
+
+		if option.InitializeParam.DiskType != "" {
+			InitializeParammap["diskType"] = option.InitializeParam.DiskType
+		}
+
+		if option.InitializeParam.DiskSizeGb != "" {
+			InitializeParammap["diskSizeGb"] = option.InitializeParam.DiskSizeGb
+		}
+
+		if option.InitializeParam.SourceImage != "" {
+			InitializeParammap["sourceImage"] = option.InitializeParam.SourceImage
+		}
+
+		if (option.InitializeParam.SourceImageEncryptionKeys != SourceImageEncryptionKey{}) {
+
+			SourceImageEncryptionKeysmmap := make(map[string]interface{})
+
+			if option.InitializeParam.SourceImageEncryptionKeys.RawKey != "" {
+				SourceImageEncryptionKeysmmap["rawKey"] = option.InitializeParam.SourceImageEncryptionKeys.RawKey
+			}
+			if option.InitializeParam.SourceImageEncryptionKeys.RawKey != "" {
+				SourceImageEncryptionKeysmmap["sha256"] = option.InitializeParam.SourceImageEncryptionKeys.Sha256
 			}
 
-			if(option.InitializeParam.DiskType!=""){
-				InitializeParammap["diskType"] = option.InitializeParam.DiskType
-			}
-
-
-			if(option.InitializeParam.DiskSizeGb!=""){
-				InitializeParammap["diskSizeGb"] = option.InitializeParam.DiskSizeGb
-			}
-
-			if(option.InitializeParam.SourceImage!=""){
-				InitializeParammap["sourceImage"] = option.InitializeParam.SourceImage
-			}
-
-			if(option.InitializeParam.SourceImageEncryptionKeys!= SourceImageEncryptionKey{}){
-
-					SourceImageEncryptionKeysmmap := make(map[string]interface{})
-
-					if(option.InitializeParam.SourceImageEncryptionKeys.RawKey!=""){
-							SourceImageEncryptionKeysmmap["rawKey"] = option.InitializeParam.SourceImageEncryptionKeys.RawKey
-						}
-						if(option.InitializeParam.SourceImageEncryptionKeys.RawKey!=""){
-							SourceImageEncryptionKeysmmap["sha256"] =  option.InitializeParam.SourceImageEncryptionKeys.Sha256
-						}
-
-					InitializeParammap["sourceImage"] = SourceImageEncryptionKeysmmap
-			}
+			InitializeParammap["sourceImage"] = SourceImageEncryptionKeysmmap
+		}
 
 		Attachdiskjsonmap["initializeParams"] = InitializeParammap
 	}

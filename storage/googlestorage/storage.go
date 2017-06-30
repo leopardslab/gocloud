@@ -138,19 +138,14 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 
 	Creatediskdictnoaryconvert(option, Creatdiskjsonmap)
 
-	//fmt.Println("Creatdiskjsonmap :\n", Creatdiskjsonmap)
 
 	Creatdiskjson, _ := json.Marshal(Creatdiskjsonmap)
 
 	Creatdiskjsonstring := string(Creatdiskjson)
 
-	fmt.Println("Creatdiskjsonstring:\n", Creatdiskjsonstring)
-
 	var Creatdiskjsonstringbyte = []byte(Creatdiskjsonstring)
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + Projectid + "/zones/" + Zone + "/disks"
-
-	fmt.Println(url)
 
 	client := &http.Client{}
 
@@ -190,6 +185,7 @@ func (googlestorage *GoogleStorage) Deletedisk(request interface{}) (resp interf
 	Deletediskresp, err := client.Do(Deletediskrequest)
 
 	defer Deletediskresp.Body.Close()
+
 	body, err := ioutil.ReadAll(Deletediskresp.Body)
 
 	fmt.Println(string(body))
@@ -455,8 +451,6 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 		}
 	}
 
-	fmt.Println("attachdisk.InitializeParam", attachdisk.InitializeParam)
-
 	Attachdiskjsonmap := make(map[string]interface{})
 
 	Attachdiskdictnoaryconvert(attachdisk, Attachdiskjsonmap)
@@ -490,7 +484,6 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 	return
 }
 
-
 func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -505,11 +498,11 @@ func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interf
 
 	detachdiskrequest, err := http.NewRequest("POST", url, nil)
 
-	q := detachdiskrequest.URL.Query()
+	detachdiskrequestparam := detachdiskrequest.URL.Query()
 
-	q.Add("deviceName", options["deviceName"])
+	detachdiskrequestparam.Add("deviceName", options["deviceName"])
 
-	detachdiskrequest.URL.RawQuery = q.Encode()
+	detachdiskrequest.URL.RawQuery = detachdiskrequestparam.Encode()
 
 	detachdiskrequest.Header.Set("Content-Type", "application/json")
 
