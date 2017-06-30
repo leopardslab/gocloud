@@ -25,7 +25,6 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 		switch key {
 		case "projectid":
 			Projectid, _ = value.(string)
-			fmt.Println("Projectid", Projectid)
 
 		case "Name":
 			name, _ := value.(string)
@@ -138,7 +137,6 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 
 	Creatediskdictnoaryconvert(option, Creatdiskjsonmap)
 
-
 	Creatdiskjson, _ := json.Marshal(Creatdiskjsonmap)
 
 	Creatdiskjsonstring := string(Creatdiskjson)
@@ -147,15 +145,11 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + Projectid + "/zones/" + Zone + "/disks"
 
-	client := &http.Client{}
+	client := googleauth.SignJWT()
 
 	Creatediskrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Creatdiskjsonstringbyte))
 
 	Creatediskrequest.Header.Set("Content-Type", "application/json")
-
-	token := googleauth.Sign()
-
-	token.SetAuthHeader(Creatediskrequest)
 
 	Creatediskresp, err := client.Do(Creatediskrequest)
 
@@ -174,14 +168,11 @@ func (googlestorage *GoogleStorage) Deletedisk(request interface{}) (resp interf
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/disks/" + options["disk"]
 
-	token := googleauth.Sign()
-
-	client := &http.Client{}
+	client := googleauth.SignJWT()
 
 	Deletediskrequest, err := http.NewRequest("DELETE", url, nil)
 	Deletediskrequest.Header.Set("Content-Type", "application/json")
 
-	token.SetAuthHeader(Deletediskrequest)
 	Deletediskresp, err := client.Do(Deletediskrequest)
 
 	defer Deletediskresp.Body.Close()
@@ -288,32 +279,24 @@ func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp in
 		}
 	}
 
-	fmt.Println(snapshot)
-
 	Createsnapshotjsonmap := make(map[string]interface{})
 
 	Createsnapshotdictnoaryconvert(snapshot, Createsnapshotjsonmap)
 
 	Createsnapshotjson, _ := json.Marshal(Createsnapshotjsonmap)
 	Createsnapshotstring := string(Createsnapshotjson)
-	fmt.Println(Createsnapshotstring)
-	var Createsnapshotstringbyte = []byte(Createsnapshotstring)
 
-	//POST https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk/createSnapshot
+	var Createsnapshotstringbyte = []byte(Createsnapshotstring)
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + Projectid + "/zones/" + Zone + "/disks/" + Disk + "/createSnapshot"
 
-	fmt.Println(url)
+	client := googleauth.SignJWT()
 
-	client := &http.Client{}
 	Createsnapshotrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Createsnapshotstringbyte))
 	Createsnapshotrequest.Header.Set("Content-Type", "application/json")
 
-	token := googleauth.Sign()
-
-	token.SetAuthHeader(Createsnapshotrequest)
-
 	Createsnapshotresp, err := client.Do(Createsnapshotrequest)
+
 	defer Createsnapshotresp.Body.Close()
 
 	body, err := ioutil.ReadAll(Createsnapshotresp.Body)
@@ -328,16 +311,10 @@ func (googlestorage *GoogleStorage) Deletesnapshot(request interface{}) (resp in
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/global/snapshots/" + options["snapshot"]
 
-	fmt.Println(url)
-
-	token := googleauth.Sign()
-
-	client := &http.Client{}
+	client := googleauth.SignJWT()
 
 	Deletesnapshotrequest, err := http.NewRequest("DELETE", url, nil)
 	Deletesnapshotrequest.Header.Set("Content-Type", "application/json")
-
-	token.SetAuthHeader(Deletesnapshotrequest)
 
 	Deletesnapshotresp, err := client.Do(Deletesnapshotrequest)
 
@@ -459,21 +436,14 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 
 	attachdiskjsonstring := string(attachdiskjson)
 
-	fmt.Println("attachdiskjsonstring", attachdiskjsonstring)
-
 	var attachdiskjsonstringbyte = []byte(attachdiskjsonstring)
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + Projectid + "/zones/" + Zone + "/instances/" + Instance + "/attachDisk"
 
-	fmt.Println(url)
+	client := googleauth.SignJWT()
 
-	client := &http.Client{}
 	attachdiskrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(attachdiskjsonstringbyte))
 	attachdiskrequest.Header.Set("Content-Type", "application/json")
-
-	token := googleauth.Sign()
-
-	token.SetAuthHeader(attachdiskrequest)
 
 	attachdiskresp, err := client.Do(attachdiskrequest)
 	defer attachdiskresp.Body.Close()
@@ -490,11 +460,7 @@ func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interf
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/detachDisk"
 
-	fmt.Println(url)
-
-	token := googleauth.Sign()
-
-	client := &http.Client{}
+	client := googleauth.SignJWT()
 
 	detachdiskrequest, err := http.NewRequest("POST", url, nil)
 
@@ -505,10 +471,6 @@ func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interf
 	detachdiskrequest.URL.RawQuery = detachdiskrequestparam.Encode()
 
 	detachdiskrequest.Header.Set("Content-Type", "application/json")
-
-	token.SetAuthHeader(detachdiskrequest)
-
-	fmt.Println(detachdiskrequest)
 
 	detachdiskresp, err := client.Do(detachdiskrequest)
 

@@ -48,8 +48,6 @@ func Sign() (token *oauth2.Token) {
 	return token
 }
 
-
-
 func SignJWT() (client *http.Client) {
 
 	data, err := ioutil.ReadFile("/home/rootmonk/workspace-gocloud-v2/src/github.com/jsonconfig/ShelterMap-547a11815320.json")
@@ -58,10 +56,10 @@ func SignJWT() (client *http.Client) {
 	}
 
 	conf, err := google.JWTConfigFromJSON(data, "https://www.googleapis.com/auth/compute",
-																							"https://www.googleapis.com/auth/devstorage.full_control",
-																							"https://www.googleapis.com/auth/ndev.clouddns.readwrite",
-																							"https://www.googleapis.com/auth/cloud-platform",
-																							)
+		"https://www.googleapis.com/auth/devstorage.full_control",
+		"https://www.googleapis.com/auth/ndev.clouddns.readwrite",
+		"https://www.googleapis.com/auth/cloud-platform",
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
