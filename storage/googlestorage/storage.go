@@ -307,8 +307,8 @@ func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp in
 			fmt.Println("Projectid", Projectid)
 
 		case "Name":
-			name, _ := value.(string)
-			snapshot.Name = name
+			NameV, _ := value.(string)
+			snapshot.Name = NameV
 
 		case "Zone":
 			ZoneV, _ := value.(string)
@@ -317,6 +317,69 @@ func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp in
 		case "disk":
 			DiskV, _ := value.(string)
 			Disk = DiskV
+
+		case "CreationTimestamp":
+			CreationTimestampV, _ := value.(string)
+			snapshot.CreationTimestamp = CreationTimestampV
+
+		case "Description":
+			DescriptionV, _ := value.(string)
+			snapshot.Description = DescriptionV
+
+		case "DiskSizeGb":
+			DiskSizeGbV, _ := value.(string)
+			snapshot.DiskSizeGb = DiskSizeGbV
+
+		case "ID":
+			IDV, _ := value.(string)
+			snapshot.ID = IDV
+
+		case "Kind":
+			KindV, _ := value.(string)
+			snapshot.Kind = KindV
+
+		case "LabelFingerprint":
+			LabelFingerprintV, _ := value.(string)
+			snapshot.LabelFingerprint = LabelFingerprintV
+
+		case "SelfLink":
+			SelfLinkV, _ := value.(string)
+			snapshot.SelfLink = SelfLinkV
+
+		case "StorageBytes":
+			StorageBytesV, _ := value.(string)
+			snapshot.StorageBytes = StorageBytesV
+
+		case "Status":
+			StatusV, _ := value.(string)
+			snapshot.Status = StatusV
+
+		case "SourceDiskID":
+			SourceDiskIDV, _ := value.(string)
+			snapshot.SourceDiskID = SourceDiskIDV
+
+		case "SourceDisk":
+			SourceDiskV, _ := value.(string)
+			snapshot.SourceDisk = SourceDiskV
+
+		case "StorageBytesStatus":
+			StorageBytesStatusV, _ := value.(string)
+			snapshot.StorageBytesStatus = StorageBytesStatusV
+
+		case "Licenses":
+			LicensesV, _ := value.([]string)
+			snapshot.Licenses = LicensesV
+
+		case "SourceDiskEncryptionKeys":
+			SourceDiskEncryptionKeysV, _ := value.(map[string]string)
+			snapshot.SourceDiskEncryptionKeys.RawKey = SourceDiskEncryptionKeysV["RawKey"]
+			snapshot.SourceDiskEncryptionKeys.Sha256 = SourceDiskEncryptionKeysV["Sha256"]
+
+		case "SnapshotEncryptionKeys":
+			SnapshotEncryptionKeysV, _ := value.(map[string]string)
+			snapshot.SnapshotEncryptionKeys.RawKey = SnapshotEncryptionKeysV["RawKey"]
+			snapshot.SnapshotEncryptionKeys.Sha256 = SnapshotEncryptionKeysV["Sha256"]
+
 		default:
 			fmt.Println("Incorrect Value")
 
@@ -325,10 +388,14 @@ func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp in
 
 	fmt.Println(snapshot)
 
-	snapshotjson, _ := json.Marshal(snapshot)
-	snapshotjsonstring := string(snapshotjson)
-	fmt.Println(snapshotjsonstring)
-	var snapshotjsonstringbyte = []byte(snapshotjsonstring)
+	Createsnapshotjsonmap := make(map[string]interface{})
+
+	Createsnapshotdictnoaryconvert(snapshot, Createsnapshotjsonmap)
+
+	Createsnapshotjson, _ := json.Marshal(Createsnapshotjsonmap)
+	Createsnapshotstring := string(Createsnapshotjson)
+	fmt.Println(Createsnapshotstring)
+	var Createsnapshotstringbyte = []byte(Createsnapshotstring)
 
 	//POST https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk/createSnapshot
 
@@ -337,7 +404,7 @@ func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp in
 	fmt.Println(url)
 
 	client := &http.Client{}
-	Createsnapshotrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(snapshotjsonstringbyte))
+	Createsnapshotrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Createsnapshotstringbyte))
 	Createsnapshotrequest.Header.Set("Content-Type", "application/json")
 
 	token := googleauth.Sign()
@@ -351,6 +418,74 @@ func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp in
 	fmt.Println(string(body))
 
 	return
+}
+
+func Createsnapshotdictnoaryconvert(option Snapshot, Createsnapshotjsonmap map[string]interface{}) {
+
+	if len(option.Licenses) != 0 {
+		Createsnapshotjsonmap["licenses"] = option.Licenses
+	}
+
+	if option.Name != "" {
+		Createsnapshotjsonmap["name"] = option.Name
+	}
+
+	if option.CreationTimestamp != "" {
+		Createsnapshotjsonmap["creationTimestamp"] = option.CreationTimestamp
+	}
+
+	if option.Description != "" {
+		Createsnapshotjsonmap["description"] = option.Description
+	}
+
+	if option.DiskSizeGb != "" {
+		Createsnapshotjsonmap["diskSizeGb"] = option.DiskSizeGb
+	}
+
+	if option.ID != "" {
+		Createsnapshotjsonmap["id"] = option.ID
+	}
+
+	if option.Kind != "" {
+		Createsnapshotjsonmap["kind"] = option.Kind
+	}
+
+	if option.Status != "" {
+		Createsnapshotjsonmap["status"] = option.Status
+	}
+
+	if option.SelfLink != "" {
+		Createsnapshotjsonmap["selfLink"] = option.SelfLink
+	}
+
+	if option.LabelFingerprint != "" {
+		Createsnapshotjsonmap["labelFingerprint"] = option.LabelFingerprint
+	}
+
+	if option.StorageBytes != "" {
+		Createsnapshotjsonmap["storageBytes"] = option.StorageBytes
+	}
+
+	if option.SourceDisk != "" {
+		Createsnapshotjsonmap["sourceDisk"] = option.SourceDisk
+	}
+
+	if option.SourceDiskID != "" {
+		Createsnapshotjsonmap["sourceDiskID"] = option.SourceDiskID
+	}
+
+	if option.StorageBytesStatus != "" {
+		Createsnapshotjsonmap["storageBytesStatus"] = option.StorageBytesStatus
+	}
+
+	if option.SourceDiskEncryptionKeys != (SourceDiskEncryptionKey{}) {
+		Createsnapshotjsonmap["sourceDiskEncryptionKey"] = option.SourceDiskEncryptionKeys
+	}
+
+	if option.SnapshotEncryptionKeys != (SnapshotEncryptionKey{}) {
+		Createsnapshotjsonmap["snapshotEncryptionKey"] = option.SnapshotEncryptionKeys
+	}
+
 }
 
 func (googlestorage *GoogleStorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
@@ -407,17 +542,67 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 			instanceV, _ := value.(string)
 			Instance = instanceV
 
+		case "Licenses":
+			LicensesV, _ := value.([]string)
+			attachdisk.Licenses = LicensesV
+
+		case "DiskEncryptionKeys":
+			DiskEncryptionKeysV, _ := value.(map[string]string)
+			attachdisk.DiskEncryptionKeys.RawKey = DiskEncryptionKeysV["RawKey"]
+			attachdisk.DiskEncryptionKeys.Sha256 = DiskEncryptionKeysV["Sha256"]
+
+
+		case "Mode":
+			ModeV, _ := value.(string)
+			attachdisk.Mode = ModeV
+
+		case "Type":
+			TypeV, _ := value.(string)
+			attachdisk.Type  =TypeV
+
+		case "Kind":
+			KindV, _ := value.(string)
+			attachdisk.Kind = KindV
+
+
+		case "Interface":
+			InterfaceV, _ := value.(string)
+			attachdisk.Interface = InterfaceV
+
+		case "Index":
+			IndexV, _ := value.(int)
+			attachdisk.Index = IndexV
+
+		case "Boot":
+			BootV, _ := value.(bool)
+			attachdisk.Boot = BootV
+
+		case "AutoDelete":
+			AutoDeleteV, _ := value.(bool)
+			attachdisk.AutoDelete = AutoDeleteV
+
+		case "DeviceName":
+			DeviceNameV, _ := value.(string)
+			attachdisk.DeviceName = DeviceNameV
+
 		default:
 			fmt.Println("Incorrect Value")
 
 		}
 	}
 
-	fmt.Println(attachdisk)
+	//fmt.Println(attachdisk)
 
-	attachdiskjson, _ := json.Marshal(attachdisk)
+	Attachdiskjsonmap := make(map[string]interface{})
+
+	Attachdiskdictnoaryconvert(attachdisk, Attachdiskjsonmap)
+
+	attachdiskjson, _ := json.Marshal(Attachdiskjsonmap)
+
 	attachdiskjsonstring := string(attachdiskjson)
-	fmt.Println(attachdiskjsonstring)
+
+	fmt.Println("attachdiskjsonstring", attachdiskjsonstring)
+
 	var attachdiskjsonstringbyte = []byte(attachdiskjsonstring)
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + Projectid + "/zones/" + Zone + "/instances/" + Instance + "/attachDisk"
@@ -439,6 +624,19 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 	fmt.Println(string(body))
 
 	return
+}
+
+func Attachdiskdictnoaryconvert(option Attachdisk, Attachdiskjsonmap map[string]interface{}) {
+	if len(option.Licenses) != 0 {
+		Attachdiskjsonmap["licenses"] = option.Licenses
+	}
+
+	if option.DiskEncryptionKeys != (DiskEncryptionKey{}) {
+		Attachdiskjsonmap["diskEncryptionKey"] = option.DiskEncryptionKeys
+	}
+
+
+
 }
 
 func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interface{}, err error) {
