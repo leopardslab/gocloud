@@ -2,6 +2,12 @@ package ec2
 
 import (
 	"strconv"
+	"encoding/hex"
+	"encoding/xml"
+	"fmt"
+	"net/http"
+	"time"
+	"crypto/rand"
 )
 
 // prepareRunParams base on vps or legacy params
@@ -99,4 +105,46 @@ func addParamsList(params map[string]string, label string, ids []string) {
 	for i, id := range ids {
 		params[label+"."+strconv.Itoa(i+1)] = id
 	}
+}
+
+
+func clientToken() (string, error) {
+
+	buf := make([]byte, 32)
+	_, err := rand.Read(buf)
+	if err != nil {
+		return "", err
+	}
+	return hex.EncodeToString(buf), nil
+}
+
+
+func buildError(r *http.Response) error {
+	errors := xmlErrors{}
+	xml.NewDecoder(r.Body).Decode(&errors)
+	var err Error
+	if len(errors.Errors) > 0 {
+		err = errors.Errors[0]
+	}
+	err.RequestId = errors.RequestId
+	err.StatusCode = r.StatusCode
+	if err.Message == "" {
+		err.Message = r.Status
+	}
+	return &err
+}
+
+type xmlErrors struct {
+	RequestId string  `xml:"RequestID"`
+	Errors    []Error `xml:"Errors>Error"`
+}
+
+var timeNow = time.Now
+
+func (err *Error) Error() string {
+	if err.Code == "" {
+		return err.Message
+	}
+
+	return fmt.Sprintf("%s (%s)", err.Message, err.Code)
 }

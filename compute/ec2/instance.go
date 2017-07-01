@@ -5,9 +5,8 @@ import (
 	"encoding/xml"
 	"fmt"
 	"github.com/scorelab/gocloud-v2/auth"
-	//"log"
 	"net/http"
-	//"net/http/httputil"
+	awsauth "github.com/scorelab/gocloud-v2/awsauth"
 	"io/ioutil"
 	"strconv"
 	"time"
@@ -112,7 +111,7 @@ func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string,
 
 	auth := Auth{AccessKey: auth.Config.AWSAccessKeyID, SecretKey: auth.Config.AWSSecretKey}
 
-	SignatureV2(req, auth)
+	awsauth.SignatureV2(req, auth)
 
 	//fmt.Println(req)
 

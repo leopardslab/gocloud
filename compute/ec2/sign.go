@@ -3,16 +3,12 @@ package ec2
 import (
 	"bytes"
 	"crypto/hmac"
-	"crypto/rand"
 	"crypto/sha256"
 	"encoding/base64"
-	"encoding/hex"
-	"encoding/xml"
 	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
-	"time"
 )
 
 //Sign v2 method for Authenticating request
@@ -65,16 +61,6 @@ func canonicalQueryString(queryString url.Values) (string, error) {
 	return strings.Replace(queryString.Encode(), "+", "%20", -1), nil
 }
 
-func clientToken() (string, error) {
-
-	buf := make([]byte, 32)
-	_, err := rand.Read(buf)
-	if err != nil {
-		return "", err
-	}
-	return hex.EncodeToString(buf), nil
-}
-
 func checkrequestMethod(rawMethod string) (verb string) {
 	fmt.Println(rawMethod)
 	rawMethodverb := strings.SplitN(rawMethod, " ", 2)
@@ -85,34 +71,4 @@ func checkrequestMethod(rawMethod string) (verb string) {
 		verb = rawMethodverb[0]
 	}
 	return verb
-}
-
-func buildError(r *http.Response) error {
-	errors := xmlErrors{}
-	xml.NewDecoder(r.Body).Decode(&errors)
-	var err Error
-	if len(errors.Errors) > 0 {
-		err = errors.Errors[0]
-	}
-	err.RequestId = errors.RequestId
-	err.StatusCode = r.StatusCode
-	if err.Message == "" {
-		err.Message = r.Status
-	}
-	return &err
-}
-
-type xmlErrors struct {
-	RequestId string  `xml:"RequestID"`
-	Errors    []Error `xml:"Errors>Error"`
-}
-
-var timeNow = time.Now
-
-func (err *Error) Error() string {
-	if err.Code == "" {
-		return err.Message
-	}
-
-	return fmt.Sprintf("%s (%s)", err.Message, err.Code)
 }
