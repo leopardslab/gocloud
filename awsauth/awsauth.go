@@ -14,7 +14,7 @@ import (
 //Sign v2 method for Authenticating request
 
 func SignatureV2(req *http.Request, Auth interface{}) (err error) {
-  auth, _ := Auth.(map[string]string)
+	auth, _ := Auth.(map[string]string)
 	queryVals := req.URL.Query()
 	queryVals.Set("AWSAccessKeyId", auth["AccessKey"])
 	queryVals.Set("SignatureVersion", "2")
@@ -51,15 +51,14 @@ func SignatureV2(req *http.Request, Auth interface{}) (err error) {
 	req.URL.RawQuery = queryVals.Encode()
 
 	return nil
-	}
+}
 
-	func canonicalQueryString(queryString url.Values) (string, error) {
+func canonicalQueryString(queryString url.Values) (string, error) {
 
 	return strings.Replace(queryString.Encode(), "+", "%20", -1), nil
-	}
+}
 
-
-	func checkrequestMethod(rawMethod string) (verb string) {
+func checkrequestMethod(rawMethod string) (verb string) {
 	fmt.Println(rawMethod)
 	rawMethodverb := strings.SplitN(rawMethod, " ", 2)
 	switch {
@@ -69,4 +68,4 @@ func SignatureV2(req *http.Request, Auth interface{}) (err error) {
 		verb = rawMethodverb[0]
 	}
 	return verb
-	}
+}

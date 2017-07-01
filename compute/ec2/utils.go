@@ -1,13 +1,13 @@
 package ec2
 
 import (
-	"strconv"
+	"crypto/rand"
 	"encoding/hex"
 	"encoding/xml"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
-	"crypto/rand"
 )
 
 // prepareRunParams base on vps or legacy params
@@ -107,7 +107,6 @@ func addParamsList(params map[string]string, label string, ids []string) {
 	}
 }
 
-
 func clientToken() (string, error) {
 
 	buf := make([]byte, 32)
@@ -117,7 +116,6 @@ func clientToken() (string, error) {
 	}
 	return hex.EncodeToString(buf), nil
 }
-
 
 func buildError(r *http.Response) error {
 	errors := xmlErrors{}

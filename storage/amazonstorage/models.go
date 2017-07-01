@@ -2,9 +2,7 @@ package amazonstorage
 
 import (
 	"encoding/xml"
-)	
-
-
+)
 
 type Amazonstorage struct {
 }
@@ -58,7 +56,6 @@ type CreateVolumeResp struct {
 	Volume
 }
 
-
 type SimpleResp struct {
 	XMLName   xml.Name
 	RequestId string `xml:"requestId"`
@@ -72,7 +69,6 @@ type VolumeAttachmentResp struct {
 	Status     string `xml:"status"`
 	AttachTime string `xml:"attachTime"`
 }
-
 
 type SnapshotsResp struct {
 	RequestId string     `xml:"requestId"`

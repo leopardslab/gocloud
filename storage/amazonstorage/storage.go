@@ -60,7 +60,7 @@ func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interf
 	params := makeParams("CreateVolume")
 	prepareVolume(params, createvolume)
 	resp = &CreateVolumeResp{}
-	err = amazonstorage.PrepareSignatureV2query(params,Region,resp)
+	err = amazonstorage.PrepareSignatureV2query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func (amazonstorage *Amazonstorage) Deletedisk(request interface{}) (resp interf
 	params["VolumeId"] = param["VolumeId"]
 	Region := param["Region"]
 	resp = &SimpleResp{}
-	err = amazonstorage.PrepareSignatureV2query(params,Region,resp)
+	err = amazonstorage.PrepareSignatureV2query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ func (amazonstorage *Amazonstorage) Createsnapshot(request interface{}) (resp in
 	params["Description"] = param["Description"]
 	Region := param["Region"]
 	resp = &CreateSnapshotResp{}
-	err = amazonstorage.PrepareSignatureV2query(params,Region, resp)
+	err = amazonstorage.PrepareSignatureV2query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ func (amazonstorage *Amazonstorage) Deletesnapshot(request interface{}) (resp in
 	}
 
 	resp = &SimpleResp{}
-	err = amazonstorage.PrepareSignatureV2query(params,Region, resp)
+	err = amazonstorage.PrepareSignatureV2query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +126,7 @@ func (amazonstorage *Amazonstorage) Attachdisk(request interface{}) (resp interf
 	params["Device"] = param["Device"]
 	Region := param["Region"]
 	resp = &VolumeAttachmentResp{}
-	err = amazonstorage.PrepareSignatureV2query(params,Region, resp)
+	err = amazonstorage.PrepareSignatureV2query(params, Region, resp)
 	if err != nil {
 		return nil, err
 	}

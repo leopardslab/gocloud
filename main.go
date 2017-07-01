@@ -478,4 +478,24 @@ func main() {
 	}
 	googlecloud.Attachdisk(attachdisk)
 
+	amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
+
+	attachdisk1 := map[string]string {
+		"VolumeId":   "vol-049426a70587418d7",
+		"InstanceId": "i-07737a0121fba7b0c",
+		"Device":     "/dev/sdh",
+		"Region":     "us-east-1",
+	}
+
+	amazoncloud.Attachdisk(attachdisk1)
+
+	detachdisk := map[string]string{
+		"VolumeId":   "vol-049426a70587418d7",
+		"InstanceId": "i-07737a0121fba7b0c",
+		"Device":     "/dev/sdh",
+		"Force":      "true",
+		"Region":     "us-east-1",
+	}
+	amazoncloud.Detachdisk(detachdisk)
+
 }

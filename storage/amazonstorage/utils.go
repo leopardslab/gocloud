@@ -1,19 +1,17 @@
 package amazonstorage
 
-
 import (
 	"encoding/xml"
+	"fmt"
 	auth "github.com/scorelab/gocloud-v2/auth"
 	awsauth "github.com/scorelab/gocloud-v2/awsauth"
-	"net/http"
-	"fmt"
 	"io/ioutil"
+	"net/http"
 	"strconv"
 	"time"
 )
 
 var timeNow = time.Now
-
 
 func prepareVolume(params map[string]string, volume CreateVolume) {
 	params["AvailabilityZone"] = volume.AvailZone
@@ -34,7 +32,6 @@ func prepareVolume(params map[string]string, volume CreateVolume) {
 	}
 }
 
-
 func makeParams(action string) map[string]string {
 	return makeParamsWithVersion(action, legacyAPIVersion)
 }
@@ -51,11 +48,11 @@ func makeParamsWithVersion(action, version string) map[string]string {
 	return params
 }
 
-func (amazonstorage *Amazonstorage) PrepareSignatureV2query(params map[string]string,Region string, resp interface{}) error {
+func (amazonstorage *Amazonstorage) PrepareSignatureV2query(params map[string]string, Region string, resp interface{}) error {
 
 	EC2Endpoint := "https://ec2." + Region + ".amazonaws.com"
 
-	req, err := http.NewRequest("GET", EC2Endpoint , nil)
+	req, err := http.NewRequest("GET", EC2Endpoint, nil)
 	if err != nil {
 		return err
 	}

@@ -5,9 +5,9 @@ import (
 	"encoding/xml"
 	"fmt"
 	"github.com/scorelab/gocloud-v2/auth"
-	"net/http"
 	awsauth "github.com/scorelab/gocloud-v2/awsauth"
 	"io/ioutil"
+	"net/http"
 	"strconv"
 	"time"
 )
