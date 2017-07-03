@@ -11,8 +11,7 @@ import (
 	"strings"
 )
 
-//Sign v2 method for Authenticating request
-
+//SignatureV2 method for Authenticating request
 func SignatureV2(req *http.Request, Auth interface{}) (err error) {
 	auth, _ := Auth.(map[string]string)
 	queryVals := req.URL.Query()
@@ -29,7 +28,7 @@ func SignatureV2(req *http.Request, Auth interface{}) (err error) {
 	if path == "" {
 		path = "/"
 	}
-	
+
 	payload := new(bytes.Buffer)
 
 	payloadstring := checkrequestMethod(req.Method) + "\n" + req.Host + "\n" + path + "\n" + queryStr
