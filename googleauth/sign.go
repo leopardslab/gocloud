@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 //sign() GCE signature it give URL to get Autorization code on which we it generate auth token and pass in each request in request header
@@ -50,7 +51,9 @@ func Sign() (token *oauth2.Token) {
 
 func SignJWT() (client *http.Client) {
 
-	data, err := ioutil.ReadFile("/home/rootmonk/workspace-gocloud-v2/src/github.com/jsonconfig/ShelterMap-547a11815320.json")
+	var home string = os.Getenv("HOME")
+
+	data, err := ioutil.ReadFile(home + "/googleconfig.json")
 	if err != nil {
 		log.Fatal(err)
 	}
