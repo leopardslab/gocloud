@@ -29,7 +29,7 @@ func SignatureV2(req *http.Request, Auth interface{}) (err error) {
 	if path == "" {
 		path = "/"
 	}
-
+	
 	payload := new(bytes.Buffer)
 
 	payloadstring := checkrequestMethod(req.Method) + "\n" + req.Host + "\n" + path + "\n" + queryStr
