@@ -12,7 +12,6 @@ func TestCreatenode(t *testing.T) {
 	}
 
 	resp, _ := amazoncloud.Createnode(create)
-	fmt.Println(resp)
 }
 
 func TestStartnode(t *testing.T) {
@@ -22,7 +21,6 @@ func TestStartnode(t *testing.T) {
 		"Region":      "us-east-1",
 	}
 	resp, _ := amazoncloud.Startnode(start)
-	fmt.Println(resp)
 }
 
 func TestStopnode(t *testing.T) {
@@ -32,7 +30,6 @@ func TestStopnode(t *testing.T) {
 		"Region":      "us-east-1",
 	}
 	resp, _ := amazoncloud.Stopnode(stop)
-	fmt.Println(resp)
 }
 
 func TestRebootnode(t *testing.T) {
@@ -42,7 +39,6 @@ func TestRebootnode(t *testing.T) {
 		"Region":      "us-east-1",
 	}
 	resp, _ := amazoncloud.Rebootnode(Reboot)
-	fmt.Println(resp)
 }
 
 func TestDeletnode(t *testing.T) {
@@ -52,5 +48,4 @@ func TestDeletnode(t *testing.T) {
 		"Region":      "us-east-1",
 	}
 	resp, _ := amazoncloud.Deletenode(delete)
-	fmt.Println(resp)
 }

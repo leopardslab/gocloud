@@ -5,6 +5,9 @@ import (
 	"encoding/hex"
 	"encoding/xml"
 	"fmt"
+	"github.com/scorelab/gocloud-v2/auth"
+	awsauth "github.com/scorelab/gocloud-v2/awsauth"
+	"io/ioutil"
 	"net/http"
 	"strconv"
 	"time"
@@ -145,4 +148,41 @@ func (err *Error) Error() string {
 	}
 
 	return fmt.Sprintf("%s (%s)", err.Message, err.Code)
+}
+
+//pass the param to query and add signature to it base on secret key and acces key
+
+func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string, resp interface{}) error {
+
+	EC2Endpoint := "https://ec2." + Region + ".amazonaws.com"
+
+	req, err := http.NewRequest("GET", EC2Endpoint, nil)
+	if err != nil {
+		return err
+	}
+
+	// Add the params passed in to the query string
+	query := req.URL.Query()
+	for varName, varVal := range params {
+		query.Add(varName, varVal)
+	}
+	query.Add("Timestamp", timeNow().In(time.UTC).Format(time.RFC3339))
+
+	req.URL.RawQuery = query.Encode()
+
+	auth := map[string]string{"AccessKey": auth.Config.AWSAccessKeyID, "SecretKey": auth.Config.AWSSecretKey}
+
+	awsauth.SignatureV2(req, auth)
+
+	r, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return err
+	}
+	defer r.Body.Close()
+
+	body, err := ioutil.ReadAll(r.Body)
+
+	fmt.Println(string(body))
+
+	return xml.NewDecoder(r.Body).Decode(resp)
 }

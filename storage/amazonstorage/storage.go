@@ -9,8 +9,6 @@ func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interf
 
 	param, _ := request.(map[string]interface{})
 
-	fmt.Println(param)
-
 	var createvolume CreateVolume
 	var Region string
 	for key, value := range param {
@@ -45,17 +43,6 @@ func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interf
 			createvolume.SnapshotId = SnapshotIdV
 		}
 	}
-
-	fmt.Println(createvolume)
-
-	volume1 := CreateVolume{
-		AvailZone:  "us-east-1a",
-		VolumeType: "gp2",
-		VolumeSize: 100,
-		IOPS:       3000,
-		Encrypted:  true,
-	}
-	fmt.Println(volume1)
 
 	params := makeParams("CreateVolume")
 	prepareVolume(params, createvolume)

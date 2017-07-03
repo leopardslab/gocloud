@@ -35,8 +35,6 @@ func SignatureV2(req *http.Request, auth Auth) (err error) {
 
 	payload := new(bytes.Buffer)
 
-	fmt.Println("req.Method:\n", req.Method)
-
 	payloadstring := checkrequestMethod(req.Method) + "\n" + req.Host + "\n" + path + "\n" + queryStr
 
 	fmt.Fprintf(payload, "%s", payloadstring)
@@ -62,7 +60,6 @@ func canonicalQueryString(queryString url.Values) (string, error) {
 }
 
 func checkrequestMethod(rawMethod string) (verb string) {
-	fmt.Println(rawMethod)
 	rawMethodverb := strings.SplitN(rawMethod, " ", 2)
 	switch {
 	case len(rawMethodverb) == 0:

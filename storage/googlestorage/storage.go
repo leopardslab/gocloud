@@ -394,7 +394,6 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 
 		case "InitializeParam":
 			InitializeParamV, _ := value.(map[string]interface{})
-			fmt.Println("InitializeParamV", InitializeParamV)
 			for key, value := range InitializeParamV {
 				switch key {
 				case "DiskName":

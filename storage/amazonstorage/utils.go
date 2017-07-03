@@ -69,8 +69,6 @@ func (amazonstorage *Amazonstorage) PrepareSignatureV2query(params map[string]st
 
 	awsauth.SignatureV2(req, auth)
 
-	fmt.Println(req)
-
 	r, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return err

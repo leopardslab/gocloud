@@ -410,7 +410,7 @@ func main() {
 	*/
 	fmt.Println("##########################################")
 
-	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+	//	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 
 	/*
 		detachdiskg := map[string]string{
@@ -470,32 +470,42 @@ func main() {
 		}
 
 	*/
-	attachdisk := map[string]interface{}{
-		"projectid": "sheltermap-1493101612061",
-		"instance":  "sumesh-10",
-		"Zone":      "us-east4-c",
-		"Source":    "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
+	/*
+		attachdisk := map[string]interface{}{
+			"projectid": "sheltermap-1493101612061",
+			"instance":  "sumesh-10",
+			"Zone":      "us-east4-c",
+			"Source":    "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
+		}
+		googlecloud.Attachdisk(attachdisk)
+
+		amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
+
+		attachdisk1 := map[string]string {
+			"VolumeId":   "vol-049426a70587418d7",
+			"InstanceId": "i-07737a0121fba7b0c",
+			"Device":     "/dev/sdh",
+			"Region":     "us-east-1",
+		}
+
+		amazoncloud.Attachdisk(attachdisk1)
+
+		detachdisk := map[string]string{
+			"VolumeId":   "vol-049426a70587418d7",
+			"InstanceId": "i-07737a0121fba7b0c",
+			"Device":     "/dev/sdh",
+			"Force":      "true",
+			"Region":     "us-east-1",
+		}
+		amazoncloud.Detachdisk(detachdisk)
+	*/
+	ec2 := map[string]interface{}{
+		"ImageId":      "ami-ccf405a5",
+		"InstanceType": "t1.micro",
+		"Region":       "us-east-1",
 	}
-	googlecloud.Attachdisk(attachdisk)
 
 	amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
-
-	attachdisk1 := map[string]string {
-		"VolumeId":   "vol-049426a70587418d7",
-		"InstanceId": "i-07737a0121fba7b0c",
-		"Device":     "/dev/sdh",
-		"Region":     "us-east-1",
-	}
-
-	amazoncloud.Attachdisk(attachdisk1)
-
-	detachdisk := map[string]string{
-		"VolumeId":   "vol-049426a70587418d7",
-		"InstanceId": "i-07737a0121fba7b0c",
-		"Device":     "/dev/sdh",
-		"Force":      "true",
-		"Region":     "us-east-1",
-	}
-	amazoncloud.Detachdisk(detachdisk)
+	amazoncloud.Createnode(ec2)
 
 }

@@ -15,6 +15,7 @@ import (
 
 func SignatureV2(req *http.Request, Auth interface{}) (err error) {
 	auth, _ := Auth.(map[string]string)
+	fmt.Println("SignatureV2 auth", auth)
 	queryVals := req.URL.Query()
 	queryVals.Set("AWSAccessKeyId", auth["AccessKey"])
 	queryVals.Set("SignatureVersion", "2")

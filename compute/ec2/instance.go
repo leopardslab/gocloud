@@ -2,14 +2,7 @@ package ec2
 
 import (
 	"encoding/base64"
-	"encoding/xml"
-	"fmt"
-	"github.com/scorelab/gocloud-v2/auth"
-	awsauth "github.com/scorelab/gocloud-v2/awsauth"
-	"io/ioutil"
-	"net/http"
 	"strconv"
-	"time"
 )
 
 // start ec2 instance accept array of instance-id
@@ -89,45 +82,6 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 	return
 }
 
-//pass the param to query and add signature to it base on secret key and acces key
-
-func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string, resp interface{}) error {
-
-	EC2Endpoint := "https://ec2." + Region + ".amazonaws.com"
-
-	req, err := http.NewRequest("GET", EC2Endpoint, nil)
-	if err != nil {
-		return err
-	}
-
-	// Add the params passed in to the query string
-	query := req.URL.Query()
-	for varName, varVal := range params {
-		query.Add(varName, varVal)
-	}
-	query.Add("Timestamp", timeNow().In(time.UTC).Format(time.RFC3339))
-
-	req.URL.RawQuery = query.Encode()
-
-	auth := Auth{AccessKey: auth.Config.AWSAccessKeyID, SecretKey: auth.Config.AWSSecretKey}
-
-	awsauth.SignatureV2(req, auth)
-
-	//fmt.Println(req)
-
-	r, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return err
-	}
-	defer r.Body.Close()
-
-	body, err := ioutil.ReadAll(r.Body)
-
-	fmt.Println(string(body))
-
-	return xml.NewDecoder(r.Body).Decode(resp)
-}
-
 //create Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation
 
 func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
@@ -204,7 +158,6 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 
 		case "SecurityGroup":
 			SecurityGroupparam, _ := value.([]map[string]string)
-			//fmt.Println(SecurityGroupparam)
 			for i := 0; i < len(SecurityGroupparam); i++ {
 				var securityGroup SecurityGroup
 				securityGroup.Id = SecurityGroupparam[i]["Id"]
@@ -247,10 +200,8 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 
 		case "RunNetworkInterface":
 			RunNetworkInterfaceparam, _ := value.([]map[string]interface{})
-			//fmt.Println(RunNetworkInterfaceparam)
 			var runNetworkInterface RunNetworkInterface
 			for i := 0; i < len(RunNetworkInterfaceparam); i++ {
-				//fmt.Println(RunNetworkInterfaceparam[i])
 				for RunNetworkInterfaceparamkey, RunNetworkInterfaceparamvalue := range RunNetworkInterfaceparam[i] {
 					switch RunNetworkInterfaceparamkey {
 					case "Id":
@@ -296,8 +247,6 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 			options.UserData = value.([]byte)
 		}
 	}
-
-	//fmt.Println(Region)
 
 	params := makeParams("RunInstances")
 
@@ -373,10 +322,7 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 
 	resp = &RunInstancesResp{}
 	err = ec2.PrepareSignatureV2query(params, Region, resp)
-	fmt.Println(resp)
 	respq, _ := resp.(*RunInstancesResp)
-
-	fmt.Println(respq)
 
 	printres(respq)
 	if err != nil {
