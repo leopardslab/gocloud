@@ -15,7 +15,6 @@ import (
 
 func SignatureV2(req *http.Request, Auth interface{}) (err error) {
 	auth, _ := Auth.(map[string]string)
-	fmt.Println("SignatureV2 auth", auth)
 	queryVals := req.URL.Query()
 	queryVals.Set("AWSAccessKeyId", auth["AccessKey"])
 	queryVals.Set("SignatureVersion", "2")
@@ -32,8 +31,6 @@ func SignatureV2(req *http.Request, Auth interface{}) (err error) {
 	}
 
 	payload := new(bytes.Buffer)
-
-	fmt.Println("req.Method:\n", req.Method)
 
 	payloadstring := checkrequestMethod(req.Method) + "\n" + req.Host + "\n" + path + "\n" + queryStr
 
@@ -60,7 +57,6 @@ func canonicalQueryString(queryString url.Values) (string, error) {
 }
 
 func checkrequestMethod(rawMethod string) (verb string) {
-	fmt.Println(rawMethod)
 	rawMethodverb := strings.SplitN(rawMethod, " ", 2)
 	switch {
 	case len(rawMethodverb) == 0:
