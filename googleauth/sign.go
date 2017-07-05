@@ -1,23 +1,24 @@
-package gce
+package googleauth
 
 import (
 	"fmt"
+	"github.com/scorelab/gocloud-v2/auth"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
+	"io/ioutil"
 	"log"
+	"net/http"
+	"os"
 )
 
 //sign() GCE signature it give URL to get Autorization code on which we it generate auth token and pass in each request in request header
-func sign() (token *oauth2.Token) {
+func Sign() (token *oauth2.Token) {
 
 	conf := &oauth2.Config{
 
+		ClientID: auth.Config.GoogleClientID,
 
-		//json file
-
-		ClientID: "os.genenv()",
-
-		ClientSecret: "os.genenv()",
+		ClientSecret: auth.Config.GoogleClientSecret,
 
 		RedirectURL: "urn:ietf:wg:oauth:2.0:oob",
 
@@ -46,4 +47,26 @@ func sign() (token *oauth2.Token) {
 	}
 
 	return token
+}
+
+func SignJWT() (client *http.Client) {
+
+	var home string = os.Getenv("HOME")
+
+	data, err := ioutil.ReadFile(home + "/googleconfig.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	conf, err := google.JWTConfigFromJSON(data, "https://www.googleapis.com/auth/compute",
+		"https://www.googleapis.com/auth/devstorage.full_control",
+		"https://www.googleapis.com/auth/ndev.clouddns.readwrite",
+		"https://www.googleapis.com/auth/cloud-platform",
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	client = conf.Client(oauth2.NoContext)
+	return client
 }

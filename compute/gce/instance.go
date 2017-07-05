@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	googleauth "github.com/scorelab/gocloud-v2/googleauth"
 	"io/ioutil"
 	"net/http"
 )
@@ -138,13 +139,10 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 	gceinstancejsonstring := string(gceinstancejson)
 	var gceinstancejsonstringbyte = []byte(gceinstancejsonstring)
 
-	client := &http.Client{}
+	client := googleauth.SignJWT()
+
 	Createnoderequest, err := http.NewRequest("POST", "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/instances", bytes.NewBuffer(gceinstancejsonstringbyte))
 	Createnoderequest.Header.Set("Content-Type", "application/json")
-
-	token := sign()
-
-	token.SetAuthHeader(Createnoderequest)
 
 	Createnoderesp, err := client.Do(Createnoderequest)
 	defer Createnoderesp.Body.Close()
@@ -161,16 +159,16 @@ func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/start"
 
-	token := sign()
+	client := googleauth.SignJWT()
 
-	client := &http.Client{}
 	Startnoderequest, err := http.NewRequest("POST", url, nil)
+
 	Startnoderequest.Header.Set("Content-Type", "application/json")
 
-	token.SetAuthHeader(Startnoderequest)
 	Startnoderesp, err := client.Do(Startnoderequest)
 
 	defer Startnoderesp.Body.Close()
+
 	body, err := ioutil.ReadAll(Startnoderesp.Body)
 
 	fmt.Println(string(body))
@@ -187,13 +185,11 @@ func (gce *GCE) Stopnode(request interface{}) (resp interface{}, err error) {
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/stop"
 
-	token := sign()
+	client := googleauth.SignJWT()
 
-	client := &http.Client{}
 	Stopnoderequest, err := http.NewRequest("POST", url, nil)
 
 	Stopnoderequest.Header.Set("Content-Type", "application/json")
-	token.SetAuthHeader(Stopnoderequest)
 
 	Stopnoderesp, err := client.Do(Stopnoderequest)
 	defer Stopnoderesp.Body.Close()
@@ -213,13 +209,11 @@ func (gce *GCE) Deletenode(request interface{}) (resp interface{}, err error) {
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"]
 
-	token := sign()
-	client := &http.Client{}
+	client := googleauth.SignJWT()
 
 	Deletenoderequest, err := http.NewRequest("DELETE", url, nil)
 	Deletenoderequest.Header.Set("Content-Type", "application/json")
 
-	token.SetAuthHeader(Deletenoderequest)
 	Deletenoderesp, err := client.Do(Deletenoderequest)
 
 	defer Deletenoderesp.Body.Close()
@@ -239,16 +233,11 @@ func (gce *GCE) Rebootnode(request interface{}) (resp interface{}, err error) {
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/reset"
 
-	fmt.Println(url)
-
-	token := sign()
-
-	client := &http.Client{}
+	client := googleauth.SignJWT()
 
 	Rebootnoderequest, err := http.NewRequest("POST", url, nil)
 	Rebootnoderequest.Header.Set("Content-Type", "application/json")
 
-	token.SetAuthHeader(Rebootnoderequest)
 	Rebootnoderesp, err := client.Do(Rebootnoderequest)
 
 	defer Rebootnoderesp.Body.Close()
@@ -267,16 +256,11 @@ func (gce *GCE) listnode(request interface{}) (resp interface{}, err error) {
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/"
 
-	fmt.Println(url)
-
-	token := sign()
-
-	client := &http.Client{}
+	client := googleauth.SignJWT()
 
 	listnoderequest, err := http.NewRequest("POST", url, nil)
 	listnoderequest.Header.Set("Content-Type", "application/json")
 
-	token.SetAuthHeader(listnoderequest)
 	listnoderesp, err := client.Do(listnoderequest)
 
 	defer listnoderesp.Body.Close()

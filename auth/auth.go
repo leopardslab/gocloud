@@ -1,6 +1,32 @@
 package auth
 
-//Googleauth struct reperesnts authentication struct for google.
-type Googleauth struct {
-	ClientID, SecretKey string
+import (
+	"encoding/json"
+	"log"
+	"os"
+	//"fmt"
+)
+
+//Configuration struct reperesnts.
+type Configuration struct {
+	AWSAccessKeyID     string
+	AWSSecretKey       string
+	GoogleClientID     string
+	GoogleClientSecret string
+}
+
+var Config Configuration
+
+func LoadConfig() {
+	var home string = os.Getenv("HOME")
+	file, err := os.Open(home + "/gocloudconfig.json")
+	if err != nil {
+		log.Fatalln("Cannot open config file", err)
+	}
+	decoder := json.NewDecoder(file)
+	Config = Configuration{}
+	err = decoder.Decode(&Config)
+	if err != nil {
+		log.Fatalln("Cannot get configuration from file", err)
+	}
 }

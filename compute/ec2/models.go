@@ -2,23 +2,25 @@ package ec2
 
 import (
 	"encoding/xml"
+	"time"
 )
 
-//RunInstances to store all attribute to create EC2 instance.
+//runinstance to store all attribute to create EC2 instance
+
 type RunInstances struct {
-	ImageID               string
+	ImageId               string
 	MinCount              int
 	MaxCount              int
 	KeyName               string
 	InstanceType          string
 	SecurityGroups        []SecurityGroup
-	KernelID              string
-	RamdiskID             string
+	KernelId              string
+	RamdiskId             string
 	UserData              []byte
 	AvailZone             string
 	PlacementGroupName    string
 	Monitoring            bool
-	SubnetID              string
+	SubnetId              string
 	DisableAPITermination bool
 	ShutdownBehavior      string
 	PrivateIPAddress      string
@@ -26,28 +28,31 @@ type RunInstances struct {
 	NetworkInterfaces     []RunNetworkInterface
 }
 
-//SecurityGroup struct.
+//SecurityGroup struct
+
 type SecurityGroup struct {
-	ID   string `xml:"groupID"`
+	Id   string `xml:"groupId"`
 	Name string `xml:"groupName"`
 }
 
-//BlockDeviceMapping struct to attach device
+// BlockDevice struct to attach device
+
 type BlockDeviceMapping struct {
 	DeviceName          string `xml:"deviceName"`
 	VirtualName         string `xml:"virtualName"`
-	SnapshotID          string `xml:"ebs>snapshotID"`
+	SnapshotId          string `xml:"ebs>snapshotId"`
 	VolumeType          string `xml:"ebs>volumeType"`
 	VolumeSize          int64  `xml:"ebs>volumeSize"`
 	DeleteOnTermination bool   `xml:"ebs>deleteOnTermination"`
 	IOPS                int64  `xml:"ebs>iops"`
 }
 
-//RunNetworkInterface struct for Ec2.
+//NetworkInterface struct for Ec2
+
 type RunNetworkInterface struct {
-	ID                     string
+	Id                      string
 	DeviceIndex             int
-	SubnetID               string
+	SubnetId                string
 	Description             string
 	PrivateIPs              []PrivateIP
 	SecurityGroupIds        []string
@@ -55,33 +60,36 @@ type RunNetworkInterface struct {
 	SecondaryPrivateIPCount int
 }
 
-//PrivateIP to assign PrivateIP.
+//Private ip to assign PrivateIP
+
 type PrivateIP struct {
 	Address   string `xml:"privateIpAddress"`
 	DNSName   string `xml:"privateDnsName"`
 	IsPrimary bool   `xml:"primary"`
 }
 
-//RunInstancesResp response.
+// run instance response
+
 type RunInstancesResp struct {
-	RequestID      string          `xml:"RequestID"`
-	ReservationID string          `xml:"ReservationID"`
-	OwnerID        string          `xml:"OwnerID"`
+	RequestId      string          `xml:"requestId"`
+	ReservationId  string          `xml:"reservationId"`
+	OwnerId        string          `xml:"ownerId"`
 	SecurityGroups []SecurityGroup `xml:"groupSet>item"`
 	Instances      []Instance      `xml:"instancesSet>item"`
 }
 
-//Instance struct represents running instance.
+// this struct represents running instance
+
 type Instance struct {
-	InstanceID         string             `xml:"instanceID"`
+	InstanceId         string             `xml:"instanceId"`
 	InstanceType       string             `xml:"instanceType"`
-	ImageID            string             `xml:"imageId"`
+	ImageId            string             `xml:"imageId"`
 	PrivateDNSName     string             `xml:"privateDnsName"`
 	DNSName            string             `xml:"dnsName"`
 	IPAddress          string             `xml:"ipAddress"`
 	PrivateIPAddress   string             `xml:"privateIpAddress"`
-	SubnetID           string             `xml:"subnetId"`
-	VPCID              string             `xml:"vpcID"`
+	SubnetId           string             `xml:"subnetId"`
+	VPCId              string             `xml:"vpcId"`
 	SourceDestCheck    bool               `xml:"sourceDestCheck"`
 	KeyName            string             `xml:"keyName"`
 	AMILaunchIndex     int                `xml:"amiLaunchIndex"`
@@ -96,40 +104,43 @@ type Instance struct {
 	NetworkInterfaces  []NetworkInterface `xml:"networkInterfaceSet>item"`
 }
 
-//InstanceStateChange stuct represents instance state change.
+//This stuct represents instance state change
+
 type InstanceStateChange struct {
-	InstanceID    string        `xml:"instanceId"`
+	InstanceId    string        `xml:"instanceId"`
 	CurrentState  InstanceState `xml:"currentState"`
 	PreviousState InstanceState `xml:"previousState"`
 }
 
-//SimpleResp stuct represents SimpleResp.
 type SimpleResp struct {
 	XMLName   xml.Name
-	RequestID string `xml:"requestId"`
+	RequestId string `xml:"requestId"`
 }
 
-//TerminateInstancesResp struct represents TerminateInstance response.
+//struct to TerminateInstance
+
 type TerminateInstancesResp struct {
-	RequestID    string                `xml:"requestID"`
+	RequestId    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
-//InstanceState struct represents InstanceState.
+// InstanceState struct
+
 type InstanceState struct {
 	Code int    `xml:"code"`
 	Name string `xml:"name"`
 }
 
-//NetworkInterface reperents running instance NetworkInterface.
+//reperent ruuing instance NetworkInterface
+
 type NetworkInterface struct {
-	ID               string                     `xml:"networkInterfaceID"`
-	SubnetID         string                     `xml:"subnetID"`
-	VPCID            string                     `xml:"vpcID"`
+	Id               string                     `xml:"networkInterfaceId"`
+	SubnetId         string                     `xml:"subnetId"`
+	VPCId            string                     `xml:"vpcId"`
 	AvailZone        string                     `xml:"availabilityZone"`
 	Description      string                     `xml:"description"`
-	OwnerID          string                     `xml:"OwnerID"`
-	RequesterID      string                     `xml:"requesterID"`
+	OwnerId          string                     `xml:"ownerId"`
+	RequesterId      string                     `xml:"requesterId"`
 	RequesterManaged bool                       `xml:"requesterManaged"`
 	Status           string                     `xml:"status"`
 	MACAddress       string                     `xml:"macAddress"`
@@ -142,31 +153,108 @@ type NetworkInterface struct {
 	PrivateIPs       []PrivateIP                `xml:"privateIpAddressesSet>item"`
 }
 
-//NetworkInterfaceAttachment represents running instance
 type NetworkInterfaceAttachment struct {
-	ID                  string `xml:"attachmentIDs"`
-	InstanceID          string `xml:"instanceID"`
-	InstanceOwnerID     string `xml:"instanceOwnerID"`
+	Id                  string `xml:"attachmentId"`
+	InstanceId          string `xml:"instanceId"`
+	InstanceOwnerId     string `xml:"instanceOwnerId"`
 	DeviceIndex         int    `xml:"deviceIndex"`
 	Status              string `xml:"status"`
 	AttachTime          string `xml:"attachTime"`
 	DeleteOnTermination bool   `xml:"deleteOnTermination"`
 }
 
-//Tag reperent tag assgin to instance
+// reperent tag assgin to instance
 type Tag struct {
 	Key   string `xml:"key"`
 	Value string `xml:"value"`
 }
 
-//StartInstanceResp response.
+//start instance response
+
 type StartInstanceResp struct {
-	RequestID    string                `xml:"requestID"`
+	RequestId    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
-//StopInstanceResp response.
+//stop instances response
+
 type StopInstanceResp struct {
-	RequestID    string                `xml:"requestID"`
+	RequestId    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
+}
+
+type Responsestruct struct {
+	RunInstancesResponse struct {
+		Xmlns         string `json:"-xmlns"`
+		RequestID     string `json:"requestId"`
+		ReservationID string `json:"reservationId"`
+		OwnerID       string `json:"ownerId"`
+		InstancesSet  struct {
+			Item struct {
+				InstanceID    string `json:"instanceId"`
+				ImageID       string `json:"imageId"`
+				InstanceState struct {
+					Code string `json:"code"`
+					Name string `json:"name"`
+				} `json:"instanceState"`
+				PrivateDNSName string    `json:"privateDnsName"`
+				AmiLaunchIndex string    `json:"amiLaunchIndex"`
+				InstanceType   string    `json:"instanceType"`
+				LaunchTime     time.Time `json:"launchTime"`
+				Placement      struct {
+					AvailabilityZone string `json:"availabilityZone"`
+					Tenancy          string `json:"tenancy"`
+				} `json:"placement"`
+				KernelID   string `json:"kernelId"`
+				Monitoring struct {
+					State string `json:"state"`
+				} `json:"monitoring"`
+				SubnetID         string `json:"subnetId"`
+				VpcID            string `json:"vpcId"`
+				PrivateIPAddress string `json:"privateIpAddress"`
+				SourceDestCheck  string `json:"sourceDestCheck"`
+				GroupSet         struct {
+					Item struct {
+						GroupID   string `json:"groupId"`
+						GroupName string `json:"groupName"`
+					} `json:"item"`
+				} `json:"groupSet"`
+				StateReason struct {
+					Code    string `json:"code"`
+					Message string `json:"message"`
+				} `json:"stateReason"`
+				Architecture        string `json:"architecture"`
+				RootDeviceType      string `json:"rootDeviceType"`
+				RootDeviceName      string `json:"rootDeviceName"`
+				VirtualizationType  string `json:"virtualizationType"`
+				ClientToken         string `json:"clientToken"`
+				Hypervisor          string `json:"hypervisor"`
+				NetworkInterfaceSet struct {
+					Item struct {
+						NetworkInterfaceID string `json:"networkInterfaceId"`
+						SubnetID           string `json:"subnetId"`
+						VpcID              string `json:"vpcId"`
+						OwnerID            string `json:"ownerId"`
+						Status             string `json:"status"`
+						PrivateIPAddress   string `json:"privateIpAddress"`
+						PrivateDNSName     string `json:"privateDnsName"`
+						SourceDestCheck    string `json:"sourceDestCheck"`
+						GroupSet           struct {
+							Item struct {
+								GroupID   string `json:"groupId"`
+								GroupName string `json:"groupName"`
+							} `json:"item"`
+						} `json:"groupSet"`
+						Attachment struct {
+							AttachmentID        string    `json:"attachmentId"`
+							DeviceIndex         string    `json:"deviceIndex"`
+							Status              string    `json:"status"`
+							AttachTime          time.Time `json:"attachTime"`
+							DeleteOnTermination string    `json:"deleteOnTermination"`
+						} `json:"attachment"`
+					} `json:"item"`
+				} `json:"networkInterfaceSet"`
+			} `json:"item"`
+		} `json:"instancesSet"`
+	} `json:"RunInstancesResponse"`
 }
