@@ -7,3 +7,8 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 func (googleloadbalancer *Googleloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
 	return
 }
+
+func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
+
+	return
+}

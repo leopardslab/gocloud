@@ -1,32 +1,6 @@
 package awsloadbalancer
 
-import (
-	"encoding/xml"
-	"fmt"
-	"github.com/scorelab/gocloud-v2/auth"
-	awsauth "github.com/scorelab/gocloud-v2/awsauth"
-	"io/ioutil"
-	"net/http"
-	"strconv"
-	"time"
-)
 
-type Awsloadbalancer struct {
-}
-
-type CreateLoadBalancer struct {
-	Name           string
-	IpAddressType  string
-	Scheme         string
-	Tags           []Tag
-	SecurityGroups []string
-	Subnets        []string
-}
-
-type Tag struct {
-	Key   string `xml:"key"`
-	Value string `xml:"value"`
-}
 
 func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
 
@@ -43,17 +17,30 @@ func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (
 			NameV, _ := value.(string)
 			options.Name = NameV
 
+		case "IpAddressType":
+			IpAddressTypeV, _ := value.(string)
+			options.IpAddressType = IpAddressTypeV
+
+		case "Scheme":
+			SchemeV, _ := value.(string)
+			options.Scheme = SchemeV
+
 		case "Subnets":
 			SubnetsV, _ := value.([]string)
 			options.Subnets = SubnetsV
+
+		case "SecurityGroups":
+			SecurityGroupsV, _ := value.([]string)
+			options.SecurityGroups = SecurityGroupsV
+
 		}
 	}
-
-	fmt.Println("options :", options)
 
 	params := makeParamsWithVersion("CreateLoadBalancer")
 
 	prepareSubnets(params, options.Subnets)
+
+	prepareSecurityGroups(params, options.SecurityGroups)
 
 	if options.Name != "" {
 		params["Name"] = options.Name
@@ -67,67 +54,33 @@ func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (
 		params["Scheme"] = options.Scheme
 	}
 
-	fmt.Println(params)
+	awsloadbalancer.PrepareSignatureV2query(params)
+
+	return
+}
+
+
+func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
+
+	param := request.(map[string]string)
+
+	params := makeParamsWithVersion("DeleteLoadBalancer")
+
+	params["LoadBalancerArn"] = param["LoadBalancerArn"]
 
 	awsloadbalancer.PrepareSignatureV2query(params)
 
 	return
 }
 
-func prepareSubnets(params map[string]string, Subnets []string) {
-
-	for i := range Subnets {
-		n := strconv.Itoa(i + 1)
-		prefix := "Subnets.member." + n
-		params[prefix] = Subnets[i]
-	}
-
-}
-
-func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
+func (awsloadbalancer *Awsloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
+  params := makeParamsWithVersion("DescribeLoadBalancers")
+  if(request!=nil){
+    param := request.(map[string]string)
+    if(params["LoadBalancerArn"] !=""){
+       params["LoadBalancerArn"] = param["LoadBalancerArn"]
+    }
+  }
+  awsloadbalancer.PrepareSignatureV2query(params)
 	return
-}
-
-func makeParamsWithVersion(action string) map[string]string {
-	params := make(map[string]string)
-	params["Action"] = action
-	params["Version"] = loadbalancerversion
-	return params
-}
-
-var timeNow = time.Now
-
-func (awsloadbalancer *Awsloadbalancer) PrepareSignatureV2query(params map[string]string) error {
-
-	ElasticloadbalancingEndpoint := "https://elasticloadbalancing.amazonaws.com"
-
-	req, err := http.NewRequest("GET", ElasticloadbalancingEndpoint, nil)
-	if err != nil {
-		return err
-	}
-
-	// Add the params passed in to the query string
-	query := req.URL.Query()
-	for varName, varVal := range params {
-		query.Add(varName, varVal)
-	}
-	query.Add("Timestamp", timeNow().In(time.UTC).Format(time.RFC3339))
-
-	req.URL.RawQuery = query.Encode()
-
-	auth := map[string]string{"AccessKey": auth.Config.AWSAccessKeyID, "SecretKey": auth.Config.AWSSecretKey}
-
-	awsauth.SignatureV2(req, auth)
-
-	r, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return err
-	}
-	defer r.Body.Close()
-
-	resp, err := ioutil.ReadAll(r.Body)
-
-	fmt.Println(string(resp))
-
-	return xml.NewDecoder(r.Body).Decode(resp)
 }
