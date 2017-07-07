@@ -1,5 +1,6 @@
 package awsloadbalancer
 
+//Creatloadbalancer creates classic loadbalancer.
 func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	var options CreateLoadBalancer
@@ -67,6 +68,7 @@ func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (
 	return
 }
 
+//Deleteloadbalancer Delete loadbalancer accept LoadBalancerName.
 func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]string)
@@ -80,6 +82,7 @@ func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) 
 	return
 }
 
+//Listloadbalancer List running loadbalancer.
 func (awsloadbalancer *Awsloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
 	params := makeParamsWithVersion("DescribeLoadBalancers")
 	if request != nil {
@@ -92,6 +95,7 @@ func (awsloadbalancer *Awsloadbalancer) Listloadbalancer(request interface{}) (r
 	return
 }
 
+//Detachnodewithloadbalancer Detach node with loadbalancer.
 func (awsloadbalancer *Awsloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 	var options Attachnodewithloadbalancer
 
@@ -125,6 +129,7 @@ func (awsloadbalancer *Awsloadbalancer) Detachnodewithloadbalancer(request inter
 	return
 }
 
+// Attachnodewithloadbalancer method Attach node with loadbalancer.
 func (awsloadbalancer *Awsloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	var options Attachnodewithloadbalancer
@@ -153,7 +158,6 @@ func (awsloadbalancer *Awsloadbalancer) Attachnodewithloadbalancer(request inter
 	if options.LoadBalancerName != "" {
 		params["LoadBalancerName"] = options.LoadBalancerName
 	}
-
 	awsloadbalancer.PrepareSignatureV2query(params)
 	return
 }

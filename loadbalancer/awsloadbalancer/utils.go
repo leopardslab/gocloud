@@ -10,8 +10,10 @@ import (
 	"time"
 )
 
+//timeNow represents time variable
 var timeNow = time.Now
 
+//PrepareSignatureV2query for elasticloadbalancing
 func (awsloadbalancer *Awsloadbalancer) PrepareSignatureV2query(params map[string]string) error {
 
 	ElasticloadbalancingEndpoint := "https://elasticloadbalancing.amazonaws.com"
@@ -45,6 +47,7 @@ func (awsloadbalancer *Awsloadbalancer) PrepareSignatureV2query(params map[strin
 	return xml.NewDecoder(r.Body).Decode(resp)
 }
 
+//prepareAvailabilityZones prepareAvailabilityZones attribute for CreateLoadBalancer
 func prepareAvailabilityZones(params map[string]string, AvailabilityZones []string) {
 
 	for i := range AvailabilityZones {
@@ -55,6 +58,7 @@ func prepareAvailabilityZones(params map[string]string, AvailabilityZones []stri
 
 }
 
+//prepareSubnets prepare prepareSubnets attribute for CreateLoadBalancer
 func prepareSubnets(params map[string]string, Subnets []string) {
 
 	for i := range Subnets {
@@ -65,6 +69,7 @@ func prepareSubnets(params map[string]string, Subnets []string) {
 
 }
 
+//prepareSecurityGroups prepare prepareSecurityGroups attribute for CreateLoadBalancer
 func prepareSecurityGroups(params map[string]string, SecurityGroups []string) {
 
 	for i := range SecurityGroups {
@@ -75,8 +80,8 @@ func prepareSecurityGroups(params map[string]string, SecurityGroups []string) {
 
 }
 
+//prepareListeners prepare prepareListeners attribute for CreateLoadBalancer
 func prepareListeners(params map[string]string, Listeners []Listener) {
-
 	for i := range Listeners {
 		n := strconv.Itoa(i + 1)
 		prefix := "Listeners.member." + n
@@ -88,6 +93,7 @@ func prepareListeners(params map[string]string, Listeners []Listener) {
 	}
 }
 
+//prepareInstances prepare Instances attribute for Attachnodewithloadbalancer
 func prepareInstances(params map[string]string, Instances []string) {
 
 	for i := range Instances {
@@ -97,6 +103,7 @@ func prepareInstances(params map[string]string, Instances []string) {
 	}
 }
 
+//makeParamsWithVersion add loadbalancerversion to queryString
 func makeParamsWithVersion(action string) map[string]string {
 	params := make(map[string]string)
 	params["Action"] = action

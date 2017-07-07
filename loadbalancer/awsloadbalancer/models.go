@@ -4,9 +4,11 @@ const (
 	loadbalancerversion = "2012-06-01"
 )
 
+//Tag represents Awsloadbalancer struct
 type Awsloadbalancer struct {
 }
 
+//Tag represents attribute of Creatloadbalancer
 type CreateLoadBalancer struct {
 	LoadBalancerName  string
 	AvailabilityZones []string
@@ -17,11 +19,13 @@ type CreateLoadBalancer struct {
 	Listeners         []Listener
 }
 
+//Tag represents attribute of Creatloadbalancer
 type Tag struct {
 	Key   string `xml:"key"`
 	Value string `xml:"value"`
 }
 
+//Listener represents Listener attribute of Creatloadbalancer
 type Listener struct {
 	InstancePort     string
 	InstanceProtocol string
@@ -30,11 +34,13 @@ type Listener struct {
 	SSLCertificateId string
 }
 
+//Attachnodewithloadbalancer represents Attachnodewithloadbalancer attribute
 type Attachnodewithloadbalancer struct {
 	Instances        []string
 	LoadBalancerName string
 }
 
+//Detachnodewithloadbalancer represents Attachnodewithloadbalancer attribute
 type Detachnodewithloadbalancer struct {
 	Instances        []string
 	LoadBalancerName string
