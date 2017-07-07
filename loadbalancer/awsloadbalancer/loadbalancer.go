@@ -95,3 +95,15 @@ func (awsloadbalancer *Awsloadbalancer) Listloadbalancer(request interface{}) (r
 	awsloadbalancer.PrepareSignatureV2query(params)
 	return
 }
+
+func (awsloadbalancer *Awsloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+
+return
+}
+
+
+
+func (awsloadbalancer *Awsloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+
+return
+}
