@@ -126,7 +126,6 @@ func (awsloadbalancer *Awsloadbalancer) Detachnodewithloadbalancer(request inter
 
 	awsloadbalancer.PrepareSignatureV2query(params)
 	return
-	return
 }
 
 // Attachnodewithloadbalancer method Attach node with loadbalancer.
