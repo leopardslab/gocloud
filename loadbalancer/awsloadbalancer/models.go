@@ -8,7 +8,7 @@ type Awsloadbalancer struct {
 }
 
 type CreateLoadBalancer struct {
-	LoadBalancerName   string
+	LoadBalancerName  string
 	AvailabilityZones []string
 	Scheme            string
 	Tags              []Tag
@@ -28,4 +28,14 @@ type Listener struct {
 	LoadBalancerPort string
 	Protocol         string
 	SSLCertificateId string
+}
+
+type Attachnodewithloadbalancer struct {
+	Instances        []string
+	LoadBalancerName string
+}
+
+type Detachnodewithloadbalancer struct {
+	Instances        []string
+	LoadBalancerName string
 }

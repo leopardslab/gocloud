@@ -2,7 +2,6 @@ package awsloadbalancer
 
 import (
 	"encoding/xml"
-	"fmt"
 	"github.com/scorelab/gocloud-v2/auth"
 	awsauth "github.com/scorelab/gocloud-v2/awsauth"
 	"io/ioutil"
@@ -33,7 +32,6 @@ func (awsloadbalancer *Awsloadbalancer) PrepareSignatureV2query(params map[strin
 
 	auth := map[string]string{"AccessKey": auth.Config.AWSAccessKeyID, "SecretKey": auth.Config.AWSSecretKey}
 
-	fmt.Println(req)
 	awsauth.SignatureV2(req, auth)
 
 	r, err := http.DefaultClient.Do(req)
@@ -43,8 +41,6 @@ func (awsloadbalancer *Awsloadbalancer) PrepareSignatureV2query(params map[strin
 	defer r.Body.Close()
 
 	resp, err := ioutil.ReadAll(r.Body)
-
-	fmt.Println(string(resp))
 
 	return xml.NewDecoder(r.Body).Decode(resp)
 }
@@ -90,7 +86,15 @@ func prepareListeners(params map[string]string, Listeners []Listener) {
 		params[prefix+".InstanceProtocol"] = Listeners[i].InstanceProtocol
 		params[prefix+".SSLCertificateId"] = Listeners[i].SSLCertificateId
 	}
+}
 
+func prepareInstances(params map[string]string, Instances []string) {
+
+	for i := range Instances {
+		n := strconv.Itoa(i + 1)
+		prefix := "Instances.member." + n
+		params[prefix+".InstanceId"] = Instances[i]
+	}
 }
 
 func makeParamsWithVersion(action string) map[string]string {

@@ -1,8 +1,5 @@
 package awsloadbalancer
 
-import(
-	"fmt"
-)
 func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	var options CreateLoadBalancer
@@ -16,7 +13,6 @@ func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (
 
 		case "LoadBalancerName":
 			LoadBalancerNameV, _ := value.(string)
-			fmt.Println(LoadBalancerNameV)
 			options.LoadBalancerName = LoadBalancerNameV
 
 		case "AvailabilityZones":
@@ -41,7 +37,7 @@ func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (
 				var listener Listener
 				listener.InstanceProtocol = Listenersparam[i]["InstanceProtocol"]
 				listener.InstancePort = Listenersparam[i]["InstancePort"]
-				listener.LoadBalancerPort  = Listenersparam[i]["LoadBalancerPort"]
+				listener.LoadBalancerPort = Listenersparam[i]["LoadBalancerPort"]
 				listener.Protocol = Listenersparam[i]["Protocol"]
 				listener.SSLCertificateId = Listenersparam[i]["SSLCertificateId"]
 				options.Listeners = append(options.Listeners, listener)
@@ -96,14 +92,68 @@ func (awsloadbalancer *Awsloadbalancer) Listloadbalancer(request interface{}) (r
 	return
 }
 
-func (awsloadbalancer *Awsloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+func (awsloadbalancer *Awsloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+	var options Attachnodewithloadbalancer
 
-return
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+
+		case "LoadBalancerName":
+			LoadBalancerNameV, _ := value.(string)
+			options.LoadBalancerName = LoadBalancerNameV
+
+		case "Instances":
+			InstancesV, _ := value.([]string)
+			options.Instances = InstancesV
+
+		}
+	}
+	params := makeParamsWithVersion("DeregisterInstancesFromLoadBalancer")
+
+	prepareInstances(params, options.Instances)
+
+	if options.LoadBalancerName != "" {
+		params["LoadBalancerName"] = options.LoadBalancerName
+	}
+
+	awsloadbalancer.PrepareSignatureV2query(params)
+	return
+	return
 }
 
+func (awsloadbalancer *Awsloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 
+	var options Attachnodewithloadbalancer
 
-func (awsloadbalancer *Awsloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
 
-return
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+
+		case "LoadBalancerName":
+			LoadBalancerNameV, _ := value.(string)
+			options.LoadBalancerName = LoadBalancerNameV
+
+		case "Instances":
+			InstancesV, _ := value.([]string)
+			options.Instances = InstancesV
+
+		}
+	}
+	params := makeParamsWithVersion("RegisterInstancesWithLoadBalancer")
+
+	prepareInstances(params, options.Instances)
+
+	if options.LoadBalancerName != "" {
+		params["LoadBalancerName"] = options.LoadBalancerName
+	}
+
+	awsloadbalancer.PrepareSignatureV2query(params)
+	return
 }

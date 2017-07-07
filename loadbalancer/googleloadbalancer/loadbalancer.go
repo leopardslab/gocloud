@@ -15,12 +15,10 @@ func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface
 
 func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 
-return
+	return
 }
-
-
 
 func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 
-return
+	return
 }
