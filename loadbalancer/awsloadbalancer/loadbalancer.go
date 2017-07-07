@@ -1,7 +1,5 @@
 package awsloadbalancer
 
-
-
 func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	var options CreateLoadBalancer
@@ -17,9 +15,9 @@ func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (
 			NameV, _ := value.(string)
 			options.Name = NameV
 
-		case "IpAddressType":
-			IpAddressTypeV, _ := value.(string)
-			options.IpAddressType = IpAddressTypeV
+		case "AvailabilityZones":
+			AvailabilityZonesV, _ := value.([]string)
+			options.AvailabilityZones = AvailabilityZonesV
 
 		case "Scheme":
 			SchemeV, _ := value.(string)
@@ -33,23 +31,33 @@ func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (
 			SecurityGroupsV, _ := value.([]string)
 			options.SecurityGroups = SecurityGroupsV
 
+		case "Listeners":
+			Listenersparam, _ := value.([]map[string]string)
+			for i := 0; i < len(Listenersparam); i++ {
+				var listener Listener
+				listener.InstanceProtocol = Listenersparam[i]["InstanceProtocol"]
+				listener.InstancePort = Listenersparam[i]["InstancePort"]
+				listener.LoadBalancerPort  = Listenersparam[i]["LoadBalancerPort"]
+				listener.Protocol = Listenersparam[i]["Protocol"]
+				listener.SSLCertificateId = Listenersparam[i]["SSLCertificateId"]
+				options.Listeners = append(options.Listeners, listener)
+			}
 		}
 	}
 
 	params := makeParamsWithVersion("CreateLoadBalancer")
 
+	prepareListeners(params, options.Listeners)
+
 	prepareSubnets(params, options.Subnets)
 
 	prepareSecurityGroups(params, options.SecurityGroups)
 
+	prepareAvailabilityZones(params, options.AvailabilityZones)
+
 	if options.Name != "" {
 		params["Name"] = options.Name
 	}
-
-	if options.IpAddressType != "" {
-		params["IpAddressType"] = options.IpAddressType
-	}
-
 	if options.Scheme != "" {
 		params["Scheme"] = options.Scheme
 	}
@@ -58,7 +66,6 @@ func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (
 
 	return
 }
-
 
 func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
 
@@ -74,13 +81,13 @@ func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) 
 }
 
 func (awsloadbalancer *Awsloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
-  params := makeParamsWithVersion("DescribeLoadBalancers")
-  if(request!=nil){
-    param := request.(map[string]string)
-    if(params["LoadBalancerArn"] !=""){
-       params["LoadBalancerArn"] = param["LoadBalancerArn"]
-    }
-  }
-  awsloadbalancer.PrepareSignatureV2query(params)
+	params := makeParamsWithVersion("DescribeLoadBalancers")
+	if request != nil {
+		param := request.(map[string]string)
+		if params["LoadBalancerArn"] != "" {
+			params["LoadBalancerArn"] = param["LoadBalancerArn"]
+		}
+	}
+	awsloadbalancer.PrepareSignatureV2query(params)
 	return
 }

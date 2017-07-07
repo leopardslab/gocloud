@@ -48,6 +48,16 @@ func (awsloadbalancer *Awsloadbalancer) PrepareSignatureV2query(params map[strin
 	return xml.NewDecoder(r.Body).Decode(resp)
 }
 
+func prepareAvailabilityZones(params map[string]string, AvailabilityZones []string) {
+
+	for i := range AvailabilityZones {
+		n := strconv.Itoa(i + 1)
+		prefix := "AvailabilityZones.member." + n
+		params[prefix] = AvailabilityZones[i]
+	}
+
+}
+
 func prepareSubnets(params map[string]string, Subnets []string) {
 
 	for i := range Subnets {
@@ -64,6 +74,21 @@ func prepareSecurityGroups(params map[string]string, SecurityGroups []string) {
 		n := strconv.Itoa(i + 1)
 		prefix := "SecurityGroups.member." + n
 		params[prefix] = SecurityGroups[i]
+	}
+
+}
+
+func prepareListeners(params map[string]string, Listeners []Listener) {
+
+	for i := range Listeners {
+		n := strconv.Itoa(i + 1)
+		prefix := "Listeners.member." + n
+		params[prefix+"LoadBalancerPort"] = Listeners[i].LoadBalancerPort
+		params[prefix+"InstancePort"] = Listeners[i].InstancePort
+		params[prefix+"Protocol"] = Listeners[i].Protocol
+		params[prefix+"InstanceProtocol"] = Listeners[i].InstanceProtocol
+		params[prefix+"SSLCertificateId"] = Listeners[i].SSLCertificateId
+
 	}
 
 }
