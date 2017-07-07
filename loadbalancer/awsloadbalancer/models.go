@@ -8,7 +8,7 @@ type Awsloadbalancer struct {
 }
 
 type CreateLoadBalancer struct {
-	Name              string
+	LoadBalancerName   string
 	AvailabilityZones []string
 	Scheme            string
 	Tags              []Tag

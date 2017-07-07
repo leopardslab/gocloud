@@ -33,6 +33,7 @@ func (awsloadbalancer *Awsloadbalancer) PrepareSignatureV2query(params map[strin
 
 	auth := map[string]string{"AccessKey": auth.Config.AWSAccessKeyID, "SecretKey": auth.Config.AWSSecretKey}
 
+	fmt.Println(req)
 	awsauth.SignatureV2(req, auth)
 
 	r, err := http.DefaultClient.Do(req)
@@ -83,12 +84,11 @@ func prepareListeners(params map[string]string, Listeners []Listener) {
 	for i := range Listeners {
 		n := strconv.Itoa(i + 1)
 		prefix := "Listeners.member." + n
-		params[prefix+"LoadBalancerPort"] = Listeners[i].LoadBalancerPort
-		params[prefix+"InstancePort"] = Listeners[i].InstancePort
-		params[prefix+"Protocol"] = Listeners[i].Protocol
-		params[prefix+"InstanceProtocol"] = Listeners[i].InstanceProtocol
-		params[prefix+"SSLCertificateId"] = Listeners[i].SSLCertificateId
-
+		params[prefix+".LoadBalancerPort"] = Listeners[i].LoadBalancerPort
+		params[prefix+".InstancePort"] = Listeners[i].InstancePort
+		params[prefix+".Protocol"] = Listeners[i].Protocol
+		params[prefix+".InstanceProtocol"] = Listeners[i].InstanceProtocol
+		params[prefix+".SSLCertificateId"] = Listeners[i].SSLCertificateId
 	}
 
 }

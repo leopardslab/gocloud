@@ -1,5 +1,8 @@
 package awsloadbalancer
 
+import(
+	"fmt"
+)
 func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	var options CreateLoadBalancer
@@ -11,9 +14,10 @@ func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (
 	for key, value := range param {
 		switch key {
 
-		case "Name":
-			NameV, _ := value.(string)
-			options.Name = NameV
+		case "LoadBalancerName":
+			LoadBalancerNameV, _ := value.(string)
+			fmt.Println(LoadBalancerNameV)
+			options.LoadBalancerName = LoadBalancerNameV
 
 		case "AvailabilityZones":
 			AvailabilityZonesV, _ := value.([]string)
@@ -55,8 +59,8 @@ func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (
 
 	prepareAvailabilityZones(params, options.AvailabilityZones)
 
-	if options.Name != "" {
-		params["Name"] = options.Name
+	if options.LoadBalancerName != "" {
+		params["LoadBalancerName"] = options.LoadBalancerName
 	}
 	if options.Scheme != "" {
 		params["Scheme"] = options.Scheme
