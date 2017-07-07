@@ -8,7 +8,7 @@ const (
 type Awsloadbalancer struct {
 }
 
-//Creatloadbalancer struct represents attribute of Creatloadbalancer.
+//CreateLoadBalancer struct represents attribute of CreateLoadBalancer.
 type CreateLoadBalancer struct {
 	LoadBalancerName  string
 	AvailabilityZones []string
