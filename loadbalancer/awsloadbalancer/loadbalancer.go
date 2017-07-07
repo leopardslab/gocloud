@@ -77,7 +77,7 @@ func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) 
 
 	params := makeParamsWithVersion("DeleteLoadBalancer")
 
-	params["LoadBalancerArn"] = param["LoadBalancerArn"]
+	params["LoadBalancerName"] = param["LoadBalancerName"]
 
 	awsloadbalancer.PrepareSignatureV2query(params)
 
