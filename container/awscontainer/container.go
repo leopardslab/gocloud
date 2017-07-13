@@ -29,7 +29,11 @@ func (ecscontainer *Ecscontainer) Creatcontainer(request interface{}) (resp inte
 	}
 	params := make(map[string]string)
 	prepreCreatcontainerparams(params, clusterName, Region)
-	ecscontainer.PrepareSignatureV4query(params)
+//addprepareCreatcontainerjson
+	Creatcontainerjsonmap := map[string]interface{}{
+		"clusterName": params["clusterName"],
+	}
+	ecscontainer.PrepareSignatureV4query(params,Creatcontainerjsonmap)
 	return
 }
 
@@ -43,7 +47,7 @@ func prepreCreatcontainerparams(params map[string]string, clusterName string, Re
 	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.CreateCluster"
 }
 
-func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]string) {
+func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]string, paramsmap map[string]interface{}) {
 
 	ECSEndpoint := "https://ecs." + params["Region"] + ".amazonaws.com"
 	service := "ecs"
@@ -53,20 +57,16 @@ func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]stri
 	signedheaders := "content-type;host;x-amz-date;x-amz-target"
 	amztarget := params["amztarget"]
 
-	Creatcontainerjsonmap := map[string]interface{}{
-		"clusterName": params["clusterName"],
-	}
-
-	Creatcontainerjson, _ := json.Marshal(Creatcontainerjsonmap)
-	Creatcontainerstring := string(Creatcontainerjson)
-	var Creatcontainerstringbyte = []byte(Creatcontainerstring)
+	requestparametersjson, _ := json.Marshal(paramsmap)
+	requestparametersjsonstring := string(requestparametersjson)
+	requestparametersjsonstringbyte := []byte(requestparametersjsonstring)
 
 	client := new(http.Client)
-	Creatcontainerrequest, _ := http.NewRequest("POST", ECSEndpoint, bytes.NewBuffer(Creatcontainerstringbyte))
-	request := awsauth.SignatureV4(Creatcontainerrequest, Creatcontainerstringbyte, amztarget, method, params["Region"], service, host, ContentType, signedheaders)
-	Creatcontainerresp, _ := client.Do(request)
-	defer Creatcontainerresp.Body.Close()
-	fmt.Println(Creatcontainerresp.Status)
-	body, _ := ioutil.ReadAll(Creatcontainerresp.Body)
-	fmt.Println("Creatcontainerresp Body:", string(body))
+	request, _ := http.NewRequest("POST", ECSEndpoint, bytes.NewBuffer(requestparametersjsonstringbyte))
+	request = awsauth.SignatureV4(request, requestparametersjsonstringbyte, amztarget, method, params["Region"], service, host, ContentType, signedheaders)
+	resp, _ := client.Do(request)
+	defer resp.Body.Close()
+	fmt.Println(resp.Status)
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("resp Body:", string(body))
 }

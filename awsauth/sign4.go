@@ -12,19 +12,6 @@ import (
 
 func SignatureV4(request *http.Request, request_parameters []byte, amztarget string, method string, region string, service string, host string, ContentType string, signedheaders string) (signrequest *http.Request) {
 
-	fmt.Println("request_parameters", request_parameters)
-
-	fmt.Println("amztarget", amztarget)
-
-	fmt.Println("method", method)
-
-	fmt.Println("service", service)
-
-	fmt.Println("region", region)
-	fmt.Println("host", host)
-	fmt.Println("ContentType", ContentType)
-	fmt.Println("signedheaders", signedheaders)
-
 	AccessKeyID := auth.Config.AWSAccessKeyID
 
 	SecretAccessKey := auth.Config.AWSSecretKey
@@ -59,8 +46,6 @@ func SignatureV4(request *http.Request, request_parameters []byte, amztarget str
 	signature := hmacsignatureV4(kSigning, string_to_sign)
 
 	authorization_header := algorithm + " " + "Credential=" + AccessKeyID + "/" + credential_scope + ", " + "SignedHeaders=" + signedheaders + ", " + "Signature=" + signature
-
-	fmt.Println("authorization_header:", authorization_header)
 
 	request.Header.Set("Content-Type", ContentType)
 
