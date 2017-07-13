@@ -26,6 +26,7 @@ type Gocloud interface {
 	Listloadbalancer(request interface{}) (resp interface{}, err error)
 	Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
 	Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
+	Creatcontainer(request interface{}) (resp interface{}, err error)
 }
 
 const (

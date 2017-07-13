@@ -1,9 +1,9 @@
 package googlecontainer
 
-type Awscontainer struct {
+type Googlecontainer struct {
 }
 
-func (awscontainer *Awscontainer) Creatcontainer(request interface{}) (resp interface{}, err error) {
+func (googlecontainer *Googlecontainer) Creatcontainer(request interface{}) (resp interface{}, err error) {
 
 	return
 }
