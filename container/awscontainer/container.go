@@ -10,7 +10,68 @@ import (
 )
 
 type Ecscontainer struct {
+
 }
+
+type Createservice struct{
+    ServiceName string
+		TaskDefinition string
+		DesiredCount int
+}
+
+func (ecscontainer *Ecscontainer) Createservice(request interface{}) (resp interface{}, err error) {
+	param := request.(map[string]interface{})
+	var createservice Createservice;
+	var  Region string
+	for key, value := range param {
+		switch key {
+		case "serviceName":
+			serviceNameV, _ := value.(string)
+			createservice.ServiceName = serviceNameV
+
+		case "Region":
+			RegionV, _ := value.(string)
+			Region = RegionV
+
+		case "taskDefinition":
+			TaskDefinitionV, _ := value.(string)
+			createservice.TaskDefinition = TaskDefinitionV
+
+		case "desiredCount":
+			desiredCountV, _ := value.(int)
+			createservice.DesiredCount = desiredCountV
+		}
+
+	}
+	params := make(map[string]string)
+	preparecreateServiceparams(params,createservice,Region)
+	Createservicejsonmap := make(map[string]interface{})
+	preparecreateServicparamsdict(Createservicejsonmap,createservice)
+	ecscontainer.PrepareSignatureV4query(params, Createservicejsonmap)
+	return
+}
+
+
+func preparecreateServiceparams(params map[string]string, createservice Createservice, Region string) {
+	if Region != "" {
+		params["Region"] = Region
+	}
+	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.CreateService"
+}
+
+
+func preparecreateServicparamsdict(params map[string]interface{}, createservice Createservice) {
+	if createservice.ServiceName != "" {
+		params["serviceName"] = createservice.ServiceName
+	}
+	if createservice.TaskDefinition != "" {
+		params["taskDefinition"] = createservice.TaskDefinition
+	}
+	if createservice.DesiredCount != 0 {
+		params["desiredCount"] = createservice.DesiredCount
+	}
+}
+
 
 func (ecscontainer *Ecscontainer) Createcontainer(request interface{}) (resp interface{}, err error) {
 

@@ -28,6 +28,7 @@ type Gocloud interface {
 	Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
 	Createcontainer(request interface{}) (resp interface{}, err error)
 	Deletecontainer(request interface{}) (resp interface{}, err error)
+	Createservice(request interface{}) (resp interface{}, err error)
 }
 
 const (
