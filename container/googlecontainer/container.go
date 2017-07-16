@@ -16,3 +16,7 @@ func (googlecontainer *Googlecontainer) Deletecontainer(request interface{}) (re
 func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp interface{}, err error) {
 	return
 }
+
+func (googlecontainer *Googlecontainer) Runtask(request interface{}) (resp interface{}, err error) {
+	return
+}

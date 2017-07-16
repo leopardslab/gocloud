@@ -47,6 +47,235 @@ type DeploymentConfiguration struct {
 	MinimumHealthyPercent int
 }
 
+type Runtask struct {
+	PlacementConstraints []Placementconstraint
+	PlacementStrategys   []Placementstrategy
+	Cluster              string
+	Count                int
+	Group                string
+	StartedBy            string
+	TaskDefinition       string
+	overrides            override
+}
+
+type override struct {
+	ContainerOverrides []ContainerOverride
+	TaskRoleArn        string
+}
+
+type ContainerOverride struct {
+	Name              string
+	MemoryReservation string
+	Memory            int
+	Cpu               int
+	Command           []string
+	Environments      []Environment
+}
+
+type Environment struct {
+	Name  string
+	Value string
+}
+
+func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}, err error) {
+	param := request.(map[string]interface{})
+	var runtask Runtask
+	var Region string
+	for key, value := range param {
+		switch key {
+		case "cluster":
+			clusterV, _ := value.(string)
+			runtask.Cluster = clusterV
+
+		case "Region":
+			RegionV, _ := value.(string)
+			Region = RegionV
+
+		case "count":
+			CountV, _ := value.(int)
+			runtask.Count = CountV
+
+		case "group":
+			GroupV, _ := value.(string)
+			runtask.Group = GroupV
+
+		case "startedBy":
+			StartedByV, _ := value.(string)
+			runtask.StartedBy = StartedByV
+
+		case "TaskDefinition":
+			TaskDefinitionV, _ := value.(string)
+			runtask.TaskDefinition = TaskDefinitionV
+
+		case "placementConstraints":
+			placementconstraintsparam, _ := value.([]map[string]interface{})
+			for i := 0; i < len(placementconstraintsparam); i++ {
+				var placementconstraint Placementconstraint
+				for placementConstraintsparamkey, placementConstraintsparamvalue := range placementconstraintsparam[i] {
+					switch placementConstraintsparamkey {
+					case "Expression":
+						placementconstraint.Expression = placementConstraintsparamvalue.(string)
+					case "Type":
+						placementconstraint.Type = placementConstraintsparamvalue.(string)
+					}
+				}
+				runtask.PlacementConstraints = append(runtask.PlacementConstraints, placementconstraint)
+			}
+
+		case "placementStrategy":
+			placementstrategyparam, _ := value.([]map[string]interface{})
+			for i := 0; i < len(placementstrategyparam); i++ {
+				var placementstrategy Placementstrategy
+				for placementstrategyparamkey, placementstrategyparamvalue := range placementstrategyparam[i] {
+					switch placementstrategyparamkey {
+					case "field":
+						placementstrategy.Field = placementstrategyparamvalue.(string)
+					case "Type":
+						placementstrategy.Type = placementstrategyparamvalue.(string)
+					}
+				}
+				runtask.PlacementStrategys = append(runtask.PlacementStrategys, placementstrategy)
+			}
+
+		case "overrides":
+			overridesparam, _ := value.(map[string]interface{})
+			fmt.Println(overridesparam)
+			for overridesparamkey, overridesparamvalue := range overridesparam {
+				switch overridesparamkey {
+				case "TaskRoleArn":
+					runtask.overrides.TaskRoleArn = overridesparamvalue.(string)
+				case "containerOverrides":
+					containerOverridesparam, _ := overridesparamvalue.([]map[string]interface{})
+					for i := 0; i < len(containerOverridesparam); i++ {
+						var containerOverride ContainerOverride
+						for containerOverrideparamkey, containerOverrideparamvalue := range containerOverridesparam[i] {
+							switch containerOverrideparamkey {
+							case "name":
+								containerOverride.Name = containerOverrideparamvalue.(string)
+
+							case "memoryReservation":
+								containerOverride.MemoryReservation = containerOverrideparamvalue.(string)
+
+							case "memory":
+								containerOverride.Memory = containerOverrideparamvalue.(int)
+
+							case "cpu":
+								containerOverride.Cpu = containerOverrideparamvalue.(int)
+
+							case "command":
+								containerOverride.Command = containerOverrideparamvalue.([]string)
+
+							case "environment":
+								Environmentsparam := containerOverrideparamvalue.([]map[string]string)
+								fmt.Println(Environmentsparam)
+								for i := 0; i < len(Environmentsparam); i++ {
+									var environment Environment
+									for environmentsparamkey, environmentsparamvalue := range Environmentsparam[i] {
+										//fmt.Println(environmentsparamkey,environmentsparamvalue)
+										switch environmentsparamkey {
+										case "name":
+											fmt.Printf("%T",environmentsparamvalue)
+											environment.Name = environmentsparamvalue
+										case "value":
+											environment.Value = environmentsparamvalue
+											fmt.Println(environmentsparamvalue)
+										}
+									}
+									containerOverride.Environments = append(containerOverride.Environments, environment)
+								}
+									fmt.Println(containerOverride.Environments)
+							}
+						}
+						runtask.overrides.ContainerOverrides = append(runtask.overrides.ContainerOverrides, containerOverride)
+					}
+				}
+			}
+		}
+	}
+	params := make(map[string]string)
+	prepareruntaskparams(params, runtask, Region)
+	//runtaskjsonmap := make(map[string]interface{})
+	//prepareruntaskparamsdict(runtaskjsonmap, runtask)
+	//ecscontainer.PrepareSignatureV4query(params, runtaskjsonmap)
+	return
+}
+
+func prepareruntaskparamsdict(runtaskjsonmap map[string]interface{}, runtask Runtask) {
+	if runtask.Cluster != "" {
+		runtaskjsonmap["cluster"] = runtask.Cluster
+	}
+	if runtask.TaskDefinition != "" {
+		runtaskjsonmap["taskDefinition"] = runtask.TaskDefinition
+	}
+	if runtask.Count != 0 {
+		runtaskjsonmap["count"] = runtask.Count
+	}
+
+	if runtask.Group != "" {
+		runtaskjsonmap["group"] = runtask.Group
+	}
+	if runtask.StartedBy != "" {
+		runtaskjsonmap["startedBy"] = runtask.StartedBy
+	}
+
+	prepareruntaskoverridesparams(runtaskjsonmap, runtask)
+	prepareruntaskplacementConstraintsparams(runtaskjsonmap, runtask)
+	prepareruntaskplacementStrategyparams(runtaskjsonmap, runtask)
+}
+
+func prepareruntaskoverridesparams(runtaskjsonmap map[string]interface{}, runtask Runtask) {
+
+}
+
+func prepareruntaskparams(params map[string]string, runtask Runtask, Region string) {
+	if Region != "" {
+		params["Region"] = Region
+	}
+	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.RunTask"
+}
+
+func prepareruntaskplacementStrategyparams(Createservicejsonmap map[string]interface{}, runtask Runtask) {
+	if len(runtask.PlacementStrategys) != 0 {
+		placementstrategys := make([]map[string]interface{}, 0)
+		for i := 0; i < len(runtask.PlacementStrategys); i++ {
+			placementstrategy := make(map[string]interface{})
+
+			if runtask.PlacementStrategys[i].Field != "" {
+				placementstrategy["field"] = runtask.PlacementStrategys[i].Field
+			}
+
+			if runtask.PlacementStrategys[i].Type != "" {
+				placementstrategy["type"] = runtask.PlacementStrategys[i].Type
+			}
+
+			placementstrategys = append(placementstrategys, placementstrategy)
+		}
+
+		Createservicejsonmap["placementstrategy"] = placementstrategys
+	}
+}
+
+func prepareruntaskplacementConstraintsparams(runtaskjsonmap map[string]interface{}, runtask Runtask) {
+	if len(runtask.PlacementConstraints) != 0 {
+		placementConstraints := make([]map[string]interface{}, 0)
+		for i := 0; i < len(runtask.PlacementConstraints); i++ {
+			PlacementConstraint := make(map[string]interface{})
+
+			if runtask.PlacementConstraints[i].Expression != "" {
+				PlacementConstraint["expression"] = runtask.PlacementConstraints[i].Expression
+			}
+
+			if runtask.PlacementConstraints[i].Type != "" {
+				PlacementConstraint["type"] = runtask.PlacementConstraints[i].Type
+			}
+
+			placementConstraints = append(placementConstraints, PlacementConstraint)
+		}
+
+		runtaskjsonmap["placementConstraints"] = placementConstraints
+	}
+}
+
 func (ecscontainer *Ecscontainer) Createservice(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
 	var createservice Createservice
@@ -134,6 +363,7 @@ func (ecscontainer *Ecscontainer) Createservice(request interface{}) (resp inter
 				}
 				createservice.PlacementStrategys = append(createservice.PlacementStrategys, placementstrategy)
 			}
+
 		}
 	}
 	params := make(map[string]string)
