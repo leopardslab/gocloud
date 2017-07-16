@@ -58,6 +58,17 @@ type Runtask struct {
 	overrides            override
 }
 
+
+type Starttask struct {
+	Cluster              string
+	ContainerInstances []string
+	Group                string
+	StartedBy            string
+	TaskDefinition       string
+	overrides            override
+}
+
+
 type override struct {
 	ContainerOverrides []ContainerOverride
 	TaskRoleArn        string
@@ -76,6 +87,174 @@ type Environment struct {
 	Name  string
 	Value string
 }
+
+
+
+func (ecscontainer *Ecscontainer) Starttask(request interface{}) (resp interface{}, err error) {
+	param := request.(map[string]interface{})
+	var starttask Starttask
+	var Region string
+	for key, value := range param {
+		switch key {
+		case "cluster":
+			clusterV, _ := value.(string)
+			starttask.Cluster = clusterV
+
+		case "Region":
+			RegionV, _ := value.(string)
+			Region = RegionV
+
+		case "containerInstances":
+			ContainerInstancesV, _ := value.([]string)
+			starttask.ContainerInstances = ContainerInstancesV
+
+		case "group":
+			GroupV, _ := value.(string)
+			starttask.Group = GroupV
+
+		case "startedBy":
+			StartedByV, _ := value.(string)
+			starttask.StartedBy = StartedByV
+
+		case "taskDefinition":
+			TaskDefinitionV, _ := value.(string)
+			starttask.TaskDefinition = TaskDefinitionV
+
+
+		case "overrides":
+			overridesparam, _ := value.(map[string]interface{})
+			for overridesparamkey, overridesparamvalue := range overridesparam {
+				switch overridesparamkey {
+				case "taskRoleArn":
+					starttask.overrides.TaskRoleArn = overridesparamvalue.(string)
+				case "containerOverrides":
+					containerOverridesparam, _ := overridesparamvalue.([]map[string]interface{})
+					for i := 0; i < len(containerOverridesparam); i++ {
+						var containerOverride ContainerOverride
+						for containerOverrideparamkey, containerOverrideparamvalue := range containerOverridesparam[i] {
+							switch containerOverrideparamkey {
+							case "name":
+								containerOverride.Name = containerOverrideparamvalue.(string)
+
+							case "memoryReservation":
+								containerOverride.MemoryReservation = containerOverrideparamvalue.(string)
+
+							case "memory":
+								containerOverride.Memory = containerOverrideparamvalue.(int)
+
+							case "cpu":
+								containerOverride.Cpu = containerOverrideparamvalue.(int)
+
+							case "command":
+								containerOverride.Command = containerOverrideparamvalue.([]string)
+
+							case "environment":
+								Environmentsparam := containerOverrideparamvalue.([]map[string]string)
+								for i := 0; i < len(Environmentsparam); i++ {
+									var environment Environment
+									for environmentsparamkey, environmentsparamvalue := range Environmentsparam[i] {
+										switch environmentsparamkey {
+										case "name":
+											environment.Name = environmentsparamvalue
+										case "value":
+											environment.Value = environmentsparamvalue
+										}
+									}
+									containerOverride.Environments = append(containerOverride.Environments, environment)
+								}
+							}
+						}
+						starttask.overrides.ContainerOverrides = append(starttask.overrides.ContainerOverrides, containerOverride)
+					}
+				}
+			}
+		}
+	}
+	params := make(map[string]string)
+	preparestarttaskparams(params, starttask, Region)
+	starttaskjsonmap := make(map[string]interface{})
+	preparestarttaskparamsdict(starttaskjsonmap, starttask)
+  ecscontainer.PrepareSignatureV4query(params, starttaskjsonmap)
+	return
+}
+
+func preparestarttaskparams(params map[string]string, starttask Starttask, Region string) {
+	if Region != "" {
+		params["Region"] = Region
+	}
+	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.StartTask"
+}
+
+
+func preparestarttaskparamsdict(starttaskjsonmap map[string]interface{}, starttask Starttask) {
+	if starttask.Cluster != "" {
+		starttaskjsonmap["cluster"] = starttask.Cluster
+	}
+	if starttask.TaskDefinition != "" {
+		starttaskjsonmap["taskDefinition"] = starttask.TaskDefinition
+	}
+	if len(starttask.ContainerInstances) != 0 {
+		starttaskjsonmap["containerInstances"] = starttask.ContainerInstances
+	}
+
+	if starttask.Group != "" {
+		starttaskjsonmap["group"] = starttask.Group
+	}
+	if starttask.StartedBy != "" {
+		starttaskjsonmap["startedBy"] = starttask.StartedBy
+	}
+
+	preparestarttaskoverridesparams(starttaskjsonmap, starttask)
+}
+
+
+func preparestarttaskoverridesparams(starttaskjsonmap map[string]interface{}, starttask Starttask) {
+	overrides := make(map[string]interface{})
+	if starttask.overrides.TaskRoleArn != "" {
+		overrides["taskRoleArn"] = starttask.overrides.TaskRoleArn
+	}
+	if len(starttask.overrides.ContainerOverrides) != 0 {
+		containerOverrides := make([]map[string]interface{}, 0)
+		for i := 0; i < len(starttask.overrides.ContainerOverrides); i++ {
+			containerOverride := make(map[string]interface{})
+			if starttask.overrides.ContainerOverrides[i].Name != "" {
+				containerOverride["name"] = starttask.overrides.ContainerOverrides[i].Name
+			}
+			if starttask.overrides.ContainerOverrides[i].MemoryReservation != "" {
+				containerOverride["memoryReservation"] = starttask.overrides.ContainerOverrides[i].MemoryReservation
+			}
+			if starttask.overrides.ContainerOverrides[i].Memory != 0 {
+				containerOverride["memory"] = starttask.overrides.ContainerOverrides[i].Memory
+			}
+			if starttask.overrides.ContainerOverrides[i].Cpu != 0 {
+				containerOverride["cpu"] = starttask.overrides.ContainerOverrides[i].Cpu
+			}
+			if len(starttask.overrides.ContainerOverrides[i].Command) != 0 {
+				containerOverride["command"] = starttask.overrides.ContainerOverrides[i].Command
+			}
+
+			if len(starttask.overrides.ContainerOverrides[i].Environments) != 0 {
+				containerOverride["environment"] = starttask.overrides.ContainerOverrides[i].Environments
+			}
+			containerOverrides = append(containerOverrides, containerOverride)
+		}
+		overrides["containerOverrides"] = containerOverrides
+	}
+	if len(overrides) != 0 {
+		starttaskjsonmap["overrides"] = overrides
+}
+	fmt.Println(starttaskjsonmap)
+}
+
+
+
+
+
+
+
+
+
+
 
 func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
