@@ -103,7 +103,7 @@ func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}
 			StartedByV, _ := value.(string)
 			runtask.StartedBy = StartedByV
 
-		case "TaskDefinition":
+		case "taskDefinition":
 			TaskDefinitionV, _ := value.(string)
 			runtask.TaskDefinition = TaskDefinitionV
 
@@ -142,7 +142,7 @@ func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}
 			fmt.Println(overridesparam)
 			for overridesparamkey, overridesparamvalue := range overridesparam {
 				switch overridesparamkey {
-				case "TaskRoleArn":
+				case "taskRoleArn":
 					runtask.overrides.TaskRoleArn = overridesparamvalue.(string)
 				case "containerOverrides":
 					containerOverridesparam, _ := overridesparamvalue.([]map[string]interface{})
@@ -167,23 +167,18 @@ func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}
 
 							case "environment":
 								Environmentsparam := containerOverrideparamvalue.([]map[string]string)
-								fmt.Println(Environmentsparam)
 								for i := 0; i < len(Environmentsparam); i++ {
 									var environment Environment
 									for environmentsparamkey, environmentsparamvalue := range Environmentsparam[i] {
-										//fmt.Println(environmentsparamkey,environmentsparamvalue)
 										switch environmentsparamkey {
 										case "name":
-											fmt.Printf("%T",environmentsparamvalue)
 											environment.Name = environmentsparamvalue
 										case "value":
 											environment.Value = environmentsparamvalue
-											fmt.Println(environmentsparamvalue)
 										}
 									}
 									containerOverride.Environments = append(containerOverride.Environments, environment)
 								}
-									fmt.Println(containerOverride.Environments)
 							}
 						}
 						runtask.overrides.ContainerOverrides = append(runtask.overrides.ContainerOverrides, containerOverride)
@@ -194,9 +189,9 @@ func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}
 	}
 	params := make(map[string]string)
 	prepareruntaskparams(params, runtask, Region)
-	//runtaskjsonmap := make(map[string]interface{})
-	//prepareruntaskparamsdict(runtaskjsonmap, runtask)
-	//ecscontainer.PrepareSignatureV4query(params, runtaskjsonmap)
+	runtaskjsonmap := make(map[string]interface{})
+	prepareruntaskparamsdict(runtaskjsonmap, runtask)
+	ecscontainer.PrepareSignatureV4query(params, runtaskjsonmap)
 	return
 }
 
@@ -224,7 +219,41 @@ func prepareruntaskparamsdict(runtaskjsonmap map[string]interface{}, runtask Run
 }
 
 func prepareruntaskoverridesparams(runtaskjsonmap map[string]interface{}, runtask Runtask) {
+	overrides := make(map[string]interface{})
+	if runtask.overrides.TaskRoleArn != "" {
+		overrides["taskRoleArn"] = runtask.overrides.TaskRoleArn
+	}
+	if len(runtask.overrides.ContainerOverrides) != 0 {
+		containerOverrides := make([]map[string]interface{}, 0)
+		for i := 0; i < len(runtask.overrides.ContainerOverrides); i++ {
+			containerOverride := make(map[string]interface{})
+			if runtask.overrides.ContainerOverrides[i].Name != "" {
+				containerOverride["name"] = runtask.overrides.ContainerOverrides[i].Name
+			}
+			if runtask.overrides.ContainerOverrides[i].MemoryReservation != "" {
+				containerOverride["memoryReservation"] = runtask.overrides.ContainerOverrides[i].MemoryReservation
+			}
+			if runtask.overrides.ContainerOverrides[i].Memory != 0 {
+				containerOverride["memory"] = runtask.overrides.ContainerOverrides[i].Memory
+			}
+			if runtask.overrides.ContainerOverrides[i].Cpu != 0 {
+				containerOverride["cpu"] = runtask.overrides.ContainerOverrides[i].Cpu
+			}
+			if len(runtask.overrides.ContainerOverrides[i].Command) != 0 {
+				containerOverride["command"] = runtask.overrides.ContainerOverrides[i].Command
+			}
 
+			if len(runtask.overrides.ContainerOverrides[i].Environments) != 0 {
+				containerOverride["environment"] = runtask.overrides.ContainerOverrides[i].Environments
+			}
+			containerOverrides = append(containerOverrides, containerOverride)
+		}
+		overrides["containerOverrides"] = containerOverrides
+	}
+	if len(overrides) != 0 {
+		runtaskjsonmap["overrides"] = overrides
+}
+	fmt.Println(runtaskjsonmap)
 }
 
 func prepareruntaskparams(params map[string]string, runtask Runtask, Region string) {
