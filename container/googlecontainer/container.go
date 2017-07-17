@@ -13,13 +13,18 @@ type Googlecontainer struct {
 }
 
 type Createcluster struct {
-	Name                  string `json:"name"`
-	Zone                  string `json:"zone"`
-	Network               string `json:"network"`
-	LoggingService        string `json:"loggingService"`
-	MonitoringService     string `json:"monitoringService"`
-	InitialClusterVersion string `json:"initialClusterVersion"`
-	Subnetwork            string `json:"subnetwork"`
+	Name                  string     `json:"name"`
+	Zone                  string     `json:"zone"`
+	Network               string     `json:"network"`
+	LoggingService        string     `json:"loggingService"`
+	MonitoringService     string     `json:"monitoringService"`
+	InitialClusterVersion string     `json:"initialClusterVersion"`
+	Subnetwork            string     `json:"subnetwork"`
+	LegacyAbac            legacyAbac `json:"legacyAbac"`
+}
+
+type legacyAbac struct {
+	Enabled bool `json:"enabled"`
 }
 
 /*
