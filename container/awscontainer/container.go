@@ -58,16 +58,14 @@ type Runtask struct {
 	overrides            override
 }
 
-
 type Starttask struct {
-	Cluster              string
+	Cluster            string
 	ContainerInstances []string
-	Group                string
-	StartedBy            string
-	TaskDefinition       string
-	overrides            override
+	Group              string
+	StartedBy          string
+	TaskDefinition     string
+	overrides          override
 }
-
 
 type override struct {
 	ContainerOverrides []ContainerOverride
@@ -88,7 +86,113 @@ type Environment struct {
 	Value string
 }
 
+type Deleteservice struct {
+	Cluster string
+	Service string
+}
 
+type Stoptask struct {
+	Cluster string
+	Reason  string
+	Task    string
+}
+
+func (ecscontainer *Ecscontainer) Stoptask(request interface{}) (resp interface{}, err error) {
+
+	param := request.(map[string]interface{})
+	var Region string
+	var stoptask Stoptask
+	for key, value := range param {
+		switch key {
+		case "cluster":
+			clusterV, _ := value.(string)
+			stoptask.Cluster = clusterV
+
+		case "Region":
+			RegionV, _ := value.(string)
+			Region = RegionV
+
+		case "reason":
+			ReasonV, _ := value.(string)
+			stoptask.Reason = ReasonV
+
+		case "task":
+			taskV, _ := value.(string)
+			stoptask.Task = taskV
+		}
+	}
+	params := make(map[string]string)
+	preparestoptaskparams(params, stoptask, Region)
+	stoptaskjsonmap := make(map[string]interface{})
+	preparestoptaskparamsdict(stoptaskjsonmap, stoptask)
+	ecscontainer.PrepareSignatureV4query(params, stoptaskjsonmap)
+	return
+}
+
+func preparestoptaskparamsdict(stoptaskjsonmap map[string]interface{}, stoptask Stoptask) {
+	if stoptask.Cluster != "" {
+		stoptaskjsonmap["cluster"] = stoptask.Cluster
+	}
+
+	if stoptask.Reason != "" {
+		stoptaskjsonmap["reason"] = stoptask.Reason
+	}
+
+	if stoptask.Task != "" {
+		stoptaskjsonmap["task"] = stoptask.Task
+	}
+}
+
+func preparestoptaskparams(params map[string]string, stoptask Stoptask, Region string) {
+	if Region != "" {
+		params["Region"] = Region
+	}
+	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.StopTask"
+}
+
+func (ecscontainer *Ecscontainer) Deleteservice(request interface{}) (resp interface{}, err error) {
+	param := request.(map[string]interface{})
+	var Region string
+	var deleteservice Deleteservice
+	for key, value := range param {
+		switch key {
+		case "cluster":
+			clusterV, _ := value.(string)
+			deleteservice.Cluster = clusterV
+
+		case "Region":
+			RegionV, _ := value.(string)
+			Region = RegionV
+
+		case "service":
+			serviceV, _ := value.(string)
+			deleteservice.Service = serviceV
+		}
+	}
+	params := make(map[string]string)
+	preparedeleteserviceparams(params, deleteservice, Region)
+	deleteServicejsonmap := make(map[string]interface{})
+	preparedeleteserviceparamsdict(deleteServicejsonmap, deleteservice)
+	ecscontainer.PrepareSignatureV4query(params, deleteServicejsonmap)
+	return
+
+}
+
+func preparedeleteserviceparams(params map[string]string, deleteservice Deleteservice, Region string) {
+	if Region != "" {
+		params["Region"] = Region
+	}
+	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.DeleteService"
+}
+
+func preparedeleteserviceparamsdict(deleteServicejsonmap map[string]interface{}, deleteservice Deleteservice) {
+	if deleteservice.Cluster != "" {
+		deleteServicejsonmap["cluster"] = deleteservice.Cluster
+	}
+	if deleteservice.Service != "" {
+		deleteServicejsonmap["service"] = deleteservice.Service
+	}
+}
 
 func (ecscontainer *Ecscontainer) Starttask(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
@@ -119,7 +223,6 @@ func (ecscontainer *Ecscontainer) Starttask(request interface{}) (resp interface
 		case "taskDefinition":
 			TaskDefinitionV, _ := value.(string)
 			starttask.TaskDefinition = TaskDefinitionV
-
 
 		case "overrides":
 			overridesparam, _ := value.(map[string]interface{})
@@ -174,7 +277,7 @@ func (ecscontainer *Ecscontainer) Starttask(request interface{}) (resp interface
 	preparestarttaskparams(params, starttask, Region)
 	starttaskjsonmap := make(map[string]interface{})
 	preparestarttaskparamsdict(starttaskjsonmap, starttask)
-  ecscontainer.PrepareSignatureV4query(params, starttaskjsonmap)
+	ecscontainer.PrepareSignatureV4query(params, starttaskjsonmap)
 	return
 }
 
@@ -184,7 +287,6 @@ func preparestarttaskparams(params map[string]string, starttask Starttask, Regio
 	}
 	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.StartTask"
 }
-
 
 func preparestarttaskparamsdict(starttaskjsonmap map[string]interface{}, starttask Starttask) {
 	if starttask.Cluster != "" {
@@ -206,7 +308,6 @@ func preparestarttaskparamsdict(starttaskjsonmap map[string]interface{}, startta
 
 	preparestarttaskoverridesparams(starttaskjsonmap, starttask)
 }
-
 
 func preparestarttaskoverridesparams(starttaskjsonmap map[string]interface{}, starttask Starttask) {
 	overrides := make(map[string]interface{})
@@ -242,19 +343,9 @@ func preparestarttaskoverridesparams(starttaskjsonmap map[string]interface{}, st
 	}
 	if len(overrides) != 0 {
 		starttaskjsonmap["overrides"] = overrides
-}
+	}
 	fmt.Println(starttaskjsonmap)
 }
-
-
-
-
-
-
-
-
-
-
 
 func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
@@ -431,7 +522,7 @@ func prepareruntaskoverridesparams(runtaskjsonmap map[string]interface{}, runtas
 	}
 	if len(overrides) != 0 {
 		runtaskjsonmap["overrides"] = overrides
-}
+	}
 	fmt.Println(runtaskjsonmap)
 }
 
