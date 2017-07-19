@@ -21,49 +21,55 @@ type Createcluster struct {
 	InitialClusterVersion string     `json:"initialClusterVersion"`
 	Subnetwork            string     `json:"subnetwork"`
 	LegacyAbac            legacyAbac `json:"legacyAbac"`
+	MasterAuth            masterAuth `json:"masterAuth"`
+	NodePools             nodePools  `json:"nodePools"`
 }
 
 type legacyAbac struct {
 	Enabled bool `json:"enabled"`
 }
 
-/*
-type Createcluster struct {
-	NodePools []struct {
-		Name string `json:"name"`
-		InitialNodeCount int `json:"initialNodeCount"`
-		Config struct {
-			MachineType string `json:"machineType"`
-			ImageType string `json:"imageType"`
-			DiskSizeGb int `json:"diskSizeGb"`
-			Preemptible bool `json:"preemptible"`
-			OauthScopes []string `json:"oauthScopes"`
-		} `json:"config"`
-		Autoscaling struct {
-			Enabled bool `json:"enabled"`
-		} `json:"autoscaling"`
-		Management struct {
-			AutoUpgrade bool `json:"autoUpgrade"`
-			AutoRepair bool `json:"autoRepair"`
-			UpgradeOptions struct {
-			} `json:"upgradeOptions"`
-		} `json:"management"`
-	} `json:"nodePools"`
-
-	MasterAuth struct {
-		Username string `json:"username"`
-		ClientCertificateConfig struct {
-			IssueClientCertificate bool `json:"issueClientCertificate"`
-		} `json:"clientCertificateConfig"`
-	} `json:"masterAuth"`
-
-	LegacyAbac struct {
-		Enabled bool `json:"enabled"`
-	} `json:"legacyAbac"`
-
+type masterAuth struct {
+	Username                string                  `json:"username"`
+	ClientCertificateConfig clientCertificateConfig `json:"clientCertificateConfig"`
 }
 
-*/
+type ClientCertificateConfig struct {
+	IssueClientCertificate bool `json:"issueClientCertificate"`
+}
+
+type LegacyAbac struct {
+	Enabled bool `json:"enabled"`
+}
+
+type config struct {
+	MachineType string   `json:"machineType"`
+	ImageType   string   `json:"imageType"`
+	DiskSizeGb  int      `json:"diskSizeGb"`
+	Preemptible bool     `json:"preemptible"`
+	OauthScopes []string `json:"oauthScopes"`
+}
+
+type autoscaling struct {
+	Enabled bool `json:"enabled"`
+}
+
+type upgradeOptions struct {
+}
+
+type management struct {
+	AutoUpgrade    bool           `json:"autoUpgrade"`
+	AutoRepair     bool           `json:"autoRepair"`
+	UpgradeOptions upgradeOptions `json:"upgradeOptions"`
+}
+
+type NodePools []struct {
+	Name             string      `json:"name"`
+	InitialNodeCount int         `json:"initialNodeCount"`
+	Config           config      `json:"config"`
+	Autoscaling      autoscaling `json:"autoscaling"`
+	Management       management  `json:"management"`
+}
 
 func (googlecontainer *Googlecontainer) Deletecontainer(request interface{}) (resp interface{}, err error) {
 
@@ -112,6 +118,25 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 		case "subnetwork":
 			SubnetworkV, _ := value.(string)
 			option.Subnetwork = SubnetworkV
+
+		case "masterAuth":
+			masterAuthV, _ := value.(map[string]interface{})
+			for key, value := range masterAuthV {
+				switch key {
+				case "username":
+					usernameV, _ := value.(string)
+					option.MasterAuth.Username = usernameV
+				case "clientCertificateConfig":
+					clientCertificateConfigV, _ := value.(map[string]interface{})
+					for key, value := range clientCertificateConfigV {
+						switch key {
+						case "issueClientCertificate":
+							issueClientCertificateV, _ := value.(bool)
+							option.ClientCertificateConfig.IssueClientCertificate = issueClientCertificateV
+						}
+					}
+				}
+			}
 		}
 	}
 
