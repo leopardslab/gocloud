@@ -13,16 +13,16 @@ type Googlecontainer struct {
 }
 
 type Createcluster struct {
-	Name                  string     `json:"name"`
-	Zone                  string     `json:"zone"`
-	Network               string     `json:"network"`
-	LoggingService        string     `json:"loggingService"`
-	MonitoringService     string     `json:"monitoringService"`
-	InitialClusterVersion string     `json:"initialClusterVersion"`
-	Subnetwork            string     `json:"subnetwork"`
-	LegacyAbac            legacyAbac `json:"legacyAbac"`
-	MasterAuth            masterAuth `json:"masterAuth"`
-	NodePools             nodePools  `json:"nodePools"`
+	Name                  string      `json:"name"`
+	Zone                  string      `json:"zone"`
+	Network               string      `json:"network"`
+	LoggingService        string      `json:"loggingService"`
+	MonitoringService     string      `json:"monitoringService"`
+	InitialClusterVersion string      `json:"initialClusterVersion"`
+	Subnetwork            string      `json:"subnetwork"`
+	LegacyAbac            legacyAbac  `json:"legacyAbac"`
+	MasterAuth            masterAuth  `json:"masterAuth"`
+	NodePools             []nodePools `json:"nodePools"`
 }
 
 type legacyAbac struct {
@@ -63,7 +63,7 @@ type management struct {
 	UpgradeOptions upgradeOptions `json:"upgradeOptions"`
 }
 
-type NodePools []struct {
+type NodePools struct {
 	Name             string      `json:"name"`
 	InitialNodeCount int         `json:"initialNodeCount"`
 	Config           config      `json:"config"`
@@ -72,6 +72,23 @@ type NodePools []struct {
 }
 
 func (googlecontainer *Googlecontainer) Deletecontainer(request interface{}) (resp interface{}, err error) {
+
+	options := request.(map[string]string)
+
+	url := "https://container.googleapis.com/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/clusters/" + options["clusterId"]
+
+	client := googleauth.SignJWT()
+
+	Deletecontainerrequest, err := http.NewRequest("DELETE", url, nil)
+	Deletecontainerrequest.Header.Set("Content-Type", "application/json")
+
+	Deletecontainerresp, err := client.Do(Deletecontainerrequest)
+
+	defer Deletecontainerresp.Body.Close()
+
+	body, err := ioutil.ReadAll(Deletecontainerresp.Body)
+
+	fmt.Println(string(body))
 
 	return
 }
@@ -137,6 +154,79 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 					}
 				}
 			}
+
+		case "nodePools":
+			nodePoolsV, _ := value.([]map[string]interface{})
+			for i := 0; i < len(nodePoolsV); i++ {
+				var nodePool NodePools
+				for key, value := range nodePoolsV[i] {
+					switch key {
+					case "name":
+						nameV, _ := value.(string)
+						nodePool.Name = nameV
+
+					case "initialNodeCount":
+						InitialNodeCountV, _ := value.(string)
+						nodePool.InitialNodeCount = InitialNodeCountV
+
+					case "config":
+						configV, _ := value.([]map[string]interface{})
+						for key, value := range configV {
+							switch key {
+							case "machineType":
+								machineTypeV, _ := value.(string)
+								nodePool.Config.MachineType = machineTypeV
+
+							case "imageType":
+								imageTypeV, _ := value.(string)
+								nodePool.Config.ImageType = imageTypeV
+
+							case "diskSizeGb":
+								DiskSizeGbV, _ := value.(int)
+								nodePool.Config.DiskSizeGb = DiskSizeGbV
+
+							case "preemptible":
+								preemptibleV, _ := value.(bool)
+								nodePool.Config.Preemptible = preemptibleV
+
+							case "oauthScopes":
+								oauthScopesV, _ := value.([]string)
+								nodePool.Config.oauthScopes = oauthScopesV
+							}
+						}
+
+					case "autoscaling":
+						autoscalingV, _ := value.(map[string]interface{})
+						for key, value := range autoscalingV {
+							switch key {
+							case "enabled":
+								enabledV, _ := value.(bool)
+								nodePool.autoscaling.Enabled = enabledV
+							}
+						}
+
+					case "management":
+
+						managementV, _ := value.(map[string]interface{})
+						for key, value := range managementV {
+							switch key {
+							case "autoUpgrade":
+								autoUpgradeV, _ := value.(bool)
+								nodePool.Management.AutoUpgrade = autoUpgradeV
+
+							case "AutoRepair":
+								autoRepairV, _ := value.(bool)
+								nodePool.Management.Enabled = autoRepairV
+
+							case "UpgradeOptions":
+							}
+						}
+
+					}
+				}
+				option.NodePools = append(option.NodePools, nodePool)
+			}
+
 		}
 	}
 
@@ -153,8 +243,7 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 
 	fmt.Println(Createclusterjsonstring)
 
-	//var Createclusterjsonstringbyte = []byte(Createclusterjsonstring)
-	var Createclusterjsonstringbyte = []byte(`{ "cluster": { "name": "cluster-1", "zone": "us-central1-a", "network": "default", "loggingService": "logging.googleapis.com", "monitoringService": "none", "nodePools": [ { "name": "default-pool", "initialNodeCount": 3, "config": { "machineType": "n1-standard-1", "imageType": "COS", "diskSizeGb": 100, "preemptible": false, "oauthScopes": [ "https://www.googleapis.com/auth/compute", "https://www.googleapis.com/auth/devstorage.read_only", "https://www.googleapis.com/auth/logging.write", "https://www.googleapis.com/auth/monitoring.write", "https://www.googleapis.com/auth/servicecontrol", "https://www.googleapis.com/auth/service.management.readonly", "https://www.googleapis.com/auth/trace.append" ] }, "autoscaling": { "enabled": false }, "management": { "autoUpgrade": false, "autoRepair": false, "upgradeOptions": {} } } ], "initialClusterVersion": "1.6.4", "masterAuth": { "username": "admin", "clientCertificateConfig": { "issueClientCertificate": true } }, "subnetwork": "default", "legacyAbac": { "enabled": true } } }`)
+	var Createclusterjsonstringbyte = []byte(Createclusterjsonstring)
 
 	url := "https://container.googleapis.com/v1/projects/" + Projectid + "/zones/" + Zone + "/clusters"
 
@@ -201,6 +290,51 @@ func Createclusterdictnoaryconvert(option Createcluster, Createclusterjsonmap ma
 
 }
 
+
+
+
+
+
+type nodepool struct {
+	NodePool struct {
+		Config struct {
+			MachineType string `json:"machineType"`
+			ImageType string `json:"imageType"`
+			OauthScopes []interface{} `json:"oauthScopes"`
+			Preemptible bool `json:"preemptible"`
+			Labels struct {
+			} `json:"labels"`
+			LocalSsdCount int `json:"localSsdCount"`
+			Metadata struct {
+			} `json:"metadata"`
+			DiskSizeGb int `json:"diskSizeGb"`
+			Tags []interface{} `json:"tags"`
+			ServiceAccount string `json:"serviceAccount"`
+		} `json:"config"`
+		Name string `json:"name"`
+		StatusMessage string `json:"statusMessage"`
+		Autoscaling struct {
+			MaxNodeCount int `json:"maxNodeCount"`
+			MinNodeCount int `json:"minNodeCount"`
+			Enabled bool `json:"enabled"`
+		} `json:"autoscaling"`
+		InitialNodeCount int `json:"initialNodeCount"`
+		Management struct {
+			AutoRepair bool `json:"autoRepair"`
+			AutoUpgrade bool `json:"autoUpgrade"`
+			UpgradeOptions struct {
+			} `json:"upgradeOptions"`
+		} `json:"management"`
+		SelfLink string `json:"selfLink"`
+		Version string `json:"version"`
+		InstanceGroupUrls []interface{} `json:"instanceGroupUrls"`
+		Status string `json:"status"`
+	} `json:"nodePool"`
+}
+
+
+
+
 func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp interface{}, err error) {
 	return
 }
@@ -216,160 +350,3 @@ func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp
 func (googlecontainer *Googlecontainer) Stoptask(request interface{}) (resp interface{}, err error) {
 	return
 }
-
-/*
-
-func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interface{}, err error) {
-
-	var option Creatdisk
-
-	var Projectid string
-
-	var Zone string
-
-	var Type string
-
-	param := request.(map[string]interface{})
-
-	for key, value := range param {
-		switch key {
-		case "projectid":
-			Projectid, _ = value.(string)
-
-		case "Name":
-			name, _ := value.(string)
-			option.Name = name
-
-		case "Zone":
-			ZoneV, _ := value.(string)
-			Zone = ZoneV
-
-		case "Type":
-			TypeV, _ := value.(string)
-			Type = TypeV
-
-		case "SizeGb":
-			SizeGbV, _ := value.(string)
-			option.SizeGb = SizeGbV
-
-		case "SourceImageEncryptionKeys":
-			SourceImageEncryptionKeysV, _ := value.(map[string]string)
-			option.SourceImageEncryptionKeys.RawKey = SourceImageEncryptionKeysV["RawKey"]
-			option.SourceImageEncryptionKeys.Sha256 = SourceImageEncryptionKeysV["Sha256"]
-
-		case "DiskEncryptionKeys":
-			DiskEncryptionKeysV, _ := value.(map[string]string)
-			option.DiskEncryptionKeys.RawKey = DiskEncryptionKeysV["RawKey"]
-			option.DiskEncryptionKeys.Sha256 = DiskEncryptionKeysV["Sha256"]
-
-		case "SourceSnapshotEncryptionKeys":
-			SourceSnapshotEncryptionKeysV, _ := value.(map[string]string)
-			option.SourceSnapshotEncryptionKeys.RawKey = SourceSnapshotEncryptionKeysV["RawKey"]
-			option.SourceSnapshotEncryptionKeys.Sha256 = SourceSnapshotEncryptionKeysV["Sha256"]
-
-		case "Licenses":
-			LicensesV, _ := value.([]string)
-			option.Licenses = LicensesV
-
-		case "Users":
-			UsersV, _ := value.([]string)
-			option.Users = UsersV
-
-		case "CreationTimestamp":
-			CreationTimestampV, _ := value.(string)
-			option.CreationTimestamp = CreationTimestampV
-
-		case "Description":
-			DescriptionV, _ := value.(string)
-			option.Description = DescriptionV
-
-		case "ID":
-			IDV, _ := value.(string)
-			option.ID = IDV
-
-		case "Kind":
-			KindV, _ := value.(string)
-			option.Kind = KindV
-
-		case "LabelFingerprint":
-			LabelFingerprintV, _ := value.(string)
-			option.LabelFingerprint = LabelFingerprintV
-
-		case "SourceSnapshotID":
-			SourceSnapshotIDV, _ := value.(string)
-			option.SourceSnapshotID = SourceSnapshotIDV
-
-		case "Status":
-			StatusV, _ := value.(string)
-			option.Status = StatusV
-
-		case "LastAttachTimestamp":
-			LastAttachTimestampV, _ := value.(string)
-			option.LastAttachTimestamp = LastAttachTimestampV
-
-		case "LastDetachTimestamp":
-			LastDetachTimestampV, _ := value.(string)
-			option.LastDetachTimestamp = LastDetachTimestampV
-
-		case "Options":
-			OptionsV, _ := value.(string)
-			option.Options = OptionsV
-
-		case "SelfLink":
-			SelfLinkV, _ := value.(string)
-			option.SelfLink = SelfLinkV
-
-		case "SourceImage":
-			SourceImage, _ := value.(string)
-			option.SourceImage = SourceImage
-
-		case "SourceImageID":
-			SourceImageIDV, _ := value.(string)
-			option.SourceImageID = SourceImageIDV
-
-		case "SourceSnapshot":
-			SourceSnapshotV, _ := value.(string)
-			option.SourceSnapshot = SourceSnapshotV
-
-		default:
-			fmt.Println("Incorrect Value")
-
-		}
-	}
-
-	zonevalue := "projects/" + Projectid + "/zones/" + Zone
-	option.Zone = zonevalue
-
-	Typevalue := "projects/" + Projectid + "/zones/" + Zone + "/diskTypes/" + Type
-	option.Type = Typevalue
-
-	Creatdiskjsonmap := make(map[string]interface{})
-
-	Creatediskdictnoaryconvert(option, Creatdiskjsonmap)
-
-	Creatdiskjson, _ := json.Marshal(Creatdiskjsonmap)
-
-	Creatdiskjsonstring := string(Creatdiskjson)
-
-	var Creatdiskjsonstringbyte = []byte(Creatdiskjsonstring)
-
-	url := "https://www.googleapis.com/compute/v1/projects/" + Projectid + "/zones/" + Zone + "/disks"
-
-	client := googleauth.SignJWT()
-
-	Creatediskrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Creatdiskjsonstringbyte))
-
-	Creatediskrequest.Header.Set("Content-Type", "application/json")
-
-	Creatediskresp, err := client.Do(Creatediskrequest)
-
-	defer Creatediskresp.Body.Close()
-
-	body, err := ioutil.ReadAll(Creatediskresp.Body)
-
-	fmt.Println(string(body))
-
-	return
-}
-
-*/
