@@ -290,11 +290,7 @@ func Createclusterdictnoaryconvert(option Createcluster, Createclusterjsonmap ma
 
 }
 
-
-
-
-
-
+/*
 type nodepool struct {
 	NodePool struct {
 		Config struct {
@@ -332,8 +328,7 @@ type nodepool struct {
 	} `json:"nodePool"`
 }
 
-
-
+*/
 
 func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp interface{}, err error) {
 	return
