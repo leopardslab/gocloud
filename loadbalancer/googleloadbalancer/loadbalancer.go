@@ -252,7 +252,7 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 
 
 	if(len(Instances)!=0){
-		instance := []interface{}
+		instance := []interface{}{}
 		for i :=0;i<(len(Instances));i++{
 				val= map[string]string{}
 				val["instance"] = Instances[i]
