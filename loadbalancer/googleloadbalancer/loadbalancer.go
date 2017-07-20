@@ -1,5 +1,15 @@
 package googleloadbalancer
 
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	googleauth "github.com/scorelab/gocloud-v2/googleauth"
+	"io/ioutil"
+	"net/http"
+)
+
+
 type TargetPools struct {
 	BackupPool        string   `json:"backupPool"`
 	CreationTimestamp string   `json:"creationTimestamp"`
@@ -20,8 +30,6 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 	var option TargetPools
 
 	var Project string
-
-	var Region string
 
 	param := request.(map[string]interface{})
 
@@ -44,23 +52,23 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 
 		case "description":
 			DescriptionV, _ := value.(string)
-			option.Description = Description
+			option.Description = DescriptionV
 
 		case "BackupPool":
-			BackupPoolV, _ := value.([]string)
+			BackupPoolV, _ := value.(string)
 			option.BackupPool = BackupPoolV
 
 		case "failoverRatio":
 			FailoverRatioV, _ := value.(int)
-			option.FailoverRatio = FailoverRatio
+			option.FailoverRatio = FailoverRatioV
 
 		case "id":
 			IDV, _ := value.(string)
-			option.ID = ID
+			option.ID = IDV
 
 		case "instances":
 			InstancesV, _ := value.([]string)
-			option.Instances = Instances
+			option.Instances = InstancesV
 
 		case "kind":
 			KindV, _ := value.(string)
@@ -70,13 +78,9 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 			SessionAffinityV, _ := value.(string)
 			option.SessionAffinity = SessionAffinityV
 
-		case "name":
-			NameV, _ := value.(string)
-			option.Name = NameV
-
 		case "region":
 			RegionV, _ := value.(string)
-			option.FailoverRatio = FailoverRatio
+			option.Region = RegionV
 
 		case "selfLink":
 			SelfLinkV, _ := value.(string)
@@ -93,7 +97,7 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 
 	Creatloadbalancerjson, _ := json.Marshal(Creatloadbalancerjsonmap)
 
-	Creatloadbalancerjsonstring := string(Createclusterjson)
+	Creatloadbalancerjsonstring := string(Creatloadbalancerjson)
 
 	fmt.Println(Creatloadbalancerjsonstring)
 
@@ -103,7 +107,7 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 
 	client := googleauth.SignJWT()
 
-	Creatloadbalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Creatloadbalancerjsonstringbyte))
+	Creatloadbalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Creatloadbalancerstringbyte))
 
 	Creatloadbalancerrequest.Header.Set("Content-Type", "application/json")
 
@@ -133,7 +137,7 @@ func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjson
 		Creatloadbalancerjsonmap["instances"]= option.Instances
 	}
 
-	if(len(option.FailoverRatio) != 0){
+	if(option.FailoverRatio != 0){
 		Creatloadbalancerjsonmap["failoverRatio"]= option.FailoverRatio
 	}
 
@@ -145,7 +149,7 @@ func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjson
 		Creatloadbalancerjsonmap["description"]= option.Description
 	}
 
-	if(option.HealthChecks == ""){
+	if(len(option.HealthChecks) != 0){
 		Creatloadbalancerjsonmap["healthChecks"]= option.HealthChecks
 	}
 
@@ -231,7 +235,8 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 	for key, value := range param {
 		switch key {
 		case "Project":
-			Project, _ = value.(string)
+			ProjectV, _ := value.(string)
+			Project = ProjectV
 
 		case "TargetPool":
 			TargetPoolV, _ := value.(string)
@@ -254,9 +259,9 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 	if(len(Instances)!=0){
 		instance := []interface{}{}
 		for i :=0;i<(len(Instances));i++{
-				val= map[string]string{}
+				val := map[string]string{}
 				val["instance"] = Instances[i]
-				instance = instance.append(val)
+				instance = append(instance,val)
 		}
 		Attachnodewithloadbalancerjsonmap["instances"] = instance
 	}
@@ -272,7 +277,7 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 
 	client := googleauth.SignJWT()
 
-	Creatloadbalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Attachnodewithloadbalancerjsonstringbyte))
+	Attachnodewithloadbalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Attachnodewithloadbalancerstringbyte))
 
 	Attachnodewithloadbalancerrequest.Header.Set("Content-Type", "application/json")
 
@@ -302,7 +307,8 @@ func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request
 	for key, value := range param {
 		switch key {
 		case "Project":
-			Project, _ = value.(string)
+			ProjectV, _ := value.(string)
+			Project = ProjectV
 
 		case "TargetPool":
 			TargetPoolV, _ := value.(string)
@@ -323,11 +329,11 @@ func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request
 
 
 	if(len(Instances)!=0){
-		instance := []interface{}
+		instance := []interface{}{}
 		for i :=0;i<(len(Instances));i++{
-				val= map[string]string{}
+				val := map[string]string{}
 				val["instance"] = Instances[i]
-				instance = instance.append(val)
+				instance = append(instance,val)
 		}
 		Detachnodewithloadbalancerjsonmap["instances"] = instance
 	}
@@ -340,14 +346,13 @@ func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request
 
 	var Detachnodewithloadbalancerstringbyte = []byte(Detachnodewithloadbalancerjsonstring)
 
-
 	client := googleauth.SignJWT()
 
-	Detachnodewithloadbalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Detachnodewithloadbalancerjsonstringbyte))
+	Detachnodewithloadbalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Detachnodewithloadbalancerstringbyte))
 
 	Detachnodewithloadbalancerrequest.Header.Set("Content-Type", "application/json")
 
-	Attachnodewithloadbalancerresp, err := client.Do(Detachnodewithloadbalancerrequest)
+	Detachnodewithloadbalancerresp, err := client.Do(Detachnodewithloadbalancerrequest)
 
 	defer Detachnodewithloadbalancerresp.Body.Close()
 

@@ -22,7 +22,7 @@ type Createcluster struct {
 	Subnetwork            string      `json:"subnetwork"`
 	LegacyAbac            legacyAbac  `json:"legacyAbac"`
 	MasterAuth            masterAuth  `json:"masterAuth"`
-	NodePools             []nodePools `json:"nodePools"`
+	NodePools             []NodePool `json:"nodePools"`
 }
 
 type legacyAbac struct {
@@ -31,10 +31,10 @@ type legacyAbac struct {
 
 type masterAuth struct {
 	Username                string                  `json:"username"`
-	ClientCertificateConfig clientCertificateConfig `json:"clientCertificateConfig"`
+	ClientCertificateConfig ClientCertificateConfigs `json:"clientCertificateConfig"`
 }
 
-type ClientCertificateConfig struct {
+type ClientCertificateConfigs struct {
 	IssueClientCertificate bool `json:"issueClientCertificate"`
 }
 
@@ -63,7 +63,7 @@ type management struct {
 	UpgradeOptions upgradeOptions `json:"upgradeOptions"`
 }
 
-type NodePools struct {
+type NodePool struct {
 	Name             string      `json:"name"`
 	InitialNodeCount int         `json:"initialNodeCount"`
 	Config           config      `json:"config"`
@@ -149,7 +149,7 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 						switch key {
 						case "issueClientCertificate":
 							issueClientCertificateV, _ := value.(bool)
-							option.ClientCertificateConfig.IssueClientCertificate = issueClientCertificateV
+							option.MasterAuth.ClientCertificateConfig.IssueClientCertificate = issueClientCertificateV
 						}
 					}
 				}
@@ -158,7 +158,7 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 		case "nodePools":
 			nodePoolsV, _ := value.([]map[string]interface{})
 			for i := 0; i < len(nodePoolsV); i++ {
-				var nodePool NodePools
+				var nodePool NodePool
 				for key, value := range nodePoolsV[i] {
 					switch key {
 					case "name":
@@ -166,7 +166,7 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 						nodePool.Name = nameV
 
 					case "initialNodeCount":
-						InitialNodeCountV, _ := value.(string)
+						InitialNodeCountV, _ := value.(int)
 						nodePool.InitialNodeCount = InitialNodeCountV
 
 					case "config":
@@ -343,5 +343,22 @@ func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp
 }
 
 func (googlecontainer *Googlecontainer) Stoptask(request interface{}) (resp interface{}, err error) {
+	options := request.(map[string]string)
+
+	url := "https://container.googleapis.com/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/operations/" + options["operationId"] + ":cancel"
+
+	client := googleauth.SignJWT()
+
+	Stoptaskrequest, err := http.NewRequest("POST", url, nil)
+	Stoptaskrequest.Header.Set("Content-Type", "application/json")
+
+	Stoptaskresp, err := client.Do(Stoptaskrequest)
+
+	defer Stoptaskresp.Body.Close()
+
+	body, err := ioutil.ReadAll(Stoptaskresp.Body)
+
+	fmt.Println(string(body))
+
 	return
 }
