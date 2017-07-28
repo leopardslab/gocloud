@@ -8,8 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 )
-
-
+//Creatloadbalancer creates google loadbalancer pool.
 func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	var option TargetPools
@@ -108,6 +107,7 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 
 }
 
+//Deleteloadbalancer deletes google loadbalancer pool.
 func (googleloadbalancer *Googleloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -130,6 +130,7 @@ func (googleloadbalancer *Googleloadbalancer) Deleteloadbalancer(request interfa
 	return
 }
 
+//Listloadbalancer lists google loadbalancer pool.
 func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -152,6 +153,7 @@ func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface
 	return
 }
 
+//Attachnodewithloadbalancer attach new google compute instance to google loadbalancer pool.
 func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	var TargetPool string
@@ -222,6 +224,7 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 	return
 }
 
+//Detachnodewithloadbalancer Detach google compute instance from google loadbalancer pool.
 func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 	var TargetPool string
 

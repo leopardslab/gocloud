@@ -1,8 +1,9 @@
 package googlecontainer
 
 import (
-	 "reflect"
+	"reflect"
 )
+
 func Createclusterdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
 	if option.Name != "" {
 		Createclusterjsonmap["name"] = option.Name
@@ -31,12 +32,12 @@ func Createclusterdictnoaryconvert(option Createcluster, Createclusterjsonmap ma
 		Createclusterjsonmap["zone"] = option.Zone
 	}
 
-	CreateserviceLegacyAbacdictnoaryconvert(option, Createclusterjsonmap)
-	CreateserviceMasterAuthdictnoaryconvert(option, Createclusterjsonmap)
-	CreateserviceNodePoolsdictnoaryconvert(option, Createclusterjsonmap)
+	CreateclusterLegacyAbacdictnoaryconvert(option, Createclusterjsonmap)
+	CreateclusterMasterAuthdictnoaryconvert(option, Createclusterjsonmap)
+	CreateclusterNodePoolsdictnoaryconvert(option, Createclusterjsonmap)
 }
 
-func CreateserviceLegacyAbacdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
+func CreateclusterLegacyAbacdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
 	legacyAbac := make(map[string]interface{})
 
 	if option.LegacyAbac.Enabled {
@@ -46,7 +47,7 @@ func CreateserviceLegacyAbacdictnoaryconvert(option Createcluster, Createcluster
 	Createclusterjsonmap["legacyAbac"] = legacyAbac
 }
 
-func CreateserviceMasterAuthdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
+func CreateclusterMasterAuthdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
 	masterAuth := make(map[string]interface{})
 
 	if option.MasterAuth.Username != "" {
@@ -66,10 +67,10 @@ func CreateserviceMasterAuthdictnoaryconvert(option Createcluster, Createcluster
 }
 
 func (c config) IsEmpty() bool {
-  return reflect.DeepEqual(c,config{})
+	return reflect.DeepEqual(c, config{})
 }
 
-func CreateserviceNodePoolsdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
+func CreateclusterNodePoolsdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
 	nodePools := make([]map[string]interface{}, 0)
 	if len(option.NodePools) != 0 {
 		for i := 0; i < len(option.NodePools); i++ {
@@ -80,26 +81,26 @@ func CreateserviceNodePoolsdictnoaryconvert(option Createcluster, Createclusterj
 			if option.NodePools[i].InitialNodeCount != 0 {
 				nodePool["initialNodeCount"] = option.NodePools[i].InitialNodeCount
 			}
-			if (!option.NodePools[i].Config.IsEmpty()){
+			if !option.NodePools[i].Config.IsEmpty() {
 				config := make(map[string]interface{})
-				if(option.NodePools[i].Config.MachineType) != ""{
-					config["MachineType"]= option.NodePools[i].Config.MachineType
+				if (option.NodePools[i].Config.MachineType) != "" {
+					config["MachineType"] = option.NodePools[i].Config.MachineType
 				}
 
-				if(option.NodePools[i].Config.DiskSizeGb) != 0 {
-					config["diskSizeGb"]= option.NodePools[i].Config.DiskSizeGb
+				if (option.NodePools[i].Config.DiskSizeGb) != 0 {
+					config["diskSizeGb"] = option.NodePools[i].Config.DiskSizeGb
 				}
 
-				if(option.NodePools[i].Config.Preemptible){
-					config["preemptible"]= option.NodePools[i].Config.Preemptible
+				if option.NodePools[i].Config.Preemptible {
+					config["preemptible"] = option.NodePools[i].Config.Preemptible
 				}
 
-				if(len(option.NodePools[i].Config.OauthScopes)) != 0{
-					config["oauthScopes"]= option.NodePools[i].Config.OauthScopes
+				if (len(option.NodePools[i].Config.OauthScopes)) != 0 {
+					config["oauthScopes"] = option.NodePools[i].Config.OauthScopes
 				}
 
-				if(option.NodePools[i].Config.ImageType) != ""{
-					config["oauthScopes"]= option.NodePools[i].Config.ImageType
+				if (option.NodePools[i].Config.ImageType) != "" {
+					config["oauthScopes"] = option.NodePools[i].Config.ImageType
 				}
 
 				nodePool["config"] = config
@@ -128,7 +129,6 @@ func CreateserviceNodePoolsdictnoaryconvert(option Createcluster, Createclusterj
 	}
 	Createclusterjsonmap["nodePools"] = nodePools
 }
-
 
 func Createservicedictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{}) {
 

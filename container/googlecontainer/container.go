@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (resp interface{}, err error) {
+func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp interface{}, err error) {
 
 	var option Createcluster
 
@@ -177,7 +177,7 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 	return
 }
 
-func (googlecontainer *Googlecontainer) Deletecontainer(request interface{}) (resp interface{}, err error) {
+func (googlecontainer *Googlecontainer) Deletecluster(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -185,15 +185,15 @@ func (googlecontainer *Googlecontainer) Deletecontainer(request interface{}) (re
 
 	client := googleauth.SignJWT()
 
-	Deletecontainerrequest, err := http.NewRequest("DELETE", url, nil)
+	Deleteclusterrequest, err := http.NewRequest("DELETE", url, nil)
 
-	Deletecontainerrequest.Header.Set("Content-Type", "application/json")
+	Deleteclusterrequest.Header.Set("Content-Type", "application/json")
 
-	Deletecontainerresp, err := client.Do(Deletecontainerrequest)
+	Deleteclusterresp, err := client.Do(Deleteclusterrequest)
 
-	defer Deletecontainerresp.Body.Close()
+	defer Deleteclusterresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Deletecontainerresp.Body)
+	body, err := ioutil.ReadAll(Deleteclusterresp.Body)
 
 	fmt.Println(string(body))
 

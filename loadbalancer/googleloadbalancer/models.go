@@ -1,8 +1,10 @@
 package googleloadbalancer
 
+//Googleloadbalancer reperents google loadbalancer methods and attributes.
 type Googleloadbalancer struct {
 }
 
+//TargetPools reperents google loadbalancer.
 type TargetPools struct {
 	BackupPool        string   `json:"backupPool"`
 	CreationTimestamp string   `json:"creationTimestamp"`

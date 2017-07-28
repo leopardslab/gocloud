@@ -9,7 +9,6 @@ import (
 	"net/http"
 )
 
-
 func preparestoptaskparamsdict(stoptaskjsonmap map[string]interface{}, stoptask Stoptask) {
 	if stoptask.Cluster != "" {
 		stoptaskjsonmap["cluster"] = stoptask.Cluster
@@ -47,7 +46,7 @@ func preparedeleteserviceparamsdict(deleteServicejsonmap map[string]interface{},
 	}
 }
 
-func prepareDeletecontainer(params map[string]string, clusterName string, Region string) {
+func prepareDeletecluster(params map[string]string, clusterName string, Region string) {
 	if clusterName != "" {
 		params["clusterName"] = clusterName
 	}
@@ -57,7 +56,7 @@ func prepareDeletecontainer(params map[string]string, clusterName string, Region
 	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.DeleteCluster"
 }
 
-func prepareCreatcontainerparams(params map[string]string, clusterName string, Region string) {
+func prepareCreateclusterrparams(params map[string]string, clusterName string, Region string) {
 	if clusterName != "" {
 		params["clusterName"] = clusterName
 	}
@@ -66,7 +65,6 @@ func prepareCreatcontainerparams(params map[string]string, clusterName string, R
 	}
 	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.CreateCluster"
 }
-
 
 func preparecreateServiceplacementConstraintsparams(Createservicejsonmap map[string]interface{}, createservice Createservice) {
 	if len(createservice.PlacementConstraints) != 0 {
@@ -135,7 +133,6 @@ func preparecreateServicedeploymentConfigurationparams(Createservicejsonmap map[
 	}
 }
 
-
 func preparestarttaskparams(params map[string]string, starttask Starttask, Region string) {
 	if Region != "" {
 		params["Region"] = Region
@@ -201,7 +198,6 @@ func preparestarttaskoverridesparams(starttaskjsonmap map[string]interface{}, st
 	}
 	fmt.Println(starttaskjsonmap)
 }
-
 
 func prepareruntaskparamsdict(runtaskjsonmap map[string]interface{}, runtask Runtask) {
 	if runtask.Cluster != "" {

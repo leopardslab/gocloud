@@ -1,5 +1,6 @@
 package googleloadbalancer
 
+//Creatloadbalancerdictnoaryconvert creates a dictnoary for Creatloadbalancer api.
 func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjsonmap map[string]interface{}) {
 
 	if option.ID == "" {
@@ -48,5 +49,4 @@ func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjson
 	if option.Kind == "" {
 		Creatloadbalancerjsonmap["kind"] = option.Kind
 	}
-
 }
