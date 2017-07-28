@@ -341,6 +341,78 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 			StatusV, _ := value.(string)
 			option.Status = StatusV
 
+		case "config":
+			configV, _ := value.(map[string]interface{})
+			for key, value := range configV {
+				switch key {
+				case "machineType":
+					machineTypeV, _ := value.(string)
+					option.Config.MachineType = machineTypeV
+
+				case "imageType":
+					imageTypeV, _ := value.(string)
+					option.Config.ImageType = imageTypeV
+
+				case "diskSizeGb":
+					DiskSizeGbV, _ := value.(int)
+					option.Config.DiskSizeGb = DiskSizeGbV
+
+				case "preemptible":
+					preemptibleV, _ := value.(bool)
+					option.Config.Preemptible = preemptibleV
+
+				case "oauthScopes":
+					oauthScopesV, _ := value.([]string)
+					option.Config.OauthScopes = oauthScopesV
+
+				case "ServiceAccount":
+					ServiceAccountV, _ := value.(string)
+					option.Config.ServiceAccount = ServiceAccountV
+
+				case "localSsdCount":
+					LocalSsdCountV, _ := value.(int)
+					option.Config.LocalSsdCount = LocalSsdCountV
+				}
+			}
+
+		case "autoscaling":
+			autoscalingV, _ := value.(map[string]interface{})
+			for key, value := range autoscalingV {
+				switch key {
+				case "enabled":
+					enabledV, _ := value.(bool)
+					option.Autoscaling.Enabled = enabledV
+
+				case "minNodeCount":
+					minNodeCountV, _ := value.(int)
+					option.Autoscaling.MinNodeCount = minNodeCountV
+
+				case "maxNodeCount":
+					maxNodeCountV, _ := value.(int)
+					option.Autoscaling.MaxNodeCount = maxNodeCountV
+
+				}
+			}
+
+		case "instanceGroupUrls":
+			autoscalingV, _ := value.([]string)
+			option.InstanceGroupUrls = autoscalingV
+
+		case "management":
+			managementV, _ := value.(map[string]interface{})
+			for key, value := range managementV {
+				switch key {
+				case "autoUpgrade":
+					autoUpgradeV, _ := value.(bool)
+					option.Management.AutoUpgrade = autoUpgradeV
+
+				case "AutoRepair":
+					autoRepairV, _ := value.(bool)
+					option.Management.AutoRepair = autoRepairV
+
+				case "UpgradeOptions":
+				}
+			}
 		}
 	}
 
