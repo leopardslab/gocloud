@@ -4,6 +4,7 @@ import (
 	"reflect"
 )
 
+//Createclusterdictnoaryconvert create dictnoary for Createcluster.
 func Createclusterdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
 	if option.Name != "" {
 		Createclusterjsonmap["name"] = option.Name
@@ -37,6 +38,7 @@ func Createclusterdictnoaryconvert(option Createcluster, Createclusterjsonmap ma
 	CreateclusterNodePoolsdictnoaryconvert(option, Createclusterjsonmap)
 }
 
+//CreateclusterLegacyAbacdictnoaryconvert create dictnoary for Createcluster.
 func CreateclusterLegacyAbacdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
 	legacyAbac := make(map[string]interface{})
 
@@ -47,6 +49,7 @@ func CreateclusterLegacyAbacdictnoaryconvert(option Createcluster, Createcluster
 	Createclusterjsonmap["legacyAbac"] = legacyAbac
 }
 
+//CreateclusterMasterAuthdictnoaryconvert create dictnoary for Createcluster.
 func CreateclusterMasterAuthdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
 	masterAuth := make(map[string]interface{})
 
@@ -66,10 +69,12 @@ func CreateclusterMasterAuthdictnoaryconvert(option Createcluster, Createcluster
 
 }
 
+//IsEmpty check the config struct is empty or not.
 func (c config) IsEmpty() bool {
 	return reflect.DeepEqual(c, config{})
 }
 
+//CreateclusterNodePoolsdictnoaryconvert create dictnoary for Createcluster.
 func CreateclusterNodePoolsdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
 	nodePools := make([]map[string]interface{}, 0)
 	if len(option.NodePools) != 0 {
@@ -130,6 +135,7 @@ func CreateclusterNodePoolsdictnoaryconvert(option Createcluster, Createclusterj
 	Createclusterjsonmap["nodePools"] = nodePools
 }
 
+//Createservicedictnoaryconvert create dictnoary for Createservice.
 func Createservicedictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{}) {
 
 	if option.Name != "" {
@@ -159,6 +165,7 @@ func Createservicedictnoaryconvert(option nodepool, Createservicejsonmap map[str
 	CreateserviceAutoscalingdictnoaryconvert(option, Createservicejsonmap)
 }
 
+//CreateserviceConfigdictnoaryconvert create dictnoary for Createservice.
 func CreateserviceConfigdictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{}) {
 
 	config := make(map[string]interface{})
@@ -194,6 +201,7 @@ func CreateserviceConfigdictnoaryconvert(option nodepool, Createservicejsonmap m
 	Createservicejsonmap["config"] = config
 }
 
+//CreateserviceManagementdictnoaryconvert create dictnoary for Createservice.
 func CreateserviceManagementdictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{}) {
 
 	management := make(map[string]interface{})
@@ -210,6 +218,7 @@ func CreateserviceManagementdictnoaryconvert(option nodepool, Createservicejsonm
 
 }
 
+//CreateserviceAutoscalingdictnoaryconvert create dictnoary for Createservice.
 func CreateserviceAutoscalingdictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{}) {
 	autoscaling := make(map[string]interface{})
 
