@@ -9,20 +9,6 @@ import (
 	"net/http"
 )
 
-type TargetPools struct {
-	BackupPool        string   `json:"backupPool"`
-	CreationTimestamp string   `json:"creationTimestamp"`
-	Description       string   `json:"description"`
-	HealthChecks      []string `json:"healthChecks"`
-	FailoverRatio     int      `json:"failoverRatio"`
-	ID                string   `json:"id"`
-	Instances         []string `json:"instances"`
-	Kind              string   `json:"kind"`
-	Name              string   `json:"name"`
-	Region            string   `json:"region"`
-	SelfLink          string   `json:"selfLink"`
-	SessionAffinity   string   `json:"sessionAffinity"`
-}
 
 func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
 
@@ -119,57 +105,6 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 	fmt.Println(string(body))
 
 	return
-
-}
-
-func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjsonmap map[string]interface{}) {
-
-	if option.ID == "" {
-		Creatloadbalancerjsonmap["id"] = option.ID
-	}
-
-	if len(option.BackupPool) != 0 {
-		Creatloadbalancerjsonmap["backupPool"] = option.BackupPool
-	}
-
-	if len(option.Instances) != 0 {
-		Creatloadbalancerjsonmap["instances"] = option.Instances
-	}
-
-	if option.FailoverRatio != 0 {
-		Creatloadbalancerjsonmap["failoverRatio"] = option.FailoverRatio
-	}
-
-	if option.CreationTimestamp == "" {
-		Creatloadbalancerjsonmap["creationTimestamp"] = option.CreationTimestamp
-	}
-
-	if option.Description == "" {
-		Creatloadbalancerjsonmap["description"] = option.Description
-	}
-
-	if len(option.HealthChecks) != 0 {
-		Creatloadbalancerjsonmap["healthChecks"] = option.HealthChecks
-	}
-
-	if option.SessionAffinity == "" {
-		Creatloadbalancerjsonmap["sessionAffinity"] = option.SessionAffinity
-	}
-
-	if option.SelfLink == "" {
-		Creatloadbalancerjsonmap["selfLink"] = option.SelfLink
-	}
-	if option.Region == "" {
-		Creatloadbalancerjsonmap["region"] = option.Region
-	}
-
-	if option.Name == "" {
-		Creatloadbalancerjsonmap["name"] = option.Name
-	}
-
-	if option.Kind == "" {
-		Creatloadbalancerjsonmap["kind"] = option.Kind
-	}
 
 }
 
