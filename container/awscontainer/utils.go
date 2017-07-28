@@ -8,7 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 )
-
+//preparestoptaskparamsdict create dictnoary for stoptask.
 func preparestoptaskparamsdict(stoptaskjsonmap map[string]interface{}, stoptask Stoptask) {
 	if stoptask.Cluster != "" {
 		stoptaskjsonmap["cluster"] = stoptask.Cluster
@@ -23,6 +23,7 @@ func preparestoptaskparamsdict(stoptaskjsonmap map[string]interface{}, stoptask 
 	}
 }
 
+//preparestoptaskparams create dictnoary for stoptask.
 func preparestoptaskparams(params map[string]string, stoptask Stoptask, Region string) {
 	if Region != "" {
 		params["Region"] = Region
@@ -30,6 +31,7 @@ func preparestoptaskparams(params map[string]string, stoptask Stoptask, Region s
 	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.StopTask"
 }
 
+//preparedeleteserviceparams Delete dictnoary for deleteservice.
 func preparedeleteserviceparams(params map[string]string, deleteservice Deleteservice, Region string) {
 	if Region != "" {
 		params["Region"] = Region
@@ -37,6 +39,7 @@ func preparedeleteserviceparams(params map[string]string, deleteservice Deletese
 	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.DeleteService"
 }
 
+//preparedeleteserviceparamsdict Delete dictnoary for deleteservice.
 func preparedeleteserviceparamsdict(deleteServicejsonmap map[string]interface{}, deleteservice Deleteservice) {
 	if deleteservice.Cluster != "" {
 		deleteServicejsonmap["cluster"] = deleteservice.Cluster
@@ -46,6 +49,7 @@ func preparedeleteserviceparamsdict(deleteServicejsonmap map[string]interface{},
 	}
 }
 
+//prepareDeletecluster Delete dictnoary for Deletecluster.
 func prepareDeletecluster(params map[string]string, clusterName string, Region string) {
 	if clusterName != "" {
 		params["clusterName"] = clusterName
@@ -56,6 +60,7 @@ func prepareDeletecluster(params map[string]string, clusterName string, Region s
 	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.DeleteCluster"
 }
 
+//prepareCreateclusterrparams creates dictnoary for Createcluster.
 func prepareCreateclusterrparams(params map[string]string, clusterName string, Region string) {
 	if clusterName != "" {
 		params["clusterName"] = clusterName
@@ -66,6 +71,7 @@ func prepareCreateclusterrparams(params map[string]string, clusterName string, R
 	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.CreateCluster"
 }
 
+//preparecreateServiceplacementConstraintsparams creates dictnoary for createService.
 func preparecreateServiceplacementConstraintsparams(Createservicejsonmap map[string]interface{}, createservice Createservice) {
 	if len(createservice.PlacementConstraints) != 0 {
 		placementConstraints := make([]map[string]interface{}, 0)
@@ -87,6 +93,7 @@ func preparecreateServiceplacementConstraintsparams(Createservicejsonmap map[str
 	}
 }
 
+//preparecreateServiceloadBalancersparams  creates dictnoary for loadBalancer.
 func preparecreateServiceloadBalancersparams(Createservicejsonmap map[string]interface{}, createservice Createservice) {
 	fmt.Println("len of createservice.LoadBalancers", len(createservice.LoadBalancers))
 	if len(createservice.LoadBalancers) != 0 {
@@ -120,6 +127,7 @@ func preparecreateServiceloadBalancersparams(Createservicejsonmap map[string]int
 	}
 }
 
+//preparecreateServicedeploymentConfigurationparams  creates dictnoary for createService.
 func preparecreateServicedeploymentConfigurationparams(Createservicejsonmap map[string]interface{}, createservice Createservice) {
 	if (createservice.DeploymentConfigurations != DeploymentConfiguration{}) {
 		deploymentConfiguration := make(map[string]interface{})
@@ -133,6 +141,7 @@ func preparecreateServicedeploymentConfigurationparams(Createservicejsonmap map[
 	}
 }
 
+//preparestarttaskparams  creates dictnoary for starttask.
 func preparestarttaskparams(params map[string]string, starttask Starttask, Region string) {
 	if Region != "" {
 		params["Region"] = Region
@@ -140,6 +149,7 @@ func preparestarttaskparams(params map[string]string, starttask Starttask, Regio
 	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.StartTask"
 }
 
+//preparestarttaskparamsdict creates dictnoary for starttask.
 func preparestarttaskparamsdict(starttaskjsonmap map[string]interface{}, starttask Starttask) {
 	if starttask.Cluster != "" {
 		starttaskjsonmap["cluster"] = starttask.Cluster
@@ -161,6 +171,7 @@ func preparestarttaskparamsdict(starttaskjsonmap map[string]interface{}, startta
 	preparestarttaskoverridesparams(starttaskjsonmap, starttask)
 }
 
+//preparestarttaskoverridesparams creates dictnoary for starttask.
 func preparestarttaskoverridesparams(starttaskjsonmap map[string]interface{}, starttask Starttask) {
 	overrides := make(map[string]interface{})
 	if starttask.overrides.TaskRoleArn != "" {
@@ -199,6 +210,7 @@ func preparestarttaskoverridesparams(starttaskjsonmap map[string]interface{}, st
 	fmt.Println(starttaskjsonmap)
 }
 
+//prepareruntaskparamsdict creates dictnoary for runtask.
 func prepareruntaskparamsdict(runtaskjsonmap map[string]interface{}, runtask Runtask) {
 	if runtask.Cluster != "" {
 		runtaskjsonmap["cluster"] = runtask.Cluster
@@ -222,6 +234,7 @@ func prepareruntaskparamsdict(runtaskjsonmap map[string]interface{}, runtask Run
 	prepareruntaskplacementStrategyparams(runtaskjsonmap, runtask)
 }
 
+//prepareruntaskoverridesparams creates dictnoary for runtask.
 func prepareruntaskoverridesparams(runtaskjsonmap map[string]interface{}, runtask Runtask) {
 	overrides := make(map[string]interface{})
 	if runtask.overrides.TaskRoleArn != "" {
@@ -260,6 +273,7 @@ func prepareruntaskoverridesparams(runtaskjsonmap map[string]interface{}, runtas
 	fmt.Println(runtaskjsonmap)
 }
 
+//prepareruntaskparams creates dictnoary for runtask.
 func prepareruntaskparams(params map[string]string, runtask Runtask, Region string) {
 	if Region != "" {
 		params["Region"] = Region
@@ -267,6 +281,7 @@ func prepareruntaskparams(params map[string]string, runtask Runtask, Region stri
 	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.RunTask"
 }
 
+//prepareruntaskplacementStrategyparams creates dictnoary for runtask.
 func prepareruntaskplacementStrategyparams(Createservicejsonmap map[string]interface{}, runtask Runtask) {
 	if len(runtask.PlacementStrategys) != 0 {
 		placementstrategys := make([]map[string]interface{}, 0)
@@ -288,6 +303,7 @@ func prepareruntaskplacementStrategyparams(Createservicejsonmap map[string]inter
 	}
 }
 
+//prepareruntaskplacementConstraintsparams creates dictnoary for runtask.
 func prepareruntaskplacementConstraintsparams(runtaskjsonmap map[string]interface{}, runtask Runtask) {
 	if len(runtask.PlacementConstraints) != 0 {
 		placementConstraints := make([]map[string]interface{}, 0)
@@ -309,6 +325,7 @@ func prepareruntaskplacementConstraintsparams(runtaskjsonmap map[string]interfac
 	}
 }
 
+//preparecreateServiceparams creates dictnoary for createService.
 func preparecreateServiceparams(params map[string]string, createservice Createservice, Region string) {
 	if Region != "" {
 		params["Region"] = Region
@@ -316,6 +333,7 @@ func preparecreateServiceparams(params map[string]string, createservice Createse
 	params["amztarget"] = "AmazonEC2ContainerServiceV20141113.CreateService"
 }
 
+//preparecreateServiceparams creates dictnoary for createService.
 func preparecreateServiceparamsdict(Createservicejsonmap map[string]interface{}, createservice Createservice) {
 	if createservice.ServiceName != "" {
 		Createservicejsonmap["serviceName"] = createservice.ServiceName
@@ -344,6 +362,7 @@ func preparecreateServiceparamsdict(Createservicejsonmap map[string]interface{},
 
 }
 
+//preparecreateServiceplacementStrategyparams creates dictnoary for createService.
 func preparecreateServiceplacementStrategyparams(Createservicejsonmap map[string]interface{}, createservice Createservice) {
 	if len(createservice.PlacementStrategys) != 0 {
 		placementstrategys := make([]map[string]interface{}, 0)
@@ -365,6 +384,7 @@ func preparecreateServiceplacementStrategyparams(Createservicejsonmap map[string
 	}
 }
 
+//PrepareSignatureV4query creates PrepareSignatureV4 for request.
 func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]string, paramsmap map[string]interface{}) {
 	fmt.Println(paramsmap)
 	ECSEndpoint := "https://ecs." + params["Region"] + ".amazonaws.com"
