@@ -19,10 +19,8 @@ type nodepool struct {
 	} `json:"autoscaling"`
 	InitialNodeCount int `json:"initialNodeCount"`
 	Management       struct {
-		AutoRepair     bool `json:"autoRepair"`
-		AutoUpgrade    bool `json:"autoUpgrade"`
-		UpgradeOptions struct {
-		} `json:"upgradeOptions"`
+		AutoRepair  bool `json:"autoRepair"`
+		AutoUpgrade bool `json:"autoUpgrade"`
 	} `json:"management"`
 	SelfLink          string   `json:"selfLink"`
 	Version           string   `json:"version"`
