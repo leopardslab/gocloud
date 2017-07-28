@@ -13,15 +13,15 @@ type Googlecontainer struct {
 }
 
 type Createcluster struct {
-	Name                  string      `json:"name"`
-	Zone                  string      `json:"zone"`
-	Network               string      `json:"network"`
-	LoggingService        string      `json:"loggingService"`
-	MonitoringService     string      `json:"monitoringService"`
-	InitialClusterVersion string      `json:"initialClusterVersion"`
-	Subnetwork            string      `json:"subnetwork"`
-	LegacyAbac            legacyAbac  `json:"legacyAbac"`
-	MasterAuth            masterAuth  `json:"masterAuth"`
+	Name                  string     `json:"name"`
+	Zone                  string     `json:"zone"`
+	Network               string     `json:"network"`
+	LoggingService        string     `json:"loggingService"`
+	MonitoringService     string     `json:"monitoringService"`
+	InitialClusterVersion string     `json:"initialClusterVersion"`
+	Subnetwork            string     `json:"subnetwork"`
+	LegacyAbac            legacyAbac `json:"legacyAbac"`
+	MasterAuth            masterAuth `json:"masterAuth"`
 	NodePools             []NodePool `json:"nodePools"`
 }
 
@@ -30,7 +30,7 @@ type legacyAbac struct {
 }
 
 type masterAuth struct {
-	Username                string                  `json:"username"`
+	Username                string                   `json:"username"`
 	ClientCertificateConfig ClientCertificateConfigs `json:"clientCertificateConfig"`
 }
 
@@ -80,6 +80,7 @@ func (googlecontainer *Googlecontainer) Deletecontainer(request interface{}) (re
 	client := googleauth.SignJWT()
 
 	Deletecontainerrequest, err := http.NewRequest("DELETE", url, nil)
+
 	Deletecontainerrequest.Header.Set("Content-Type", "application/json")
 
 	Deletecontainerresp, err := client.Do(Deletecontainerrequest)
@@ -170,7 +171,7 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 						nodePool.InitialNodeCount = InitialNodeCountV
 
 					case "config":
-						configV, _ := value.([]map[string]interface{})
+						configV, _ := value.(map[string]interface{})
 						for key, value := range configV {
 							switch key {
 							case "machineType":
@@ -191,7 +192,7 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 
 							case "oauthScopes":
 								oauthScopesV, _ := value.([]string)
-								nodePool.Config.oauthScopes = oauthScopesV
+								nodePool.Config.OauthScopes = oauthScopesV
 							}
 						}
 
@@ -201,12 +202,11 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 							switch key {
 							case "enabled":
 								enabledV, _ := value.(bool)
-								nodePool.autoscaling.Enabled = enabledV
+								nodePool.Autoscaling.Enabled = enabledV
 							}
 						}
 
 					case "management":
-
 						managementV, _ := value.(map[string]interface{})
 						for key, value := range managementV {
 							switch key {
@@ -216,7 +216,7 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 
 							case "AutoRepair":
 								autoRepairV, _ := value.(bool)
-								nodePool.Management.Enabled = autoRepairV
+								nodePool.Management.AutoRepair = autoRepairV
 
 							case "UpgradeOptions":
 							}
@@ -226,7 +226,6 @@ func (googlecontainer *Googlecontainer) Createcontainer(request interface{}) (re
 				}
 				option.NodePools = append(option.NodePools, nodePool)
 			}
-
 		}
 	}
 
@@ -284,61 +283,160 @@ func Createclusterdictnoaryconvert(option Createcluster, Createclusterjsonmap ma
 		Createclusterjsonmap["initialClusterVersion"] = option.InitialClusterVersion
 	}
 
+	if option.Subnetwork != "" {
+		Createclusterjsonmap["subnetwork"] = option.Subnetwork
+	}
+
 	if option.Zone != "" {
-		Createclusterjsonmap["subnetwork"] = option.Zone
+		Createclusterjsonmap["zone"] = option.Zone
+	}
+}
+
+func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp interface{}, err error) {
+
+	var option nodepool
+
+	var Projectid string
+
+	var ClusterId string
+
+	var Zone string
+
+	param := request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "projectid":
+			Projectid, _ = value.(string)
+
+		case "name":
+			name, _ := value.(string)
+			option.Name = name
+
+		case "Zone":
+			ZoneV, _ := value.(string)
+			Zone = ZoneV
+
+		case "clusterId":
+			ClusterIdV, _ := value.(string)
+			ClusterId = ClusterIdV
+
+		case "statusMessage":
+			StatusMessageV, _ := value.(string)
+			option.StatusMessage = StatusMessageV
+
+		case "initialNodeCount":
+			InitialNodeCountV, _ := value.(int)
+			option.InitialNodeCount = InitialNodeCountV
+
+		case "selfLink":
+			SelfLinkV, _ := value.(string)
+			option.SelfLink = SelfLinkV
+
+		case "version":
+			VersionV, _ := value.(string)
+			option.Version = VersionV
+
+		case "status":
+			StatusV, _ := value.(string)
+			option.Status = StatusV
+
+		}
+	}
+
+	option.Config.MachineType = "Hello"
+	fmt.Println(option.Config.MachineType)
+
+	//zonevalue := "projects/" + Projectid + "/zones/" + Zone
+	//option.Zone = zonevalue
+
+	Createservicejsonmap := make(map[string]interface{})
+
+	Createservicedictnoaryconvert(option, Createservicejsonmap)
+
+	Createservicejson, _ := json.Marshal(Createservicejsonmap)
+
+	Createservicejsonstring := string(Createservicejson)
+
+	fmt.Println(Createservicejsonstring)
+
+	var Createservicejsonstringbyte = []byte(Createservicejsonstring)
+
+	url := "https://container.googleapis.com/v1/projects/" + Projectid + "/zones/" + Zone + "/clusters" + ClusterId + "/nodePools"
+
+	client := googleauth.SignJWT()
+
+	Createservicerequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Createservicejsonstringbyte))
+
+	Createservicerequest.Header.Set("Content-Type", "application/json")
+
+	Createservicerresp, err := client.Do(Createservicerequest)
+
+	defer Createservicerresp.Body.Close()
+
+	body, err := ioutil.ReadAll(Createservicerresp.Body)
+
+	fmt.Println(string(body))
+
+	return
+}
+
+func Createservicedictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{}) {
+
+	if option.Name != "" {
+		Createclusterjsonmap["name"] = option.Name
+	}
+
+	if option.StatusMessage != "" {
+		Createclusterjsonmap["statusMessage"] = option.StatusMessage
+	}
+
+	if option.InitialNodeCount != 0 {
+		Createclusterjsonmap["initialNodeCount"] = option.InitialNodeCount
+	}
+
+	if option.SelfLink != "" {
+		Createclusterjsonmap["selfLink"] = option.SelfLink
+	}
+
+	if option.Version != "" {
+		Createclusterjsonmap["version"] = option.Version
+	}
+
+	if option.Status != "" {
+		Createclusterjsonmap["status"] = option.Status
 	}
 
 }
 
-/*
-type nodepool struct {
-	NodePool struct {
-		Config struct {
-			MachineType string `json:"machineType"`
-			ImageType string `json:"imageType"`
-			OauthScopes []interface{} `json:"oauthScopes"`
-			Preemptible bool `json:"preemptible"`
-			Labels struct {
-			} `json:"labels"`
-			LocalSsdCount int `json:"localSsdCount"`
-			Metadata struct {
-			} `json:"metadata"`
-			DiskSizeGb int `json:"diskSizeGb"`
-			Tags []interface{} `json:"tags"`
-			ServiceAccount string `json:"serviceAccount"`
-		} `json:"config"`
-		Name string `json:"name"`
-		StatusMessage string `json:"statusMessage"`
-		Autoscaling struct {
-			MaxNodeCount int `json:"maxNodeCount"`
-			MinNodeCount int `json:"minNodeCount"`
-			Enabled bool `json:"enabled"`
-		} `json:"autoscaling"`
-		InitialNodeCount int `json:"initialNodeCount"`
-		Management struct {
-			AutoRepair bool `json:"autoRepair"`
-			AutoUpgrade bool `json:"autoUpgrade"`
-			UpgradeOptions struct {
-			} `json:"upgradeOptions"`
-		} `json:"management"`
-		SelfLink string `json:"selfLink"`
-		Version string `json:"version"`
-		InstanceGroupUrls []interface{} `json:"instanceGroupUrls"`
-		Status string `json:"status"`
-	} `json:"nodePool"`
-}
-
-*/
-
-func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp interface{}, err error) {
-	return
-}
-
 func (googlecontainer *Googlecontainer) Runtask(request interface{}) (resp interface{}, err error) {
+	fmt.Println("\nThis API is not provided by Google cloud")
 	return
 }
 
+func (googlecontainer *Googlecontainer) Starttask(request interface{}) (resp interface{}, err error) {
+	fmt.Println("\nThis API is not provided by Google cloud")
+	return
+}
 func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp interface{}, err error) {
+
+	options := request.(map[string]string)
+
+	url := "https://container.googleapis.com/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/clusters/" + options["clusterId"] + "/nodePools/" + options["nodePoolId"]
+
+	client := googleauth.SignJWT()
+
+	Deleteservicerequest, err := http.NewRequest("POST", url, nil)
+	Deleteservicerequest.Header.Set("Content-Type", "application/json")
+
+	Deleteserviceresp, err := client.Do(Deleteservicerequest)
+
+	defer Deleteserviceresp.Body.Close()
+
+	body, err := ioutil.ReadAll(Deleteserviceresp.Body)
+
+	fmt.Println(string(body))
+
 	return
 }
 

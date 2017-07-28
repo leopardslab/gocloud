@@ -9,7 +9,6 @@ import (
 	"net/http"
 )
 
-
 type TargetPools struct {
 	BackupPool        string   `json:"backupPool"`
 	CreationTimestamp string   `json:"creationTimestamp"`
@@ -123,78 +122,77 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 
 }
 
-func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjsonmap map[string]interface{}){
+func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjsonmap map[string]interface{}) {
 
-	if(option.ID == ""){
-		Creatloadbalancerjsonmap["id"]= option.ID
+	if option.ID == "" {
+		Creatloadbalancerjsonmap["id"] = option.ID
 	}
 
-	if(len(option.BackupPool) != 0){
-		Creatloadbalancerjsonmap["backupPool"]= option.BackupPool
+	if len(option.BackupPool) != 0 {
+		Creatloadbalancerjsonmap["backupPool"] = option.BackupPool
 	}
 
-	if(len(option.Instances) != 0){
-		Creatloadbalancerjsonmap["instances"]= option.Instances
+	if len(option.Instances) != 0 {
+		Creatloadbalancerjsonmap["instances"] = option.Instances
 	}
 
-	if(option.FailoverRatio != 0){
-		Creatloadbalancerjsonmap["failoverRatio"]= option.FailoverRatio
+	if option.FailoverRatio != 0 {
+		Creatloadbalancerjsonmap["failoverRatio"] = option.FailoverRatio
 	}
 
-	if(option.CreationTimestamp == ""){
-		Creatloadbalancerjsonmap["creationTimestamp"]= option.CreationTimestamp
+	if option.CreationTimestamp == "" {
+		Creatloadbalancerjsonmap["creationTimestamp"] = option.CreationTimestamp
 	}
 
-	if(option.Description == ""){
-		Creatloadbalancerjsonmap["description"]= option.Description
+	if option.Description == "" {
+		Creatloadbalancerjsonmap["description"] = option.Description
 	}
 
-	if(len(option.HealthChecks) != 0){
-		Creatloadbalancerjsonmap["healthChecks"]= option.HealthChecks
+	if len(option.HealthChecks) != 0 {
+		Creatloadbalancerjsonmap["healthChecks"] = option.HealthChecks
 	}
 
-	if(option.SessionAffinity == ""){
-		Creatloadbalancerjsonmap["sessionAffinity"]= option.SessionAffinity
+	if option.SessionAffinity == "" {
+		Creatloadbalancerjsonmap["sessionAffinity"] = option.SessionAffinity
 	}
 
-	if(option.SelfLink == ""){
-		Creatloadbalancerjsonmap["selfLink"]= option.SelfLink
+	if option.SelfLink == "" {
+		Creatloadbalancerjsonmap["selfLink"] = option.SelfLink
 	}
-	if(option.Region == ""){
-		Creatloadbalancerjsonmap["region"]= option.Region
-	}
-
-	if(option.Name == ""){
-		Creatloadbalancerjsonmap["name"]= option.Name
+	if option.Region == "" {
+		Creatloadbalancerjsonmap["region"] = option.Region
 	}
 
-	if(option.Kind == ""){
-		Creatloadbalancerjsonmap["kind"]= option.Kind
+	if option.Name == "" {
+		Creatloadbalancerjsonmap["name"] = option.Name
+	}
+
+	if option.Kind == "" {
+		Creatloadbalancerjsonmap["kind"] = option.Kind
 	}
 
 }
 
-
 func (googleloadbalancer *Googleloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
 
-		options := request.(map[string]string)
+	options := request.(map[string]string)
 
-		url := "https://www.googleapis.com/compute/v1/projects/" + options["project"] + "/regions/" + options["region"] + "/targetPools/" + options["targetPool"]
+	url := "https://www.googleapis.com/compute/v1/projects/" + options["project"] + "/regions/" + options["region"] + "/targetPools/" + options["targetPool"]
 
-		client := googleauth.SignJWT()
+	client := googleauth.SignJWT()
 
-		Deleteloadbalancerrequest, err := http.NewRequest("DELETE", url, nil)
-		Deleteloadbalancerrequest.Header.Set("Content-Type", "application/json")
+	Deleteloadbalancerrequest, err := http.NewRequest("DELETE", url, nil)
+	Deleteloadbalancerrequest.Header.Set("Content-Type", "application/json")
 
-		Deleteloadbalancerresp, err := client.Do(Deleteloadbalancerrequest)
+	Deleteloadbalancerresp, err := client.Do(Deleteloadbalancerrequest)
 
-		defer Deleteloadbalancerresp.Body.Close()
+	defer Deleteloadbalancerresp.Body.Close()
 
-		body, err := ioutil.ReadAll(Deleteloadbalancerresp.Body)
+	body, err := ioutil.ReadAll(Deleteloadbalancerresp.Body)
 
-		fmt.Println(string(body))
+	fmt.Println(string(body))
 
-		return
+	return
 }
 
 func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
@@ -218,7 +216,6 @@ func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface
 
 	return
 }
-
 
 func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 
@@ -250,18 +247,17 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 			InstancesV, _ := value.([]string)
 			Instances = InstancesV
 		}
-}
-	url := "https://www.googleapis.com/compute/v1/projects/" + Project + "/regions/" + Region + "/targetPools/" + TargetPool +"/addInstance"
+	}
+	url := "https://www.googleapis.com/compute/v1/projects/" + Project + "/regions/" + Region + "/targetPools/" + TargetPool + "/addInstance"
 
 	Attachnodewithloadbalancerjsonmap := make(map[string]interface{})
 
-
-	if(len(Instances)!=0){
+	if len(Instances) != 0 {
 		instance := []interface{}{}
-		for i :=0;i<(len(Instances));i++{
-				val := map[string]string{}
-				val["instance"] = Instances[i]
-				instance = append(instance,val)
+		for i := 0; i < (len(Instances)); i++ {
+			val := map[string]string{}
+			val["instance"] = Instances[i]
+			instance = append(instance, val)
 		}
 		Attachnodewithloadbalancerjsonmap["instances"] = instance
 	}
@@ -273,7 +269,6 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 	fmt.Println(Attachnodewithloadbalancerjsonstring)
 
 	var Attachnodewithloadbalancerstringbyte = []byte(Attachnodewithloadbalancerjsonstring)
-
 
 	client := googleauth.SignJWT()
 
@@ -291,7 +286,6 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 
 	return
 }
-
 
 func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 	var TargetPool string
@@ -322,18 +316,17 @@ func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request
 			InstancesV, _ := value.([]string)
 			Instances = InstancesV
 		}
-}
-	url := "https://www.googleapis.com/compute/v1/projects/" + Project + "/regions/" + Region + "/targetPools/" + TargetPool +"/addInstance"
+	}
+	url := "https://www.googleapis.com/compute/v1/projects/" + Project + "/regions/" + Region + "/targetPools/" + TargetPool + "/addInstance"
 
 	Detachnodewithloadbalancerjsonmap := make(map[string]interface{})
 
-
-	if(len(Instances)!=0){
+	if len(Instances) != 0 {
 		instance := []interface{}{}
-		for i :=0;i<(len(Instances));i++{
-				val := map[string]string{}
-				val["instance"] = Instances[i]
-				instance = append(instance,val)
+		for i := 0; i < (len(Instances)); i++ {
+			val := map[string]string{}
+			val["instance"] = Instances[i]
+			instance = append(instance, val)
 		}
 		Detachnodewithloadbalancerjsonmap["instances"] = instance
 	}

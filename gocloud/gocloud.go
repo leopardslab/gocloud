@@ -32,6 +32,7 @@ type Gocloud interface {
 	Runtask(request interface{}) (resp interface{}, err error)
 	Deleteservice(request interface{}) (resp interface{}, err error)
 	Stoptask(request interface{}) (resp interface{}, err error)
+	Starttask(request interface{}) (resp interface{}, err error)
 }
 
 const (
