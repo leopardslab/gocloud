@@ -1,8 +1,10 @@
 package googlecontainer
 
+//Googlecontainer struct represents Googlecontainer attributes and methods.
 type Googlecontainer struct {
 }
 
+//Createcluster struct represents Createcluster attributes.
 type Createcluster struct {
 	Name                  string     `json:"name"`
 	Zone                  string     `json:"zone"`
@@ -16,23 +18,28 @@ type Createcluster struct {
 	NodePools             []NodePool `json:"nodePools"`
 }
 
+//legacyAbac struct represents legacyAbac attributes of Createcluster.
 type legacyAbac struct {
 	Enabled bool `json:"enabled"`
 }
 
+//masterAuth struct represents masterAuth attributes of Createcluster.
 type masterAuth struct {
 	Username                string                   `json:"username"`
 	ClientCertificateConfig ClientCertificateConfigs `json:"clientCertificateConfig"`
 }
 
+//ClientCertificateConfigs struct represents ClientCertificateConfigs attributes of masterAuth.
 type ClientCertificateConfigs struct {
 	IssueClientCertificate bool `json:"issueClientCertificate"`
 }
 
+//LegacyAbac struct represents LegacyAbac attributes of Createcluster.
 type LegacyAbac struct {
 	Enabled bool `json:"enabled"`
 }
 
+//config represents config attributes of NodePool.
 type config struct {
 	MachineType string   `json:"machineType"`
 	ImageType   string   `json:"imageType"`
@@ -41,15 +48,18 @@ type config struct {
 	OauthScopes []string `json:"oauthScopes"`
 }
 
+//config represents autoscaling attributes of NodePool.
 type autoscaling struct {
 	Enabled bool `json:"enabled"`
 }
 
+//management represents management attributes of NodePool.
 type management struct {
 	AutoUpgrade bool `json:"autoUpgrade"`
 	AutoRepair  bool `json:"autoRepair"`
 }
 
+//NodePool struct represents NodePool attributes of Createcluster.
 type NodePool struct {
 	Name             string      `json:"name"`
 	InitialNodeCount int         `json:"initialNodeCount"`
@@ -58,6 +68,7 @@ type NodePool struct {
 	Management       management  `json:"management"`
 }
 
+//NodePool struct represents NodePool attributes of Createservice.
 type nodepool struct {
 	Config struct {
 		MachineType    string   `json:"machineType"`

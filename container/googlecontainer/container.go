@@ -9,6 +9,7 @@ import (
 	"net/http"
 )
 
+//Createcluster creates cluster.
 func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp interface{}, err error) {
 
 	var option Createcluster
@@ -177,6 +178,7 @@ func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp
 	return
 }
 
+//Deletecluster deletes cluster.
 func (googlecontainer *Googlecontainer) Deletecluster(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -200,6 +202,7 @@ func (googlecontainer *Googlecontainer) Deletecluster(request interface{}) (resp
 	return
 }
 
+//Createservice crestes loadbalancer service.
 func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp interface{}, err error) {
 
 	var option nodepool
@@ -354,15 +357,19 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 	return
 }
 
+//runtask runs container.
 func (googlecontainer *Googlecontainer) Runtask(request interface{}) (resp interface{}, err error) {
 	fmt.Println("\nThis API is not provided by Google cloud")
 	return
 }
 
+//Starttask start container.
 func (googlecontainer *Googlecontainer) Starttask(request interface{}) (resp interface{}, err error) {
 	fmt.Println("\nThis API is not provided by Google cloud")
 	return
 }
+
+//Deleteservice crestes loadbalancer service.
 func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -385,6 +392,7 @@ func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp
 	return
 }
 
+//Stoptask stops container.
 func (googlecontainer *Googlecontainer) Stoptask(request interface{}) (resp interface{}, err error) {
 	options := request.(map[string]string)
 
