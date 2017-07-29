@@ -27,12 +27,149 @@ type Changednsrecordsets struct {
 
 func (googledns *Googledns) Changednsrecordsets(request interface{}) (resp interface{}, err error) {
 
+	param := request.(map[string]interface{})
+	var ManagedZone, Project string
+	var option Changednsrecordsets
+
+	for key, value := range param {
+		switch key {
+
+		case "project":
+			ProjectV, _ := value.(string)
+			Project = ProjectV
+
+		case "managedZone":
+			ManagedZoneV, _ := value.(string)
+			ManagedZone = ManagedZoneV
+
+		case "additions":
+			AdditionsV, _ := value.([]string)
+			option.Additions = AdditionsV
+
+		case "deletions":
+			DeletionsV, _ := value.([]string)
+			option.Deletions = DeletionsV
+
+		case "startTime":
+			StartTimeV, _ := value.(string)
+			option.StartTime = StartTimeV
+
+		case "id":
+			IDV, _ := value.(string)
+			option.ID = IDV
+
+		case "kind":
+			kindV, _ := value.(string)
+			option.kind = kindV
+
+		case "status":
+			StatusV, _ := value.(string)
+			option.Status = StatusV
+
+		}
+	}
+
+	Changednsrecordsetsjsonmap := make(map[string]interface{})
+
+	Changednsrecordsetsdictnoaryconvert(option, Changednsrecordsetsjsonmap)
+
+	Changednsrecordsetsjson, _ := json.Marshal(Changednsrecordsetsjsonmap)
+
+	Changednsrecordsetsstring := string(Changednsrecordsetsjson)
+
+	fmt.Println(Changednsrecordsetsstring)
+
+	var Changednsrecordsetsjsonstringbyte = []byte(Changednsrecordsetsjsonstring)
+
+	url := "https://www.googleapis.com/dns/v1/projects/" + Project + "/managedZones" + ManagedZone + "/changes"
+
+	client := googleauth.SignJWT()
+
+	Changednsrecordsetsrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Changednsrecordsetsjsonstringbyte))
+
+	Creatednsrequest.Header.Set("Content-Type", "application/json")
+
+	Changednsrecordsetsrresp, err := client.Do(Changednsrecordsetsrequest)
+
+	defer Changednsrecordsetsrresp.Body.Close()
+
+	body, err := ioutil.ReadAll(Changednsrecordsetsrresp.Body)
+
+	fmt.Println(string(body))
+
+	return
+}
+
+func Changednsrecordsetsdictnoaryconvert(option Changednsrecordsets, Changednsrecordsetsjsonmap map[string]interface{}) {
+	if len(option.Additions) != 0 {
+		Changednsrecordsetsjsonmap["additions"] = option.Additions
+	}
+
+	if len(option.Deletions) != 0 {
+		Changednsrecordsetsjsonmap["Deletions"] = option.Deletions
+	}
+
+	if option.ID != "" {
+		Changednsrecordsetsjsonmap["id"] = option.ID
+	}
+	if option.Kind != "" {
+		Changednsrecordsetsjsonmap["kind"] = option.Kind
+	}
+	if option.StartTime != "" {
+		Changednsrecordsetsjsonmap["startTime"] = option.StartTime
+	}
+	if option.Status != "" {
+		Changednsrecordsetsjsonmap["status"] = option.Status
+	}
+}
+
+func (googledns *Googledns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error) {
+
+	options := request.(map[string]string)
+
+	url := "https://www.googleapis.com/dns/v1/projects" + options["project"] + "/managedZones/" + options["managedZone"] + "/changes"
+
+	client := googleauth.SignJWT()
+
+	ListResourcednsRecordSetsrequest, err := http.NewRequest("GET", url, nil)
+
+	ListResourcednsRecordSetsparam := ListResourcednsRecordSetsrequest.URL.Query()
+
+	if options["maxResults"] != "" {
+		ListResourcednsRecordSetsrequestparam.Add("deviceName", options["maxResults"])
+	}
+
+	if options["pageToken"] != 0 {
+		ListResourcednsRecordSetsrequestparam.Add("pageToken", options["pageToken"])
+	}
+
+	if options["sortBy"] != "" {
+		ListResourcednsRecordSetsrequestparam.Add("sortBy", options["sortBy"])
+	}
+
+	if options["sortOrder"] != "" {
+		ListResourcednsRecordSetsrequestparam.Add("sortOrder", options["sortOrder"])
+	}
+
+	ListResourcednsRecordSetsrequest.URL.RawQuery = ListResourcednsRecordSetsrequestparam.Encode()
+
+	ListResourcednsRecordSetsrequest.Header.Set("Content-Type", "application/json")
+
+	ListResourcednsRecordSetssresp, err := client.Do(ListResourcednsRecordSetsrequest)
+
+	defer ListResourcednsRecordSetsresp.Body.Close()
+
+	body, err := ioutil.ReadAll(ListResourcednsRecordSetsresp.Body)
+
+	fmt.Println(string(body))
+
+	return
 }
 
 func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
-	var ManagedZone, Project string
+	var Project string
 	var option Createdns
 
 	for key, value := range param {
@@ -171,32 +308,32 @@ func (googledns *Googledns) Deletedns(request interface{}) (resp interface{}, er
 func Creatednsedictnoaryconvert(option Createdns, Creatednsjsonmap map[string]interface{}) {
 
 	if len(option.nameServers) != 0 {
-		Createclusterjsonmap["nameServers"] = option.nameServers
+		Creatednsjsonmap["nameServers"] = option.nameServers
 	}
 
 	if option.Name != "" {
-		Createclusterjsonmap["name"] = option.Name
+		Creatednsjsonmap["name"] = option.Name
 	}
 
 	if option.NameServerSet != "" {
-		Createclusterjsonmap["NameServerSet"] = option.NameServerSet
+		Creatednsjsonmap["NameServerSet"] = option.NameServerSet
 	}
 
 	if option.DNSName != "" {
-		Createclusterjsonmap["dnsName"] = option.DNSName
+		Creatednsjsonmap["dnsName"] = option.DNSName
 	}
 
 	if option.Kind != "" {
-		Createclusterjsonmap["kind"] = option.Kind
+		Creatednsjsonmap["kind"] = option.Kind
 	}
 
 	if option.ID != "" {
-		Createclusterjsonmap["id"] = option.ID
+		Creatednsjsonmap["id"] = option.ID
 	}
 	if option.Description != "" {
-		Createclusterjsonmap["description"] = option.Description
+		Creatednsjsonmap["description"] = option.Description
 	}
 	if option.CreationTime != "" {
-		Createclusterjsonmap["creationTime"] = option.CreationTime
+		Creatednsjsonmap["creationTime"] = option.CreationTime
 	}
 }
