@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 )
+
 //preparestoptaskparamsdict create dictnoary for stoptask.
 func preparestoptaskparamsdict(stoptaskjsonmap map[string]interface{}, stoptask Stoptask) {
 	if stoptask.Cluster != "" {
