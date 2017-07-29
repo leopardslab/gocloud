@@ -12,8 +12,9 @@ func TestCreatenode(t *testing.T) {
 	}
 
 	resp, _ := amazoncloud.Createnode(create)
+	fmt.Println("%T",resp)
 }
-
+/*
 func TestStartnode(t *testing.T) {
 	var amazoncloud EC2
 	start := map[string]string{
@@ -49,3 +50,4 @@ func TestDeletnode(t *testing.T) {
 	}
 	resp, _ := amazoncloud.Deletenode(delete)
 }
+*/

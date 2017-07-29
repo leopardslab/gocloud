@@ -3,7 +3,7 @@ package ec2
 import (
 	"encoding/base64"
 	"strconv"
-)
+	)
 
 // start ec2 instance accept array of instance-id
 
@@ -22,6 +22,8 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 	if err != nil {
 		return nil, err
 	}
+	//fmt.Println(resp)
+	//fmt.Printf("%T",resp)
 	return resp, nil
 }
 
