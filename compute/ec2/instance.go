@@ -3,7 +3,7 @@ package ec2
 import (
 	"encoding/base64"
 	"strconv"
-	)
+)
 
 // start ec2 instance accept array of instance-id
 

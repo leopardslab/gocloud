@@ -11,13 +11,13 @@ func TestStartnode(t *testing.T) {
 		"instance":  "sumesh-10",
 		"Zone":      "us-east4-c",
 	}
-	resp,_ := gce.Startnode(start)
+	resp, _ := gce.Startnode(start)
 
-  response := resp.(map[string]interface{})
+	response := resp.(map[string]interface{})
 
-	if(response["status"]=="200 OK"){
+	if response["status"] == "200 OK" {
 		fmt.Println(" Test pass")
-	}else{
-			fmt.Println("fail")
+	} else {
+		fmt.Println("fail")
 	}
 }

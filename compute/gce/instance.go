@@ -170,12 +170,12 @@ func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 	defer Startnoderesp.Body.Close()
 
 	body, err := ioutil.ReadAll(Startnoderesp.Body)
-	fmt.Println("response.status",Startnoderesp.Status)
-  Startnoderesponse := make(map[string]interface{})
+	fmt.Println("response.status", Startnoderesp.Status)
+	Startnoderesponse := make(map[string]interface{})
 	Startnoderesponse["status"] = Startnoderesp.Status
-	Startnoderesponse["body"]=string(body)
+	Startnoderesponse["body"] = string(body)
 	resp = Startnoderesponse
-	return resp,nil
+	return resp, nil
 }
 
 //stop gce instance currentnly running

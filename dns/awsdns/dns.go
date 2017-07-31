@@ -1,10 +1,9 @@
 package awsdns
 
-type Awsdns struct{
-
+type Awsdns struct {
 }
 
 func (awsdns *Awsdns) Listdns(request interface{}) (resp interface{}, err error) {
 
-return
+	return
 }
