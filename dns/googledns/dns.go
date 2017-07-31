@@ -2,8 +2,8 @@ package googledns
 
 
 import (
-	"bytes"
-	"encoding/json"
+	//"bytes"
+// "encoding/json"
 	"fmt"
 	googleauth "github.com/scorelab/gocloud-v2/googleauth"
 	"io/ioutil"
@@ -274,7 +274,7 @@ func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err 
 		Listdnsrequestparam.Add("deviceName", options["maxResults"])
 	}
 
-	if options["pageToken"] != 0 {
+	if options["pageToken"] != "0" {
 		Listdnsrequestparam.Add("pageToken", options["pageToken"])
 	}
 
@@ -282,7 +282,7 @@ func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err 
 
 	Listdnsrequest.Header.Set("Content-Type", "application/json")
 
-	Listdnssresp, err := client.Do(Listdnsrequest)
+	Listdnsresp, err := client.Do(Listdnsrequest)
 
 	defer Listdnsresp.Body.Close()
 
