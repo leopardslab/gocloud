@@ -1,5 +1,15 @@
 package googledns
 
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	googleauth "github.com/scorelab/gocloud-v2/googleauth"
+	"io/ioutil"
+	"net/http"
+)
+
 //Googledns struct represents Googledns attribute and methods associates with it.
 type Googledns struct {
 }
@@ -17,8 +27,8 @@ type Createdns struct {
 }
 
 type Changednsrecordsets struct {
-	Additions []interface{} `json:"additions"`
-	Deletions []interface{} `json:"deletions"`
+	Additions []string `json:"additions"`
+	Deletions []string `json:"deletions"`
 	ID        string        `json:"id"`
 	Kind      string        `json:"kind"`
 	StartTime string        `json:"startTime"`
