@@ -35,6 +35,7 @@ type Changednsrecordsets struct {
 	Status    string        `json:"status"`
 }
 
+/*
 func (googledns *Googledns) Changednsrecordsets(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
@@ -255,6 +256,7 @@ func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, er
 
 }
 
+*/
 //Listdns lists DNS.
 func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err error) {
 
@@ -291,6 +293,7 @@ func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err 
 	return
 }
 
+/*
 //Deletedns deletes DNS.
 func (googledns *Googledns) Deletedns(request interface{}) (resp interface{}, err error) {
 
@@ -347,3 +350,4 @@ func Creatednsedictnoaryconvert(option Createdns, Creatednsjsonmap map[string]in
 		Creatednsjsonmap["creationTime"] = option.CreationTime
 	}
 }
+*/
