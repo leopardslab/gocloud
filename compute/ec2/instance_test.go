@@ -1,5 +1,5 @@
 package ec2
-
+/*
 import "testing"
 import "fmt"
 
@@ -14,6 +14,7 @@ func TestCreatenode(t *testing.T) {
 	resp, _ := amazoncloud.Createnode(create)
 	fmt.Println("%T",resp)
 }
+*/
 /*
 func TestStartnode(t *testing.T) {
 	var amazoncloud EC2
