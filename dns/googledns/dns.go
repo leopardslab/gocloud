@@ -289,7 +289,6 @@ func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err 
 	body, err := ioutil.ReadAll(Listdnsresp.Body)
 
 	fmt.Println(string(body))
-
 	return
 }
 
