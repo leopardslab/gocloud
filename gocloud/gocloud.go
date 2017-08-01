@@ -34,6 +34,7 @@ type Gocloud interface {
 	Stoptask(request interface{}) (resp interface{}, err error)
 	Starttask(request interface{}) (resp interface{}, err error)
 	Listdns(request interface{}) (resp interface{}, err error)
+	Createdns(request interface{}) (resp interface{}, err error)
 }
 
 const (

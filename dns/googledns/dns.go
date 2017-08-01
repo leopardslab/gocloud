@@ -1,8 +1,8 @@
 package googledns
 
 import (
-	//"bytes"
-	// "encoding/json"
+	"bytes"
+	 "encoding/json"
 	"fmt"
 	googleauth "github.com/scorelab/gocloud-v2/googleauth"
 	"io/ioutil"
@@ -35,6 +35,16 @@ type Changednsrecordsets struct {
 }
 
 /*
+func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, err error) {
+return
+}
+
+func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err error) {
+return
+}
+
+*/
+
 func (googledns *Googledns) Changednsrecordsets(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
@@ -70,7 +80,7 @@ func (googledns *Googledns) Changednsrecordsets(request interface{}) (resp inter
 
 		case "kind":
 			kindV, _ := value.(string)
-			option.kind = kindV
+			option.Kind = kindV
 
 		case "status":
 			StatusV, _ := value.(string)
@@ -89,7 +99,7 @@ func (googledns *Googledns) Changednsrecordsets(request interface{}) (resp inter
 
 	fmt.Println(Changednsrecordsetsstring)
 
-	var Changednsrecordsetsjsonstringbyte = []byte(Changednsrecordsetsjsonstring)
+	var Changednsrecordsetsjsonstringbyte = []byte(Changednsrecordsetsstring)
 
 	url := "https://www.googleapis.com/dns/v1/projects/" + Project + "/managedZones" + ManagedZone + "/changes"
 
@@ -97,7 +107,7 @@ func (googledns *Googledns) Changednsrecordsets(request interface{}) (resp inter
 
 	Changednsrecordsetsrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Changednsrecordsetsjsonstringbyte))
 
-	Creatednsrequest.Header.Set("Content-Type", "application/json")
+	Changednsrecordsetsrequest.Header.Set("Content-Type", "application/json")
 
 	Changednsrecordsetsrresp, err := client.Do(Changednsrecordsetsrequest)
 
@@ -146,30 +156,30 @@ func (googledns *Googledns) ListResourcednsRecordSets(request interface{}) (resp
 	ListResourcednsRecordSetsparam := ListResourcednsRecordSetsrequest.URL.Query()
 
 	if options["maxResults"] != "" {
-		ListResourcednsRecordSetsrequestparam.Add("deviceName", options["maxResults"])
+		ListResourcednsRecordSetsparam.Add("deviceName", options["maxResults"])
 	}
 
-	if options["pageToken"] != 0 {
-		ListResourcednsRecordSetsrequestparam.Add("pageToken", options["pageToken"])
+	if options["pageToken"] != "" {
+		ListResourcednsRecordSetsparam.Add("pageToken", options["pageToken"])
 	}
 
 	if options["sortBy"] != "" {
-		ListResourcednsRecordSetsrequestparam.Add("sortBy", options["sortBy"])
+		ListResourcednsRecordSetsparam.Add("sortBy", options["sortBy"])
 	}
 
 	if options["sortOrder"] != "" {
-		ListResourcednsRecordSetsrequestparam.Add("sortOrder", options["sortOrder"])
+		ListResourcednsRecordSetsparam.Add("sortOrder", options["sortOrder"])
 	}
 
-	ListResourcednsRecordSetsrequest.URL.RawQuery = ListResourcednsRecordSetsrequestparam.Encode()
+	ListResourcednsRecordSetsrequest.URL.RawQuery = ListResourcednsRecordSetsparam.Encode()
 
 	ListResourcednsRecordSetsrequest.Header.Set("Content-Type", "application/json")
 
 	ListResourcednsRecordSetssresp, err := client.Do(ListResourcednsRecordSetsrequest)
 
-	defer ListResourcednsRecordSetsresp.Body.Close()
+	defer ListResourcednsRecordSetssresp.Body.Close()
 
-	body, err := ioutil.ReadAll(ListResourcednsRecordSetsresp.Body)
+	body, err := ioutil.ReadAll(ListResourcednsRecordSetssresp.Body)
 
 	fmt.Println(string(body))
 
@@ -191,11 +201,11 @@ func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, er
 
 		case "CreationTime":
 			CreationTimeV, _ := value.(string)
-			option.creationTime = CreationTimeV
+			option.CreationTime = CreationTimeV
 
 		case "Description":
 			DescriptionV, _ := value.(string)
-			option.description = DescriptionV
+			option.Description = DescriptionV
 
 		case "dnsName":
 			DNSNameV, _ := value.(string)
@@ -203,7 +213,7 @@ func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, er
 
 		case "nameServers":
 			nameServersV, _ := value.([]string)
-			option.nameServers = nameServersV
+			option.NameServers = nameServersV
 
 		case "id":
 			IDV, _ := value.(string)
@@ -211,7 +221,7 @@ func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, er
 
 		case "Kind":
 			kindV, _ := value.(string)
-			option.kind = kindV
+			option.Kind = kindV
 
 		case "Name":
 			NameV, _ := value.(string)
@@ -255,7 +265,7 @@ func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, er
 
 }
 
-*/
+
 //Listdns lists DNS.
 func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err error) {
 
@@ -291,7 +301,7 @@ func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err 
 	return
 }
 
-/*
+
 //Deletedns deletes DNS.
 func (googledns *Googledns) Deletedns(request interface{}) (resp interface{}, err error) {
 
@@ -318,8 +328,8 @@ func (googledns *Googledns) Deletedns(request interface{}) (resp interface{}, er
 
 func Creatednsedictnoaryconvert(option Createdns, Creatednsjsonmap map[string]interface{}) {
 
-	if len(option.nameServers) != 0 {
-		Creatednsjsonmap["nameServers"] = option.nameServers
+	if len(option.NameServers) != 0 {
+		Creatednsjsonmap["nameServers"] = option.NameServers
 	}
 
 	if option.Name != "" {
@@ -348,4 +358,3 @@ func Creatednsedictnoaryconvert(option Createdns, Creatednsjsonmap map[string]in
 		Creatednsjsonmap["creationTime"] = option.CreationTime
 	}
 }
-*/

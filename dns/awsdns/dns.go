@@ -1,5 +1,9 @@
 package awsdns
 
+import (
+	"fmt"
+)
+
 type Awsdns struct {
 }
 
@@ -34,7 +38,7 @@ func (awsdns *Awsdns) Listdns(request interface{}) (resp interface{}, err error)
 }
 
 
-func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, err error) {
+func (awsdns *Awsdns) Createdns(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 
@@ -53,6 +57,7 @@ func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, er
 
 		case "xmlns":
 			XmlnsV, _ := value.(string)
+			fmt.Println(XmlnsV)
 			option.Xmlns = "https://route53.amazonaws.com/doc/2013-04-01/"
 
 		case "callerReference":
@@ -61,16 +66,16 @@ func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, er
 
 		case "hostedZoneConfig":
 			hostedZoneConfigV, _ := value.(map[string]string)
-      createHostedZoneRequest.HostedZoneConfig=&hostedZoneConfig{Comment: hostedZoneConfigV["Comment"], PrivateZone:hostedZoneConfigV["PrivateZone"]}
+      option.HostedZoneConfig = &hostedZoneConfig{Comment: hostedZoneConfigV["Comment"], PrivateZone:hostedZoneConfigV["PrivateZone"]}
 
 		case "VPC":
 			VPCV, _ := value.(map[string]string)
-			createHostedZoneRequest.VPC = &Vpc{VPCID : VPCV["VPCID"], VPCRegion : VPCV["VPCRegion"]}
+			option.VPC = &Vpc{VPCID : VPCV["VPCID"], VPCRegion : VPCV["VPCRegion"]}
 
 		}
 	}
 
-
+	fmt.Println(option.Name)
 	return
 
 }
