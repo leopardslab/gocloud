@@ -2,7 +2,7 @@ package googledns
 
 import (
 	"bytes"
-	 "encoding/json"
+	"encoding/json"
 	"fmt"
 	googleauth "github.com/scorelab/gocloud-v2/googleauth"
 	"io/ioutil"
@@ -33,17 +33,6 @@ type Changednsrecordsets struct {
 	StartTime string   `json:"startTime"`
 	Status    string   `json:"status"`
 }
-
-/*
-func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, err error) {
-return
-}
-
-func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err error) {
-return
-}
-
-*/
 
 func (googledns *Googledns) Changednsrecordsets(request interface{}) (resp interface{}, err error) {
 
@@ -265,7 +254,6 @@ func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, er
 
 }
 
-
 //Listdns lists DNS.
 func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err error) {
 
@@ -300,7 +288,6 @@ func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err 
 	fmt.Println(string(body))
 	return
 }
-
 
 //Deletedns deletes DNS.
 func (googledns *Googledns) Deletedns(request interface{}) (resp interface{}, err error) {
