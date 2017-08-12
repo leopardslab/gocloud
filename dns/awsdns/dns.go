@@ -13,14 +13,13 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+	"strconv"
 	"strings"
 	"time"
-	"strconv"
 )
 
 type Awsdns struct {
 }
-
 
 func multimap(p map[string]string) url.Values {
 	q := make(url.Values, len(p))
@@ -30,7 +29,7 @@ func multimap(p map[string]string) url.Values {
 	return q
 }
 
-type  ListResourcednsRecordSets struct {
+type ListResourcednsRecordSets struct {
 	Name       string
 	Type       string
 	Identifier string
@@ -82,8 +81,7 @@ type ResourceRecordSet struct {
 	Region        string       `xml:"Region,omitempty"`
 	Failover      string       `xml:"Failover,omitempty"`
 	AliasTarget   *AliasTarget `xml:"AliasTarget,omitempty"`
-
-	RecordsXML string `xml:",innerxml"`
+	RecordsXML    string       `xml:",innerxml"`
 }
 
 type CreateHostedZoneRequest struct {
@@ -110,7 +108,6 @@ type ListHostedZonesResponse struct {
 	MaxItems    int          `xml:"MaxItems"`
 }
 
-
 type ChangeResourceRecordSetsResponse struct {
 	ChangeInfo ChangeInfo `xml:"ChangeInfo"`
 }
@@ -133,11 +130,67 @@ func CleanZoneID(ID string) string {
 
 func (awsdns *Awsdns) Changednsrecordsets(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
-  fmt.Println(param)
-  var zone string
-  var option *ChangeResourceRecordSetsRequest
+	fmt.Println(param)
+	var zone string
+	var Comment string
+	var option *ChangeResourceRecordSetsRequest
+	var change []Change
+	for key, value := range param {
+		switch key {
+		case "zone":
+			zoneV, _ := value.(string)
+			zone = zoneV
 
+		case "comment":
+			commentV, _ := value.(string)
+			Comment = commentV
+
+		case "changes":
+			ChangesV, _ := value.([]map[string]interface{})
+			for i := 0; i < len(ChangesV); i++ {
+				var changeparam Change
+				for ChangesVkey, ChangesVvalue := range ChangesV[i] {
+					switch ChangesVkey {
+					case "action":
+						changeparam.Action = ChangesVvalue.(string)
+
+					case "record":
+						recordparam, _ := ChangesVvalue.(map[string]interface{})
+						var recordparams ResourceRecordSet
+						for recordparamkey, recordparamvalue := range recordparam {
+
+						    switch recordparamkey {
+							      case "name":
+								        recordparams.Name = recordparamvalue.(string)
+
+									  case "type":
+									      recordparams.Type = recordparamvalue.(string)
+
+									  case "ttl":
+										   recordparams.TTL = recordparamvalue.(int)
+
+									  case "records":
+											 recordparams.Records = recordparamvalue.([]string)
+
+							}
+						}
+
+						changeparam.Record = recordparams
+						fmt.Println("recordparam",recordparam)
+
+					}
+				}
+				change = append(change, changeparam)
+			}
+
+		}
+
+	}
+
+	option = &ChangeResourceRecordSetsRequest{Comment: Comment, Changes: change}
+	fmt.Println("option", option)
 	reqCopy := *option
+
 	for i, change := range reqCopy.Changes {
 		if len(change.Record.Records) > 1 {
 			var buf bytes.Buffer
@@ -146,7 +199,6 @@ func (awsdns *Awsdns) Changednsrecordsets(request interface{}) (resp interface{}
 					"<ResourceRecord><Value>%s</Value></ResourceRecord>",
 					r))
 			}
-
 			change.Record.Records = nil
 			change.Record.RecordsXML = fmt.Sprintf(
 				"<ResourceRecords>%s</ResourceRecords>", buf.String())
@@ -160,19 +212,14 @@ func (awsdns *Awsdns) Changednsrecordsets(request interface{}) (resp interface{}
 
 	response := make(map[string]interface{})
 
-	awsdns.PrepareSignatureV4query("POST", fmt.Sprintf("/%s/hostedzone/%s/rrset", "2013-04-01",zone),reqCopy,out, response)
+	awsdns.PrepareSignatureV4query("POST", fmt.Sprintf("/%s/hostedzone/%s/rrset", "2013-04-01", zone), reqCopy, out, response)
 
 	fmt.Println("response body :", response["body"])
 
 	resp = response
 
 	return resp, nil
-
-
-
 }
-
-
 
 func (awsdns *Awsdns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error) {
 
@@ -188,7 +235,6 @@ func (awsdns *Awsdns) ListResourcednsRecordSets(request interface{}) (resp inter
 		case "zone":
 			zoneV, _ := value.(string)
 			zone = zoneV
-
 
 		case "name":
 			nameV, _ := value.(string)
@@ -212,41 +258,37 @@ func (awsdns *Awsdns) ListResourcednsRecordSets(request interface{}) (resp inter
 	params := make(map[string]string)
 
 	if option.Name != "" {
-			params["name"] = option.Name
-		}
+		params["name"] = option.Name
+	}
 
 	if option.Type != "" {
-			params["type"] = option.Type
-		}
+		params["type"] = option.Type
+	}
 
 	if option.Identifier != "" {
-			params["identifier"] = option.Identifier
-		}
+		params["identifier"] = option.Identifier
+	}
 
 	if option.MaxItems != 0 {
-			params["maxitems"] = strconv.FormatInt(int64(option.MaxItems), 10)
-		}
+		params["maxitems"] = strconv.FormatInt(int64(option.MaxItems), 10)
+	}
 
-		req := multimap(params)
+	req := multimap(params)
 
-		zone = CleanZoneID(zone)
+	zone = CleanZoneID(zone)
 
-		response := make(map[string]interface{})
+	response := make(map[string]interface{})
 
-		out := &ListResourceRecordSetsResponse{}
+	out := &ListResourceRecordSetsResponse{}
 
-		awsdns.PrepareSignatureV4query("GET", fmt.Sprintf("/%s/hostedzone/%s/rrset", "2013-04-01", zone), req, out, response)
+	awsdns.PrepareSignatureV4query("GET", fmt.Sprintf("/%s/hostedzone/%s/rrset", "2013-04-01", zone), req, out, response)
 
-		fmt.Println("response body :", response["body"])
+	fmt.Println("response body :", response["body"])
 
-		resp = response
+	resp = response
 
-		return resp, nil
+	return resp, nil
 }
-
-
-
-
 
 func (awsdns *Awsdns) Listdns(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
