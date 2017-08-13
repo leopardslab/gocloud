@@ -18,6 +18,7 @@ import (
 )
 
 
+//multimap create map for parameters.
 func multimap(p map[string]string) url.Values {
 	q := make(url.Values, len(p))
 	for k, v := range p {
@@ -26,6 +27,7 @@ func multimap(p map[string]string) url.Values {
 	return q
 }
 
+//CleanZoneID cleans zone ID.
 func CleanZoneID(ID string) string {
 	if strings.HasPrefix(ID, "/hostedzone/") {
 		ID = strings.TrimPrefix(ID, "/hostedzone/")
@@ -33,7 +35,7 @@ func CleanZoneID(ID string) string {
 	return ID
 }
 
-
+//PrepareSignatureV4query prepare signatue for awsdns.
 func (awsdns *Awsdns) PrepareSignatureV4query(method, path string, req, resp interface{}, response map[string]interface{}) error {
 	params := make(map[string]string)
 	endpoint, err := url.Parse("https://route53.amazonaws.com")
@@ -42,7 +44,6 @@ func (awsdns *Awsdns) PrepareSignatureV4query(method, path string, req, resp int
 	}
 	endpoint.Path = path
 	sign(endpoint.Path, params)
-	fmt.Println("params : ", params)
 
 	if queryArgs, ok := req.(url.Values); ok {
 		endpoint.RawQuery = queryArgs.Encode()
@@ -120,8 +121,10 @@ func (awsdns *Awsdns) PrepareSignatureV4query(method, path string, req, resp int
 }
 
 
+//b64 represents base64.StdEncoding.
 var b64 = base64.StdEncoding
 
+// sign signs aws request.
 func sign(path string, params map[string]string) {
 
 	AccessKey := auth.Config.AWSAccessKeyID
@@ -132,8 +135,6 @@ func sign(path string, params map[string]string) {
 
 	params["Date"] = date
 
-	fmt.Println("SecretKey:", SecretKey)
-
 	hash := hmac.New(sha256.New, []byte(SecretKey))
 
 	hash.Write([]byte(date))
@@ -141,8 +142,6 @@ func sign(path string, params map[string]string) {
 	signature := make([]byte, b64.EncodedLen(hash.Size()))
 
 	b64.Encode(signature, hash.Sum(nil))
-
-	fmt.Println("AccessKey:", AccessKey)
 
 	header := fmt.Sprintf("AWS3-HTTPS AWSAccessKeyId=%s,Algorithm=HmacSHA256,Signature=%s", AccessKey, signature)
 
