@@ -1,20 +1,9 @@
 package awsdns
 
 import (
-	"bytes"
-	"crypto/hmac"
-	"crypto/sha256"
-	"encoding/base64"
-	"encoding/xml"
 	"fmt"
-	auth "github.com/scorelab/gocloud-v2/auth"
-	"io"
-	"io/ioutil"
-	"net/http"
 	"net/url"
-	"reflect"
 	"strconv"
-	"strings"
 	"time"
 )
 
