@@ -37,7 +37,6 @@ type Gocloud interface {
 	Createdns(request interface{}) (resp interface{}, err error)
 	Deletedns(request interface{}) (resp interface{}, err error)
 	ListResourcednsRecordSets(request interface{}) (resp interface{}, err error)
-	Changednsrecordsets(request interface{}) (resp interface{}, err error)
 }
 
 const (
