@@ -153,7 +153,11 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 	body, err := ioutil.ReadAll(Createnoderesp.Body)
 	fmt.Println(string(body))
 
-	return
+	Createnoderesponse := make(map[string]interface{})
+	Createnoderesponse["status"] = Createnoderesp.StatusCode
+	Createnoderesponse["body"] = string(body)
+	resp = Createnoderesponse
+	return resp, nil
 }
 
 func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
@@ -202,7 +206,11 @@ func (gce *GCE) Stopnode(request interface{}) (resp interface{}, err error) {
 	body, err := ioutil.ReadAll(Stopnoderesp.Body)
 	fmt.Println(string(body))
 
-	return
+	Stopnoderesponse := make(map[string]interface{})
+	Stopnoderesponse["status"] = Stopnoderesp.StatusCode
+	Stopnoderesponse["body"] = string(body)
+	resp = Stopnoderesponse
+	return resp, nil
 }
 
 //delete gce instance currentnly running
@@ -226,7 +234,11 @@ func (gce *GCE) Deletenode(request interface{}) (resp interface{}, err error) {
 
 	fmt.Println(string(body))
 
-	return
+	Deletenoderesponse := make(map[string]interface{})
+	Deletenoderesponse["status"] = Deletenoderesp.StatusCode
+	Deletenoderesponse["body"] = string(body)
+	resp = Deletenoderesponse
+	return resp, nil
 }
 
 //reboot/reset gce instance currentnly ***running***
@@ -249,7 +261,11 @@ func (gce *GCE) Rebootnode(request interface{}) (resp interface{}, err error) {
 	body, err := ioutil.ReadAll(Rebootnoderesp.Body)
 	fmt.Println(string(body))
 
-	return
+	Rebootnoderesponse := make(map[string]interface{})
+	Rebootnoderesponse["status"] = Rebootnoderesp.StatusCode
+	Rebootnoderesponse["body"] = string(body)
+	resp = Rebootnoderesponse
+	return resp, nil
 }
 
 //list gce instance currentnly created
@@ -273,5 +289,9 @@ func (gce *GCE) listnode(request interface{}) (resp interface{}, err error) {
 
 	fmt.Println(string(body))
 
-	return
+	listnoderesponse := make(map[string]interface{})
+	listnoderesponse["status"] = listnoderesp.StatusCode
+	listnoderesponse["body"] = string(body)
+	resp = listnoderesponse
+	return resp, nil
 }
