@@ -17,7 +17,6 @@ import (
 	"time"
 )
 
-
 //multimap create map for parameters.
 func multimap(p map[string]string) url.Values {
 	q := make(url.Values, len(p))
@@ -119,7 +118,6 @@ func (awsdns *Awsdns) PrepareSignatureV4query(method, path string, req, resp int
 	decoder := xml.NewDecoder(re.Body)
 	return decoder.Decode(resp)
 }
-
 
 //b64 represents base64.StdEncoding.
 var b64 = base64.StdEncoding

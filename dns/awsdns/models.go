@@ -1,13 +1,10 @@
 package awsdns
 
-import (
-)
-
-
+//Awsdns represents Awsdns attribute and method associates with it.
 type Awsdns struct {
 }
 
-
+//ListResourcednsRecordSets represents ListResourcednsRecordSets.
 type ListResourcednsRecordSets struct {
 	Name       string
 	Type       string
@@ -15,22 +12,26 @@ type ListResourcednsRecordSets struct {
 	MaxItems   int
 }
 
+//ChangeResourceRecordSetsRequest respeptes ChangeResourceRecordSetsRequest.
 type ChangeResourceRecordSetsRequest struct {
 	Comment string   `xml:"ChangeBatch>Comment,omitempty"`
 	Changes []Change `xml:"ChangeBatch>Changes>Change"`
 }
 
+//Change represents Change.
 type Change struct {
 	Action string            `xml:"Action"`
 	Record ResourceRecordSet `xml:"ResourceRecordSet"`
 }
 
+//AliasTarget represents AliasTarget.
 type AliasTarget struct {
 	HostedZoneId         string
 	DNSName              string
 	EvaluateTargetHealth bool
 }
 
+//HostedZone represents HostedZone.
 type HostedZone struct {
 	ID              string `xml:"Id"`
 	Name            string `xml:"Name"`
@@ -39,16 +40,19 @@ type HostedZone struct {
 	ResourceCount   int    `xml:"ResourceRecordSetCount"`
 }
 
+//ChangeInfo represents ChangeInfo.
 type ChangeInfo struct {
 	ID          string `xml:"Id"`
 	Status      string `xml:"Status"`
 	SubmittedAt string `xml:"SubmittedAt"`
 }
 
+//DelegationSet represents DelegationSet.
 type DelegationSet struct {
 	NameServers []string `xml:"NameServers>NameServer"`
 }
 
+//ResourceRecordSet represents ResourceRecordSet.
 type ResourceRecordSet struct {
 	Name          string       `xml:"Name"`
 	Type          string       `xml:"Type"`
@@ -63,22 +67,26 @@ type ResourceRecordSet struct {
 	RecordsXML    string       `xml:",innerxml"`
 }
 
+//CreateHostedZoneRequest represents CreateHostedZoneRequest.
 type CreateHostedZoneRequest struct {
 	Name            string `xml:"Name"`
 	CallerReference string `xml:"CallerReference"`
 	Comment         string `xml:"HostedZoneConfig>Comment"`
 }
 
+//CreateHostedZoneResponse represents CreateHostedZoneResponse.
 type CreateHostedZoneResponse struct {
 	HostedZone    HostedZone    `xml:"HostedZone"`
 	ChangeInfo    ChangeInfo    `xml:"ChangeInfo"`
 	DelegationSet DelegationSet `xml:"DelegationSet"`
 }
 
+//DeleteHostedZoneResponse represents DeleteHostedZoneResponse.
 type DeleteHostedZoneResponse struct {
 	ChangeInfo ChangeInfo `xml:"ChangeInfo"`
 }
 
+//ListHostedZonesResponse represents ListHostedZonesResponse.
 type ListHostedZonesResponse struct {
 	HostedZones []HostedZone `xml:"HostedZones>HostedZone"`
 	Marker      string       `xml:"Marker"`
@@ -87,10 +95,12 @@ type ListHostedZonesResponse struct {
 	MaxItems    int          `xml:"MaxItems"`
 }
 
+//ChangeResourceRecordSetsResponse represents ChangeResourceRecordSetsResponse
 type ChangeResourceRecordSetsResponse struct {
 	ChangeInfo ChangeInfo `xml:"ChangeInfo"`
 }
 
+//ListResourceRecordSetsResponse represents ListResourceRecordSetsResponse.
 type ListResourceRecordSetsResponse struct {
 	Records              []ResourceRecordSet `xml:"ResourceRecordSets>ResourceRecordSet"`
 	IsTruncated          bool                `xml:"IsTruncated"`

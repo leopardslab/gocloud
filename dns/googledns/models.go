@@ -1,8 +1,5 @@
 package googledns
 
-import (
-)
-
 //Googledns struct represents Googledns attribute and methods associates with it.
 type Googledns struct {
 }
