@@ -1,6 +1,6 @@
 package googledns
 
-
+//Creatednsedictnoaryconvert convert Createdns parameters to Createdns dictnoary.
 func Creatednsedictnoaryconvert(option Createdns, Creatednsjsonmap map[string]interface{}) {
 
 	if len(option.NameServers) != 0 {

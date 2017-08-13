@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-
+//ListResourcednsRecordSets list ListResourcednsRecordSets.
 func (googledns *Googledns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -53,6 +53,7 @@ func (googledns *Googledns) ListResourcednsRecordSets(request interface{}) (resp
 	return
 }
 
+//Createdns creates DNS.
 func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
