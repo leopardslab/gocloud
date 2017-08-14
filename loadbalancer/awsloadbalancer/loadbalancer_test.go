@@ -8,7 +8,6 @@ func init() {
 	auth.LoadConfig()
 }
 
-
 func TestCreatloadbalancer(t *testing.T) {
 	var awsloadbalancer Awsloadbalancer
 	Listeners := []map[string]string{{
@@ -36,13 +35,12 @@ func TestCreatloadbalancer(t *testing.T) {
 	}
 }
 
-
 func TestDeleteloadbalancer(t *testing.T) {
-  var awsloadbalancer Awsloadbalancer
+	var awsloadbalancer Awsloadbalancer
 
-  deleteloadbalancer := map[string]string{
-    "LoadBalancerName": "my-load-balancer",
-  }
+	deleteloadbalancer := map[string]string{
+		"LoadBalancerName": "my-load-balancer",
+	}
 	_, err := awsloadbalancer.Deleteloadbalancer(deleteloadbalancer)
 
 	if err != nil {
@@ -52,11 +50,10 @@ func TestDeleteloadbalancer(t *testing.T) {
 	}
 }
 
-
 func TestListloadbalancer(t *testing.T) {
-  var awsloadbalancer Awsloadbalancer
+	var awsloadbalancer Awsloadbalancer
 
-  	_, err := awsloadbalancer.Listloadbalancer(nil)
+	_, err := awsloadbalancer.Listloadbalancer(nil)
 
 	if err != nil {
 		fmt.Println("Test Fail")
@@ -64,17 +61,16 @@ func TestListloadbalancer(t *testing.T) {
 		fmt.Println("Test Pass")
 	}
 }
-
 
 func TestAttachnodewithloadbalancer(t *testing.T) {
-  var awsloadbalancer Awsloadbalancer
+	var awsloadbalancer Awsloadbalancer
 
-  attachnodewithloadbalancer := map[string]interface{}{
-    "Instances":        []string{"i-05f4f2535c41b680b"},
-    "LoadBalancerName": "my-load-balancer",
-  }
+	attachnodewithloadbalancer := map[string]interface{}{
+		"Instances":        []string{"i-05f4f2535c41b680b"},
+		"LoadBalancerName": "my-load-balancer",
+	}
 
-  	_, err := awsloadbalancer.Attachnodewithloadbalancer(attachnodewithloadbalancer)
+	_, err := awsloadbalancer.Attachnodewithloadbalancer(attachnodewithloadbalancer)
 
 	if err != nil {
 		fmt.Println("Test Fail")
@@ -83,15 +79,14 @@ func TestAttachnodewithloadbalancer(t *testing.T) {
 	}
 }
 
-
 func TestDetachnodewithloadbalancer(t *testing.T) {
-  var awsloadbalancer Awsloadbalancer
+	var awsloadbalancer Awsloadbalancer
 
-  detachnodewithloadbalancer := map[string]interface{}{
-    "Instances":        []string{"i-05f4f2535c41b680b"},
-    "LoadBalancerName": "my-load-balancer",
-  }
-  	_, err := awsloadbalancer.Detachnodewithloadbalancer(detachnodewithloadbalancer)
+	detachnodewithloadbalancer := map[string]interface{}{
+		"Instances":        []string{"i-05f4f2535c41b680b"},
+		"LoadBalancerName": "my-load-balancer",
+	}
+	_, err := awsloadbalancer.Detachnodewithloadbalancer(detachnodewithloadbalancer)
 
 	if err != nil {
 		fmt.Println("Test Fail")

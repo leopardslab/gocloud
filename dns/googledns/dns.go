@@ -3,7 +3,6 @@ package googledns
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	googleauth "github.com/scorelab/gocloud-v2/googleauth"
 	"io/ioutil"
 	"net/http"
@@ -11,10 +10,9 @@ import (
 )
 
 const (
-        UnixDate    = "Mon Jan _2 15:04:05 MST 2006"
-        RFC3339     = "2006-01-02T15:04:05Z07:00"
+	UnixDate = "Mon Jan _2 15:04:05 MST 2006"
+	RFC3339  = "2006-01-02T15:04:05Z07:00"
 )
-
 
 //ListResourcednsRecordSets list ListResourcednsRecordSets.
 func (googledns *Googledns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error) {
@@ -55,9 +53,11 @@ func (googledns *Googledns) ListResourcednsRecordSets(request interface{}) (resp
 
 	body, err := ioutil.ReadAll(ListResourcednsRecordSetssresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	ListResourcednsRecordSetresponse := make(map[string]interface{})
+	ListResourcednsRecordSetresponse["status"] = ListResourcednsRecordSetssresp.StatusCode
+	ListResourcednsRecordSetresponse["body"] = string(body)
+	resp = ListResourcednsRecordSetresponse
+	return resp, err
 }
 
 //Createdns creates DNS.
@@ -117,8 +117,6 @@ func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, er
 
 	Creatednsjsonstring := string(Creatednsjson)
 
-	fmt.Println(Creatednsjsonstring)
-
 	var Creatednsjsonstringbyte = []byte(Creatednsjsonstring)
 
 	url := "https://www.googleapis.com/dns/v1/projects/" + Project + "/managedZones"
@@ -135,10 +133,11 @@ func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, er
 
 	body, err := ioutil.ReadAll(Creatednsrresp.Body)
 
-	fmt.Println(string(body))
-
-	return
-
+	Creatednsresponse := make(map[string]interface{})
+	Creatednsresponse["status"] = Creatednsrresp.StatusCode
+	Creatednsresponse["body"] = string(body)
+	resp = Creatednsresponse
+	return resp, err
 }
 
 //Listdns lists DNS.
@@ -172,8 +171,11 @@ func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err 
 
 	body, err := ioutil.ReadAll(Listdnsresp.Body)
 
-	fmt.Println(string(body))
-	return
+	Listdnsresponse := make(map[string]interface{})
+	Listdnsresponse["status"] = Listdnsresp.StatusCode
+	Listdnsresponse["body"] = string(body)
+	resp = Listdnsresponse
+	return resp, err
 }
 
 //Deletedns deletes DNS.
@@ -195,7 +197,9 @@ func (googledns *Googledns) Deletedns(request interface{}) (resp interface{}, er
 
 	body, err := ioutil.ReadAll(Deletednsresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Deletednsresponse := make(map[string]interface{})
+	Deletednsresponse["status"] = Deletednsresp.StatusCode
+	Deletednsresponse["body"] = string(body)
+	resp = Deletednsresponse
+	return resp, err
 }
