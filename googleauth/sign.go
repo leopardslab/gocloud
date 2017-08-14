@@ -27,6 +27,7 @@ func Sign() (token *oauth2.Token) {
 			"https://www.googleapis.com/auth/devstorage.full_control",
 			"https://www.googleapis.com/auth/ndev.clouddns.readwrite",
 			"https://www.googleapis.com/auth/cloud-platform",
+			"https://www.googleapis.com/auth/ndev.clouddns.readonly",
 		},
 
 		Endpoint: google.Endpoint,
@@ -53,7 +54,7 @@ func SignJWT() (client *http.Client) {
 
 	var home string = os.Getenv("HOME")
 
-	data, err := ioutil.ReadFile(home + "/googleconfig.json")
+	data, err := ioutil.ReadFile(home + "/ShelterMap-70475fda46e7.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -62,6 +63,7 @@ func SignJWT() (client *http.Client) {
 		"https://www.googleapis.com/auth/devstorage.full_control",
 		"https://www.googleapis.com/auth/ndev.clouddns.readwrite",
 		"https://www.googleapis.com/auth/cloud-platform",
+		"https://www.googleapis.com/auth/ndev.clouddns.readonly",
 	)
 	if err != nil {
 		log.Fatal(err)

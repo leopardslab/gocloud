@@ -950,7 +950,7 @@ func main() {
 	fmt.Println(response["body"])
 
 */
-
+/*
 creatloadbalancer := map[string]interface{}{
 	"Project": "sheltermap-1493101612061",
 	"name":  "google-loadbalancer",
@@ -960,4 +960,39 @@ creatloadbalancer := map[string]interface{}{
 
 googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 googlecloud.Creatloadbalancer(creatloadbalancer)
+
+*/
+googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+
+createdns := map[string]interface{}{
+	"Project": "sheltermap-1493101612061",
+   "Kind"	:   "dns#managedZone",
+	 "Description": "dns",
+	 "DnsName" : "rootmonk.me.",
+	 "Name":"gocloud3",
+}
+googlecloud.Createdns(createdns)
+
+	listdns := map[string]string{
+		"Project": "sheltermap-1493101612061",
+	}
+
+  googlecloud.Listdns(listdns)
+
+
+
+	listResourcednsRecordSets := map[string]string{
+		"Project": "sheltermap-1493101612061",
+	  "managedZone":"gocloud3",
+	 }
+	  googlecloud.ListResourcednsRecordSets(listResourcednsRecordSets)
+
+/*
+		deletedns := map[string]string{
+			"Project": "sheltermap-1493101612061",
+		  "managedZone":"gocloud3",
+		 }
+		  googlecloud.Deletedns(deletedns)
+*/
+
 }
