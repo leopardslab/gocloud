@@ -924,6 +924,7 @@ func main() {
 
 	*/
 
+/*loadbalancer api aws
 	Listeners := []map[string]string{{
 		"InstancePort":     "80",
 		"LoadBalancerPort": "80",
@@ -947,4 +948,16 @@ func main() {
 
 	fmt.Println("***************")
 	fmt.Println(response["body"])
+
+*/
+
+creatloadbalancer := map[string]interface{}{
+	"Project": "sheltermap-1493101612061",
+	"name":  "google-loadbalancer",
+	"Region":"us-east4-c",
+	"instances": []string{"testing-scorelab"},
+}
+
+googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+googlecloud.Creatloadbalancer(creatloadbalancer)
 }
