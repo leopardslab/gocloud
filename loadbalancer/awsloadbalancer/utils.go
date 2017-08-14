@@ -1,7 +1,6 @@
 package awsloadbalancer
 
 import (
-	"encoding/xml"
 	"github.com/scorelab/gocloud-v2/auth"
 	awsauth "github.com/scorelab/gocloud-v2/awsauth"
 	"io/ioutil"
@@ -14,7 +13,7 @@ import (
 var timeNow = time.Now
 
 //PrepareSignatureV2query for elasticloadbalancing.
-func (awsloadbalancer *Awsloadbalancer) PrepareSignatureV2query(params map[string]string) error {
+func (awsloadbalancer *Awsloadbalancer) PrepareSignatureV2query(params map[string]string, response map[string]interface{}) error {
 
 	ElasticloadbalancingEndpoint := "https://elasticloadbalancing.amazonaws.com"
 
@@ -42,9 +41,11 @@ func (awsloadbalancer *Awsloadbalancer) PrepareSignatureV2query(params map[strin
 	}
 	defer r.Body.Close()
 
-	resp, err := ioutil.ReadAll(r.Body)
+	body, err := ioutil.ReadAll(r.Body)
 
-	return xml.NewDecoder(r.Body).Decode(resp)
+	response["body"] = string(body)
+	response["status"] = r.StatusCode
+	return err
 }
 
 //prepareAvailabilityZones prepareAvailabilityZones attribute for CreateLoadBalancer.

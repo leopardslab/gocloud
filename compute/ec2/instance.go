@@ -20,7 +20,7 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 
 	response := make(map[string]interface{})
 
-	err = ec2.PrepareSignatureV2query(params, Region,response)
+	err = ec2.PrepareSignatureV2query(params, Region, response)
 	resp = response
 	return resp, nil
 }

@@ -63,9 +63,10 @@ func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (
 		params["Scheme"] = options.Scheme
 	}
 
-	awsloadbalancer.PrepareSignatureV2query(params)
-
-	return
+	response := make(map[string]interface{})
+	err = awsloadbalancer.PrepareSignatureV2query(params, response)
+	resp = response
+	return resp, err
 }
 
 //Deleteloadbalancer Delete loadbalancer accept LoadBalancerName.
@@ -77,9 +78,10 @@ func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) 
 
 	params["LoadBalancerName"] = param["LoadBalancerName"]
 
-	awsloadbalancer.PrepareSignatureV2query(params)
-
-	return
+	response := make(map[string]interface{})
+	err = awsloadbalancer.PrepareSignatureV2query(params, response)
+	resp = response
+	return resp, err
 }
 
 //Listloadbalancer List running loadbalancer.
@@ -91,8 +93,10 @@ func (awsloadbalancer *Awsloadbalancer) Listloadbalancer(request interface{}) (r
 			params["LoadBalancerArn"] = param["LoadBalancerArn"]
 		}
 	}
-	awsloadbalancer.PrepareSignatureV2query(params)
-	return
+	response := make(map[string]interface{})
+	err = awsloadbalancer.PrepareSignatureV2query(params, response)
+	resp = response
+	return resp, err
 }
 
 //Detachnodewithloadbalancer Detach node with loadbalancer.
@@ -124,8 +128,10 @@ func (awsloadbalancer *Awsloadbalancer) Detachnodewithloadbalancer(request inter
 		params["LoadBalancerName"] = options.LoadBalancerName
 	}
 
-	awsloadbalancer.PrepareSignatureV2query(params)
-	return
+	response := make(map[string]interface{})
+	err = awsloadbalancer.PrepareSignatureV2query(params, response)
+	resp = response
+	return resp, err
 }
 
 // Attachnodewithloadbalancer method Attach node with loadbalancer.
@@ -157,6 +163,8 @@ func (awsloadbalancer *Awsloadbalancer) Attachnodewithloadbalancer(request inter
 	if options.LoadBalancerName != "" {
 		params["LoadBalancerName"] = options.LoadBalancerName
 	}
-	awsloadbalancer.PrepareSignatureV2query(params)
-	return
+	response := make(map[string]interface{})
+	err = awsloadbalancer.PrepareSignatureV2query(params, response)
+	resp = response
+	return resp, err
 }

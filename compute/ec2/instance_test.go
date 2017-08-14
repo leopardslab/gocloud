@@ -9,7 +9,6 @@ func init() {
 	auth.LoadConfig()
 }
 
-
 func TestCreatenode(t *testing.T) {
 	var amazoncloud EC2
 	create := map[string]interface{}{
@@ -18,16 +17,14 @@ func TestCreatenode(t *testing.T) {
 		"Region":       "us-east-1",
 	}
 
-	_,err := amazoncloud.Createnode(create)
+	_, err := amazoncloud.Createnode(create)
 
-  if(err!=nil){
+	if err != nil {
 		fmt.Println("Test Fail")
-	}else{
-		 fmt.Println("Test Pass")
+	} else {
+		fmt.Println("Test Pass")
 	}
 }
-
-
 
 func TestStopnode(t *testing.T) {
 	var amazoncloud EC2
@@ -35,16 +32,14 @@ func TestStopnode(t *testing.T) {
 		"instance-id": "i-06d518ba15b68685c",
 		"Region":      "us-east-1",
 	}
-	_ ,err := amazoncloud.Stopnode(stop)
+	_, err := amazoncloud.Stopnode(stop)
 
-  if(err!=nil){
+	if err != nil {
 		fmt.Println("Test Fail")
-	}else{
-		 fmt.Println("Test Pass")
+	} else {
+		fmt.Println("Test Pass")
 	}
 }
-
-
 
 func TestStartnode(t *testing.T) {
 	var amazoncloud EC2
@@ -52,15 +47,13 @@ func TestStartnode(t *testing.T) {
 		"instance-id": "i-0174bd6f54178e89b",
 		"Region":      "us-east-1",
 	}
-	_,err := amazoncloud.Startnode(start)
-  if(err!=nil){
+	_, err := amazoncloud.Startnode(start)
+	if err != nil {
 		fmt.Println("Test Fail")
-	}else{
-		 fmt.Println("Test Pass")
+	} else {
+		fmt.Println("Test Pass")
 	}
 }
-
-
 
 func TestRebootnode(t *testing.T) {
 	var amazoncloud EC2
@@ -68,13 +61,13 @@ func TestRebootnode(t *testing.T) {
 		"instance-id": "i-0174bd6f54178e89b",
 		"Region":      "us-east-1",
 	}
-	_,err := amazoncloud.Rebootnode(Reboot)
+	_, err := amazoncloud.Rebootnode(Reboot)
 
-  if(err!=nil){
-    fmt.Println("Test Fail")
-  }else{
-     fmt.Println("Test Pass")
-  }
+	if err != nil {
+		fmt.Println("Test Fail")
+	} else {
+		fmt.Println("Test Pass")
+	}
 }
 
 func TestDeletnode(t *testing.T) {
@@ -83,11 +76,11 @@ func TestDeletnode(t *testing.T) {
 		"instance-id": "i-0174bd6f54178e89b",
 		"Region":      "us-east-1",
 	}
-	_,err := amazoncloud.Deletenode(delete)
+	_, err := amazoncloud.Deletenode(delete)
 
-  if(err!=nil){
+	if err != nil {
 		fmt.Println("Test Fail")
-	}else{
-		 fmt.Println("Test Pass")
+	} else {
+		fmt.Println("Test Pass")
 	}
 }

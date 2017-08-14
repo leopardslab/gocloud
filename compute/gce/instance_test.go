@@ -4,61 +4,56 @@ import "testing"
 
 import "fmt"
 
-
 func TestDeletenode(t *testing.T) {
 	var gce GCE
 	deletenode := map[string]string{
-	"projectid":"sheltermap-1493101612061",
-	"instance":"testing-scorelab",
-	"Zone": "us-west1-c",
-}
+		"projectid": "sheltermap-1493101612061",
+		"instance":  "testing-scorelab",
+		"Zone":      "us-west1-c",
+	}
 
-	_,err := gce.Deletenode(deletenode)
+	_, err := gce.Deletenode(deletenode)
 
-	if(err!=nil){
+	if err != nil {
 		fmt.Println("Test Fail")
-		}else{
-	 	fmt.Println("Test Pass")
+	} else {
+		fmt.Println("Test Pass")
 	}
 }
-
 
 func TestStopnode(t *testing.T) {
 	var gce GCE
 	stopnode := map[string]string{
-	"projectid":"sheltermap-1493101612061",
-	"instance":"testing-scorelab",
-	"Zone": "us-west1-c",
+		"projectid": "sheltermap-1493101612061",
+		"instance":  "testing-scorelab",
+		"Zone":      "us-west1-c",
 	}
 
-	_,err := gce.Stopnode(stopnode)
+	_, err := gce.Stopnode(stopnode)
 
-	if(err!=nil){
+	if err != nil {
 		fmt.Println("Test Fail")
-	}else{
-		 fmt.Println("Test Pass")
+	} else {
+		fmt.Println("Test Pass")
 	}
- }
-
+}
 
 func TestRebootnode(t *testing.T) {
 	var gce GCE
 	reboot := map[string]string{
-	"projectid":"sheltermap-1493101612061",
-	"instance":"testing-scorelab",
-	"Zone": "us-west1-c",
-
+		"projectid": "sheltermap-1493101612061",
+		"instance":  "testing-scorelab",
+		"Zone":      "us-west1-c",
 	}
-	_,err := gce.Rebootnode(reboot)
+	_, err := gce.Rebootnode(reboot)
 
-
-	if(err!=nil){
+	if err != nil {
 		fmt.Println("Test Fail")
-	}else{
-		 fmt.Println("Test Pass")
+	} else {
+		fmt.Println("Test Pass")
 	}
 
-	}
+}
 
 func TestCreatenode(t *testing.T) {
 
@@ -104,11 +99,11 @@ func TestCreatenode(t *testing.T) {
 		"NetworkInterfaces": NetworkInterfaces,
 	}
 
-	_,err := gce.Createnode(createnode)
+	_, err := gce.Createnode(createnode)
 
-	if(err!=nil){
+	if err != nil {
 		fmt.Println("Test Fail")
-	}else{
-		 fmt.Println("Test Pass")
+	} else {
+		fmt.Println("Test Pass")
 	}
 }
