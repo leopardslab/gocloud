@@ -27,7 +27,6 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 		switch key {
 		case "projectid":
 			projectid, _ = value.(string)
-			fmt.Println(projectid)
 
 		case "Zone":
 			zoneV, _ := value.(string)
@@ -151,7 +150,6 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 	defer Createnoderesp.Body.Close()
 
 	body, err := ioutil.ReadAll(Createnoderesp.Body)
-	fmt.Println(string(body))
 
 	Createnoderesponse := make(map[string]interface{})
 	Createnoderesponse["status"] = Createnoderesp.StatusCode
@@ -182,7 +180,7 @@ func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 	Startnoderesponse["status"] = Startnoderesp.StatusCode
 	Startnoderesponse["body"] = string(body)
 	resp = Startnoderesponse
-	return resp, nil
+	return resp, err
 }
 
 //stop gce instance currentnly running
@@ -204,7 +202,6 @@ func (gce *GCE) Stopnode(request interface{}) (resp interface{}, err error) {
 	defer Stopnoderesp.Body.Close()
 
 	body, err := ioutil.ReadAll(Stopnoderesp.Body)
-	fmt.Println(string(body))
 
 	Stopnoderesponse := make(map[string]interface{})
 	Stopnoderesponse["status"] = Stopnoderesp.StatusCode
@@ -232,12 +229,11 @@ func (gce *GCE) Deletenode(request interface{}) (resp interface{}, err error) {
 	defer Deletenoderesp.Body.Close()
 	body, err := ioutil.ReadAll(Deletenoderesp.Body)
 
-	fmt.Println(string(body))
-
 	Deletenoderesponse := make(map[string]interface{})
 	Deletenoderesponse["status"] = Deletenoderesp.StatusCode
 	Deletenoderesponse["body"] = string(body)
 	resp = Deletenoderesponse
+
 	return resp, nil
 }
 
@@ -256,10 +252,10 @@ func (gce *GCE) Rebootnode(request interface{}) (resp interface{}, err error) {
 	Rebootnoderequest.Header.Set("Content-Type", "application/json")
 
 	Rebootnoderesp, err := client.Do(Rebootnoderequest)
-
+	fmt.Println("error is :", err)
 	defer Rebootnoderesp.Body.Close()
+
 	body, err := ioutil.ReadAll(Rebootnoderesp.Body)
-	fmt.Println(string(body))
 
 	Rebootnoderesponse := make(map[string]interface{})
 	Rebootnoderesponse["status"] = Rebootnoderesp.StatusCode
@@ -286,8 +282,6 @@ func (gce *GCE) listnode(request interface{}) (resp interface{}, err error) {
 
 	defer listnoderesp.Body.Close()
 	body, err := ioutil.ReadAll(listnoderesp.Body)
-
-	fmt.Println(string(body))
 
 	listnoderesponse := make(map[string]interface{})
 	listnoderesponse["status"] = listnoderesp.StatusCode

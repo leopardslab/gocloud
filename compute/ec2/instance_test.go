@@ -1,8 +1,14 @@
 package ec2
 
-/*
 import "testing"
 import "fmt"
+
+import "github.com/scorelab/gocloud-v2/auth"
+
+func init() {
+	auth.LoadConfig()
+}
+
 
 func TestCreatenode(t *testing.T) {
 	var amazoncloud EC2
@@ -12,28 +18,49 @@ func TestCreatenode(t *testing.T) {
 		"Region":       "us-east-1",
 	}
 
-	resp, _ := amazoncloud.Createnode(create)
-	fmt.Println("%T",resp)
+	_,err := amazoncloud.Createnode(create)
+
+  if(err!=nil){
+		fmt.Println("Test Fail")
+	}else{
+		 fmt.Println("Test Pass")
+	}
 }
-*/
-/*
+
+
+
+func TestStopnode(t *testing.T) {
+	var amazoncloud EC2
+	stop := map[string]string{
+		"instance-id": "i-06d518ba15b68685c",
+		"Region":      "us-east-1",
+	}
+	_ ,err := amazoncloud.Stopnode(stop)
+
+  if(err!=nil){
+		fmt.Println("Test Fail")
+	}else{
+		 fmt.Println("Test Pass")
+	}
+}
+
+
+
 func TestStartnode(t *testing.T) {
 	var amazoncloud EC2
 	start := map[string]string{
 		"instance-id": "i-0174bd6f54178e89b",
 		"Region":      "us-east-1",
 	}
-	resp, _ := amazoncloud.Startnode(start)
+	_,err := amazoncloud.Startnode(start)
+  if(err!=nil){
+		fmt.Println("Test Fail")
+	}else{
+		 fmt.Println("Test Pass")
+	}
 }
 
-func TestStopnode(t *testing.T) {
-	var amazoncloud EC2
-	stop := map[string]string{
-		"instance-id": "i-0174bd6f54178e89b",
-		"Region":      "us-east-1",
-	}
-	resp, _ := amazoncloud.Stopnode(stop)
-}
+
 
 func TestRebootnode(t *testing.T) {
 	var amazoncloud EC2
@@ -41,7 +68,13 @@ func TestRebootnode(t *testing.T) {
 		"instance-id": "i-0174bd6f54178e89b",
 		"Region":      "us-east-1",
 	}
-	resp, _ := amazoncloud.Rebootnode(Reboot)
+	_,err := amazoncloud.Rebootnode(Reboot)
+
+  if(err!=nil){
+    fmt.Println("Test Fail")
+  }else{
+     fmt.Println("Test Pass")
+  }
 }
 
 func TestDeletnode(t *testing.T) {
@@ -50,6 +83,11 @@ func TestDeletnode(t *testing.T) {
 		"instance-id": "i-0174bd6f54178e89b",
 		"Region":      "us-east-1",
 	}
-	resp, _ := amazoncloud.Deletenode(delete)
+	_,err := amazoncloud.Deletenode(delete)
+
+  if(err!=nil){
+		fmt.Println("Test Fail")
+	}else{
+		 fmt.Println("Test Pass")
+	}
 }
-*/

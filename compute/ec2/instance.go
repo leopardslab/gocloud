@@ -17,13 +17,11 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 	params := makeParams("StartInstances")
 
 	addParamsList(params, "InstanceId", ids)
-	resp = &StartInstanceResp{}
-	err = ec2.PrepareSignatureV2query(params, Region, resp)
-	if err != nil {
-		return nil, err
-	}
-	//fmt.Println(resp)
-	//fmt.Printf("%T",resp)
+
+	response := make(map[string]interface{})
+
+	err = ec2.PrepareSignatureV2query(params, Region,response)
+	resp = response
 	return resp, nil
 }
 
@@ -40,10 +38,15 @@ func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
 	addParamsList(params, "InstanceId", ids)
 	resp = &StopInstanceResp{}
 
-	err = ec2.PrepareSignatureV2query(params, Region, resp)
+	response := make(map[string]interface{})
+
+	err = ec2.PrepareSignatureV2query(params, Region, response)
+
 	if err != nil {
 		return nil, err
 	}
+
+	resp = response
 	return resp, nil
 }
 
@@ -58,11 +61,14 @@ func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 
 	params := makeParams("RebootInstances")
 	addParamsList(params, "InstanceId", ids)
-	resp = &SimpleResp{}
-	err = ec2.PrepareSignatureV2query(params, Region, resp)
+
+	response := make(map[string]interface{})
+
+	err = ec2.PrepareSignatureV2query(params, Region, response)
 	if err != nil {
 		return nil, err
 	}
+	resp = response
 	return resp, nil
 }
 
@@ -76,12 +82,14 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 
 	params := makeParams("TerminateInstances")
 	addParamsList(params, "InstanceId", instIds)
-	resp = &TerminateInstancesResp{}
-	err = ec2.PrepareSignatureV2query(params, Region, resp)
+	response := make(map[string]interface{})
+
+	err = ec2.PrepareSignatureV2query(params, Region, response)
 	if err != nil {
 		return nil, err
 	}
-	return
+	resp = response
+	return resp, nil
 }
 
 //create Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation
@@ -322,19 +330,11 @@ func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
 		params["PrivateIpAddress"] = options.PrivateIPAddress
 	}
 
-	resp = &RunInstancesResp{}
-	err = ec2.PrepareSignatureV2query(params, Region, resp)
-	respq, _ := resp.(*RunInstancesResp)
+	response := make(map[string]interface{})
 
-	printres(respq)
-	if err != nil {
-		return nil, err
-	}
-	return
-}
+	err = ec2.PrepareSignatureV2query(params, Region, response)
 
-func printres(resp *RunInstancesResp) {
-	for _, instance := range resp.Instances {
-		println("Now running", instance.InstanceId)
-	}
+	resp = response
+
+	return resp, err
 }

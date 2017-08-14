@@ -1,7 +1,6 @@
 package amazonstorage
 
 import (
-	"encoding/xml"
 	"fmt"
 	auth "github.com/scorelab/gocloud-v2/auth"
 	awsauth "github.com/scorelab/gocloud-v2/awsauth"
@@ -48,7 +47,7 @@ func makeParamsWithVersion(action, version string) map[string]string {
 	return params
 }
 
-func (amazonstorage *Amazonstorage) PrepareSignatureV2query(params map[string]string, Region string, resp interface{}) error {
+func (amazonstorage *Amazonstorage) PrepareSignatureV2query(params map[string]string, Region string, response map[string]interface{}) error {
 
 	EC2Endpoint := "https://ec2." + Region + ".amazonaws.com"
 
@@ -70,14 +69,19 @@ func (amazonstorage *Amazonstorage) PrepareSignatureV2query(params map[string]st
 	awsauth.SignatureV2(req, auth)
 
 	r, err := http.DefaultClient.Do(req)
+
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 	defer r.Body.Close()
 
 	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		return err
+	}
+	response["body"] = string(body)
+	response["status"] = r.StatusCode
 
-	fmt.Println(string(body))
-
-	return xml.NewDecoder(r.Body).Decode(resp)
+	return err
 }

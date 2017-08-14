@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"os"
-	//"fmt"
 )
 
 //Configuration struct reperesnts.
