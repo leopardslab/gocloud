@@ -54,7 +54,7 @@ func SignJWT() (client *http.Client) {
 
 	var home string = os.Getenv("HOME")
 
-	data, err := ioutil.ReadFile(home + "/ShelterMap-70475fda46e7.json")
+	data, err := ioutil.ReadFile(home + "/ShelterMap-3d450eb49f43_container.json")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -962,6 +962,8 @@ func main() {
 	   googlecloud.Creatloadbalancer(creatloadbalancer)
 
 	*/
+
+	/*google dns
 	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 
 	createdns := map[string]interface{}{
@@ -990,5 +992,57 @@ func main() {
 		"managedZone": "gocloud3",
 	}
 	googlecloud.Deletedns(deletedns)
+ */
+
+
+/*google container API
+	fmt.Println("cluster is creating:")
+
+	nodepools := []map[string]interface{}{
+		{
+			"name": "default-pool",
+			"initialNodeCount": 3,
+		},
+	}
+
+ createcluster := map[string]interface{}{
+	 "Project":"sheltermap-1493101612061",
+	 "Name": "cluster-2",
+	 "Zone": "us-central1-a",
+	 "nodePools":nodepools,
+ }
+ fmt.Println("nodepool in main",nodepools)
+ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+
+ googlecloud.Createcluster(createcluster)
+
+ deletecluster := map[string]string{
+ 	"Project":"sheltermap-1493101612061",
+ 	"clusterId": "cluster-1",
+ 	"Zone": "us-central1-a",
+ }
+ googlecloud.Deletecluster(deletecluster)
+
+ createservice := map[string]interface{}{
+ 	"Project":"sheltermap-1493101612061",
+ 	"clusterId": "cluster-2",
+ 	"Zone": "us-central1-a",
+	"Name":"nodepool",
+ }
+
+	googlecloud.Createservice(createservice)
+
+*/
+	deleteservice := map[string]string{
+  	"Project":"sheltermap-1493101612061",
+  	"clusterId": "cluster-2",
+  	"Zone": "us-central1-a",
+  	"nodePoolId":"nodepool",
+  }
+
+	fmt.Println("nodepool in main")
+  googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+
+	googlecloud.Deleteservice(deleteservice)
 
 }

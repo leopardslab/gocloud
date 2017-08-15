@@ -22,10 +22,10 @@ func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp
 
 	for key, value := range param {
 		switch key {
-		case "projectid":
+		case "Project":
 			Projectid, _ = value.(string)
 
-		case "name":
+		case "Name":
 			name, _ := value.(string)
 			option.Name = name
 
@@ -144,14 +144,22 @@ func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp
 		}
 	}
 
-	zonevalue := "projects/" + Projectid + "/zones/" + Zone
-	option.Zone = zonevalue
+	//zonevalue := "projects/" + Projectid + "/zones/" + Zone
+	option.Zone = Zone
 
 	Createclusterjsonmap := make(map[string]interface{})
 
 	Createclusterdictnoaryconvert(option, Createclusterjsonmap)
 
-	Createclusterjson, _ := json.Marshal(Createclusterjsonmap)
+  fmt.Println(Createclusterjsonmap)
+
+	 Createclusterdict := make(map[string]interface{})
+
+	 Createclusterdict["cluster"] = Createclusterjsonmap
+
+	 fmt.Println(Createclusterdict)
+
+	Createclusterjson, _ := json.Marshal(Createclusterdict)
 
 	Createclusterjsonstring := string(Createclusterjson)
 
@@ -183,7 +191,7 @@ func (googlecontainer *Googlecontainer) Deletecluster(request interface{}) (resp
 
 	options := request.(map[string]string)
 
-	url := "https://container.googleapis.com/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/clusters/" + options["clusterId"]
+	url := "https://container.googleapis.com/v1/projects/" + options["Project"] + "/zones/" + options["Zone"] + "/clusters/" + options["clusterId"]
 
 	client := googleauth.SignJWT()
 
@@ -217,10 +225,10 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 
 	for key, value := range param {
 		switch key {
-		case "projectid":
+		case "Project":
 			Projectid, _ = value.(string)
 
-		case "name":
+		case "Name":
 			name, _ := value.(string)
 			option.Name = name
 
@@ -330,7 +338,15 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 
 	Createservicedictnoaryconvert(option, Createservicejsonmap)
 
-	Createservicejson, _ := json.Marshal(Createservicejsonmap)
+	fmt.Println(Createservicejsonmap)
+
+	Createservicedict := make(map[string]interface{})
+
+  Createservicedict["nodePool"] = Createservicejsonmap
+
+  fmt.Println(Createservicedict)
+
+	Createservicejson, _ := json.Marshal(Createservicedict)
 
 	Createservicejsonstring := string(Createservicejson)
 
@@ -338,7 +354,7 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 
 	var Createservicejsonstringbyte = []byte(Createservicejsonstring)
 
-	url := "https://container.googleapis.com/v1/projects/" + Projectid + "/zones/" + Zone + "/clusters" + ClusterId + "/nodePools"
+	url := "https://container.googleapis.com/v1/projects/" + Projectid + "/zones/" + Zone + "/clusters/" + ClusterId + "/nodePools"
 
 	client := googleauth.SignJWT()
 
@@ -374,11 +390,11 @@ func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp
 
 	options := request.(map[string]string)
 
-	url := "https://container.googleapis.com/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/clusters/" + options["clusterId"] + "/nodePools/" + options["nodePoolId"]
+	url := "https://container.googleapis.com/v1/projects/" + options["Project"] + "/zones/" + options["Zone"] + "/clusters/" + options["clusterId"] + "/nodePools/" + options["nodePoolId"]
 
 	client := googleauth.SignJWT()
 
-	Deleteservicerequest, err := http.NewRequest("POST", url, nil)
+	Deleteservicerequest, err := http.NewRequest("DELETE", url, nil)
 	Deleteservicerequest.Header.Set("Content-Type", "application/json")
 
 	Deleteserviceresp, err := client.Do(Deleteservicerequest)
@@ -396,7 +412,7 @@ func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp
 func (googlecontainer *Googlecontainer) Stoptask(request interface{}) (resp interface{}, err error) {
 	options := request.(map[string]string)
 
-	url := "https://container.googleapis.com/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/operations/" + options["operationId"] + ":cancel"
+	url := "https://container.googleapis.com/v1/projects/" + options["Project"] + "/zones/" + options["Zone"] + "/operations/" + options["OperationId"] + ":cancel"
 
 	client := googleauth.SignJWT()
 
