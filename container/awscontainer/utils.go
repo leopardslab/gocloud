@@ -124,7 +124,6 @@ func preparecreateServiceloadBalancersparams(Createservicejsonmap map[string]int
 
 		Createservicejsonmap["loadBalancers"] = loadBalancers
 
-		fmt.Println("Createservicejsonmap of loadBalancers", Createservicejsonmap["loadBalancers"])
 	}
 }
 
@@ -386,8 +385,7 @@ func preparecreateServiceplacementStrategyparams(Createservicejsonmap map[string
 }
 
 //PrepareSignatureV4query creates PrepareSignatureV4 for request.
-func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]string, paramsmap map[string]interface{}) {
-	fmt.Println(paramsmap)
+func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]string, paramsmap map[string]interface{},response map[string]interface{}) error {
 	ECSEndpoint := "https://ecs." + params["Region"] + ".amazonaws.com"
 	service := "ecs"
 	method := "POST"
@@ -399,13 +397,14 @@ func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]stri
 	requestparametersjson, _ := json.Marshal(paramsmap)
 	requestparametersjsonstring := string(requestparametersjson)
 	requestparametersjsonstringbyte := []byte(requestparametersjsonstring)
-	fmt.Println("requestparametersjsonstring", requestparametersjsonstring)
 	client := new(http.Client)
 	request, _ := http.NewRequest("POST", ECSEndpoint, bytes.NewBuffer(requestparametersjsonstringbyte))
 	request = awsauth.SignatureV4(request, requestparametersjsonstringbyte, amztarget, method, params["Region"], service, host, ContentType, signedheaders)
-	resp, _ := client.Do(request)
+	resp,err := client.Do(request)
 	defer resp.Body.Close()
 	fmt.Println(resp.Status)
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("resp Body:", string(body))
+	body, err := ioutil.ReadAll(resp.Body)
+	response["body"] = string(body)
+	response["body"] = resp.StatusCode
+	return err
 }

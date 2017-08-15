@@ -1,8 +1,5 @@
 package awscontainer
 
-import (
-	"fmt"
-)
 
 //Stoptask stops container.
 func (ecscontainer *Ecscontainer) Stoptask(request interface{}) (resp interface{}, err error) {
@@ -33,8 +30,10 @@ func (ecscontainer *Ecscontainer) Stoptask(request interface{}) (resp interface{
 	preparestoptaskparams(params, stoptask, Region)
 	stoptaskjsonmap := make(map[string]interface{})
 	preparestoptaskparamsdict(stoptaskjsonmap, stoptask)
-	ecscontainer.PrepareSignatureV4query(params, stoptaskjsonmap)
-	return
+	response := make(map[string]interface{})
+	err = ecscontainer.PrepareSignatureV4query(params, stoptaskjsonmap,response)
+	resp = response
+	return resp,err
 }
 
 //Deleteservice Delete container service.
@@ -61,8 +60,10 @@ func (ecscontainer *Ecscontainer) Deleteservice(request interface{}) (resp inter
 	preparedeleteserviceparams(params, deleteservice, Region)
 	deleteServicejsonmap := make(map[string]interface{})
 	preparedeleteserviceparamsdict(deleteServicejsonmap, deleteservice)
-	ecscontainer.PrepareSignatureV4query(params, deleteServicejsonmap)
-	return
+	response := make(map[string]interface{})
+	err = ecscontainer.PrepareSignatureV4query(params, deleteServicejsonmap,response)
+	resp = response
+	return resp,err
 }
 
 //Starttask start container service.
@@ -149,8 +150,11 @@ func (ecscontainer *Ecscontainer) Starttask(request interface{}) (resp interface
 	preparestarttaskparams(params, starttask, Region)
 	starttaskjsonmap := make(map[string]interface{})
 	preparestarttaskparamsdict(starttaskjsonmap, starttask)
-	ecscontainer.PrepareSignatureV4query(params, starttaskjsonmap)
-	return
+
+	response := make(map[string]interface{})
+	err = ecscontainer.PrepareSignatureV4query(params, starttaskjsonmap,response)
+	resp = response
+	return resp,err
 }
 
 //Runtask runs container.
@@ -216,7 +220,6 @@ func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}
 
 		case "overrides":
 			overridesparam, _ := value.(map[string]interface{})
-			fmt.Println(overridesparam)
 			for overridesparamkey, overridesparamvalue := range overridesparam {
 				switch overridesparamkey {
 				case "taskRoleArn":
@@ -268,8 +271,10 @@ func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}
 	prepareruntaskparams(params, runtask, Region)
 	runtaskjsonmap := make(map[string]interface{})
 	prepareruntaskparamsdict(runtaskjsonmap, runtask)
-	ecscontainer.PrepareSignatureV4query(params, runtaskjsonmap)
-	return
+	response := make(map[string]interface{})
+	err = ecscontainer.PrepareSignatureV4query(params, runtaskjsonmap,response)
+	resp = response
+	return resp,err
 }
 
 //Createservice creates container service.
@@ -367,8 +372,10 @@ func (ecscontainer *Ecscontainer) Createservice(request interface{}) (resp inter
 	preparecreateServiceparams(params, createservice, Region)
 	Createservicejsonmap := make(map[string]interface{})
 	preparecreateServiceparamsdict(Createservicejsonmap, createservice)
-	ecscontainer.PrepareSignatureV4query(params, Createservicejsonmap)
-	return
+	response := make(map[string]interface{})
+	err = ecscontainer.PrepareSignatureV4query(params, Createservicejsonmap,response)
+	resp = response
+	return resp,err
 }
 
 //Createcluster creates cluster.
@@ -393,8 +400,10 @@ func (ecscontainer *Ecscontainer) Createcluster(request interface{}) (resp inter
 	Createclusterjsonmap := map[string]interface{}{
 		"clusterName": params["clusterName"],
 	}
-	ecscontainer.PrepareSignatureV4query(params, Createclusterjsonmap)
-	return
+	response := make(map[string]interface{})
+	err = ecscontainer.PrepareSignatureV4query(params, Createclusterjsonmap,response)
+	resp = response
+	return resp,err
 }
 
 //Deletecluster delete cluster.
@@ -417,8 +426,11 @@ func (ecscontainer *Ecscontainer) Deletecluster(request interface{}) (resp inter
 	prepareDeletecluster(params, clusterName, Region)
 
 	Deletecontainerjsonmap := map[string]interface{}{
-		"clusterName": params["clusterName"],
+		"clusterName": clusterName,
 	}
-	ecscontainer.PrepareSignatureV4query(params, Deletecontainerjsonmap)
-	return
+
+	response := make(map[string]interface{})
+	err = ecscontainer.PrepareSignatureV4query(params, Deletecontainerjsonmap,response)
+	resp = response
+	return resp,err
 }
