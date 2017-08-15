@@ -151,19 +151,15 @@ func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp
 
 	Createclusterdictnoaryconvert(option, Createclusterjsonmap)
 
-  fmt.Println(Createclusterjsonmap)
 
 	 Createclusterdict := make(map[string]interface{})
 
 	 Createclusterdict["cluster"] = Createclusterjsonmap
 
-	 fmt.Println(Createclusterdict)
 
 	Createclusterjson, _ := json.Marshal(Createclusterdict)
 
 	Createclusterjsonstring := string(Createclusterjson)
-
-	fmt.Println(Createclusterjsonstring)
 
 	var Createclusterjsonstringbyte = []byte(Createclusterjsonstring)
 
@@ -181,9 +177,11 @@ func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp
 
 	body, err := ioutil.ReadAll(Createclusterresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Createclusteresponse := make(map[string]interface{})
+	Createclusteresponse["status"] = Createclusterresp.StatusCode
+	Createclusteresponse["body"] = string(body)
+	resp = Createclusteresponse
+	return resp, err
 }
 
 //Deletecluster deletes cluster.
@@ -205,9 +203,11 @@ func (googlecontainer *Googlecontainer) Deletecluster(request interface{}) (resp
 
 	body, err := ioutil.ReadAll(Deleteclusterresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Deleteclusterresponse := make(map[string]interface{})
+	Deleteclusterresponse["status"] = Deleteclusterresp.StatusCode
+	Deleteclusterresponse["body"] = string(body)
+	resp = Deleteclusterresponse
+	return resp, err
 }
 
 //Createservice crestes loadbalancer service.
@@ -338,19 +338,15 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 
 	Createservicedictnoaryconvert(option, Createservicejsonmap)
 
-	fmt.Println(Createservicejsonmap)
 
 	Createservicedict := make(map[string]interface{})
 
   Createservicedict["nodePool"] = Createservicejsonmap
 
-  fmt.Println(Createservicedict)
 
 	Createservicejson, _ := json.Marshal(Createservicedict)
 
 	Createservicejsonstring := string(Createservicejson)
-
-	fmt.Println(Createservicejsonstring)
 
 	var Createservicejsonstringbyte = []byte(Createservicejsonstring)
 
@@ -368,9 +364,11 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 
 	body, err := ioutil.ReadAll(Createservicerresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Createserviceresponse := make(map[string]interface{})
+	Createserviceresponse["status"] = Createservicerresp.StatusCode
+	Createserviceresponse["body"] = string(body)
+	resp = Createserviceresponse
+	return resp, err
 }
 
 //runtask runs container.
@@ -403,9 +401,11 @@ func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp
 
 	body, err := ioutil.ReadAll(Deleteserviceresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Deleteserviceresponse := make(map[string]interface{})
+	Deleteserviceresponse["status"] = Deleteserviceresp.StatusCode
+	Deleteserviceresponse["body"] = string(body)
+	resp = Deleteserviceresponse
+	return resp, err
 }
 
 //Stoptask stops container.
@@ -425,7 +425,9 @@ func (googlecontainer *Googlecontainer) Stoptask(request interface{}) (resp inte
 
 	body, err := ioutil.ReadAll(Stoptaskresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Stoptaskrespresponse := make(map[string]interface{})
+	Stoptaskrespresponse["status"] = Stoptaskresp.StatusCode
+	Stoptaskrespresponse["body"] = string(body)
+	resp = Stoptaskrespresponse
+	return resp, err
 }

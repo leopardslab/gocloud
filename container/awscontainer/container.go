@@ -416,9 +416,9 @@ func (ecscontainer *Ecscontainer) Deletecluster(request interface{}) (resp inter
 	params := make(map[string]string)
 	prepareDeletecluster(params, clusterName, Region)
 
-	Creatcontainerjsonmap := map[string]interface{}{
+	Deletecontainerjsonmap := map[string]interface{}{
 		"clusterName": params["clusterName"],
 	}
-	ecscontainer.PrepareSignatureV4query(params, Creatcontainerjsonmap)
+	ecscontainer.PrepareSignatureV4query(params, Deletecontainerjsonmap)
 	return
 }
