@@ -2,7 +2,6 @@ package ec2
 
 import "testing"
 import "github.com/scorelab/gocloud-v2/auth"
-import "fmt"
 
 func init() {
 	auth.LoadConfig()
