@@ -177,7 +177,6 @@ func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string,
 	r, err := http.DefaultClient.Do(req)
 
 	if err != nil {
-		fmt.Println(err)
 		return err
 	}
 	defer r.Body.Close()

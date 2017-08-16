@@ -1,9 +1,8 @@
 package ec2
 
 import "testing"
-import "fmt"
-
 import "github.com/scorelab/gocloud-v2/auth"
+import "fmt"
 
 func init() {
 	auth.LoadConfig()
@@ -20,9 +19,7 @@ func TestCreatenode(t *testing.T) {
 	_, err := amazoncloud.Createnode(create)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -35,9 +32,7 @@ func TestStopnode(t *testing.T) {
 	_, err := amazoncloud.Stopnode(stop)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -48,25 +43,22 @@ func TestStartnode(t *testing.T) {
 		"Region":      "us-east-1",
 	}
 	_, err := amazoncloud.Startnode(start)
+	fmt.Println(err)
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
 func TestRebootnode(t *testing.T) {
 	var amazoncloud EC2
 	Reboot := map[string]string{
-		"instance-id": "i-0174bd6f54178e89b",
+		"instance-id": "i-037a9fae81c33ac30",
 		"Region":      "us-east-1",
 	}
 	_, err := amazoncloud.Rebootnode(Reboot)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Pass")
 	}
 }
 
@@ -79,8 +71,6 @@ func TestDeletnode(t *testing.T) {
 	_, err := amazoncloud.Deletenode(delete)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }

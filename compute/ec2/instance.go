@@ -22,7 +22,7 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 
 	err = ec2.PrepareSignatureV2query(params, Region, response)
 	resp = response
-	return resp, nil
+	return resp, err
 }
 
 // stop ec2 instance accept array of instance-id
@@ -69,7 +69,7 @@ func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 		return nil, err
 	}
 	resp = response
-	return resp, nil
+	return resp, err
 }
 
 // delete ec2 instance accept array of instance-id
@@ -89,7 +89,7 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 		return nil, err
 	}
 	resp = response
-	return resp, nil
+	return resp, err
 }
 
 //create Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation
