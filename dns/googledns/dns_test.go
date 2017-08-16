@@ -3,11 +3,10 @@ package googledns
 import "testing"
 import "fmt"
 
-
 func TestCreatedns(t *testing.T) {
 	var googledns Googledns
 
-  createdns := map[string]interface{}{
+	createdns := map[string]interface{}{
 		"Project":     "sheltermap-1493101612061",
 		"Kind":        "dns#managedZone",
 		"Description": "dns",
@@ -23,13 +22,12 @@ func TestCreatedns(t *testing.T) {
 	}
 }
 
-
 func TestListdns(t *testing.T) {
 	var googledns Googledns
 
-  listdns := map[string]string{
-    "Project": "sheltermap-1493101612061",
-  }
+	listdns := map[string]string{
+		"Project": "sheltermap-1493101612061",
+	}
 
 	_, err := googledns.Listdns(listdns)
 
@@ -40,15 +38,13 @@ func TestListdns(t *testing.T) {
 	}
 }
 
-
-
 func TestListResourcednsRecordSets(t *testing.T) {
 	var googledns Googledns
 
-  listResourcednsRecordSets := map[string]string{
-    "Project":     "sheltermap-1493101612061",
-    "managedZone": "gocloud3",
-  }
+	listResourcednsRecordSets := map[string]string{
+		"Project":     "sheltermap-1493101612061",
+		"managedZone": "gocloud3",
+	}
 	_, err := googledns.ListResourcednsRecordSets(listResourcednsRecordSets)
 
 	if err != nil {
@@ -58,16 +54,14 @@ func TestListResourcednsRecordSets(t *testing.T) {
 	}
 }
 
-
-
 func TestDeletedns(t *testing.T) {
 	var googledns Googledns
 
-  deletedns := map[string]string{
-    "Project":     "sheltermap-1493101612061",
-    "managedZone": "gocloud3",
-  }
-  	_, err := googledns.Deletedns(deletedns)
+	deletedns := map[string]string{
+		"Project":     "sheltermap-1493101612061",
+		"managedZone": "gocloud3",
+	}
+	_, err := googledns.Deletedns(deletedns)
 
 	if err != nil {
 		fmt.Println("Test Fail")

@@ -151,11 +151,9 @@ func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp
 
 	Createclusterdictnoaryconvert(option, Createclusterjsonmap)
 
+	Createclusterdict := make(map[string]interface{})
 
-	 Createclusterdict := make(map[string]interface{})
-
-	 Createclusterdict["cluster"] = Createclusterjsonmap
-
+	Createclusterdict["cluster"] = Createclusterjsonmap
 
 	Createclusterjson, _ := json.Marshal(Createclusterdict)
 
@@ -338,11 +336,9 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 
 	Createservicedictnoaryconvert(option, Createservicejsonmap)
 
-
 	Createservicedict := make(map[string]interface{})
 
-  Createservicedict["nodePool"] = Createservicejsonmap
-
+	Createservicedict["nodePool"] = Createservicejsonmap
 
 	Createservicejson, _ := json.Marshal(Createservicedict)
 

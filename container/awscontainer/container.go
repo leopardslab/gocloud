@@ -1,6 +1,5 @@
 package awscontainer
 
-
 //Stoptask stops container.
 func (ecscontainer *Ecscontainer) Stoptask(request interface{}) (resp interface{}, err error) {
 
@@ -31,9 +30,9 @@ func (ecscontainer *Ecscontainer) Stoptask(request interface{}) (resp interface{
 	stoptaskjsonmap := make(map[string]interface{})
 	preparestoptaskparamsdict(stoptaskjsonmap, stoptask)
 	response := make(map[string]interface{})
-	err = ecscontainer.PrepareSignatureV4query(params, stoptaskjsonmap,response)
+	err = ecscontainer.PrepareSignatureV4query(params, stoptaskjsonmap, response)
 	resp = response
-	return resp,err
+	return resp, err
 }
 
 //Deleteservice Delete container service.
@@ -61,9 +60,9 @@ func (ecscontainer *Ecscontainer) Deleteservice(request interface{}) (resp inter
 	deleteServicejsonmap := make(map[string]interface{})
 	preparedeleteserviceparamsdict(deleteServicejsonmap, deleteservice)
 	response := make(map[string]interface{})
-	err = ecscontainer.PrepareSignatureV4query(params, deleteServicejsonmap,response)
+	err = ecscontainer.PrepareSignatureV4query(params, deleteServicejsonmap, response)
 	resp = response
-	return resp,err
+	return resp, err
 }
 
 //Starttask start container service.
@@ -152,9 +151,9 @@ func (ecscontainer *Ecscontainer) Starttask(request interface{}) (resp interface
 	preparestarttaskparamsdict(starttaskjsonmap, starttask)
 
 	response := make(map[string]interface{})
-	err = ecscontainer.PrepareSignatureV4query(params, starttaskjsonmap,response)
+	err = ecscontainer.PrepareSignatureV4query(params, starttaskjsonmap, response)
 	resp = response
-	return resp,err
+	return resp, err
 }
 
 //Runtask runs container.
@@ -272,9 +271,9 @@ func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}
 	runtaskjsonmap := make(map[string]interface{})
 	prepareruntaskparamsdict(runtaskjsonmap, runtask)
 	response := make(map[string]interface{})
-	err = ecscontainer.PrepareSignatureV4query(params, runtaskjsonmap,response)
+	err = ecscontainer.PrepareSignatureV4query(params, runtaskjsonmap, response)
 	resp = response
-	return resp,err
+	return resp, err
 }
 
 //Createservice creates container service.
@@ -373,9 +372,9 @@ func (ecscontainer *Ecscontainer) Createservice(request interface{}) (resp inter
 	Createservicejsonmap := make(map[string]interface{})
 	preparecreateServiceparamsdict(Createservicejsonmap, createservice)
 	response := make(map[string]interface{})
-	err = ecscontainer.PrepareSignatureV4query(params, Createservicejsonmap,response)
+	err = ecscontainer.PrepareSignatureV4query(params, Createservicejsonmap, response)
 	resp = response
-	return resp,err
+	return resp, err
 }
 
 //Createcluster creates cluster.
@@ -401,9 +400,9 @@ func (ecscontainer *Ecscontainer) Createcluster(request interface{}) (resp inter
 		"clusterName": params["clusterName"],
 	}
 	response := make(map[string]interface{})
-	err = ecscontainer.PrepareSignatureV4query(params, Createclusterjsonmap,response)
+	err = ecscontainer.PrepareSignatureV4query(params, Createclusterjsonmap, response)
 	resp = response
-	return resp,err
+	return resp, err
 }
 
 //Deletecluster delete cluster.
@@ -430,7 +429,7 @@ func (ecscontainer *Ecscontainer) Deletecluster(request interface{}) (resp inter
 	}
 
 	response := make(map[string]interface{})
-	err = ecscontainer.PrepareSignatureV4query(params, Deletecontainerjsonmap,response)
+	err = ecscontainer.PrepareSignatureV4query(params, Deletecontainerjsonmap, response)
 	resp = response
-	return resp,err
+	return resp, err
 }

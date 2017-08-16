@@ -27,13 +27,13 @@ func LoadConfig() {
 	Config = Configuration{}
 	_ = decoder.Decode(&Config)
 
-	if(Config.AWSAccessKeyID == "" || Config.AWSSecretKey ==""){
+	if Config.AWSAccessKeyID == "" || Config.AWSSecretKey == "" {
 
-			Config.AWSAccessKeyID = os.Getenv("AWSAccessKeyID")
-			Config.AWSSecretKey   = os.Getenv("AWSSecretKey")
+		Config.AWSAccessKeyID = os.Getenv("AWSAccessKeyID")
+		Config.AWSSecretKey = os.Getenv("AWSSecretKey")
 
-			if(Config.AWSAccessKeyID == "" || Config.AWSSecretKey ==""){
-							log.Fatalln("Cannot Get access key and secert key")
-					}
+		if Config.AWSAccessKeyID == "" || Config.AWSSecretKey == "" {
+			log.Fatalln("Cannot Get access key and secert key")
 		}
+	}
 }

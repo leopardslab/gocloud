@@ -385,7 +385,7 @@ func preparecreateServiceplacementStrategyparams(Createservicejsonmap map[string
 }
 
 //PrepareSignatureV4query creates PrepareSignatureV4 for request.
-func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]string, paramsmap map[string]interface{},response map[string]interface{}) error {
+func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]string, paramsmap map[string]interface{}, response map[string]interface{}) error {
 	ECSEndpoint := "https://ecs." + params["Region"] + ".amazonaws.com"
 	service := "ecs"
 	method := "POST"
@@ -400,7 +400,7 @@ func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]stri
 	client := new(http.Client)
 	request, _ := http.NewRequest("POST", ECSEndpoint, bytes.NewBuffer(requestparametersjsonstringbyte))
 	request = awsauth.SignatureV4(request, requestparametersjsonstringbyte, amztarget, method, params["Region"], service, host, ContentType, signedheaders)
-	resp,err := client.Do(request)
+	resp, err := client.Do(request)
 	defer resp.Body.Close()
 	fmt.Println(resp.Status)
 	body, err := ioutil.ReadAll(resp.Body)

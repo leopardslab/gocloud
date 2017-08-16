@@ -83,7 +83,6 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 
 	option.CreationTimestamp = time.Now().UTC().Format(time.RFC3339)
 
-
 	Creatloadbalancerjsonmap := make(map[string]interface{})
 
 	Creatloadbalancerdictnoaryconvert(option, Creatloadbalancerjsonmap)
@@ -147,7 +146,7 @@ func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface
 
 	url := "https://www.googleapis.com/compute/beta/projects/" + options["Project"] + "/regions/" + options["Region"] + "/targetPools/"
 
-//  url := "https://www.googleapis.com/compute/beta/projects/" + Project + "/regions/" + Region + "/targetPools"
+	//  url := "https://www.googleapis.com/compute/beta/projects/" + Project + "/regions/" + Region + "/targetPools"
 
 	client := googleauth.SignJWT()
 
