@@ -43,7 +43,6 @@ func TestStartnode(t *testing.T) {
 		"Region":      "us-east-1",
 	}
 	_, err := amazoncloud.Startnode(start)
-	fmt.Println(err)
 	if err != nil {
 		t.Errorf("Test Fail")
 	}

@@ -8,7 +8,7 @@ func TestDeletenode(t *testing.T) {
 	var gce GCE
 	deletenode := map[string]string{
 		"projectid": "sheltermap-1493101612061",
-		"instance":  "testing-scorelab",
+		"instance":  "testing-scorelab2",
 		"Zone":      "us-west1-c",
 	}
 
@@ -25,7 +25,7 @@ func TestStopnode(t *testing.T) {
 	var gce GCE
 	stopnode := map[string]string{
 		"projectid": "sheltermap-1493101612061",
-		"instance":  "testing-scorelab",
+		"instance":  "testing-scorelab2",
 		"Zone":      "us-west1-c",
 	}
 
@@ -92,9 +92,9 @@ func TestCreatenode(t *testing.T) {
 
 	createnode := map[string]interface{}{
 		"projectid":         "sheltermap-1493101612061",
-		"Name":              "testing-scorelab",
+		"Name":              "testing-scorelab2",
 		"MachineType":       "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/machineTypes/n1-standard-1",
-		"Zone":              "us-east4-c",
+		"Zone":              "us-central1-b",
 		"disk":              disk,
 		"NetworkInterfaces": NetworkInterfaces,
 	}

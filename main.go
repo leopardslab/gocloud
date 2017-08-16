@@ -1033,6 +1033,7 @@ func main() {
 	googlecloud.Createservice(createservice)
 
 */
+/*
 	deleteservice := map[string]string{
   	"Project":"sheltermap-1493101612061",
   	"clusterId": "cluster-2",
@@ -1044,5 +1045,46 @@ func main() {
   googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 
 	googlecloud.Deleteservice(deleteservice)
+*/
 
+googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
+/*
+creatloadbalancer := map[string]interface{}{
+ "Project": "sheltermap-1493101612061",
+ "Name":  "google-loadbalancer",
+ "Region":"us-central1",
+ "Instances": []string{"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-central1-b/instances/instance-1"},
+}
+googlecloud.Creatloadbalancer(creatloadbalancer)
+
+listloadbalancer := map[string]string{
+	"Project":"sheltermap-1493101612061",
+	"Region": "us-central1",
+}
+googlecloud.Listloadbalancer(listloadbalancer)
+*/
+attachnodewithloadbalancer := map[string]interface{}{
+"Project":"sheltermap-1493101612061",
+"Region": "us-central1",
+"TargetPool" :"google-loadbalancer",
+"Instances" : []string{"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-central1-b/instances/instance-2"},
+}
+googlecloud.Attachnodewithloadbalancer(attachnodewithloadbalancer)
+
+detachnodewithloadbalancer := map[string]interface{}{
+	"Project":"sheltermap-1493101612061",
+	"Region": "us-central1",
+	"TargetPool" :"google-loadbalancer",
+	"Instances" : []string{"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-central1-b/instances/instance-2"},
+}
+
+googlecloud.Detachnodewithloadbalancer(detachnodewithloadbalancer)
+
+
+deleteloadbalancer := map[string]string{
+"Project":"sheltermap-1493101612061",
+"Region": "us-central1",
+"TargetPool" :"google-loadbalancer",
+}
+googlecloud.Deleteloadbalancer(deleteloadbalancer)
 }

@@ -3,7 +3,7 @@ package googleloadbalancer
 //Creatloadbalancerdictnoaryconvert creates a dictnoary for Creatloadbalancer api.
 func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjsonmap map[string]interface{}) {
 
-	if option.ID == "" {
+	if option.ID != "" {
 		Creatloadbalancerjsonmap["id"] = option.ID
 	}
 
@@ -19,11 +19,11 @@ func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjson
 		Creatloadbalancerjsonmap["failoverRatio"] = option.FailoverRatio
 	}
 
-	if option.CreationTimestamp == "" {
+	if (option.CreationTimestamp) != "" {
 		Creatloadbalancerjsonmap["creationTimestamp"] = option.CreationTimestamp
 	}
 
-	if option.Description == "" {
+	if (option.Description) != "" {
 		Creatloadbalancerjsonmap["description"] = option.Description
 	}
 
@@ -31,22 +31,22 @@ func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjson
 		Creatloadbalancerjsonmap["healthChecks"] = option.HealthChecks
 	}
 
-	if option.SessionAffinity == "" {
+	if (option.SessionAffinity) != "" {
 		Creatloadbalancerjsonmap["sessionAffinity"] = option.SessionAffinity
 	}
 
-	if option.SelfLink == "" {
+	if option.SelfLink != "" {
 		Creatloadbalancerjsonmap["selfLink"] = option.SelfLink
 	}
-	if option.Region == "" {
+	if option.Region != "" {
 		Creatloadbalancerjsonmap["region"] = option.Region
 	}
 
-	if option.Name == "" {
+	if option.Name != "" {
 		Creatloadbalancerjsonmap["name"] = option.Name
 	}
 
-	if option.Kind == "" {
+	if option.Kind != "" {
 		Creatloadbalancerjsonmap["kind"] = option.Kind
 	}
 }
