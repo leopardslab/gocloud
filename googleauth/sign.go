@@ -69,7 +69,7 @@ func SignJWT() (client *http.Client) {
 
 	var home string = os.Getenv("HOME")
 
-	data, err := ioutil.ReadFile(home + "/googleconfig.json")
+	data, err := ioutil.ReadFile(home + "/ShelterMap-70475fda46e7.json")
 
 	if err != nil {
 		jwt := JWT{}
