@@ -3,7 +3,6 @@ package gce
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	googleauth "github.com/scorelab/gocloud-v2/googleauth"
 	"io/ioutil"
 	"net/http"
@@ -155,7 +154,7 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 	Createnoderesponse["status"] = Createnoderesp.StatusCode
 	Createnoderesponse["body"] = string(body)
 	resp = Createnoderesponse
-	return resp, nil
+	return resp, err
 }
 
 func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
@@ -175,7 +174,6 @@ func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 	defer Startnoderesp.Body.Close()
 
 	body, err := ioutil.ReadAll(Startnoderesp.Body)
-	fmt.Println("response.statusCode", Startnoderesp.StatusCode)
 	Startnoderesponse := make(map[string]interface{})
 	Startnoderesponse["status"] = Startnoderesp.StatusCode
 	Startnoderesponse["body"] = string(body)
@@ -207,7 +205,7 @@ func (gce *GCE) Stopnode(request interface{}) (resp interface{}, err error) {
 	Stopnoderesponse["status"] = Stopnoderesp.StatusCode
 	Stopnoderesponse["body"] = string(body)
 	resp = Stopnoderesponse
-	return resp, nil
+	return resp, err
 }
 
 //delete gce instance currentnly running
@@ -234,7 +232,7 @@ func (gce *GCE) Deletenode(request interface{}) (resp interface{}, err error) {
 	Deletenoderesponse["body"] = string(body)
 	resp = Deletenoderesponse
 
-	return resp, nil
+	return resp, err
 }
 
 //reboot/reset gce instance currentnly ***running***
@@ -252,7 +250,7 @@ func (gce *GCE) Rebootnode(request interface{}) (resp interface{}, err error) {
 	Rebootnoderequest.Header.Set("Content-Type", "application/json")
 
 	Rebootnoderesp, err := client.Do(Rebootnoderequest)
-	fmt.Println("error is :", err)
+
 	defer Rebootnoderesp.Body.Close()
 
 	body, err := ioutil.ReadAll(Rebootnoderesp.Body)
@@ -261,7 +259,7 @@ func (gce *GCE) Rebootnode(request interface{}) (resp interface{}, err error) {
 	Rebootnoderesponse["status"] = Rebootnoderesp.StatusCode
 	Rebootnoderesponse["body"] = string(body)
 	resp = Rebootnoderesponse
-	return resp, nil
+	return resp, err
 }
 
 //list gce instance currentnly created
@@ -287,5 +285,5 @@ func (gce *GCE) listnode(request interface{}) (resp interface{}, err error) {
 	listnoderesponse["status"] = listnoderesp.StatusCode
 	listnoderesponse["body"] = string(body)
 	resp = listnoderesponse
-	return resp, nil
+	return resp, err
 }

@@ -2,8 +2,6 @@ package gce
 
 import "testing"
 
-import "fmt"
-
 func TestDeletenode(t *testing.T) {
 	var gce GCE
 	deletenode := map[string]string{
@@ -15,9 +13,7 @@ func TestDeletenode(t *testing.T) {
 	_, err := gce.Deletenode(deletenode)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -32,9 +28,7 @@ func TestStopnode(t *testing.T) {
 	_, err := gce.Stopnode(stopnode)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -48,11 +42,8 @@ func TestRebootnode(t *testing.T) {
 	_, err := gce.Rebootnode(reboot)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
-
 }
 
 func TestCreatenode(t *testing.T) {
@@ -102,8 +93,6 @@ func TestCreatenode(t *testing.T) {
 	_, err := gce.Createnode(createnode)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
