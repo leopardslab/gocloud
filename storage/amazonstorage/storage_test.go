@@ -1,7 +1,6 @@
 package amazonstorage
 
 import "testing"
-import "fmt"
 import "github.com/scorelab/gocloud-v2/auth"
 
 func init() {

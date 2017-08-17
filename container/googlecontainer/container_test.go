@@ -1,7 +1,6 @@
 package googlecontainer
 
 import "testing"
-import "fmt"
 
 func TestCreatecluster(t *testing.T) {
 	var googlecontainer Googlecontainer

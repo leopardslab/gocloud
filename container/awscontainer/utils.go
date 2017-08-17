@@ -3,7 +3,6 @@ package awscontainer
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	awsauth "github.com/scorelab/gocloud-v2/awsauth"
 	"io/ioutil"
 	"net/http"
@@ -96,10 +95,8 @@ func preparecreateServiceplacementConstraintsparams(Createservicejsonmap map[str
 
 //preparecreateServiceloadBalancersparams  creates dictnoary for loadBalancer.
 func preparecreateServiceloadBalancersparams(Createservicejsonmap map[string]interface{}, createservice Createservice) {
-	fmt.Println("len of createservice.LoadBalancers", len(createservice.LoadBalancers))
 	if len(createservice.LoadBalancers) != 0 {
 		loadBalancers := make([]map[string]interface{}, 0)
-		fmt.Println("loadBalancers", loadBalancers)
 		for i := 0; i < len(createservice.LoadBalancers); i++ {
 			loadBalancer := make(map[string]interface{})
 
@@ -207,7 +204,6 @@ func preparestarttaskoverridesparams(starttaskjsonmap map[string]interface{}, st
 	if len(overrides) != 0 {
 		starttaskjsonmap["overrides"] = overrides
 	}
-	fmt.Println(starttaskjsonmap)
 }
 
 //prepareruntaskparamsdict creates dictnoary for runtask.
@@ -270,7 +266,6 @@ func prepareruntaskoverridesparams(runtaskjsonmap map[string]interface{}, runtas
 	if len(overrides) != 0 {
 		runtaskjsonmap["overrides"] = overrides
 	}
-	fmt.Println(runtaskjsonmap)
 }
 
 //prepareruntaskparams creates dictnoary for runtask.
@@ -402,7 +397,6 @@ func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]stri
 	request = awsauth.SignatureV4(request, requestparametersjsonstringbyte, amztarget, method, params["Region"], service, host, ContentType, signedheaders)
 	resp, err := client.Do(request)
 	defer resp.Body.Close()
-	fmt.Println(resp.Status)
 	body, err := ioutil.ReadAll(resp.Body)
 	response["body"] = string(body)
 	response["body"] = resp.StatusCode
