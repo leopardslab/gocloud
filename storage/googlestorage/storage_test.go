@@ -1,7 +1,6 @@
 package googlestorage
 
 import "testing"
-import "fmt"
 
 func TestCreatedisk(t *testing.T) {
 	var googlestorage GoogleStorage
@@ -16,9 +15,7 @@ func TestCreatedisk(t *testing.T) {
 	_, err := googlestorage.Createdisk(createdisk)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -32,16 +29,14 @@ func TestDeletedisk(t *testing.T) {
 	_, err := googlestorage.Deletedisk(deletedisk)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
 func TestAttachdisk(t *testing.T) {
 	var googlestorage GoogleStorage
 
-	attachdisk := map[string]string{
+	attachdisk := map[string]interface{}{
 		"projectid":  "sheltermap-1493101612061",
 		"instance":   "testing-scorelab",
 		"Zone":       "us-east4-c",
@@ -51,9 +46,7 @@ func TestAttachdisk(t *testing.T) {
 	_, err := googlestorage.Attachdisk(attachdisk)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -70,9 +63,7 @@ func TestCreatesnapshot(t *testing.T) {
 	_, err := googlestorage.Createsnapshot(createsnapshot)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -87,8 +78,6 @@ func TestDeletesnapshot(t *testing.T) {
 	_, err := googlestorage.Deletesnapshot(deletesnapshot)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }

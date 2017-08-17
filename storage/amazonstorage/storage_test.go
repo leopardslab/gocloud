@@ -19,10 +19,9 @@ func TestCreatedisk(t *testing.T) {
 	_, err := amazonstorage.Createdisk(createdisk)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
+
 }
 
 func TestDeletedisk(t *testing.T) {
@@ -35,9 +34,7 @@ func TestDeletedisk(t *testing.T) {
 	_, err := amazonstorage.Deletedisk(deletedisk)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -54,9 +51,7 @@ func TestAttachdisk(t *testing.T) {
 	_, err := amazonstorage.Attachdisk(attachdisk)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -74,9 +69,7 @@ func TestDetachdisk(t *testing.T) {
 	_, err := amazonstorage.Detachdisk(detachdisk)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -91,9 +84,7 @@ func TestCreatesnapshot(t *testing.T) {
 	_, err := amazonstorage.Createsnapshot(createsnapshot)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -108,8 +99,6 @@ func TestDeletesnapshot(t *testing.T) {
 	_, err := amazonstorage.Deletesnapshot(deletesnapshot)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }

@@ -1,7 +1,6 @@
 package awsloadbalancer
 
 import "testing"
-import "fmt"
 import "github.com/scorelab/gocloud-v2/auth"
 
 func init() {
@@ -29,9 +28,7 @@ func TestCreatloadbalancer(t *testing.T) {
 	_, err := awsloadbalancer.Creatloadbalancer(creatloadbalancer)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -44,9 +41,7 @@ func TestDeleteloadbalancer(t *testing.T) {
 	_, err := awsloadbalancer.Deleteloadbalancer(deleteloadbalancer)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -56,9 +51,7 @@ func TestListloadbalancer(t *testing.T) {
 	_, err := awsloadbalancer.Listloadbalancer(nil)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -73,9 +66,7 @@ func TestAttachnodewithloadbalancer(t *testing.T) {
 	_, err := awsloadbalancer.Attachnodewithloadbalancer(attachnodewithloadbalancer)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -89,8 +80,6 @@ func TestDetachnodewithloadbalancer(t *testing.T) {
 	_, err := awsloadbalancer.Detachnodewithloadbalancer(detachnodewithloadbalancer)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }

@@ -2,8 +2,6 @@ package googleloadbalancer
 
 import "testing"
 
-//import "fmt"
-
 func TestCreatloadbalancer(t *testing.T) {
 
 	var googleloadbalancer Googleloadbalancer

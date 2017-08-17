@@ -3,7 +3,6 @@ package googlestorage
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	googleauth "github.com/scorelab/gocloud-v2/googleauth"
 	"io/ioutil"
 	"net/http"
@@ -121,9 +120,6 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 			SourceSnapshotV, _ := value.(string)
 			option.SourceSnapshot = SourceSnapshotV
 
-		default:
-			fmt.Println("Incorrect Value")
-
 		}
 	}
 
@@ -161,7 +157,7 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 	Creatediskresponse["status"] = Creatediskresp.StatusCode
 	Creatediskresponse["body"] = string(body)
 	resp = Creatediskresponse
-	return resp, nil
+	return resp, err
 }
 
 func (googlestorage *GoogleStorage) Deletedisk(request interface{}) (resp interface{}, err error) {
@@ -185,7 +181,7 @@ func (googlestorage *GoogleStorage) Deletedisk(request interface{}) (resp interf
 	Deletediskrespresponse["status"] = Deletediskresp.StatusCode
 	Deletediskrespresponse["body"] = string(body)
 	resp = Deletediskrespresponse
-	return resp, nil
+	return resp, err
 }
 
 func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
@@ -276,9 +272,6 @@ func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp in
 			snapshot.SnapshotEncryptionKeys.RawKey = SnapshotEncryptionKeysV["RawKey"]
 			snapshot.SnapshotEncryptionKeys.Sha256 = SnapshotEncryptionKeysV["Sha256"]
 
-		default:
-			fmt.Println("Incorrect Value")
-
 		}
 	}
 
@@ -308,7 +301,7 @@ func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp in
 	Createsnapshotresponse["status"] = Createsnapshotresp.StatusCode
 	Createsnapshotresponse["body"] = string(body)
 	resp = Createsnapshotresponse
-	return resp, nil
+	return resp, err
 }
 
 func (googlestorage *GoogleStorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
@@ -331,7 +324,7 @@ func (googlestorage *GoogleStorage) Deletesnapshot(request interface{}) (resp in
 	Deletesnapshotresponse["status"] = Deletesnapshotresp.StatusCode
 	Deletesnapshotresponse["body"] = string(body)
 	resp = Deletesnapshotresponse
-	return resp, nil
+	return resp, err
 }
 
 func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interface{}, err error) {
@@ -427,11 +420,7 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 					attachdisk.InitializeParam.SourceImageEncryptionKeys.Sha256 = SourceImageEncryptionKeysV["Sha256"]
 				}
 			}
-
-		default:
-			fmt.Println("Incorrect Value")
-
-		}
+  	}
 	}
 
 	Attachdiskjsonmap := make(map[string]interface{})
@@ -460,7 +449,7 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 	attachdiskresponse["status"] = attachdiskresp.StatusCode
 	attachdiskresponse["body"] = string(body)
 	resp = attachdiskresponse
-	return resp, nil
+	return resp, err
 }
 
 func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interface{}, err error) {
@@ -491,5 +480,5 @@ func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interf
 	detachdiskresponse["status"] = detachdiskresp.StatusCode
 	detachdiskresponse["body"] = string(body)
 	resp = detachdiskresponse
-	return resp, nil
+	return resp, err
 }

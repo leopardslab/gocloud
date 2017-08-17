@@ -20,9 +20,7 @@ func TestCreatecluster(t *testing.T) {
 	_, err := ecscontainer.Createcluster(createcluster)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -37,9 +35,7 @@ func TestDeletecluster(t *testing.T) {
 	_, err := ecscontainer.Deletecluster(deletecluster)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -54,9 +50,7 @@ func TestStoptask(t *testing.T) {
 	_, err := ecscontainer.Stoptask(stoptask)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -81,9 +75,7 @@ func TestCreateservice(t *testing.T) {
 	_, err := ecscontainer.Createservice(createservice)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -98,8 +90,6 @@ func TestDeleteservice(t *testing.T) {
 	_, err := ecscontainer.Deleteservice(deleteservice)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }

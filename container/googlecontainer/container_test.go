@@ -21,9 +21,7 @@ func TestCreatecluster(t *testing.T) {
 	_, err := googlecontainer.Createcluster(createcluster)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -39,9 +37,7 @@ func TestDeletecluster(t *testing.T) {
 	_, err := googlecontainer.Deletecluster(deletecluster)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -57,9 +53,7 @@ func TestCreateservice(t *testing.T) {
 	_, err := googlecontainer.Createservice(createservice)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -75,8 +69,6 @@ func TestDeleteservice(t *testing.T) {
 	_, err := googlecontainer.Deleteservice(deleteservice)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }

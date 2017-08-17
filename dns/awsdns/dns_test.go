@@ -1,8 +1,6 @@
 package awsdns
 
 import "testing"
-import "fmt"
-
 import "github.com/scorelab/gocloud-v2/auth"
 
 func init() {
@@ -19,10 +17,9 @@ func TestCreatedns(t *testing.T) {
 	_, err := awsdns.Createdns(createdns)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
+
 }
 
 func TestDeletedns(t *testing.T) {
@@ -34,9 +31,7 @@ func TestDeletedns(t *testing.T) {
 	_, err := awsdns.Deletedns(deletedns)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -51,9 +46,7 @@ func TestListdns(t *testing.T) {
 	_, err := awsdns.Listdns(listdns)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -66,8 +59,6 @@ func TestListResourcednsRecordSets(t *testing.T) {
 	_, err := awsdns.ListResourcednsRecordSets(listResourcednsRecordSets)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }

@@ -1,7 +1,6 @@
 package googledns
 
 import "testing"
-import "fmt"
 
 func TestCreatedns(t *testing.T) {
 	var googledns Googledns
@@ -16,10 +15,9 @@ func TestCreatedns(t *testing.T) {
 	_, err := googledns.Createdns(createdns)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
+
 }
 
 func TestListdns(t *testing.T) {
@@ -32,9 +30,7 @@ func TestListdns(t *testing.T) {
 	_, err := googledns.Listdns(listdns)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -48,9 +44,7 @@ func TestListResourcednsRecordSets(t *testing.T) {
 	_, err := googledns.ListResourcednsRecordSets(listResourcednsRecordSets)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
 
@@ -64,8 +58,6 @@ func TestDeletedns(t *testing.T) {
 	_, err := googledns.Deletedns(deletedns)
 
 	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
+		t.Errorf("Test Fail")
 	}
 }
