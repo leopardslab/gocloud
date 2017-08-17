@@ -38,34 +38,16 @@ func TestDeletedisk(t *testing.T) {
 	}
 }
 
-func TestDetachdisk(t *testing.T) {
+func TestAttachdisk(t *testing.T) {
 	var googlestorage GoogleStorage
 
-	detachdisk := map[string]string{
+	attachdisk := map[string]string{
 		"projectid":  "sheltermap-1493101612061",
 		"instance":   "testing-scorelab",
 		"Zone":       "us-east4-c",
 		"deviceName": "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
 	}
 
-	_, err := googlestorage.Detachdisk(detachdisk)
-
-	if err != nil {
-		fmt.Println("Test Fail")
-	} else {
-		fmt.Println("Test Pass")
-	}
-}
-
-func TestAttachdisk(t *testing.T) {
-	var googlestorage GoogleStorage
-
-	attachdisk := map[string]interface{}{
-		"projectid": "sheltermap-1493101612061",
-		"instance":  "testing-scorelab",
-		"Zone":      "us-east4-c",
-		"Source":    "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
-	}
 	_, err := googlestorage.Attachdisk(attachdisk)
 
 	if err != nil {
@@ -74,6 +56,7 @@ func TestAttachdisk(t *testing.T) {
 		fmt.Println("Test Pass")
 	}
 }
+
 
 func TestCreatesnapshot(t *testing.T) {
 	var googlestorage GoogleStorage
