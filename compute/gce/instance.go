@@ -6,6 +6,7 @@ import (
 	googleauth "github.com/scorelab/gocloud-v2/googleauth"
 	"io/ioutil"
 	"net/http"
+	"fmt"
 )
 
 //create gce instance
@@ -146,6 +147,7 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 	Createnoderequest.Header.Set("Content-Type", "application/json")
 
 	Createnoderesp, err := client.Do(Createnoderequest)
+	fmt.Println(err)
 	defer Createnoderesp.Body.Close()
 
 	body, err := ioutil.ReadAll(Createnoderesp.Body)

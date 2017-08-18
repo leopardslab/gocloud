@@ -15,7 +15,7 @@ func TestCreatecluster(t *testing.T) {
 		"Region":      "us-east-1",
 	}
 
-  ecscontainer.Createcluster(createcluster)
+	ecscontainer.Createcluster(createcluster)
 }
 
 func TestDeletecluster(t *testing.T) {

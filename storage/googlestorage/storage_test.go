@@ -50,7 +50,6 @@ func TestAttachdisk(t *testing.T) {
 	}
 }
 
-
 func TestCreatesnapshot(t *testing.T) {
 	var googlestorage GoogleStorage
 
