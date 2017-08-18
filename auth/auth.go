@@ -19,10 +19,8 @@ var Config Configuration
 func LoadConfig() {
 
 	var home string = os.Getenv("HOME")
-	file, err := os.Open(home + "/gocloudconfig.json")
-	if err != nil {
-		log.Fatalln("Cannot open config file", err)
-	}
+	file, _ := os.Open(home + "/gocloudconfig.json")
+
 	decoder := json.NewDecoder(file)
 	Config = Configuration{}
 	_ = decoder.Decode(&Config)
