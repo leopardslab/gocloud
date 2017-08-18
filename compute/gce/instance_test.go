@@ -6,7 +6,7 @@ func TestDeletenode(t *testing.T) {
 	var gce GCE
 	deletenode := map[string]string{
 		"projectid": "sheltermap-1493101612061",
-		"instance":  "testing-scorelab",
+		"instance":  "testing-scorelab2",
 		"Zone":      "us-west1-c",
 	}
 	gce.Deletenode(deletenode)

@@ -63,7 +63,7 @@ func TestRebootnode(t *testing.T) {
 func TestDeletnode(t *testing.T) {
 	var amazoncloud EC2
 	delete := map[string]string{
-		"instance-id": "i-0174bd6f54178e89b",
+		"instance-id": "i-0076d8bd2fbefcb61",
 		"Region":      "us-east-1",
 	}
 
