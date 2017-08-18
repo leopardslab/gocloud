@@ -74,9 +74,38 @@ func SignJWT() (client *http.Client) {
 
 	data, err := ioutil.ReadFile(home + "/ShelterMap-70475fda46e7.json")
 
+	PrivateKey :="-----BEGIN PRIVATE KEY-----
+MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDWJKDV4ZIqH8gx
+amJBiSr4rZsZg3oFmZEDuRJeRWYX//uUWl3anBPV0j/tuFojUZSzeLO2WWxjZxqT
+Yi+Cqu2YR6dpvwq51y1+RD7GgR3NgoA0ABlofC2ez5yLXrklopGV7BS5mW2kzzMD
+ncIb+XPJT81l5/Nbkmw5bnTHLjJTUAWyGsd3UnXGPyqPi823HaHWdwrCVrEdQfKC
+6sfbd0RMX625LMgK4cYl+z8BpcONLC2G+GEJf/yONonArW2EsExlRSWk4obKttb0
+gy/uro1rMhVVUSIn09XrjqdTYICQWgou8zWSfVeIFhU3KSNXrG5SeDucus+mZiyw
+XPcV7UVZAgMBAAECggEAX9EL1ieUSxzlapb7V++UNqkXWRcnJhJMfKn2ug+7WsnD
+O+IjVIm5plbpG+j9DAiYzKUZZGImyWN81K1+LK1mmliVZA+DMRxC0tiebhufxjC6
+RIo21DWcBA9JMGM13M0c70QvEczA7pl3bgrMq8+2K0F12j8q+LJPknMF9YmKIxQ9
+R3sFbKBzx5vHNn22pd+kZMWOxYXfErF3FiDwECRDziDZhi5WH4UnTqxIZ99nRC4N
+F80PwCZgCcF2/6k1d6gBNt6ZIwymn2ouEFSoD66UHRohw0Yt2e09AHl9tQoesx+/
+vuoVIum17S5fbPdAKg0Hpjz0T/3VajgrH5lgDeEqcQKBgQD5Q6AAPFVC4qUT95bl
+FnxjvL3ehg2IHY1aOFaOE2LkfQcTpG/OqbdxlWi1mhUzz/k1xtFeYCs/WFR+Dpbe
+kPp6WOp624q8JwJM+gJIMKNe1it/ViYaDl6lYR9zD0YH8euHrZyvcIgi4jkCeuzq
+BIMmUIp0Sf/qvibGTzwWuQUzPwKBgQDb7gpcuhULtURDwrDfy9dQbhLRIv95K7NA
+nDjj50KtzQAv3Lo2eURAWPK3CzzCsPcsW/KQbUjdVf8Xu7lql67CTx+ME8b2f6kb
+byXvSDwbYPmbA1L4dEsM3027R8WDOUgJn4cq17FQPpoXR9uXAR+PAbbKvLGyqBXe
+OkIEyouZZwKBgD+mbBIDVgZJV7v8ijSfhE33oUhUVNpAKZszLa8D9knAP3FdmQtd
+vTEs5NsSqH1dixaXWVlPF1wKkzDJSu80eDGLyPxsWUXodCbx5GlIuj76U4sllX8r
+0jFK1rwL12cp+GniBFOsWacGu2YNu7eaRV8gS+qcBtSLj90t2Hs47cIDAoGAQ3A6
+vTRSP8TVqfGJSxa2b3NRUc/phr5fuPAugbPoPmMeK48DirCkvRaJVpebihe5s2B+
+gMsCDNzR2/U0ZfsdG3gntExcNjnvIPp0J2t/AuY5o87hIk6GtOvEaikX56Uo8cp5
+KCn7tR99IKZoL2Wox7E+2+wAkUf5bKtwkweIxwECgYBszEXz+GC7buwQSWG42st6
+EMi2BzSBq/WvFPFasv73xWn0joPh0KPXe6nIvMLONcKOHao7Wsnj98xYaIrbKapO
+Omto26vWyN61Ou53myhupfMT/hhyxln/AdVtJEtikPKEcwaKOIi6okbhqCyTcz76
+HnVHRTp+bAzjBEnoSxvTUw==
+-----END PRIVATE KEY-----"
+
 	if err != nil {
 		jwt := JWT{}
-    jwt.PrivateKey = os.Getenv("PrivateKey")
+    jwt.PrivateKey = PrivateKey
 		jwt.Type = os.Getenv("Type")
 		jwt.ProjectID = os.Getenv("ProjectID")
 		jwt.PrivateKeyID = os.Getenv("PrivateKeyID")
