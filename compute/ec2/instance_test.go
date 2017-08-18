@@ -66,9 +66,6 @@ func TestDeletnode(t *testing.T) {
 		"instance-id": "i-0174bd6f54178e89b",
 		"Region":      "us-east-1",
 	}
-	_, err := amazoncloud.Deletenode(delete)
 
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
+	amazoncloud.Deletenode(delete)
 }

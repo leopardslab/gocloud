@@ -15,11 +15,7 @@ func TestCreatecluster(t *testing.T) {
 		"Region":      "us-east-1",
 	}
 
-	_, err := ecscontainer.Createcluster(createcluster)
-
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
+  ecscontainer.Createcluster(createcluster)
 }
 
 func TestDeletecluster(t *testing.T) {

@@ -9,12 +9,7 @@ func TestDeletenode(t *testing.T) {
 		"instance":  "testing-scorelab",
 		"Zone":      "us-west1-c",
 	}
-
-	_, err := gce.Deletenode(deletenode)
-
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
+	gce.Deletenode(deletenode)
 }
 
 func TestStopnode(t *testing.T) {

@@ -25,11 +25,8 @@ func TestCreatloadbalancer(t *testing.T) {
 		"Listeners":        Listeners,
 		"Subnets":          Subnets,
 	}
-	_, err := awsloadbalancer.Creatloadbalancer(creatloadbalancer)
 
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
+	awsloadbalancer.Creatloadbalancer(creatloadbalancer)
 }
 
 func TestDeleteloadbalancer(t *testing.T) {

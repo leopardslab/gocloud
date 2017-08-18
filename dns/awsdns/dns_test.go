@@ -14,12 +14,7 @@ func TestCreatedns(t *testing.T) {
 		"hostedZoneConfig": "hostedZoneConfig",
 	}
 
-	_, err := awsdns.Createdns(createdns)
-
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
-
+	awsdns.Createdns(createdns)
 }
 
 func TestDeletedns(t *testing.T) {
