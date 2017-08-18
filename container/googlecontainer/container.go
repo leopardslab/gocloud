@@ -22,10 +22,10 @@ func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp
 
 	for key, value := range param {
 		switch key {
-		case "projectid":
+		case "Project":
 			Projectid, _ = value.(string)
 
-		case "name":
+		case "Name":
 			name, _ := value.(string)
 			option.Name = name
 
@@ -144,18 +144,20 @@ func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp
 		}
 	}
 
-	zonevalue := "projects/" + Projectid + "/zones/" + Zone
-	option.Zone = zonevalue
+	//zonevalue := "projects/" + Projectid + "/zones/" + Zone
+	option.Zone = Zone
 
 	Createclusterjsonmap := make(map[string]interface{})
 
 	Createclusterdictnoaryconvert(option, Createclusterjsonmap)
 
-	Createclusterjson, _ := json.Marshal(Createclusterjsonmap)
+	Createclusterdict := make(map[string]interface{})
+
+	Createclusterdict["cluster"] = Createclusterjsonmap
+
+	Createclusterjson, _ := json.Marshal(Createclusterdict)
 
 	Createclusterjsonstring := string(Createclusterjson)
-
-	fmt.Println(Createclusterjsonstring)
 
 	var Createclusterjsonstringbyte = []byte(Createclusterjsonstring)
 
@@ -173,9 +175,11 @@ func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp
 
 	body, err := ioutil.ReadAll(Createclusterresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Createclusteresponse := make(map[string]interface{})
+	Createclusteresponse["status"] = Createclusterresp.StatusCode
+	Createclusteresponse["body"] = string(body)
+	resp = Createclusteresponse
+	return resp, err
 }
 
 //Deletecluster deletes cluster.
@@ -183,7 +187,7 @@ func (googlecontainer *Googlecontainer) Deletecluster(request interface{}) (resp
 
 	options := request.(map[string]string)
 
-	url := "https://container.googleapis.com/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/clusters/" + options["clusterId"]
+	url := "https://container.googleapis.com/v1/projects/" + options["Project"] + "/zones/" + options["Zone"] + "/clusters/" + options["clusterId"]
 
 	client := googleauth.SignJWT()
 
@@ -197,9 +201,11 @@ func (googlecontainer *Googlecontainer) Deletecluster(request interface{}) (resp
 
 	body, err := ioutil.ReadAll(Deleteclusterresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Deleteclusterresponse := make(map[string]interface{})
+	Deleteclusterresponse["status"] = Deleteclusterresp.StatusCode
+	Deleteclusterresponse["body"] = string(body)
+	resp = Deleteclusterresponse
+	return resp, err
 }
 
 //Createservice crestes loadbalancer service.
@@ -217,10 +223,10 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 
 	for key, value := range param {
 		switch key {
-		case "projectid":
+		case "Project":
 			Projectid, _ = value.(string)
 
-		case "name":
+		case "Name":
 			name, _ := value.(string)
 			option.Name = name
 
@@ -330,15 +336,17 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 
 	Createservicedictnoaryconvert(option, Createservicejsonmap)
 
-	Createservicejson, _ := json.Marshal(Createservicejsonmap)
+	Createservicedict := make(map[string]interface{})
+
+	Createservicedict["nodePool"] = Createservicejsonmap
+
+	Createservicejson, _ := json.Marshal(Createservicedict)
 
 	Createservicejsonstring := string(Createservicejson)
 
-	fmt.Println(Createservicejsonstring)
-
 	var Createservicejsonstringbyte = []byte(Createservicejsonstring)
 
-	url := "https://container.googleapis.com/v1/projects/" + Projectid + "/zones/" + Zone + "/clusters" + ClusterId + "/nodePools"
+	url := "https://container.googleapis.com/v1/projects/" + Projectid + "/zones/" + Zone + "/clusters/" + ClusterId + "/nodePools"
 
 	client := googleauth.SignJWT()
 
@@ -352,9 +360,11 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 
 	body, err := ioutil.ReadAll(Createservicerresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Createserviceresponse := make(map[string]interface{})
+	Createserviceresponse["status"] = Createservicerresp.StatusCode
+	Createserviceresponse["body"] = string(body)
+	resp = Createserviceresponse
+	return resp, err
 }
 
 //runtask runs container.
@@ -374,11 +384,11 @@ func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp
 
 	options := request.(map[string]string)
 
-	url := "https://container.googleapis.com/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/clusters/" + options["clusterId"] + "/nodePools/" + options["nodePoolId"]
+	url := "https://container.googleapis.com/v1/projects/" + options["Project"] + "/zones/" + options["Zone"] + "/clusters/" + options["clusterId"] + "/nodePools/" + options["nodePoolId"]
 
 	client := googleauth.SignJWT()
 
-	Deleteservicerequest, err := http.NewRequest("POST", url, nil)
+	Deleteservicerequest, err := http.NewRequest("DELETE", url, nil)
 	Deleteservicerequest.Header.Set("Content-Type", "application/json")
 
 	Deleteserviceresp, err := client.Do(Deleteservicerequest)
@@ -387,16 +397,18 @@ func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp
 
 	body, err := ioutil.ReadAll(Deleteserviceresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Deleteserviceresponse := make(map[string]interface{})
+	Deleteserviceresponse["status"] = Deleteserviceresp.StatusCode
+	Deleteserviceresponse["body"] = string(body)
+	resp = Deleteserviceresponse
+	return resp, err
 }
 
 //Stoptask stops container.
 func (googlecontainer *Googlecontainer) Stoptask(request interface{}) (resp interface{}, err error) {
 	options := request.(map[string]string)
 
-	url := "https://container.googleapis.com/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/operations/" + options["operationId"] + ":cancel"
+	url := "https://container.googleapis.com/v1/projects/" + options["Project"] + "/zones/" + options["Zone"] + "/operations/" + options["OperationId"] + ":cancel"
 
 	client := googleauth.SignJWT()
 
@@ -409,7 +421,9 @@ func (googlecontainer *Googlecontainer) Stoptask(request interface{}) (resp inte
 
 	body, err := ioutil.ReadAll(Stoptaskresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Stoptaskrespresponse := make(map[string]interface{})
+	Stoptaskrespresponse["status"] = Stoptaskresp.StatusCode
+	Stoptaskrespresponse["body"] = string(body)
+	resp = Stoptaskrespresponse
+	return resp, err
 }

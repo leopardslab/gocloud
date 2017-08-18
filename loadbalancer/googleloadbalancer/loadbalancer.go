@@ -3,18 +3,25 @@ package googleloadbalancer
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	googleauth "github.com/scorelab/gocloud-v2/googleauth"
 	"io/ioutil"
 	"net/http"
+	"time"
+)
+
+const (
+	//UnixDate reperesnts unix date-time format.
+	UnixDate = "Mon Jan _2 15:04:05 MST 2006"
+	//RFC3339 reperesnts RFC3339 date-time format. 
+	RFC3339  = "2006-01-02T15:04:05Z07:00"
 )
 
 //Creatloadbalancer creates google loadbalancer pool.
 func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	var option TargetPools
-
 	var Project string
+	var Region string
 
 	param := request.(map[string]interface{})
 
@@ -23,13 +30,13 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 		case "Project":
 			Project, _ = value.(string)
 
-		case "name":
+		case "Name":
 			name, _ := value.(string)
 			option.Name = name
 
 		case "Region":
 			RegionV, _ := value.(string)
-			option.Region = RegionV
+			Region = RegionV
 
 		case "healthChecks":
 			HealthChecksV, _ := value.([]string)
@@ -51,7 +58,7 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 			IDV, _ := value.(string)
 			option.ID = IDV
 
-		case "instances":
+		case "Instances":
 			InstancesV, _ := value.([]string)
 			option.Instances = InstancesV
 
@@ -65,7 +72,7 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 
 		case "region":
 			RegionV, _ := value.(string)
-			option.Region = RegionV
+			Region = RegionV
 
 		case "selfLink":
 			SelfLinkV, _ := value.(string)
@@ -74,7 +81,9 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 		}
 	}
 
-	option.CreationTimestamp = ""
+	option.Region = "https://www.googleapis.com/compute/v1/projects/" + Project + "zones/" + Region
+
+	option.CreationTimestamp = time.Now().UTC().Format(time.RFC3339)
 
 	Creatloadbalancerjsonmap := make(map[string]interface{})
 
@@ -84,11 +93,9 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 
 	Creatloadbalancerjsonstring := string(Creatloadbalancerjson)
 
-	fmt.Println(Creatloadbalancerjsonstring)
-
 	var Creatloadbalancerstringbyte = []byte(Creatloadbalancerjsonstring)
 
-	url := "https://www.googleapis.com/compute/v1/projects/" + Project + "regions/" + option.Region + "targetPools"
+	url := "https://www.googleapis.com/compute/beta/projects/" + Project + "/regions/" + Region + "/targetPools"
 
 	client := googleauth.SignJWT()
 
@@ -102,10 +109,11 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 
 	body, err := ioutil.ReadAll(Creatloadbalancerresp.Body)
 
-	fmt.Println(string(body))
-
-	return
-
+	Creatloadbalancerresponse := make(map[string]interface{})
+	Creatloadbalancerresponse["status"] = Creatloadbalancerresp.StatusCode
+	Creatloadbalancerresponse["body"] = string(body)
+	resp = Creatloadbalancerresponse
+	return resp, err
 }
 
 //Deleteloadbalancer deletes google loadbalancer pool.
@@ -113,7 +121,7 @@ func (googleloadbalancer *Googleloadbalancer) Deleteloadbalancer(request interfa
 
 	options := request.(map[string]string)
 
-	url := "https://www.googleapis.com/compute/v1/projects/" + options["project"] + "/regions/" + options["region"] + "/targetPools/" + options["targetPool"]
+	url := "https://www.googleapis.com/compute/beta/projects/" + options["Project"] + "/regions/" + options["Region"] + "/targetPools/" + options["TargetPool"]
 
 	client := googleauth.SignJWT()
 
@@ -126,9 +134,11 @@ func (googleloadbalancer *Googleloadbalancer) Deleteloadbalancer(request interfa
 
 	body, err := ioutil.ReadAll(Deleteloadbalancerresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Deleteloadbalancerresponse := make(map[string]interface{})
+	Deleteloadbalancerresponse["status"] = Deleteloadbalancerresp.StatusCode
+	Deleteloadbalancerresponse["body"] = string(body)
+	resp = Deleteloadbalancerresponse
+	return resp, err
 }
 
 //Listloadbalancer lists google loadbalancer pool.
@@ -136,7 +146,9 @@ func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface
 
 	options := request.(map[string]string)
 
-	url := "https://www.googleapis.com/compute/v1/projects/" + options["project"] + "/regions/" + options["region"] + "/targetPools/"
+	url := "https://www.googleapis.com/compute/beta/projects/" + options["Project"] + "/regions/" + options["Region"] + "/targetPools/"
+
+	//  url := "https://www.googleapis.com/compute/beta/projects/" + Project + "/regions/" + Region + "/targetPools"
 
 	client := googleauth.SignJWT()
 
@@ -149,9 +161,11 @@ func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface
 
 	body, err := ioutil.ReadAll(Listloadbalancerresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Listloadbalancerresponse := make(map[string]interface{})
+	Listloadbalancerresponse["status"] = Listloadbalancerresp.StatusCode
+	Listloadbalancerresponse["body"] = string(body)
+	resp = Listloadbalancerresponse
+	return resp, err
 }
 
 //Attachnodewithloadbalancer attach new google compute instance to google loadbalancer pool.
@@ -186,7 +200,7 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 			Instances = InstancesV
 		}
 	}
-	url := "https://www.googleapis.com/compute/v1/projects/" + Project + "/regions/" + Region + "/targetPools/" + TargetPool + "/addInstance"
+	url := "https://www.googleapis.com/compute/beta/projects/" + Project + "/regions/" + Region + "/targetPools/" + TargetPool + "/addInstance"
 
 	Attachnodewithloadbalancerjsonmap := make(map[string]interface{})
 
@@ -204,8 +218,6 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 
 	Attachnodewithloadbalancerjsonstring := string(Attachnodewithloadbalancerjson)
 
-	fmt.Println(Attachnodewithloadbalancerjsonstring)
-
 	var Attachnodewithloadbalancerstringbyte = []byte(Attachnodewithloadbalancerjsonstring)
 
 	client := googleauth.SignJWT()
@@ -220,9 +232,11 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 
 	body, err := ioutil.ReadAll(Attachnodewithloadbalancerresp.Body)
 
-	fmt.Println(string(body))
-
-	return
+	Attachnodewithloadbalancerresponse := make(map[string]interface{})
+	Attachnodewithloadbalancerresponse["status"] = Attachnodewithloadbalancerresp.StatusCode
+	Attachnodewithloadbalancerresponse["body"] = string(body)
+	resp = Attachnodewithloadbalancerresponse
+	return resp, err
 }
 
 //Detachnodewithloadbalancer Detach google compute instance from google loadbalancer pool.
@@ -256,7 +270,7 @@ func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request
 			Instances = InstancesV
 		}
 	}
-	url := "https://www.googleapis.com/compute/v1/projects/" + Project + "/regions/" + Region + "/targetPools/" + TargetPool + "/addInstance"
+	url := "https://www.googleapis.com/compute/beta/projects/" + Project + "/regions/" + Region + "/targetPools/" + TargetPool + "/removeInstance"
 
 	Detachnodewithloadbalancerjsonmap := make(map[string]interface{})
 
@@ -274,8 +288,6 @@ func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request
 
 	Detachnodewithloadbalancerjsonstring := string(Detachnodewithloadbalancerjson)
 
-	fmt.Println(Detachnodewithloadbalancerjsonstring)
-
 	var Detachnodewithloadbalancerstringbyte = []byte(Detachnodewithloadbalancerjsonstring)
 
 	client := googleauth.SignJWT()
@@ -290,8 +302,9 @@ func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request
 
 	body, err := ioutil.ReadAll(Detachnodewithloadbalancerresp.Body)
 
-	fmt.Println(string(body))
-
-	return
-
+	Detachnodewithloadbalancerresponse := make(map[string]interface{})
+	Detachnodewithloadbalancerresponse["status"] = Detachnodewithloadbalancerresp.StatusCode
+	Detachnodewithloadbalancerresponse["body"] = string(body)
+	resp = Detachnodewithloadbalancerresponse
+	return resp, err
 }

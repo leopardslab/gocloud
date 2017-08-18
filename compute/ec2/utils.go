@@ -152,7 +152,7 @@ func (err *Error) Error() string {
 
 //pass the param to query and add signature to it base on secret key and acces key
 
-func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string, resp interface{}) error {
+func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string, response map[string]interface{}) error {
 
 	EC2Endpoint := "https://ec2." + Region + ".amazonaws.com"
 
@@ -175,14 +175,19 @@ func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string,
 	awsauth.SignatureV2(req, auth)
 
 	r, err := http.DefaultClient.Do(req)
+
 	if err != nil {
 		return err
 	}
 	defer r.Body.Close()
 
 	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		return err
+	}
 
-	fmt.Println(string(body))
+	response["body"] = string(body)
+	response["status"] = r.StatusCode
 
-	return xml.NewDecoder(r.Body).Decode(resp)
+	return err
 }

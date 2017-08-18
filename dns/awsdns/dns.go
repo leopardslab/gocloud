@@ -70,8 +70,6 @@ func (awsdns *Awsdns) ListResourcednsRecordSets(request interface{}) (resp inter
 
 	awsdns.PrepareSignatureV4query("GET", fmt.Sprintf("/%s/hostedzone/%s/rrset", "2013-04-01", zone), req, out, response)
 
-	fmt.Println("response body :", response["body"])
-
 	resp = response
 
 	return resp, nil
@@ -112,8 +110,6 @@ func (awsdns *Awsdns) Listdns(request interface{}) (resp interface{}, err error)
 
 	awsdns.PrepareSignatureV4query("GET", fmt.Sprintf("/%s/hostedzone/", "2013-04-01"), values, out, response)
 
-	fmt.Println("response body :", response["body"])
-
 	resp = response
 
 	return resp, nil
@@ -128,8 +124,6 @@ func (awsdns *Awsdns) Deletedns(request interface{}) (resp interface{}, err erro
 	response := make(map[string]interface{})
 
 	awsdns.PrepareSignatureV4query("DELETE", fmt.Sprintf("/%s/hostedzone/%s", "2013-04-01", param["ID"]), nil, out, response)
-
-	fmt.Println("response body :", response["body"])
 
 	resp = response
 
@@ -169,8 +163,6 @@ func (awsdns *Awsdns) Createdns(request interface{}) (resp interface{}, err erro
 	response := make(map[string]interface{})
 
 	awsdns.PrepareSignatureV4query("POST", fmt.Sprintf("/%s/hostedzone", "2013-04-01"), option, out, response)
-
-	fmt.Println("response body :", response["body"])
 
 	resp = response
 
