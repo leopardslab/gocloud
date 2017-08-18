@@ -26,6 +26,13 @@ type Gocloud interface {
 	Listloadbalancer(request interface{}) (resp interface{}, err error)
 	Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
 	Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
+	Createcluster(request interface{}) (resp interface{}, err error)
+	Deletecluster(request interface{}) (resp interface{}, err error)
+	Createservice(request interface{}) (resp interface{}, err error)
+	Runtask(request interface{}) (resp interface{}, err error)
+	Deleteservice(request interface{}) (resp interface{}, err error)
+	Stoptask(request interface{}) (resp interface{}, err error)
+	Starttask(request interface{}) (resp interface{}, err error)
 }
 
 const (
