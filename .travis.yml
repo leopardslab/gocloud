@@ -7,6 +7,7 @@ script:
 env:
   global:
     - test=10
+    secure:
     - PrivateKey = "-----BEGIN PRIVATE KEY-----
 MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDWJKDV4ZIqH8gx
 amJBiSr4rZsZg3oFmZEDuRJeRWYX//uUWl3anBPV0j/tuFojUZSzeLO2WWxjZxqT
