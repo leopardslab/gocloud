@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 )
+
 //Creatloadbalancer creates google loadbalancer pool.
 func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
 

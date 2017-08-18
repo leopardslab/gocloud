@@ -17,6 +17,8 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 
 	var projectid string
 
+	var Zone string
+
 	param := make(map[string]interface{})
 
 	param = request.(map[string]interface{})
@@ -28,8 +30,9 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 			fmt.Println(projectid)
 
 		case "Zone":
-			Zone, _ := value.(string)
-			gceinstance.Zone = Zone
+			zoneV, _ := value.(string)
+			gceinstance.Zone = zoneV
+			Zone = zoneV
 
 		case "selfLink":
 			selfLink, _ := value.(string)
@@ -140,8 +143,8 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 	var gceinstancejsonstringbyte = []byte(gceinstancejsonstring)
 
 	client := googleauth.SignJWT()
-
-	Createnoderequest, err := http.NewRequest("POST", "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/instances", bytes.NewBuffer(gceinstancejsonstringbyte))
+	urlv := "https://www.googleapis.com/compute/v1/projects/" + projectid + "/zones/" + Zone + "/instances"
+	Createnoderequest, err := http.NewRequest("POST", urlv, bytes.NewBuffer(gceinstancejsonstringbyte))
 	Createnoderequest.Header.Set("Content-Type", "application/json")
 
 	Createnoderesp, err := client.Do(Createnoderequest)
@@ -170,10 +173,12 @@ func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 	defer Startnoderesp.Body.Close()
 
 	body, err := ioutil.ReadAll(Startnoderesp.Body)
-
-	fmt.Println(string(body))
-
-	return
+	fmt.Println("response.statusCode", Startnoderesp.StatusCode)
+	Startnoderesponse := make(map[string]interface{})
+	Startnoderesponse["status"] = Startnoderesp.StatusCode
+	Startnoderesponse["body"] = string(body)
+	resp = Startnoderesponse
+	return resp, nil
 }
 
 //stop gce instance currentnly running

@@ -22,6 +22,8 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 	if err != nil {
 		return nil, err
 	}
+	//fmt.Println(resp)
+	//fmt.Printf("%T",resp)
 	return resp, nil
 }
 
