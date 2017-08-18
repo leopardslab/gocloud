@@ -52,6 +52,7 @@ func Sign() (token *oauth2.Token) {
 	return token
 }
 
+//JWT struct reperesnts JWT json.
 type JWT struct {
 	Type                    string `json:"type"`
 	ProjectID               string `json:"project_id"`
@@ -65,6 +66,8 @@ type JWT struct {
 	ClientX509CertURL       string `json:"client_x509_cert_url"`
 }
 
+
+//SignJWT reperesnts google service account authentication.
 func SignJWT() (client *http.Client) {
 
 	var home string = os.Getenv("HOME")
