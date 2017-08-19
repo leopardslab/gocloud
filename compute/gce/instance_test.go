@@ -6,15 +6,10 @@ func TestDeletenode(t *testing.T) {
 	var gce GCE
 	deletenode := map[string]string{
 		"projectid": "sheltermap-1493101612061",
-		"instance":  "testing-scorelab",
-		"Zone":      "us-west1-c",
+		"instance":  "testing-scorelab2",
+		"Zone":      "us-east4-c",
 	}
-
-	_, err := gce.Deletenode(deletenode)
-
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
+	gce.Deletenode(deletenode)
 }
 
 func TestStopnode(t *testing.T) {
@@ -22,7 +17,7 @@ func TestStopnode(t *testing.T) {
 	stopnode := map[string]string{
 		"projectid": "sheltermap-1493101612061",
 		"instance":  "testing-scorelab2",
-		"Zone":      "us-west1-c",
+		"Zone":      "us-east4-c",
 	}
 
 	_, err := gce.Stopnode(stopnode)
@@ -37,7 +32,7 @@ func TestRebootnode(t *testing.T) {
 	reboot := map[string]string{
 		"projectid": "sheltermap-1493101612061",
 		"instance":  "testing-scorelab",
-		"Zone":      "us-west1-c",
+		"Zone":      "us-east4-c",
 	}
 	_, err := gce.Rebootnode(reboot)
 
@@ -85,7 +80,7 @@ func TestCreatenode(t *testing.T) {
 		"projectid":         "sheltermap-1493101612061",
 		"Name":              "testing-scorelab2",
 		"MachineType":       "https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-east4-c/machineTypes/n1-standard-1",
-		"Zone":              "us-central1-b",
+		"Zone":              "us-east4-c",
 		"disk":              disk,
 		"NetworkInterfaces": NetworkInterfaces,
 	}

@@ -420,7 +420,7 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 					attachdisk.InitializeParam.SourceImageEncryptionKeys.Sha256 = SourceImageEncryptionKeysV["Sha256"]
 				}
 			}
-  	}
+		}
 	}
 
 	Attachdiskjsonmap := make(map[string]interface{})

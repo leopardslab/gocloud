@@ -171,6 +171,7 @@ func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp
 
 	Createclusterresp, err := client.Do(Createclusterrequest)
 
+	fmt.Println(err)
 	defer Createclusterresp.Body.Close()
 
 	body, err := ioutil.ReadAll(Createclusterresp.Body)

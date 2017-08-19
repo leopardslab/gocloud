@@ -12,8 +12,8 @@ import (
 const (
 	//UnixDate reperesnts unix date-time format.
 	UnixDate = "Mon Jan _2 15:04:05 MST 2006"
-	//RFC3339 reperesnts RFC3339 date-time format. 
-	RFC3339  = "2006-01-02T15:04:05Z07:00"
+	//RFC3339 reperesnts RFC3339 date-time format.
+	RFC3339 = "2006-01-02T15:04:05Z07:00"
 )
 
 //Creatloadbalancer creates google loadbalancer pool.

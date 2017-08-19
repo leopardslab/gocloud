@@ -3,8 +3,4 @@ go:
  - 1.6.2 
 script:
 - go test -v ./...
-
-env:
-  global:
-    - a=10
-    - b=10
+ 

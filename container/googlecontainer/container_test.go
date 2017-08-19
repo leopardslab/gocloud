@@ -13,7 +13,7 @@ func TestCreatecluster(t *testing.T) {
 	}
 	createcluster := map[string]interface{}{
 		"Project":   "sheltermap-1493101612061",
-		"Name":      "cluster-2",
+		"Name":      "cluster-3",
 		"Zone":      "us-central1-a",
 		"nodePools": nodepools,
 	}
@@ -29,7 +29,7 @@ func TestDeletecluster(t *testing.T) {
 
 	deletecluster := map[string]string{
 		"Project":   "sheltermap-1493101612061",
-		"clusterId": "cluster-1",
+		"clusterId": "cluster-3",
 		"Zone":      "us-central1-a",
 	}
 
@@ -44,7 +44,7 @@ func TestCreateservice(t *testing.T) {
 	var googlecontainer Googlecontainer
 	createservice := map[string]interface{}{
 		"Project":   "sheltermap-1493101612061",
-		"clusterId": "cluster-2",
+		"clusterId": "cluster-3",
 		"Zone":      "us-central1-a",
 		"Name":      "nodepool",
 	}
@@ -61,7 +61,7 @@ func TestDeleteservice(t *testing.T) {
 
 	deleteservice := map[string]string{
 		"Project":    "sheltermap-1493101612061",
-		"clusterId":  "cluster-2",
+		"clusterId":  "cluster-3",
 		"Zone":       "us-central1-a",
 		"nodePoolId": "nodepool",
 	}
