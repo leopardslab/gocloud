@@ -72,7 +72,7 @@ func SignJWT() (client *http.Client) {
 
 	var home string = os.Getenv("HOME")
 
-	data, err := ioutil.ReadFile(home + "gocloud-v2-testing.json")
+	data, err := ioutil.ReadFile(home + "Hello.json")//"gocloud-v2-testing.json")
 
 	if err != nil {
 		jwt := JWT{}
