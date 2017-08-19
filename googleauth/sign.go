@@ -72,23 +72,10 @@ func SignJWT() (client *http.Client) {
 
 	var home string = os.Getenv("HOME")
 
-	data, err := ioutil.ReadFile(home + "Hello.json")//"/ShelterMap-73bdb0a53ce9.json")
+	data, err := ioutil.ReadFile(home + "gocloud-v2-testing.json")
 
 	if err != nil {
 		jwt := JWT{}
-		/*
-    jwt.PrivateKey = os.Getenv("PrivateKey")
-		jwt.Type = os.Getenv("Type")
-		jwt.ProjectID = os.Getenv("ProjectID")
-		jwt.PrivateKeyID = os.Getenv("PrivateKeyID")
-		jwt.ClientID = os.Getenv("ClientID")
-		jwt.ClientEmail = os.Getenv("ClientEmail")
-		jwt.AuthURI = os.Getenv("AuthURI")
-		jwt.TokenURI = os.Getenv("TokenURI")
-		jwt.AuthProviderX509CertURL = os.Getenv("AuthProviderX509CertURL")
-		jwt.ClientX509CertURL = os.Getenv("ClientX509CertURL")
-    */
-
 		jwt.PrivateKey = "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDilnkJluzrS2ZW\nK6dLkG0G58IMAypcT95NNVMmLG6jr3CLuWv0nCsp7bX8cTYeT5WqaX1sRX8yVREV\nhiJpIr4aC39O44v+3cxTawHJdYvZtq43S4wFPwRbznRE4/JwPW2tA9WYEksfbCd+\nSdUddngghpDzLmG9IjPwd0nDo5tyd+5blM8KtACTMWIe9DozpH6TT507vEeviLJ1\nYEvw8W8qPiLBmeXk9G0t8VbCtKewpBpgRzxGxW5mt4gXclKIrEXTmjPBFrGKrrea\nCHnro+orlXm8TXtfmFLBSyNfBZCWeLxyneaERQlBa2zlkJ5xRx00lz1cPff1weKE\noKtZncKXAgMBAAECggEAXkz3hLkuUuKnbZdvYbBy35vWk39Bwvducj2OJGX7id36\n/fumZUAVarbGtZA8ULMYe7q5ezUVMdJbcNTJP245JcfBLQjge6q9Xb48GSb1lB9G\nNDcZyBko7DhpBT7E6Fd4bLgazdZXM3WknheGPWPPrOG0M7EK9lbkvOA4b9aIXEOr\nE6rtaDj853KQHbJGQiZULJH5/RqFHx1JVfra7K9npGPeewfpSbsuoFrxwaClGLC4\nmzHVwK/YQpJb+TxYfs8Ia7VGQYiRQ0JLbro/eqqKEy+ZbJfgKnpfbQqPYpD3t5C+\nOt5BdAUZGauoYDSRVqjcJOa+fNGHAg8NVMCjAGJnOQKBgQDxmhEyOZaC8V+v35tc\nNo+wVr7EcEyYNlThFDGFQ3XmsuIdDiJd65Y3TZ8aDH8hOiq/jJWaXbRFXY5l8xtt\ne2oUixUjuPZOpef2q9g6TAVARMcitSXAjUA63sKyKdDw0kVEPhcUoNU+gLcoujJV\nhJCmeNnmUnnELP52HlKUxownhQKBgQDwF1kVnJ3Bzp0S32kMgEWLIOKq8aHNz+L5\nGSKHRVyhtPHg5mG0urZ7OTgPEnzB306DzA8bYxPyynUIKmZT4P1h55Np+n2P2CND\niOiMPcWSEsqUcobi2WDjhsukImvNESudkIz5WBazNxJjM08tiNXvv3BOb3ZbfYtZ\nN3qp/5WmawKBgHXhHhLLVkx9SJqfF0ZeuKzpJhriT/zURYWsPJ0w1Q3CqeBTTSFW\nGOzSypYDEuQ7ZTAgf73ZimNtylSj0PYSCSgM1Duhu0uUVyFbpxyKiuVYqXCdwdW5\nFWWj2orjLDbT4Ufyo4BFGMZuNu+AKZ7gF1OiE271PsQgz+cB1HkShr+hAoGAJHsH\nuDbx6Y7hYwq7RYEAECHRDzRj54fc7wiYrIEnkBKUZh3bXsC4FYUeNXwTpMmvfms1\nKG4ni86jdbgrkDcxiPzM819yULcAtLRK0XRZXtaoHWJBiJqLFEdZDfmE88XWILzk\nDscJu/V0P8p+D2cpSqKGCAT7sO8ki0vYwZfqPz0CgYEA7DZHf8pZ0ls9gHA4SfjN\n+4x6SVKf7uaAhZQQeJiHdabod0Lv2fTL7iIrLvr6CJJuNDNabGrNUCcHRuSOFsX6\n5BxwGzu8IoZr+OdUxTNWH99M2KgKaedOzc+UWYWydNPQjKQqJvRzl72TcihCw/Gm\n4GrbT+IssTAOvwngM6TQfYk=\n-----END PRIVATE KEY-----\n"
 		jwt.Type = "service_account"
 		jwt.ProjectID = "sheltermap-1493101612061"
@@ -102,12 +89,10 @@ func SignJWT() (client *http.Client) {
 
 		jwtjson, _ := json.Marshal(jwt)
 
-		fmt.Println(string(jwtjson))
-
 		jwtjsonstring := string(jwtjson)
 
 		datastr := strings.NewReader(jwtjsonstring)
-    fmt.Println("I am here")
+
 		data, err = ioutil.ReadAll(datastr)
 		if err != nil {
 			log.Fatal(err)
