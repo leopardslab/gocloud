@@ -399,6 +399,6 @@ func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]stri
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	response["body"] = string(body)
-	response["body"] = resp.StatusCode
+	response["status"] = resp.StatusCode
 	return err
 }

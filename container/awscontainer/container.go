@@ -425,7 +425,7 @@ func (ecscontainer *Ecscontainer) Deletecluster(request interface{}) (resp inter
 	prepareDeletecluster(params, clusterName, Region)
 
 	Deletecontainerjsonmap := map[string]interface{}{
-		"clusterName": clusterName,
+		"cluster": clusterName,
 	}
 
 	response := make(map[string]interface{})

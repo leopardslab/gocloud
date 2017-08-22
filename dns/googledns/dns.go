@@ -19,7 +19,7 @@ func (googledns *Googledns) ListResourcednsRecordSets(request interface{}) (resp
 
 	options := request.(map[string]string)
 
-	url := "https://www.googleapis.com/dns/v1/projects" + options["project"] + "/managedZones/" + options["managedZone"] + "/changes"
+	url := "https://www.googleapis.com/dns/v1/projects/" + options["project"] + "/managedZones/" + options["managedZone"] + "/rrsets"
 
 	client := googleauth.SignJWT()
 

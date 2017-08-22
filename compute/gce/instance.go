@@ -3,10 +3,10 @@ package gce
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	googleauth "github.com/scorelab/gocloud-v2/googleauth"
 	"io/ioutil"
 	"net/http"
-	"fmt"
 )
 
 //create gce instance

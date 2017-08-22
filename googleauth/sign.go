@@ -3,7 +3,6 @@ package googleauth
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/scorelab/gocloud-v2/auth"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"io/ioutil"
@@ -18,9 +17,9 @@ func Sign() (token *oauth2.Token) {
 
 	conf := &oauth2.Config{
 
-		ClientID: auth.Config.GoogleClientID,
+		ClientID: os.Getenv("GoogleClientID"),
 
-		ClientSecret: auth.Config.GoogleClientSecret,
+		ClientSecret:os.Getenv("GoogleClientSecret") ,
 
 		RedirectURL: "urn:ietf:wg:oauth:2.0:oob",
 
@@ -66,7 +65,6 @@ type JWT struct {
 	ClientX509CertURL       string `json:"client_x509_cert_url"`
 }
 
-
 //SignJWT reperesnts google service account authentication.
 func SignJWT() (client *http.Client) {
 
@@ -76,6 +74,26 @@ func SignJWT() (client *http.Client) {
 
 	if err != nil {
 		jwt := JWT{}
+
+		jwt.PrivateKey = os.Getenv("PrivateKey")
+
+		jwt.Type = os.Getenv("Type")
+
+		jwt.ProjectID = os.Getenv("ProjectID")
+
+		jwt.PrivateKeyID = os.Getenv("PrivateKeyID")
+
+		jwt.ClientID = os.Getenv("ClientID")
+
+		jwt.ClientEmail = os.Getenv("ClientEmail")
+
+		jwt.AuthURI = os.Getenv("AuthURI")
+
+		jwt.TokenURI = os.Getenv("TokenURI")
+
+		jwt.AuthProviderX509CertURL = os.Getenv("AuthProviderX509CertURL")
+
+		jwt.ClientX509CertURL = os.Getenv("ClientX509CertURL")
 
 		jwtjson, _ := json.Marshal(jwt)
 
