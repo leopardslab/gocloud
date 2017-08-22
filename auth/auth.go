@@ -10,8 +10,6 @@ import (
 type Configuration struct {
 	AWSAccessKeyID     string
 	AWSSecretKey       string
-	GoogleClientID     string
-	GoogleClientSecret string
 }
 
 var Config Configuration
