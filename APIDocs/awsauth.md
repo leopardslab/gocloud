@@ -1,5 +1,5 @@
 package awsauth
-    import "github.com/scorelab/gocloud-v2/awsauth"
+    import "github.com/cloudlibz/gocloud/awsauth"
 
 
 FUNCTIONS

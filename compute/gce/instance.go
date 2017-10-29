@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	googleauth "github.com/scorelab/gocloud-v2/googleauth"
+	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
 )

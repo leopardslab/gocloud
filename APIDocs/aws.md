@@ -1,5 +1,5 @@
 package aws
-    import "github.com/scorelab/gocloud-v2/aws"
+    import "github.com/cloudlibz/gocloud/aws"
 
 
 TYPES

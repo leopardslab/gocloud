@@ -1,5 +1,5 @@
 package auth
-    import "github.com/scorelab/gocloud-v2/auth"
+    import "github.com/cloudlibz/gocloud/auth"
 
 
 FUNCTIONS
