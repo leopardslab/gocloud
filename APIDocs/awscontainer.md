@@ -1,5 +1,5 @@
 package awscontainer
-    import "github.com/scorelab/gocloud-v2/container/awscontainer"
+    import "github.com/cloudlibz/gocloud/container/awscontainer"
 
 
 TYPES

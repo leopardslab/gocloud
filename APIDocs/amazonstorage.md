@@ -1,5 +1,5 @@
 package amazonstorage
-    import "github.com/scorelab/gocloud-v2/storage/amazonstorage"
+    import "github.com/cloudlibz/gocloud/storage/amazonstorage"
 
 
 TYPES

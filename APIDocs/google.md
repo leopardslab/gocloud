@@ -1,5 +1,5 @@
 package google
-    import "github.com/scorelab/gocloud-v2/google"
+    import "github.com/cloudlibz/gocloud/google"
 
 
 TYPES
