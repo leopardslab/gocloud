@@ -3,21 +3,13 @@ package gce
 //GCE struct reperesnts Google Compute Engine.
 type GCE struct {
 	Name string `json:"name"`
-
 	Zone string `json:"zone"`
-
 	MachineType string `json:"machineType"`
-
 	Disks []Disk `json:"disks"`
-
 	CanIPForward bool `json:"canIpForward"`
-
 	NetworkInterfaces []NetworkInterface `json:"networkInterfaces"`
-
 	Description string `json:"description"`
-
 	selfLink string `json:"selfLink"`
-
 	Scheduling `json:"scheduling"`
 }
 
