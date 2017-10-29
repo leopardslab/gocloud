@@ -30,28 +30,19 @@ func SignatureV2(req *http.Request, Auth interface{}) (err error) {
 	}
 
 	payload := new(bytes.Buffer)
-
 	payloadstring := checkrequestMethod(req.Method) + "\n" + req.Host + "\n" + path + "\n" + queryStr
-
 	fmt.Fprintf(payload, "%s", payloadstring)
-
 	hash := hmac.New(sha256.New, []byte(auth["SecretKey"]))
-
 	hash.Write(payload.Bytes())
-
 	signature := make([]byte, base64.StdEncoding.EncodedLen(hash.Size()))
-
 	base64.StdEncoding.Encode(signature, hash.Sum(nil))
 
 	queryVals.Set("Signature", string(signature))
-
 	req.URL.RawQuery = queryVals.Encode()
-
 	return nil
 }
 
 func canonicalQueryString(queryString url.Values) (string, error) {
-
 	return strings.Replace(queryString.Encode(), "+", "%20", -1), nil
 }
 
