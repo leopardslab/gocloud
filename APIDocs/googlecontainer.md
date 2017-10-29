@@ -1,5 +1,5 @@
 package googlecontainer
-    import "github.com/scorelab/gocloud-v2/container/googlecontainer"
+    import "github.com/cloudlibz/gocloud/container/googlecontainer"
 
 
 FUNCTIONS

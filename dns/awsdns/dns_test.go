@@ -1,7 +1,7 @@
 package awsdns
 
 import "testing"
-import "github.com/scorelab/gocloud-v2/auth"
+import "github.com/cloudlibz/gocloud/auth"
 
 func init() {
 	auth.LoadConfig()

@@ -1,5 +1,5 @@
 package googledns
-    import "github.com/scorelab/gocloud-v2/dns/googledns"
+    import "github.com/cloudlibz/gocloud/dns/googledns"
 
 
 CONSTANTS

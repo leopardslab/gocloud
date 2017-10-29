@@ -1,5 +1,5 @@
 package awsdns
-    import "github.com/scorelab/gocloud-v2/dns/awsdns"
+    import "github.com/cloudlibz/gocloud/dns/awsdns"
 
 
 FUNCTIONS

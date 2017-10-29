@@ -5,7 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
-	auth "github.com/scorelab/gocloud-v2/auth"
+	auth "github.com/cloudlibz/gocloud/auth"
 	"net/http"
 	"time"
 )

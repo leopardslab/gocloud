@@ -1,5 +1,5 @@
 package gocloud
-    import "github.com/scorelab/gocloud-v2/gocloud"
+    import "github.com/cloudlibz/gocloud/gocloud"
 
 
 CONSTANTS

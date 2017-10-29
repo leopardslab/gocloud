@@ -1,5 +1,5 @@
 package googlestorage
-    import "github.com/scorelab/gocloud-v2/storage/googlestorage"
+    import "github.com/cloudlibz/gocloud/storage/googlestorage"
 
 
 FUNCTIONS

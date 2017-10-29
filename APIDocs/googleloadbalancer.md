@@ -1,5 +1,5 @@
 package googleloadbalancer
-    import "github.com/scorelab/gocloud-v2/loadbalancer/googleloadbalancer"
+    import "github.com/cloudlibz/gocloud/loadbalancer/googleloadbalancer"
 
 
 CONSTANTS

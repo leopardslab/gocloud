@@ -1,5 +1,5 @@
 package gce
-    import "github.com/scorelab/gocloud-v2/compute/gce"
+    import "github.com/cloudlibz/gocloud/compute/gce"
 
 
 TYPES
