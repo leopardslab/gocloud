@@ -3,7 +3,7 @@ package googlestorage
 import (
 	"bytes"
 	"encoding/json"
-	googleauth "github.com/scorelab/gocloud-v2/googleauth"
+	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
 )
