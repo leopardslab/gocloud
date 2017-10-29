@@ -1,5 +1,5 @@
 package googleauth
-    import "github.com/scorelab/gocloud-v2/googleauth"
+    import "github.com/cloudlibz/gocloud/googleauth"
 
 
 FUNCTIONS

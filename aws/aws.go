@@ -1,11 +1,11 @@
 package aws
 
 import (
-	ec2 "github.com/scorelab/gocloud-v2/compute/ec2"
-	awscontainer "github.com/scorelab/gocloud-v2/container/awscontainer"
-	awsdns "github.com/scorelab/gocloud-v2/dns/awsdns"
-	awsloadbalancer "github.com/scorelab/gocloud-v2/loadbalancer/awsloadbalancer"
-	amazonstorage "github.com/scorelab/gocloud-v2/storage/amazonstorage"
+	ec2 "github.com/cloudlibz/gocloud/compute/ec2"
+	awscontainer "github.com/cloudlibz/gocloud/container/awscontainer"
+	awsdns "github.com/cloudlibz/gocloud/dns/awsdns"
+	awsloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/awsloadbalancer"
+	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
 )
 
 //AWS struct reperents amazon cloud provider.

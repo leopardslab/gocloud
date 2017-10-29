@@ -1,5 +1,5 @@
 package awsloadbalancer
-    import "github.com/scorelab/gocloud-v2/loadbalancer/awsloadbalancer"
+    import "github.com/cloudlibz/gocloud/loadbalancer/awsloadbalancer"
 
 
 TYPES

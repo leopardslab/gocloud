@@ -3,9 +3,9 @@ package gocloud
 import (
 	"errors"
 	"fmt"
-	"github.com/scorelab/gocloud-v2/auth"
-	"github.com/scorelab/gocloud-v2/aws"
-	"github.com/scorelab/gocloud-v2/google"
+	"github.com/cloudlibz/gocloud/auth"
+	"github.com/cloudlibz/gocloud/aws"
+	"github.com/cloudlibz/gocloud/google"
 )
 
 //Gocloud is a interface which hide differece between different cloud providers.
