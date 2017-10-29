@@ -169,11 +169,8 @@ func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string,
 	query.Add("Timestamp", timeNow().In(time.UTC).Format(time.RFC3339))
 
 	req.URL.RawQuery = query.Encode()
-
 	auth := map[string]string{"AccessKey": auth.Config.AWSAccessKeyID, "SecretKey": auth.Config.AWSSecretKey}
-
 	awsauth.SignatureV2(req, auth)
-
 	r, err := http.DefaultClient.Do(req)
 
 	if err != nil {
