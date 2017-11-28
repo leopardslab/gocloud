@@ -7,7 +7,7 @@ import (
 	"encoding/base64"
 	"encoding/xml"
 	"fmt"
-	auth "github.com/scorelab/gocloud-v2/auth"
+	auth "github.com/cloudlibz/gocloud/auth"
 	"io"
 	"io/ioutil"
 	"net/http"

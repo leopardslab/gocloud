@@ -2,8 +2,8 @@ package amazonstorage
 
 import (
 	"fmt"
-	auth "github.com/scorelab/gocloud-v2/auth"
-	awsauth "github.com/scorelab/gocloud-v2/awsauth"
+	auth "github.com/cloudlibz/gocloud/auth"
+	awsauth "github.com/cloudlibz/gocloud/awsauth"
 	"io/ioutil"
 	"net/http"
 	"strconv"

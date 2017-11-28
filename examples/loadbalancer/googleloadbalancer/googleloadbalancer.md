@@ -25,7 +25,7 @@ export ClientX509CertURL =  "xxxxxxxxxxxx"
 
 ```js
 
-import "github.com/scorelab/gocloud-v2/gocloud"
+import "github.com/cloudlibz/gocloud/gocloud"
 
 googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 ```
