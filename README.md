@@ -1,3 +1,5 @@
+![GoCloud Logo](assets/logo.png)
+
 # gocloud
 Cloud services library
 
