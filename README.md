@@ -12,9 +12,9 @@ gocloud is a golang library which hides differences between different cloud prov
 
 **Container**  --allows users to install and deploy containers onto container based virtualization platforms.
 
-**Load balancer**  --allaws you to manager Load Balancer service.
+**Load balancer**  --allows you to manager Load Balancer service.
 
-**DNS**  --allaws you to manage DNS service.
+**DNS**  --allows you to manage DNS service.
 
 
 ## Service Providers
