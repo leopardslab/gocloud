@@ -27,7 +27,7 @@ GoCloud is a golang library which hides differences between different cloud prov
 - EC2 Storage
 - Amazon Elastic Container Service (Container)
 - Elastic Load Balancing
-- AWS Route5S
+- AWS Route53
 
 ### Google
 
