@@ -8,7 +8,7 @@
 Cloud services library
 
 
-GoCloud is a golang library which eliminates differences between different cloud providers' (AWS,GCP,Openstack etc) APIs and allows you to manage different cloud resources through a unified and easy to use API.
+GoCloud is a golang library which hides differences between different cloud providers' (AWS,GCP,Openstack etc) APIs and allows you to manage different cloud resources through a unified and easy to use API.
 
 # Service Types
 
@@ -31,7 +31,7 @@ GoCloud is a golang library which eliminates differences between different cloud
 - EC2 Storage
 - Amazon Elastic Container Service (Container)
 - Elastic Load Balancing
-- AWS Route5S
+- AWS Route53
 
 ### Google
 
