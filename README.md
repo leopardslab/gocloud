@@ -1,5 +1,9 @@
 ![GoCloud Logo](assets/logo.png)
 
+[![Codacy Badge]()]()
+[![Build Status]()]()
+[![Build status]()]()
+[![Gitter]()]()
 # gocloud
 Cloud services library
 
