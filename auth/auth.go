@@ -29,7 +29,7 @@ func LoadConfig() {
 		Config.AWSSecretKey = os.Getenv("AWSSecretKey")
 
 		if Config.AWSAccessKeyID == "" || Config.AWSSecretKey == "" {
-			log.Fatalln("Cannot Get access key and secert key")
+			log.Fatalln("Cannot Get access key and secret key")
 		}
 	}
 }
