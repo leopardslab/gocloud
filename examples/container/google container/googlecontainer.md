@@ -3,7 +3,7 @@
 ## Configure google credentials
 
 
-download service account credential file from google cloud save as `googlecloud.json`,
+download service account credential file from google cloud save as `googlecloudinfo.json`,
 
 
 also You can setup enviroment variables as
@@ -48,7 +48,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
   }
 
   resp, err := googlecloud.Createcluster(createcluster)
-  
+
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 
@@ -64,14 +64,14 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 	}
 
  resp , err := googlecloud.Deletecluster(deletecluster)
- 
+
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
 ### create service
 
 ```js
-  
+
   createservice := map[string]interface{}{
 	"Project"   :   "sheltermap-1493101612061",
 	"clusterId" :   "cluster-2",
@@ -94,9 +94,9 @@ deleteservice := map[string]string{
 		"Zone":       "us-central1-a",
 		"nodePoolId": "nodepool",
 	}
- 
+
  resp, err := googlecloud.Deleteservice(deleteservice)
- 
+
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
