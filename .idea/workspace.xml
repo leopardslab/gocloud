@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae838b59-925d-49a8-9cfe-8c523cb38ae4" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/aliauth/sign.go" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/aliauth/utils.go" afterPath="$PROJECT_DIR$/aliauth/utils.go" />
-      <change beforePath="$PROJECT_DIR$/compute/aliecs/instance_test.go" afterPath="$PROJECT_DIR$/compute/aliecs/instance_test.go" />
-      <change beforePath="$PROJECT_DIR$/gocloud/gocloud.go" afterPath="$PROJECT_DIR$/gocloud/gocloud.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -63,16 +60,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="url.go" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/go/src/net/url/url.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6400">
-              <caret line="263" column="5" lean-forward="false" selection-start-line="263" selection-start-column="5" selection-end-line="263" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="instance_test.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/compute/aliecs/instance_test.go">
           <provider selected="true" editor-type-id="text-editor">
@@ -105,11 +92,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gocloud.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gocloud.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gocloud/gocloud.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="675">
               <caret line="65" column="28" lean-forward="false" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="16" column="6" lean-forward="true" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -167,6 +164,7 @@
         <option value="$PROJECT_DIR$/compute/aliecs/instance_test.go" />
         <option value="$PROJECT_DIR$/aliauth/utils.go" />
         <option value="$PROJECT_DIR$/gocloud/gocloud.go" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -491,8 +489,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1860" height="1080" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25523704" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25523704" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -522,13 +521,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/storage/googlestorage/models.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/storage/googlestorage/storage.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -890,6 +882,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
           <caret line="65" column="28" lean-forward="false" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="16" column="6" lean-forward="true" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
           <folding />
         </state>
       </provider>
