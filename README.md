@@ -38,7 +38,15 @@ GoCloud is a golang library which hides differences between different cloud prov
 - Google Compute
 - Google Compute Storage
 - Google  Container Service (Container)
-- Google Elastic Load Balancing 
-- Google DNS 
+- Google Elastic Load Balancing
+- Google DNS
 
 Currently, implementaions for other cloud providers are being worked on.
+
+
+## Development setup
+
+```
+$ git clone https://github.com/cloudlibz/gocloud
+$ cd gocloud
+```
