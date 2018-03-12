@@ -3,7 +3,6 @@ package aliecs
 import (
 	"github.com/cloudlibz/gocloud/aliauth"
 	"testing"
-	"fmt"
 )
 
 func init() {
@@ -18,11 +17,10 @@ func TestCreatenode(t *testing.T) {
 		"InstanceType":    "ecs.xn4.small",
 		"SecurityGroupId": "sg-m5egbo9s5xb21kpu6nk2",
 	}
-	resp, err := aliEcs.Createnode(create)
+	_, err := aliEcs.Createnode(create)
 	if err != nil {
-		fmt.Println(err)
+		t.Errorf("Test Fail")
 		return
 	}
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
+	t.Logf("Ali node is created successfully.")
 }
