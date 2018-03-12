@@ -6,6 +6,8 @@ import (
 	"github.com/cloudlibz/gocloud/auth"
 	"github.com/cloudlibz/gocloud/aws"
 	"github.com/cloudlibz/gocloud/google"
+	"github.com/cloudlibz/gocloud/aliauth"
+	"github.com/cloudlibz/gocloud/ali"
 )
 
 //Gocloud is a interface which hide differece between different cloud providers.
@@ -44,10 +46,13 @@ const (
 	Amazonprovider = "aws"
 	//Googleprovider reperents Google cloud.
 	Googleprovider = "google"
+	//Aliprovider reperents Google cloud.
+	Aliprovider = "ali"
 )
 
 func init() {
 	auth.LoadConfig()
+	aliauth.LoadConfig()
 }
 
 //CloudProvider return the instance of respepted cloud and map to the Gocloud so we can call the method like createnote on CloudProvider instance
@@ -60,6 +65,9 @@ func CloudProvider(provider string) (Gocloud, error) {
 
 	case Googleprovider:
 		return new(google.Google), nil
+
+	case Aliprovider:
+		return new(ali.Ali), nil
 
 	default:
 		return nil, errors.New(fmt.Sprintf("provider %s not recognized\n", provider))
