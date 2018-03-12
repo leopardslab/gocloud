@@ -12,7 +12,6 @@ import (
 	"sort"
 	"net/http"
 	"io/ioutil"
-	"fmt"
 	"strconv"
 )
 
@@ -40,10 +39,8 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 	}
 
 	stringToSign := "GET" + "&%2F&" + percentEncode(canonicalizedQueryString[1:])
-	fmt.Println(stringToSign)
 
 	base64Sign := CreateSignature(stringToSign, Config.AliAccessKeySecret+"&")
-	fmt.Println("base64Sign",base64Sign)
 
 	query := url.Values{}
 	for key, value := range params {
@@ -52,7 +49,6 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 
 	// Generate the request URL
 	requestURL := "https://ecs.aliyuncs.com/" + "?" + query.Encode() + "&Signature=" + url.QueryEscape(base64Sign)
-	fmt.Println("requestURL", requestURL)
 
 	httpReq, err := http.NewRequest("GET", requestURL, nil)
 
@@ -69,14 +65,7 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 
 	response["body"] = string(body)
 	response["status"] = resp.StatusCode
-
-	test()
 	return err
-}
-
-func test() {
-	stringToSign := "GET&%2F&AccessKeyId%3Dtestid%26Action%3DDescribeRegions%26Format%3DXML%26SignatureMethod%3DHMAC-SHA1%26SignatureNonce%3D3ee8c1b8-83d3-44af-a94f-4e0ad82fd6cf%26SignatureVersion%3D1.0%26TimeStamp%3D2016-02-23T12%253A46%253A24Z%26Version%3D2014-05-26"
-	fmt.Println(CreateSignature(stringToSign, "testsecret&"))
 }
 
 func InitParams(action string, params map[string]interface{}) map[string]interface{} {
@@ -86,8 +75,8 @@ func InitParams(action string, params map[string]interface{}) map[string]interfa
 	params["TimeStamp"] = time.Now().UTC().Format(formatISO8601)
 	params["SignatureMethod"] = "HMAC-SHA1"
 	params["SignatureVersion"] = "1.0"
-	randomInt:=rand.Int63()
-	params["SignatureNonce"] = strconv.FormatInt(randomInt,10)
+	randomInt := rand.Int63()
+	params["SignatureNonce"] = strconv.FormatInt(randomInt, 10)
 
 	params["Action"] = action
 

@@ -50,23 +50,20 @@ const (
 	Aliprovider = "ali"
 )
 
-func init() {
-	auth.LoadConfig()
-	aliauth.LoadConfig()
-}
-
 //CloudProvider return the instance of respepted cloud and map to the Gocloud so we can call the method like createnote on CloudProvider instance
 //this is a delegation of cloud provider.
 func CloudProvider(provider string) (Gocloud, error) {
 
 	switch provider {
 	case Amazonprovider:
+		auth.LoadConfig()
 		return new(aws.AWS), nil
 
 	case Googleprovider:
 		return new(google.Google), nil
 
 	case Aliprovider:
+		aliauth.LoadConfig()
 		return new(ali.Ali), nil
 
 	default:

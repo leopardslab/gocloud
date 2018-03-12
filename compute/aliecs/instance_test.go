@@ -15,7 +15,7 @@ func TestCreatenode(t *testing.T) {
 	create := map[string]interface{}{
 		"RegionId":        "cn-qingdao",
 		"ImageId":         "centos_7_04_64_20G_alibase_201701015.vhd",
-		"InstanceType":    "ecs.t1.small",
+		"InstanceType":    "ecs.xn4.small",
 		"SecurityGroupId": "sg-m5egbo9s5xb21kpu6nk2",
 	}
 	resp, err := aliEcs.Createnode(create)
