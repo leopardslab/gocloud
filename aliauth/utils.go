@@ -2,7 +2,6 @@ package aliauth
 
 import (
 	"time"
-	srand "crypto/rand"
 	"math/rand"
 	"net/url"
 	"crypto/hmac"
@@ -18,7 +17,7 @@ import (
 const formatISO8601 = "2006-01-02T15:04:05Z"
 
 func SignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
-	params = InitParams(action, params)
+	params = initParams(action, params)
 
 	var canonicalizedQueryString string
 
@@ -40,7 +39,7 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 
 	stringToSign := "GET" + "&%2F&" + percentEncode(canonicalizedQueryString[1:])
 
-	base64Sign := CreateSignature(stringToSign, Config.AliAccessKeySecret+"&")
+	base64Sign := createSignature(stringToSign, Config.AliAccessKeySecret+"&")
 
 	query := url.Values{}
 	for key, value := range params {
@@ -68,7 +67,7 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 	return err
 }
 
-func InitParams(action string, params map[string]interface{}) map[string]interface{} {
+func initParams(action string, params map[string]interface{}) map[string]interface{} {
 	params["Format"] = "XML"
 	params["Version"] = "2014-05-26"
 	params["AccessKeyId"] = Config.AliAccessKeyId
@@ -80,10 +79,10 @@ func InitParams(action string, params map[string]interface{}) map[string]interfa
 
 	params["Action"] = action
 
-	return SortMap(params)
+	return sortMap(params)
 }
 
-func SortMap(oldMap map[string]interface{}) map[string]interface{} {
+func sortMap(oldMap map[string]interface{}) map[string]interface{} {
 	keys := make([]string, len(oldMap))
 	i := 0
 	for k, _ := range oldMap {
@@ -100,7 +99,7 @@ func SortMap(oldMap map[string]interface{}) map[string]interface{} {
 }
 
 //CreateSignature creates signature for string following Aliyun rules
-func CreateSignature(stringToSignature, accessKeySecret string) string {
+func createSignature(stringToSignature, accessKeySecret string) string {
 	// Crypto by HMAC-SHA1
 	hmacSha1 := hmac.New(sha1.New, []byte(accessKeySecret))
 	hmacSha1.Write([]byte(stringToSignature))
@@ -113,46 +112,13 @@ func CreateSignature(stringToSignature, accessKeySecret string) string {
 }
 
 func percentEncode(str string) string {
-	return PercentReplace(url.QueryEscape(str))
+	return percentReplace(url.QueryEscape(str))
 }
 
-func PercentReplace(str string) string {
+func percentReplace(str string) string {
 	str = strings.Replace(str, "+", "%20", -1)
 	str = strings.Replace(str, "*", "%2A", -1)
 	str = strings.Replace(str, "%7E", "~", -1)
 
 	return str
-}
-
-// CreateSignatureForRequest creates signature for query string values
-func CreateSignatureForRequest(method string, values *url.Values, accessKeySecret string) string {
-
-	canonicalizedQueryString := PercentReplace(values.Encode())
-
-	stringToSign := method + "&%2F&" + url.QueryEscape(canonicalizedQueryString)
-	return CreateSignature(stringToSign, accessKeySecret)
-}
-
-const dictionary = "_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-
-//CreateRandomString create random string
-func CreateRandomString() string {
-	b := make([]byte, 32)
-	l := len(dictionary)
-
-	_, err := srand.Read(b)
-
-	if err != nil {
-		// fail back to insecure rand
-		rand.Seed(time.Now().UnixNano())
-		for i := range b {
-			b[i] = dictionary[rand.Int()%l]
-		}
-	} else {
-		for i, v := range b {
-			b[i] = dictionary[v%byte(l)]
-		}
-	}
-
-	return string(b)
 }
