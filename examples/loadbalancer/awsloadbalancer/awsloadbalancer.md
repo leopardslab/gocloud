@@ -2,11 +2,11 @@
 
 ## Configure AWS credentials
 
-Create `gocloudconfig.json` as follows,
+Create `amazoncloudconfig.json` as follows,
 ```js
 {
   "AWSAccessKeyID": "xxxxxxxxxxxx",
-  "AWSSecretKey": "xxxxxxxxxxxx",
+  "AWSSecretKey": "xxxxxxxxxxxx"
 }
 ```
 
@@ -45,9 +45,9 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 	"Listeners":        Listeners,
 	"Subnets":          Subnets,
  }
- 
+
  resp, err := awsloadbalancer.Creatloadbalancer(creatloadbalancer)
- 
+
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
@@ -58,9 +58,9 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
   deleteloadbalancer := map[string]string{
 		"LoadBalancerName": "my-load-balancer",
 	}
-  
+
   resp, err := awsloadbalancer.Deleteloadbalancer(deleteloadbalancer)
-  
+
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -86,9 +86,9 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"Instances":        []string{"i-05f4f2535c41b680b"},
 		"LoadBalancerName": "my-load-balancer",
 	}
- 
+
  resp, err := awsloadbalancer.Detachnodewithloadbalancer(detachnodewithloadbalancer)
- 
+
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
@@ -103,4 +103,3 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
-
