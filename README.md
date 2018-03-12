@@ -50,3 +50,8 @@ Currently, implementaions for other cloud providers are being worked on.
 $ git clone https://github.com/cloudlibz/gocloud
 $ cd gocloud
 ```
+### Run unit tests
+
+```
+$ go test -v
+```
