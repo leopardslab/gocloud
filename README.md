@@ -44,7 +44,7 @@ Currently, implementations for other cloud providers are being worked on.
 1. Install golang.  
    ```
    $ sudo apt-get update -y
-   $ sudo apt-get install golang
+   $ sudo apt-get install golang -y
    ```
    
 2. Set GOPATH environment variable. Run `gedit ~/.bashrc`.  
@@ -92,7 +92,7 @@ $ go get cloud.google.com/go/compute/metadata
    export ClientX509CertURL =  "xxxxxxxxxxxx"
    ```
 
-6. You are all set to you gocloud!
+6. You are all set to use gocloud!
 
 ## Development setup
 
