@@ -1,13 +1,10 @@
 # gocloud loadbalancer - gce
 
-## Configure google credentials
+## Configure Google Cloud credentials.
 
+Download your service account credentials file from Google Cloud and save it as `googlecloudinfo.json` in your <b>HOME</b> directory.
 
-download service account credential file from google cloud save as `googlecloudinfo.json`,
-
-
-also You can setup enviroment variables as
-
+You can also set the credentials as environment variables:
 ```js
 export PrivateKey =  "xxxxxxxxxxxx"
 export Type =  "xxxxxxxxxxxx"
@@ -60,7 +57,8 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
-### attach node with loadbalancer
+
+### Attach node with loadbalancer
 
 ```js
 
@@ -77,7 +75,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
  fmt.Println(response["body"])
 ```
 
-### detach node with loadbalancer
+### Detach node with loadbalancer
 
 ```js
   detachnodewithloadbalancer := map[string]interface{}{
@@ -93,8 +91,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
  fmt.Println(response["body"])
 ```
 
-
-### delete loadbalancer
+### Delete loadbalancer
 ```js
   deleteloadbalancer := map[string]string{
 		"Project":    "sheltermap-1493101612061",

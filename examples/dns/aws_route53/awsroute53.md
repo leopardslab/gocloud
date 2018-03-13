@@ -1,8 +1,8 @@
 # gocloud DNS - AWS
 
-## Configure AWS credentials
+## Configure AWS credentials.
 
-Create `amazoncloudconfig.json` as follows,
+Create `amazoncloudconfig.json` in your <b>HOME</b> directory as follows:
 ```js
 {
   "AWSAccessKeyID": "xxxxxxxxxxxx",
@@ -10,8 +10,7 @@ Create `amazoncloudconfig.json` as follows,
 }
 ```
 
-also You can setup enviroment variables as
-
+You can also set the credentials as environment variables:
 ```js
 export AWSAccessKeyID =  "xxxxxxxxxxxx"
 export AWSSecretKey = "xxxxxxxxxxxx"
@@ -26,7 +25,7 @@ import "github.com/cloudlibz/gocloud/gocloud"
 amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 ```
 
-### create dns
+### Create DNS
 
 ```js
   createdns := map[string]interface{}{
@@ -40,7 +39,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
  fmt.Println(response["body"])
 ```
 
-### delete dns
+### Delete DNS
 ```js
  deletedns := map[string]string{
 		"ID": "ZOD7SUP0ZGGQQ",
@@ -52,7 +51,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
  fmt.Println(response["body"])
 ```
 
-### List dns
+### List DNS
 
 ```js
  listdns := map[string]interface{}{
@@ -66,7 +65,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
  fmt.Println(response["body"])
 ```
 
-### list ResourcednsRecordSets
+### List ResourcednsRecordSets
 
 ```js
 
