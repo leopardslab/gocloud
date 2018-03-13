@@ -24,19 +24,19 @@ GoCloud is a golang library which hides differences between different cloud prov
 
 ### AWS
 
-* EC2 (Compute)
-* EC2 Storage
-* Amazon Elastic Container Service (Container)
-* Elastic Load Balancing
-* AWS Route53 (DNS)
+* EC2 Compute [Link to example](examples/compute/ec2/ec2.md)
+* EC2 Storage [Link to example](examples/storage/aws_storage/amazonstorage.md)
+* Amazon Elastic Container Service (Container) [Link to example](examples/container/aws_container/awscontainer.md)
+* Elastic Load Balancing [Link to example](examples/loadbalancer/aws_loadbalancer/awsloadbalancer.md)
+* AWS Route53 (DNS) [Link to example](examples/dns/aws_route53/awsroute53.md)
 
 ### Google
 
-* Google Compute
-* Google Compute Storage
-* Google Container Service (Container)
-* Google Elastic Load Balancing
-* Google DNS
+* Google Compute [Link to example](examples/compute/gce/gce.md)
+* Google Compute Storage [Link to example](examples/storage/google_storage/googlestorage.md)
+* Google Container Service (Container) [Link to example](examples/container/google_container/googlecontainer.md)
+* Google Elastic Load Balancing [Link to example](examples/loadbalancer/google_loadbalancer/googleloadbalancer.md)
+* Google DNS [Link to example](examples/dns/google_dns/googledns.md)
 
 Currently, implementations for other cloud providers are being worked on.
 
