@@ -2,6 +2,8 @@ package aliecs
 
 import (
 	"github.com/cloudlibz/gocloud/aliauth"
+	"strconv"
+	"reflect"
 )
 
 func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
@@ -26,50 +28,82 @@ func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "RegionId":
-			options.RegionId = value.(string)
+			regionId, _ := value.(string)
+			options.RegionId = regionId
 		case "ImageId":
-			options.ImageId = value.(string)
+			imageId, _ := value.(string)
+			options.ImageId = imageId
 		case "InstanceType":
-			options.InstanceType = value.(string)
+			instanceType, _ := value.(string)
+			options.InstanceType = instanceType
 		case "SecurityGroupId":
-			options.SecurityGroupId = value.(string)
+			securityGroupId, _ := value.(string)
+			options.SecurityGroupId = securityGroupId
 		case "ZoneId":
-			options.ZoneId = value.(string)
+			zoneId, _ := value.(string)
+			options.ZoneId = zoneId
 		case "InstanceName":
-			options.InstanceName = value.(string)
+			instanceName, _ := value.(string)
+			options.InstanceName = instanceName
 		case "Description":
+			description, _ := value.(string)
+			options.Description = description
 		case "InternetChargeType":
+			internetChargeType, _ := value.(string)
+			options.InternetChargeType = internetChargeType
 		case "InternetMaxBandwidthIn":
+			internetMaxBandwidthIn, ok := value.(int)
+			if !ok {
+				internetMaxBandwidthIn, _ = strconv.Atoi(value.(string))
+			}
+			options.InternetMaxBandwidthIn = internetMaxBandwidthIn
 		case "InternetMaxBandwidthOut":
+			internetMaxBandwidthOut, ok := value.(int)
+			if !ok {
+				internetMaxBandwidthOut, _ = strconv.Atoi(value.(string))
+			}
+			options.InternetMaxBandwidthOut = internetMaxBandwidthOut
 		case "HostName":
+			hostName, _ := value.(string)
+			options.HostName = hostName
 		case "Password":
+			password, _ := value.(string)
+			options.Password = password
 		case "IoOptimized":
+			ioOptimized, _ := value.(string)
+			options.IoOptimized = ioOptimized
 		case "SystemDisk.Category":
+			category, _ := value.(string)
+			options.SystemDiskCategory = category
 		case "SystemDisk.Size":
+			systemDiskSize, _ := value.(string)
+			options.SystemDiskSize = systemDiskSize
 		case "SystemDisk.DiskName":
+			systemDiskName, _ := value.(string)
+			options.SystemDiskName = systemDiskName
 		case "SystemDisk.Description":
+			systemDiskDescription, _ := value.(string)
+			options.SystemDiskDescription = systemDiskDescription
 		}
 	}
 
 	params := make(map[string]interface{})
 
-	if options.RegionId != "" {
-		params["RegionId"] = options.RegionId
-	}
-	if options.ImageId != "" {
-		params["ImageId"] = options.ImageId
-	}
-	if options.InstanceType != "" {
-		params["InstanceType"] = options.InstanceType
-	}
-	if options.SecurityGroupId != "" {
-		params["SecurityGroupId"] = options.SecurityGroupId
-	}
-	if options.ZoneId != "" {
-		params["ZoneId"] = options.ZoneId
-	}
-	if options.InstanceName != "" {
-		params["InstanceName"] = options.InstanceName
+	//put all of options into params
+	e := reflect.ValueOf(&options).Elem()
+	typeOfOptions := e.Type()
+
+	for i := 0; i < e.NumField(); i++ {
+		switch e.Field(i).Type().String() {
+		case "string":
+			if e.Field(i).Interface() != "" {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		case "int":
+			if e.Field(i).Interface() != 0 {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		}
 	}
 
 	response := make(map[string]interface{})
