@@ -12,7 +12,7 @@ import (
 	"strings"
 )
 
-//sign() GCE signature it give URL to get Autorization code on which we it generate auth token and pass in each request in request header
+//sign() GCE signature: it gives URL to get Authorization code on which it generates auth token and passes in each request in request header
 func Sign() (token *oauth2.Token) {
 
 	conf := &oauth2.Config{
