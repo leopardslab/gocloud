@@ -1,8 +1,8 @@
 # gocloud storage - AWS
 
-## Configure AWS credentials
+## Configure AWS credentials.
 
-Create `amazoncloudconfig.json` as follows,
+Create `amazoncloudconfig.json` in your <b>HOME</b> directory as follows:
 ```js
 {
   "AWSAccessKeyID": "xxxxxxxxxxxx",
@@ -10,8 +10,7 @@ Create `amazoncloudconfig.json` as follows,
 }
 ```
 
-also You can setup enviroment variables as
-
+You can also set the credentials as environment variables:
 ```js
 export AWSAccessKeyID =  "xxxxxxxxxxxx"
 export AWSSecretKey = "xxxxxxxxxxxx"
@@ -40,7 +39,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
   fmt.Println(response["body"])
 ```
 
-###  delete disk
+### Delete disk
 
 ```js
   deletedisk := map[string]string{
@@ -53,7 +52,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
   fmt.Println(response["body"])
 ```
 
-### attach disk
+### Attach disk
 
 ```js
   attachdisk := map[string]string{
@@ -85,7 +84,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 ```
 
 
-### create snapshot
+### Create snapshot
 
 ```js
 createsnapshot := map[string]string{
@@ -99,7 +98,7 @@ createsnapshot := map[string]string{
   fmt.Println(response["body"])
 ```
 
-### delete snapshot
+### Delete snapshot
 
 ```js
   deletesnapshot := map[string]string{

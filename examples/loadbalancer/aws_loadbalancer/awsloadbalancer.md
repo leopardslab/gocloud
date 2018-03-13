@@ -1,8 +1,8 @@
 # gocloud loadbancer - AWS
 
-## Configure AWS credentials
+## Configure AWS credentials.
 
-Create `amazoncloudconfig.json` as follows,
+Create `amazoncloudconfig.json` in your <b>HOME</b> directory as follows:
 ```js
 {
   "AWSAccessKeyID": "xxxxxxxxxxxx",
@@ -10,8 +10,7 @@ Create `amazoncloudconfig.json` as follows,
 }
 ```
 
-also You can setup enviroment variables as
-
+You can also set the credentials as environment variables:
 ```js
 export AWSAccessKeyID =  "xxxxxxxxxxxx"
 export AWSSecretKey = "xxxxxxxxxxxx"
@@ -52,7 +51,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
  fmt.Println(response["body"])
 ```
 
-### delete loadbalancer
+### Delete loadbalancer
 
 ```js
   deleteloadbalancer := map[string]string{
@@ -65,7 +64,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
   fmt.Println(response["body"])
 ```
 
-### attach node with loadbalancer
+### Attach node with loadbalancer
 
 ```js
   attachnodewithloadbalancer := map[string]interface{}{
@@ -79,7 +78,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
   fmt.Println(response["body"])
 ```
 
-### detach node with loadbalancer
+### Detach node with loadbalancer
 
 ```js
  detachnodewithloadbalancer := map[string]interface{}{
@@ -94,7 +93,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 ```
 
 
-### Listloadbalancer
+### List loadbalancer
 
 ```js
 
