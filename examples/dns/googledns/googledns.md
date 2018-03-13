@@ -3,7 +3,7 @@
 ## Configure google credentials
 
 
-download service account credential file from google cloud save as `googlecloud.json`,
+download service account credential file from google cloud save as `googlecloudinfo.json`,
 
 
 also You can setup enviroment variables as
@@ -40,9 +40,9 @@ createdns := map[string]interface{}{
 		"DnsName":     "rootmonk.me.",
 		"Name":        "gocloud",
 	}
-	
+
   resp, err := googlecloud.Createdns(createdns)
-  
+
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 
@@ -56,19 +56,19 @@ createdns := map[string]interface{}{
 	}
 
   resp, err := googlecloud.Listdns(listdns)
- 
+
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
 ### Delete dns
 
 ```js
-  
+
   deletedns := map[string]string{
 		"Project":     "sheltermap-1493101612061",
 		"managedZone": "gocloud3",
 	}
- 
+
  resp, err := googlecloud.Deletedns(deletedns)
 
  response := resp.(map[string]interface{})
@@ -82,7 +82,7 @@ createdns := map[string]interface{}{
 	"Project"     : "sheltermap-1493101612061",
 	"managedZone" : "gocloud3",
   }
-   
+
   resp, err := googlecloud.ListResourcednsRecordSets(listResourcednsRecordSets)
 
  response := resp.(map[string]interface{})

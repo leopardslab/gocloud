@@ -35,8 +35,8 @@ func Sign() (token *oauth2.Token) {
 	}
 
 	url := conf.AuthCodeURL("state", oauth2.AccessTypeOffline)
-	fmt.Printf("\nVisit the URL for Autorization \n: %v", url)
-	fmt.Printf("\nEnter Autorization code :\n")
+	fmt.Printf("\nVisit the URL for autorization: \n %v", url)
+	fmt.Printf("\nEnter autorization code: \n")
 
 	var code string
 	if _, err := fmt.Scan(&code); err != nil {

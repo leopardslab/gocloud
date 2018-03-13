@@ -10,7 +10,7 @@ import (
 	"github.com/cloudlibz/gocloud/ali"
 )
 
-//Gocloud is a interface which hide differece between different cloud providers.
+// Gocloud is a interface which hides the differece between different cloud providers.
 type Gocloud interface {
 	Createnode(request interface{}) (resp interface{}, err error)
 	Startnode(request interface{}) (resp interface{}, err error)
@@ -42,21 +42,24 @@ type Gocloud interface {
 }
 
 const (
-	//Amazonprovider reperents Amazon cloud.
+	// Amazonprovider reperents Amazon cloud.
 	Amazonprovider = "aws"
-	//Googleprovider reperents Google cloud.
+	// Googleprovider reperents Google cloud.
 	Googleprovider = "google"
 	//Aliprovider reperents Google cloud.
 	Aliprovider = "ali"
 )
 
-//CloudProvider return the instance of respepted cloud and map to the Gocloud so we can call the method like createnote on CloudProvider instance
-//this is a delegation of cloud provider.
+// CloudProvider returns the instance of respective cloud and maps it to Gocloud so that we can call
+// the method like Createnode on CloudProvider instance.
+// This is a delegation of CloudProvider.
+
 func CloudProvider(provider string) (Gocloud, error) {
 
 	switch provider {
 	case Amazonprovider:
-		auth.LoadConfig()
+		// Calls authentication procedure for AWS
+		auth.AWSLoadConfig()
 		return new(aws.AWS), nil
 
 	case Googleprovider:
@@ -67,7 +70,7 @@ func CloudProvider(provider string) (Gocloud, error) {
 		return new(ali.Ali), nil
 
 	default:
-		return nil, errors.New(fmt.Sprintf("provider %s not recognized\n", provider))
+		return nil, errors.New(fmt.Sprintf("Provider %s not recognized.\n", provider))
 	}
 
 }

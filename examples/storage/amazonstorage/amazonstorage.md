@@ -2,11 +2,11 @@
 
 ## Configure AWS credentials
 
-Create `gocloudconfig.json` as follows,
+Create `amazoncloudconfig.json` as follows,
 ```js
 {
   "AWSAccessKeyID": "xxxxxxxxxxxx",
-  "AWSSecretKey": "xxxxxxxxxxxx",
+  "AWSSecretKey": "xxxxxxxxxxxx"
 }
 ```
 
@@ -34,7 +34,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"VolumeSize": 100,
 		"Region":     "us-east-1",
 	}
-  
+
   resp, err := amazonstorage.Createdisk(createdisk)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -47,7 +47,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"VolumeId": "vol-0996a16ff8f032760",
 		"Region":   "us-east-1",
 	}
- 
+
   resp, err := amazonstorage.Deletedisk(deletedisk)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -62,7 +62,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"Device":     "/dev/sdh",
 		"Region":     "us-east-1",
 	}
-	
+
   resp, err := amazonstorage.Attachdisk(attachdisk)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -93,7 +93,7 @@ createsnapshot := map[string]string{
 		"Description": "create snapshot for vol-047d011f7536d2b7c",
 		"Region":      "us-east-1",
 	}
-	
+
   resp, err := amazonstorage.Createsnapshot(createsnapshot)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -106,7 +106,7 @@ createsnapshot := map[string]string{
 		"SnapshotId": "snap-0f0839076356ce6cb",
 		"Region":     "us-east-1",
 	}
-  
+
   resp, err := amazonstorage.Deletesnapshot(deletesnapshot)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])

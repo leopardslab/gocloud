@@ -2,11 +2,11 @@
 
 ## Configure AWS credentials
 
-Create `gocloudconfig.json` as follows,
+Create `amazoncloudconfig.json` as follows,
 ```js
 {
   "AWSAccessKeyID": "xxxxxxxxxxxx",
-  "AWSSecretKey": "xxxxxxxxxxxx",
+  "AWSSecretKey": "xxxxxxxxxxxx"
 }
 ```
 
@@ -59,13 +59,13 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
  LoadBalancers := []map[string]interface{}{{
 	"containerName":    "rootmonk",
 	"loadBalancerName": "us-east-2",
-	}, 
+	},
     {
 	"containerName":    "rootmonk",
 	"loadBalancerName": "us-east-2",
      },
   }
-  
+
   createservice := map[string]interface{}{
 		"serviceName":    "ecs-simple-service",
 		"taskDefinition": "ecs-demo",
@@ -88,9 +88,9 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 	"service": "service",
 	"Region":  "us-east-1",
    }
-  
+
   resp, err := ecscontainer.Deleteservice(deleteservice)
-  
+
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```

@@ -3,7 +3,7 @@
 ## Configure google credentials
 
 
-download service account credential file from google cloud save as `googlecloud.json`,
+download service account credential file from google cloud save as `googlecloudinfo.json`,
 
 
 also You can setup enviroment variables as
@@ -74,7 +74,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
     }
 
   resp, err := googlecloud.Createnode(createnode)
-  
+
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 
@@ -90,7 +90,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 	}
 
  resp , err := googlecloud.Stopnode(stopnode)
- 
+
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
@@ -119,9 +119,9 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"instance":  "testing-scorelab",
 		"Zone":      "us-west1-c",
 	}
-  
+
   resp, err := googlecloud.Rebootnode(reboot)
-  
+
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -136,9 +136,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 	}
 
   resp, err := googlecloud.Deletenode(deletenode)
-  
+
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
-
-

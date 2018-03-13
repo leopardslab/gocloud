@@ -2,11 +2,11 @@
 
 ## Configure AWS credentials
 
-Create `gocloudconfig.json` as follows,
+Create `amazoncloudconfig.json` as follows,
 ```js
 {
   "AWSAccessKeyID": "xxxxxxxxxxxx",
-  "AWSSecretKey": "xxxxxxxxxxxx",
+  "AWSSecretKey": "xxxxxxxxxxxx"
 }
 ```
 
@@ -61,7 +61,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 	}
 
   resp, err := awsdns.Listdns(listdns)
- 
+
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
@@ -69,13 +69,13 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 ### list ResourcednsRecordSets
 
 ```js
- 
+
  listResourcednsRecordSets := map[string]interface{}{
 	"zone": "ZBNX5TIW033J2",
   }
 
  resp, err := awsdns.ListResourcednsRecordSets(listResourcednsRecordSets)
- 
+
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```

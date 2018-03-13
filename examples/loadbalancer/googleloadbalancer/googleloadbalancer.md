@@ -3,7 +3,7 @@
 ## Configure google credentials
 
 
-download service account credential file from google cloud save as `googlecloud.json`,
+download service account credential file from google cloud save as `googlecloudinfo.json`,
 
 
 also You can setup enviroment variables as
@@ -41,7 +41,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 	}
 
   resp, err := googlecloud.Creatloadbalancer(creatloadbalancer)
-  
+
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 
@@ -56,14 +56,14 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
  }
 
  resp, err := googlecloud.Listloadbalancer(listloadbalancer)
- 
+
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
 ### attach node with loadbalancer
 
 ```js
-  
+
   attachnodewithloadbalancer := map[string]interface{}{
 	"Project":    "sheltermap-1493101612061",
 	"Region":     "us-central1",
@@ -72,7 +72,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 	}
 
  resp, err := googlecloud.Attachnodewithloadbalancer(attachnodewithloadbalancer)
- 
+
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
