@@ -1,17 +1,16 @@
 # gocloud compute - AWS
 
-## Configure AWS credentials
+## Configure AWS credentials.
 
-Create `gocloudconfig.json` as follows,
+Create `amazoncloudconfig.json` in your <b>HOME</b> directory as follows:
 ```js
 {
   "AWSAccessKeyID": "xxxxxxxxxxxx",
-  "AWSSecretKey": "xxxxxxxxxxxx",
+  "AWSSecretKey": "xxxxxxxxxxxx"
 }
 ```
 
-also You can setup enviroment variables as
-
+You can also set the credentials as environment variables:
 ```js
 export AWSAccessKeyID =  "xxxxxxxxxxxx"
 export AWSSecretKey = "xxxxxxxxxxxx"
@@ -47,7 +46,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"instance-id": "i-06d518ba15b68685c",
 		"Region":      "us-east-1",
 	}
-  
+
   resp, err := amazoncloud.Stopnode(stop)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -60,7 +59,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"instance-id": "i-0174bd6f54178e89b",
 		"Region":      "us-east-1",
 	}
-  
+
   resp, err := amazoncloud.Startnode(start)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -73,24 +72,23 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"instance-id": "i-037a9fae81c33ac30",
 		"Region":      "us-east-1",
 	}
-	
- 
+
+
   resp, err := amazoncloud.Rebootnode(Reboot)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
 
-### delete instance
+### Delete instance
 
 ```js
   delete := map[string]string{
   "instance-id": "i-0174bd6f54178e89b",
   "Region":      "us-east-1",
-   } 
-  
- 
+   }
+
+
   resp, err := amazoncloud.Deletenode(delete)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
-

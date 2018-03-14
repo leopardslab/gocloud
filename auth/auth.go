@@ -6,15 +6,15 @@ import (
 	"os"
 )
 
-// Configuration struct for representing AWS credentials
-type Configuration struct {
+// AWSConfiguration struct for representing AWS credentials
+type AWSConfiguration struct {
 	AWSAccessKeyID     string
 	AWSSecretKey       string
 }
 
-var Config Configuration
+var Config AWSConfiguration
 
-func AWSLoadConfig() {
+func awsAuth.LoadConfig() {
 
 // Read from file first.
 	var home string = os.Getenv("HOME")
@@ -23,9 +23,9 @@ func AWSLoadConfig() {
 	// Defer the closing of our jsonFile so that we can parse it later on
 	defer file.Close()
 
-	// We initialize Configuration struct
+	// We initialize AWSConfiguration struct
 	decoder := json.NewDecoder(file)
-	Config = Configuration{}
+	Config = AWSConfiguration{}
 	_ = decoder.Decode(&Config)
 
 	if Config.AWSAccessKeyID == "" || Config.AWSSecretKey == "" {

@@ -4,7 +4,7 @@ import "testing"
 import "github.com/cloudlibz/gocloud/auth"
 
 func init() {
-	auth.LoadConfig()
+	awsAuth.LoadConfig()
 }
 
 func TestCreatenode(t *testing.T) {

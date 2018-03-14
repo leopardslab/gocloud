@@ -54,7 +54,7 @@ func CloudProvider(provider string) (Gocloud, error) {
 	switch provider {
 	case Amazonprovider:
 		// Calls authentication procedure for AWS
-		auth.AWSLoadConfig()
+		awsAuth.LoadConfig()
 		return new(aws.AWS), nil
 
 	case Googleprovider:
