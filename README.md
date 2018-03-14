@@ -3,8 +3,9 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0fce581810a6420aaca4ba6757c54529)](https://www.codacy.com/app/cloudlibz/gocloud?utm_source=github.com&utm_medium=referral&utm_content=cloudlibz/gocloud&utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/cloudlibz/gocloud.svg?branch=master)](https://travis-ci.org/cloudlibz/gocloud)
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg?style=flat-square)](https://gitter.im/cloudlibz/gocloud)
-[![Blog](https://www.google.co.in/search?biw=1855&bih=983&tbm=isch&sa=1&ei=HyOpWpX8Csqy0ATa27DABw&q=medium&oq=medium&gs_l=psy-ab.3...5357.6570.0.6782.6.6.0.0.0.0.353.353.3-1.1.0....0...1c.1.64.psy-ab..5.1.352...0j0i67k1.0.wBDUkfgklzE#imgrc=d29hCX-XIVZJpM:)](https://medium.com/gocloud)
+
 [![Gitter](https://camo.githubusercontent.com/df8e028288079a740c10e6cfaad2fa0e0c96014d/687474703a2f2f696d672e736869656c64732e696f2f62616467652f446f63732d6c61746573742d677265656e2e737667)](https://github.com/cloudlibz/gocloud/tree/master/docs)
+
 # gocloud: Cloud services library.
 
 GoCloud is a golang library which hides differences between different cloud providers' (AWS,GCP,Openstack etc) APIs and allows you to manage different cloud resources through a unified and easy to use API.
@@ -108,3 +109,4 @@ $ cd gocloud
 $ cd gocloud
 $ go test -v
 ```
+
