@@ -26,18 +26,18 @@ GoCloud is a golang library which hides differences between different cloud prov
 ### AWS
 
 * EC2 Compute [Link to example](examples/compute/ec2/ec2.md)
-* EC2 Storage [Link to example](examples/storage/aws_storage/amazonstorage.md)
-* Amazon Elastic Container Service (Container) [Link to example](examples/container/aws_container/awscontainer.md)
-* Elastic Load Balancing [Link to example](examples/loadbalancer/aws_loadbalancer/awsloadbalancer.md)
-* AWS Route53 (DNS) [Link to example](examples/dns/aws_route53/awsroute53.md)
+* EC2 Storage [Link to example](examples/storage/aws_storage/aws_storage.md)
+* Amazon Elastic Container Service (Container) [Link to example](examples/container/aws_container/aws_container.md)
+* Elastic Load Balancing [Link to example](examples/loadbalancer/aws_loadbalancer/aws_loadbalancer.md)
+* AWS Route53 (DNS) [Link to example](examples/dns/aws_route53/aws_route53.md)
 
 ### Google
 
 * Google Compute [Link to example](examples/compute/gce/gce.md)
-* Google Compute Storage [Link to example](examples/storage/google_storage/googlestorage.md)
-* Google Container Service (Container) [Link to example](examples/container/google_container/googlecontainer.md)
-* Google Elastic Load Balancing [Link to example](examples/loadbalancer/google_loadbalancer/googleloadbalancer.md)
-* Google DNS [Link to example](examples/dns/google_dns/googledns.md)
+* Google Compute Storage [Link to example](examples/storage/google_storage/google_storage.md)
+* Google Container Service (Container) [Link to example](examples/container/google_container/google_container.md)
+* Google Elastic Load Balancing [Link to example](examples/loadbalancer/google_loadbalancer/google_loadbalancer.md)
+* Google DNS [Link to example](examples/dns/google_dns/google_dns.md)
 
 Currently, implementations for other cloud providers are being worked on.
 
