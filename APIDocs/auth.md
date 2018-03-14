@@ -4,7 +4,7 @@ package auth
 
 FUNCTIONS
 
-func LoadConfig()
+func awsAuth.LoadConfig()
 
 TYPES
 
@@ -15,5 +15,3 @@ type Configuration struct {
     Configuration struct reperesnts.
 
 var Config Configuration
-
-
