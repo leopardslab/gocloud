@@ -1,13 +1,10 @@
 # gocloud compute - gce
 
-## Configure google credentials
+## Configure Google Cloud credentials.
 
+Download your service account credentials file from Google Cloud and save it as `googlecloudinfo.json` in your <b>HOME</b> directory.
 
-download service account credential file from google cloud save as `googlecloudinfo.json`,
-
-
-also You can setup enviroment variables as
-
+You can also set the credentials as environment variables:
 ```js
 export PrivateKey =  "xxxxxxxxxxxx"
 export Type =  "xxxxxxxxxxxx"
@@ -126,7 +123,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
   fmt.Println(response["body"])
 ```
 
-### delete instance
+### Delete instance
 
 ```js
  deletenode := map[string]string{
