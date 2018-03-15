@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"io/ioutil"
 	"strconv"
+	"fmt"
 )
 
 const formatISO8601 = "2006-01-02T15:04:05Z"
@@ -80,6 +81,7 @@ func initParams(action string, params map[string]interface{}) map[string]interfa
 	params["SignatureVersion"] = "1.0"
 	randomInt := rand.Int63()
 	params["SignatureNonce"] = strconv.FormatInt(randomInt, 10)
+	fmt.Println(params["SignatureNonce"])
 
 	params["Action"] = action
 
