@@ -2,6 +2,7 @@ package aliauth
 
 import (
 	"time"
+	srand "crypto/rand"
 	"math/rand"
 	"net/url"
 	"crypto/hmac"
@@ -11,7 +12,6 @@ import (
 	"sort"
 	"net/http"
 	"io/ioutil"
-	"strconv"
 	"fmt"
 )
 
@@ -73,17 +73,15 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 }
 
 func initParams(action string, params map[string]interface{}) map[string]interface{} {
+	params["Action"] = action
+
 	params["Format"] = "XML"
 	params["Version"] = "2014-05-26"
 	params["AccessKeyId"] = Config.AliAccessKeyID
 	params["TimeStamp"] = time.Now().UTC().Format(formatISO8601)
 	params["SignatureMethod"] = "HMAC-SHA1"
 	params["SignatureVersion"] = "1.0"
-	randomInt := rand.Int63()
-	params["SignatureNonce"] = strconv.FormatInt(randomInt, 10)
-	fmt.Println(params["SignatureNonce"])
-
-	params["Action"] = action
+	params["SignatureNonce"] = createRandomString()
 
 	return params
 }
@@ -111,4 +109,28 @@ func percentReplace(str string) string {
 	str = strings.Replace(str, "%7E", "~", -1)
 
 	return str
+}
+
+const dictionary = "_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+
+// CreateRandomString create random string
+func createRandomString() string {
+	b := make([]byte, 32)
+	l := len(dictionary)
+
+	_, err := srand.Read(b)
+
+	if err != nil {
+		// fail back to insecure rand
+		rand.Seed(time.Now().UnixNano())
+		for i := range b {
+			b[i] = dictionary[rand.Int()%l]
+		}
+	} else {
+		for i, v := range b {
+			b[i] = dictionary[v%byte(l)]
+		}
+	}
+
+	return string(b)
 }

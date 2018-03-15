@@ -8,8 +8,8 @@ import (
 
 // Configuration struct for representing AWS credentials
 type Configuration struct {
-	AWSAccessKeyID string
-	AWSSecretKey   string
+	AWSAccessKeyID     string
+	AWSSecretKey       string
 }
 
 var Config Configuration
