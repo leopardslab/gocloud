@@ -24,7 +24,7 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 	//sort map by key
 	keys := make([]string, len(params))
 	i := 0
-	for k, _ := range params {
+	for k := range params {
 		keys[i] = k
 		i++
 	}
@@ -70,7 +70,7 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 func initParams(action string, params map[string]interface{}) map[string]interface{} {
 	params["Format"] = "XML"
 	params["Version"] = "2014-05-26"
-	params["AccessKeyId"] = Config.AliAccessKeyId
+	params["AccessKeyId"] = Config.AliAccessKeyID
 	params["TimeStamp"] = time.Now().UTC().Format(formatISO8601)
 	params["SignatureMethod"] = "HMAC-SHA1"
 	params["SignatureVersion"] = "1.0"
@@ -85,7 +85,7 @@ func initParams(action string, params map[string]interface{}) map[string]interfa
 func sortMap(oldMap map[string]interface{}) map[string]interface{} {
 	keys := make([]string, len(oldMap))
 	i := 0
-	for k, _ := range oldMap {
+	for k := range oldMap {
 		keys[i] = k
 		i++
 	}

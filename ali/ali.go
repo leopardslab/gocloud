@@ -8,6 +8,7 @@ import (
 	"github.com/cloudlibz/gocloud/dns/alidns"
 )
 
+//Ali struct represents Ali-cloud provider.
 type Ali struct {
 	aliecs.ECS
 	alistorage.AliStorage

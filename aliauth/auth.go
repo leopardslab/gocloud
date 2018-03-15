@@ -8,14 +8,14 @@ import (
 
 //Configuration struct reperesnts.
 type Configuration struct {
-	AliAccessKeyId     string
+	AliAccessKeyID     string
 	AliAccessKeySecret string
 }
 
 var Config Configuration
 
 func LoadConfig() {
-
+	// Read from file first.
 	var home string = os.Getenv("HOME")
 	file, _ := os.Open(home + "/gocloudconfig.json")
 
@@ -23,12 +23,12 @@ func LoadConfig() {
 	Config = Configuration{}
 	_ = decoder.Decode(&Config)
 
-	if Config.AliAccessKeyId == "" || Config.AliAccessKeySecret == "" {
+	if Config.AliAccessKeyID == "" || Config.AliAccessKeySecret == "" {
 
-		Config.AliAccessKeyId = os.Getenv("AliAccessKeyId")
+		Config.AliAccessKeyID = os.Getenv("AliAccessKeyID")
 		Config.AliAccessKeySecret = os.Getenv("AliAccessKeySecret")
 
-		if Config.AliAccessKeyId == "" || Config.AliAccessKeySecret == "" {
+		if Config.AliAccessKeyID == "" || Config.AliAccessKeySecret == "" {
 			log.Fatalln("Cannot Get Ali access key and secret key")
 		}
 	}

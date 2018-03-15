@@ -10,7 +10,7 @@ func init() {
 func TestCreatenode(t *testing.T) {
 	var amazoncloud EC2
 	create := map[string]interface{}{
-		"ImageId":      "ami-ccf405a5",
+		"ImageID":      "ami-ccf405a5",
 		"InstanceType": "t1.micro",
 		"Region":       "us-east-1",
 	}
