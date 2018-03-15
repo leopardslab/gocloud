@@ -1,4 +1,4 @@
-package aliecs
+package ecs
 
 import (
 	"github.com/cloudlibz/gocloud/aliauth"
@@ -18,6 +18,8 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
+
+// Create Ec2 instances accept map[string]interface{}
 func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 	var options CreateInstance
 
@@ -92,7 +94,6 @@ func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 	//put all of options into params
 	e := reflect.ValueOf(&options).Elem()
 	typeOfOptions := e.Type()
-
 	for i := 0; i < e.NumField(); i++ {
 		switch e.Field(i).Type().String() {
 		case "string":

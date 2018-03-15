@@ -1,7 +1,7 @@
 package ali
 
 import (
-	"github.com/cloudlibz/gocloud/compute/aliecs"
+	"github.com/cloudlibz/gocloud/compute/ecs"
 	"github.com/cloudlibz/gocloud/storage/alistorage"
 	"github.com/cloudlibz/gocloud/loadbalancer/aliloadbalancer"
 	"github.com/cloudlibz/gocloud/container/alicontainer"
@@ -10,7 +10,7 @@ import (
 
 //Ali struct represents Ali-cloud provider.
 type Ali struct {
-	aliecs.ECS
+	ecs.ECS
 	alistorage.Alistorage
 	aliloadbalancer.Aliloadbalancer
 	alicontainer.Alicontainer

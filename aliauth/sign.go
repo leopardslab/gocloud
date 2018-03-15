@@ -12,7 +12,6 @@ import (
 	"sort"
 	"net/http"
 	"io/ioutil"
-	"fmt"
 )
 
 const formatISO8601 = "2006-01-02T15:04:05Z"

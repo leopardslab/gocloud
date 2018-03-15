@@ -12,8 +12,10 @@ type Configuration struct {
 	AliAccessKeySecret string
 }
 
+// To store config from alicloudconfig.json
 var Config Configuration
 
+// Load Ali-cloud config from alicloudconfig.json or environment variables
 func LoadConfig() {
 	// Read from file first.
 	var home string = os.Getenv("HOME")

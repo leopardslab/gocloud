@@ -1,4 +1,4 @@
-package aliecs
+package ecs
 
 // CreateInstance to store all attribute to create Ali-cloud ECS instance
 type CreateInstance struct {

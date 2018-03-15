@@ -1,4 +1,4 @@
-package aliecs
+package ecs
 
 import (
 	"github.com/cloudlibz/gocloud/aliauth"
