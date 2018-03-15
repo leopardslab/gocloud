@@ -15,7 +15,7 @@ type Configuration struct {
 //Config from alicloudconfig.json
 var Config Configuration
 
-//Load Ali-cloud config from alicloudconfig.json or environment variables
+//LoadConfig represents Load Ali-cloud config from alicloudconfig.json or environment variables
 func LoadConfig() {
 	// Read from file first.
 	var home string = os.Getenv("HOME")
