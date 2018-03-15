@@ -17,14 +17,18 @@ var Config Configuration
 func LoadConfig() {
 	// Read from file first.
 	var home string = os.Getenv("HOME")
-	file, _ := os.Open(home + "/gocloudconfig.json")
+	file, _ := os.Open(home + "/alicloudconfig.json")
 
+	// Defer the closing of our jsonFile so that we can parse it later on
+	defer file.Close()
+
+	// We initialize Configuration struct
 	decoder := json.NewDecoder(file)
 	Config = Configuration{}
 	_ = decoder.Decode(&Config)
 
 	if Config.AliAccessKeyID == "" || Config.AliAccessKeySecret == "" {
-
+		// If alicloudconfig.json doesn't exist, look for credentials as environment variables.
 		Config.AliAccessKeyID = os.Getenv("AliAccessKeyID")
 		Config.AliAccessKeySecret = os.Getenv("AliAccessKeySecret")
 

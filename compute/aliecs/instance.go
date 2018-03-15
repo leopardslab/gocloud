@@ -27,19 +27,19 @@ func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 
 	for key, value := range param {
 		switch key {
-		case "RegionID":
+		case "RegionId":
 			regionID, _ := value.(string)
 			options.RegionID = regionID
-		case "ImageID":
+		case "ImageId":
 			imageID, _ := value.(string)
 			options.ImageID = imageID
 		case "InstanceType":
 			instanceType, _ := value.(string)
 			options.InstanceType = instanceType
-		case "SecurityGroupID":
+		case "SecurityGroupId":
 			securityGroupID, _ := value.(string)
 			options.SecurityGroupID = securityGroupID
-		case "ZoneID":
+		case "ZoneId":
 			zoneID, _ := value.(string)
 			options.ZoneID = zoneID
 		case "InstanceName":
