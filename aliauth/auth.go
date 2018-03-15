@@ -6,16 +6,16 @@ import (
 	"log"
 )
 
-// Configuration struct for representing Ali-cloud credentials
+//Configuration struct for representing Ali-cloud credentials
 type Configuration struct {
 	AliAccessKeyID     string
 	AliAccessKeySecret string
 }
 
-// To store config from alicloudconfig.json
+//Store config from alicloudconfig.json
 var Config Configuration
 
-// Load Ali-cloud config from alicloudconfig.json or environment variables
+//Load Ali-cloud config from alicloudconfig.json or environment variables
 func LoadConfig() {
 	// Read from file first.
 	var home string = os.Getenv("HOME")

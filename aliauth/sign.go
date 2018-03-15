@@ -16,7 +16,7 @@ import (
 
 const formatISO8601 = "2006-01-02T15:04:05Z"
 
-// Sign and do request by action parameter and specific parameters
+//Sign and do request by action parameter and specific parameters
 func SignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
 	// Add common params and action param
 	params = initParams(action, params)
@@ -112,7 +112,7 @@ func percentReplace(str string) string {
 
 const dictionary = "_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
-// CreateRandomString create random string
+//CreateRandomString create random string
 func createRandomString() string {
 	b := make([]byte, 32)
 	l := len(dictionary)
@@ -120,7 +120,7 @@ func createRandomString() string {
 	_, err := srand.Read(b)
 
 	if err != nil {
-		// fail back to insecure rand
+		// Fail back to insecure rand
 		rand.Seed(time.Now().UnixNano())
 		for i := range b {
 			b[i] = dictionary[rand.Int()%l]

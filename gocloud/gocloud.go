@@ -10,7 +10,7 @@ import (
 	"github.com/cloudlibz/gocloud/ali"
 )
 
-// Gocloud is a interface which hides the differece between different cloud providers.
+// Gocloud is a interface which hides the difference between different cloud providers.
 type Gocloud interface {
 	Createnode(request interface{}) (resp interface{}, err error)
 	Startnode(request interface{}) (resp interface{}, err error)
@@ -46,7 +46,7 @@ const (
 	Amazonprovider = "aws"
 	// Googleprovider reperents Google cloud.
 	Googleprovider = "google"
-	//Aliprovider reperents Google cloud.
+	// Aliprovider reperents Google cloud.
 	Aliprovider = "ali"
 )
 

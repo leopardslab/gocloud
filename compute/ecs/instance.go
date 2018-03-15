@@ -6,20 +6,24 @@ import (
 	"reflect"
 )
 
+//TODO
 func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
+//TODO
 func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
+//TODO
 func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
+//TODO
 func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Create Ec2 instances accept map[string]interface{}
+//Create Ec2 instances accept map[string]interface{}
 func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 	var options CreateInstance
 
@@ -91,7 +95,7 @@ func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 
 	params := make(map[string]interface{})
 
-	//put all of options into params
+	// Put all of options into params
 	e := reflect.ValueOf(&options).Elem()
 	typeOfOptions := e.Type()
 	for i := 0; i < e.NumField(); i++ {
