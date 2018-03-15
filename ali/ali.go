@@ -11,7 +11,7 @@ import (
 //Ali struct represents Ali-cloud provider.
 type Ali struct {
 	aliecs.ECS
-	alistorage.AliStorage
+	alistorage.Alistorage
 	aliloadbalancer.Aliloadbalancer
 	alicontainer.Alicontainer
 	alidns.Alidns

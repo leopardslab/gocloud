@@ -16,12 +16,12 @@ import (
 
 const formatISO8601 = "2006-01-02T15:04:05Z"
 
+// Sign and do request by action parameter and specific parameters
 func SignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
+	// Add common params and action param
 	params = initParams(action, params)
 
-	var canonicalizedQueryString string
-
-	//sort map by key
+	// Sort the parameters by key
 	keys := make([]string, len(params))
 	i := 0
 	for k := range params {
@@ -29,6 +29,9 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 		i++
 	}
 	sort.Strings(keys)
+
+	// Generate the stringToSign
+	var canonicalizedQueryString string
 	for _, k := range keys {
 		v := params[k]
 		canonicalizedQueryString += "&"
@@ -36,11 +39,12 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 		canonicalizedQueryString += "="
 		canonicalizedQueryString += percentEncode(v.(string))
 	}
-
 	stringToSign := "GET" + "&%2F&" + percentEncode(canonicalizedQueryString[1:])
 
+	// Create signature
 	base64Sign := createSignature(stringToSign, Config.AliAccessKeySecret+"&")
 
+	// Init url query
 	query := url.Values{}
 	for key, value := range params {
 		query.Add(key, value.(string))
@@ -79,26 +83,10 @@ func initParams(action string, params map[string]interface{}) map[string]interfa
 
 	params["Action"] = action
 
-	return sortMap(params)
+	return params
 }
 
-func sortMap(oldMap map[string]interface{}) map[string]interface{} {
-	keys := make([]string, len(oldMap))
-	i := 0
-	for k := range oldMap {
-		keys[i] = k
-		i++
-	}
-	sort.Strings(keys)
-
-	sortedMap := make(map[string]interface{})
-	for _, k := range keys {
-		sortedMap[k] = oldMap[k]
-	}
-	return sortedMap
-}
-
-//CreateSignature creates signature for string following Aliyun rules
+//CreateSignature creates signature for string following Ali-cloud rules
 func createSignature(stringToSignature, accessKeySecret string) string {
 	// Crypto by HMAC-SHA1
 	hmacSha1 := hmac.New(sha1.New, []byte(accessKeySecret))

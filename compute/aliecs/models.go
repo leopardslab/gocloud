@@ -1,6 +1,6 @@
 package aliecs
 
-
+// CreateInstance to store all attribute to create Ali-cloud ECS instance
 type CreateInstance struct {
 	RegionID                string
 	ZoneID                  string

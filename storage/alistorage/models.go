@@ -1,4 +1,5 @@
 package alistorage
 
-type AliStorage struct {
+//Alistorage struct represents Alistorage attribute and method associates with it.
+type Alistorage struct {
 }

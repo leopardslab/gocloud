@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-//Configuration struct reperesnts.
+// Configuration struct for representing Ali-cloud credentials
 type Configuration struct {
 	AliAccessKeyID     string
 	AliAccessKeySecret string
