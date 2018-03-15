@@ -12,7 +12,7 @@ type Configuration struct {
 	AliAccessKeySecret string
 }
 
-//Store config from alicloudconfig.json
+//Config from alicloudconfig.json
 var Config Configuration
 
 //Load Ali-cloud config from alicloudconfig.json or environment variables
