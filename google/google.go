@@ -8,7 +8,7 @@ import (
 	googlestorage "github.com/cloudlibz/gocloud/storage/googlestorage"
 )
 
-//Google  struct represents google cloud provider.
+// Google  struct represents Google Cloud provider.
 type Google struct {
 	gce.GCE
 	googlestorage.GoogleStorage

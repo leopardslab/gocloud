@@ -1,10 +1,10 @@
 package awscontainer
 
 import "testing"
-import "github.com/cloudlibz/gocloud/auth"
+import awsAuth "github.com/cloudlibz/gocloud/auth"
 
 func init() {
-	auth.LoadConfig()
+	awsAuth.LoadConfig()
 }
 
 func TestCreatecluster(t *testing.T) {
