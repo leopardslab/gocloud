@@ -6,15 +6,16 @@ import (
 	"os"
 )
 
-// AWSConfiguration struct for representing AWS credentials
+// AWSConfiguration struct for representing AWS credentials.
 type AWSConfiguration struct {
 	AWSAccessKeyID     string
 	AWSSecretKey       string
 }
 
-// Object for AWSConfiguration
+// Config is variable of type AWSConfiguration.
 var Config AWSConfiguration
 
+// LoadConfig function loads the access credentials for AWS.
 func LoadConfig() {
 
 	// Read from file first.
