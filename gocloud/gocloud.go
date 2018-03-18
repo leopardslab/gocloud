@@ -3,14 +3,14 @@ package gocloud
 import (
 	"errors"
 	"fmt"
-	awsAuth "github.com/cloudlibz/gocloud/awsauth"
+	awsAuth "github.com/cloudlibz/gocloud/auth"
 	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
 	"github.com/cloudlibz/gocloud/aws"
 	"github.com/cloudlibz/gocloud/google"
 	"github.com/cloudlibz/gocloud/digiocean"
 )
 
-// Gocloud is a interface which hides the differece between different cloud providers.
+// Gocloud is a interface which hides the difference between different cloud providers.
 type Gocloud interface {
 	Createnode(request interface{}) (resp interface{}, err error)
 	Startnode(request interface{}) (resp interface{}, err error)
