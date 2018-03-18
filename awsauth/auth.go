@@ -6,8 +6,6 @@ import (
 	"os"
 )
 
-// AWS
-
 // AWSConfiguration struct for representing AWS credentials
 type AWSConfiguration struct {
 	AWSAccessKeyID     string

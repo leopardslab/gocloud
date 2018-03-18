@@ -3,9 +3,11 @@ package gocloud
 import (
 	"errors"
 	"fmt"
-	"github.com/cloudlibz/gocloud/auth"
+	awsAuth "github.com/cloudlibz/gocloud/awsauth"
+	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
 	"github.com/cloudlibz/gocloud/aws"
 	"github.com/cloudlibz/gocloud/google"
+	"github.com/cloudlibz/gocloud/digiocean"
 )
 
 // Gocloud is a interface which hides the differece between different cloud providers.
@@ -44,6 +46,8 @@ const (
 	Amazonprovider = "aws"
 	// Googleprovider reperents Google cloud.
 	Googleprovider = "google"
+	// Digioceanprovider reperents Digital Ocean cloud.
+	Digioceanprovider = "digiocean"
 )
 
 // CloudProvider returns the instance of respective cloud and maps it to Gocloud so that we can call
@@ -59,6 +63,11 @@ func CloudProvider(provider string) (Gocloud, error) {
 
 	case Googleprovider:
 		return new(google.Google), nil
+
+	case Digioceanprovider:
+		// Calls authentication procedure for Digital Ocean.
+		digioceanAuth.LoadConfig()
+		return new(digiocean.DigitalOcean), nil
 
 	default:
 		return nil, errors.New(fmt.Sprintf("Provider %s not recognized.\n", provider))
