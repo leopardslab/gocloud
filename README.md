@@ -3,7 +3,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0fce581810a6420aaca4ba6757c54529)](https://www.codacy.com/app/cloudlibz/gocloud?utm_source=github.com&utm_medium=referral&utm_content=cloudlibz/gocloud&utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/cloudlibz/gocloud.svg?branch=master)](https://travis-ci.org/cloudlibz/gocloud)
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg?style=flat-square)](https://gitter.im/cloudlibz/gocloud)
-[![docs](https://camo.githubusercontent.com/df8e028288079a740c10e6cfaad2fa0e0c96014d/687474703a2f2f696d672e736869656c64732e696f2f62616467652f446f63732d6c61746573742d677265656e2e737667)](https://github.com/cloudlibz/gocloud/tree/master/docs)
+[![docs](https://camo.githubusercontent.com/df8e028288079a740c10e6cfaad2fa0e0c96014d/687474703a2f2f696d672e736869656c64732e696f2f62616467652f446f63732d6c61746573742d677265656e2e737667)](docs)
 
 # gocloud: Cloud services library.
 
@@ -27,19 +27,19 @@ GoCloud is a golang library which hides differences between different cloud prov
 
 ### AWS
 
-* EC2 (Compute)
-* EC2 Storage
-* Amazon Elastic Container Service (Container)
-* Elastic Load Balancing
-* AWS Route53 (DNS)
+* EC2 Compute [Link to example](examples/compute/ec2/ec2.md)
+* EC2 Storage [Link to example](examples/storage/aws_storage/aws_storage.md)
+* Amazon Elastic Container Service (Container) [Link to example](examples/container/aws_container/aws_container.md)
+* Elastic Load Balancing [Link to example](examples/loadbalancer/aws_loadbalancer/aws_loadbalancer.md)
+* AWS Route53 (DNS) [Link to example](examples/dns/aws_route53/aws_route53.md)
 
 ### Google
 
-* Google Compute
-* Google Compute Storage
-* Google Container Service (Container)
-* Google Elastic Load Balancing
-* Google DNS
+* Google Compute [Link to example](examples/compute/gce/gce.md)
+* Google Compute Storage [Link to example](examples/storage/google_storage/google_storage.md)
+* Google Container Service (Container) [Link to example](examples/container/google_container/google_container.md)
+* Google Elastic Load Balancing [Link to example](examples/loadbalancer/google_loadbalancer/google_loadbalancer.md)
+* Google DNS [Link to example](examples/dns/google_dns/google_dns.md)
 
 Currently, implementations for other cloud providers are being worked on.
 
@@ -47,16 +47,16 @@ Currently, implementations for other cloud providers are being worked on.
 1. Install golang.  
    ```
    $ sudo apt-get update -y
-   $ sudo apt-get install golang
+   $ sudo apt-get install golang -y
    ```
-   
+
 2. Set GOPATH environment variable. Run `gedit ~/.bashrc`.  
   Copy the following in your .bashrc file:
   ```
   export GOPATH=$HOME/gopath
   export GOBIN=$HOME/gopath/bin
   ```
-     
+
 3. Test your installation by copying the following piece of code in a file. Save the file as *gotest.go*. Run the file using the command `go run gotest.go`. If that command returns “Hello World!”, then Go is successfully installed and functional.
 ```golang
 package main
@@ -95,7 +95,8 @@ $ go get cloud.google.com/go/compute/metadata
    export ClientX509CertURL =  "xxxxxxxxxxxx"
    ```
 
-6. You are all set to you gocloud!
+6. You are all set to use gocloud! Check out the following YouTube videos for more information and usage examples:
+https://youtu.be/4LxsAeoonlY?list=PLOdfztY25UNnxK_0KRRHSngJIyVLDKZxq&t=3
 
 ## Development setup
 
@@ -110,4 +111,3 @@ $ cd gocloud
 $ cd gocloud
 $ go test -v
 ```
-
