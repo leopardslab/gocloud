@@ -7,6 +7,7 @@ import (
 	"github.com/cloudlibz/gocloud/aws"
 	"github.com/cloudlibz/gocloud/google"
 	"github.com/cloudlibz/gocloud/openstack"
+	"github.com/cloudlibz/gocloud/azure"
 )
 
 // Gocloud is a interface which hides the differece between different cloud providers.
@@ -50,6 +51,8 @@ const (
 	// Openstackprovider reperents openstack cloud.
 	Openstackprovider = "openstack"
 
+	Azureprovider = "azure"
+
 )
 
 // CloudProvider returns the instance of respective cloud and maps it to Gocloud so that we can call
@@ -68,6 +71,9 @@ func CloudProvider(provider string) (Gocloud, error) {
 
 	case Openstackprovider:
 		return new(openstack.Openstack), nil
+
+	case Azureprovider:
+		return new(azure.Azure), nil
 
 	default:
 		return nil, errors.New(fmt.Sprintf("Provider %s not recognized.\n", provider))
