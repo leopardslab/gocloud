@@ -3,14 +3,16 @@ package gocloud
 import (
 	"errors"
 	"fmt"
-	"github.com/cloudlibz/gocloud/auth"
-	"github.com/cloudlibz/gocloud/aws"
-	"github.com/cloudlibz/gocloud/google"
-	"github.com/cloudlibz/gocloud/openstack"
-	"github.com/cloudlibz/gocloud/azure"
+	awsAuth "github.com/shlokgilda/gocloud/auth"
+	digioceanAuth "github.com/shlokgilda/gocloud/digioceanauth"
+	"github.com/shlokgilda/gocloud/aws"
+	"github.com/shlokgilda/gocloud/google"
+	"github.com/shlokgilda/gocloud/openstack"
+	"github.com/shlokgilda/gocloud/azure"
+	"github.com/shlokgilda/gocloud/digiocean"
 )
 
-// Gocloud is a interface which hides the differece between different cloud providers.
+// Gocloud is a interface which hides the difference between different cloud providers.
 type Gocloud interface {
 	Createnode(request interface{}) (resp interface{}, err error)
 	Startnode(request interface{}) (resp interface{}, err error)
@@ -42,17 +44,20 @@ type Gocloud interface {
 }
 
 const (
-	// Amazonprovider reperents Amazon cloud.
+	// Amazonprovider represents Amazon cloud.
 	Amazonprovider = "aws"
 
-	// Googleprovider reperents Google cloud.
+	// Googleprovider represents Google cloud.
 	Googleprovider = "google"
 
-	// Openstackprovider reperents openstack cloud.
+	// Openstackprovider represents Openstack cloud.
 	Openstackprovider = "openstack"
 
+	// Azureprovider represents Openstack cloud.
 	Azureprovider = "azure"
 
+	// Digioceanprovider represents Digital Ocean cloud.
+	Digioceanprovider = "digiocean"
 )
 
 // CloudProvider returns the instance of respective cloud and maps it to Gocloud so that we can call
@@ -63,7 +68,7 @@ func CloudProvider(provider string) (Gocloud, error) {
 	switch provider {
 	case Amazonprovider:
 		// Calls authentication procedure for AWS
-		auth.AWSLoadConfig()
+		awsAuth.LoadConfig()
 		return new(aws.AWS), nil
 
 	case Googleprovider:
@@ -72,11 +77,16 @@ func CloudProvider(provider string) (Gocloud, error) {
 	case Openstackprovider:
 		return new(openstack.Openstack), nil
 
+	case Digioceanprovider:
+		// Calls authentication procedure for Digital Ocean.
+		digioceanAuth.LoadConfig()
+		return new(digiocean.DigitalOcean), nil
+
 	case Azureprovider:
 		return new(azure.Azure), nil
 
 	default:
-		return nil, errors.New(fmt.Sprintf("Provider %s not recognized.\n", provider))
+		return nil, fmt.Errorf("provider %s not recognized", provider)
 	}
 
 }

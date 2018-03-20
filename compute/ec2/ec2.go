@@ -7,6 +7,6 @@ const (
 )
 
 
-//Ec2 struct
+// EC2 struct
 type EC2 struct {
 }

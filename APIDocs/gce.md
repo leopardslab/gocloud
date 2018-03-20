@@ -1,5 +1,5 @@
 package gce
-    import "github.com/cloudlibz/gocloud/compute/gce"
+    import "github.com/shlokgilda/gocloud/compute/gce"
 
 
 TYPES

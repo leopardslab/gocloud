@@ -1,4 +1,4 @@
-packge designate
+package designate
 
 func (designate *Designate) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error)  {
 	return resp, err

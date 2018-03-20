@@ -1,10 +1,10 @@
 package awsdns
 
 import "testing"
-import "github.com/cloudlibz/gocloud/auth"
+import awsAuth "github.com/shlokgilda/gocloud/auth"
 
 func init() {
-	auth.LoadConfig()
+	awsAuth.LoadConfig()
 }
 
 func TestCreatedns(t *testing.T) {
