@@ -1,5 +1,5 @@
 package ec2
-    import "github.com/shlokgilda/gocloud/compute/ec2"
+    import "github.com/cloudlibz/gocloud/compute/ec2"
 
 
 VARIABLES

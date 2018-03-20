@@ -2,7 +2,7 @@ package droplet
 
 import (
   "testing"
-  digioceanAuth "github.com/shlokgilda/gocloud/digioceanauth"
+  digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
 )
 
 func init() {

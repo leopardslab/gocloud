@@ -1,5 +1,5 @@
 package aws
-    import "github.com/shlokgilda/gocloud/aws"
+    import "github.com/cloudlibz/gocloud/aws"
 
 
 TYPES

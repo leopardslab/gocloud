@@ -1,8 +1,8 @@
 ![GoCloud Logo](assets/logo.png)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0fce581810a6420aaca4ba6757c54529)](https://www.codacy.com/app/shlokgilda/gocloud?utm_source=github.com&utm_medium=referral&utm_content=shlokgilda/gocloud&utm_campaign=Badge_Grade)
-[![Build Status](https://travis-ci.org/shlokgilda/gocloud.svg?branch=master)](https://travis-ci.org/shlokgilda/gocloud)
-[![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg?style=flat-square)](https://gitter.im/shlokgilda/gocloud)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0fce581810a6420aaca4ba6757c54529)](https://www.codacy.com/app/cloudlibz/gocloud?utm_source=github.com&utm_medium=referral&utm_content=cloudlibz/gocloud&utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/cloudlibz/gocloud.svg?branch=master)](https://travis-ci.org/cloudlibz/gocloud)
+[![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg?style=flat-square)](https://gitter.im/cloudlibz/gocloud)
 [![docs](https://camo.githubusercontent.com/df8e028288079a740c10e6cfaad2fa0e0c96014d/687474703a2f2f696d672e736869656c64732e696f2f62616467652f446f63732d6c61746573742d677265656e2e737667)](docs)
 
 # gocloud: Cloud services library.
@@ -43,6 +43,10 @@ GoCloud is a golang library which hides differences between different cloud prov
 
 Currently, implementations for other cloud providers are being worked on.
 
+### DigitalOcean
+
+* DigitalOcean Droplet [Link to example](examples/compute/droplet/droplet.md)
+
 ## Installation instructions for Linux (Ubuntu)
 1. Install golang.  
    ```
@@ -68,20 +72,38 @@ func main() {
 
 4. Now we need to fetch the gocloud repository and other necessary packages. Run the following commands in order:
 ```
-$ go get github.com/shlokgilda/gocloud
+$ go get github.com/cloudlibz/gocloud
 $ go get golang.org/x/oauth2
 $ go get cloud.google.com/go/compute/metadata
 ```
 
-5. Download your AWS and Google access credentials and store them in a file in your <b>HOME</b> directory.  
-   Save your AWS credentials in a file named *amazoncloudconfig.json* and your Google Cloud credentials in a file named *googlecloudconfig.json*.  
+5. Download your AWS, Google and DigitalOcean access credentials and store them in a file in your <b>HOME</b> directory.  
+
+   #### AWS:
+   Save your AWS credentials in a file named *amazoncloudconfig.json*.
+   ```js
+   {
+     "AWSAccessKeyID": "xxxxxxxxxxxx",
+     "AWSSecretKey": "xxxxxxxxxxxx"
+   }
+   ```
+   #### Google Cloud Services:
+   Save your Google Cloud credentials in a file named *googlecloudconfig.json*. The file is downloaded in the required format.
+   #### DigitalOcean:
+   Save your DigitalOcean credentials in a file named *digioceancloudconfig.json*.
+   ```js
+   {
+     "AccessToken": "xxxxxxxxxxxx"
+   }
+   ```
+
    You can also set your credentials as environment variables.  
-   For AWS:  
+   #### AWS:  
    ```
    export AWSAccessKeyID =  "xxxxxxxxxxxx"
    export AWSSecretKey = "xxxxxxxxxxxx"
    ```
-   For Google Cloud Services:
+   #### Google Cloud Services:
    ```
    export PrivateKey =  "xxxxxxxxxxxx"
    export Type =  "xxxxxxxxxxxx"
@@ -94,6 +116,10 @@ $ go get cloud.google.com/go/compute/metadata
    export AuthProviderX509CertURL = "xxxxxxxxxxxx"
    export ClientX509CertURL =  "xxxxxxxxxxxx"
    ```
+   #### DigitalOcean:  
+   ```
+   export DigiOceanAccessToken =  "xxxxxxxxxxxx"
+   ```
 
 6. You are all set to use gocloud! Check out the following YouTube videos for more information and usage examples:
 https://youtu.be/4LxsAeoonlY?list=PLOdfztY25UNnxK_0KRRHSngJIyVLDKZxq&t=3
@@ -101,7 +127,7 @@ https://youtu.be/4LxsAeoonlY?list=PLOdfztY25UNnxK_0KRRHSngJIyVLDKZxq&t=3
 ## Development setup
 
 ```
-$ git clone https://github.com/shlokgilda/gocloud
+$ git clone https://github.com/cloudlibz/gocloud
 $ cd gocloud
 ```
 
@@ -109,5 +135,5 @@ $ cd gocloud
 
 ```
 $ cd gocloud
-$ go test -v
+$ go test -v ./...
 ```

@@ -1,5 +1,5 @@
 package googlecontainer
-    import "github.com/shlokgilda/gocloud/container/googlecontainer"
+    import "github.com/cloudlibz/gocloud/container/googlecontainer"
 
 
 FUNCTIONS

@@ -3,7 +3,7 @@ package awscontainer
 import (
 	"bytes"
 	"encoding/json"
-	awsauth "github.com/shlokgilda/gocloud/awsauth"
+	awsauth "github.com/cloudlibz/gocloud/awsauth"
 	"io/ioutil"
 	"net/http"
 )

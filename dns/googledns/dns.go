@@ -3,7 +3,7 @@ package googledns
 import (
 	"bytes"
 	"encoding/json"
-	googleauth "github.com/shlokgilda/gocloud/googleauth"
+	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
 	"time"

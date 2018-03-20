@@ -1,11 +1,11 @@
 package google
 
 import (
-	gce "github.com/shlokgilda/gocloud/compute/gce"
-	googlecontainer "github.com/shlokgilda/gocloud/container/googlecontainer"
-	googledns "github.com/shlokgilda/gocloud/dns/googledns"
-	googleloadbalancer "github.com/shlokgilda/gocloud/loadbalancer/googleloadbalancer"
-	googlestorage "github.com/shlokgilda/gocloud/storage/googlestorage"
+	gce "github.com/cloudlibz/gocloud/compute/gce"
+	googlecontainer "github.com/cloudlibz/gocloud/container/googlecontainer"
+	googledns "github.com/cloudlibz/gocloud/dns/googledns"
+	googleloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/googleloadbalancer"
+	googlestorage "github.com/cloudlibz/gocloud/storage/googlestorage"
 )
 
 // Google  struct represents Google Cloud provider.

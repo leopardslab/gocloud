@@ -1,6 +1,6 @@
-# gocloud compute - AWS
+# gocloud compute - DigitalOcean
 
-## Configure AWS credentials.
+## Configure DigitalOcean credentials.
 
 Create `digioceancloudconfig.json` in your <b>HOME</b> directory as follows:
 ```js
@@ -18,7 +18,7 @@ export DigiOceanAccessToken =  "xxxxxxxxxxxx"
 
 ```js
 
-import "github.com/shlokgilda/gocloud/gocloud"
+import "github.com/cloudlibz/gocloud/gocloud"
 
 digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
 ```
