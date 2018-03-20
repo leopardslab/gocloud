@@ -1,5 +1,5 @@
 package auth
-    import "github.com/shlokgilda/gocloud/auth"
+    import "github.com/cloudlibz/gocloud/auth"
 
 
 FUNCTIONS

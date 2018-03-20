@@ -1,5 +1,5 @@
 package amazonstorage
-    import "github.com/shlokgilda/gocloud/storage/amazonstorage"
+    import "github.com/cloudlibz/gocloud/storage/amazonstorage"
 
 
 TYPES

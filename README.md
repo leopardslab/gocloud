@@ -1,8 +1,8 @@
 ![GoCloud Logo](assets/logo.png)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0fce581810a6420aaca4ba6757c54529)](https://www.codacy.com/app/shlokgilda/gocloud?utm_source=github.com&utm_medium=referral&utm_content=shlokgilda/gocloud&utm_campaign=Badge_Grade)
-[![Build Status](https://travis-ci.org/shlokgilda/gocloud.svg?branch=master)](https://travis-ci.org/shlokgilda/gocloud)
-[![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg?style=flat-square)](https://gitter.im/shlokgilda/gocloud)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0fce581810a6420aaca4ba6757c54529)](https://www.codacy.com/app/cloudlibz/gocloud?utm_source=github.com&utm_medium=referral&utm_content=cloudlibz/gocloud&utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/cloudlibz/gocloud.svg?branch=master)](https://travis-ci.org/cloudlibz/gocloud)
+[![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg?style=flat-square)](https://gitter.im/cloudlibz/gocloud)
 [![docs](https://camo.githubusercontent.com/df8e028288079a740c10e6cfaad2fa0e0c96014d/687474703a2f2f696d672e736869656c64732e696f2f62616467652f446f63732d6c61746573742d677265656e2e737667)](docs)
 
 # gocloud: Cloud services library.
@@ -68,7 +68,7 @@ func main() {
 
 4. Now we need to fetch the gocloud repository and other necessary packages. Run the following commands in order:
 ```
-$ go get github.com/shlokgilda/gocloud
+$ go get github.com/cloudlibz/gocloud
 $ go get golang.org/x/oauth2
 $ go get cloud.google.com/go/compute/metadata
 ```
@@ -101,7 +101,7 @@ https://youtu.be/4LxsAeoonlY?list=PLOdfztY25UNnxK_0KRRHSngJIyVLDKZxq&t=3
 ## Development setup
 
 ```
-$ git clone https://github.com/shlokgilda/gocloud
+$ git clone https://github.com/cloudlibz/gocloud
 $ cd gocloud
 ```
 

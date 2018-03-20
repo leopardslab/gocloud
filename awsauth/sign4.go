@@ -5,7 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
-	auth "github.com/shlokgilda/gocloud/auth"
+	auth "github.com/cloudlibz/gocloud/auth"
 	"net/http"
 	"time"
 )
