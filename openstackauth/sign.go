@@ -24,8 +24,6 @@ func openstackauth(){
 
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 
-  println(jsonStr)
-
   client := http.Client{}
 
   Createnoderequest, err := http.NewRequest("POST", urlv,  bytes.NewBuffer(byteValue))
