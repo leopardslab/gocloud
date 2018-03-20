@@ -6,20 +6,191 @@ import (
 	"reflect"
 )
 
-//TODO
+//Start Ec2 instances accept map[string]interface{}
 func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	response := make(map[string]interface{})
+
+	var options StartInstance
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "InstanceId":
+			InstanceIdV, _ := value.(string)
+			options.InstanceId = InstanceIdV
+		}
+	}
+
+	params := make(map[string]interface{})
+
+	// Put all of options into params
+	e := reflect.ValueOf(&options).Elem()
+	typeOfOptions := e.Type()
+	for i := 0; i < e.NumField(); i++ {
+		switch e.Field(i).Type().String() {
+		case "string":
+			if e.Field(i).Interface() != "" {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		case "int":
+			if e.Field(i).Interface() != 0 {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		}
+	}
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("StartInstance", params, response)
+	resp = response
 	return resp, err
+
 }
-//TODO
+
+//Stopnode Ec2 instances accept map[string]interface{}
 func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	response := make(map[string]interface{})
+
+	var options StopInstance
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "InstanceId":
+			InstanceIdV, _ := value.(string)
+			options.InstanceId = InstanceIdV
+		}
+	}
+
+	params := make(map[string]interface{})
+
+	// Put all of options into params
+	e := reflect.ValueOf(&options).Elem()
+	typeOfOptions := e.Type()
+	for i := 0; i < e.NumField(); i++ {
+		switch e.Field(i).Type().String() {
+		case "string":
+			if e.Field(i).Interface() != "" {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		case "int":
+			if e.Field(i).Interface() != 0 {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		}
+	}
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("StopInstance", params, response)
+	resp = response
 	return resp, err
 }
-//TODO
+
+
+//Delete Ec2 instances accept map[string]interface{}
 func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	response := make(map[string]interface{})
+
+	var options RebootInstance
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "InstanceId":
+			InstanceIdV, _ := value.(string)
+			options.InstanceId = InstanceIdV
+		}
+	}
+
+	params := make(map[string]interface{})
+
+	// Put all of options into params
+	e := reflect.ValueOf(&options).Elem()
+	typeOfOptions := e.Type()
+	for i := 0; i < e.NumField(); i++ {
+		switch e.Field(i).Type().String() {
+		case "string":
+			if e.Field(i).Interface() != "" {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		case "int":
+			if e.Field(i).Interface() != 0 {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		}
+	}
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("RebootInstance", params, response)
+	resp = response
 	return resp, err
 }
-//TODO
+
+//Delete Ec2 instances accept map[string]interface{}
 func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	response := make(map[string]interface{})
+
+	var options DeleteInstance
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "InstanceId":
+			InstanceIdV, _ := value.(string)
+			options.InstanceId = InstanceIdV
+		}
+	}
+
+	params := make(map[string]interface{})
+
+	// Put all of options into params
+	e := reflect.ValueOf(&options).Elem()
+	typeOfOptions := e.Type()
+	for i := 0; i < e.NumField(); i++ {
+		switch e.Field(i).Type().String() {
+		case "string":
+			if e.Field(i).Interface() != "" {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		case "int":
+			if e.Field(i).Interface() != 0 {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		}
+	}
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("DeleteInstance", params, response)
+	resp = response
 	return resp, err
 }
 
