@@ -4,10 +4,6 @@ package googleauth
 
 FUNCTIONS
 
-func Sign() (token *oauth2.Token)
-    sign() GCE signature it give URL to get Autorization code on which we it
-    generate auth token and pass in each request in request header
-
 func SignJWT() (client *http.Client)
     SignJWT reperesnts google service account authentication.
 
@@ -26,5 +22,3 @@ type JWT struct {
     ClientX509CertURL       string `json:"client_x509_cert_url"`
 }
     JWT struct reperesnts JWT json.
-
-

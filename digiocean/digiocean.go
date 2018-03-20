@@ -8,7 +8,7 @@ import (
 	digioceancontainer "github.com/cloudlibz/gocloud/container/digioceancontainer"
 )
 
-// DigitalOcean  struct represents Digital Ocean cloud provider.
+// DigitalOcean struct represents DigitalOcean cloud provider.
 type DigitalOcean struct {
 	droplet.Droplet
 	digioceandns.Digioceandns

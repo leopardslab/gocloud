@@ -44,7 +44,7 @@ func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error)
 
 func (gce *GCE) Stopnode(request interface{}) (resp interface{}, err error)
 
-type GCEResponse struct {
+type Response struct {
     Kind          string `json:"kind"`
     ID            string `json:"id"`
     Name          string `json:"name"`

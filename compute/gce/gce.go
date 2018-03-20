@@ -50,7 +50,7 @@ type Scheduling struct {
 	AutomaticRestart  bool   `json:"automaticRestart"`
 }
 
-type GCEResponse struct {
+type Response struct {
 	Kind          string `json:"kind"`
 	ID            string `json:"id"`
 	Name          string `json:"name"`

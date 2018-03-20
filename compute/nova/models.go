@@ -4,8 +4,8 @@ package nova
 
 //WIP
 type  CreateServer struct {
-  server Server`json:"server"`
-	oSSCHHNTSchedulerHints OSSCHHNTSchedulerHints `json:"OS-SCH-HNT:scheduler_hints"`
+  server Server `json:"server"`
+	oSSCHHNTSchedulerHints OSSCHHNTSchedulerHints  `json:"OS-SCH-HNT:scheduler_hints"`
 }
 
 type OSSCHHNTSchedulerHints struct {
