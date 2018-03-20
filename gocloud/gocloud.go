@@ -86,7 +86,7 @@ func CloudProvider(provider string) (Gocloud, error) {
 		return new(azure.Azure), nil
 
 	default:
-		return nil, fmt.Errorf("Provider %s not recognized.\n", provider)
+		return nil, fmt.Errorf("provider %s not recognized", provider)
 	}
 
 }
