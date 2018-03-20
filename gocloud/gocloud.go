@@ -1,7 +1,6 @@
 package gocloud
 
 import (
-	"errors"
 	"fmt"
 	awsAuth "github.com/shlokgilda/gocloud/auth"
 	digioceanAuth "github.com/shlokgilda/gocloud/digioceanauth"
