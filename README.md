@@ -43,6 +43,10 @@ GoCloud is a golang library which hides differences between different cloud prov
 
 Currently, implementations for other cloud providers are being worked on.
 
+### DigitalOcean
+
+* DigitalOcean Droplet [Link to example](examples/compute/droplet/droplet.md)
+
 ## Installation instructions for Linux (Ubuntu)
 1. Install golang.  
    ```
@@ -73,15 +77,33 @@ $ go get golang.org/x/oauth2
 $ go get cloud.google.com/go/compute/metadata
 ```
 
-5. Download your AWS and Google access credentials and store them in a file in your <b>HOME</b> directory.  
-   Save your AWS credentials in a file named *amazoncloudconfig.json* and your Google Cloud credentials in a file named *googlecloudconfig.json*.  
+5. Download your AWS, Google and DigitalOcean access credentials and store them in a file in your <b>HOME</b> directory.  
+
+   #### AWS:
+   Save your AWS credentials in a file named *amazoncloudconfig.json*.
+   ```js
+   {
+     "AWSAccessKeyID": "xxxxxxxxxxxx",
+     "AWSSecretKey": "xxxxxxxxxxxx"
+   }
+   ```
+   #### Google Cloud Services:
+   Save your Google Cloud credentials in a file named *googlecloudconfig.json*. The file is downloaded in the required format.
+   #### DigitalOcean:
+   Save your DigitalOcean credentials in a file named *digioceancloudconfig.json*.
+   ```js
+   {
+     "AccessToken": "xxxxxxxxxxxx"
+   }
+   ```
+
    You can also set your credentials as environment variables.  
-   For AWS:  
+   #### AWS:  
    ```
    export AWSAccessKeyID =  "xxxxxxxxxxxx"
    export AWSSecretKey = "xxxxxxxxxxxx"
    ```
-   For Google Cloud Services:
+   #### Google Cloud Services:
    ```
    export PrivateKey =  "xxxxxxxxxxxx"
    export Type =  "xxxxxxxxxxxx"
@@ -93,6 +115,10 @@ $ go get cloud.google.com/go/compute/metadata
    export TokenURI = "xxxxxxxxxxxx"
    export AuthProviderX509CertURL = "xxxxxxxxxxxx"
    export ClientX509CertURL =  "xxxxxxxxxxxx"
+   ```
+   #### DigitalOcean:  
+   ```
+   export DigiOceanAccessToken =  "xxxxxxxxxxxx"
    ```
 
 6. You are all set to use gocloud! Check out the following YouTube videos for more information and usage examples:
@@ -109,5 +135,5 @@ $ cd gocloud
 
 ```
 $ cd gocloud
-$ go test -v
+$ go test -v ./...
 ```

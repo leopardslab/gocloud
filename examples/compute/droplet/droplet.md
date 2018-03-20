@@ -1,6 +1,6 @@
-# gocloud compute - AWS
+# gocloud compute - DigitalOcean
 
-## Configure AWS credentials.
+## Configure DigitalOcean credentials.
 
 Create `digioceancloudconfig.json` in your <b>HOME</b> directory as follows:
 ```js
