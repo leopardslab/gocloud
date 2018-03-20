@@ -1,6 +1,10 @@
 language: go
-go: 
- - 1.6.2 
+go:
+ - 1.6.2
 script:
 - go test -v ./...
- 
+before_install:
+  - go get -v golang.org/x/oauth2
+  - go get -v cloud.google.com/go/compute/metadata
+notifications:
+  email: false

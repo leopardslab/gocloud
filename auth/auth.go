@@ -6,36 +6,39 @@ import (
 	"os"
 )
 
-// Configuration struct for representing AWS credentials
-type Configuration struct {
+// AWSConfiguration struct for representing AWS credentials.
+type AWSConfiguration struct {
 	AWSAccessKeyID     string
 	AWSSecretKey       string
 }
 
-var Config Configuration
+// Config is variable of type AWSConfiguration.
+var Config AWSConfiguration
 
-func AWSLoadConfig() {
+// LoadConfig loads the AWS credentials.
+func LoadConfig() {
 
-// Read from file first.
+	// Read from file first.
 	var home string = os.Getenv("HOME")
 	file, _ := os.Open(home + "/amazoncloudconfig.json")
 
-	// Defer the closing of our jsonFile so that we can parse it later on
+	// Defer the closing of our jsonFile so that we can parse it later on.
 	defer file.Close()
 
-	// We initialize Configuration struct
+	// We initialize AWSConfiguration struct.
 	decoder := json.NewDecoder(file)
-	Config = Configuration{}
+	Config = AWSConfiguration{}
 	_ = decoder.Decode(&Config)
 
 	if Config.AWSAccessKeyID == "" || Config.AWSSecretKey == "" {
-// If amazoncloudconfig.json doesn't exist, look for credentials as environment variables.
+	// If amazoncloudconfig.json doesn't exist, look for credentials as
+	// environment variables.
 
 		Config.AWSAccessKeyID = os.Getenv("AWSAccessKeyID")
 		Config.AWSSecretKey = os.Getenv("AWSSecretKey")
 
 		if Config.AWSAccessKeyID == "" || Config.AWSSecretKey == "" {
-			log.Fatalln("Cannot get access key and secret key")
+			log.Fatalln("Cannot get access key and secret key.")
 		}
 	}
 }

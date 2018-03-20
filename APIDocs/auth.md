@@ -15,5 +15,3 @@ type Configuration struct {
     Configuration struct reperesnts.
 
 var Config Configuration
-
-
