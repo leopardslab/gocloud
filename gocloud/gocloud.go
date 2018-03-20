@@ -46,6 +46,14 @@ const (
 	Amazonprovider = "aws"
 	// Googleprovider reperents Google cloud.
 	Googleprovider = "google"
+	// Openstackprovider represents Openstack cloud.
+	Openstackprovider = "openstack"
+
+	// Azureprovider represents Openstack cloud.
+	Azureprovider = "azure"
+
+	// Digioceanprovider represents Digital Ocean cloud.
+	Digioceanprovider = "digiocean"
 	// Aliprovider reperents Google cloud.
 	Aliprovider = "ali"
 )
@@ -59,18 +67,29 @@ func CloudProvider(provider string) (Gocloud, error) {
 	switch provider {
 	case Amazonprovider:
 		// Calls authentication procedure for AWS
-		auth.AWSLoadConfig()
+		awsAuth.LoadConfig()
 		return new(aws.AWS), nil
 
 	case Googleprovider:
 		return new(google.Google), nil
+
+	case Openstackprovider:
+		return new(openstack.Openstack), nil
+
+	case Digioceanprovider:
+		// Calls authentication procedure for Digital Ocean.
+		digioceanAuth.LoadConfig()
+		return new(digiocean.DigitalOcean), nil
+
+	case Azureprovider:
+		return new(azure.Azure), nil
 
 	case Aliprovider:
 		aliauth.LoadConfig()
 		return new(ali.Ali), nil
 
 	default:
-		return nil, errors.New(fmt.Sprintf("Provider %s not recognized.\n", provider))
+		return nil, fmt.Errorf("provider %s not recognized", provider)
 	}
 
 }
