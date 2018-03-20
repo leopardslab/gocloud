@@ -57,11 +57,15 @@ const (
 
 	// Digioceanprovider represents Digital Ocean cloud.
 	Digioceanprovider = "digiocean"
+	
+	// Aliprovider reperents Google cloud.
+	Aliprovider = "ali"
 )
 
 // CloudProvider returns the instance of respective cloud and maps it to Gocloud so that we can call
 // the method like Createnode on CloudProvider instance.
 // This is a delegation of CloudProvider.
+
 func CloudProvider(provider string) (Gocloud, error) {
 
 	switch provider {
@@ -84,8 +88,12 @@ func CloudProvider(provider string) (Gocloud, error) {
 	case Azureprovider:
 		return new(azure.Azure), nil
 
+	case Aliprovider:
+		aliauth.LoadConfig()
+		return new(ali.Ali), nil
+
 	default:
 		return nil, fmt.Errorf("provider %s not recognized", provider)
 	}
-
 }
+	
