@@ -20,3 +20,25 @@ type CreateInstance struct {
 	SystemDiskName          string
 	SystemDiskDescription   string
 }
+
+//CreateInstance to store all attribute to start Ali-cloud ECS instance
+type StartInstance struct {
+	InstanceId string
+}
+
+//CreateInstance to store all attribute to Stop Ali-cloud ECS instance
+type StopInstance struct {
+	InstanceId string
+}
+
+
+//RebootInstance to store all attribute to Reboot Ali-cloud ECS instance
+type RebootInstance struct {
+	InstanceId string
+}
+
+
+//DeleteInstance to store all attribute to Delete Ali-cloud ECS instance
+type RebootInstance struct {
+	InstanceId string
+}
