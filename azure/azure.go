@@ -8,7 +8,7 @@ import (
 	azuredns "github.com/cloudlibz/gocloud/storage/azuredns"
 )
 
-//openstack  struct represents openstack cloud provider.
+// Azure  struct represents Microsoft Azure cloud provider.
 type Azure struct {
 	azurecompute.Azurecompute
 	azurestorage.Azurestorage

@@ -1,6 +1,5 @@
 package azurecontainer
 
-
-type Azurecontainer struct{
-
+// Azurecontainer struct represents a Azure container.
+type Azurecontainer struct {
 }

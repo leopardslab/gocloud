@@ -1,5 +1,5 @@
 package digioceanloadbalancer
 
-// Digioceanloadbalancer struct represents a DigitalOcean Load balancer.
+// Digioceanloadbalancer struct represents a DigitalOcean load balancer.
 type Digioceanloadbalancer struct{
 }

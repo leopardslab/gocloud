@@ -1,6 +1,5 @@
 package azureloadbalancer
 
-
-type Azureloadbalancer struct{
-
+// Azureloadbalancer struct represents a Azure load balancer.
+type Azureloadbalancer struct {
 }

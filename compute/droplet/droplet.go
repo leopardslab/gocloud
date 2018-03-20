@@ -4,7 +4,7 @@ import (
   "encoding/json"
 )
 
-// Droplet represents a request to create a Droplet.
+// Droplet represents a request to create a droplet.
 type Droplet struct {
 	Name              string                `json:"name"`
 	Region            string                `json:"region"`

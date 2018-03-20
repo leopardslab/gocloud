@@ -1,5 +1,5 @@
 package azuredns
 
-type Azuredns struct{
-
+// Azuredns struct represents a Azure DNS service.
+type Azuredns struct {
 }

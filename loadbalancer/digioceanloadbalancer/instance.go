@@ -10,17 +10,17 @@ func (digioceanloadbalancer *Digioceanloadbalancer) Deleteloadbalancer(request i
 	return resp, err
 }
 
-// Listloadbalancer function lists load balancers..
+// Listloadbalancer function lists load balancers.
 func (digioceanloadbalancer *Digioceanloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Detachnodewithloadbalancer function detaches a load balancer from a Droplet.
+// Detachnodewithloadbalancer function detaches a load balancer from a droplet.
 func (digioceanloadbalancer *Digioceanloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Attachnodewithloadbalancer function attaches a load balancer to a Droplet.
+// Attachnodewithloadbalancer function attaches a load balancer to a droplet.
 func (digioceanloadbalancer *Digioceanloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
