@@ -3,13 +3,13 @@ package gocloud
 import (
 	"errors"
 	"fmt"
-	awsAuth "github.com/cloudlibz/gocloud/auth"
-	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
-	"github.com/cloudlibz/gocloud/aws"
-	"github.com/cloudlibz/gocloud/google"
-	"github.com/cloudlibz/gocloud/openstack"
-	"github.com/cloudlibz/gocloud/azure"
-	"github.com/cloudlibz/gocloud/digiocean"
+	awsAuth "github.com/shlokgilda/gocloud/auth"
+	digioceanAuth "github.com/shlokgilda/gocloud/digioceanauth"
+	"github.com/shlokgilda/gocloud/aws"
+	"github.com/shlokgilda/gocloud/google"
+	"github.com/shlokgilda/gocloud/openstack"
+	"github.com/shlokgilda/gocloud/azure"
+	"github.com/shlokgilda/gocloud/digiocean"
 )
 
 // Gocloud is a interface which hides the difference between different cloud providers.

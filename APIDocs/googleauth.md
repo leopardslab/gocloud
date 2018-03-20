@@ -1,5 +1,5 @@
 package googleauth
-    import "github.com/cloudlibz/gocloud/googleauth"
+    import "github.com/shlokgilda/gocloud/googleauth"
 
 
 FUNCTIONS

@@ -1,5 +1,5 @@
 package awsauth
-    import "github.com/cloudlibz/gocloud/awsauth"
+    import "github.com/shlokgilda/gocloud/awsauth"
 
 
 FUNCTIONS

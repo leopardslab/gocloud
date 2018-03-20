@@ -1,7 +1,7 @@
 package droplet
 
 import (
-  digioceanauth "github.com/cloudlibz/gocloud/digioceanauth"
+  digioceanauth "github.com/shlokgilda/gocloud/digioceanauth"
   "bytes"
   "fmt"
   "io/ioutil"

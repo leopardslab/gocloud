@@ -1,5 +1,5 @@
 package gocloud
-    import "github.com/cloudlibz/gocloud/gocloud"
+    import "github.com/shlokgilda/gocloud/gocloud"
 
 
 CONSTANTS
