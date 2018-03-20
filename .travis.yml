@@ -4,7 +4,6 @@ go:
 script:
 - go test -v ./...
 before_install:
-  - go get -v github.com/shlokgilda/gocloud
   - go get -v golang.org/x/oauth2
   - go get -v cloud.google.com/go/compute/metadata
 notifications:
