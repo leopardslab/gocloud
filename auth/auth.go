@@ -31,7 +31,8 @@ func LoadConfig() {
 	_ = decoder.Decode(&Config)
 
 	if Config.AWSAccessKeyID == "" || Config.AWSSecretKey == "" {
-	// If amazoncloudconfig.json doesn't exist, look for credentials as environment variables.
+	// If amazoncloudconfig.json doesn't exist, look for credentials as
+	// environment variables.
 
 		Config.AWSAccessKeyID = os.Getenv("AWSAccessKeyID")
 		Config.AWSSecretKey = os.Getenv("AWSSecretKey")
