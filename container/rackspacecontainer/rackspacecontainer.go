@@ -1,5 +1,5 @@
 package rackspacecontainer
 
-// rackspacecontainer  struct represents a rackspace container.
-type Azurecontainer struct {
+// Rackspacecontainer  struct represents a Rackspace container.
+type Rackspacecontainer struct {
 }

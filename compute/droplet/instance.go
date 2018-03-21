@@ -18,7 +18,7 @@ const dropletBasePath = "https://api.digitalocean.com/v2/droplets"
 func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err error) {
 
   var DropletInstance Droplet // Initialize Droplet struct
-  AccessToken := digioceanauth.Token.AccessToken  // Fetch the AccessToken
+  DigiOceanAccessToken := digioceanauth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
   param := make(map[string]interface{})
   param = request.(map[string]interface{})
@@ -109,7 +109,7 @@ func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err e
     fmt.Println(err)
   }
   Createnodereq.Header.Set("Content-Type", "application/json")
-  Createnodereq.Header.Set("Authorization", "Bearer " + AccessToken)
+  Createnodereq.Header.Set("Authorization", "Bearer " + DigiOceanAccessToken)
 
 	Createnoderesp, err := http.DefaultClient.Do(Createnodereq)
 	if err != nil {
@@ -140,7 +140,7 @@ func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err er
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
-	AccessToken := digioceanauth.Token.AccessToken  // Fetch the AccessToken
+	DigiOceanAccessToken := digioceanauth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	startRequest := &ActionRequest{"type": "power_on"}
 	startRequestJSON, _ := json.Marshal(startRequest)
@@ -152,7 +152,7 @@ func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err er
 		fmt.Println(err)
 	}
 	Startnodereq.Header.Set("Content-Type", "application/json")
-	Startnodereq.Header.Set("Authorization", "Bearer " + AccessToken)
+	Startnodereq.Header.Set("Authorization", "Bearer " + DigiOceanAccessToken)
 
 	Startnoderesp, err := http.DefaultClient.Do(Startnodereq)
 	if err != nil {
@@ -162,7 +162,6 @@ func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err er
 
 	responseBody, err := ioutil.ReadAll(Startnoderesp.Body)
 	Startnoderesponse := make(map[string]interface{})
-	//Startnoderesponse["status"] = Startnoderesponse.StatusCode
 	Startnoderesponse["body"] = string(responseBody)
 	resp = Startnoderesponse
 
@@ -182,7 +181,7 @@ func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err err
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
-	AccessToken := digioceanauth.Token.AccessToken  // Fetch the AccessToken
+	DigiOceanAccessToken := digioceanauth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	stopRequest := &ActionRequest{"type": "power_off"}
 	stopRequestJSON, _ := json.Marshal(stopRequest)
@@ -194,7 +193,7 @@ func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err err
 		fmt.Println(err)
 	}
 	Stopnodereq.Header.Set("Content-Type", "application/json")
-	Stopnodereq.Header.Set("Authorization", "Bearer " + AccessToken)
+	Stopnodereq.Header.Set("Authorization", "Bearer " + DigiOceanAccessToken)
 
 	Stopnoderesp, err := http.DefaultClient.Do(Stopnodereq)
 	if err != nil {
@@ -204,7 +203,6 @@ func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err err
 
 	responseBody, err := ioutil.ReadAll(Stopnoderesp.Body)
 	Stopnoderesponse := make(map[string]interface{})
-	//Stopnoderesponse["status"] = Stopnoderesponse.StatusCode
 	Stopnoderesponse["body"] = string(responseBody)
 	resp = Stopnoderesponse
 
@@ -224,7 +222,7 @@ func (droplet *Droplet) Rebootnode(request interface{}) (resp interface{}, err e
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
-	AccessToken := digioceanauth.Token.AccessToken  // Fetch the AccessToken
+	DigiOceanAccessToken := digioceanauth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	rebootRequest := &ActionRequest{"type": "reboot"}
 	rebootRequestJSON, _ := json.Marshal(rebootRequest)
@@ -236,7 +234,7 @@ func (droplet *Droplet) Rebootnode(request interface{}) (resp interface{}, err e
 		fmt.Println(err)
 	}
 	Rebootnodereq.Header.Set("Content-Type", "application/json")
-	Rebootnodereq.Header.Set("Authorization", "Bearer " + AccessToken)
+	Rebootnodereq.Header.Set("Authorization", "Bearer " + DigiOceanAccessToken)
 
 	Rebootnoderesp, err := http.DefaultClient.Do(Rebootnodereq)
 	if err != nil {
@@ -267,14 +265,14 @@ func (droplet *Droplet) Deletenode(request interface{}) (resp interface{}, err e
 	}
 
 	url := dropletBasePath + "/" + options["ID"]
-	AccessToken := digioceanauth.Token.AccessToken  // Fetch the AccessToken
+	DigiOceanAccessToken := digioceanauth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	Deletenoderequest, err := http.NewRequest("DELETE", url, nil)
 	if err != nil {
 		fmt.Println(err)
 	}
 	Deletenoderequest.Header.Set("Content-Type", "application/json")
-	Deletenoderequest.Header.Set("Authorization", "Bearer " + AccessToken)
+	Deletenoderequest.Header.Set("Authorization", "Bearer " + DigiOceanAccessToken)
 
 	Deletenoderesp, err := http.DefaultClient.Do(Deletenoderequest)
 	if err != nil {

@@ -36,7 +36,8 @@ func (d CreateImage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(d.ID)
 }
 
-// CreateSSHKey identifies a SSH Key for the create request. It prefers fingerprint over ID.
+// CreateSSHKey identifies a SSH Key for the create request. It prefers
+// fingerprint over ID.
 type CreateSSHKey struct {
 	ID          string
 	Fingerprint string

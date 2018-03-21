@@ -4,15 +4,17 @@ import (
 	"fmt"
 	awsAuth "github.com/cloudlibz/gocloud/auth"
 	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	aliAuth "github.com/cloudlibz/gocloud/aliauth"
 	"github.com/cloudlibz/gocloud/aws"
 	"github.com/cloudlibz/gocloud/google"
 	"github.com/cloudlibz/gocloud/openstack"
 	"github.com/cloudlibz/gocloud/azure"
 	"github.com/cloudlibz/gocloud/digiocean"
 	"github.com/cloudlibz/gocloud/rackspace"
+	"github.com/cloudlibz/gocloud/ali"
 )
 
-// Gocloud is a interface which hides the difference between different cloud providers.
+// Gocloud is an interface which hides the difference between different cloud providers.
 type Gocloud interface {
 	Createnode(request interface{}) (resp interface{}, err error)
 	Startnode(request interface{}) (resp interface{}, err error)
@@ -69,7 +71,6 @@ const (
 // CloudProvider returns the instance of respective cloud and maps it to Gocloud so that we can call
 // the method like Createnode on CloudProvider instance.
 // This is a delegation of CloudProvider.
-
 func CloudProvider(provider string) (Gocloud, error) {
 
 	switch provider {
@@ -93,7 +94,8 @@ func CloudProvider(provider string) (Gocloud, error) {
 		return new(azure.Azure), nil
 
 	case Aliprovider:
-		aliauth.LoadConfig()
+		// Calls authentication procedure for Ali Cloud.
+		aliAuth.LoadConfig()
 		return new(ali.Ali), nil
 
 	case Rackspaceprovider:

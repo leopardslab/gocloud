@@ -6,7 +6,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"github.com/cloudlibz/gocloud/auth"
-	awsauth "github.com/cloudlibz/gocloud/awsauth"
+	awsAuth "github.com/cloudlibz/gocloud/awsauth"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -17,9 +17,8 @@ import (
 func prepareRunParams(options RunInstances) map[string]string {
 	if options.SubnetId != "" || len(options.NetworkInterfaces) > 0 {
 		return makeParamsVPC("RunInstances")
-	} else {
-		return makeParams("RunInstances")
 	}
+	return makeParams("RunInstances")
 }
 
 func makeParams(action string) map[string]string {
@@ -127,7 +126,7 @@ func buildError(r *http.Response) error {
 	if len(errors.Errors) > 0 {
 		err = errors.Errors[0]
 	}
-	err.RequestId = errors.RequestId
+	err.RequestID = errors.RequestID
 	err.StatusCode = r.StatusCode
 	if err.Message == "" {
 		err.Message = r.Status
@@ -136,7 +135,7 @@ func buildError(r *http.Response) error {
 }
 
 type xmlErrors struct {
-	RequestId string  `xml:"RequestID"`
+	RequestID string  `xml:"RequestID"`
 	Errors    []Error `xml:"Errors>Error"`
 }
 
@@ -150,8 +149,8 @@ func (err *Error) Error() string {
 	return fmt.Sprintf("%s (%s)", err.Message, err.Code)
 }
 
-//pass the param to query and add signature to it base on secret key and acces key
 
+// PrepareSignatureV2query passes the params to query and adds signature to it based on the secret key and access key.
 func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string, response map[string]interface{}) error {
 
 	EC2Endpoint := "https://ec2." + Region + ".amazonaws.com"
@@ -170,7 +169,7 @@ func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string,
 
 	req.URL.RawQuery = query.Encode()
 	auth := map[string]string{"AccessKey": auth.Config.AWSAccessKeyID, "SecretKey": auth.Config.AWSSecretKey}
-	awsauth.SignatureV2(req, auth)
+	awsAuth.SignatureV2(req, auth)
 	r, err := http.DefaultClient.Do(req)
 
 	if err != nil {

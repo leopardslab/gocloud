@@ -6,7 +6,7 @@ import (
 	"reflect"
 )
 
-//Start Ec2 instances accept map[string]interface{}
+// Startnode function starts an EC2 instance.
 func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 
 	param := make(map[string]interface{})
@@ -23,9 +23,9 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 
 	for key, value := range param {
 		switch key {
-		case "InstanceId":
-			InstanceIdV, _ := value.(string)
-			options.InstanceId = InstanceIdV
+		case "InstanceID":
+			InstanceIDV, _ := value.(string)
+			options.InstanceID = InstanceIDV
 		}
 	}
 
@@ -54,7 +54,7 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 
 }
 
-//Stopnode Ec2 instances accept map[string]interface{}
+// Stopnode function stops an EC2 instance.
 func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 
@@ -70,9 +70,9 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 
 	for key, value := range param {
 		switch key {
-		case "InstanceId":
-			InstanceIdV, _ := value.(string)
-			options.InstanceId = InstanceIdV
+		case "InstanceID":
+			InstanceIDV, _ := value.(string)
+			options.InstanceID = InstanceIDV
 		}
 	}
 
@@ -101,7 +101,7 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 }
 
 
-//Delete Ec2 instances accept map[string]interface{}
+// Rebootnode function reboots an EC2 instance.
 func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 
@@ -117,9 +117,9 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 
 	for key, value := range param {
 		switch key {
-		case "InstanceId":
-			InstanceIdV, _ := value.(string)
-			options.InstanceId = InstanceIdV
+		case "InstanceID":
+			InstanceIDV, _ := value.(string)
+			options.InstanceID = InstanceIDV
 		}
 	}
 
@@ -147,7 +147,7 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Delete Ec2 instances accept map[string]interface{}
+// Deletenode function deletes an EC2 instance.
 func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 
 	param := make(map[string]interface{})
@@ -164,9 +164,9 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 
 	for key, value := range param {
 		switch key {
-		case "InstanceId":
-			InstanceIdV, _ := value.(string)
-			options.InstanceId = InstanceIdV
+		case "InstanceID":
+			InstanceIDV, _ := value.(string)
+			options.InstanceID = InstanceIDV
 		}
 	}
 
@@ -194,7 +194,7 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Create Ec2 instances accept map[string]interface{}
+// Createnode function creates a new EC2 instance.
 func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 	var options CreateInstance
 

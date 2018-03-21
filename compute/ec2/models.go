@@ -71,7 +71,7 @@ type PrivateIP struct {
 // run instance response
 
 type RunInstancesResp struct {
-	RequestId      string          `xml:"requestId"`
+	RequestID      string          `xml:"requestId"`
 	ReservationId  string          `xml:"reservationId"`
 	OwnerId        string          `xml:"ownerId"`
 	SecurityGroups []SecurityGroup `xml:"groupSet>item"`
@@ -81,7 +81,7 @@ type RunInstancesResp struct {
 // this struct represents running instance
 
 type Instance struct {
-	InstanceId         string             `xml:"instanceId"`
+	InstanceID         string             `xml:"InstanceID"`
 	InstanceType       string             `xml:"instanceType"`
 	ImageId            string             `xml:"imageId"`
 	PrivateDNSName     string             `xml:"privateDnsName"`
@@ -107,20 +107,20 @@ type Instance struct {
 //This stuct represents instance state change
 
 type InstanceStateChange struct {
-	InstanceId    string        `xml:"instanceId"`
+	InstanceID    string        `xml:"InstanceID"`
 	CurrentState  InstanceState `xml:"currentState"`
 	PreviousState InstanceState `xml:"previousState"`
 }
 
 type SimpleResp struct {
 	XMLName   xml.Name
-	RequestId string `xml:"requestId"`
+	RequestID string `xml:"requestId"`
 }
 
 //struct to TerminateInstance
 
 type TerminateInstancesResp struct {
-	RequestId    string                `xml:"requestId"`
+	RequestID    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
@@ -155,7 +155,7 @@ type NetworkInterface struct {
 
 type NetworkInterfaceAttachment struct {
 	Id                  string `xml:"attachmentId"`
-	InstanceId          string `xml:"instanceId"`
+	InstanceID          string `xml:"InstanceID"`
 	InstanceOwnerId     string `xml:"instanceOwnerId"`
 	DeviceIndex         int    `xml:"deviceIndex"`
 	Status              string `xml:"status"`
@@ -172,14 +172,14 @@ type Tag struct {
 //start instance response
 
 type StartInstanceResp struct {
-	RequestId    string                `xml:"requestId"`
+	RequestID    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
 //stop instances response
 
 type StopInstanceResp struct {
-	RequestId    string                `xml:"requestId"`
+	RequestID    string                `xml:"requestId"`
 	StateChanges []InstanceStateChange `xml:"instancesSet>item"`
 }
 
@@ -191,7 +191,7 @@ type Responsestruct struct {
 		OwnerID       string `json:"ownerId"`
 		InstancesSet  struct {
 			Item struct {
-				InstanceID    string `json:"instanceId"`
+				InstanceID    string `json:"InstanceID"`
 				ImageID       string `json:"imageId"`
 				InstanceState struct {
 					Code string `json:"code"`
