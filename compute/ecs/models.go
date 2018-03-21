@@ -1,6 +1,6 @@
 package ecs
 
-//CreateInstance to store all attribute to create Ali-cloud ECS instance
+// CreateInstance to store all attributes to create Ali cloud ECS instance.
 type CreateInstance struct {
 	RegionID                string
 	ZoneID                  string
@@ -21,24 +21,24 @@ type CreateInstance struct {
 	SystemDiskDescription   string
 }
 
-//CreateInstance to store all attribute to start Ali-cloud ECS instance
+// StartInstance to store all attributes to start Ali cloud ECS instance.
 type StartInstance struct {
-	InstanceId string
+	InstanceID string
 }
 
-//CreateInstance to store all attribute to Stop Ali-cloud ECS instance
+// StopInstance to store all attributes to stop Ali cloud ECS instance.
 type StopInstance struct {
-	InstanceId string
+	InstanceID string
 }
 
 
-//RebootInstance to store all attribute to Reboot Ali-cloud ECS instance
+// RebootInstance to store all attributes to reboot Ali cloud ECS instance.
 type RebootInstance struct {
-	InstanceId string
+	InstanceID string
 }
 
 
-//DeleteInstance to store all attribute to Delete Ali-cloud ECS instance
-type RebootInstance struct {
-	InstanceId string
+// DeleteInstance to store all attribute to delete Ali cloud ECS instance.
+type DeleteInstance struct {
+	InstanceID string
 }

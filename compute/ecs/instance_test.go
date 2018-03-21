@@ -1,12 +1,12 @@
 package ecs
 
 import (
-	"github.com/cloudlibz/gocloud/aliauth"
+	aliAuth "github.com/cloudlibz/gocloud/aliauth"
 	"testing"
 )
 
 func init() {
-	aliauth.LoadConfig()
+	aliAuth.LoadConfig()
 }
 
 func TestCreatenode(t *testing.T) {
