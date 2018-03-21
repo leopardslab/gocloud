@@ -126,7 +126,7 @@ func buildError(r *http.Response) error {
 	if len(errors.Errors) > 0 {
 		err = errors.Errors[0]
 	}
-	err.RequestId = errors.RequestId
+	err.RequestID = errors.RequestID
 	err.StatusCode = r.StatusCode
 	if err.Message == "" {
 		err.Message = r.Status
@@ -135,7 +135,7 @@ func buildError(r *http.Response) error {
 }
 
 type xmlErrors struct {
-	RequestId string  `xml:"RequestID"`
+	RequestID string  `xml:"RequestID"`
 	Errors    []Error `xml:"Errors>Error"`
 }
 
@@ -149,8 +149,8 @@ func (err *Error) Error() string {
 	return fmt.Sprintf("%s (%s)", err.Message, err.Code)
 }
 
-//pass the param to query and add signature to it base on secret key and acces key
 
+// PrepareSignatureV2query passes the params to query and adds signature to it based on the secret key and access key.
 func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string, response map[string]interface{}) error {
 
 	EC2Endpoint := "https://ec2." + Region + ".amazonaws.com"

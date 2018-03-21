@@ -71,7 +71,6 @@ const (
 // CloudProvider returns the instance of respective cloud and maps it to Gocloud so that we can call
 // the method like Createnode on CloudProvider instance.
 // This is a delegation of CloudProvider.
-
 func CloudProvider(provider string) (Gocloud, error) {
 
 	switch provider {

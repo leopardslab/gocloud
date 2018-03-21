@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// SignatureV4 function implements Signature V4 signing process for AWS.  
 func SignatureV4(request *http.Request, requestParameters []byte, amztarget string, method string, region string, service string, host string, ContentType string, signedheaders string) (signrequest *http.Request) {
 	AccessKeyID := auth.Config.AWSAccessKeyID
 	SecretAccessKey := auth.Config.AWSSecretKey
