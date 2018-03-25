@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-////Start ECS instances accept map[string]interface{}
+// Start ECS instances accept map[string]interface{}
 func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 	var options StartInstance
 
@@ -68,7 +68,7 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Create ECS instances accept map[string]interface{}
+// Create ECS instances accept map[string]interface{}
 func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 	var options CreateInstance
 
