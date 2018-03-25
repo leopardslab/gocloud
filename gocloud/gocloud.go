@@ -11,6 +11,7 @@ import (
 	"github.com/cloudlibz/gocloud/digiocean"
 	"github.com/cloudlibz/gocloud/aliauth"
 	"github.com/cloudlibz/gocloud/ali"
+	"github.com/cloudlibz/gocloud/rackspace"
 )
 
 // Gocloud is a interface which hides the difference between different cloud providers.
@@ -59,9 +60,12 @@ const (
 
 	// Digioceanprovider represents Digital Ocean cloud.
 	Digioceanprovider = "digiocean"
-	
+
 	// Aliprovider reperents Google cloud.
 	Aliprovider = "ali"
+
+	// Rackspaceprovider reperents rackspace cloud.
+	Rackspaceprovider = "rackspace"
 )
 
 // CloudProvider returns the instance of respective cloud and maps it to Gocloud so that we can call
@@ -94,8 +98,10 @@ func CloudProvider(provider string) (Gocloud, error) {
 		aliauth.LoadConfig()
 		return new(ali.Ali), nil
 
+	case Rackspaceprovider:
+		return new(rackspace.Rackspace), nil
+
 	default:
 		return nil, fmt.Errorf("provider %s not recognized", provider)
 	}
 }
-	

@@ -7,6 +7,7 @@ import (
 	"fmt"
 )
 
+
 // Start ECS instances accept map[string]interface{}
 func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 	var options StartInstance
@@ -51,20 +52,126 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 	err = aliauth.SignAndDoRequest("StartInstance", params, response)
 	resp = response
 	return resp, err
+
 }
 
-//TODO
+// Stop ECS instances accept map[string]interface{}
 func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
+	var options StopInstance
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "InstanceId":
+			InstanceIdV, _ := value.(string)
+			options.InstanceId = InstanceIdV
+		}
+	}
+
+	params := make(map[string]interface{})
+
+	// Put all of options into params
+	e := reflect.ValueOf(&options).Elem()
+	typeOfOptions := e.Type()
+	for i := 0; i < e.NumField(); i++ {
+		switch e.Field(i).Type().String() {
+		case "string":
+			if e.Field(i).Interface() != "" {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		case "int":
+			if e.Field(i).Interface() != 0 {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		}
+	}
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("StopInstance", params, response)
+	resp = response
 	return resp, err
 }
 
-//TODO
+// Reboot ECS instances accept map[string]interface{}
 func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
+	var options RebootInstance
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "InstanceId":
+			InstanceIdV, _ := value.(string)
+			options.InstanceId = InstanceIdV
+		}
+	}
+
+	params := make(map[string]interface{})
+
+	// Put all of options into params
+	e := reflect.ValueOf(&options).Elem()
+	typeOfOptions := e.Type()
+	for i := 0; i < e.NumField(); i++ {
+		switch e.Field(i).Type().String() {
+		case "string":
+			if e.Field(i).Interface() != "" {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		case "int":
+			if e.Field(i).Interface() != 0 {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		}
+	}
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("RebootInstance", params, response)
+	resp = response
 	return resp, err
 }
 
-//TODO
+// Delete ECS instances accept map[string]interface{}
 func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
+	var options DeleteInstance
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "InstanceId":
+			InstanceIdV, _ := value.(string)
+			options.InstanceId = InstanceIdV
+		}
+	}
+
+	params := make(map[string]interface{})
+
+	// Put all of options into params
+	e := reflect.ValueOf(&options).Elem()
+	typeOfOptions := e.Type()
+	for i := 0; i < e.NumField(); i++ {
+		switch e.Field(i).Type().String() {
+		case "string":
+			if e.Field(i).Interface() != "" {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		case "int":
+			if e.Field(i).Interface() != 0 {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		}
+	}
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("DeleteInstance", params, response)
+	resp = response
 	return resp, err
 }
 
