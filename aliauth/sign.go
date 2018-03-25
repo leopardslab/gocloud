@@ -17,7 +17,7 @@ import (
 
 const formatISO8601 = "2006-01-02T15:04:05Z"
 
-//Sign and do request by action parameter and specific parameters
+// SignAndDoRequest sign and do request by action parameter and specific parameters
 func SignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
 	// Add common params and action param
 	params = initParams(action, params)

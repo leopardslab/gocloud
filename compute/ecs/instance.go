@@ -6,7 +6,7 @@ import (
 	"reflect"
 )
 
-// Start ECS instances accept map[string]interface{}
+// Startnode start ECS instances accept map[string]interface{}
 func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 	var options StartInstance
 
@@ -52,7 +52,7 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 
 }
 
-// Stop ECS instances accept map[string]interface{}
+// Stopnode stop ECS instances accept map[string]interface{}
 func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 	var options StopInstance
 
@@ -63,8 +63,8 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "InstanceId":
-			instanceId, _ := value.(string)
-			options.InstanceID = instanceId
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
 		case "ForceStop":
 			switch value.(type) {
 			case bool:
@@ -107,7 +107,7 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Reboot ECS instances accept map[string]interface{}
+// Rebootnode reboot ECS instances accept map[string]interface{}
 func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	var options RebootInstance
 
@@ -118,8 +118,8 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "InstanceId":
-			instanceId, _ := value.(string)
-			options.InstanceID = instanceId
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
 		case "ForceStop":
 			switch value.(type) {
 			case bool:
@@ -152,7 +152,7 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Delete ECS instances accept map[string]interface{}
+// Deletenode delete ECS instances accept map[string]interface{}
 func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	var options DeleteInstance
 
@@ -163,8 +163,8 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "InstanceId":
-			instanceId, _ := value.(string)
-			options.InstanceID = instanceId
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
 		}
 	}
 
@@ -188,7 +188,7 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Create ECS instances accept map[string]interface{}
+// Createnode create ECS instances accept map[string]interface{}
 func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 	var options CreateInstance
 
