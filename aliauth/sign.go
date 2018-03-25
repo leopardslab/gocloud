@@ -113,7 +113,7 @@ func percentReplace(str string) string {
 
 const dictionary = "_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
-//CreateRandomString create random string
+// CreateRandomString create random string
 func createRandomString() string {
 	b := make([]byte, 32)
 	l := len(dictionary)
@@ -135,6 +135,7 @@ func createRandomString() string {
 	return string(b)
 }
 
+// getString return string from interface{}
 func getString(v interface{}) string {
 	switch v.(type) {
 	case string:

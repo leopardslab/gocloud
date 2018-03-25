@@ -4,9 +4,7 @@ import (
 	"github.com/cloudlibz/gocloud/aliauth"
 	"strconv"
 	"reflect"
-	"fmt"
 )
-
 
 // Start ECS instances accept map[string]interface{}
 func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
@@ -19,8 +17,8 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "InstanceId":
-			InstanceID, _ := value.(string)
-			options.InstanceID = InstanceID
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
 		case "InitLocalDisk":
 			switch value.(type) {
 			case bool:
@@ -44,7 +42,6 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 			}
 		case "bool":
 			params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-			fmt.Println(params[typeOfOptions.Field(i).Name], e.Field(i).Interface())
 		}
 	}
 
@@ -66,8 +63,25 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "InstanceId":
-			InstanceIdV, _ := value.(string)
-			options.InstanceId = InstanceIdV
+			instanceId, _ := value.(string)
+			options.InstanceID = instanceId
+		case "ForceStop":
+			switch value.(type) {
+			case bool:
+				options.ForceStop = value.(bool)
+			case string:
+				options.ForceStop = value.(string) == "true" || value.(string) == "True"
+			}
+		case "ConfirmStop":
+			switch value.(type) {
+			case bool:
+				options.ConfirmStop = value.(bool)
+			case string:
+				options.ConfirmStop = value.(string) == "true" || value.(string) == "True"
+			}
+		case "StoppedMode":
+			stoppedMode, _ := value.(string)
+			options.StoppedMode = stoppedMode
 		}
 	}
 
@@ -82,10 +96,8 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 			if e.Field(i).Interface() != "" {
 				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
 			}
-		case "int":
-			if e.Field(i).Interface() != 0 {
-				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-			}
+		case "bool":
+			params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
 		}
 	}
 
@@ -106,8 +118,15 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "InstanceId":
-			InstanceIdV, _ := value.(string)
-			options.InstanceId = InstanceIdV
+			instanceId, _ := value.(string)
+			options.InstanceID = instanceId
+		case "ForceStop":
+			switch value.(type) {
+			case bool:
+				options.ForceStop = value.(bool)
+			case string:
+				options.ForceStop = value.(string) == "true" || value.(string) == "True"
+			}
 		}
 	}
 
@@ -122,10 +141,8 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 			if e.Field(i).Interface() != "" {
 				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
 			}
-		case "int":
-			if e.Field(i).Interface() != 0 {
-				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-			}
+		case "bool":
+			params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
 		}
 	}
 
@@ -146,8 +163,8 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "InstanceId":
-			InstanceIdV, _ := value.(string)
-			options.InstanceId = InstanceIdV
+			instanceId, _ := value.(string)
+			options.InstanceID = instanceId
 		}
 	}
 
@@ -160,10 +177,6 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 		switch e.Field(i).Type().String() {
 		case "string":
 			if e.Field(i).Interface() != "" {
-				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-			}
-		case "int":
-			if e.Field(i).Interface() != 0 {
 				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
 			}
 		}

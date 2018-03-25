@@ -1,5 +1,5 @@
 package rackspacecontainer
 
-// rackspacecontainer  struct represents a rackspace container.
+// Rackspacecontainer  struct represents a rackspace container.
 type Rackspacecontainer struct {
 }

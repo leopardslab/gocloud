@@ -16,7 +16,7 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 
 	params := makeParams("StartInstances")
 
-	addParamsList(params, "InstanceId", ids)
+	addParamsList(params, "InstanceID", ids)
 
 	response := make(map[string]interface{})
 
@@ -35,7 +35,7 @@ func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
 	Region := param["Region"]
 
 	params := makeParams("StopInstances")
-	addParamsList(params, "InstanceId", ids)
+	addParamsList(params, "InstanceID", ids)
 	resp = &StopInstanceResp{}
 
 	response := make(map[string]interface{})
@@ -60,7 +60,7 @@ func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 	Region := param["Region"]
 
 	params := makeParams("RebootInstances")
-	addParamsList(params, "InstanceId", ids)
+	addParamsList(params, "InstanceID", ids)
 
 	response := make(map[string]interface{})
 
@@ -81,7 +81,7 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 	Region := param["Region"]
 
 	params := makeParams("TerminateInstances")
-	addParamsList(params, "InstanceId", instIds)
+	addParamsList(params, "InstanceID", instIds)
 	response := make(map[string]interface{})
 
 	err = ec2.PrepareSignatureV2query(params, Region, response)

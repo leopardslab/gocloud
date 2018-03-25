@@ -29,15 +29,19 @@ type StartInstance struct {
 
 // StopInstance to store all attribute to Stop Ali-cloud ECS instance
 type StopInstance struct {
-	InstanceId string
+	InstanceID string
+	ForceStop bool
+	ConfirmStop bool
+	StoppedMode string
 }
 
 // RebootInstance to store all attribute to Reboot Ali-cloud ECS instance
 type RebootInstance struct {
-	InstanceId string
+	InstanceID string
+	ForceStop  bool
 }
 
 // DeleteInstance to store all attribute to Delete Ali-cloud ECS instance
 type DeleteInstance struct {
-	InstanceId string
+	InstanceID string
 }
