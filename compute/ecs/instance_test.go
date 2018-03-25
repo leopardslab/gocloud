@@ -24,3 +24,16 @@ func TestCreatenode(t *testing.T) {
 	}
 	t.Logf("Ali node is created successfully.")
 }
+
+func TestStartnode(t *testing.T) {
+	var aliEcs ECS
+	start := map[string]interface{}{
+		"InstanceId": "i-m5e3ee3z8wdy8ktdq591",
+	}
+	_, err := aliEcs.Startnode(start)
+	if err != nil {
+		t.Errorf("Test Fail")
+		return
+	}
+	t.Logf("Ali node is started successfully.")
+}

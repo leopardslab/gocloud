@@ -20,3 +20,9 @@ type CreateInstance struct {
 	SystemDiskName          string
 	SystemDiskDescription   string
 }
+
+//StartInstance to store all attribute to start Ali-cloud ECS instance
+type StartInstance struct {
+	InstanceID    string
+	InitLocalDisk bool
+}

@@ -4,26 +4,71 @@ import (
 	"github.com/cloudlibz/gocloud/aliauth"
 	"strconv"
 	"reflect"
+	"fmt"
 )
 
-//TODO
+////Start ECS instances accept map[string]interface{}
 func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
+	var options StartInstance
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "InstanceId":
+			InstanceID, _ := value.(string)
+			options.InstanceID = InstanceID
+		case "InitLocalDisk":
+			switch value.(type) {
+			case bool:
+				options.InitLocalDisk = value.(bool)
+			case string:
+				options.InitLocalDisk = value.(string) == "true" || value.(string) == "True"
+			}
+		}
+	}
+
+	params := make(map[string]interface{})
+
+	// Put all of options into params
+	e := reflect.ValueOf(&options).Elem()
+	typeOfOptions := e.Type()
+	for i := 0; i < e.NumField(); i++ {
+		switch e.Field(i).Type().String() {
+		case "string":
+			if e.Field(i).Interface() != "" {
+				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			}
+		case "bool":
+			params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
+			fmt.Println(params[typeOfOptions.Field(i).Name], e.Field(i).Interface())
+		}
+	}
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("StartInstance", params, response)
+	resp = response
 	return resp, err
 }
+
 //TODO
 func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
+
 //TODO
 func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
+
 //TODO
 func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Create Ec2 instances accept map[string]interface{}
+//Create ECS instances accept map[string]interface{}
 func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 	var options CreateInstance
 
@@ -58,17 +103,19 @@ func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 			internetChargeType, _ := value.(string)
 			options.InternetChargeType = internetChargeType
 		case "InternetMaxBandwidthIn":
-			internetMaxBandwidthIn, ok := value.(int)
-			if !ok {
-				internetMaxBandwidthIn, _ = strconv.Atoi(value.(string))
+			switch value.(type) {
+			case int:
+				options.InternetMaxBandwidthIn = value.(int)
+			case string:
+				options.InternetMaxBandwidthIn, _ = strconv.Atoi(value.(string))
 			}
-			options.InternetMaxBandwidthIn = internetMaxBandwidthIn
 		case "InternetMaxBandwidthOut":
-			internetMaxBandwidthOut, ok := value.(int)
-			if !ok {
-				internetMaxBandwidthOut, _ = strconv.Atoi(value.(string))
+			switch value.(type) {
+			case int:
+				options.InternetMaxBandwidthOut = value.(int)
+			case string:
+				options.InternetMaxBandwidthOut, _ = strconv.Atoi(value.(string))
 			}
-			options.InternetMaxBandwidthOut = internetMaxBandwidthOut
 		case "HostName":
 			hostName, _ := value.(string)
 			options.HostName = hostName
