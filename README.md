@@ -47,6 +47,10 @@ Currently, implementations for other cloud providers are being worked on.
 
 * DigitalOcean Droplet [Link to example](examples/compute/droplet/droplet.md)
 
+### Ali-cloud
+
+* ECS Compute [Link to example](examples/compute/ecs/ecs.md)
+
 ## Installation instructions for Linux (Ubuntu)
 1. Install golang.  
    ```
@@ -77,7 +81,7 @@ $ go get golang.org/x/oauth2
 $ go get cloud.google.com/go/compute/metadata
 ```
 
-5. Download your AWS, Google and DigitalOcean access credentials and store them in a file in your <b>HOME</b> directory.  
+5. Download your AWS, Google, DigitalOcean and Ali-cloud access credentials and store them in a file in your <b>HOME</b> directory.
 
    #### AWS:
    Save your AWS credentials in a file named *amazoncloudconfig.json*.
@@ -94,6 +98,14 @@ $ go get cloud.google.com/go/compute/metadata
    ```js
    {
      "AccessToken": "xxxxxxxxxxxx"
+   }
+   ```
+   #### Ali-cloud:
+   Save your Ali-cloud credentials in a file named *alicloudconfig.json*.
+   ```js
+   {
+     "AliAccessKeyID":"xxxxxxxxxxxx",
+     "AliAccessKeySecret":"xxxxxxxxxxxx"
    }
    ```
 
@@ -120,6 +132,12 @@ $ go get cloud.google.com/go/compute/metadata
    ```
    export DigiOceanAccessToken =  "xxxxxxxxxxxx"
    ```
+   #### Ali-cloud:
+   ```
+   export AliAccessKeyID =  "xxxxxxxxxxxx"
+   export AliAccessKeySecret =  "xxxxxxxxxxxx"
+   ```
+
 
 6. You are all set to use gocloud! Check out the following YouTube videos for more information and usage examples:
 https://youtu.be/4LxsAeoonlY?list=PLOdfztY25UNnxK_0KRRHSngJIyVLDKZxq&t=3
