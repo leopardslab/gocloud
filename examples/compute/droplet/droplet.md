@@ -5,7 +5,7 @@
 Create `digioceancloudconfig.json` in your <b>HOME</b> directory as follows:
 ```js
 {
-  "AccessToken": "xxxxxxxxxxxx"
+  "DigiOceanAccessToken": "xxxxxxxxxxxx"
 }
 ```
 
