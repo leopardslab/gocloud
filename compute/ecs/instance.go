@@ -17,7 +17,7 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 
 	var options StartInstance
 
-	param := make(map[string]interface{})
+	param = make(map[string]interface{})
 
 	param = request.(map[string]interface{})
 
@@ -47,7 +47,7 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 		}
 	}
 
-	response := make(map[string]interface{})
+	response = make(map[string]interface{})
 	err = aliauth.SignAndDoRequest("StartInstance", params, response)
 	resp = response
 	return resp, err
@@ -64,7 +64,7 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 
 	var options StopInstance
 
-	param := make(map[string]interface{})
+	param = make(map[string]interface{})
 
 	param = request.(map[string]interface{})
 
@@ -94,7 +94,7 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 		}
 	}
 
-	response := make(map[string]interface{})
+	response = make(map[string]interface{})
 	err = aliauth.SignAndDoRequest("StopInstance", params, response)
 	resp = response
 	return resp, err
@@ -111,7 +111,7 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 
 	var options RebootInstance
 
-	param := make(map[string]interface{})
+	param = make(map[string]interface{})
 
 	param = request.(map[string]interface{})
 
@@ -141,7 +141,7 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 		}
 	}
 
-	response := make(map[string]interface{})
+	response = make(map[string]interface{})
 	err = aliauth.SignAndDoRequest("RebootInstance", params, response)
 	resp = response
 	return resp, err
@@ -158,7 +158,7 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 
 	var options DeleteInstance
 
-	param := make(map[string]interface{})
+	param = make(map[string]interface{})
 
 	param = request.(map[string]interface{})
 
@@ -188,7 +188,7 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 		}
 	}
 
-	response := make(map[string]interface{})
+	response = make(map[string]interface{})
 	err = aliauth.SignAndDoRequest("DeleteInstance", params, response)
 	resp = response
 	return resp, err
