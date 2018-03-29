@@ -30,7 +30,7 @@ func TestCreatenode(t *testing.T) {
 func TestStartnode(t *testing.T) {
 	var aliEcs ECS
 	start := map[string]interface{}{
-		"InstanceId": "i-m5e3ee3z8wdy8ktdq591",
+		"InstanceId": "i-m5ea01zic0bg8dufo2eo",
 	}
 	_, err := aliEcs.Startnode(start)
 	if err != nil {
@@ -43,7 +43,7 @@ func TestStartnode(t *testing.T) {
 func TestStopnode(t *testing.T) {
 	var aliEcs ECS
 	stop := map[string]interface{}{
-		"InstanceId": "i-m5e3ee3z8wdy8ktdq591",
+		"InstanceId": "i-m5ea01zic0bg8dufo2eo",
 		"ForceStop":  false,
 	}
 	_, err := aliEcs.Stopnode(stop)
@@ -57,10 +57,10 @@ func TestStopnode(t *testing.T) {
 func TestRebootnode(t *testing.T) {
 	var aliEcs ECS
 	reboot := map[string]interface{}{
-		"InstanceId": "i-m5e3ee3z8wdy8ktdq591",
+		"InstanceId": "i-m5ea01zic0bg8dufo2eo",
 		"ForceStop":  false,
 	}
-	_, err := aliEcs.Stopnode(reboot)
+	_, err := aliEcs.Rebootnode(reboot)
 	if err != nil {
 		t.Errorf("Rebootnode Test Fail")
 		return
@@ -71,7 +71,7 @@ func TestRebootnode(t *testing.T) {
 func TestDeletenode(t *testing.T) {
 	var aliEcs ECS
 	delete := map[string]interface{}{
-		"InstanceId": "i-m5e3ee3z8wdy8ktdq591",
+		"InstanceId": "i-m5ea01zic0bg8dufo2eo",
 	}
 	_, err := aliEcs.Deletenode(delete)
 	if err != nil {

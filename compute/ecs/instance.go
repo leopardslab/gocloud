@@ -32,18 +32,7 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 	params := make(map[string]interface{})
 
 	// Put all of options into params
-	e := reflect.ValueOf(&options).Elem()
-	typeOfOptions := e.Type()
-	for i := 0; i < e.NumField(); i++ {
-		switch e.Field(i).Type().String() {
-		case "string":
-			if e.Field(i).Interface() != "" {
-				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-			}
-		case "bool":
-			params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-		}
-	}
+	params = aliauth.PutStructToMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.SignAndDoRequest("StartInstance", params, response)
@@ -88,18 +77,7 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 	params := make(map[string]interface{})
 
 	// Put all of options into params
-	e := reflect.ValueOf(&options).Elem()
-	typeOfOptions := e.Type()
-	for i := 0; i < e.NumField(); i++ {
-		switch e.Field(i).Type().String() {
-		case "string":
-			if e.Field(i).Interface() != "" {
-				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-			}
-		case "bool":
-			params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-		}
-	}
+	params = aliauth.PutStructToMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.SignAndDoRequest("StopInstance", params, response)
@@ -133,18 +111,7 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	params := make(map[string]interface{})
 
 	// Put all of options into params
-	e := reflect.ValueOf(&options).Elem()
-	typeOfOptions := e.Type()
-	for i := 0; i < e.NumField(); i++ {
-		switch e.Field(i).Type().String() {
-		case "string":
-			if e.Field(i).Interface() != "" {
-				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-			}
-		case "bool":
-			params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-		}
-	}
+	params = aliauth.PutStructToMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.SignAndDoRequest("RebootInstance", params, response)
