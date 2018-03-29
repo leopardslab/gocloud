@@ -171,16 +171,7 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	params := make(map[string]interface{})
 
 	// Put all of options into params
-	e := reflect.ValueOf(&options).Elem()
-	typeOfOptions := e.Type()
-	for i := 0; i < e.NumField(); i++ {
-		switch e.Field(i).Type().String() {
-		case "string":
-			if e.Field(i).Interface() != "" {
-				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-			}
-		}
-	}
+	params = aliauth.PutStructToMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.SignAndDoRequest("DeleteInstance", params, response)
@@ -262,7 +253,7 @@ func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 		default:
 			switch value.(type) {
 			case string:
-				params[key] =  value.(string)
+				params[key] = value.(string)
 			case int:
 				params[key] = strconv.Itoa(value.(int))
 			case bool:
