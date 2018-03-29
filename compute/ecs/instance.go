@@ -196,6 +196,8 @@ func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 
 	param = request.(map[string]interface{})
 
+	params := make(map[string]interface{})
+
 	for key, value := range param {
 		switch key {
 		case "RegionId":
@@ -257,10 +259,17 @@ func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 		case "SystemDisk.Description":
 			systemDiskDescription, _ := value.(string)
 			options.SystemDiskDescription = systemDiskDescription
+		default:
+			switch value.(type) {
+			case string:
+				params[key] =  value.(string)
+			case int:
+				params[key] = strconv.Itoa(value.(int))
+			case bool:
+				params[key] = strconv.FormatBool(value.(bool))
+			}
 		}
 	}
-
-	params := make(map[string]interface{})
 
 	// Put all of options into params
 	e := reflect.ValueOf(&options).Elem()
