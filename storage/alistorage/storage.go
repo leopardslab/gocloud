@@ -2,10 +2,10 @@ package alistorage
 
 import (
 	"strconv"
-	"reflect"
+	"github.com/cloudlibz/gocloud/aliauth"
 )
 
-//TODO
+// Createdisk create ECS-Disk accept map[string]interface{}
 func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{}, err error) {
 	var options CreateDisk
 
@@ -53,26 +53,12 @@ func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{},
 		}
 	}
 
-	params := make(map[string]interface{})
-
 	// Put all of options into params
-	e := reflect.ValueOf(&options).Elem()
-	typeOfOptions := e.Type()
-	for i := 0; i < e.NumField(); i++ {
-		switch e.Field(i).Type().String() {
-		case "string":
-			if e.Field(i).Interface() != "" {
-				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-			}
-		case "bool":
-			params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-		case "int":
-			if e.Field(i).Interface() != 0 {
-				params[typeOfOptions.Field(i).Name] = e.Field(i).Interface()
-			}
-		}
-	}
+	params := aliauth.PutStructToMap(&options)
 
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("CreateDisk", params, response)
+	resp = response
 	return resp, err
 }
 
