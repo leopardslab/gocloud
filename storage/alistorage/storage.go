@@ -86,12 +86,12 @@ func (aliStorage *Alistorage) Deletedisk(request interface{}) (resp interface{},
 	return resp, err
 }
 
-// Createsnapshot
+// Createsnapshot create snapshot accept map[string]interface{}
 func (aliStorage *Alistorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//TODO
+// Deletesnapshot delete snapshot accept map[string]interface{}
 func (aliStorage *Alistorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
