@@ -62,8 +62,27 @@ func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{},
 	return resp, err
 }
 
-//TODO
+// Deletedisk delete ECS-Disk accept map[string]interface{}
 func (aliStorage *Alistorage) Deletedisk(request interface{}) (resp interface{}, err error) {
+	var options DeleteDisk
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "DiskId":
+			diskID, _ := value.(string)
+			options.DiskID = diskID
+		}
+	}
+	// Put all of options into params
+	params := aliauth.PutStructToMap(&options)
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("DeleteDisk", params, response)
+	resp = response
 	return resp, err
 }
 
@@ -77,12 +96,63 @@ func (aliStorage *Alistorage) Deletesnapshot(request interface{}) (resp interfac
 	return resp, err
 }
 
-//TODO
+// Attachdisk attach ECS-Disk to ECS, accept map[string]interface{}
 func (aliStorage *Alistorage) Attachdisk(request interface{}) (resp interface{}, err error) {
+	var options AttachDisk
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "InstanceId":
+			instanceId, _ := value.(string)
+			options.InstanceID = instanceId
+		case "DiskId":
+			diskID, _ := value.(string)
+			options.DiskID = diskID
+		case "DeleteWithInstance":
+			switch value.(type) {
+			case bool:
+				options.DeleteWithInstance = value.(bool)
+			case string:
+				options.DeleteWithInstance = value.(string) == "true" || value.(string) == "True"
+			}
+		}
+	}
+	// Put all of options into params
+	params := aliauth.PutStructToMap(&options)
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("AttachDisk", params, response)
+	resp = response
 	return resp, err
 }
 
-//TODO
+// Detachdisk detach ECS-Disk from ECS, accept map[string]interface{}
 func (aliStorage *Alistorage) Detachdisk(request interface{}) (resp interface{}, err error) {
+	var options AttachDisk
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "InstanceId":
+			instanceId, _ := value.(string)
+			options.InstanceID = instanceId
+		case "DiskId":
+			diskID, _ := value.(string)
+			options.DiskID = diskID
+		}
+	}
+	// Put all of options into params
+	params := aliauth.PutStructToMap(&options)
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("DetachDisk", params, response)
+	resp = response
 	return resp, err
 }
