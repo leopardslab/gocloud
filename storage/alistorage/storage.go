@@ -141,8 +141,8 @@ func (aliStorage *Alistorage) Detachdisk(request interface{}) (resp interface{},
 	for key, value := range param {
 		switch key {
 		case "InstanceId":
-			instanceId, _ := value.(string)
-			options.InstanceID = instanceId
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
 		case "DiskId":
 			diskID, _ := value.(string)
 			options.DiskID = diskID
