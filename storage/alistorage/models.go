@@ -13,7 +13,7 @@ type CreateDisk struct {
 	Encrypted    bool
 	DiskCategory string
 	Size         int
-	SnapshotId   string
+	SnapshotID   string
 	ClientToken  string
 }
 

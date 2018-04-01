@@ -45,8 +45,8 @@ func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{},
 				options.Size, _ = strconv.Atoi(value.(string))
 			}
 		case "SnapshotId":
-			snapshotId, _ := value.(string)
-			options.SnapshotId = snapshotId
+			snapshotID, _ := value.(string)
+			options.SnapshotID = snapshotID
 		case "ClientToken":
 			clientToken, _ := value.(string)
 			options.ClientToken = clientToken
@@ -107,8 +107,8 @@ func (aliStorage *Alistorage) Attachdisk(request interface{}) (resp interface{},
 	for key, value := range param {
 		switch key {
 		case "InstanceId":
-			instanceId, _ := value.(string)
-			options.InstanceID = instanceId
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
 		case "DiskId":
 			diskID, _ := value.(string)
 			options.DiskID = diskID
