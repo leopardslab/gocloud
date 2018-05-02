@@ -6,6 +6,7 @@ import (
 	googledns "github.com/cloudlibz/gocloud/dns/googledns"
 	googleloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/googleloadbalancer"
 	googlestorage "github.com/cloudlibz/gocloud/storage/googlestorage"
+	googlecloudfunctions "github.com/cloudlibz/gocloud/serverless/googlecloudfunctions"
 )
 
 // Google  struct represents Google Cloud provider.
@@ -15,4 +16,5 @@ type Google struct {
 	googleloadbalancer.Googleloadbalancer
 	googlecontainer.Googlecontainer
 	googledns.Googledns
+	googlecloudfunctions.Googlecloudfunctions
 }
