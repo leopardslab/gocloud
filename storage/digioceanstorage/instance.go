@@ -81,7 +81,7 @@ func (digioceanstorage *Digioceanstorage) Deletedisk(request interface{}) (resp 
 
 	options := request.(map[string]string)
 
-	url := storageBasePath + "/" + options["ID"]
+	url := storageBasePath + "/" + options["VolumeID"]
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	deleteSnapshotReq, err := http.NewRequest("DELETE", url, nil)
@@ -121,7 +121,7 @@ func (digioceanstorage *Digioceanstorage) Createsnapshot(request interface{}) (r
 	for key, value := range param {
 
     switch key {
-		case "VolumeID":
+			case "VolumeID":
         volumeIDvalue, _ := value.(string)
         volumeID = volumeIDvalue
 
@@ -170,7 +170,7 @@ func (digioceanstorage *Digioceanstorage) Deletesnapshot(request interface{}) (r
 
 	options := request.(map[string]string)
 
-	url := "https://api.digitalocean.com/v2/snapshts/" + options["ID"]
+	url := "https://api.digitalocean.com/v2/snapshts/" + options["SnapshotID"]
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	deleteSnapshotReq, err := http.NewRequest("DELETE", url, nil)
@@ -217,7 +217,7 @@ func (digioceanstorage *Digioceanstorage) Attachdisk(request interface{}) (resp 
         dropletIDvalue, _ := value.(int)
         dropletID = dropletIDvalue
 
-			case "VolumeID":
+			case "Region":
         regionvalue, _ := value.(string)
         region = regionvalue
     } // Closes switch-case
@@ -280,7 +280,7 @@ func (digioceanstorage *Digioceanstorage) Detachdisk(request interface{}) (resp 
         dropletIDvalue, _ := value.(int)
         dropletID = dropletIDvalue
 
-			case "VolumeID":
+			case "Region":
         regionvalue, _ := value.(string)
         region = regionvalue
     } // Closes switch-case
