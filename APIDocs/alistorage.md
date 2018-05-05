@@ -9,12 +9,12 @@ package alistorage
 type Alistorage struct {
 }
 ```
-    Alistorage struct represents Alistorage attribute and method associates with it.
+Alistorage struct represents Alistorage attribute and method associates with it.
 
 ```
 func (aliStorage *Alistorage) Attachdisk(request interface{}) (resp interface{}, err error)
 ```
-    Attachdisk attach ECS-Disk to ECS, accept map[string]interface{}
+Attachdisk attach ECS-Disk to ECS, accept map[string]interface{}
 
 ```
 func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{}, err error)
