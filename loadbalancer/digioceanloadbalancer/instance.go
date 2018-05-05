@@ -7,8 +7,6 @@ import (
   "io/ioutil"
 	"net/http"
   "encoding/json"
-  "strconv"
-  "errors"
 )
 
 // loadBalancerBasePath is the endpoint URL for digitalocean API.
@@ -154,13 +152,6 @@ func (digioceanloadbalancer *LoadBalancer) Createloadbalancer(request interface{
 func (digioceanloadbalancer *LoadBalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
 
   options := request.(map[string]string)
-  inputID, err := strconv.Atoi(options["ID"])
-  if err != nil {
-    fmt.Println(err)
-  }
-  if inputID < 1 {
-		return nil, errors.New("loadBalancerID cannot be less than 1")
-	}
 
 	url := loadBalancerBasePath + "/" + options["ID"]
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
