@@ -9,7 +9,7 @@ package aliauth
 func LoadConfig()
 ```
 
-    LoadConfig represents Load Ali-cloud config from alicloudconfig.json or environment variables
+LoadConfig represents Load Ali-cloud config from alicloudconfig.json or environment variables
 
 ```
 func PutStructToMap(i interface{}) map[string]interface{}
