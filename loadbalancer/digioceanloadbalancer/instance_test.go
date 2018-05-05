@@ -11,6 +11,8 @@ func init() {
 
 func TestCreateloadbalancer(t *testing.T) {
 
+  var digioceancloud LoadBalancer
+
   forwardingrules := []map[string]interface{}{
       {
         "EntryProtocol":  "https",
@@ -54,7 +56,7 @@ func TestCreateloadbalancer(t *testing.T) {
     "RedirectHTTPToHTTPS": false,
 	}
 
-	_, err := digioceancloud.Creatloadbalancer(create)
+	_, err := digioceancloud.Createloadbalancer(create)
 
 	if err != nil {
 		t.Errorf("Test to create DigitalOcean LoadBalancer failed.")
@@ -62,6 +64,8 @@ func TestCreateloadbalancer(t *testing.T) {
 }
 
 func TestDeleteloadbalancer(t *testing.T) {
+
+  var digioceancloud LoadBalancer
 
   delete := map[string]string{
     "ID": "86407564",
@@ -76,6 +80,8 @@ func TestDeleteloadbalancer(t *testing.T) {
 
 func TestListloadbalancer(t *testing.T) {
 
+  var digioceancloud LoadBalancer
+
 	_, err := digioceancloud.Listloadbalancer(nil)
 
 	if err != nil {
@@ -84,6 +90,8 @@ func TestListloadbalancer(t *testing.T) {
 }
 
 func TestAttachnodewithloadbalancer(t *testing.T) {
+
+  var digioceancloud LoadBalancer
 
   attachnodewithloadbalancer := map[string]interface{}{
     "LoadBalancerID":   "my-load-balancer",
@@ -98,6 +106,8 @@ func TestAttachnodewithloadbalancer(t *testing.T) {
 }
 
 func TestDetachnodewithloadbalancer(t *testing.T) {
+
+  var digioceancloud LoadBalancer
 
   detachnodewithloadbalancer := map[string]interface{}{
     "LoadBalancerID":   "my-load-balancer",

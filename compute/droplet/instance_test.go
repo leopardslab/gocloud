@@ -12,6 +12,7 @@ func init() {
 func TestCreatenode(t *testing.T) {
 
 	var digioceancloud Droplet
+
   image := map[string]interface{}{
     "Slug": "ubuntu-16-04-x64",
 	}
@@ -41,6 +42,7 @@ func TestCreatenode(t *testing.T) {
 func TestStopnode(t *testing.T) {
 
 	var digioceancloud Droplet
+
   stop := map[string]string{
     "ID": "86407564",
    }
@@ -55,6 +57,7 @@ func TestStopnode(t *testing.T) {
 func TestStartnode(t *testing.T) {
 
   var digioceancloud Droplet
+
   start := map[string]string{
     "ID": "86407564",
    }
@@ -68,6 +71,7 @@ func TestStartnode(t *testing.T) {
 func TestRebootnode(t *testing.T) {
 
   var digioceancloud Droplet
+
   reboot := map[string]string{
     "ID": "86407564",
    }
@@ -82,6 +86,7 @@ func TestRebootnode(t *testing.T) {
 func TestDeletnode(t *testing.T) {
 
   var digioceancloud Droplet
+  
   delete := map[string]string{
     "ID": "86407564",
    }
