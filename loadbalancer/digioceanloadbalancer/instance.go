@@ -14,8 +14,8 @@ import (
 // loadBalancerBasePath is the endpoint URL for digitalocean API.
 const loadBalancerBasePath = "https://api.digitalocean.com/v2/load_balancers"
 
-// Creatloadbalancer function creates a new load balancer.
-func (digioceanloadbalancer *LoadBalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
+// Createloadbalancer function creates a new load balancer.
+func (digioceanloadbalancer *LoadBalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	var loadBalancerInstance LoadBalancer	// Initialize LoadBalancer struct
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
@@ -55,8 +55,8 @@ func (digioceanloadbalancer *LoadBalancer) Creatloadbalancer(request interface{}
                 loadBalancerForwardingRule.TargetPort = forwardingRulesParamValue.(int)
               case "CertificateID":
                 loadBalancerForwardingRule.CertificateID = forwardingRulesParamValue.(string)
-              case "TlsPassthrough":
-                loadBalancerForwardingRule.TlsPassthrough = forwardingRulesParamValue.(bool)
+              case "TLSPassthrough":
+                loadBalancerForwardingRule.TLSPassthrough = forwardingRulesParamValue.(bool)
             }
           }
           loadBalancerInstance.ForwardingRules = append(loadBalancerInstance.ForwardingRules, loadBalancerForwardingRule)
@@ -100,9 +100,9 @@ func (digioceanloadbalancer *LoadBalancer) Creatloadbalancer(request interface{}
           case "CookieName":
             cookieName, _ := value.(string)
             loadBalancerInstance.StickySessions.CookieName = cookieName
-          case "CookieTtlSeconds":
+          case "CookieTTLSeconds":
             cookieTTLSeconds, _ := value.(int)
-            loadBalancerInstance.StickySessions.CookieTtlSeconds = cookieTTLSeconds
+            loadBalancerInstance.StickySessions.CookieTTLSeconds = cookieTTLSeconds
           }
         }
 
@@ -114,9 +114,9 @@ func (digioceanloadbalancer *LoadBalancer) Creatloadbalancer(request interface{}
         tag, _ := value.(string)
         loadBalancerInstance.Tag = tag
 
-      case "RedirectHttpToHttps":
+      case "RedirectHTTPToHTTPS":
         redirectHTTPToHTTPS, _ := value.(bool)
-        loadBalancerInstance.RedirectHttpToHttps = redirectHTTPToHTTPS
+        loadBalancerInstance.RedirectHTTPToHTTPS = redirectHTTPToHTTPS
 
     } // Closes switch-case
 
@@ -223,7 +223,7 @@ func (digioceanloadbalancer *LoadBalancer) Attachnodewithloadbalancer(request in
 
   DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
-  var loadBalancerID int  // To store the loadBalancerID
+  var loadBalancerID string  // To store the loadBalancerID
   var DropletIDs []int  // To store the DropletIDs
 
   param := make(map[string]interface{})
@@ -233,7 +233,7 @@ func (digioceanloadbalancer *LoadBalancer) Attachnodewithloadbalancer(request in
 
     switch key {
       case "LoadBalancerID":
-        loadBalancerIDvalue, _ := value.(int)
+        loadBalancerIDvalue, _ := value.(string)
         loadBalancerID = loadBalancerIDvalue
 
       case "DropletIDs":
@@ -250,7 +250,7 @@ func (digioceanloadbalancer *LoadBalancer) Attachnodewithloadbalancer(request in
 	if len(DropletIDs) != 0 {
 		instance := []interface{}{}
 		for i := 0; i < (len(DropletIDs)); i++ {
-			val := map[string]string{}
+			val := map[string]int{}
 			val["droplet_ids"] = DropletIDs[i]
 			instance = append(instance, val)
 		}
@@ -289,7 +289,7 @@ func (digioceanloadbalancer *LoadBalancer) Detachnodewithloadbalancer(request in
 
   DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
-  var loadBalancerID int  // To store the loadBalancerID
+  var loadBalancerID string  // To store the loadBalancerID
   var DropletIDs []int  // To store the DropletIDs
 
   param := make(map[string]interface{})
@@ -299,7 +299,7 @@ func (digioceanloadbalancer *LoadBalancer) Detachnodewithloadbalancer(request in
 
     switch key {
       case "LoadBalancerID":
-        loadBalancerIDvalue, _ := value.(int)
+        loadBalancerIDvalue, _ := value.(string)
         loadBalancerID = loadBalancerIDvalue
 
       case "DropletIDs":
@@ -316,7 +316,7 @@ func (digioceanloadbalancer *LoadBalancer) Detachnodewithloadbalancer(request in
   if len(DropletIDs) != 0 {
     instance := []interface{}{}
     for i := 0; i < (len(DropletIDs)); i++ {
-      val := map[string]string{}
+      val := map[string]int{}
       val["droplet_ids"] = DropletIDs[i]
       instance = append(instance, val)
     }

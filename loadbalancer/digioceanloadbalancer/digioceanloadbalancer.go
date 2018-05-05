@@ -10,7 +10,7 @@ type LoadBalancer struct {
 	StickySessions      StickySessions   `json:"stickySessions,omitempty"`
 	DropletIDs          []int            `json:"dropletIds,omitempty"`
 	Tag                 string           `json:"tag,omitempty"`
-	RedirectHttpToHttps bool             `json:"redirectHTTPToHTTPS,omitempty"`
+	RedirectHTTPToHTTPS bool             `json:"redirectHTTPToHTTPS,omitempty"`
 }
 
 // ForwardingRule represents load balancer forwarding rules.
@@ -20,7 +20,7 @@ type ForwardingRule struct {
 	TargetProtocol string `json:"targetProtocol,omitempty"`
 	TargetPort     int    `json:"targetPort,omitempty"`
 	CertificateID  string `json:"certificateId,omitempty"`
-	TlsPassthrough bool   `json:"TLSPassthrough,omitempty"`
+	TLSPassthrough bool   `json:"TLSPassthrough,omitempty"`
 }
 
 // HealthCheck represents optional load balancer health check rules.
@@ -38,5 +38,5 @@ type HealthCheck struct {
 type StickySessions struct {
 	Type             string `json:"typeStickySessions,omitempty"`
 	CookieName       string `json:"cookieName,omitempty"`
-	CookieTtlSeconds int    `json:"cookieTTLSeconds,omitempty"`
+	CookieTTLSeconds int    `json:"cookieTTLSeconds,omitempty"`
 }
