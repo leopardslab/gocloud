@@ -110,6 +110,6 @@ func TestDetachnodewithloadbalancer(t *testing.T) {
   _, err := digioceancloud.Detachnodewithloadbalancer(detachnodewithloadbalancer)
 
 	if err != nil {
-		t.Errorf("Test to detach Droplets to DigitalOcean LoadBalancer failed")
+		t.Errorf("Test to detach Droplets from DigitalOcean LoadBalancer failed")
 	}
 }
