@@ -19,27 +19,27 @@ Attachdisk attach ECS-Disk to ECS, accept map[string]interface{}
 ```
 func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{}, err error)
 ```
-    Createdisk create ECS-Disk accept map[string]interface{}
+Createdisk create ECS-Disk accept map[string]interface{}
 
 ```
 func (aliStorage *Alistorage) Createsnapshot(request interface{}) (resp interface{}, err error)
 ```
-    Createsnapshot create snapshot accept map[string]interface{}
+Createsnapshot create snapshot accept map[string]interface{}
 
 ```
 func (aliStorage *Alistorage) Deletedisk(request interface{}) (resp interface{}, err error)
 ```
-    Deletedisk delete ECS-Disk accept map[string]interface{}
+Deletedisk delete ECS-Disk accept map[string]interface{}
 
 ```
 func (aliStorage *Alistorage) Deletesnapshot(request interface{}) (resp interface{}, err error)
 ```
-    Deletesnapshot delete snapshot accept map[string]interface{}
+Deletesnapshot delete snapshot accept map[string]interface{}
 
 ```
 func (aliStorage *Alistorage) Detachdisk(request interface{}) (resp interface{}, err error)
 ```
-    Detachdisk detach ECS-Disk from ECS, accept map[string]interface{}
+Detachdisk detach ECS-Disk from ECS, accept map[string]interface{}
 
 ```
 type AttachDisk struct {
@@ -48,7 +48,7 @@ type AttachDisk struct {
     DeleteWithInstance bool
 }
 ```
-    AttachDisk to store all attribute of attach Ali-cloud ECS-Disk to ECS
+AttachDisk to store all attribute of attach Ali-cloud ECS-Disk to ECS
 
 ```
 type CreateDisk struct {
@@ -63,14 +63,14 @@ type CreateDisk struct {
     ClientToken  string
 }
 ```
-    CreateDisk to store all attribute to create Ali-cloud ECS-Disk
+CreateDisk to store all attribute to create Ali-cloud ECS-Disk
 
 ```
 type DeleteDisk struct {
     DiskID string
 }
 ```
-    DeleteDisk to store all attribute to delete Ali-cloud ECS-Disk
+DeleteDisk to store all attribute to delete Ali-cloud ECS-Disk
 
 ```
 type DetachDisk struct {
@@ -78,6 +78,6 @@ type DetachDisk struct {
     DiskID     string
 }
 ```
-    DetachDisk to store all attribute of detach Ali-cloud ECS-Disk from ECS
+DetachDisk to store all attribute of detach Ali-cloud ECS-Disk from ECS
 
 
