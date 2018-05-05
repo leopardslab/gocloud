@@ -44,7 +44,8 @@ GoCloud is a golang library which hides the difference between different APIs pr
 ### DigitalOcean
 
 * DigitalOcean Droplet [Link to example](examples/compute/droplet/droplet.md)
-* DigitalOcean LoadBalancer [Link to example](examples/loadbalancer/digioceanloadbalancer/digioceanloadbalancer.md)
+* DigitalOcean LoadBalancer [Link to example](examples/loadbalancer/digiocean_loadbalancer/digioceanloadbalancer.md)
+* DigitalOcean Storage [Link to example](examples/storage/digiocean_storage/digiocean_storage.md)
 
 Currently, implementations for other cloud providers are being worked on.
 
