@@ -16,13 +16,6 @@ func TestCreateloadbalancer(t *testing.T) {
   forwardingrules := []map[string]interface{}{
       {
         "EntryProtocol":  "https",
-        "EntryPort":  443,
-        "TargetProtocol": "http",
-        "TargetPort": 80,
-        "CertificateID":  "a-b-c",
-      },
-      {
-        "EntryProtocol":  "https",
         "EntryPort":  444,
         "TargetProtocol": "https",
         "TargetPort": 443,
