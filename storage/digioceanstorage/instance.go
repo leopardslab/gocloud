@@ -203,6 +203,8 @@ func (digioceanstorage *Digioceanstorage) Attachdisk(request interface{}) (resp 
 	var dropletID int	// To store the Droplet the volume will be attached to.
 	var region string	// To store the region
 
+	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
+
 	param := make(map[string]interface{})
   param = request.(map[string]interface{})
 
@@ -265,6 +267,8 @@ func (digioceanstorage *Digioceanstorage) Detachdisk(request interface{}) (resp 
 	var volumeID string	// To store the volumeID
 	var dropletID int	// To store the Droplet the volume will be attached to.
 	var region string	// To store the region
+
+	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	param := make(map[string]interface{})
   param = request.(map[string]interface{})

@@ -11,7 +11,7 @@ func init() {
 
 func TestCreatedisk(t *testing.T) {
 
-  var digioceancloud LoadBalancer
+  var digioceancloud Digioceanstorage
 
 	create := map[string]interface{}{
     "Name": "example-01",
@@ -30,7 +30,7 @@ func TestCreatedisk(t *testing.T) {
 
 func TestDeletedisk(t *testing.T) {
 
-  var digioceancloud LoadBalancer
+  var digioceancloud Digioceanstorage
 
   delete := map[string]string{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
@@ -45,7 +45,7 @@ func TestDeletedisk(t *testing.T) {
 
 func TestCreatesnapshot(t *testing.T) {
 
-  var digioceancloud LoadBalancer
+  var digioceancloud Digioceanstorage
 
   create := map[string]interface{}{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e5",
@@ -61,7 +61,7 @@ func TestCreatesnapshot(t *testing.T) {
 
 func TestDeletesnapshot(t *testing.T) {
 
-  var digioceancloud LoadBalancer
+  var digioceancloud Digioceanstorage
 
   delete := map[string]string{
     "SnapshotID": "7724db7c-e098-11e5-b522-000f53304e51",
@@ -76,7 +76,7 @@ func TestDeletesnapshot(t *testing.T) {
 
 func TestAttachdisk(t *testing.T) {
 
-  var digioceancloud LoadBalancer
+  var digioceancloud Digioceanstorage
 
   create := map[string]interface{}{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
@@ -93,15 +93,15 @@ func TestAttachdisk(t *testing.T) {
 
 func TestDetachdisk(t *testing.T) {
 
-  var digioceancloud LoadBalancer
+  var digioceancloud Digioceanstorage
 
-  create := map[string]interface{}{
+  delete := map[string]interface{}{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
     "DropletID": "9978454",
     "Region":  "nyc3",
 	}
 
-	_, err := digioceancloud.Detachdisk(create)
+	_, err := digioceancloud.Detachdisk(delete)
 
 	if err != nil {
 		t.Errorf("Test to detach disk from DigitalOcean Droplet failed.")
