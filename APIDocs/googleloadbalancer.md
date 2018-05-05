@@ -13,9 +13,9 @@ const (
 
 FUNCTIONS
 
-func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjsonmap map[string]interface{})
-    Creatloadbalancerdictnoaryconvert creates a dictnoary for
-    Creatloadbalancer api.
+func Createloadbalancerdictnoaryconvert(option TargetPools, Createloadbalancerjsonmap map[string]interface{})
+    Createloadbalancerdictnoaryconvert creates a dictnoary for
+    Createloadbalancer api.
 
 TYPES
 
@@ -27,8 +27,8 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
     Attachnodewithloadbalancer attach new google compute instance to google
     loadbalancer pool.
 
-func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error)
-    Creatloadbalancer creates google loadbalancer pool.
+func (googleloadbalancer *Googleloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error)
+    Createloadbalancer creates google loadbalancer pool.
 
 func (googleloadbalancer *Googleloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error)
     Deleteloadbalancer deletes google loadbalancer pool.

@@ -1,7 +1,7 @@
 package aliloadbalancer
 
 //TODO
-func (aliloadbalancer *Aliloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
+func (aliloadbalancer *Aliloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 //TODO
