@@ -1,7 +1,7 @@
 package droplet
 
 import (
-  digioceanauth "github.com/cloudlibz/gocloud/digioceanauth"
+  digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
   "bytes"
   "fmt"
   "io/ioutil"
@@ -18,7 +18,7 @@ const dropletBasePath = "https://api.digitalocean.com/v2/droplets"
 func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err error) {
 
   var DropletInstance Droplet // Initialize Droplet struct
-  DigiOceanAccessToken := digioceanauth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
+  DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
   param := make(map[string]interface{})
   param = request.(map[string]interface{})
@@ -27,74 +27,74 @@ func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err e
 
     switch key {
 
-    case "Name":
-      name, _ := value.(string)
-      DropletInstance.Name = name
+      case "Name":
+        name, _ := value.(string)
+        DropletInstance.Name = name
 
-    case "Region":
-      region, _ := value.(string)
-      DropletInstance.Region = region
+      case "Region":
+        region, _ := value.(string)
+        DropletInstance.Region = region
 
-    case "Size":
-      size, _ := value.(string)
-      DropletInstance.Size = size
+      case "Size":
+        size, _ := value.(string)
+        DropletInstance.Size = size
 
-    case "Image":
-    imageparam, _ := value.(map[string]interface{})
-    for key, value := range imageparam {
-      switch key {
-        case "ID":
-          id, _ := value.(int)
-          DropletInstance.Image.ID = id
-          break
-    		case "Slug":
-          slug, _ := value.(string)
-          DropletInstance.Image.Slug = slug
-          break
+      case "Image":
+      imageparam, _ := value.(map[string]interface{})
+      for key, value := range imageparam {
+        switch key {
+          case "ID":
+            id, _ := value.(int)
+            DropletInstance.Image.ID = id
+            break
+      		case "Slug":
+            slug, _ := value.(string)
+            DropletInstance.Image.Slug = slug
+            break
+          }
         }
-      }
 
-    case "SSHKeys":
-      sshkeyparam, _ := value.([]map[string]string)
-      for i := 0; i < len(sshkeyparam); i++ {
-        var dropletCreateSSHKey CreateSSHKey
-        dropletCreateSSHKey.ID = sshkeyparam[i]["ID"]
-        dropletCreateSSHKey.Fingerprint = sshkeyparam[i]["Fingerprint"]
-        DropletInstance.SSHKeys = append(DropletInstance.SSHKeys, dropletCreateSSHKey)
-      }
+      case "SSHKeys":
+        sshkeyparam, _ := value.([]map[string]string)
+        for i := 0; i < len(sshkeyparam); i++ {
+          var dropletCreateSSHKey CreateSSHKey
+          dropletCreateSSHKey.ID = sshkeyparam[i]["ID"]
+          dropletCreateSSHKey.Fingerprint = sshkeyparam[i]["Fingerprint"]
+          DropletInstance.SSHKeys = append(DropletInstance.SSHKeys, dropletCreateSSHKey)
+        }
 
-    case "Volumes":
-      volumeparam, _ := value.([]map[string]string)
-      for i := 0; i < len(volumeparam); i++ {
-        var dropletCreateVolume CreateVolume
-        dropletCreateVolume.ID = volumeparam[i]["ID"]
-        dropletCreateVolume.Name = volumeparam[i]["Name"]
-        DropletInstance.Volumes = append(DropletInstance.Volumes, dropletCreateVolume)
-      }
+      case "Volumes":
+        volumeparam, _ := value.([]map[string]string)
+        for i := 0; i < len(volumeparam); i++ {
+          var dropletCreateVolume CreateVolume
+          dropletCreateVolume.ID = volumeparam[i]["ID"]
+          dropletCreateVolume.Name = volumeparam[i]["Name"]
+          DropletInstance.Volumes = append(DropletInstance.Volumes, dropletCreateVolume)
+        }
 
-    case "Backups":
-      backups, _ := value.(bool)
-      DropletInstance.Backups = backups
+      case "Backups":
+        backups, _ := value.(bool)
+        DropletInstance.Backups = backups
 
-    case "IPv6":
-      ipv6, _ := value.(bool)
-      DropletInstance.IPv6 = ipv6
+      case "IPv6":
+        ipv6, _ := value.(bool)
+        DropletInstance.IPv6 = ipv6
 
-    case "PrivateNetworking":
-      privateNetworking, _ := value.(bool)
-      DropletInstance.PrivateNetworking = privateNetworking
+      case "PrivateNetworking":
+        privateNetworking, _ := value.(bool)
+        DropletInstance.PrivateNetworking = privateNetworking
 
-    case "Monitoring":
-      monitoring, _ := value.(bool)
-      DropletInstance.Monitoring = monitoring
+      case "Monitoring":
+        monitoring, _ := value.(bool)
+        DropletInstance.Monitoring = monitoring
 
-    case "UserData":
-      userData, _ := value.(string)
-      DropletInstance.UserData = userData
+      case "UserData":
+        userData, _ := value.(string)
+        DropletInstance.UserData = userData
 
-    case "Tags":
-      tags, _ := value.([]string)
-      DropletInstance.Tags = tags
+      case "Tags":
+        tags, _ := value.([]string)
+        DropletInstance.Tags = tags
 
     } // Closes switch-case
 
@@ -140,7 +140,7 @@ func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err er
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
-	DigiOceanAccessToken := digioceanauth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
+	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	startRequest := &ActionRequest{"type": "power_on"}
 	startRequestJSON, _ := json.Marshal(startRequest)
@@ -181,7 +181,7 @@ func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err err
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
-	DigiOceanAccessToken := digioceanauth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
+	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	stopRequest := &ActionRequest{"type": "power_off"}
 	stopRequestJSON, _ := json.Marshal(stopRequest)
@@ -222,7 +222,7 @@ func (droplet *Droplet) Rebootnode(request interface{}) (resp interface{}, err e
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
-	DigiOceanAccessToken := digioceanauth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
+	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	rebootRequest := &ActionRequest{"type": "reboot"}
 	rebootRequestJSON, _ := json.Marshal(rebootRequest)
@@ -265,7 +265,7 @@ func (droplet *Droplet) Deletenode(request interface{}) (resp interface{}, err e
 	}
 
 	url := dropletBasePath + "/" + options["ID"]
-	DigiOceanAccessToken := digioceanauth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
+	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	Deletenoderequest, err := http.NewRequest("DELETE", url, nil)
 	if err != nil {
