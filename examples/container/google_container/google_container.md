@@ -2,7 +2,7 @@
 
 ## Configure Google Cloud credentials.
 
-Download your service account credentials file from Google Cloud and save it as `googlecloudinfo.json` in your <b>HOME</b> directory.
+Download your service account credentials file from Google Cloud and save it as `googlecloudinfo.json` in your <b>HOME/.gocloud</b> directory.
 
 You can also set the credentials as environment variables:
 ```js
