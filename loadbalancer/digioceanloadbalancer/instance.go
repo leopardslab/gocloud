@@ -7,8 +7,8 @@ import (
   "io/ioutil"
 	"net/http"
   "encoding/json"
-  "errors"
   "strconv"
+  "errors"
 )
 
 // loadBalancerBasePath is the endpoint URL for digitalocean API.
@@ -245,19 +245,11 @@ func (digioceanloadbalancer *LoadBalancer) Attachnodewithloadbalancer(request in
 
   url := loadBalancerBasePath + "/" + loadBalancerID + "/droplets"
 
-  loadBalancerInstance := make(map[string]interface{})
+  dropletinstances := map[string][]int{
+    "droplet_ids": DropletIDs,
+  }
 
-	if len(DropletIDs) != 0 {
-		instance := []interface{}{}
-		for i := 0; i < (len(DropletIDs)); i++ {
-			val := map[string]int{}
-			val["droplet_ids"] = DropletIDs[i]
-			instance = append(instance, val)
-		}
-		loadBalancerInstance["droplet_ids"] = instance
-	}
-
-  loadBalancerInstanceJSON, _ := json.Marshal(loadBalancerInstance)
+  loadBalancerInstanceJSON, _ := json.Marshal(dropletinstances)
   loadBalancerInstanceJSONString := string(loadBalancerInstanceJSON)
   var loadBalancerInstanceJSONStringbyte = []byte(loadBalancerInstanceJSONString)
 
@@ -311,19 +303,11 @@ func (digioceanloadbalancer *LoadBalancer) Detachnodewithloadbalancer(request in
 
   url := loadBalancerBasePath + "/" + loadBalancerID + "/droplets"
 
-  loadBalancerInstance := make(map[string]interface{})
-
-  if len(DropletIDs) != 0 {
-    instance := []interface{}{}
-    for i := 0; i < (len(DropletIDs)); i++ {
-      val := map[string]int{}
-      val["droplet_ids"] = DropletIDs[i]
-      instance = append(instance, val)
-    }
-    loadBalancerInstance["droplet_ids"] = instance
+  dropletinstances := map[string][]int{
+    "droplet_ids": DropletIDs,
   }
 
-  loadBalancerInstanceJSON, _ := json.Marshal(loadBalancerInstance)
+  loadBalancerInstanceJSON, _ := json.Marshal(dropletinstances)
   loadBalancerInstanceJSONString := string(loadBalancerInstanceJSON)
   var loadBalancerInstanceJSONStringbyte = []byte(loadBalancerInstanceJSONString)
 

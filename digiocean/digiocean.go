@@ -12,7 +12,7 @@ import (
 type DigitalOcean struct {
 	droplet.Droplet
 	digioceandns.Digioceandns
-	digioceanloadbalancer.Digioceanloadbalancer
+	digioceanloadbalancer.LoadBalancer
 	digioceanstorage.Digioceanstorage
 	digioceancontainer.Digioceancontainer
 }
