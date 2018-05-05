@@ -13,5 +13,6 @@ type Ali struct {
     alicontainer.Alicontainer
     alidns.Alidns
 }
-    Ali struct represents Ali-cloud provider.
 ```
+    Ali struct represents Ali-cloud provider.
+
