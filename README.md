@@ -78,7 +78,7 @@ $ go get golang.org/x/oauth2
 $ go get cloud.google.com/go/compute/metadata
 ```
 
-5. Download your AWS, Google and DigitalOcean access credentials and store them in a file in your <b>HOME</b> directory.  
+5. Create a directory called <b>.gocloud</b> in your <b>HOME</b> directory. Download your AWS, Google and DigitalOcean access credentials and store them in a file in your <b>.gocloud</b> folder.   
 
    #### AWS:
    Save your AWS credentials in a file named *amazoncloudconfig.json*.
