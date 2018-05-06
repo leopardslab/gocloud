@@ -71,11 +71,11 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
 ### Delete loadbalancer
 
 ```js
-  delete := map[string]string{
+  delete1 := map[string]string{
     "ID": "86407564",
    }
 
-  resp, err := digioceancloud.Deleteloadbalancer(delete)
+  resp, err := digioceancloud.Deleteloadbalancer(delete1)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
