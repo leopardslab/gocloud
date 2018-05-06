@@ -31,7 +31,7 @@ func SignJWT() (client *http.Client) {
 
 	var home string = os.Getenv("HOME")
 
-	data, err := ioutil.ReadFile(home + "/googlecloudconfig.json")
+	data, err := ioutil.ReadFile(home + "/.gocloud" + "/googlecloudconfig.json")
 
 	if err != nil {
 		jwt := JWT{}
