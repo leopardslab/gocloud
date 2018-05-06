@@ -44,11 +44,11 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
 ### Delete disk
 
 ```js
-  delete := map[string]string{
+  delete1 := map[string]string{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
    }
 
-  resp, err := digioceancloud.Deletedisk(delete)
+  resp, err := digioceancloud.Deletedisk(delete1)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -62,7 +62,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "Name": "big-data-snapshot1475261774",
   }
 
-  resp, err := digioceancloud.Createsnapshot(delete)
+  resp, err := digioceancloud.Createsnapshot(create)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -71,11 +71,11 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
 ### Delete snapshot
 
 ```js
-  delete := map[string]string{
+  delete1 := map[string]string{
     "SnapshotID": "7724db7c-e098-11e5-b522-000f53304e51",
    }
 
-  resp, err := digioceancloud.Deletesnapshot(delete)
+  resp, err := digioceancloud.Deletesnapshot(delete1)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -99,13 +99,13 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
 ### Detach disk from droplet
 
 ```js
-  delete := map[string]interface{}{
+  delete1 := map[string]interface{}{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
     "DropletID": "9978454",
     "Region":  "nyc3",
   }
 
- resp, err := digioceancloud.Detachdisk(delete)
+ resp, err := digioceancloud.Detachdisk(delete1)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
