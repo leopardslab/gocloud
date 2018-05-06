@@ -8,7 +8,7 @@ import (
 
 // TokenSource struct for representing DigiOcean credentials.
 type TokenSource struct {
-    AccessToken string
+    DigiOceanAccessToken string
 }
 
 // Token is a variable of type TokenSource.
@@ -18,7 +18,7 @@ var Token TokenSource
 func LoadConfig() {
 
 	// Read from file first.
-	var home string = os.Getenv("HOME")
+	var home = os.Getenv("HOME")
 	file, _ := os.Open(home + "/digioceancloudconfig.json")
 
 	// Defer the closing of our file so that we can parse it later on.
@@ -29,11 +29,11 @@ func LoadConfig() {
 	Token = TokenSource{}
 	_ = decoder.Decode(&Token)
 
-	if Token.AccessToken == "" {
+	if Token.DigiOceanAccessToken == "" {
 // If digioceancloudconfig.json doesn't exist, look for credentials as environment variables.
 
-		Token.AccessToken = os.Getenv("DigiOceanAccessToken")
-		if Token.AccessToken == "" {
+		Token.DigiOceanAccessToken = os.Getenv("DigiOceanAccessToken")
+		if Token.DigiOceanAccessToken == "" {
 			log.Fatalln("Cannot get access token for DigitalOcean.")
 		}
 	}

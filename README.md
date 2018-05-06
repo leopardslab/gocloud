@@ -7,7 +7,7 @@
 
 # gocloud: Cloud services library.
 
-GoCloud is a golang library which hides differences between different cloud providers' (AWS,GCP,Openstack etc) APIs and allows you to manage different cloud resources through a unified and easy to use API.
+GoCloud is a golang library which hides the difference between different APIs provided by varied cloud providers (AWS, GCP, OpenStack etc.) and allows you to manage different cloud resources through a unified and easy to use API.
 
 ![GoCloud Architecture](assets/gocloudarchitecture.png)
 
@@ -41,11 +41,12 @@ GoCloud is a golang library which hides differences between different cloud prov
 * Google Elastic Load Balancing [Link to example](examples/loadbalancer/google_loadbalancer/google_loadbalancer.md)
 * Google DNS [Link to example](examples/dns/google_dns/google_dns.md)
 
-Currently, implementations for other cloud providers are being worked on.
-
 ### DigitalOcean
 
 * DigitalOcean Droplet [Link to example](examples/compute/droplet/droplet.md)
+* DigitalOcean LoadBalancer [Link to example](examples/loadbalancer/digioceanloadbalancer/digioceanloadbalancer.md)
+
+Currently, implementations for other cloud providers are being worked on.
 
 ## Installation instructions for Linux (Ubuntu)
 1. Install golang.  
@@ -93,7 +94,7 @@ $ go get cloud.google.com/go/compute/metadata
    Save your DigitalOcean credentials in a file named *digioceancloudconfig.json*.
    ```js
    {
-     "AccessToken": "xxxxxxxxxxxx"
+     "DigiOceanAccessToken": "xxxxxxxxxxxx"
    }
    ```
 
@@ -137,3 +138,5 @@ $ cd gocloud
 $ cd gocloud
 $ go test -v ./...
 ```
+
+<b>Please make sure to delete all your instances, storage blocks, load balancers, containers, and DNS settings once you run the tests by visiting the respective web portals of the cloud providers.</b>

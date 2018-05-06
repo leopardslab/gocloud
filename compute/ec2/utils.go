@@ -6,7 +6,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"github.com/cloudlibz/gocloud/auth"
-	awsauth "github.com/cloudlibz/gocloud/awsauth"
+	awsAuth "github.com/cloudlibz/gocloud/awsauth"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -17,9 +17,8 @@ import (
 func prepareRunParams(options RunInstances) map[string]string {
 	if options.SubnetId != "" || len(options.NetworkInterfaces) > 0 {
 		return makeParamsVPC("RunInstances")
-	} else {
-		return makeParams("RunInstances")
 	}
+	return makeParams("RunInstances")
 }
 
 func makeParams(action string) map[string]string {
@@ -170,7 +169,7 @@ func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string,
 
 	req.URL.RawQuery = query.Encode()
 	auth := map[string]string{"AccessKey": auth.Config.AWSAccessKeyID, "SecretKey": auth.Config.AWSSecretKey}
-	awsauth.SignatureV2(req, auth)
+	awsAuth.SignatureV2(req, auth)
 	r, err := http.DefaultClient.Do(req)
 
 	if err != nil {

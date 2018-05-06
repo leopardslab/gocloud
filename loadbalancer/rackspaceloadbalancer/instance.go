@@ -1,7 +1,7 @@
 package rackspaceloadbalancer
 
-// Creatloadbalancer function creates a new load balancer.
-func (rackspaceloadbalancer *Rackspaceloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
+// Createloadbalancer function creates a new load balancer.
+func (rackspaceloadbalancer *Rackspaceloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
