@@ -49,7 +49,7 @@ func TestCreatesnapshot(t *testing.T) {
 
   create := map[string]interface{}{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e5",
-    "Name": "big-data-snapshot1475261774",
+    "SnapshotName": "big-data-snapshot1475261774",
 	}
 
 	_, err := digioceancloud.Createsnapshot(create)
@@ -80,7 +80,7 @@ func TestAttachdisk(t *testing.T) {
 
   create := map[string]interface{}{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
-    "DropletID": "9978454",
+    "DropletID": 9978454,
     "Region":  "nyc3",
 	}
 
@@ -97,7 +97,7 @@ func TestDetachdisk(t *testing.T) {
 
   delete := map[string]interface{}{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
-    "DropletID": "9978454",
+    "DropletID": 9978454,
     "Region":  "nyc3",
 	}
 
