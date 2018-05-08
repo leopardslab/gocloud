@@ -88,11 +88,58 @@ func (aliStorage *Alistorage) Deletedisk(request interface{}) (resp interface{},
 
 // Createsnapshot create snapshot accept map[string]interface{}
 func (aliStorage *Alistorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
+	var options CreateSnapshot
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "DiskId":
+			diskID, _ := value.(string)
+			options.DiskID = diskID
+		case "SnapshotName":
+			snapshotName, _ := value.(string)
+			options.SnapshotName = snapshotName
+		case "Description":
+			description, _ := value.(string)
+			options.Description = description
+		case "ClientToken":
+			clientToken, _ := value.(string)
+			options.ClientToken = clientToken
+		}
+	}
+	// Put all of options into params
+	params := aliauth.PutStructToMap(&options)
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("CreateSnapshot", params, response)
+	resp = response
 	return resp, err
 }
 
 // Deletesnapshot delete snapshot accept map[string]interface{}
 func (aliStorage *Alistorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
+	var options DeleteSnapshot
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "SnapshotId":
+			snapshotID, _ := value.(string)
+			options.SnapshotID = snapshotID
+		}
+	}
+	// Put all of options into params
+	params := aliauth.PutStructToMap(&options)
+
+	response := make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("DeleteSnapshot", params, response)
+	resp = response
 	return resp, err
 }
 
