@@ -34,3 +34,16 @@ type DetachDisk struct {
 	InstanceID string
 	DiskID     string
 }
+
+// CreateSnapshot to store all attribute of create Ali-cloud ECS-Disk 's Snapshot
+type CreateSnapshot struct {
+	DiskID       string
+	SnapshotName string
+	Description  string
+	ClientToken  string
+}
+
+// DeleteSnapshot to store all attribute of delete Ali-cloud ECS-Disk 's Snapshot
+type DeleteSnapshot struct {
+	SnapshotID string
+}
