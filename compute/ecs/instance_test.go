@@ -21,7 +21,7 @@ func TestCreatenode(t *testing.T) {
 	}
 	_, err := aliEcs.Createnode(create)
 	if err != nil {
-		t.Errorf("Createnode Test Fail")
+		t.Errorf("Createnode Test Fail: %s", err)
 		return
 	}
 	t.Logf("Ali node is created successfully.")
@@ -40,7 +40,7 @@ func TestCreateNodeBuilder(t *testing.T) {
 	}
 	_, err = aliEcs.Createnode(createNode)
 	if err != nil {
-		t.Errorf("Createnode Test Fail")
+		t.Errorf("Createnode Test Fail: %s", err)
 		return
 	}
 	t.Logf("Ali node is created successfully.")
