@@ -80,4 +80,18 @@ type DetachDisk struct {
 ```
 DetachDisk to store all attribute of detach Ali-cloud ECS-Disk from ECS
 
+```
+type DeleteSnapshot struct {
+    SnapshotID string
+}
+```
+DeleteSnapshot to store all attribute of delete Ali-cloud ECS-Disk 's Snapshot
+
+```
+type DetachDisk struct {
+    InstanceID string
+    DiskID     string
+}
+```
+DetachDisk to store all attribute of detach Ali-cloud ECS-Disk from ECS
 
