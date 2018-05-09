@@ -71,7 +71,7 @@ func TestDetachdisk(t *testing.T) {
 func TestCreatesnapshot(t *testing.T) {
 	var alistorage Alistorage
 	createsnapshot := map[string]interface{}{
-		"DiskId":       "d-m5edwiwlyyn7bwz6cdd4",
+		"DiskId":       "d-m5e7k6ycnx8b5zzsm0yp",
 		"SnapshotName": "ThisIsSnapshotName",
 	}
 	_, err := alistorage.Createsnapshot(createsnapshot)
@@ -85,7 +85,7 @@ func TestCreatesnapshot(t *testing.T) {
 func TestDeletesnapshot(t *testing.T) {
 	var alistorage Alistorage
 	deletesnapshot := map[string]interface{}{
-		"SnapshotId": "s-923FE2BF0",
+		"SnapshotId": "s-m5eave3s6oufpctcxynu",
 	}
 	_, err := alistorage.Deletesnapshot(deletesnapshot)
 	if err != nil {
