@@ -6,6 +6,7 @@ import (
 	awsdns "github.com/cloudlibz/gocloud/dns/awsdns"
 	awsloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/awsloadbalancer"
 	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
+	lambda "github.com/cloudlibz/gocloud/serverless/lambda"
 )
 
 //AWS struct reperents amazon cloud provider.
@@ -15,4 +16,5 @@ type AWS struct {
 	awsloadbalancer.Awsloadbalancer
 	awscontainer.Ecscontainer
 	awsdns.Awsdns
+	lambda.Lambda
 }
