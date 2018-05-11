@@ -6,6 +6,7 @@ import (
 	rackspaceloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/rackspaceloadbalancer"
 	rackspacecontainer "github.com/cloudlibz/gocloud/container/rackspacecontainer"
 	rackspacedns "github.com/cloudlibz/gocloud/dns/rackspacedns"
+	rackspaceserverless "github.com/cloudlibz/gocloud/serverless/rackspaceserverless"
 )
 
 // Rackspace  struct represents Rackspace cloud provider.
@@ -15,4 +16,5 @@ type Rackspace struct {
 	rackspaceloadbalancer.Rackspaceloadbalancer
 	rackspacecontainer.Rackspacecontainer
   rackspacedns.Rackspacedns
+	rackspaceserverless.Rackspaceserverless
 }
