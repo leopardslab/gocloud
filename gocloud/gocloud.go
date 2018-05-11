@@ -5,6 +5,7 @@ import (
 	aliAuth "github.com/cloudlibz/gocloud/aliauth"
 	awsAuth "github.com/cloudlibz/gocloud/auth"
 	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	aliauth "github.com/cloudlibz/gocloud/aliauth"
 	"github.com/cloudlibz/gocloud/aws"
 	"github.com/cloudlibz/gocloud/google"
 	"github.com/cloudlibz/gocloud/openstack"
@@ -45,6 +46,11 @@ type Gocloud interface {
 	Createdns(request interface{}) (resp interface{}, err error)
 	Deletedns(request interface{}) (resp interface{}, err error)
 	ListResourcednsRecordSets(request interface{}) (resp interface{}, err error)
+	Getfunction(request interface{}) (resp interface{}, err error)
+	Createfunction(request interface{}) (resp interface{}, err error)
+	Callfunction(request interface{}) (resp interface{}, err error)
+	Listfunction(request interface{}) (resp interface{}, err error)
+	Deletefunction(request interface{}) (resp interface{}, err error)
 }
 
 const (
