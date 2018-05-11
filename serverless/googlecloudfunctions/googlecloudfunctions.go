@@ -185,8 +185,8 @@ func (googlecloudfunctions *Googlecloudfunctions) Getfunction(request interface{
 func (googlecloudfunctions *Googlecloudfunctions) Listfunction(request interface{}) (resp interface{}, err error) {
 
   options := request.(map[string]string)
-
-  url := "https://cloudfunctions.googleapis.com/v1/" + options["name"] + ":call"
+	
+  url := "https://cloudfunctions.googleapis.com/v1/" + options["name"] + "/functions"
 
   client := googleauth.SignJWT()
 
