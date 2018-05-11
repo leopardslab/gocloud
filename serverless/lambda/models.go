@@ -1,5 +1,15 @@
 package lambda
 
+
+type Lambda struct{
+
+}
+
+type Deletefunction struct {
+	FunctionName string
+	Qualifier string
+}
+
 type Createfunction struct {
 
   code Code `json:"Code"`

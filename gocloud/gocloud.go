@@ -4,6 +4,7 @@ import (
 	"fmt"
 	awsAuth "github.com/cloudlibz/gocloud/auth"
 	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	aliauth "github.com/cloudlibz/gocloud/aliauth"
 	"github.com/cloudlibz/gocloud/aws"
 	"github.com/cloudlibz/gocloud/google"
 	"github.com/cloudlibz/gocloud/openstack"
@@ -12,6 +13,7 @@ import (
 	"github.com/cloudlibz/gocloud/aliauth"
 	"github.com/cloudlibz/gocloud/ali"
 	"github.com/cloudlibz/gocloud/rackspace"
+	"github.com/cloudlibz/gocloud/ali"
 )
 
 // Gocloud is a interface which hides the difference between different cloud providers.
@@ -43,6 +45,11 @@ type Gocloud interface {
 	Createdns(request interface{}) (resp interface{}, err error)
 	Deletedns(request interface{}) (resp interface{}, err error)
 	ListResourcednsRecordSets(request interface{}) (resp interface{}, err error)
+	Getfunction(request interface{}) (resp interface{}, err error)
+	Createfunction(request interface{}) (resp interface{}, err error)
+	Callfunction(request interface{}) (resp interface{}, err error)
+	Listfunction(request interface{}) (resp interface{}, err error)
+	Deletefunction(request interface{}) (resp interface{}, err error)
 }
 
 const (
