@@ -6,6 +6,7 @@ import (
 	digioceanloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/digioceanloadbalancer"
 	digioceanstorage "github.com/cloudlibz/gocloud/storage/digioceanstorage"
 	digioceancontainer "github.com/cloudlibz/gocloud/container/digioceancontainer"
+	digioceanserverless "github.com/cloudlibz/gocloud/serverless/digioceanserverless"
 )
 
 // DigitalOcean struct represents DigitalOcean cloud provider.
@@ -15,4 +16,5 @@ type DigitalOcean struct {
 	digioceanloadbalancer.LoadBalancer
 	digioceanstorage.Digioceanstorage
 	digioceancontainer.Digioceancontainer
+	digioceanserverless.Digioceanserverless
 }

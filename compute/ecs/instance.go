@@ -77,6 +77,7 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 
 	// Put all of options into params
 	params = aliauth.PutStructIntoMap(&options)
+
 	response := make(map[string]interface{})
 	err = aliauth.ECSSignAndDoRequest("StopInstance", params, response)
 	resp = response
@@ -111,8 +112,8 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	// Put all of options into params
 	params = aliauth.PutStructIntoMap(&options)
 
-	response := make(map[string]interface{})
-	err = aliauth.ECSSignAndDoRequest("RebootInstance", params, response)
+	response = make(map[string]interface{})
+	err = aliauth.SignAndDoRequest("RebootInstance", params, response)
 	resp = response
 	return resp, err
 }
@@ -137,6 +138,7 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 
 	// Put all of options into params
 	params = aliauth.PutStructIntoMap(&options)
+
 	response := make(map[string]interface{})
 	err = aliauth.ECSSignAndDoRequest("DeleteInstance", params, response)
 	resp = response

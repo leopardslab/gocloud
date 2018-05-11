@@ -1,32 +1,34 @@
 package lambda
 
+func (lambda *Lambda) Getfunction(request interface{}) (resp interface{}, err error) {
 
-
-DELETE /2015-03-31/functions/FunctionName?Qualifier=Qualifier HTTP/1.1
-
-
-
-type Deletefunction struct {
-	FunctionName string
-	Qualifier string
+	return resp, err
 }
 
-func preparedeleteserviceparams(params map[string]interface{}, deletefunction Deletefunction, Region string) {
-	if Region != "" {
-		params["Region"] = Region
-	}
+func (lambda *Lambda) Createfunction(request interface{}) (resp interface{}, err error) {
 
-	if deletefunction.FunctionName != "" {
-		params["FunctionName"] = deletefunction.FunctionName
-	}
+	return resp, err
+}
 
-	if deletefunction.Qualifier != "" {
-		params["Qualifier"] = deletefunction.Qualifier
-	}
+func (lambda *Lambda) Callfunction(request interface{}) (resp interface{}, err error) {
 
+	return resp, err
+}
+
+func (lambda *Lambda) Listfunction(request interface{}) (resp interface{}, err error) {
+
+	return resp, err
 }
 
 
+func (lambda *Lambda) Deletefunction(request interface{}) (resp interface{}, err error) {
+
+	return resp, err
+}
+
+
+
+/*
 func (lambda *Lambda) Deletefunction(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
 	var Region string
@@ -50,15 +52,15 @@ func (lambda *Lambda) Deletefunction(request interface{}) (resp interface{}, err
 	params := make(map[string]interface{})
 	preparedeletefunctionparams(params, deletefunction, Region)
 	response := make(map[string]interface{})
-	err = ecscontainer.PrepareSignatureV4query(params,response)
+	err = lambda.PrepareSignatureV4query(params,response)
 	resp = response
 	return resp, err
 }
 
 
-func (lambda *Lambda) PrepareSignatureV4query(params map[string]string,response map[string]interface{}) error {
-	ECSEndpoint := "https://ecs." + params["Region"] + ".amazonaws.com"
-	service := "ecs"
+func (lambda *Lambda) PrepareSignatureV4query(params map[string]interface{},response map[string]interface{}) error {
+	ECSEndpoint := "https://lambda." + params["Region"] + ".amazonaws.com"
+	service := "lambda"
 	method := "POST"
 	host := service + "." + params["Region"] + ".amazonaws.com"
 	ContentType := "application/x-amz-json-1.1"
@@ -78,3 +80,4 @@ func (lambda *Lambda) PrepareSignatureV4query(params map[string]string,response 
 	response["status"] = resp.StatusCode
 	return err
 }
+*/
