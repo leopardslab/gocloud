@@ -5,6 +5,18 @@ func (alinosql *Alinosql) Listtables(request interface{}) (resp interface{}, err
 	return resp, err
 }
 
+func (alinosql *Alinosql) Deletetables(request interface{}) (resp interface{}, err error) {
+	return resp, err
+}
+
+func (alinosql *Alinosql) Describetables(request interface{}) (resp interface{}, err error) {
+	return resp, err
+}
+
+func (alinosql *Alinosql) Createtables(request interface{}) (resp interface{}, err error) {
+	return resp, err
+}
+
 /*
 func (rackspaceserverless *Rackspaceserverless) Createfunction(request interface{}) (resp interface{}, err error) {
 
