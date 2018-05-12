@@ -7,6 +7,7 @@ import (
 	rackspacecontainer "github.com/cloudlibz/gocloud/container/rackspacecontainer"
 	rackspacedns "github.com/cloudlibz/gocloud/dns/rackspacedns"
 	rackspaceserverless "github.com/cloudlibz/gocloud/serverless/rackspaceserverless"
+	rackspacenosql "github.com/cloudlibz/gocloud/database/rackspacenosql"
 )
 
 // rackspace  struct represents rackspace cloud provider.
@@ -17,4 +18,5 @@ type Rackspace struct {
 	rackspacecontainer.Rackspacecontainer
   rackspacedns.Rackspacedns
 	rackspaceserverless.Rackspaceserverless
+	rackspacenosql.Rackspacenosql
 }
