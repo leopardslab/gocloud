@@ -26,25 +26,6 @@ func TestCreatenode(t *testing.T) {
 	}
 	t.Logf("Ali node is created successfully.")
 }
-func TestCreateNodeBuilder(t *testing.T) {
-	var aliEcs ECS
-	createNode, err := NewCreateNodeBuilder().
-		RegionID("cn-qingdao").
-		ImageID("centos_7_04_64_20G_alibase_201701015.vhd").
-		InstanceType("ecs.xn4.small").
-		SecurityGroupID("sg-m5egbo9s5xb21kpu6nk2").
-		Build()
-	if err != nil {
-		t.Errorf("Createnode Test Fail: %s", err.Error())
-		return
-	}
-	_, err = aliEcs.Createnode(createNode)
-	if err != nil {
-		t.Errorf("Createnode Test Fail: %s", err)
-		return
-	}
-	t.Logf("Ali node is created successfully.")
-}
 
 func TestStartnode(t *testing.T) {
 	var aliEcs ECS
