@@ -6,7 +6,8 @@ import (
 	azureloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/azureloadbalancer"
 	azurecontainer "github.com/cloudlibz/gocloud/container/azurecontainer"
 	azuredns "github.com/cloudlibz/gocloud/dns/azuredns"
-	aliserverless "github.com/cloudlibz/gocloud/serverless/aliserverless"
+	azureserverless "github.com/cloudlibz/gocloud/serverless/azureserverless"
+	azurenosql "github.com/cloudlibz/gocloud/database/azurenosql"
 )
 
 // Azure  struct represents Microsoft Azure cloud provider.
@@ -16,5 +17,6 @@ type Azure struct {
 	azureloadbalancer.Azureloadbalancer
 	azurecontainer.Azurecontainer
   azuredns.Azuredns
-	aliserverless.Aliserverless
+	azureserverless.Azureserverless
+	azurenosql.Azurenosql
 }

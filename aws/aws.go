@@ -7,6 +7,8 @@ import (
 	awsloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/awsloadbalancer"
 	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
 	lambda "github.com/cloudlibz/gocloud/serverless/lambda"
+	dynamodb "github.com/cloudlibz/gocloud/database/dynamodb"
+
 )
 
 //AWS struct reperents amazon cloud provider.
@@ -17,4 +19,5 @@ type AWS struct {
 	awscontainer.Ecscontainer
 	awsdns.Awsdns
 	lambda.Lambda
+	dynamodb.Dynamodb
 }

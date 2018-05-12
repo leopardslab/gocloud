@@ -51,6 +51,7 @@ type Gocloud interface {
 	Callfunction(request interface{}) (resp interface{}, err error)
 	Listfunction(request interface{}) (resp interface{}, err error)
 	Deletefunction(request interface{}) (resp interface{}, err error)
+	Listtables(request interface{}) (resp interface{}, err error)
 }
 
 const (
