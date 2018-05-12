@@ -5,6 +5,19 @@ func (digioceannosql *Digioceannosql) Listtables(request interface{}) (resp inte
 	return resp, err
 }
 
+
+func (digioceannosql *Digioceannosql) Deletetables(request interface{}) (resp interface{}, err error) {
+	return resp, err
+}
+
+
+func (digioceannosql *Digioceannosql) Describetables(request interface{}) (resp interface{}, err error) {
+	return resp, err
+}
+
+func (digioceannosql *Digioceannosql) Createtables(request interface{}) (resp interface{}, err error) {
+	return resp, err
+}
 /*
 func (rackspaceserverless *Rackspaceserverless) Createfunction(request interface{}) (resp interface{}, err error) {
 
