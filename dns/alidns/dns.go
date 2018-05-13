@@ -43,7 +43,7 @@ func (alidns *Alidns) ListResourcednsRecordSets(request interface{}) (resp inter
 	params := aliauth.PutStructToMap(&options)
 
 	response := make(map[string]interface{})
-	err = aliauth.SignAndDoRequest("DescribeDomainRecords", params, response)
+	err = aliauth.DNSSignAndDoRequest("DescribeDomainRecords", params, response)
 	resp = response
 	return resp, err
 }
@@ -82,7 +82,7 @@ func (alidns *Alidns) Listdns(request interface{}) (resp interface{}, err error)
 	params := aliauth.PutStructToMap(&options)
 
 	response := make(map[string]interface{})
-	err = aliauth.SignAndDoRequest("DescribeDomains", params, response)
+	err = aliauth.DNSSignAndDoRequest("DescribeDomains", params, response)
 	resp = response
 	return resp, err
 }
@@ -105,7 +105,7 @@ func (alidns *Alidns) Deletedns(request interface{}) (resp interface{}, err erro
 	params := aliauth.PutStructToMap(&options)
 
 	response := make(map[string]interface{})
-	err = aliauth.SignAndDoRequest("DeleteDomainRecord", params, response)
+	err = aliauth.DNSSignAndDoRequest("DeleteDomainRecord", params, response)
 	resp = response
 	return resp, err
 }
@@ -126,7 +126,7 @@ func (alidns *Alidns) Createdns(request interface{}) (resp interface{}, err erro
 			options.RR = value.(string)
 		case "Type":
 			options.Type = value.(string)
-	    case "Value":
+		case "Value":
 			options.Value = value.(string)
 		case "TTL":
 			switch value.(type) {
@@ -150,7 +150,7 @@ func (alidns *Alidns) Createdns(request interface{}) (resp interface{}, err erro
 	params := aliauth.PutStructToMap(&options)
 
 	response := make(map[string]interface{})
-	err = aliauth.SignAndDoRequest("AddDomainRecord", params, response)
+	err = aliauth.DNSSignAndDoRequest("AddDomainRecord", params, response)
 	resp = response
 	return resp, err
 }

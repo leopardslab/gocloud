@@ -17,11 +17,38 @@ import (
 
 const formatISO8601 = "2006-01-02T15:04:05Z"
 
-// SignAndDoRequest sign and do request by action parameter and specific parameters
-func SignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
+func DNSSignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
 	// Add common params and action param
-	params = initParams(action, params)
+	params["Action"] = action
+	params["Format"] = "XML"
+	params["Version"] = "2015-01-09"
+	params["AccessKeyId"] = Config.AliAccessKeyID
+	params["Timestamp"] = time.Now().UTC().Format(formatISO8601)
+	params["SignatureMethod"] = "HMAC-SHA1"
+	params["SignatureVersion"] = "1.0"
+	params["SignatureNonce"] = createRandomString()
 
+	err := signAndDoRequest("alidns.aliyuncs.com", params, response)
+	return err
+}
+
+func ECSSignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
+	// Add common params and action param
+	params["Action"] = action
+	params["Format"] = "XML"
+	params["Version"] = "2014-05-26"
+	params["AccessKeyId"] = Config.AliAccessKeyID
+	params["TimeStamp"] = time.Now().UTC().Format(formatISO8601)
+	params["SignatureMethod"] = "HMAC-SHA1"
+	params["SignatureVersion"] = "1.0"
+	params["SignatureNonce"] = createRandomString()
+
+	err := signAndDoRequest("ecs.aliyuncs.com", params, response)
+	return err
+}
+
+// signAndDoRequest sign and do request by action parameter and specific parameters
+func signAndDoRequest(domain string, params map[string]interface{}, response map[string]interface{}) error {
 	// Sort the parameters by key
 	keys := make([]string, len(params))
 	i := 0
@@ -52,7 +79,7 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 	}
 
 	// Generate the request URL
-	requestURL := "https://ecs.aliyuncs.com/" + "?" + query.Encode() + "&Signature=" + url.QueryEscape(base64Sign)
+	requestURL := "https://" + domain + "/?" + query.Encode() + "&Signature=" + url.QueryEscape(base64Sign)
 
 	httpReq, err := http.NewRequest("GET", requestURL, nil)
 
@@ -72,7 +99,7 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 	return err
 }
 
-func initParams(action string, params map[string]interface{}) map[string]interface{} {
+func initECSParams(action string, params map[string]interface{}) map[string]interface{} {
 	params["Action"] = action
 
 	params["Format"] = "XML"
