@@ -1,10 +1,5 @@
 package ecs
 
-import (
-	"github.com/cloudlibz/gocloud/aliauth"
-	"errors"
-)
-
 const errCommon = "miss required parameter: "
 
 // CreateInstance to store all attribute to create Ali-cloud ECS instance
