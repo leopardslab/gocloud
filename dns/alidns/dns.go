@@ -1,18 +1,21 @@
 package alidns
 
-//TODO
-func (alidns *Alidns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error)  {
+// ListResourcednsRecordSets list resource DNS record sets accept map[string]interface{}
+func (alidns *Alidns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
-//TODO
-func (alidns *Alidns) Listdns(request interface{}) (resp interface{}, err error)  {
+
+// Listdns list DNS record accept map[string]interface{}
+func (alidns *Alidns) Listdns(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
-//TODO
-func (alidns *Alidns) Deletedns(request interface{}) (resp interface{}, err error)  {
+
+// Deletedns delete DNS record accept map[string]interface{}
+func (alidns *Alidns) Deletedns(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
-//TODO
-func (alidns *Alidns) Createdns(request interface{}) (resp interface{}, err error)  {
+
+// Createdns add DNS record accept map[string]interface{}
+func (alidns *Alidns) Createdns(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
