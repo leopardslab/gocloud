@@ -12,11 +12,12 @@ import (
 	"sort"
 	"net/http"
 	"io/ioutil"
+	"strconv"
 )
 
 const formatISO8601 = "2006-01-02T15:04:05Z"
 
-//Sign and do request by action parameter and specific parameters
+// SignAndDoRequest sign and do request by action parameter and specific parameters
 func SignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
 	// Add common params and action param
 	params = initParams(action, params)
@@ -37,7 +38,7 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 		canonicalizedQueryString += "&"
 		canonicalizedQueryString += percentEncode(k)
 		canonicalizedQueryString += "="
-		canonicalizedQueryString += percentEncode(v.(string))
+		canonicalizedQueryString += percentEncode(getString(v))
 	}
 	stringToSign := "GET" + "&%2F&" + percentEncode(canonicalizedQueryString[1:])
 
@@ -47,7 +48,7 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 	// Init url query
 	query := url.Values{}
 	for key, value := range params {
-		query.Add(key, value.(string))
+		query.Add(key, getString(value))
 	}
 
 	// Generate the request URL
@@ -112,7 +113,7 @@ func percentReplace(str string) string {
 
 const dictionary = "_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
-//CreateRandomString create random string
+// CreateRandomString create random string
 func createRandomString() string {
 	b := make([]byte, 32)
 	l := len(dictionary)
@@ -132,4 +133,17 @@ func createRandomString() string {
 	}
 
 	return string(b)
+}
+
+// getString return string from interface{}
+func getString(v interface{}) string {
+	switch v.(type) {
+	case string:
+		return v.(string)
+	case int:
+		return strconv.Itoa(v.(int))
+	case bool:
+		return strconv.FormatBool(v.(bool))
+	}
+	return ""
 }
