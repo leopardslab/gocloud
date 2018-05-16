@@ -27,7 +27,7 @@ type CreateInstance struct {
 }
 ```
 
-    CreateInstance to store all attribute to create Ali-cloud ECS instance
+CreateInstance to store all attribute to create Ali-cloud ECS instance
 
 ```
 type CreateNodeBuilder struct {
