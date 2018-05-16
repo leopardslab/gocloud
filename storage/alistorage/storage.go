@@ -54,7 +54,7 @@ func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{},
 	}
 
 	// Put all of options into params
-	params := aliauth.PutStructToMap(&options)
+	params := aliauth.PutStructIntoMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.ECSSignAndDoRequest("CreateDisk", params, response)
@@ -78,7 +78,7 @@ func (aliStorage *Alistorage) Deletedisk(request interface{}) (resp interface{},
 		}
 	}
 	// Put all of options into params
-	params := aliauth.PutStructToMap(&options)
+	params := aliauth.PutStructIntoMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.ECSSignAndDoRequest("DeleteDisk", params, response)
@@ -111,7 +111,7 @@ func (aliStorage *Alistorage) Createsnapshot(request interface{}) (resp interfac
 		}
 	}
 	// Put all of options into params
-	params := aliauth.PutStructToMap(&options)
+	params := aliauth.PutStructIntoMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.ECSSignAndDoRequest("CreateSnapshot", params, response)
@@ -135,7 +135,7 @@ func (aliStorage *Alistorage) Deletesnapshot(request interface{}) (resp interfac
 		}
 	}
 	// Put all of options into params
-	params := aliauth.PutStructToMap(&options)
+	params := aliauth.PutStructIntoMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.ECSSignAndDoRequest("DeleteSnapshot", params, response)
@@ -169,7 +169,7 @@ func (aliStorage *Alistorage) Attachdisk(request interface{}) (resp interface{},
 		}
 	}
 	// Put all of options into params
-	params := aliauth.PutStructToMap(&options)
+	params := aliauth.PutStructIntoMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.ECSSignAndDoRequest("AttachDisk", params, response)
@@ -196,7 +196,7 @@ func (aliStorage *Alistorage) Detachdisk(request interface{}) (resp interface{},
 		}
 	}
 	// Put all of options into params
-	params := aliauth.PutStructToMap(&options)
+	params := aliauth.PutStructIntoMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.ECSSignAndDoRequest("DetachDisk", params, response)

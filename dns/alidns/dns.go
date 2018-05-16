@@ -40,7 +40,7 @@ func (alidns *Alidns) ListResourcednsRecordSets(request interface{}) (resp inter
 		}
 	}
 	// Put all of options into params
-	params := aliauth.PutStructToMap(&options)
+	params := aliauth.PutStructIntoMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.DNSSignAndDoRequest("DescribeDomainRecords", params, response)
@@ -79,7 +79,7 @@ func (alidns *Alidns) Listdns(request interface{}) (resp interface{}, err error)
 		}
 	}
 	// Put all of options into params
-	params := aliauth.PutStructToMap(&options)
+	params := aliauth.PutStructIntoMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.DNSSignAndDoRequest("DescribeDomains", params, response)
@@ -102,7 +102,7 @@ func (alidns *Alidns) Deletedns(request interface{}) (resp interface{}, err erro
 		}
 	}
 	// Put all of options into params
-	params := aliauth.PutStructToMap(&options)
+	params := aliauth.PutStructIntoMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.DNSSignAndDoRequest("DeleteDomainRecord", params, response)
@@ -147,7 +147,7 @@ func (alidns *Alidns) Createdns(request interface{}) (resp interface{}, err erro
 		}
 	}
 	// Put all of options into params
-	params := aliauth.PutStructToMap(&options)
+	params := aliauth.PutStructIntoMap(&options)
 
 	response := make(map[string]interface{})
 	err = aliauth.DNSSignAndDoRequest("AddDomainRecord", params, response)

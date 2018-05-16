@@ -146,6 +146,6 @@ func (b *CreateNodeBuilder) Build() (map[string]interface{}, error) {
 	}
 	params := make(map[string]interface{})
 	// Put all of options into params
-	params = aliauth.PutStructToMap(b.params)
+	params = aliauth.PutStructIntoMap(b.params)
 	return params, nil
 }
