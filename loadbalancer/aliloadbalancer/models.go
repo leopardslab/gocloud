@@ -4,6 +4,7 @@ package aliloadbalancer
 type Aliloadbalancer struct {
 }
 
+// CreateLoadBalancer struct represents attribute of create LoadBalancer.
 type CreateLoadBalancer struct {
 	RegionID           string
 	MasterZoneID       string
@@ -21,11 +22,14 @@ type CreateLoadBalancer struct {
 	ClientToken        string
 	ResourceGroupID    string
 }
+
+// DeleteLoadBalancer struct represents attribute of delete LoadBalancer.
 type DeleteLoadBalancer struct {
 	RegionID       string
 	LoadBalancerID string
 }
 
+// ListLoadBalancer struct represents attribute of list LoadBalancer.
 type ListLoadBalancer struct {
 	RegionID              string
 	LoadBalancerID        string
@@ -40,4 +44,17 @@ type ListLoadBalancer struct {
 	ServerID              string
 	MasterZoneID          string
 	SlaveZoneID           string
+}
+
+// AttachLoadBalancer represents Attach node with loadbalancer attribute.
+type AttachLoadBalancer struct {
+	LoadBalancerID string
+	BackendServers string
+}
+
+// DetachLoadBalancer represents Detach node with loadbalancer attribute.
+type DetachLoadBalancer struct {
+	RegionID       string
+	LoadBalancerID string
+	BackendServers string
 }

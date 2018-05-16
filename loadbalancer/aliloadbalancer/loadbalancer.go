@@ -5,7 +5,7 @@ import (
 	"github.com/cloudlibz/gocloud/aliauth"
 )
 
-//TODO
+// Creatloadbalancer creates ali loadbalancer
 func (aliloadbalancer *Aliloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
 	var options CreateLoadBalancer
 
@@ -77,7 +77,7 @@ func (aliloadbalancer *Aliloadbalancer) Creatloadbalancer(request interface{}) (
 	return resp, err
 }
 
-//TODO
+// Deleteloadbalancer deletes ali loadbalancer
 func (aliloadbalancer *Aliloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
 	var options DeleteLoadBalancer
 
@@ -105,7 +105,7 @@ func (aliloadbalancer *Aliloadbalancer) Deleteloadbalancer(request interface{}) 
 	return resp, err
 }
 
-//TODO
+// Listloadbalancer lists ali loadbalancer
 func (aliloadbalancer *Aliloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
 	var options ListLoadBalancer
 
@@ -143,12 +143,61 @@ func (aliloadbalancer *Aliloadbalancer) Listloadbalancer(request interface{}) (r
 	return resp, err
 }
 
-//TODO
+// Detachnodewithloadbalancer detach ali ecs instance from ali loadbalancer
 func (aliloadbalancer *Aliloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+	var options DetachLoadBalancer
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "RegionId":
+			RegionID, _ := value.(string)
+			options.RegionID = RegionID
+		case "LoadBalancerId":
+			LoadBalancerID, _ := value.(string)
+			options.LoadBalancerID = LoadBalancerID
+		case "BackendServers":
+			BackendServers, _ := value.(string)
+			options.BackendServers = BackendServers
+		}
+	}
+
+	// Put all of options into params
+	params := aliauth.PutStructIntoMap(&options)
+
+	response := make(map[string]interface{})
+	err = aliauth.LoadBalancerSignAndDoRequest("RemoveBackendServers", params, response)
+	resp = response
 	return resp, err
 }
 
-//TODO
+//Attachnodewithloadbalancer attach ali ecs instance to ali loadbalancer
 func (aliloadbalancer *Aliloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+	var options AttachLoadBalancer
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "LoadBalancerId":
+			LoadBalancerID, _ := value.(string)
+			options.LoadBalancerID = LoadBalancerID
+		case "BackendServers":
+			BackendServers, _ := value.(string)
+			options.BackendServers = BackendServers
+		}
+	}
+
+	// Put all of options into params
+	params := aliauth.PutStructIntoMap(&options)
+
+	response := make(map[string]interface{})
+	err = aliauth.LoadBalancerSignAndDoRequest("AddBackendServers", params, response)
+	resp = response
 	return resp, err
 }

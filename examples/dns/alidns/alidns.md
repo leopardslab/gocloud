@@ -44,7 +44,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
 
 ### Delete DNS
 
-```
+```js
   deleteDNS := map[string]interface{}{
   		"RecordId": "3888946862348288",
   }
@@ -56,7 +56,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
 
 ### List DNS
 
-```
+```js
   listDNS := map[string]interface{}{
   		"PageNumber": 1,
   		"PageSize":   20,
@@ -69,7 +69,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
 
 ### List resource DNS record sets
 
-```
+```j
   listResourceDNSRecordSets := map[string]interface{}{
   		"DomainName": "oddcn.cn",
   }
