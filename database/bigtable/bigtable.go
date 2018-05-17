@@ -1,5 +1,14 @@
 package bigtable
 
+import(
+	"bytes"
+	"encoding/json"
+	googleauth "github.com/cloudlibz/gocloud/googleauth"
+	"io/ioutil"
+	"net/http"
+	"fmt"
+)
+
 func (bigtable *Bigtable) Listtables(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -10,7 +19,7 @@ func (bigtable *Bigtable) Listtables(request interface{}) (resp interface{}, err
 
 	listbigtablerequest, err := http.NewRequest("GET", url, nil)
 
-	listbigtablerequestparam := bigtablerequest.URL.Query()
+	listbigtablerequestparam := listbigtablerequest.URL.Query()
 
 	if options["pageToken"] != "" {
 		listbigtablerequestparam.Add("pageToken", options["pageToken"])
@@ -79,7 +88,7 @@ func (bigtable *Bigtable) Describetables(request interface{}) (resp interface{},
 
 	defer Describebigtableresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Deletebigtableresp.Body)
+	body, err := ioutil.ReadAll(Describebigtableresp.Body)
 
 	Describebigtableresponse := make(map[string]interface{})
 	Describebigtableresponse["status"] = Describebigtableresp.StatusCode
@@ -90,25 +99,27 @@ func (bigtable *Bigtable) Describetables(request interface{}) (resp interface{},
 
 func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, err error) {
 
-	POST https://bigtableadmin.googleapis.com/v2/{parent=projects/*/instances/*}/tables
+	//POST https://bigtableadmin.googleapis.com/v2/{parent=projects/*/instances/*}/tables
 
 	param := request.(map[string]interface{})
-	var Location string
-	var option Createbigtable
+	var Location, parent string
+	var option  Createbigtable
 
 	for key, value := range param {
 		switch key {
 
-		case "parent":
+		case "Location":
 			LocationV, _ := value.(string)
 			Location = LocationV
 
 
-		case "":
-			HTTPSTriggerV, _ := value.(map[string]string)
-			option.HTTPSTrigger.URL = HTTPSTriggerV["URL"]
+		case "parent":
+	//		HTTPSTriggerV, _ := value.(map[string]string)
+//option.HTTPSTrigger.URL = HTTPSTriggerV["URL"]
 		}
 	}
+
+	fmt.Println(Location);
 
 	Createbigtablejsonmap := make(map[string]interface{})
 
@@ -142,6 +153,6 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 }
 
 
-func Createbigtabledictnoaryconvert(option Createbigtablefunction, CreateGooglecloudfunctionjsonmap map[string]interface{}){
+func Createbigtabledictnoaryconvert(option Createbigtable, Createbigtablejsonmap map[string]interface{}){
 
 }
