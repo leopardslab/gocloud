@@ -10,6 +10,7 @@ import (
 )
 
 func (dynamodb *Dynamodb) Listtables(request interface{}) (resp interface{}, err error) {
+
 	param := request.(map[string]interface{})
 
 	var ExclusiveStartTableName, Limit, Region string
@@ -34,12 +35,13 @@ func (dynamodb *Dynamodb) Listtables(request interface{}) (resp interface{}, err
 
 	preparelisttables(params, ExclusiveStartTableName, Limit, Region)
 
-	listtablesjsonmap := map[string]interface{}{
-	//	"ExclusiveStartTableName":ExclusiveStartTableName ,
-	//	"Limit": Limit,
-	}
+	listtablesjsonmap := map[string]interface{}{}
+
+	listtablesjsonmap["ExclusiveStartTableName"] = ExclusiveStartTableName
+	listtablesjsonmap["Limit"] = Limit
 
 	response := make(map[string]interface{})
+
 	err = dynamodb.PrepareSignatureV4query(params, listtablesjsonmap, response)
 	resp = response
 	return resp, err
