@@ -4,6 +4,7 @@ package dynamodb
 type Dynamodb struct{
 
 }
+/*
 
 type AttributeDefinitions struct {
   AttributeName string `json:"AttributeName"`
@@ -72,3 +73,5 @@ type SSESpecification struct {
 type StreamSpecification struct {
   StreamViewType string `json:"StreamViewType"`
 }
+
+*/
