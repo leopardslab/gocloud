@@ -19,6 +19,8 @@ const formatISO8601 = "2006-01-02T15:04:05Z"
 
 var EcsRegion string
 
+var LoadBalancerRegion string
+
 func LoadBalancerSignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
 	// Add common params and action param
 	params["Action"] = action
@@ -30,7 +32,7 @@ func LoadBalancerSignAndDoRequest(action string, params map[string]interface{}, 
 	params["SignatureVersion"] = "1.0"
 	params["SignatureNonce"] = createRandomString()
 
-	err := signAndDoRequest("slb.aliyuncs.com", params, response)
+	err := signAndDoRequest(LoadBalancerRegion, params, response)
 	return err
 }
 

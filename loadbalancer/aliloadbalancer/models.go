@@ -1,5 +1,7 @@
 package aliloadbalancer
 
+import "github.com/cloudlibz/gocloud/aliauth"
+
 //Aliloadbalancer represents Aliloadbalancer struct.
 type Aliloadbalancer struct {
 }
@@ -57,4 +59,25 @@ type DetachLoadBalancer struct {
 	RegionID       string
 	LoadBalancerID string
 	BackendServers string
+}
+
+func init() {
+	SetRegion(DefaultRegion)
+}
+
+const (
+	DefaultRegion = "slb.aliyuncs.com"
+	Zhangjiakou   = "slb.cn-zhangjiakou.aliyuncs.com"
+	Hohhot        = "slb.cn-huhehaote.aliyuncs.com"
+	Tokyo         = "slb.ap-northeast-1.aliyuncs.com"
+	Sydney        = "slb.ap-southeast-2.aliyuncs.com"
+	KualaLumpur   = "slb.ap-southeast-3.aliyuncs.com"
+	Jakarta       = "slb.ap-southeast-5.aliyuncs.com"
+	Mumbai        = "slb.ap-south-1.aliyuncs.com"
+	Dubai         = "slb.me-east-1.aliyuncs.com"
+	Frankfurt     = "slb.eu-central-1.aliyuncs.com"
+)
+
+func SetRegion(region string) {
+	aliauth.LoadBalancerRegion = region
 }

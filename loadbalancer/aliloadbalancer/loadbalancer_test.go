@@ -12,8 +12,9 @@ func init() {
 
 func TestCreateLoadBalancer(t *testing.T) {
 	var alilb Aliloadbalancer
+	SetRegion(Mumbai)
 	create := map[string]interface{}{
-		"RegionId":           "cn-qingdao",
+		"RegionId":           "ap-south-1",
 		"LoadBalancerName":   "abc",
 		"AddressType":        "internet",
 		"InternetChargeType": "paybytraffic",
