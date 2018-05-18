@@ -17,6 +17,8 @@ import (
 
 const formatISO8601 = "2006-01-02T15:04:05Z"
 
+var EcsRegion string
+
 func LoadBalancerSignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
 	// Add common params and action param
 	params["Action"] = action
@@ -58,7 +60,7 @@ func ECSSignAndDoRequest(action string, params map[string]interface{}, response 
 	params["SignatureVersion"] = "1.0"
 	params["SignatureNonce"] = createRandomString()
 
-	err := signAndDoRequest("ecs.aliyuncs.com", params, response)
+	err := signAndDoRequest(EcsRegion, params, response)
 	return err
 }
 

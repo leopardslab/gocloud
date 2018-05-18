@@ -250,3 +250,11 @@ func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 	resp = response
 	return resp, err
 }
+
+func (ecs *ECS) ListNodeType(request interface{}) (resp interface{}, err error)  {
+	params := make(map[string]interface{})
+	response := make(map[string]interface{})
+	err = aliauth.ECSSignAndDoRequest("DescribeInstanceTypes", params, response)
+	resp = response
+	return resp, err
+}

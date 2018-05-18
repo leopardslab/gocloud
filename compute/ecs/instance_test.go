@@ -3,6 +3,7 @@ package ecs
 import (
 	"github.com/cloudlibz/gocloud/aliauth"
 	"testing"
+	"fmt"
 )
 
 func init() {
@@ -98,4 +99,17 @@ func TestDeletenode(t *testing.T) {
 		return
 	}
 	t.Logf("Ali node is deleted successfully.")
+}
+
+func TestListNodeType(t *testing.T) {
+	var aliEcs ECS
+	SetRegion(Mumbai)
+	resp, err := aliEcs.ListNodeType(nil)
+	if err != nil {
+		t.Errorf("ListNodeType Test Fail")
+		return
+	}
+	response := resp.(map[string]interface{})
+	fmt.Println(response["body"])
+	t.Logf("Ali node type is listed successfully.")
 }
