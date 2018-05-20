@@ -16,8 +16,8 @@ const (
 	RFC3339 = "2006-01-02T15:04:05Z07:00"
 )
 
-//Creatloadbalancer creates google loadbalancer pool.
-func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
+//Createloadbalancer creates google loadbalancer pool.
+func (googleloadbalancer *Googleloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	var option TargetPools
 	var Project string
@@ -85,34 +85,34 @@ func (googleloadbalancer *Googleloadbalancer) Creatloadbalancer(request interfac
 
 	option.CreationTimestamp = time.Now().UTC().Format(time.RFC3339)
 
-	Creatloadbalancerjsonmap := make(map[string]interface{})
+	Createloadbalancerjsonmap := make(map[string]interface{})
 
-	Creatloadbalancerdictnoaryconvert(option, Creatloadbalancerjsonmap)
+	Createloadbalancerdictnoaryconvert(option, Createloadbalancerjsonmap)
 
-	Creatloadbalancerjson, _ := json.Marshal(Creatloadbalancerjsonmap)
+	Createloadbalancerjson, _ := json.Marshal(Createloadbalancerjsonmap)
 
-	Creatloadbalancerjsonstring := string(Creatloadbalancerjson)
+	Createloadbalancerjsonstring := string(Createloadbalancerjson)
 
-	var Creatloadbalancerstringbyte = []byte(Creatloadbalancerjsonstring)
+	var Createloadbalancerstringbyte = []byte(Createloadbalancerjsonstring)
 
 	url := "https://www.googleapis.com/compute/beta/projects/" + Project + "/regions/" + Region + "/targetPools"
 
 	client := googleauth.SignJWT()
 
-	Creatloadbalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Creatloadbalancerstringbyte))
+	Createloadbalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Createloadbalancerstringbyte))
 
-	Creatloadbalancerrequest.Header.Set("Content-Type", "application/json")
+	Createloadbalancerrequest.Header.Set("Content-Type", "application/json")
 
-	Creatloadbalancerresp, err := client.Do(Creatloadbalancerrequest)
+	Createloadbalancerresp, err := client.Do(Createloadbalancerrequest)
 
-	defer Creatloadbalancerresp.Body.Close()
+	defer Createloadbalancerresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Creatloadbalancerresp.Body)
+	body, err := ioutil.ReadAll(Createloadbalancerresp.Body)
 
-	Creatloadbalancerresponse := make(map[string]interface{})
-	Creatloadbalancerresponse["status"] = Creatloadbalancerresp.StatusCode
-	Creatloadbalancerresponse["body"] = string(body)
-	resp = Creatloadbalancerresponse
+	Createloadbalancerresponse := make(map[string]interface{})
+	Createloadbalancerresponse["status"] = Createloadbalancerresp.StatusCode
+	Createloadbalancerresponse["body"] = string(body)
+	resp = Createloadbalancerresponse
 	return resp, err
 }
 

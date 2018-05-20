@@ -1,7 +1,7 @@
 package azureloadbalancer
 
-// Creatloadbalancer function creates a new load balancer.
-func (azureloadbalancer *Azureloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
+// Createloadbalancer function creates a new load balancer.
+func (azureloadbalancer *Azureloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 

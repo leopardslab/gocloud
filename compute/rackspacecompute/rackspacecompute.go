@@ -1,5 +1,5 @@
 package rackspacecompute
 
-// rackspacecompute represents a request to create a rackspace compute instance.
+// Rackspacecompute represents a request to create a Rackspace compute instance.
 type Rackspacecompute struct {
 }

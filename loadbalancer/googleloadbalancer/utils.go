@@ -1,52 +1,52 @@
 package googleloadbalancer
 
-//Creatloadbalancerdictnoaryconvert creates a dictnoary for Creatloadbalancer api.
-func Creatloadbalancerdictnoaryconvert(option TargetPools, Creatloadbalancerjsonmap map[string]interface{}) {
+//Createloadbalancerdictnoaryconvert creates a dictnoary for Createloadbalancer api.
+func Createloadbalancerdictnoaryconvert(option TargetPools, Createloadbalancerjsonmap map[string]interface{}) {
 
 	if option.ID != "" {
-		Creatloadbalancerjsonmap["id"] = option.ID
+		Createloadbalancerjsonmap["id"] = option.ID
 	}
 
 	if len(option.BackupPool) != 0 {
-		Creatloadbalancerjsonmap["backupPool"] = option.BackupPool
+		Createloadbalancerjsonmap["backupPool"] = option.BackupPool
 	}
 
 	if len(option.Instances) != 0 {
-		Creatloadbalancerjsonmap["instances"] = option.Instances
+		Createloadbalancerjsonmap["instances"] = option.Instances
 	}
 
 	if option.FailoverRatio != 0 {
-		Creatloadbalancerjsonmap["failoverRatio"] = option.FailoverRatio
+		Createloadbalancerjsonmap["failoverRatio"] = option.FailoverRatio
 	}
 
 	if (option.CreationTimestamp) != "" {
-		Creatloadbalancerjsonmap["creationTimestamp"] = option.CreationTimestamp
+		Createloadbalancerjsonmap["creationTimestamp"] = option.CreationTimestamp
 	}
 
 	if (option.Description) != "" {
-		Creatloadbalancerjsonmap["description"] = option.Description
+		Createloadbalancerjsonmap["description"] = option.Description
 	}
 
 	if len(option.HealthChecks) != 0 {
-		Creatloadbalancerjsonmap["healthChecks"] = option.HealthChecks
+		Createloadbalancerjsonmap["healthChecks"] = option.HealthChecks
 	}
 
 	if (option.SessionAffinity) != "" {
-		Creatloadbalancerjsonmap["sessionAffinity"] = option.SessionAffinity
+		Createloadbalancerjsonmap["sessionAffinity"] = option.SessionAffinity
 	}
 
 	if option.SelfLink != "" {
-		Creatloadbalancerjsonmap["selfLink"] = option.SelfLink
+		Createloadbalancerjsonmap["selfLink"] = option.SelfLink
 	}
 	if option.Region != "" {
-		Creatloadbalancerjsonmap["region"] = option.Region
+		Createloadbalancerjsonmap["region"] = option.Region
 	}
 
 	if option.Name != "" {
-		Creatloadbalancerjsonmap["name"] = option.Name
+		Createloadbalancerjsonmap["name"] = option.Name
 	}
 
 	if option.Kind != "" {
-		Creatloadbalancerjsonmap["kind"] = option.Kind
+		Createloadbalancerjsonmap["kind"] = option.Kind
 	}
 }

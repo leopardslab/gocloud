@@ -25,7 +25,7 @@ type Tag struct {
 	Value string `xml:"value"`
 }
 
-//Listener represents Listener attribute of Creatloadbalancer.
+//Listener represents Listener attribute of Createloadbalancer.
 type Listener struct {
 	InstancePort     string
 	InstanceProtocol string

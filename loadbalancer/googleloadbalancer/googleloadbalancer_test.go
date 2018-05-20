@@ -2,7 +2,7 @@ package googleloadbalancer
 
 import "testing"
 
-func TestCreatloadbalancer(t *testing.T) {
+func TestCreateloadbalancer(t *testing.T) {
 
 	var googleloadbalancer Googleloadbalancer
 
@@ -13,7 +13,7 @@ func TestCreatloadbalancer(t *testing.T) {
 		"Instances": []string{"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-central1-b/instances/instance-1"},
 	}
 
-	_, err := googleloadbalancer.Creatloadbalancer(creatloadbalancer)
+	_, err := googleloadbalancer.Createloadbalancer(creatloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test Fail")

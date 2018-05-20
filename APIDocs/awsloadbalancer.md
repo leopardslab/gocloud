@@ -18,8 +18,8 @@ type Awsloadbalancer struct {
 func (awsloadbalancer *Awsloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
     Attachnodewithloadbalancer method Attach node with loadbalancer.
 
-func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error)
-    Creatloadbalancer creates classic loadbalancer.
+func (awsloadbalancer *Awsloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error)
+    Createloadbalancer creates classic loadbalancer.
 
 func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error)
     Deleteloadbalancer Delete loadbalancer accept LoadBalancerName.
@@ -58,7 +58,7 @@ type Listener struct {
     Protocol         string
     SSLCertificateId string
 }
-    Listener represents Listener attribute of Creatloadbalancer.
+    Listener represents Listener attribute of Createloadbalancer.
 
 type Tag struct {
     Key   string `xml:"key"`
