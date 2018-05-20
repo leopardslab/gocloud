@@ -59,7 +59,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
 ```js
   create := map[string]interface{}{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e5",
-    "Name": "big-data-snapshot1475261774",
+    "SnapshotName": "big-data-snapshot1475261774",
   }
 
   resp, err := digioceancloud.Createsnapshot(delete)
@@ -86,7 +86,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
 ```js
   create := map[string]interface{}{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
-    "DropletID": "9978454",
+    "DropletID": 9978454,
     "Region":  "nyc3",
   }
 
@@ -101,7 +101,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
 ```js
   delete := map[string]interface{}{
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
-    "DropletID": "9978454",
+    "DropletID": 9978454,
     "Region":  "nyc3",
   }
 

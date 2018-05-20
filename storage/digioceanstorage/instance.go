@@ -170,7 +170,7 @@ func (digioceanstorage *Digioceanstorage) Deletesnapshot(request interface{}) (r
 
 	options := request.(map[string]string)
 
-	url := "https://api.digitalocean.com/v2/snapshts/" + options["SnapshotID"]
+	url := "https://api.digitalocean.com/v2/snapshots/" + options["SnapshotID"]
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken  // Fetch the DigiOceanAccessToken
 
 	deleteSnapshotReq, err := http.NewRequest("DELETE", url, nil)
