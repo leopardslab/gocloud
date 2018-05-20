@@ -71,3 +71,27 @@ func createRandomString() string {
 
 	return string(b)
 }
+func getEndpointWithRegion(region string) string {
+	switch region {
+	case "cn-zhangjiakou":
+		return region
+	case "cn-huhehaote":
+		return region
+	case "ap-northeast-1":
+		return region
+	case "ap-southeast-2":
+		return region
+	case "ap-southeast-3":
+		return region
+	case "ap-southeast-5":
+		return region
+	case "ap-south-1":
+		return region
+	case "me-east-1":
+		return region
+	case "eu-central-1":
+		return region
+	default:
+		return ""
+	}
+}

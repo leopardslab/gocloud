@@ -12,10 +12,6 @@ import (
 
 const formatISO8601 = "2006-01-02T15:04:05Z"
 
-var EcsRegion string
-
-var LoadBalancerRegion string
-
 func LoadBalancerSignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
 	// Add common params and action param
 	params["Action"] = action
@@ -27,7 +23,20 @@ func LoadBalancerSignAndDoRequest(action string, params map[string]interface{}, 
 	params["SignatureVersion"] = "1.0"
 	params["SignatureNonce"] = createRandomString()
 
-	err := signAndDoRequest(LoadBalancerRegion, params, response)
+	var endpoint string
+	if params["RegionID"] != nil {
+		if params["RegionID"].(string) != "" {
+			endpoint = getEndpointWithRegion(params["RegionID"].(string))
+		}
+	}
+
+	if endpoint == "" {
+		endpoint = "slb.aliyuncs.com"
+	} else {
+		endpoint = "slb." + endpoint + ".aliyuncs.com"
+	}
+
+	err := signAndDoRequest(endpoint, params, response)
 	return err
 }
 
@@ -57,12 +66,25 @@ func ECSSignAndDoRequest(action string, params map[string]interface{}, response 
 	params["SignatureVersion"] = "1.0"
 	params["SignatureNonce"] = createRandomString()
 
-	err := signAndDoRequest(EcsRegion, params, response)
+	var endpoint string
+	if params["RegionID"] != nil {
+		if params["RegionID"].(string) != "" {
+			endpoint = getEndpointWithRegion(params["RegionID"].(string))
+		}
+	}
+
+	if endpoint == "" {
+		endpoint = "ecs.aliyuncs.com"
+	} else {
+		endpoint = "ecs." + endpoint + ".aliyuncs.com"
+	}
+
+	err := signAndDoRequest(endpoint, params, response)
 	return err
 }
 
 // signAndDoRequest sign and do request by action parameter and specific parameters
-func signAndDoRequest(domain string, params map[string]interface{}, response map[string]interface{}) error {
+func signAndDoRequest(endpoint string, params map[string]interface{}, response map[string]interface{}) error {
 	// Sort the parameters by key
 	keys := make([]string, len(params))
 	i := 0
@@ -93,7 +115,7 @@ func signAndDoRequest(domain string, params map[string]interface{}, response map
 	}
 
 	// Generate the request URL
-	requestURL := "https://" + domain + "/?" + query.Encode() + "&Signature=" + url.QueryEscape(base64Sign)
+	requestURL := "https://" + endpoint + "/?" + query.Encode() + "&Signature=" + url.QueryEscape(base64Sign)
 
 	httpReq, err := http.NewRequest("GET", requestURL, nil)
 
