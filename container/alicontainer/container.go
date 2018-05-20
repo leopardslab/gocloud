@@ -93,6 +93,25 @@ func (alicontainer *Alicontainer) Createcluster(request interface{}) (resp inter
 
 //TODO
 func (alicontainer *Alicontainer) Deletecluster(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	var regionID string
+	var clusterID string
+
+	for key, value := range param {
+		switch key {
+		case "region_id":
+			regionID, _ = value.(string)
+		case "cluster_id":
+			clusterID, _ = value.(string)
+		}
+	}
+
+	response := make(map[string]interface{})
+	err = aliauth.ContainerSignAndDoRequest(regionID, http.MethodDelete, "/clusters/"+clusterID, nil, nil, response)
+	resp = response
 	return resp, err
 }
 

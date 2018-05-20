@@ -7,7 +7,7 @@ type ECS struct {
 }
 
 func init() {
-	SetRegion(DefaultRegion)
+	SetEndpoint(DefaultRegion)
 }
 
 const (
@@ -23,6 +23,6 @@ const (
 	Frankfurt     = "ecs.eu-central-1.aliyuncs.com"
 )
 
-func SetRegion(region string) {
+func SetEndpoint(region string) {
 	aliauth.EcsRegion = region
 }

@@ -11,7 +11,6 @@ import (
 	"net/http"
 	"time"
 	"io/ioutil"
-	"fmt"
 	"strings"
 )
 
@@ -101,9 +100,9 @@ func generateRequestURL(path string, query map[string]interface{}) (requestURL s
 			queryString += url.QueryEscape(getString(v))
 		}
 
-		requestURL = "http://cs.aliyuncs.com" + path + "?" + queryString[1:]
+		requestURL = "https://cs.aliyuncs.com" + path + "?" + queryString[1:]
 	} else {
-		requestURL = "http://cs.aliyuncs.com" + path
+		requestURL = "https://cs.aliyuncs.com" + path
 	}
 	return requestURL
 }
@@ -121,7 +120,6 @@ func signRequest(request *http.Request) {
 
 	stringToSign := request.Method + "\n" + accept + "\n" + contentMd5 + "\n" + contentType + "\n" + date + "\n" + canonicalizedHeader + canonicalizedResource
 
-	fmt.Printf("stringToSign = %s: \n", stringToSign)
 	signature := createSignature(stringToSign, Config.AliAccessKeySecret)
 	headers.Set("Authorization", "acs "+Config.AliAccessKeyID+":"+signature)
 }

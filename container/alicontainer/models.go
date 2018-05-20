@@ -20,3 +20,6 @@ type CreateCluster struct {
 	NeedSLB          bool   `json:"need_slb"`
 	ReleaseEipFlag   bool   `json:"release_eip_flag"`
 }
+
+type DeleteCluster struct {
+}
