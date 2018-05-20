@@ -23,3 +23,12 @@ type CreateCluster struct {
 
 type DeleteCluster struct {
 }
+
+type StartTask struct {
+	Name        string            `json:"name"`
+	Description string            `json:"description"`
+	Template    string            `json:"template"`
+	Version     string            `json:"version"`
+	Environment map[string]string `json:"environment"`
+	LatestImage bool              `json:"latest_image"`
+}

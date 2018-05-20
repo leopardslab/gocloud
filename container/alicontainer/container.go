@@ -127,6 +127,37 @@ func (alicontainer *Alicontainer) Runtask(request interface{}) (resp interface{}
 
 //TODO
 func (alicontainer *Alicontainer) Starttask(request interface{}) (resp interface{}, err error) {
+	var options StartTask
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+
+	for key, value := range param {
+		switch key {
+		case "name":
+			options.Name, _ = value.(string)
+		case "description":
+			options.Description, _ = value.(string)
+		case "template":
+			options.Template, _ = value.(string)
+		case "version":
+			options.Version, _ = value.(string)
+		case "environment":
+			options.Environment, _ = value.(map[string]string)
+		case "latest_image":
+			switch value.(type) {
+			case bool:
+				options.LatestImage = value.(bool)
+			case string:
+				options.LatestImage = value.(string) == "true" || value.(string) == "True"
+			}
+		}
+	}
+
+	response := make(map[string]interface{})
+	err = aliauth.ContainerSignAndDoRequest("", http.MethodPost, "/projects/", nil, options, response)
+	resp = response
 	return resp, err
 }
 

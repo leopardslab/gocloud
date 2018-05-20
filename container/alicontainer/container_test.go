@@ -40,7 +40,7 @@ func TestDeleteCluster(t *testing.T) {
 	var aliContainer Alicontainer
 	delete := map[string]interface{}{
 		"region_id":  "cn-beijing",
-		"cluster_id": "c52d8ca4d56a94ebd8577db5d84392b71",
+		"cluster_id": "cf02b9dffa1fa45daac18cb436471ff2a",
 	}
 	_, err := aliContainer.Deletecluster(delete)
 	if err != nil {
