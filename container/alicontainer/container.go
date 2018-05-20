@@ -26,6 +26,8 @@ func (alicontainer *Alicontainer) Createcluster(request interface{}) (resp inter
 		case "size":
 			switch value.(type) {
 			case int:
+				options.Size = int64(value.(int))
+			case int64:
 				options.Size = value.(int64)
 			case string:
 				options.Size, _ = strconv.ParseInt(value.(string), 10, 64)
@@ -54,7 +56,9 @@ func (alicontainer *Alicontainer) Createcluster(request interface{}) (resp inter
 		case "data_disk_size":
 			switch value.(type) {
 			case int:
-				options.DataDiskSize = value.(int64)
+				options.Size = int64(value.(int))
+			case int64:
+				options.Size = value.(int64)
 			case string:
 				options.DataDiskSize, _ = strconv.ParseInt(value.(string), 10, 64)
 			}
@@ -82,7 +86,7 @@ func (alicontainer *Alicontainer) Createcluster(request interface{}) (resp inter
 	}
 
 	response := make(map[string]interface{})
-	err = aliauth.ContainerSignAndDoRequest(regionID, http.MethodPost, options, response)
+	err = aliauth.ContainerSignAndDoRequest(regionID, http.MethodPost, "/clusters", nil, options, response)
 	resp = response
 	return resp, err
 }
