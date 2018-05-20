@@ -12,15 +12,84 @@ import (
 	"sort"
 	"net/http"
 	"io/ioutil"
+	"strconv"
 )
 
 const formatISO8601 = "2006-01-02T15:04:05Z"
 
-//Sign and do request by action parameter and specific parameters
-func SignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
+func LoadBalancerSignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
 	// Add common params and action param
-	params = initParams(action, params)
+	params["Action"] = action
+	params["Format"] = "XML"
+	params["Version"] = "2014-05-15"
+	params["AccessKeyId"] = Config.AliAccessKeyID
+	params["Timestamp"] = time.Now().UTC().Format(formatISO8601)
+	params["SignatureMethod"] = "HMAC-SHA1"
+	params["SignatureVersion"] = "1.0"
+	params["SignatureNonce"] = createRandomString()
 
+	var endpoint string
+	if params["RegionID"] != nil {
+		if params["RegionID"].(string) != "" {
+			endpoint = getEndpointWithRegion(params["RegionID"].(string))
+		}
+	}
+
+	if endpoint == "" {
+		endpoint = "slb.aliyuncs.com"
+	} else {
+		endpoint = "slb." + endpoint + ".aliyuncs.com"
+	}
+
+	err := signAndDoRequest(endpoint, params, response)
+	return err
+}
+
+func DNSSignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
+	// Add common params and action param
+	params["Action"] = action
+	params["Format"] = "XML"
+	params["Version"] = "2015-01-09"
+	params["AccessKeyId"] = Config.AliAccessKeyID
+	params["Timestamp"] = time.Now().UTC().Format(formatISO8601)
+	params["SignatureMethod"] = "HMAC-SHA1"
+	params["SignatureVersion"] = "1.0"
+	params["SignatureNonce"] = createRandomString()
+
+	err := signAndDoRequest("alidns.aliyuncs.com", params, response)
+	return err
+}
+
+func ECSSignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
+	// Add common params and action param
+	params["Action"] = action
+	params["Format"] = "XML"
+	params["Version"] = "2014-05-26"
+	params["AccessKeyId"] = Config.AliAccessKeyID
+	params["TimeStamp"] = time.Now().UTC().Format(formatISO8601)
+	params["SignatureMethod"] = "HMAC-SHA1"
+	params["SignatureVersion"] = "1.0"
+	params["SignatureNonce"] = createRandomString()
+
+	var endpoint string
+	if params["RegionID"] != nil {
+		if params["RegionID"].(string) != "" {
+			endpoint = getEndpointWithRegion(params["RegionID"].(string))
+		}
+	}
+
+	if endpoint == "" {
+		endpoint = "ecs.aliyuncs.com"
+	} else {
+		endpoint = "ecs." + endpoint + ".aliyuncs.com"
+	}
+
+	err := signAndDoRequest(endpoint, params, response)
+	return err
+}
+
+// signAndDoRequest sign and do request by action parameter and specific parameters
+func signAndDoRequest(endpoint string, params map[string]interface{}, response map[string]interface{}) error {
 	// Sort the parameters by key
 	keys := make([]string, len(params))
 	i := 0
@@ -37,7 +106,7 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 		canonicalizedQueryString += "&"
 		canonicalizedQueryString += percentEncode(k)
 		canonicalizedQueryString += "="
-		canonicalizedQueryString += percentEncode(v.(string))
+		canonicalizedQueryString += percentEncode(getString(v))
 	}
 	stringToSign := "GET" + "&%2F&" + percentEncode(canonicalizedQueryString[1:])
 
@@ -47,11 +116,11 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 	// Init url query
 	query := url.Values{}
 	for key, value := range params {
-		query.Add(key, value.(string))
+		query.Add(key, getString(value))
 	}
 
 	// Generate the request URL
-	requestURL := "https://ecs.aliyuncs.com/" + "?" + query.Encode() + "&Signature=" + url.QueryEscape(base64Sign)
+	requestURL := "https://" + endpoint + "/?" + query.Encode() + "&Signature=" + url.QueryEscape(base64Sign)
 
 	httpReq, err := http.NewRequest("GET", requestURL, nil)
 
@@ -71,7 +140,7 @@ func SignAndDoRequest(action string, params map[string]interface{}, response map
 	return err
 }
 
-func initParams(action string, params map[string]interface{}) map[string]interface{} {
+func initECSParams(action string, params map[string]interface{}) map[string]interface{} {
 	params["Action"] = action
 
 	params["Format"] = "XML"
@@ -112,7 +181,7 @@ func percentReplace(str string) string {
 
 const dictionary = "_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
-//CreateRandomString create random string
+// CreateRandomString create random string
 func createRandomString() string {
 	b := make([]byte, 32)
 	l := len(dictionary)
@@ -132,4 +201,17 @@ func createRandomString() string {
 	}
 
 	return string(b)
+}
+
+// getString return string from interface{}
+func getString(v interface{}) string {
+	switch v.(type) {
+	case string:
+		return v.(string)
+	case int:
+		return strconv.Itoa(v.(int))
+	case bool:
+		return strconv.FormatBool(v.(bool))
+	}
+	return ""
 }
