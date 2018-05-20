@@ -19,7 +19,7 @@ var Config Configuration
 func LoadConfig() {
 	// Read from file first.
 	var home string = os.Getenv("HOME")
-	file, _ := os.Open(home + "/alicloudconfig.json")
+	file, _ := os.Open(home + "/.gocloud" + "/alicloudconfig.json")
 
 	// Defer the closing of our jsonFile so that we can parse it later on
 	defer file.Close()
