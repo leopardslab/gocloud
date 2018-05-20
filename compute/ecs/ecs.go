@@ -1,13 +1,7 @@
 package ecs
 
-import "github.com/cloudlibz/gocloud/aliauth"
-
 //Ali ECS struct
 type ECS struct {
-}
-
-func init() {
-	SetRegion(DefaultRegion)
 }
 
 const (
@@ -22,7 +16,3 @@ const (
 	Dubai         = "ecs.me-east-1.aliyuncs.com"
 	Frankfurt     = "ecs.eu-central-1.aliyuncs.com"
 )
-
-func SetRegion(region string) {
-	aliauth.EcsRegion = region
-}

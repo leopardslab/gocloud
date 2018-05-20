@@ -103,7 +103,6 @@ func TestDeletenode(t *testing.T) {
 
 func TestListNodeType(t *testing.T) {
 	var aliEcs ECS
-	SetRegion(Mumbai)
 	resp, err := aliEcs.ListNodeType(nil)
 	if err != nil {
 		t.Errorf("ListNodeType Test Fail")
