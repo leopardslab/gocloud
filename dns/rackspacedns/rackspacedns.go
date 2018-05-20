@@ -1,5 +1,5 @@
 package rackspacedns
 
-// rackspacedns struct represents a rackspac service.
+// Rackspacedns struct represents a Rackspace DNS service.
 type Rackspacedns struct {
 }

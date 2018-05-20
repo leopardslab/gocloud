@@ -2,7 +2,7 @@
 
 ## Configure AWS credentials.
 
-Create `amazoncloudconfig.json` in your <b>HOME</b> directory as follows:
+Create `amazoncloudconfig.json` in your <b>HOME/.gocloud</b> directory as follows:
 ```js
 {
   "AWSAccessKeyID": "xxxxxxxxxxxx",
