@@ -2,7 +2,7 @@
 
 ## Configure AWS credentials.
 
-Create `amazoncloudconfig.json` in your <b>HOME</b> directory as follows:
+Create `amazoncloudconfig.json` in your <b>HOME/.gocloud</b> directory as follows:
 ```js
 {
   "AWSAccessKeyID": "xxxxxxxxxxxx",
@@ -45,7 +45,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 	"Subnets":          Subnets,
  }
 
- resp, err := awsloadbalancer.Creatloadbalancer(creatloadbalancer)
+ resp, err := awsloadbalancer.Createloadbalancer(creatloadbalancer)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])

@@ -44,6 +44,8 @@ GoCloud is a golang library which hides the difference between different APIs pr
 ### DigitalOcean
 
 * DigitalOcean Droplet [Link to example](examples/compute/droplet/droplet.md)
+* DigitalOcean LoadBalancer [Link to example](examples/loadbalancer/digiocean_loadbalancer/digioceanloadbalancer.md)
+* DigitalOcean Storage [Link to example](examples/storage/digiocean_storage/digiocean_storage.md)
 
 Currently, implementations for other cloud providers are being worked on.
 
@@ -77,7 +79,7 @@ $ go get golang.org/x/oauth2
 $ go get cloud.google.com/go/compute/metadata
 ```
 
-5. Download your AWS, Google and DigitalOcean access credentials and store them in a file in your <b>HOME</b> directory.  
+5. Create a directory called <b>.gocloud</b> in your <b>HOME/.gocloud</b> directory. Download your AWS, Google and DigitalOcean access credentials and store them in a file in your <b>.gocloud</b> folder.   
 
    #### AWS:
    Save your AWS credentials in a file named *amazoncloudconfig.json*.

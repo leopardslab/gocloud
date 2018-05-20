@@ -7,7 +7,7 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-func TestCreatloadbalancer(t *testing.T) {
+func TestCreateloadbalancer(t *testing.T) {
 	var awsloadbalancer Awsloadbalancer
 	Listeners := []map[string]string{{
 		"InstancePort":     "80",
@@ -26,7 +26,7 @@ func TestCreatloadbalancer(t *testing.T) {
 		"Subnets":          Subnets,
 	}
 
-	awsloadbalancer.Creatloadbalancer(creatloadbalancer)
+	awsloadbalancer.Createloadbalancer(creatloadbalancer)
 }
 
 func TestDeleteloadbalancer(t *testing.T) {

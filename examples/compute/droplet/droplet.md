@@ -2,7 +2,7 @@
 
 ## Configure DigitalOcean credentials.
 
-Create `digioceancloudconfig.json` in your <b>HOME</b> directory as follows:
+Create `digioceancloudconfig.json` in your <b>HOME/.gocloud</b> directory as follows:
 ```js
 {
   "DigiOceanAccessToken": "xxxxxxxxxxxx"

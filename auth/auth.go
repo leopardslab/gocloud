@@ -20,7 +20,7 @@ func LoadConfig() {
 
 	// Read from file first.
 	var home string = os.Getenv("HOME")
-	file, _ := os.Open(home + "/amazoncloudconfig.json")
+	file, _ := os.Open(home + "/.gocloud" + "/amazoncloudconfig.json")
 
 	// Defer the closing of our jsonFile so that we can parse it later on.
 	defer file.Close()

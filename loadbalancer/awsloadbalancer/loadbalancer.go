@@ -1,7 +1,7 @@
 package awsloadbalancer
 
-//Creatloadbalancer creates classic loadbalancer.
-func (awsloadbalancer *Awsloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
+//Createloadbalancer creates classic loadbalancer.
+func (awsloadbalancer *Awsloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	var options CreateLoadBalancer
 
