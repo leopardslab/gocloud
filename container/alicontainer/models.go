@@ -24,11 +24,22 @@ type CreateCluster struct {
 type DeleteCluster struct {
 }
 
-type StartTask struct {
+type RunTask struct {
 	Name        string            `json:"name"`
 	Description string            `json:"description"`
 	Template    string            `json:"template"`
 	Version     string            `json:"version"`
 	Environment map[string]string `json:"environment"`
 	LatestImage bool              `json:"latest_image"`
+}
+
+type clusterCerts struct {
+	CA   string `json:"ca,omitempty"`
+	Key  string `json:"key,omitempty"`
+	Cert string `json:"cert,omitempty"`
+}
+type cluster struct {
+	ClusterID string `json:"cluster_id"`
+	Name      string `json:"name"`
+	MasterURL string `json:"master_url"`
 }

@@ -4,6 +4,13 @@ import (
 	"github.com/cloudlibz/gocloud/aliauth"
 	"strconv"
 	"net/http"
+	"encoding/json"
+	"fmt"
+	"crypto/tls"
+	"crypto/x509"
+	"io/ioutil"
+	"io"
+	"bytes"
 )
 
 //TODO
@@ -122,19 +129,18 @@ func (alicontainer *Alicontainer) Createservice(request interface{}) (resp inter
 
 //TODO
 func (alicontainer *Alicontainer) Runtask(request interface{}) (resp interface{}, err error) {
-	return resp, err
-}
-
-//TODO
-func (alicontainer *Alicontainer) Starttask(request interface{}) (resp interface{}, err error) {
-	var options StartTask
+	var options RunTask
 
 	param := make(map[string]interface{})
 
 	param = request.(map[string]interface{})
 
+	var clusterID string
+
 	for key, value := range param {
 		switch key {
+		case "cluster_id":
+			clusterID = value.(string)
 		case "name":
 			options.Name, _ = value.(string)
 		case "description":
@@ -155,10 +161,81 @@ func (alicontainer *Alicontainer) Starttask(request interface{}) (resp interface
 		}
 	}
 
+	clusterCerts, err := getClusterCerts(clusterID)
+	if err != nil {
+		return
+	}
+	fmt.Println(clusterCerts)
+
+	masterURL, err := getClusterMasterURL(clusterID)
+	if err != nil {
+		return
+	}
+	fmt.Println(masterURL)
+
+	certs, err := tls.X509KeyPair([]byte(clusterCerts.Cert), []byte(clusterCerts.Key))
+	if err != nil {
+		return
+	}
+
+	caCertPool := x509.NewCertPool()
+	caCertPool.AppendCertsFromPEM([]byte(clusterCerts.CA))
+
+	httpClient := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+				Certificates:       []tls.Certificate{certs},
+				ClientCAs:          caCertPool,
+				ClientAuth:         tls.RequireAndVerifyClientCert,
+			},
+		},
+	}
+
+	var reqBody []byte
+
+	// generate request body and Content-MD5
+	reqBody, err = json.Marshal(options)
+	if err != nil {
+		return
+	}
+
+	// generate request url
+	requestURL := masterURL + "/projects/"
+	fmt.Println(requestURL)
+
+	var bodyReader io.Reader
+	if reqBody != nil {
+		bodyReader = bytes.NewReader(reqBody)
+	}
+	httpReq, err := http.NewRequest(http.MethodGet, requestURL, bodyReader)
+	if err != nil {
+		return
+	}
+
+	httpResp, err := httpClient.Do(httpReq)
+	if err != nil {
+		return
+	}
+	defer httpResp.Body.Close()
+
+	body, err := ioutil.ReadAll(httpResp.Body)
+	if err != nil {
+		return
+	}
+
 	response := make(map[string]interface{})
-	err = aliauth.ContainerSignAndDoRequest("", http.MethodPost, "/projects/", nil, options, response)
+
+	response["body"] = string(body)
+	response["status"] = httpResp.StatusCode
+
 	resp = response
 	return resp, err
+}
+
+//TODO
+func (alicontainer *Alicontainer) Starttask(request interface{}) (resp interface{}, err error) {
+	return
 }
 
 //TODO
@@ -169,4 +246,29 @@ func (alicontainer *Alicontainer) Deleteservice(request interface{}) (resp inter
 //TODO
 func (alicontainer *Alicontainer) Stoptask(request interface{}) (resp interface{}, err error) {
 	return resp, err
+}
+
+func getClusterCerts(clusterID string) (certs clusterCerts, err error) {
+	response := make(map[string]interface{})
+	err = aliauth.ContainerSignAndDoRequest("", http.MethodGet, "/clusters/"+clusterID+"/certs", nil, nil, response)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal([]byte(response["body"].(string)), &certs)
+	return
+}
+
+func getClusterMasterURL(clusterID string) (masterURL string, err error) {
+	response := make(map[string]interface{})
+	err = aliauth.ContainerSignAndDoRequest("", http.MethodGet, "/clusters/"+clusterID, nil, nil, response)
+	if err != nil {
+		return
+	}
+	var clusterInfo cluster
+	err = json.Unmarshal([]byte(response["body"].(string)), &clusterInfo)
+	if err != nil {
+		return
+	}
+	masterURL = clusterInfo.MasterURL
+	return
 }

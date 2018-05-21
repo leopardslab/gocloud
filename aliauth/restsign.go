@@ -12,7 +12,12 @@ import (
 	"time"
 	"io/ioutil"
 	"strings"
+	"fmt"
 )
+
+func ContainerTaskSignAndDoRequest()  {
+	
+}
 
 func ContainerSignAndDoRequest(region string, method string, path string, query map[string]interface{}, args interface{}, response map[string]interface{}) error {
 	var reqBody []byte
@@ -30,6 +35,7 @@ func ContainerSignAndDoRequest(region string, method string, path string, query 
 
 	// generate request url
 	requestURL := generateRequestURL(path, query)
+	fmt.Println(requestURL)
 
 	var bodyReader io.Reader
 	if reqBody != nil {
