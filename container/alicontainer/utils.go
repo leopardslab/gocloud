@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"encoding/json"
 	"io/ioutil"
-	"fmt"
 	"io"
 	"bytes"
 	"crypto/x509"
@@ -18,13 +17,11 @@ func clusterProjectSignAndDoRequest(method string, path string, clusterID string
 	if err != nil {
 		return
 	}
-	fmt.Println(clusterCerts)
 
 	masterURL, err := getClusterMasterURL(clusterID)
 	if err != nil {
 		return
 	}
-	fmt.Println(masterURL)
 
 	certs, err := tls.X509KeyPair([]byte(clusterCerts.Cert), []byte(clusterCerts.Key))
 	if err != nil {
@@ -54,11 +51,9 @@ func clusterProjectSignAndDoRequest(method string, path string, clusterID string
 			return
 		}
 	}
-	fmt.Println(string(reqBody))
 
 	// generate request url
 	requestURL := masterURL + path
-	fmt.Println(requestURL)
 
 	var bodyReader io.Reader
 	if reqBody != nil {

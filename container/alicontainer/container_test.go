@@ -72,3 +72,32 @@ func TestRunTask(t *testing.T) {
 	}
 	t.Logf("Ali container project is created successfully.")
 }
+
+func TestStartTask(t *testing.T) {
+	var aliContainer Alicontainer
+	startTask := map[string]interface{}{
+		"cluster_id": "c7adbebc81e9647618a4348b8d92eac2f",
+		"name":       "test",
+	}
+	_, err := aliContainer.Starttask(startTask)
+	if err != nil {
+		t.Errorf("StartTask Test Fail: %s", err)
+		return
+	}
+	t.Logf("Ali container task is started successfully.")
+}
+
+func TestStopTask(t *testing.T) {
+	var aliContainer Alicontainer
+	stopTask := map[string]interface{}{
+		"cluster_id": "c7adbebc81e9647618a4348b8d92eac2f",
+		"name":       "test",
+		"timeout":    20,
+	}
+	_, err := aliContainer.Stoptask(stopTask)
+	if err != nil {
+		t.Errorf("StopTask Test Fail: %s", err)
+		return
+	}
+	t.Logf("Ali container task is stoped successfully.")
+}
