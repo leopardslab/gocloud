@@ -44,8 +44,31 @@ func TestDeleteCluster(t *testing.T) {
 	}
 	_, err := aliContainer.Deletecluster(delete)
 	if err != nil {
-		t.Errorf("CreateCluster Test Fail: %s", err)
+		t.Errorf("DeleteCluster Test Fail: %s", err)
 		return
 	}
-	t.Logf("Ali container is created successfully.")
+	t.Logf("Ali container is deleted successfully.")
+}
+
+func TestRunTask(t *testing.T) {
+	var aliContainer Alicontainer
+	runTask := map[string]interface{}{
+		"cluster_id":  "cc27bc9c9edbc4af5a0a369557e8da39d",
+		"name":        "test",
+		"description": "This is a test application",
+		"template":    "web:\r\n  image: nginx",
+		"version":     "1.0",
+		"environment": map[string]string{"USER": "abc", "PWD": "password",},
+	}
+	resp, err := aliContainer.Runtask(runTask)
+	if err != nil {
+		t.Errorf("Runtask Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 201 {
+		t.Errorf("Runtask Test Fail: %s", err)
+		return
+	}
+	t.Logf("Ali container project is created successfully.")
 }
