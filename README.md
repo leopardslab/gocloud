@@ -52,6 +52,7 @@ Currently, implementations for other cloud providers are being worked on.
 * ECS Compute [Link to example](examples/compute/ecs/ecs.md)
 * ECS Storage [Link to example](examples/storage/alistorage/alistorage.md)
 * Alibaba Cloud DNS [Link to example](examples/dns/alidns/alidns.md)
+* Server Load Balancer [Link to example](examples/loadbalancer/aliloadbalancer/aliloadbalancer.md)
 
 ## Installation instructions for Linux (Ubuntu)
 1. Install golang.  

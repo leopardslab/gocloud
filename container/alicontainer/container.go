@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-//TODO
+// Createcluster creates container cluster
 func (alicontainer *Alicontainer) Createcluster(request interface{}) (resp interface{}, err error) {
 	var options CreateCluster
 
@@ -92,7 +92,7 @@ func (alicontainer *Alicontainer) Createcluster(request interface{}) (resp inter
 	return resp, err
 }
 
-//TODO
+// Deletecluster deletes container cluster
 func (alicontainer *Alicontainer) Deletecluster(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 
@@ -116,13 +116,13 @@ func (alicontainer *Alicontainer) Deletecluster(request interface{}) (resp inter
 	return resp, err
 }
 
-//TODO
+// Createservice Create service is not provided by Alibaba cloud
 func (alicontainer *Alicontainer) Createservice(request interface{}) (resp interface{}, err error) {
 	fmt.Println("\nThis API is not provided by Alibaba cloud")
 	return resp, err
 }
 
-//TODO
+// Runtask creates project of container cluster
 func (alicontainer *Alicontainer) Runtask(request interface{}) (resp interface{}, err error) {
 	var options RunTask
 
@@ -161,7 +161,7 @@ func (alicontainer *Alicontainer) Runtask(request interface{}) (resp interface{}
 	return resp, err
 }
 
-//TODO
+// Runtask starts project of container cluster
 func (alicontainer *Alicontainer) Starttask(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 
@@ -184,13 +184,13 @@ func (alicontainer *Alicontainer) Starttask(request interface{}) (resp interface
 	return resp, err
 }
 
-//TODO
+// Deleteservice delete service is not provided by Alibaba cloud
 func (alicontainer *Alicontainer) Deleteservice(request interface{}) (resp interface{}, err error) {
 	fmt.Println("\nThis API is not provided by Alibaba cloud")
 	return resp, err
 }
 
-//TODO
+// Runtask stops project of container cluster
 func (alicontainer *Alicontainer) Stoptask(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 
