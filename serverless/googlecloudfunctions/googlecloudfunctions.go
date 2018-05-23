@@ -10,6 +10,11 @@ import(
 
 )
 
+const (
+	UnixDate = "Mon Jan _2 15:04:05 MST 2006"
+	RFC3339  = "2006-01-02T15:04:05Z07:00"
+)
+
 type Googlecloudfunctions struct{
 
 }
@@ -21,7 +26,7 @@ type CreateGooglecloudfunction struct {
 	Timeout             string    `json:"timeout"`
 	AvailableMemoryMb   int       `json:"availableMemoryMb"`
 	ServiceAccountEmail string    `json:"serviceAccountEmail"`
-	UpdateTime          time.Time `json:"updateTime"`
+	UpdateTime          string `json:"updateTime"`
 	VersionID           string    `json:"versionId"`
 	SourceUploadURL string `json:"sourceUploadUrl"`
   Labels   labels `json:"labels"`
@@ -55,8 +60,10 @@ func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interfa
 			option.Timeout = TimeoutV
 
 		case "UpdateTime":
-		//	UpdateTimeV, _ := value.(string)
-  //    option.UpdateTime = time.Now().UTC().Format(time.RFC3339)
+			UpdateTimeV, _ := value.(string)
+			option.UpdateTime = UpdateTimeV
+			option.UpdateTime = time.Now().UTC().Format(time.RFC3339)
+
 
 		case "Name":
 			NameV, _ := value.(string)
@@ -128,6 +135,55 @@ func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interfa
 }
 
 func CreateGooglecloudfunctionedictnoaryconvert(option CreateGooglecloudfunction, CreateGooglecloudfunctionjsonmap map[string]interface{}){
+
+	if option.AvailableMemoryMb != 0 {
+		CreateGooglecloudfunctionjsonmap["availableMemoryMb"] = option.AvailableMemoryMb
+	}
+
+	if option.Name != "" {
+		CreateGooglecloudfunctionjsonmap["name"] = option.Name
+	}
+
+
+	if option.Status != "" {
+		CreateGooglecloudfunctionjsonmap["status"] = option.Status
+	}
+
+	if option.EntryPoint != "" {
+		CreateGooglecloudfunctionjsonmap["EntryPoint"] = option.EntryPoint
+	}
+
+	if option.Timeout != "" {
+		CreateGooglecloudfunctionjsonmap["timeout"] = option.Timeout
+	}
+
+	if option.ServiceAccountEmail != "" {
+		CreateGooglecloudfunctionjsonmap["serviceAccountEmail"] = option.ServiceAccountEmail
+	}
+
+	if option.UpdateTime != "" {
+		CreateGooglecloudfunctionjsonmap["updateTime"] = option.UpdateTime
+	}
+
+	if option.VersionID != "" {
+		CreateGooglecloudfunctionjsonmap["versionID"] = option.VersionID
+	}
+
+	if option.ServiceAccountEmail != "" {
+		CreateGooglecloudfunctionjsonmap["sourceUploadURL"] = option.SourceUploadURL
+	}
+
+	if option.Labels.DeploymentTool != "" {
+		labels := make(map[string]string)
+		labels["deployment-tool"] = option.Labels.DeploymentTool
+		CreateGooglecloudfunctionjsonmap["labels"] = labels
+	}
+
+	if option.HTTPSTrigger.URL != "" {
+		labels := make(map[string]string)
+		labels["urls"] = option.HTTPSTrigger.URL
+		CreateGooglecloudfunctionjsonmap["httpsTrigger"] = labels
+	}
 
 }
 
