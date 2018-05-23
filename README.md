@@ -49,6 +49,13 @@ GoCloud is a golang library which hides the difference between different APIs pr
 
 Currently, implementations for other cloud providers are being worked on.
 
+### Ali-cloud
+
+* ECS Compute [Link to example](examples/compute/ecs/ecs.md)
+* ECS Storage [Link to example](examples/storage/alistorage/alistorage.md)
+* Alibaba Cloud DNS [Link to example](examples/dns/alidns/alidns.md)
+* Server Load Balancer [Link to example](examples/loadbalancer/aliloadbalancer/aliloadbalancer.md)
+
 ## Installation instructions for Linux (Ubuntu)
 1. Install golang.  
    ```
@@ -79,7 +86,7 @@ $ go get golang.org/x/oauth2
 $ go get cloud.google.com/go/compute/metadata
 ```
 
-5. Create a directory called <b>.gocloud</b> in your <b>HOME</b> directory. Download your AWS, Google and DigitalOcean access credentials and store them in a file in your <b>.gocloud</b> folder.   
+5. Create a directory called <b>.gocloud</b> in your <b>HOME</b> directory. Download your AWS, Google and DigitalOcean access credentials and store them in a file in your <b>.gocloud</b> folder.
 
    #### AWS:
    Save your AWS credentials in a file named *amazoncloudconfig.json*.
@@ -96,6 +103,14 @@ $ go get cloud.google.com/go/compute/metadata
    ```js
    {
      "DigiOceanAccessToken": "xxxxxxxxxxxx"
+   }
+   ```
+   #### Ali-cloud:
+   Save your Ali-cloud credentials in a file named *alicloudconfig.json*.
+   ```js
+   {
+     "AliAccessKeyID":"xxxxxxxxxxxx",
+     "AliAccessKeySecret":"xxxxxxxxxxxx"
    }
    ```
 
@@ -122,6 +137,12 @@ $ go get cloud.google.com/go/compute/metadata
    ```
    export DigiOceanAccessToken =  "xxxxxxxxxxxx"
    ```
+   #### Ali-cloud:
+   ```
+   export AliAccessKeyID =  "xxxxxxxxxxxx"
+   export AliAccessKeySecret =  "xxxxxxxxxxxx"
+   ```
+
 
 6. You are all set to use gocloud! Check out the following YouTube videos for more information and usage examples:
 https://youtu.be/4LxsAeoonlY?list=PLOdfztY25UNnxK_0KRRHSngJIyVLDKZxq&t=3
