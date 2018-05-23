@@ -81,11 +81,106 @@ func (dynamodb *Dynamodb) Deletetables(request interface{}) (resp interface{}, e
 }
 
 func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, err error) {
+	param := request.(map[string]interface{})
+	var createtable Createtable
+	var  Region string
+
+	for key, value := range param {
+		switch key {
+
+			case "Region":
+				RegionV, _ := value.(string)
+				Region = RegionV
+
+			case "TableName":
+				TableNameV, _ := value.(string)
+				createtable.TableName = TableNameV
+
+			case "StreamSpecification":
+				streamSpecificationparam, _ := value.(map[string]interface{})
+				for streamSpecificationparamkey, streamSpecificationparamvalue := range streamSpecificationparam {
+					switch streamSpecificationparamkey {
+					case "StreamViewType":
+						createtable.streamSpecification.StreamViewType = streamSpecificationparamvalue.(string)
+
+					case "StreamEnabled":
+						createtable.streamSpecification.StreamEnabled = streamSpecificationparamvalue.(bool)
+				}
+			}
+
+
+			case "SSESpecification":
+				sSESpecificationparam, _ := value.(map[string]interface{})
+				for sSESpecificationparamkey, sSESpecificationparamparamvalue := range sSESpecificationparam {
+					switch sSESpecificationparamkey {
+					case "Enabled":
+						createtable.SSESpecification.Enabled = sSESpecificationparamparamvalue["Enabled"]
+					}
+				}
+
+			case "ProvisionedThroughput":
+				provisionedThroughputparam, _ := value.(map[string]interface{})
+				for provisionedThroughputparamkey, provisionedThroughputparamvalue := range provisionedThroughputparam {
+					switch provisionedThroughputparamkey {
+					case "StreamViewType":
+						createtable.provisionedThroughput.ReadCapacityUnits = provisionedThroughputparamvalue.(int)
+
+					case "StreamEnabled":
+						createtable.provisionedThroughput.WriteCapacityUnits = provisionedThroughputparamvalue.(int)
+				}
+			}
+
+			case "keySchema":
+				keySchemaparam, _ := value.(map[string]interface{})
+				for keySchemaparamkey, keySchemaparamvalue := range keySchemaparam {
+					switch keySchemaparamkey {
+					case "AttributeName":
+						createtable.keySchema.AttributeName= keySchemaparamvalue.(int)
+
+					case "KeyType":
+						createtable.keySchema.KeyType  = keySchemaparamvalue.(int)
+				}
+			}
+
+			case "LocalSecondaryIndexes":
+				localSecondaryIndexesparam, _ := value.([]map[string]interface{})
+
+				for i := 0; i < len(localSecondaryIndexesparam); i++ {
+					var localSecondaryIndexes LocalSecondaryIndexes
+					for localSecondaryIndexesparamkey, localSecondaryIndexesparamvalue := range localSecondaryIndexesparam[i] {
+						 switch localSecondaryIndexesparamkey {
+								case "IndexName":
+									containerOverride.Name = localSecondaryIndexesparamvalue.(string)
+
+								case "memoryReservation":
+									containerOverride.MemoryReservation = containerOverrideparamvalue.(string)
+					  }
+				 }
+			 }
+
+
+
+			case "globalSecondaryIndexes":
+
+	}
+
+	params := make(map[string]string)
+
+	preparedescribetables(params, TableName, Region)
+
+	deletetablesjsonmap := map[string]interface{}{
+		"TableName": TableName ,
+	}
+
+	response := make(map[string]interface{})
+	err = dynamodb.PrepareSignatureV4query(params, deletetablesjsonmap, response)
+	resp = response
 	return resp, err
 }
 
 
 func (dynamodb *Dynamodb)Describetables(request interface{}) (resp interface{}, err error) {
+
 	param := request.(map[string]interface{})
 
 	var TableName, Region string
