@@ -114,7 +114,7 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 				for sSESpecificationparamkey, sSESpecificationparamparamvalue := range sSESpecificationparam {
 					switch sSESpecificationparamkey {
 					case "Enabled":
-						createtable.SSESpecification.Enabled = sSESpecificationparamparamvalue["Enabled"]
+						createtable.sSESpecification.Enabled = sSESpecificationparamparamvalue.(bool)
 					}
 				}
 
@@ -135,10 +135,10 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 				for keySchemaparamkey, keySchemaparamvalue := range keySchemaparam {
 					switch keySchemaparamkey {
 					case "AttributeName":
-						createtable.keySchema.AttributeName= keySchemaparamvalue.(int)
+						createtable.keySchema.AttributeName= keySchemaparamvalue.(string)
 
 					case "KeyType":
-						createtable.keySchema.KeyType  = keySchemaparamvalue.(int)
+						createtable.keySchema.KeyType  = keySchemaparamvalue.(string)
 				}
 			}
 
@@ -153,21 +153,26 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 								    localSecondaryIndexes.IndexName = localSecondaryIndexesparamvalue.(string)
 
 								case "keySchema":
-									keySchemaparam, _ := localSecondaryIndexesparamvalue.(map[string]interface{})
-									for keySchemaparamkey, keySchemaparamvalue := range keySchemaparam {
+									keySchemaparam, _ := localSecondaryIndexesparamvalue.([]map[string]interface{})
+									for i := 0; i < len(keySchemaparam); i++ {
+									var keySchema KeySchema
+									for keySchemaparamkey, keySchemaparamvalue := range keySchemaparam[i] {
 										switch keySchemaparamkey {
 											case "AttributeName":
-												localSecondaryIndexes.keySchema.AttributeName = keySchemaparamvalue.(int)
+												keySchema.AttributeName = keySchemaparamvalue.(string)
 
 											case "KeyType":
-												localSecondaryIndexes.keySchema.KeyType  = keySchemaparamvalue.(int)
+												keySchema.KeyType  = keySchemaparamvalue.(string)
 									}
 								}
+
+								localSecondaryIndexes.keySchema = append(localSecondaryIndexes.keySchema, keySchema)
+							}
 
 							case "Projection":
 								projectionparam, _ := localSecondaryIndexesparamvalue.(map[string]interface{})
 								for projectionparamkey, projectionparamvalue := range projectionparam {
-									switch keySchemaparamkey {
+									switch projectionparamkey {
 										case "NonKeyAttributes":
 											localSecondaryIndexes.projection.NonKeyAttributes = projectionparamvalue.([]string)
 
@@ -175,25 +180,96 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 											localSecondaryIndexes.projection.ProjectionType  = projectionparamvalue.(string)
 								}
 							}
-
-
 					  }
 				 }
+				 createtable.localSecondaryIndexes = append(createtable.localSecondaryIndexes, localSecondaryIndexes)
 			 }
 
 
-
 			case "globalSecondaryIndexes":
+				globalSecondaryIndexesparam, _ := value.([]map[string]interface{})
+				for i := 0; i < len(globalSecondaryIndexesparam); i++ {
+					var globalSecondaryIndexes GlobalSecondaryIndexes
+					for globalSecondaryIndexesparamkey, globalSecondaryIndexesparamvalue := range globalSecondaryIndexesparam[i] {
+						 switch globalSecondaryIndexesparamkey {
+								case "IndexName":
+										globalSecondaryIndexes.IndexName = globalSecondaryIndexesparamvalue.(string)
+
+								case "keySchema":
+									keySchemaparam, _ := globalSecondaryIndexesparamvalue.([]map[string]interface{})
+									for i := 0; i < len(keySchemaparam); i++ {
+									var keySchema KeySchema
+									for keySchemaparamkey, keySchemaparamvalue := range keySchemaparam[i] {
+										switch keySchemaparamkey {
+											case "AttributeName":
+												keySchema.AttributeName = keySchemaparamvalue.(string)
+
+											case "KeyType":
+												keySchema.KeyType  = keySchemaparamvalue.(string)
+									}
+								}
+
+								globalSecondaryIndexes.keySchema = append(globalSecondaryIndexes.keySchema, keySchema)
+							}
+
+							case "Projection":
+								projectionparam, _ := globalSecondaryIndexesparamvalue.(map[string]interface{})
+								for projectionparamkey, projectionparamvalue := range projectionparam {
+									switch projectionparamkey {
+										case "NonKeyAttributes":
+											globalSecondaryIndexes.projection.NonKeyAttributes = projectionparamvalue.([]string)
+
+										case "ProjectionType":
+											globalSecondaryIndexes.projection.ProjectionType  = projectionparamvalue.(string)
+								}
+							}
+
+						case "ProvisionedThroughput":
+							provisionedThroughputparam, _ := globalSecondaryIndexesparamvalue.(map[string]interface{})
+							for provisionedThroughputparamkey, provisionedThroughputparamvalue := range provisionedThroughputparam {
+								switch provisionedThroughputparamkey {
+								case "StreamViewType":
+									createtable.provisionedThroughput.ReadCapacityUnits = provisionedThroughputparamvalue.(int)
+
+								case "StreamEnabled":
+									createtable.provisionedThroughput.WriteCapacityUnits = provisionedThroughputparamvalue.(int)
+							}
+						}
+
+
+						}
+				 }
+				 createtable.globalSecondaryIndexes = append(createtable.globalSecondaryIndexes, globalSecondaryIndexes)
+			 }
+
+
+		 case "AttributeDefinitions":
+			attributeDefinitionsparam, _ := value.([]map[string]interface{})
+			for i := 0; i < len(attributeDefinitionsparam); i++ {
+					var attributeDefinitions AttributeDefinitions
+					for attributeDefinitionsparamkey, attributeDefinitionsparamvalue := range attributeDefinitionsparam[i] {
+						switch attributeDefinitionsparamkey {
+						case "AttributeName":
+							attributeDefinitions.AttributeName = attributeDefinitionsparamvalue.(string)
+
+						case "AttributeType":
+							attributeDefinitions.AttributeType = attributeDefinitionsparamvalue.(string)
+					}
+				}
+				createtable.attributeDefinitions = append(createtable.attributeDefinitions, attributeDefinitions)
+		}
+
+
 
 	}
 
 }
 	params := make(map[string]string)
 
+
 	preparedescribetables(params, TableName, Region)
 
 	deletetablesjsonmap := map[string]interface{}{
-		"TableName": TableName ,
 	}
 
 	response := make(map[string]interface{})
