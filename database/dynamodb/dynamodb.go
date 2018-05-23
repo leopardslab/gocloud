@@ -150,10 +150,33 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 					for localSecondaryIndexesparamkey, localSecondaryIndexesparamvalue := range localSecondaryIndexesparam[i] {
 						 switch localSecondaryIndexesparamkey {
 								case "IndexName":
-									containerOverride.Name = localSecondaryIndexesparamvalue.(string)
+								    localSecondaryIndexes.IndexName = localSecondaryIndexesparamvalue.(string)
 
-								case "memoryReservation":
-									containerOverride.MemoryReservation = containerOverrideparamvalue.(string)
+								case "keySchema":
+									keySchemaparam, _ := localSecondaryIndexesparamvalue.(map[string]interface{})
+									for keySchemaparamkey, keySchemaparamvalue := range keySchemaparam {
+										switch keySchemaparamkey {
+											case "AttributeName":
+												localSecondaryIndexes.keySchema.AttributeName = keySchemaparamvalue.(int)
+
+											case "KeyType":
+												localSecondaryIndexes.keySchema.KeyType  = keySchemaparamvalue.(int)
+									}
+								}
+
+							case "Projection":
+								projectionparam, _ := localSecondaryIndexesparamvalue.(map[string]interface{})
+								for projectionparamkey, projectionparamvalue := range projectionparam {
+									switch keySchemaparamkey {
+										case "NonKeyAttributes":
+											localSecondaryIndexes.projection.NonKeyAttributes = projectionparamvalue.([]string)
+
+										case "ProjectionType":
+											localSecondaryIndexes.projection.ProjectionType  = projectionparamvalue.(string)
+								}
+							}
+
+
 					  }
 				 }
 			 }
@@ -164,6 +187,7 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 
 	}
 
+}
 	params := make(map[string]string)
 
 	preparedescribetables(params, TableName, Region)
