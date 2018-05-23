@@ -67,22 +67,42 @@ func(awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{}) 
 
 
 func preparestarttaskparamsdict(createMLModeljsonmap map[string]interface{}, createMLModel CreateMLModel) {
-	if starttask.Cluster != "" {
-		starttaskjsonmap["cluster"] = starttask.Cluster
+
+
+
+
+TrainingDataSourceID
+
+	if createMLModel.MLModelId != "" {
+		createMLModeljsonmap["MLModelId"] = createMLModel.MLModelId
 	}
-	if starttask.TaskDefinition != "" {
-		starttaskjsonmap["taskDefinition"] = starttask.TaskDefinition
-	}
-	if len(starttask.ContainerInstances) != 0 {
-		starttaskjsonmap["containerInstances"] = starttask.ContainerInstances
+	if createMLModel.MLModelName != "" {
+		createMLModeljsonmap["MLModelName"] = createMLModel.MLModelName
 	}
 
-	if starttask.Group != "" {
-		starttaskjsonmap["group"] = starttask.Group
+	if createMLModel.MLModelType != "" {
+		createMLModeljsonmap["MLModelType"] = createMLModel.MLModelType
 	}
-	if starttask.StartedBy != "" {
-		starttaskjsonmap["startedBy"] = starttask.StartedBy
+	if createMLModel.Recipe != "" {
+		createMLModeljsonmap["Recipe"] = createMLModel.Recipe
 	}
+
+	if createMLModel.RecipeURI != "" {
+		createMLModeljsonmap["RecipeURI"] = createMLModel.RecipeURI
+	}
+
+	if createMLModel.TrainingDataSourceID != "" {
+		createMLModeljsonmap["TrainingDataSourceID"] = createMLModel.TrainingDataSourceID
+	}
+
+
+	if createMLModel.Parameters.String != "" {
+		parameters := make(map[string]string)
+		parameters["string"] = createMLModel.Parameters.String
+		createMLModeljsonmap["parameters"] = parameters
+	}
+
+
 }
 
 
