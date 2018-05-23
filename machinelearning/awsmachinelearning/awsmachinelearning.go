@@ -2,8 +2,97 @@ package awsmachinelearning
 
 func(awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{}) (resp interface{}, err error) {
 
+
+
+
+
+
+	param := request.(map[string]interface{})
+
+	var Region string
+  var createMLModel CreateMLModel
+
+	for key, value := range param {
+		switch key {
+			case "MLModelId":
+				TableNameV, _ := value.(string)
+				TableName = TableNameV
+
+			case "Region":
+				RegionV, _ := value.(string)
+				Region = RegionV
+
+			case "MLModelName":
+				MLModelNameV, _ := value.(string)
+				createMLModel.MLModelName = MLModelNameV
+
+			case "MLModelType":
+				MLModelTypeV, _ := value.(string)
+				createMLModel.MLModelType = MLModelTypeV
+
+			case "Recipe":
+				RecipeV, _ := value.(string)
+				createMLModel.Recipe = RecipeV
+
+
+			case "RecipeURI":
+				RecipeURIV, _ := value.(string)
+				createMLModel.RecipeURI = RecipeURIV
+
+
+			case "TrainingDataSourceID":
+				TrainingDataSourceIDV, _ := value.(string)
+				createMLModel.TrainingDataSourceID = TrainingDataSourceIDV
+
+
+			case "String":
+				StringV, _ := value.(string)
+				createMLModel.parameters.String = StringV
+		}
+	}
+
+	params := make(map[string]string)
+
+	preparecreateMLModelparams(params, createMLModel, Region)
+
+	createMLModeljsonmap := make(map[string]interface{})
+
+	preparecreateMLModelparamsdict(createMLModeljsonmap, createMLModel)
+
+	response := make(map[string]interface{})
+	err = awsmachinelearning.PrepareSignatureV4query(params, createMLModeljsonmap, response)
+	resp = response
 	return resp, err
 }
+
+
+func preparestarttaskparamsdict(createMLModeljsonmap map[string]interface{}, createMLModel CreateMLModel) {
+	if starttask.Cluster != "" {
+		starttaskjsonmap["cluster"] = starttask.Cluster
+	}
+	if starttask.TaskDefinition != "" {
+		starttaskjsonmap["taskDefinition"] = starttask.TaskDefinition
+	}
+	if len(starttask.ContainerInstances) != 0 {
+		starttaskjsonmap["containerInstances"] = starttask.ContainerInstances
+	}
+
+	if starttask.Group != "" {
+		starttaskjsonmap["group"] = starttask.Group
+	}
+	if starttask.StartedBy != "" {
+		starttaskjsonmap["startedBy"] = starttask.StartedBy
+	}
+}
+
+
+func preparecreateMLModel(params map[string]string, createMLModel CreateMLModel, Region string) {
+	if Region != "" {
+		params["Region"] = Region
+	}
+	params["amztarget"] = "AmazonML_20141212.CreateMLModel"
+}
+
 
 func(awsmachinelearning *Awsmachinelearning) DeleteMLModel(request interface{}) (resp interface{}, err error) {
 
@@ -33,7 +122,7 @@ func(awsmachinelearning *Awsmachinelearning) DeleteMLModel(request interface{}) 
 	}
 
 	response := make(map[string]interface{})
-	err = dynamodb.PrepareSignatureV4query(params, deletemodeljsonmap, response)
+	err = awsmachinelearning.PrepareSignatureV4query(params, deletemodeljsonmap, response)
 	resp = response
 	return resp, err
 }
@@ -150,7 +239,7 @@ func(awsmachinelearning *Awsmachinelearning) GetMLModel(request interface{}) (re
 	}
 
 	response := make(map[string]interface{})
-	err = dynamodb.PrepareSignatureV4query(params, deletemodeljsonmap, response)
+	err = awsmachinelearning.PrepareSignatureV4query(params, deletemodeljsonmap, response)
 	resp = response
 	return resp, err
 }
@@ -193,7 +282,7 @@ func (awsmachinelearning *Awsmachinelearning) UpdateMLModel(request interface{})
 	}
 
 	response := make(map[string]interface{})
-	err = dynamodb.PrepareSignatureV4query(params, updatemodeljsonmap, response)
+	err = awsmachinelearning.PrepareSignatureV4query(params, updatemodeljsonmap, response)
 	resp = response
 	return resp, err
 }
