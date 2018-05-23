@@ -113,7 +113,13 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 			Location = LocationV
 
 
-		case "parent":
+		case "tableId":
+
+		case "table":
+
+		case "initialSplits":
+
+
 	//		HTTPSTriggerV, _ := value.(map[string]string)
 //option.HTTPSTrigger.URL = HTTPSTriggerV["URL"]
 		}
