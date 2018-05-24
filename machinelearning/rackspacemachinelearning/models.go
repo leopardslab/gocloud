@@ -1,6 +1,4 @@
 package rackspacemachinelearning
 
-
-type Rackspacemachinelearning struct{
-
+type Rackspacemachinelearning struct {
 }

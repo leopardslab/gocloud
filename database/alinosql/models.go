@@ -1,6 +1,4 @@
 package alinosql
 
-
-type Alinosql struct{
-
+type Alinosql struct {
 }

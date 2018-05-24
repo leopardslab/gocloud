@@ -1,6 +1,4 @@
 package openstacknosql
 
-
-type Openstacknosql struct{
-
+type Openstacknosql struct {
 }

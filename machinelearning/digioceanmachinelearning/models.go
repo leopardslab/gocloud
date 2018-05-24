@@ -1,6 +1,4 @@
 package awsmachinelearning
 
-
-type Awsmachinelearning struct{
-
+type Awsmachinelearning struct {
 }

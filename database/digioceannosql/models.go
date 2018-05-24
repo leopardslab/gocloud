@@ -1,6 +1,4 @@
 package digioceannosql
 
-
-type Digioceannosql struct{
-
+type Digioceannosql struct {
 }

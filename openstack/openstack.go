@@ -3,11 +3,11 @@ package openstack
 import (
 	nova "github.com/cloudlibz/gocloud/compute/nova"
 	magnum "github.com/cloudlibz/gocloud/container/magnum"
+	openstacknosql "github.com/cloudlibz/gocloud/database/openstacknosql"
 	designate "github.com/cloudlibz/gocloud/dns/designate"
 	neutron "github.com/cloudlibz/gocloud/loadbalancer/neutron"
-	cinder "github.com/cloudlibz/gocloud/storage/cinder"
 	openstackserverless "github.com/cloudlibz/gocloud/serverless/openstackserverless"
-	openstacknosql "github.com/cloudlibz/gocloud/database/openstacknosql"
+	cinder "github.com/cloudlibz/gocloud/storage/cinder"
 )
 
 //openstack  struct represents openstack cloud provider.

@@ -1,29 +1,29 @@
 package droplet
 
 import (
-  "encoding/json"
+	"encoding/json"
 )
 
 // Droplet represents a request to create a droplet.
 type Droplet struct {
-	Name              string                `json:"name"`
-	Region            string                `json:"region"`
-	Size              string                `json:"size"`
-	Image             CreateImage           `json:"image"`
-	SSHKeys           []CreateSSHKey        `json:"ssh_keys"`
-	Backups           bool                  `json:"backups"`
-	IPv6              bool                  `json:"ipv6"`
-	PrivateNetworking bool                  `json:"privateNetworking"`
-	Monitoring        bool                  `json:"monitoring"`
-	UserData          string                `json:"userData,omitempty"`
-	Volumes           []CreateVolume        `json:"volumes,omitempty"`
-	Tags              []string              `json:"tags"`
+	Name              string         `json:"name"`
+	Region            string         `json:"region"`
+	Size              string         `json:"size"`
+	Image             CreateImage    `json:"image"`
+	SSHKeys           []CreateSSHKey `json:"ssh_keys"`
+	Backups           bool           `json:"backups"`
+	IPv6              bool           `json:"ipv6"`
+	PrivateNetworking bool           `json:"privateNetworking"`
+	Monitoring        bool           `json:"monitoring"`
+	UserData          string         `json:"userData,omitempty"`
+	Volumes           []CreateVolume `json:"volumes,omitempty"`
+	Tags              []string       `json:"tags"`
 }
 
 // CreateImage identifies an image for the create request. It prefers slug over ID.
 type CreateImage struct {
-	ID   int	`json:"id,omitempty"`
-	Slug string	`json:"name,omitempty"`
+	ID   int    `json:"id,omitempty"`
+	Slug string `json:"name,omitempty"`
 }
 
 // MarshalJSON returns either the slug or id of the image. It returns the id
@@ -75,7 +75,6 @@ func (d CreateVolume) MarshalJSON() ([]byte, error) {
 
 // ActionRequest reprents DigitalOcean Action Request
 type ActionRequest map[string]interface{}
-
 
 /*
 Extra structs related to Droplet. May be used in the future.

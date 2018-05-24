@@ -1,5 +1,4 @@
 package magnum
 
-type Magnum struct{
-
+type Magnum struct {
 }

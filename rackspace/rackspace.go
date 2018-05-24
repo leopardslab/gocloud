@@ -2,12 +2,12 @@ package rackspace
 
 import (
 	rackspacecompute "github.com/cloudlibz/gocloud/compute/rackspacecompute"
-	rackspacestorage "github.com/cloudlibz/gocloud/storage/rackspacestorage"
-	rackspaceloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/rackspaceloadbalancer"
 	rackspacecontainer "github.com/cloudlibz/gocloud/container/rackspacecontainer"
-	rackspacedns "github.com/cloudlibz/gocloud/dns/rackspacedns"
-	rackspaceserverless "github.com/cloudlibz/gocloud/serverless/rackspaceserverless"
 	rackspacenosql "github.com/cloudlibz/gocloud/database/rackspacenosql"
+	rackspacedns "github.com/cloudlibz/gocloud/dns/rackspacedns"
+	rackspaceloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/rackspaceloadbalancer"
+	rackspaceserverless "github.com/cloudlibz/gocloud/serverless/rackspaceserverless"
+	rackspacestorage "github.com/cloudlibz/gocloud/storage/rackspacestorage"
 )
 
 // rackspace  struct represents rackspace cloud provider.
@@ -16,7 +16,7 @@ type Rackspace struct {
 	rackspacestorage.Rackspacestorage
 	rackspaceloadbalancer.Rackspaceloadbalancer
 	rackspacecontainer.Rackspacecontainer
-  rackspacedns.Rackspacedns
+	rackspacedns.Rackspacedns
 	rackspaceserverless.Rackspaceserverless
 	rackspacenosql.Rackspacenosql
 }

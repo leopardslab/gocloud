@@ -1,14 +1,14 @@
 package droplet
 
 import (
-  digioceanauth "github.com/cloudlibz/gocloud/digioceanauth"
-  "bytes"
-  "fmt"
-  "io/ioutil"
+	"bytes"
+	"encoding/json"
+	"errors"
+	"fmt"
+	digioceanauth "github.com/cloudlibz/gocloud/digioceanauth"
+	"io/ioutil"
 	"net/http"
-  "encoding/json"
-  "strconv"
-  "errors"
+	"strconv"
 )
 
 // dropletBasePath is the endpoint URL for digitalocean API.
@@ -17,99 +17,99 @@ const dropletBasePath = "https://api.digitalocean.com/v2/droplets"
 // Createnode function creates a new droplet.
 func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err error) {
 
-  var DropletInstance Droplet // Initialize Droplet struct
-  AccessToken := digioceanauth.Token.AccessToken  // Fetch the AccessToken
+	var DropletInstance Droplet                    // Initialize Droplet struct
+	AccessToken := digioceanauth.Token.AccessToken // Fetch the AccessToken
 
-  param := make(map[string]interface{})
-  param = request.(map[string]interface{})
+	param := make(map[string]interface{})
+	param = request.(map[string]interface{})
 
-  for key, value := range param {
+	for key, value := range param {
 
-    switch key {
+		switch key {
 
-    case "Name":
-      name, _ := value.(string)
-      DropletInstance.Name = name
+		case "Name":
+			name, _ := value.(string)
+			DropletInstance.Name = name
 
-    case "Region":
-      region, _ := value.(string)
-      DropletInstance.Region = region
+		case "Region":
+			region, _ := value.(string)
+			DropletInstance.Region = region
 
-    case "Size":
-      size, _ := value.(string)
-      DropletInstance.Size = size
+		case "Size":
+			size, _ := value.(string)
+			DropletInstance.Size = size
 
-    case "Image":
-    imageparam, _ := value.(map[string]interface{})
-    for key, value := range imageparam {
-      switch key {
-        case "ID":
-          id, _ := value.(int)
-          DropletInstance.Image.ID = id
-          break
-    		case "Slug":
-          slug, _ := value.(string)
-          DropletInstance.Image.Slug = slug
-          break
-        }
-      }
+		case "Image":
+			imageparam, _ := value.(map[string]interface{})
+			for key, value := range imageparam {
+				switch key {
+				case "ID":
+					id, _ := value.(int)
+					DropletInstance.Image.ID = id
+					break
+				case "Slug":
+					slug, _ := value.(string)
+					DropletInstance.Image.Slug = slug
+					break
+				}
+			}
 
-    case "SSHKeys":
-      sshkeyparam, _ := value.([]map[string]string)
-      for i := 0; i < len(sshkeyparam); i++ {
-        var dropletCreateSSHKey CreateSSHKey
-        dropletCreateSSHKey.ID = sshkeyparam[i]["ID"]
-        dropletCreateSSHKey.Fingerprint = sshkeyparam[i]["Fingerprint"]
-        DropletInstance.SSHKeys = append(DropletInstance.SSHKeys, dropletCreateSSHKey)
-      }
+		case "SSHKeys":
+			sshkeyparam, _ := value.([]map[string]string)
+			for i := 0; i < len(sshkeyparam); i++ {
+				var dropletCreateSSHKey CreateSSHKey
+				dropletCreateSSHKey.ID = sshkeyparam[i]["ID"]
+				dropletCreateSSHKey.Fingerprint = sshkeyparam[i]["Fingerprint"]
+				DropletInstance.SSHKeys = append(DropletInstance.SSHKeys, dropletCreateSSHKey)
+			}
 
-    case "Volumes":
-      volumeparam, _ := value.([]map[string]string)
-      for i := 0; i < len(volumeparam); i++ {
-        var dropletCreateVolume CreateVolume
-        dropletCreateVolume.ID = volumeparam[i]["ID"]
-        dropletCreateVolume.Name = volumeparam[i]["Name"]
-        DropletInstance.Volumes = append(DropletInstance.Volumes, dropletCreateVolume)
-      }
+		case "Volumes":
+			volumeparam, _ := value.([]map[string]string)
+			for i := 0; i < len(volumeparam); i++ {
+				var dropletCreateVolume CreateVolume
+				dropletCreateVolume.ID = volumeparam[i]["ID"]
+				dropletCreateVolume.Name = volumeparam[i]["Name"]
+				DropletInstance.Volumes = append(DropletInstance.Volumes, dropletCreateVolume)
+			}
 
-    case "Backups":
-      backups, _ := value.(bool)
-      DropletInstance.Backups = backups
+		case "Backups":
+			backups, _ := value.(bool)
+			DropletInstance.Backups = backups
 
-    case "IPv6":
-      ipv6, _ := value.(bool)
-      DropletInstance.IPv6 = ipv6
+		case "IPv6":
+			ipv6, _ := value.(bool)
+			DropletInstance.IPv6 = ipv6
 
-    case "PrivateNetworking":
-      privateNetworking, _ := value.(bool)
-      DropletInstance.PrivateNetworking = privateNetworking
+		case "PrivateNetworking":
+			privateNetworking, _ := value.(bool)
+			DropletInstance.PrivateNetworking = privateNetworking
 
-    case "Monitoring":
-      monitoring, _ := value.(bool)
-      DropletInstance.Monitoring = monitoring
+		case "Monitoring":
+			monitoring, _ := value.(bool)
+			DropletInstance.Monitoring = monitoring
 
-    case "UserData":
-      userData, _ := value.(string)
-      DropletInstance.UserData = userData
+		case "UserData":
+			userData, _ := value.(string)
+			DropletInstance.UserData = userData
 
-    case "Tags":
-      tags, _ := value.([]string)
-      DropletInstance.Tags = tags
+		case "Tags":
+			tags, _ := value.([]string)
+			DropletInstance.Tags = tags
 
-    } // Closes switch-case
+		} // Closes switch-case
 
-  } // Closes for loop
+	} // Closes for loop
 
-  dropletInstanceJSON, _ := json.Marshal(DropletInstance)
-  dropletInstanceJSONString := string(dropletInstanceJSON)
-  var dropletInstanceJSONStringbyte = []byte(dropletInstanceJSONString)
+	dropletInstanceJSON, _ := json.Marshal(DropletInstance)
+	dropletInstanceJSONString := string(dropletInstanceJSON)
+	var dropletInstanceJSONStringbyte = []byte(dropletInstanceJSONString)
 
-  Createnodereq, err := http.NewRequest("POST", dropletBasePath, bytes.NewBuffer(dropletInstanceJSONStringbyte))
-  if err != nil {
-    fmt.Println(err)
-  }
-  Createnodereq.Header.Set("Content-Type", "application/json")
-  Createnodereq.Header.Set("Authorization", "Bearer " + AccessToken)
+	Createnodereq, err := http.NewRequest("POST", dropletBasePath, bytes.NewBuffer(dropletInstanceJSONStringbyte))
+	if err != nil {
+		fmt.Println(err)
+	}
+	Createnodereq.Header.Set("Content-Type", "application/json")
+	Createnodereq.Header.Set("Authorization", "Bearer "+AccessToken)
 
 	Createnoderesp, err := http.DefaultClient.Do(Createnodereq)
 	if err != nil {
@@ -119,7 +119,7 @@ func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err e
 	defer Createnoderesp.Body.Close()
 
 	responseBody, err := ioutil.ReadAll(Createnoderesp.Body)
-  Createnoderesponse := make(map[string]interface{})
+	Createnoderesponse := make(map[string]interface{})
 	Createnoderesponse["status"] = Createnoderesp.StatusCode
 	Createnoderesponse["body"] = string(responseBody)
 	resp = Createnoderesponse
@@ -132,27 +132,27 @@ func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err e
 func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
-  inputID, err := strconv.Atoi(options["ID"])
-  if err != nil {
-    fmt.Println(err)
-  }
-  if inputID < 1 {
+	inputID, err := strconv.Atoi(options["ID"])
+	if err != nil {
+		fmt.Println(err)
+	}
+	if inputID < 1 {
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
-	AccessToken := digioceanauth.Token.AccessToken  // Fetch the AccessToken
+	AccessToken := digioceanauth.Token.AccessToken // Fetch the AccessToken
 
 	startRequest := &ActionRequest{"type": "power_on"}
 	startRequestJSON, _ := json.Marshal(startRequest)
-  startRequestJSONString := string(startRequestJSON)
-  var startRequestJSONStringbyte = []byte(startRequestJSONString)
+	startRequestJSONString := string(startRequestJSON)
+	var startRequestJSONStringbyte = []byte(startRequestJSONString)
 
 	Startnodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(startRequestJSONStringbyte))
 	if err != nil {
 		fmt.Println(err)
 	}
 	Startnodereq.Header.Set("Content-Type", "application/json")
-	Startnodereq.Header.Set("Authorization", "Bearer " + AccessToken)
+	Startnodereq.Header.Set("Authorization", "Bearer "+AccessToken)
 
 	Startnoderesp, err := http.DefaultClient.Do(Startnodereq)
 	if err != nil {
@@ -174,27 +174,27 @@ func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err er
 func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
-  inputID, err := strconv.Atoi(options["ID"])
-  if err != nil {
-    fmt.Println(err)
-  }
-  if inputID < 1 {
+	inputID, err := strconv.Atoi(options["ID"])
+	if err != nil {
+		fmt.Println(err)
+	}
+	if inputID < 1 {
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
-	AccessToken := digioceanauth.Token.AccessToken  // Fetch the AccessToken
+	AccessToken := digioceanauth.Token.AccessToken // Fetch the AccessToken
 
 	stopRequest := &ActionRequest{"type": "power_off"}
 	stopRequestJSON, _ := json.Marshal(stopRequest)
-  stopRequestJSONString := string(stopRequestJSON)
-  var stopRequestJSONStringbyte = []byte(stopRequestJSONString)
+	stopRequestJSONString := string(stopRequestJSON)
+	var stopRequestJSONStringbyte = []byte(stopRequestJSONString)
 
 	Stopnodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(stopRequestJSONStringbyte))
 	if err != nil {
 		fmt.Println(err)
 	}
 	Stopnodereq.Header.Set("Content-Type", "application/json")
-	Stopnodereq.Header.Set("Authorization", "Bearer " + AccessToken)
+	Stopnodereq.Header.Set("Authorization", "Bearer "+AccessToken)
 
 	Stopnoderesp, err := http.DefaultClient.Do(Stopnodereq)
 	if err != nil {
@@ -216,27 +216,27 @@ func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err err
 func (droplet *Droplet) Rebootnode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
-  inputID, err := strconv.Atoi(options["ID"])
-  if err != nil {
-    fmt.Println(err)
-  }
-  if inputID < 1 {
+	inputID, err := strconv.Atoi(options["ID"])
+	if err != nil {
+		fmt.Println(err)
+	}
+	if inputID < 1 {
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
-	AccessToken := digioceanauth.Token.AccessToken  // Fetch the AccessToken
+	AccessToken := digioceanauth.Token.AccessToken // Fetch the AccessToken
 
 	rebootRequest := &ActionRequest{"type": "reboot"}
 	rebootRequestJSON, _ := json.Marshal(rebootRequest)
-  rebootRequestJSONString := string(rebootRequestJSON)
-  var rebootRequestJSONStringbyte = []byte(rebootRequestJSONString)
+	rebootRequestJSONString := string(rebootRequestJSON)
+	var rebootRequestJSONStringbyte = []byte(rebootRequestJSONString)
 
 	Rebootnodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(rebootRequestJSONStringbyte))
 	if err != nil {
 		fmt.Println(err)
 	}
 	Rebootnodereq.Header.Set("Content-Type", "application/json")
-	Rebootnodereq.Header.Set("Authorization", "Bearer " + AccessToken)
+	Rebootnodereq.Header.Set("Authorization", "Bearer "+AccessToken)
 
 	Rebootnoderesp, err := http.DefaultClient.Do(Rebootnodereq)
 	if err != nil {
@@ -258,23 +258,23 @@ func (droplet *Droplet) Rebootnode(request interface{}) (resp interface{}, err e
 func (droplet *Droplet) Deletenode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
-  inputID, err := strconv.Atoi(options["ID"])
-  if err != nil {
-    fmt.Println(err)
-  }
-  if inputID < 1 {
+	inputID, err := strconv.Atoi(options["ID"])
+	if err != nil {
+		fmt.Println(err)
+	}
+	if inputID < 1 {
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 
 	url := dropletBasePath + "/" + options["ID"]
-	AccessToken := digioceanauth.Token.AccessToken  // Fetch the AccessToken
+	AccessToken := digioceanauth.Token.AccessToken // Fetch the AccessToken
 
 	Deletenoderequest, err := http.NewRequest("DELETE", url, nil)
 	if err != nil {
 		fmt.Println(err)
 	}
 	Deletenoderequest.Header.Set("Content-Type", "application/json")
-	Deletenoderequest.Header.Set("Authorization", "Bearer " + AccessToken)
+	Deletenoderequest.Header.Set("Authorization", "Bearer "+AccessToken)
 
 	Deletenoderesp, err := http.DefaultClient.Do(Deletenoderequest)
 	if err != nil {

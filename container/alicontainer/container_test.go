@@ -1,8 +1,8 @@
 package alicontainer
 
 import (
-	"testing"
 	"github.com/cloudlibz/gocloud/aliauth"
+	"testing"
 )
 
 func init() {
@@ -58,7 +58,7 @@ func TestRunTask(t *testing.T) {
 		"description": "This is a test application",
 		"template":    "web:\r\n  image: nginx",
 		"version":     "1.0",
-		"environment": map[string]string{"USER": "abc", "PWD": "password",},
+		"environment": map[string]string{"USER": "abc", "PWD": "password"},
 	}
 	resp, err := aliContainer.Runtask(runTask)
 	if err != nil {

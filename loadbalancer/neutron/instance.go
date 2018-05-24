@@ -1,6 +1,5 @@
 package neutron
 
-
 func (neutron *Neutron) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

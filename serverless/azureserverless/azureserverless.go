@@ -20,7 +20,6 @@ func (azureserverless *Azureserverless) Listfunction(request interface{}) (resp 
 	return resp, err
 }
 
-
 func (azureserverless *Azureserverless) Deletefunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
