@@ -289,6 +289,7 @@ func preparecreatetablejsonmap(createtablejsonmap map[string]interface{}, create
 	preparecreatetableProvisionedThroughputparams(createtablejsonmap,createtable)
 	preparekeySchemaparams(createtablejsonmap,createtable)
 	prepareAttributeDefinitionsparams(createtablejsonmap,createtable)
+	prepareLocalSecondaryIndexesparams(createtablejsonmap,createtable)
 
 }
 
@@ -381,6 +382,72 @@ func preparekeySchemaparams(createtablejsonmap map[string]interface{}, createtab
 }
 
 
+func prepareLocalSecondaryIndexesparams(createtablejsonmap map[string]interface{}, createtable Createtable) {
+
+		if len(createtable.localSecondaryIndexes) != 0 {
+
+				localSecondaryIndexesvarrayjsonmap := make([]map[string]interface{},0)
+
+				for(i:=0;i< len(localSecondaryIndexes); i++){
+
+					localSecondaryIndexesvjsonmap := make(map[string]interface{})
+
+					localSecondaryIndexesvjsonmap["IndexName"]	=localSecondaryIndexes[i].IndexName
+
+					if(createtable.projection!=Projection{}){
+
+						projectionv := make(map[string]interface{})
+						projectionv["ProjectionType"] = localSecondaryIndexes[i].projection.ProjectionType
+						projectionv["NonKeyAttributes"] =  localSecondaryIndexes[i].projection.NonKeyAttributes
+					}
+
+				 localSecondaryIndexesvarrayjsonmap["LocalSecondaryIndexes"] = append(localSecondaryIndexesvarrayjsonmap["LocalSecondaryIndexes"],localSecondaryIndexesvjsonmap)
+				}
+		}
+}
+
+
+/*
+func prepareLocalSecondaryIndexesparams(createtablejsonmap map[string]interface{}, createtable Createtable) {
+
+	if len(createtable.localSecondaryIndexes) != 0 {
+
+		localSecondaryIndexesvarrayjsonmap := make([]map[string]interface{}, 0)
+
+		for(i:=0;i< len(localSecondaryIndexes); i++){
+
+			localSecondaryIndexesvjsonmap := make(map[string]interface{})
+
+			if len(createtable.localSecondaryIndexes[i].keySchema) != 0 {
+
+				keySchemavs := make([]map[string]interface{}, 0)
+
+				for i := 0; i < len(createtable.localSecondaryIndexes[i].keySchema); i++ {
+
+					keySchemav := make(map[string]interface{})
+
+
+					if createtable.localSecondaryIndexes[i].keySchema[i].AttributeName != "" {
+						keySchemav["AttributeName"] = createtable.localSecondaryIndexes[i].keySchema[i].AttributeName
+					}
+
+					if createtable.localSecondaryIndexes[i].keySchema[i].KeyType != "" {
+						keySchemav["KeyType"] = createtable.localSecondaryIndexes[i].keySchema[i].KeyType
+					}
+
+					keySchemavs = append(keySchemavs, keySchemav)
+				}
+
+				localSecondaryIndexesvjsonmap["KeySchema"] = keySchemavs
+			}
+
+
+			localSecondaryIndexesvarrayjsonmap = append(localSecondaryIndexesvarrayjsonmap, localSecondaryIndexesvjsonmap)
+		}
+	}
+
+}
+*/
 
 func (dynamodb *Dynamodb) Describetables(request interface{}) (resp interface{}, err error) {
 
