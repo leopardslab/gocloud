@@ -29,7 +29,7 @@ type Createtable struct {
 	attributeDefinitions   []AttributeDefinitions   `json:"AttributeDefinitions"`
 	globalSecondaryIndexes []GlobalSecondaryIndexes `json:"GlobalSecondaryIndexes"`
 	localSecondaryIndexes  []LocalSecondaryIndexes  `json:"LocalSecondaryIndexes"`
-	keySchema              []KeySchema               `json:"KeySchema"`
+	keySchema              []KeySchema              `json:"KeySchema"`
 	provisionedThroughput  ProvisionedThroughput    `json:"ProvisionedThroughput"`
 	sSESpecification       SSESpecification         `json:"SSESpecification"`
 	streamSpecification    StreamSpecification      `json:"StreamSpecification"`
