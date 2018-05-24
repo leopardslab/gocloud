@@ -1,5 +1,4 @@
 package azureserverless
 
-
-type Azureserverless struct{
+type Azureserverless struct {
 }

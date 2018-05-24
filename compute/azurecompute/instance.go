@@ -2,12 +2,12 @@ package azurecompute
 
 // Createnode function creates a new Azurecompute instance.
 func (azurecompute *Azurecompute) Createnode(request interface{}) (resp interface{}, err error) {
-  return resp, err
+	return resp, err
 }
 
 // Startnode function starts a Azurecompute instance.
 func (azurecompute *Azurecompute) Startnode(request interface{}) (resp interface{}, err error) {
-  	return resp, err
+	return resp, err
 }
 
 // Stopnode function stops a Azurecompute instance.

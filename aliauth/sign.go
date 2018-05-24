@@ -1,13 +1,13 @@
 package aliauth
 
 import (
-	"time"
-	"net/url"
-	"strings"
-	"sort"
-	"net/http"
 	"io/ioutil"
+	"net/http"
+	"net/url"
+	"sort"
 	"strconv"
+	"strings"
+	"time"
 )
 
 const formatISO8601 = "2006-01-02T15:04:05Z"

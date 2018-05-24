@@ -1,5 +1,4 @@
 package designate
 
-type Designate struct{
-
+type Designate struct {
 }

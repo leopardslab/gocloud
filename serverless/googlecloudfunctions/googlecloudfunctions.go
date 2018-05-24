@@ -1,13 +1,12 @@
 package googlecloudfunctions
 
-import(
-	"time"
+import (
 	"bytes"
 	"encoding/json"
 	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
-
+	"time"
 )
 
 const (
@@ -15,36 +14,34 @@ const (
 	RFC3339  = "2006-01-02T15:04:05Z07:00"
 )
 
-type Googlecloudfunctions struct{
-
+type Googlecloudfunctions struct {
 }
 
 type CreateGooglecloudfunction struct {
-	Name         string `json:"name"`
-	Status              string    `json:"status"`
-	EntryPoint          string    `json:"entryPoint"`
-	Timeout             string    `json:"timeout"`
-	AvailableMemoryMb   int       `json:"availableMemoryMb"`
-	ServiceAccountEmail string    `json:"serviceAccountEmail"`
-	UpdateTime          string `json:"updateTime"`
-	VersionID           string    `json:"versionId"`
-	SourceUploadURL string `json:"sourceUploadUrl"`
-  Labels   labels `json:"labels"`
-  HTTPSTrigger httpstrigger `json:"httpsTrigger"`
+	Name                string       `json:"name"`
+	Status              string       `json:"status"`
+	EntryPoint          string       `json:"entryPoint"`
+	Timeout             string       `json:"timeout"`
+	AvailableMemoryMb   int          `json:"availableMemoryMb"`
+	ServiceAccountEmail string       `json:"serviceAccountEmail"`
+	UpdateTime          string       `json:"updateTime"`
+	VersionID           string       `json:"versionId"`
+	SourceUploadURL     string       `json:"sourceUploadUrl"`
+	Labels              labels       `json:"labels"`
+	HTTPSTrigger        httpstrigger `json:"httpsTrigger"`
 }
 
-type labels  struct {
-  DeploymentTool string `json:"deployment-tool"`
+type labels struct {
+	DeploymentTool string `json:"deployment-tool"`
 }
 
 type httpstrigger struct {
-  URL string `json:"url"`
+	URL string `json:"url"`
 }
-
 
 func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interface{}) (resp interface{}, err error) {
 
-  param := request.(map[string]interface{})
+	param := request.(map[string]interface{})
 	var Location string
 	var option CreateGooglecloudfunction
 
@@ -63,7 +60,6 @@ func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interfa
 			UpdateTimeV, _ := value.(string)
 			option.UpdateTime = UpdateTimeV
 			option.UpdateTime = time.Now().UTC().Format(time.RFC3339)
-
 
 		case "Name":
 			NameV, _ := value.(string)
@@ -89,15 +85,15 @@ func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interfa
 			SourceUploadURLV, _ := value.(string)
 			option.SourceUploadURL = SourceUploadURLV
 
-    case "AvailableMemoryMb":
+		case "AvailableMemoryMb":
 			AvailableMemoryMbV, _ := value.(int)
 			option.AvailableMemoryMb = AvailableMemoryMbV
 
-    case "Labels":
+		case "Labels":
 			LabelsV, _ := value.(map[string]string)
 			option.Labels.DeploymentTool = LabelsV["DeploymentTool"]
 
-    case "HTTPSTrigger":
+		case "HTTPSTrigger":
 			HTTPSTriggerV, _ := value.(map[string]string)
 			option.HTTPSTrigger.URL = HTTPSTriggerV["URL"]
 		}
@@ -134,7 +130,7 @@ func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interfa
 	return resp, err
 }
 
-func CreateGooglecloudfunctionedictnoaryconvert(option CreateGooglecloudfunction, CreateGooglecloudfunctionjsonmap map[string]interface{}){
+func CreateGooglecloudfunctionedictnoaryconvert(option CreateGooglecloudfunction, CreateGooglecloudfunctionjsonmap map[string]interface{}) {
 
 	if option.AvailableMemoryMb != 0 {
 		CreateGooglecloudfunctionjsonmap["availableMemoryMb"] = option.AvailableMemoryMb
@@ -143,7 +139,6 @@ func CreateGooglecloudfunctionedictnoaryconvert(option CreateGooglecloudfunction
 	if option.Name != "" {
 		CreateGooglecloudfunctionjsonmap["name"] = option.Name
 	}
-
 
 	if option.Status != "" {
 		CreateGooglecloudfunctionjsonmap["status"] = option.Status
@@ -189,13 +184,13 @@ func CreateGooglecloudfunctionedictnoaryconvert(option CreateGooglecloudfunction
 
 func (googlecloudfunctions *Googlecloudfunctions) Deletefunction(request interface{}) (resp interface{}, err error) {
 
-  options := request.(map[string]string)
+	options := request.(map[string]string)
 
 	url := "https://cloudfunctions.googleapis.com/v1/" + options["name"]
 
 	client := googleauth.SignJWT()
 
-  DeleteGooglecloudfunctionrequest, err := http.NewRequest("DELETE", url, nil)
+	DeleteGooglecloudfunctionrequest, err := http.NewRequest("DELETE", url, nil)
 
 	DeleteGooglecloudfunctionrequest.Header.Set("Content-Type", "application/json")
 
@@ -214,104 +209,102 @@ func (googlecloudfunctions *Googlecloudfunctions) Deletefunction(request interfa
 
 func (googlecloudfunctions *Googlecloudfunctions) Getfunction(request interface{}) (resp interface{}, err error) {
 
-  options := request.(map[string]string)
+	options := request.(map[string]string)
 
-  url := "https://cloudfunctions.googleapis.com/v1/" + options["name"]
+	url := "https://cloudfunctions.googleapis.com/v1/" + options["name"]
 
-  client := googleauth.SignJWT()
+	client := googleauth.SignJWT()
 
-  GetGooglecloudfunctionrequest, err := http.NewRequest("GET", url, nil)
+	GetGooglecloudfunctionrequest, err := http.NewRequest("GET", url, nil)
 
-  GetGooglecloudfunctionrequest.Header.Set("Content-Type", "application/json")
+	GetGooglecloudfunctionrequest.Header.Set("Content-Type", "application/json")
 
-  GetGooglecloudfunctionsresp, err := client.Do(GetGooglecloudfunctionrequest)
+	GetGooglecloudfunctionsresp, err := client.Do(GetGooglecloudfunctionrequest)
 
-  defer GetGooglecloudfunctionsresp.Body.Close()
+	defer GetGooglecloudfunctionsresp.Body.Close()
 
-  body, err := ioutil.ReadAll(GetGooglecloudfunctionsresp.Body)
+	body, err := ioutil.ReadAll(GetGooglecloudfunctionsresp.Body)
 
-  GetGooglecloudfunctionresponse := make(map[string]interface{})
-  GetGooglecloudfunctionresponse["status"] = GetGooglecloudfunctionsresp.StatusCode
-  GetGooglecloudfunctionresponse["body"] = string(body)
-  resp = GetGooglecloudfunctionresponse
-  return resp, err
+	GetGooglecloudfunctionresponse := make(map[string]interface{})
+	GetGooglecloudfunctionresponse["status"] = GetGooglecloudfunctionsresp.StatusCode
+	GetGooglecloudfunctionresponse["body"] = string(body)
+	resp = GetGooglecloudfunctionresponse
+	return resp, err
 
 }
 
 func (googlecloudfunctions *Googlecloudfunctions) Listfunction(request interface{}) (resp interface{}, err error) {
 
-  options := request.(map[string]string)
+	options := request.(map[string]string)
 
-  url := "https://cloudfunctions.googleapis.com/v1/" + options["name"] + "/functions"
+	url := "https://cloudfunctions.googleapis.com/v1/" + options["name"] + "/functions"
 
-  client := googleauth.SignJWT()
+	client := googleauth.SignJWT()
 
-  listgooglecloudfunctionrequest, err := http.NewRequest("GET", url, nil)
+	listgooglecloudfunctionrequest, err := http.NewRequest("GET", url, nil)
 
-  listgooglecloudfunctionrequestparam := listgooglecloudfunctionrequest.URL.Query()
+	listgooglecloudfunctionrequestparam := listgooglecloudfunctionrequest.URL.Query()
 
-  if options["pageToken"] != "" {
-    listgooglecloudfunctionrequestparam.Add("pageToken", options["pageToken"])
-  }
+	if options["pageToken"] != "" {
+		listgooglecloudfunctionrequestparam.Add("pageToken", options["pageToken"])
+	}
 
-  if options["pageSize"] != "0" {
-    listgooglecloudfunctionrequestparam.Add("pageSize", options["pageSize"])
-  }
+	if options["pageSize"] != "0" {
+		listgooglecloudfunctionrequestparam.Add("pageSize", options["pageSize"])
+	}
 
-  listgooglecloudfunctionrequest.URL.RawQuery = listgooglecloudfunctionrequestparam.Encode()
+	listgooglecloudfunctionrequest.URL.RawQuery = listgooglecloudfunctionrequestparam.Encode()
 
-  listgooglecloudfunctionrequest.Header.Set("Content-Type", "application/json")
+	listgooglecloudfunctionrequest.Header.Set("Content-Type", "application/json")
 
-  listgooglecloudfunctionresp, err := client.Do(listgooglecloudfunctionrequest)
+	listgooglecloudfunctionresp, err := client.Do(listgooglecloudfunctionrequest)
 
-  defer listgooglecloudfunctionresp.Body.Close()
+	defer listgooglecloudfunctionresp.Body.Close()
 
-  body, err := ioutil.ReadAll(listgooglecloudfunctionresp.Body)
+	body, err := ioutil.ReadAll(listgooglecloudfunctionresp.Body)
 
-  listgooglecloudfunctionresponse := make(map[string]interface{})
-  listgooglecloudfunctionresponse["status"] = listgooglecloudfunctionresp.StatusCode
-  listgooglecloudfunctionresponse["body"] = string(body)
-  resp = listgooglecloudfunctionresponse
-  return resp, err
+	listgooglecloudfunctionresponse := make(map[string]interface{})
+	listgooglecloudfunctionresponse["status"] = listgooglecloudfunctionresp.StatusCode
+	listgooglecloudfunctionresponse["body"] = string(body)
+	resp = listgooglecloudfunctionresponse
+	return resp, err
 }
-
 
 func (googlecloudfunctions *Googlecloudfunctions) Callfunction(request interface{}) (resp interface{}, err error) {
 
-  options := request.(map[string]string)
+	options := request.(map[string]string)
 
 	url := "https://cloudfunctions.googleapis.com/v1/" + options["name"] + ":call"
 
-  callGooglecloudfunctionjsonmap := make(map[string]interface{})
+	callGooglecloudfunctionjsonmap := make(map[string]interface{})
 
-  callGooglecloudfunctionjsonmap["data"] = options["data"]
+	callGooglecloudfunctionjsonmap["data"] = options["data"]
 
-  callGooglecloudfunctionjson, _ := json.Marshal(callGooglecloudfunctionjsonmap)
+	callGooglecloudfunctionjson, _ := json.Marshal(callGooglecloudfunctionjsonmap)
 
-  callGooglecloudfunctionjsonstring := string(callGooglecloudfunctionjson)
+	callGooglecloudfunctionjsonstring := string(callGooglecloudfunctionjson)
 
-  var callGooglecloudfunctionjsonstringbyte = []byte(callGooglecloudfunctionjsonstring)
+	var callGooglecloudfunctionjsonstringbyte = []byte(callGooglecloudfunctionjsonstring)
 
-  client := googleauth.SignJWT()
+	client := googleauth.SignJWT()
 
-  callGooglecloudfunctionrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(callGooglecloudfunctionjsonstringbyte))
+	callGooglecloudfunctionrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(callGooglecloudfunctionjsonstringbyte))
 
-  callGooglecloudfunctionrequest.Header.Set("Content-Type", "application/json")
+	callGooglecloudfunctionrequest.Header.Set("Content-Type", "application/json")
 
-  callGooglecloudfunctionresp, err := client.Do(callGooglecloudfunctionrequest)
+	callGooglecloudfunctionresp, err := client.Do(callGooglecloudfunctionrequest)
 
-  defer callGooglecloudfunctionresp.Body.Close()
+	defer callGooglecloudfunctionresp.Body.Close()
 
-  body, err := ioutil.ReadAll(callGooglecloudfunctionresp.Body)
+	body, err := ioutil.ReadAll(callGooglecloudfunctionresp.Body)
 
-  callGooglecloudfunctionresponse := make(map[string]interface{})
-  callGooglecloudfunctionresponse["status"] = callGooglecloudfunctionresp.StatusCode
-  callGooglecloudfunctionresponse["body"] = string(body)
-  resp = callGooglecloudfunctionresponse
-  return resp, err
+	callGooglecloudfunctionresponse := make(map[string]interface{})
+	callGooglecloudfunctionresponse["status"] = callGooglecloudfunctionresp.StatusCode
+	callGooglecloudfunctionresponse["body"] = string(body)
+	resp = callGooglecloudfunctionresponse
+	return resp, err
 }
 
 //projects/adept-comfort-202709/locations/us-central1/functions/function-1
-
 
 //projects/adept-comfort-202709/locations/us-central1/functions/function-1

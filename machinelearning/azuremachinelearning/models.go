@@ -1,6 +1,4 @@
-package azuremachinelearning 
+package azuremachinelearning
 
-
-type Azuremachinelearning struct{
-
+type Azuremachinelearning struct {
 }

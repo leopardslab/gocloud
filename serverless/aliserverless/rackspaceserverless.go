@@ -20,7 +20,6 @@ func (aliserverless *Aliserverless) Listfunction(request interface{}) (resp inte
 	return resp, err
 }
 
-
 func (aliserverless *Aliserverless) Deletefunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err

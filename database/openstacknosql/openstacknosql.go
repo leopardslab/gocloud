@@ -17,7 +17,6 @@ func (openstacknosql *Openstacknosql) Createtables(request interface{}) (resp in
 	return resp, err
 }
 
-
 /*
 func (rackspaceserverless *Rackspaceserverless) Createfunction(request interface{}) (resp interface{}, err error) {
 

@@ -1,9 +1,9 @@
 package aliloadbalancer
 
 import (
-	"testing"
-	"github.com/cloudlibz/gocloud/aliauth"
 	"fmt"
+	"github.com/cloudlibz/gocloud/aliauth"
+	"testing"
 )
 
 func init() {
@@ -43,7 +43,7 @@ func TestDeleteLoadBalancer(t *testing.T) {
 func TestListLoadBalancer(t *testing.T) {
 	var alilb Aliloadbalancer
 	list := map[string]interface{}{
-		"RegionId":       "cn-qingdao",
+		"RegionId": "cn-qingdao",
 	}
 	resp, err := alilb.Listloadbalancer(list)
 	if err != nil {

@@ -5,16 +5,16 @@ import (
 	aliAuth "github.com/cloudlibz/gocloud/aliauth"
 	awsAuth "github.com/cloudlibz/gocloud/auth"
 	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	"github.com/cloudlibz/gocloud/ali"
 	aliauth "github.com/cloudlibz/gocloud/aliauth"
+	awsAuth "github.com/cloudlibz/gocloud/auth"
 	"github.com/cloudlibz/gocloud/aws"
-	"github.com/cloudlibz/gocloud/google"
-	"github.com/cloudlibz/gocloud/openstack"
 	"github.com/cloudlibz/gocloud/azure"
 	"github.com/cloudlibz/gocloud/digiocean"
-	"github.com/cloudlibz/gocloud/aliauth"
-	"github.com/cloudlibz/gocloud/ali"
+	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	"github.com/cloudlibz/gocloud/google"
+	"github.com/cloudlibz/gocloud/openstack"
 	"github.com/cloudlibz/gocloud/rackspace"
-	"github.com/cloudlibz/gocloud/ali"
 )
 
 // Gocloud is a interface which hides the difference between different cloud providers.

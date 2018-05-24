@@ -1,5 +1,4 @@
 package openstackserverless
 
-type Openstackserverless struct{
-
+type Openstackserverless struct {
 }

@@ -1,6 +1,4 @@
 package azurenosql
 
-
-type Azurenosql struct{
-
+type Azurenosql struct {
 }

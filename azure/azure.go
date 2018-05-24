@@ -2,12 +2,12 @@ package azure
 
 import (
 	azurecompute "github.com/cloudlibz/gocloud/compute/azurecompute"
-	azurestorage "github.com/cloudlibz/gocloud/storage/azurestorage"
-	azureloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/azureloadbalancer"
 	azurecontainer "github.com/cloudlibz/gocloud/container/azurecontainer"
-	azuredns "github.com/cloudlibz/gocloud/dns/azuredns"
-	azureserverless "github.com/cloudlibz/gocloud/serverless/azureserverless"
 	azurenosql "github.com/cloudlibz/gocloud/database/azurenosql"
+	azuredns "github.com/cloudlibz/gocloud/dns/azuredns"
+	azureloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/azureloadbalancer"
+	azureserverless "github.com/cloudlibz/gocloud/serverless/azureserverless"
+	azurestorage "github.com/cloudlibz/gocloud/storage/azurestorage"
 )
 
 // Azure  struct represents Microsoft Azure cloud provider.
@@ -16,7 +16,7 @@ type Azure struct {
 	azurestorage.Azurestorage
 	azureloadbalancer.Azureloadbalancer
 	azurecontainer.Azurecontainer
-  azuredns.Azuredns
+	azuredns.Azuredns
 	azureserverless.Azureserverless
 	azurenosql.Azurenosql
 }

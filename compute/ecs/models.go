@@ -1,8 +1,8 @@
 package ecs
 
 import (
-	"github.com/cloudlibz/gocloud/aliauth"
 	"errors"
+	"github.com/cloudlibz/gocloud/aliauth"
 )
 
 const errCommon = "miss required parameter: "
