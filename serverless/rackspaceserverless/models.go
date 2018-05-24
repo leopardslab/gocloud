@@ -1,6 +1,4 @@
 package rackspaceserverless
 
-
-type Rackspaceserverless struct{
-
+type Rackspaceserverless struct {
 }

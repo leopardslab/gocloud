@@ -1,6 +1,4 @@
 package digioceanserverless
 
-
-type Digioceanserverless struct{
-
+type Digioceanserverless struct {
 }

@@ -1,6 +1,4 @@
 package aliserverless
 
-
-type Aliserverless struct{
-
+type Aliserverless struct {
 }

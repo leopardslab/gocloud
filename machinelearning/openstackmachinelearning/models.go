@@ -1,6 +1,4 @@
 package openstackmachinelearning
 
-
-type Openstackmachinelearning struct{
-
+type Openstackmachinelearning struct {
 }

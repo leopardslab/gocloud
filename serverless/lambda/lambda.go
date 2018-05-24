@@ -20,13 +20,10 @@ func (lambda *Lambda) Listfunction(request interface{}) (resp interface{}, err e
 	return resp, err
 }
 
-
 func (lambda *Lambda) Deletefunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
-
-
 
 /*
 func (lambda *Lambda) Deletefunction(request interface{}) (resp interface{}, err error) {

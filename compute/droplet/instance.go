@@ -6,9 +6,7 @@ import (
   "fmt"
   "io/ioutil"
 	"net/http"
-  "encoding/json"
-  "strconv"
-  "errors"
+	"strconv"
 )
 
 // dropletBasePath is the endpoint URL for digitalocean API.
@@ -119,7 +117,7 @@ func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err e
 	defer Createnoderesp.Body.Close()
 
 	responseBody, err := ioutil.ReadAll(Createnoderesp.Body)
-  Createnoderesponse := make(map[string]interface{})
+	Createnoderesponse := make(map[string]interface{})
 	Createnoderesponse["status"] = Createnoderesp.StatusCode
 	Createnoderesponse["body"] = string(responseBody)
 	resp = Createnoderesponse
@@ -132,11 +130,11 @@ func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err e
 func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
-  inputID, err := strconv.Atoi(options["ID"])
-  if err != nil {
-    fmt.Println(err)
-  }
-  if inputID < 1 {
+	inputID, err := strconv.Atoi(options["ID"])
+	if err != nil {
+		fmt.Println(err)
+	}
+	if inputID < 1 {
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
@@ -144,8 +142,8 @@ func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err er
 
 	startRequest := &ActionRequest{"type": "power_on"}
 	startRequestJSON, _ := json.Marshal(startRequest)
-  startRequestJSONString := string(startRequestJSON)
-  var startRequestJSONStringbyte = []byte(startRequestJSONString)
+	startRequestJSONString := string(startRequestJSON)
+	var startRequestJSONStringbyte = []byte(startRequestJSONString)
 
 	Startnodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(startRequestJSONStringbyte))
 	if err != nil {
@@ -173,11 +171,11 @@ func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err er
 func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
-  inputID, err := strconv.Atoi(options["ID"])
-  if err != nil {
-    fmt.Println(err)
-  }
-  if inputID < 1 {
+	inputID, err := strconv.Atoi(options["ID"])
+	if err != nil {
+		fmt.Println(err)
+	}
+	if inputID < 1 {
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
@@ -185,8 +183,8 @@ func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err err
 
 	stopRequest := &ActionRequest{"type": "power_off"}
 	stopRequestJSON, _ := json.Marshal(stopRequest)
-  stopRequestJSONString := string(stopRequestJSON)
-  var stopRequestJSONStringbyte = []byte(stopRequestJSONString)
+	stopRequestJSONString := string(stopRequestJSON)
+	var stopRequestJSONStringbyte = []byte(stopRequestJSONString)
 
 	Stopnodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(stopRequestJSONStringbyte))
 	if err != nil {
@@ -214,11 +212,11 @@ func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err err
 func (droplet *Droplet) Rebootnode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
-  inputID, err := strconv.Atoi(options["ID"])
-  if err != nil {
-    fmt.Println(err)
-  }
-  if inputID < 1 {
+	inputID, err := strconv.Atoi(options["ID"])
+	if err != nil {
+		fmt.Println(err)
+	}
+	if inputID < 1 {
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 	url := dropletBasePath + "/" + options["ID"] + "/actions"
@@ -226,8 +224,8 @@ func (droplet *Droplet) Rebootnode(request interface{}) (resp interface{}, err e
 
 	rebootRequest := &ActionRequest{"type": "reboot"}
 	rebootRequestJSON, _ := json.Marshal(rebootRequest)
-  rebootRequestJSONString := string(rebootRequestJSON)
-  var rebootRequestJSONStringbyte = []byte(rebootRequestJSONString)
+	rebootRequestJSONString := string(rebootRequestJSON)
+	var rebootRequestJSONStringbyte = []byte(rebootRequestJSONString)
 
 	Rebootnodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(rebootRequestJSONStringbyte))
 	if err != nil {
@@ -256,11 +254,11 @@ func (droplet *Droplet) Rebootnode(request interface{}) (resp interface{}, err e
 func (droplet *Droplet) Deletenode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
-  inputID, err := strconv.Atoi(options["ID"])
-  if err != nil {
-    fmt.Println(err)
-  }
-  if inputID < 1 {
+	inputID, err := strconv.Atoi(options["ID"])
+	if err != nil {
+		fmt.Println(err)
+	}
+	if inputID < 1 {
 		return nil, errors.New("dropletID cannot be less than 1")
 	}
 

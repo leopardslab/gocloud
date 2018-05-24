@@ -20,7 +20,6 @@ func (digioceanserverless *Digioceanserverless) Listfunction(request interface{}
 	return resp, err
 }
 
-
 func (digioceanserverless *Digioceanserverless) Deletefunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err

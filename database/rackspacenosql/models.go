@@ -1,6 +1,4 @@
 package rackspacenosql
 
-
-type Rackspacenosql struct{
-
+type Rackspacenosql struct {
 }

@@ -1,6 +1,4 @@
 package googlemachinelearning
 
-
-type Googlemachinelearning struct{
-
+type Googlemachinelearning struct {
 }

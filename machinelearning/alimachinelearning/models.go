@@ -1,6 +1,4 @@
 package alimachinelearning
 
-
-type Alimachinelearning struct{
-
+type Alimachinelearning struct {
 }

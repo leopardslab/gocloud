@@ -3,12 +3,11 @@ package aws
 import (
 	ec2 "github.com/cloudlibz/gocloud/compute/ec2"
 	awscontainer "github.com/cloudlibz/gocloud/container/awscontainer"
+	dynamodb "github.com/cloudlibz/gocloud/database/dynamodb"
 	awsdns "github.com/cloudlibz/gocloud/dns/awsdns"
 	awsloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/awsloadbalancer"
-	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
 	lambda "github.com/cloudlibz/gocloud/serverless/lambda"
-	dynamodb "github.com/cloudlibz/gocloud/database/dynamodb"
-
+	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
 )
 
 //AWS struct reperents amazon cloud provider.

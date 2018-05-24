@@ -1,16 +1,16 @@
 package openstackmachinelearning
 
-func(openstackmachinelearning *Openstackmachinelearning) CreateMLModel(request interface{}) (resp interface{}, err error) {
+func (openstackmachinelearning *Openstackmachinelearning) CreateMLModel(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-func(openstackmachinelearning *Openstackmachinelearning) DeleteMLModel(request interface{}) (resp interface{}, err error) {
+func (openstackmachinelearning *Openstackmachinelearning) DeleteMLModel(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-func(openstackmachinelearning *Openstackmachinelearning) GetMLModel(request interface{}) (resp interface{}, err error) {
+func (openstackmachinelearning *Openstackmachinelearning) GetMLModel(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
