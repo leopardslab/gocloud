@@ -164,5 +164,6 @@ func (digioceandns *Digioceandns) Listdns(request interface{}) (resp interface{}
 // ListResourcednsRecordSets function lists DNS record sets. DigitalOcean API
 // doesn't provide functionality to suppport this function.
 func (digioceandns *Digioceandns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error) {
+
 	return resp, err
 }

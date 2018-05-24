@@ -20,7 +20,6 @@ func (openstackserverless *Openstackserverless) Listfunction(request interface{}
 	return resp, err
 }
 
-
 func (openstackserverless *Openstackserverless) Deletefunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err

@@ -1,7 +1,7 @@
 package digioceanauth
 
 import (
-  "encoding/json"
+	"encoding/json"
 	"log"
 	"os"
 )

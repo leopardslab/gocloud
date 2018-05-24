@@ -1,8 +1,8 @@
 package droplet
 
 import (
-  "testing"
-  digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	"testing"
 )
 
 func init() {
@@ -18,18 +18,18 @@ func TestCreatenode(t *testing.T) {
 	}
 
 	create := map[string]interface{}{
-    "Name":   "example.com",
-    "Region": "nyc3",
-    "Size":   "s-1vcpu-1gb",
-    "Image": image,
-    "SSHKeys": nil,
-    "Backups": false,
-    "IPv6": true,
-    "UserData": nil,
-    "PrivateNetworking": nil,
-    "Volumes": nil,
-    "Monitoring": false,
-    "Tags": []string{"web"},
+		"Name":              "example.com",
+		"Region":            "nyc3",
+		"Size":              "s-1vcpu-1gb",
+		"Image":             image,
+		"SSHKeys":           nil,
+		"Backups":           false,
+		"IPv6":              true,
+		"UserData":          nil,
+		"PrivateNetworking": nil,
+		"Volumes":           nil,
+		"Monitoring":        false,
+		"Tags":              []string{"web"},
 	}
 
 	_, err := digioceancloud.Createnode(create)
@@ -86,7 +86,7 @@ func TestRebootnode(t *testing.T) {
 func TestDeletnode(t *testing.T) {
 
   var digioceancloud Droplet
-  
+
   delete := map[string]string{
     "ID": "86407564",
    }

@@ -1,9 +1,7 @@
 package bigtable
 
-
-type Bigtable struct{
-
+type Bigtable struct {
 }
 
-type Createbigtable struct{  
+type Createbigtable struct {
 }

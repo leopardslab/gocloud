@@ -1,38 +1,35 @@
 package main
 
-import("fmt"
-		"github.com/cloudlibz/gocloud/gocloud"
+import (
+	"fmt"
+	"github.com/cloudlibz/gocloud/gocloud"
 )
 
-
-func main(){
+func main() {
 
 	amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 
-
 	listtables := map[string]interface{}{
-	"Region": "us-east-2",
-	 "TableName" : "hello",
-  }
+		"Region":    "us-east-2",
+		"TableName": "hello",
+	}
 
+	resp, _ := amazoncloud.Describetables(listtables)
+	response := resp.(map[string]interface{})
+	fmt.Println(response["body"])
+	fmt.Println(response["status"])
 
- resp, _ := amazoncloud.Describetables(listtables)
- response := resp.(map[string]interface{})
- fmt.Println(response["body"])
- fmt.Println(response["status"])
+	/*
+	    deletetables := map[string]interface{}{
+	    "Region": "us-east-2",
+	    "TableName" : "hello",
+	    }
 
-
-/*
- deletetables := map[string]interface{}{
- "Region": "us-east-2",
- "TableName" : "hello",
- }
-
-resp, _ := amazoncloud.Deletetables(deletetables)
-response := resp.(map[string]interface{})
-fmt.Println(response["body"])
-fmt.Println(response["status"])
-*/
+	   resp, _ := amazoncloud.Deletetables(deletetables)
+	   response := resp.(map[string]interface{})
+	   fmt.Println(response["body"])
+	   fmt.Println(response["status"])
+	*/
 
 }
 
