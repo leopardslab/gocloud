@@ -4,6 +4,7 @@ package alicontainer
 type Alicontainer struct {
 }
 
+// CreateCluster struct represents create cluster attributes.
 type CreateCluster struct {
 	Name             string `json:"name"`
 	Size             int64  `json:"size"`
@@ -21,9 +22,7 @@ type CreateCluster struct {
 	ReleaseEipFlag   bool   `json:"release_eip_flag"`
 }
 
-type DeleteCluster struct {
-}
-
+// RunTask struct represents create project of cluster attributes.
 type RunTask struct {
 	Name        string            `json:"name"`
 	Description string            `json:"description"`
