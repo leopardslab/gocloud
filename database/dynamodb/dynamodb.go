@@ -290,7 +290,8 @@ func preparecreatetablejsonmap(createtablejsonmap map[string]interface{}, create
 	preparekeySchemaparams(createtablejsonmap,createtable)
 	prepareAttributeDefinitionsparams(createtablejsonmap,createtable)
 	prepareLocalSecondaryIndexesparams(createtablejsonmap,createtable)
-
+	prepareAttributeDefinitionsparams(createtablejsonmap,createtable)
+	prepareGlobalSecondaryIndexesparams(createtablejsonmap,createtable)
 }
 
 
@@ -382,6 +383,66 @@ func preparekeySchemaparams(createtablejsonmap map[string]interface{}, createtab
 }
 
 
+
+func prepareGlobalSecondaryIndexesparams(createtablejsonmap map[string]interface{}, createtable Createtable) {
+
+		if len(createtable.globalSecondaryIndexes) != 0 {
+
+				globalSecondaryIndexesvarrayjsonmap := make([]map[string]interface{},0)
+
+				for(i:=0;i< len(globalSecondaryIndexes); i++){
+
+					globalSecondaryIndexessvjsonmap := make(map[string]interface{})
+
+					globalSecondaryIndexesvjsonmap["IndexName"]	= globalSecondaryIndexes[i].IndexName
+
+					if( createtable.globalSecondaryIndexes.projection!=Projection{}){
+
+						projectionv := make(map[string]interface{})
+						projectionv["ProjectionType"] = createtable.globalSecondaryIndexes[i].projection.ProjectionType
+						projectionv["NonKeyAttributes"] =  createtable.globalSecondaryIndexes[i].projection.NonKeyAttributes
+						globalSecondaryIndexesvjsonmap["Projection"] = projectionv
+					}
+
+					if( createtable.globalSecondaryIndexes.provisionedThroughput!=ProvisionedThroughput{}){
+
+						provisionedThroughputv := make(map[string]interface{})
+						projectionv["ReadCapacityUnits"] = createtable.globalSecondaryIndexes[i].provisionedThroughput.ReadCapacityUnits
+						projectionv["WriteCapacityUnits"] =  createtable.globalSecondaryIndexes[i].provisionedThroughput.WriteCapacityUnits
+						globalSecondaryIndexesvjsonmap["ProvisionedThroughput"] = provisionedThroughputv
+					}
+
+
+					if len(createtable.globalSecondaryIndexes[i].keySchema) != 0 {
+
+						keySchemavs := make([]map[string]interface{}, 0)
+
+						for i := 0; i < len(createtable.globalSecondaryIndexes[i].keySchema); i++ {
+
+							keySchemav := make(map[string]interface{})
+
+
+							if createtable.globalSecondaryIndexes[i].keySchema[i].AttributeName != "" {
+								keySchemav["AttributeName"] = createtable.globalSecondaryIndexes[i].keySchema[i].AttributeName
+							}
+
+							if createtable.localSecondaryIndexes[i].keySchema[i].KeyType != "" {
+								keySchemav["KeyType"] = createtable.globalSecondaryIndexes[i].keySchema[i].KeyType
+							}
+
+							keySchemavs = append(keySchemavs, keySchemav)
+						}
+
+						globalSecondaryIndexesvjsonmap["KeySchema"] = keySchemavs
+					}
+
+				 globalSecondaryIndexesvarrayjsonmap["GlobalSecondaryIndexes"] = append(globalSecondaryIndexesvarrayjsonmap["GlobalSecondaryIndexes"],localSecondaryIndexesvjsonmap)
+				}
+		}
+}
+
+
+
 func prepareLocalSecondaryIndexesparams(createtablejsonmap map[string]interface{}, createtable Createtable) {
 
 		if len(createtable.localSecondaryIndexes) != 0 {
@@ -399,6 +460,30 @@ func prepareLocalSecondaryIndexesparams(createtablejsonmap map[string]interface{
 						projectionv := make(map[string]interface{})
 						projectionv["ProjectionType"] = localSecondaryIndexes[i].projection.ProjectionType
 						projectionv["NonKeyAttributes"] =  localSecondaryIndexes[i].projection.NonKeyAttributes
+						localSecondaryIndexesvjsonmap["Projection"] = projectionv
+					}
+
+					if len(createtable.localSecondaryIndexes[i].keySchema) != 0 {
+
+						keySchemavs := make([]map[string]interface{}, 0)
+
+						for i := 0; i < len(createtable.localSecondaryIndexes[i].keySchema); i++ {
+
+							keySchemav := make(map[string]interface{})
+
+
+							if createtable.localSecondaryIndexes[i].keySchema[i].AttributeName != "" {
+								keySchemav["AttributeName"] = createtable.localSecondaryIndexes[i].keySchema[i].AttributeName
+							}
+
+							if createtable.localSecondaryIndexes[i].keySchema[i].KeyType != "" {
+								keySchemav["KeyType"] = createtable.localSecondaryIndexes[i].keySchema[i].KeyType
+							}
+
+							keySchemavs = append(keySchemavs, keySchemav)
+						}
+
+						localSecondaryIndexesvjsonmap["KeySchema"] = keySchemavs
 					}
 
 				 localSecondaryIndexesvarrayjsonmap["LocalSecondaryIndexes"] = append(localSecondaryIndexesvarrayjsonmap["LocalSecondaryIndexes"],localSecondaryIndexesvjsonmap)
