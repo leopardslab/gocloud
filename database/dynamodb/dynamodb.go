@@ -384,17 +384,17 @@ func preparekeySchemaparams(createtablejsonmap map[string]interface{}, createtab
 
 
 func prepareGlobalSecondaryIndexesparams(createtablejsonmap map[string]interface{}, createtable Createtable) {
-
+/*
 		if len(createtable.globalSecondaryIndexes) != 0 {
 
 				globalSecondaryIndexesvarrayjsonmap := make([]map[string]interface{},0)
 
-				for(i:=0;i< len(createtable.globalSecondaryIndexes); i++){
+				for i:= 0; i<len(createtable.globalSecondaryIndexes); i++{
 
 					globalSecondaryIndexessvjsonmap := make(map[string]interface{})
 
-					if(globalSecondaryIndexesvjsonmap["IndexName"] != ""){
-							globalSecondaryIndexesvjsonmap["IndexName"]	= globalSecondaryIndexes[i].IndexName
+					if(createtable.globalSecondaryIndexes["IndexName"] != ""){
+							globalSecondaryIndexesvjsonmap["IndexName"]	= createtable.globalSecondaryIndexes[i].IndexName
 					}
 
 					if( createtable.globalSecondaryIndexes.projection!=Projection{}){
@@ -442,17 +442,18 @@ func prepareGlobalSecondaryIndexesparams(createtablejsonmap map[string]interface
 
 				createtablejsonmap["GlobalSecondaryIndexes"] = globalSecondaryIndexesvarrayjsonmap
 		}
+	*/
 }
 
 
 
 func prepareLocalSecondaryIndexesparams(createtablejsonmap map[string]interface{}, createtable Createtable) {
-
+/*
 		if len(createtable.localSecondaryIndexes) != 0 {
 
 				localSecondaryIndexesvarrayjsonmap := make([]map[string]interface{},0)
 
-				for(i:=0;i< len(localSecondaryIndexes); i++){
+				for i:=0;i< len(localSecondaryIndexes); i++ {
 
 					localSecondaryIndexesvjsonmap := make(map[string]interface{})
 
@@ -494,6 +495,7 @@ func prepareLocalSecondaryIndexesparams(createtablejsonmap map[string]interface{
 				}
 					createtablejsonmap["LocalSecondaryIndexes"]=localSecondaryIndexesvarrayjsonmap
 		}
+	*/	
 }
 
 
