@@ -13,7 +13,7 @@ func (bigtable *Bigtable) Listtables(request interface{}) (resp interface{}, err
 
 	options := request.(map[string]string)
 
-	url := "bigtableadmin.googleapis.com/v2/" + options["parent"] + "/tables"
+	url := "https://bigtableadmin.googleapis.com/v2/" + options["parent"] + "/tables"
 
 	client := googleauth.SignJWT()
 
@@ -21,11 +21,9 @@ func (bigtable *Bigtable) Listtables(request interface{}) (resp interface{}, err
 
 	listbigtablerequestparam := listbigtablerequest.URL.Query()
 
-	if options["pageToken"] != "" {
-		listbigtablerequestparam.Add("pageToken", options["pageToken"])
-	}
+	listbigtablerequestparam.Add("pageToken", options["pageToken"])
 
-	if options["view"] != "0" {
+	if options["view"] != "" {
 		listbigtablerequestparam.Add("view", options["view"])
 	}
 
@@ -34,6 +32,8 @@ func (bigtable *Bigtable) Listtables(request interface{}) (resp interface{}, err
 	listbigtablerequest.Header.Set("Content-Type", "application/json")
 
 	listbigtableresp, err := client.Do(listbigtablerequest)
+
+	fmt.Println(err)
 
 	defer listbigtableresp.Body.Close()
 
@@ -79,7 +79,7 @@ func (bigtable *Bigtable) Describetables(request interface{}) (resp interface{},
 
 	client := googleauth.SignJWT()
 
-	Describebigtablerequest, err := http.NewRequest("DELETE", url, nil)
+	Describebigtablerequest, err := http.NewRequest("GET", url, nil)
 
 	Describebigtablerequest.Header.Set("Content-Type", "application/json")
 
@@ -101,28 +101,57 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 	//POST https://bigtableadmin.googleapis.com/v2/{parent=projects/*/instances/*}/tables
 
 	param := request.(map[string]interface{})
-	var Location, parent string
+
+	var parent string
+
 	var option Createbigtable
 
 	for key, value := range param {
 		switch key {
-
-		case "Location":
-			LocationV, _ := value.(string)
-			Location = LocationV
+		case "parent":
+			parentv, _ := value.(string)
+			parent = parentv
 
 		case "tableId":
+			tableIdv, _ := value.(string)
+			option.tableId = tableIdv
 
 		case "table":
+			tableparam, _ := value.(map[string]interface{})
+
+			for tablekey, tablevalue := range tableparam {
+
+			    switch tablekey {
+
+						case "name":
+									namev := tablevalue.(string)
+									option.table.name = namev
+
+						case "granularity":
+								granularityv := tablevalue.(string)
+								option.table.granularity = granularityv
+
+				}
+			}
 
 		case "initialSplits":
-
-			//		HTTPSTriggerV, _ := value.(map[string]string)
-			//option.HTTPSTrigger.URL = HTTPSTriggerV["URL"]
+			/*
+			  initialSplitsparam := make([]map[string]interface{})
+				for i := 0; i < len(initialSplitsparam); i++ {
+						var initialSplits InitialSplits
+						for initialSplitsparam, initialSplitsparamvalue := range initialSplitsparam[i] {
+							switch initialSplitsparamkey {
+							    case "key":
+									    initialSplits.key = initialSplitsparamvalue.(string)
+							}
+						}
+						option.initialSplits = append(createtable.initialSplits, initialSplits)
+					}
+				*/
 		}
 	}
 
-	fmt.Println(Location)
+	fmt.Println(parent)
 
 	Createbigtablejsonmap := make(map[string]interface{})
 
@@ -132,9 +161,19 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 
 	Createbigtablejsonstring := string(Createbigtablejson)
 
-	var Createbigtablejsonstringbyte = []byte(Createbigtablejsonstring)
+	fmt.Println(Createbigtablejsonstring)
+
+//	byte(`{"tableId": "bokkkya","table": { "name": "bokkkya"}}`)
+
+// []byte(`{"tableId": "bokkkya","table": { "name": "bokkkya"}}`)
+
+//	var Createbigtablejsonstringbyte = []byte(Createbigtablejsonstring)
+
+	var Createbigtablejsonstringbyte = []byte(`{"tableId": "bokkkya","table": { }}`)
 
 	url := "https://bigtableadmin.googleapis.com/v2/" + parent + "/tables"
+
+	//url := https://bigtableadmin.googleapis.com/v2/{parent=projects/*}/instances
 
 	client := googleauth.SignJWT()
 
