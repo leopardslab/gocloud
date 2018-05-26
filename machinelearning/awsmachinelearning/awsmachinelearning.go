@@ -2,7 +2,7 @@ package awsmachinelearning
 
 func(awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{}) (resp interface{}, err error) {
 
-
+/*
 
 
 
@@ -62,16 +62,12 @@ func(awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{}) 
 	response := make(map[string]interface{})
 	err = awsmachinelearning.PrepareSignatureV4query(params, createMLModeljsonmap, response)
 	resp = response
+	*/
 	return resp, err
 }
 
 
 func preparestarttaskparamsdict(createMLModeljsonmap map[string]interface{}, createMLModel CreateMLModel) {
-
-
-
-
-TrainingDataSourceID
 
 	if createMLModel.MLModelId != "" {
 		createMLModeljsonmap["MLModelId"] = createMLModel.MLModelId
@@ -254,7 +250,7 @@ func(awsmachinelearning *Awsmachinelearning) GetMLModel(request interface{}) (re
 	preparedeletemodel(params, MLModelId, Region)
 
 	deletemodeljsonmap := map[string]interface{}{
-		"MLModelId": MLModelId
+		"MLModelId": MLModelId,
 		"Verbose" : Verbose,
 	}
 
@@ -268,7 +264,7 @@ func (awsmachinelearning *Awsmachinelearning) UpdateMLModel(request interface{})
 
 	param := request.(map[string]interface{})
 
-	var MLModelId, MLModelName, ScoreThreshold Region string
+	var MLModelId, MLModelName, ScoreThreshold, Region string
 
 	for key, value := range param {
 		switch key {
