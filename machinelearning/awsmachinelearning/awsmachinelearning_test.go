@@ -2,6 +2,7 @@ package awsmachinelearning
 
 import "testing"
 import awsAuth "github.com/cloudlibz/gocloud/auth"
+import "fmt"
 
 func init() {
 	awsAuth.LoadConfig()
@@ -16,9 +17,13 @@ func init() {
         "MLModelId": "ml-EL5FRUNlk7p",
       }
 
-    	_, err := awsmachinelearning.GetMLModel(getMLModel)
+    	resp, err := awsmachinelearning.GetMLModel(getMLModel)
 
     	if err != nil {
     		t.Errorf("Test Fail")
     	}
+
+    	response := resp.(map[string]interface{})
+
+    	fmt.Println(response["body"])
     }
