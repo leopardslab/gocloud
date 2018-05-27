@@ -8,6 +8,7 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
+/*
     func TestGetMLModel(t *testing.T) {
 
       var awsmachinelearning Awsmachinelearning
@@ -27,6 +28,7 @@ func init() {
 
     	fmt.Println(response["body"])
     }
+
 
 
 
@@ -71,4 +73,30 @@ func TestUpdateMLModel(t *testing.T) {
   response := resp.(map[string]interface{})
 
   fmt.Println(response["body"])
+}
+
+*/
+
+func TestCreateMLModel(t *testing.T) {
+
+	var awsmachinelearning Awsmachinelearning
+
+	createMLModel := map[string]interface{}{
+		"Region":      "us-east-1",
+		"MLModelName": "EXAMPLE",
+		"MLModelId":   "ml-EL5FRUNlk7p",
+		"MLModelType": "REGRESSION",
+		"RecipeUri": "	s3://bokya/census.csv",
+		"TrainingDataSourceId": "ds-Lf3D4KaPukx",
+	}
+
+	resp, err := awsmachinelearning.CreateMLModel(createMLModel)
+
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
 }
