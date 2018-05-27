@@ -59,6 +59,22 @@ func TestStartnode(t *testing.T) {
 	}
 	t.Logf("Ali node is started successfully.")
 }
+func TestStartNodeBuilder(t *testing.T) {
+	var aliEcs ECS
+	startNode, err := NewStartNodeBuilder().
+		InstanceID("m5ea01zic0bg8dufo2eo").
+		Build()
+	if err != nil {
+		t.Errorf("StartNode Test Fail: %s", err.Error())
+		return
+	}
+	_, err = aliEcs.Startnode(startNode)
+	if err != nil {
+		t.Errorf("StartNode Test Fail: %s", err)
+		return
+	}
+	t.Logf("Ali node is started successfully.")
+}
 
 func TestStopnode(t *testing.T) {
 	var aliEcs ECS
@@ -69,6 +85,22 @@ func TestStopnode(t *testing.T) {
 	_, err := aliEcs.Stopnode(stop)
 	if err != nil {
 		t.Errorf("Stopnode Test Fail")
+		return
+	}
+	t.Logf("Ali node is stoped successfully.")
+}
+func TestStopNodeBuilder(t *testing.T) {
+	var aliEcs ECS
+	stopNode, err := NewStopNodeBuilder().
+		InstanceID("m5ea01zic0bg8dufo2eo").
+		Build()
+	if err != nil {
+		t.Errorf("Stopnode Test Fail: %s", err.Error())
+		return
+	}
+	_, err = aliEcs.Stopnode(stopNode)
+	if err != nil {
+		t.Errorf("Stopnode Test Fail: %s", err)
 		return
 	}
 	t.Logf("Ali node is stoped successfully.")
@@ -87,6 +119,22 @@ func TestRebootnode(t *testing.T) {
 	}
 	t.Logf("Ali node is rebooted successfully.")
 }
+func TestRebootNodeBuilder(t *testing.T) {
+	var aliEcs ECS
+	rebootNode, err := NewRebootNodeBuilder().
+		InstanceID("m5ea01zic0bg8dufo2eo").
+		Build()
+	if err != nil {
+		t.Errorf("Rebootnode Test Fail: %s", err.Error())
+		return
+	}
+	_, err = aliEcs.Rebootnode(rebootNode)
+	if err != nil {
+		t.Errorf("Rebootnode Test Fail: %s", err)
+		return
+	}
+	t.Logf("Ali node is rebooted successfully.")
+}
 
 func TestDeletenode(t *testing.T) {
 	var aliEcs ECS
@@ -96,6 +144,22 @@ func TestDeletenode(t *testing.T) {
 	_, err := aliEcs.Deletenode(delete)
 	if err != nil {
 		t.Errorf("Deletenode Test Fail")
+		return
+	}
+	t.Logf("Ali node is deleted successfully.")
+}
+func TestDeleteNodeBuilder(t *testing.T) {
+	var aliEcs ECS
+	deleteNode, err := NewDeleteNodeBuilder().
+		InstanceID("m5ea01zic0bg8dufo2eo").
+		Build()
+	if err != nil {
+		t.Errorf("Deletenode Test Fail: %s", err.Error())
+		return
+	}
+	_, err = aliEcs.Deletenode(deleteNode)
+	if err != nil {
+		t.Errorf("Deletenode Test Fail: %s", err)
 		return
 	}
 	t.Logf("Ali node is deleted successfully.")

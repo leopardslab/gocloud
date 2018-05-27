@@ -8,7 +8,7 @@ import (
 
 // Startnode start ECS instances accept map[string]interface{}
 func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
-	var options StartInstance
+	var options StartNode
 
 	param = make(map[string]interface{})
 
@@ -42,7 +42,7 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 
 // Stopnode stop ECS instances accept map[string]interface{}
 func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
-	var options StopInstance
+	var options StopNode
 
 	param = make(map[string]interface{})
 
@@ -85,7 +85,7 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 
 // Rebootnode reboot ECS instances accept map[string]interface{}
 func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
-	var options RebootInstance
+	var options RebootNode
 
 	param = make(map[string]interface{})
 
@@ -119,7 +119,7 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 
 // Deletenode delete ECS instances accept map[string]interface{}
 func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
-	var options DeleteInstance
+	var options DeleteNode
 
 	param = make(map[string]interface{})
 
@@ -145,7 +145,7 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 
 // Createnode create ECS instances accept map[string]interface{}
 func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
-	var options CreateInstance
+	var options CreateNode
 
 	param := make(map[string]interface{})
 
