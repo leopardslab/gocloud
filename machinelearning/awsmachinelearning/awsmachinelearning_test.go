@@ -8,7 +8,7 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-/*
+
     func TestGetMLModel(t *testing.T) {
 
       var awsmachinelearning Awsmachinelearning
@@ -75,7 +75,7 @@ func TestUpdateMLModel(t *testing.T) {
   fmt.Println(response["body"])
 }
 
-*/
+
 
 func TestCreateMLModel(t *testing.T) {
 
