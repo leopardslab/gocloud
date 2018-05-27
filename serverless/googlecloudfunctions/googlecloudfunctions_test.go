@@ -1,4 +1,4 @@
-package bigtable
+package googlecloudfunctions
 
 import "testing"
 
