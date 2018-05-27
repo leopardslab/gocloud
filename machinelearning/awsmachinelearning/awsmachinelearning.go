@@ -9,61 +9,52 @@ import (
 	"net/http"
 )
 
-
-func(awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{}) (resp interface{}, err error) {
-
-/*
-
-
-
+func (awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 
 	var Region string
-  var createMLModel CreateMLModel
+	var createMLModel CreateMLModel
 
 	for key, value := range param {
 		switch key {
-			case "MLModelId":
-				TableNameV, _ := value.(string)
-				TableName = TableNameV
+		case "MLModelId":
+			MLModelIdV, _ := value.(string)
+			createMLModel.MLModelID = MLModelIdV
 
-			case "Region":
-				RegionV, _ := value.(string)
-				Region = RegionV
+		case "Region":
+			RegionV, _ := value.(string)
+			Region = RegionV
 
-			case "MLModelName":
-				MLModelNameV, _ := value.(string)
-				createMLModel.MLModelName = MLModelNameV
+		case "MLModelName":
+			MLModelNameV, _ := value.(string)
+			createMLModel.MLModelName = MLModelNameV
 
-			case "MLModelType":
-				MLModelTypeV, _ := value.(string)
-				createMLModel.MLModelType = MLModelTypeV
+		case "MLModelType":
+			MLModelTypeV, _ := value.(string)
+			createMLModel.MLModelType = MLModelTypeV
 
-			case "Recipe":
-				RecipeV, _ := value.(string)
-				createMLModel.Recipe = RecipeV
+		case "Recipe":
+			RecipeV, _ := value.(string)
+			createMLModel.Recipe = RecipeV
 
+		case "RecipeURI":
+			RecipeURIV, _ := value.(string)
+			createMLModel.RecipeURI = RecipeURIV
 
-			case "RecipeURI":
-				RecipeURIV, _ := value.(string)
-				createMLModel.RecipeURI = RecipeURIV
+		case "TrainingDataSourceID":
+			TrainingDataSourceIDV, _ := value.(string)
+			createMLModel.TrainingDataSourceID = TrainingDataSourceIDV
 
-
-			case "TrainingDataSourceID":
-				TrainingDataSourceIDV, _ := value.(string)
-				createMLModel.TrainingDataSourceID = TrainingDataSourceIDV
-
-
-			case "String":
-				StringV, _ := value.(string)
-				createMLModel.parameters.String = StringV
+		case "String":
+			StringV, _ := value.(string)
+			createMLModel.parameters.String = StringV
 		}
 	}
 
 	params := make(map[string]string)
 
-	preparecreateMLModelparams(params, createMLModel, Region)
+	preparecreateMLModel(params, createMLModel, Region)
 
 	createMLModeljsonmap := make(map[string]interface{})
 
@@ -72,16 +63,14 @@ func(awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{}) 
 	response := make(map[string]interface{})
 	err = awsmachinelearning.PrepareSignatureV4query(params, createMLModeljsonmap, response)
 	resp = response
-	*/
+
 	return resp, err
 }
 
+func preparecreateMLModelparamsdict(createMLModeljsonmap map[string]interface{}, createMLModel CreateMLModel) {
 
-func preparestarttaskparamsdict(createMLModeljsonmap map[string]interface{}, createMLModel CreateMLModel) {
-
-	/*
-	if createMLModel.MLModelId != "" {
-		createMLModeljsonmap["MLModelId"] = createMLModel.MLModelId
+	if createMLModel.MLModelID != "" {
+		createMLModeljsonmap["MLModelId"] = createMLModel.MLModelID
 	}
 	if createMLModel.MLModelName != "" {
 		createMLModeljsonmap["MLModelName"] = createMLModel.MLModelName
@@ -102,16 +91,13 @@ func preparestarttaskparamsdict(createMLModeljsonmap map[string]interface{}, cre
 		createMLModeljsonmap["TrainingDataSourceID"] = createMLModel.TrainingDataSourceID
 	}
 
-
-	if createMLModel.Parameters.String != "" {
+	if createMLModel.parameters.String != "" {
 		parameters := make(map[string]string)
-		parameters["string"] = createMLModel.Parameters.String
+		parameters["string"] = createMLModel.parameters.String
 		createMLModeljsonmap["parameters"] = parameters
 	}
-*/
 
 }
-
 
 func preparecreateMLModel(params map[string]string, createMLModel CreateMLModel, Region string) {
 	if Region != "" {
@@ -120,8 +106,7 @@ func preparecreateMLModel(params map[string]string, createMLModel CreateMLModel,
 	params["amztarget"] = "AmazonML_20141212.CreateMLModel"
 }
 
-
-func(awsmachinelearning *Awsmachinelearning) DeleteMLModel(request interface{}) (resp interface{}, err error) {
+func (awsmachinelearning *Awsmachinelearning) DeleteMLModel(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 
@@ -129,23 +114,22 @@ func(awsmachinelearning *Awsmachinelearning) DeleteMLModel(request interface{}) 
 
 	for key, value := range param {
 		switch key {
-			case "MLModelId":
-				MLModelIdV, _ := value.(string)
-				MLModelId = MLModelIdV
+		case "MLModelId":
+			MLModelIdV, _ := value.(string)
+			MLModelId = MLModelIdV
 
-			case "Region":
-				RegionV, _ := value.(string)
-				Region = RegionV
+		case "Region":
+			RegionV, _ := value.(string)
+			Region = RegionV
 		}
 	}
 
 	params := make(map[string]string)
 
-
 	preparedeletemodel(params, MLModelId, Region)
 
 	deletemodeljsonmap := map[string]interface{}{
-		"MLModelId": MLModelId ,
+		"MLModelId": MLModelId,
 	}
 
 	response := make(map[string]interface{})
@@ -154,7 +138,7 @@ func(awsmachinelearning *Awsmachinelearning) DeleteMLModel(request interface{}) 
 	return resp, err
 }
 
-func preparedeletemodel(params map[string]string, MLModelId string,Region string) {
+func preparedeletemodel(params map[string]string, MLModelId string, Region string) {
 
 	if MLModelId != "" {
 		params["MLModelId"] = MLModelId
@@ -167,7 +151,7 @@ func preparedeletemodel(params map[string]string, MLModelId string,Region string
 	params["amztarget"] = "AmazonML_20141212.DeleteMLModel"
 }
 
-func preparegetmodel(params map[string]string, MLModelId string ,Verbose string,Region string) {
+func preparegetmodel(params map[string]string, MLModelId string, Verbose string, Region string) {
 
 	if MLModelId != "" {
 		params["MLModelId"] = MLModelId
@@ -184,7 +168,7 @@ func preparegetmodel(params map[string]string, MLModelId string ,Verbose string,
 	params["amztarget"] = "AmazonML_20141212.GetMLModel"
 }
 
-func prepareupdatemodel(params map[string]string, MLModelId string ,ScoreThreshold string, MLModelName string,Region string) {
+func prepareupdatemodel(params map[string]string, MLModelId string, ScoreThreshold string, MLModelName string, Region string) {
 
 	if MLModelId != "" {
 		params["MLModelId"] = MLModelId
@@ -205,16 +189,14 @@ func prepareupdatemodel(params map[string]string, MLModelId string ,ScoreThresho
 	params["amztarget"] = "AmazonML_20141212.UpdateMLModel"
 }
 
-
-
 //PrepareSignatureV4query creates PrepareSignatureV4 for request.
 func (awsmachinelearning *Awsmachinelearning) PrepareSignatureV4query(params map[string]string, paramsmap map[string]interface{}, response map[string]interface{}) error {
 	ECSEndpoint := "https://machinelearning." + params["Region"] + ".amazonaws.com"
-	fmt.Println("ECSEndpoint : ",ECSEndpoint)
+	fmt.Println("ECSEndpoint : ", ECSEndpoint)
 	service := "machinelearning"
 	method := "POST"
 	host := service + "." + params["Region"] + ".amazonaws.com"
-	fmt.Println("host : ",host)
+	fmt.Println("host : ", host)
 	ContentType := "application/x-amz-json-1.1"
 	signedheaders := "content-type;host;x-amz-date;x-amz-target"
 	amztarget := params["amztarget"]
@@ -233,7 +215,7 @@ func (awsmachinelearning *Awsmachinelearning) PrepareSignatureV4query(params map
 	return err
 }
 
-func(awsmachinelearning *Awsmachinelearning) GetMLModel(request interface{}) (resp interface{}, err error) {
+func (awsmachinelearning *Awsmachinelearning) GetMLModel(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 
@@ -241,28 +223,27 @@ func(awsmachinelearning *Awsmachinelearning) GetMLModel(request interface{}) (re
 
 	for key, value := range param {
 		switch key {
-			case "MLModelId":
-				MLModelIdV, _ := value.(string)
-				MLModelId = MLModelIdV
+		case "MLModelId":
+			MLModelIdV, _ := value.(string)
+			MLModelId = MLModelIdV
 
-			case "Verbose":
-				VerboseV, _ := value.(string)
-				Verbose = VerboseV
+		case "Verbose":
+			VerboseV, _ := value.(string)
+			Verbose = VerboseV
 
-			case "Region":
-				RegionV, _ := value.(string)
-				Region = RegionV
+		case "Region":
+			RegionV, _ := value.(string)
+			Region = RegionV
 		}
 	}
 
 	params := make(map[string]string)
 
-
 	preparedeletemodel(params, MLModelId, Region)
 
 	deletemodeljsonmap := map[string]interface{}{
 		"MLModelId": MLModelId,
-		"Verbose" : Verbose,
+		"Verbose":   Verbose,
 	}
 
 	response := make(map[string]interface{})
@@ -279,34 +260,32 @@ func (awsmachinelearning *Awsmachinelearning) UpdateMLModel(request interface{})
 
 	for key, value := range param {
 		switch key {
-			case "MLModelId":
-				MLModelIdV, _ := value.(string)
-				MLModelId = MLModelIdV
+		case "MLModelId":
+			MLModelIdV, _ := value.(string)
+			MLModelId = MLModelIdV
 
-			case "MLModelName":
-				MLModelNameV, _ := value.(string)
-				MLModelName = MLModelNameV
+		case "MLModelName":
+			MLModelNameV, _ := value.(string)
+			MLModelName = MLModelNameV
 
-			case "ScoreThreshold":
-				ScoreThresholdV, _ := value.(string)
-				ScoreThreshold = ScoreThresholdV
+		case "ScoreThreshold":
+			ScoreThresholdV, _ := value.(string)
+			ScoreThreshold = ScoreThresholdV
 
-			case "Region":
-				RegionV, _ := value.(string)
-				Region = RegionV
+		case "Region":
+			RegionV, _ := value.(string)
+			Region = RegionV
 		}
 	}
 
 	params := make(map[string]string)
 
-
-	prepareupdatemodel(params, MLModelId  ,ScoreThreshold , MLModelName ,Region)
-
+	prepareupdatemodel(params, MLModelId, ScoreThreshold, MLModelName, Region)
 
 	updatemodeljsonmap := map[string]interface{}{
-		"MLModelId": MLModelId ,
-		"MLModelName": MLModelName,
-		"ScoreThreshold" : ScoreThreshold,
+		"MLModelId":      MLModelId,
+		"MLModelName":    MLModelName,
+		"ScoreThreshold": ScoreThreshold,
 	}
 
 	response := make(map[string]interface{})
