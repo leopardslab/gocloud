@@ -1,3 +1,5 @@
+package dynamodb
+
 import "testing"
 import awsAuth "github.com/cloudlibz/gocloud/auth"
 
