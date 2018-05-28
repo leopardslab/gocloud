@@ -54,3 +54,75 @@ func TestDeletetables(t *testing.T) {
 		t.Errorf("Test Fail")
 	}
 }
+
+
+
+func TestCreatetables(t *testing.T) {
+
+	var dynamodb Dynamodb
+
+
+	keySchema :=[]map[string]interface{}{
+		{
+					 "AttributeName": "ForumName",
+					 "KeyType": "HASH"
+			 },
+			 {
+					 "AttributeName": "Subject",
+					 "KeyType": "RANGE"
+			 }
+	}
+
+
+	attributeDefinitions := []map[string]interface{}{
+
+		{
+            "AttributeName": "ForumName",
+            "AttributeType": "S"
+        },
+        {
+            "AttributeName": "Subject",
+            "AttributeType": "S"
+        },
+        {
+            "AttributeName": "LastPostDateTime",
+            "AttributeType": "S"
+        }
+
+		}
+
+
+		projection := map[string]interface{}{
+					"ProjectionType": "KEYS_ONLY"
+		}
+
+		provisionedThroughput := map[string]interface{}{
+        "ReadCapacityUnits": 5,
+        "WriteCapacityUnits": 5
+    }
+
+	localSecondaryIndexes :=[]map[string]interface{}{
+		{
+            "IndexName": "LastPostIndex",
+            "KeySchema": keySchema ,
+            "Projection": projection,
+
+					provisionedThroughput: provisionedThroughput,
+    }
+	}
+
+
+	createtables := map[string]interface{}{
+		"Region":    "us-east-1",
+		"TableName": "Thread",
+		"KeySchema" : keySchema,
+		"AttributeDefinitions" :attributeDefinitions ,
+		"LocalSecondaryIndexes" : localSecondaryIndexes,
+	}
+
+	_, err := dynamodb.Createtables(createtables)
+
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
+}
