@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
+	"fmt"
 )
 
 const (
@@ -101,6 +102,8 @@ func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interfa
 
 	CreateGooglecloudfunctionjsonmap := make(map[string]interface{})
 
+	fmt.Println(option.SourceUploadURL)
+
 	CreateGooglecloudfunctionedictnoaryconvert(option, CreateGooglecloudfunctionjsonmap)
 
 	CreateGooglecloudfunctionjson, _ := json.Marshal(CreateGooglecloudfunctionjsonmap)
@@ -130,6 +133,28 @@ func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interfa
 	return resp, err
 }
 
+/*
+{
+  "name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
+  "httpsTrigger": {
+    "url": "https://us-central1-adept-comfort-202709.cloudfunctions.net/function-1"
+  },
+  "status": "ACTIVE",
+  "entryPoint": "helloWorld",
+  "timeout": "60s",
+  "availableMemoryMb": 256,
+  "serviceAccountEmail": "adept-comfort-202709@appspot.gserviceaccount.com",
+  "updateTime": "2018-05-11T18:20:33Z",
+  "versionId": "1",
+  "labels": {
+    "deployment-tool": "console-cloud"
+  },
+  "sourceUploadUrl": "https://storage.googleapis.com/gcf-upload-us-central1-f24bda97-6cd1-46cc-b37d-1f60eac4210a/8548b011-9626-42c1-86ed-6190892b328e.zip?GoogleAccessId=126778294088@cloudservices.gserviceaccount.com&Expires=1526064618&Signature=nB%2FI6cwIap0DF5T0Uo9eYCnlmi3HLqvoRW4MfodzVI%2FXuC7HU%2BE9SwduVQKYeTRddo5iFNdm4VDmBu4A4fGQvZ5PaCuoKG4i7jZXRJgq1B4NIpocaFnHmY6ZWaCS0Av%2Bus29FHs2nTYIqp9zHWHHORSQC%2BPF8GP2mRToDOShpodkQFkxP6wsXUnkk8tDUf5mvTRkeqtgf0rX0huidbEVl7ZtGkcQiusDcS9Nhe3dwqOdsJ7xs2khl2D%2FOmch6jgrZ11MtXum3G5XnFLqMYupS0pvB%2BQiy7g7eLfIw%2BdvtRTEuEFyxWP49lCHUG8wWad0hNEVf29oAHS2x%2B4Q%2FaIGbA%3D%3D",
+  "runtime": "nodejs6"
+}
+
+*/
+
 func CreateGooglecloudfunctionedictnoaryconvert(option CreateGooglecloudfunction, CreateGooglecloudfunctionjsonmap map[string]interface{}) {
 
 	if option.AvailableMemoryMb != 0 {
@@ -145,7 +170,7 @@ func CreateGooglecloudfunctionedictnoaryconvert(option CreateGooglecloudfunction
 	}
 
 	if option.EntryPoint != "" {
-		CreateGooglecloudfunctionjsonmap["EntryPoint"] = option.EntryPoint
+		CreateGooglecloudfunctionjsonmap["entryPoint"] = option.EntryPoint
 	}
 
 	if option.Timeout != "" {
@@ -161,11 +186,11 @@ func CreateGooglecloudfunctionedictnoaryconvert(option CreateGooglecloudfunction
 	}
 
 	if option.VersionID != "" {
-		CreateGooglecloudfunctionjsonmap["versionID"] = option.VersionID
+		CreateGooglecloudfunctionjsonmap["versionId"] = option.VersionID
 	}
 
 	if option.ServiceAccountEmail != "" {
-		CreateGooglecloudfunctionjsonmap["sourceUploadURL"] = option.SourceUploadURL
+		CreateGooglecloudfunctionjsonmap["sourceUploadUrl"] = option.SourceUploadURL
 	}
 
 	if option.Labels.DeploymentTool != "" {
@@ -176,7 +201,7 @@ func CreateGooglecloudfunctionedictnoaryconvert(option CreateGooglecloudfunction
 
 	if option.HTTPSTrigger.URL != "" {
 		labels := make(map[string]string)
-		labels["urls"] = option.HTTPSTrigger.URL
+		labels["url"] = option.HTTPSTrigger.URL
 		CreateGooglecloudfunctionjsonmap["httpsTrigger"] = labels
 	}
 
