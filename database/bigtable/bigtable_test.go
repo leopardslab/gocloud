@@ -2,12 +2,11 @@ package bigtable
 
 import "testing"
 
-
 func TestCreatetables(t *testing.T) {
 
 	var bigtable Bigtable
 
-  createtables := map[string]interface{}{
+	createtables := map[string]interface{}{
 		"parent": "projects/adept-comfort-202709/instances/helloo",
 	}
 
@@ -18,14 +17,13 @@ func TestCreatetables(t *testing.T) {
 	}
 }
 
-
 func TestDescribetables(t *testing.T) {
 
 	var bigtable Bigtable
 
-  describetables := map[string]string{
-	   "name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
-  }
+	describetables := map[string]string{
+		"name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
+	}
 
 	_, err := bigtable.Describetables(describetables)
 
@@ -34,16 +32,15 @@ func TestDescribetables(t *testing.T) {
 	}
 }
 
-
 func TestListtables(t *testing.T) {
 
 	var bigtable Bigtable
 
-  listtables := map[string]string{
-  "parent": "projects/adept-comfort-202709/instances/helloo",
-    "view" : "NAME_ONLY",
-  "pageToken" : "",
-  }
+	listtables := map[string]string{
+		"parent":    "projects/adept-comfort-202709/instances/helloo",
+		"view":      "NAME_ONLY",
+		"pageToken": "",
+	}
 
 	_, err := bigtable.Listtables(listtables)
 
@@ -52,16 +49,13 @@ func TestListtables(t *testing.T) {
 	}
 }
 
-
-
-
 func TestDeletetables(t *testing.T) {
 
 	var bigtable Bigtable
 
-  deletetables := map[string]string{
-    "name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
-  }
+	deletetables := map[string]string{
+		"name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
+	}
 
 	_, err := bigtable.Deletetables(deletetables)
 

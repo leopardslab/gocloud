@@ -2,14 +2,13 @@ package googlecloudfunctions
 
 import "testing"
 
-
 func TestCallfunction(t *testing.T) {
 
 	var googlecloudfunctions Googlecloudfunctions
 
-  callfunction := map[string]string{
-    "name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
-  }
+	callfunction := map[string]string{
+		"name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
+	}
 
 	_, err := googlecloudfunctions.Callfunction(callfunction)
 
@@ -18,14 +17,13 @@ func TestCallfunction(t *testing.T) {
 	}
 }
 
-
 func TestDeletefunction(t *testing.T) {
 
 	var googlecloudfunctions Googlecloudfunctions
 
-  deletefunction := map[string]string{
-    "name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
-  }
+	deletefunction := map[string]string{
+		"name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
+	}
 
 	_, err := googlecloudfunctions.Deletefunction(deletefunction)
 
@@ -34,14 +32,13 @@ func TestDeletefunction(t *testing.T) {
 	}
 }
 
-
 func TestGetfunction(t *testing.T) {
 
 	var googlecloudfunctions Googlecloudfunctions
 
-  getfunction := map[string]string{
-    "name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
-  }
+	getfunction := map[string]string{
+		"name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
+	}
 
 	_, err := googlecloudfunctions.Getfunction(getfunction)
 
@@ -50,16 +47,14 @@ func TestGetfunction(t *testing.T) {
 	}
 }
 
-
 func TestListfunction(t *testing.T) {
 
 	var googlecloudfunctions Googlecloudfunctions
 
-  listfunction := map[string]string{
-    "name": "projects/adept-comfort-202709/locations/us-central1",
-    "pageSize": "1",
-  }
-
+	listfunction := map[string]string{
+		"name":     "projects/adept-comfort-202709/locations/us-central1",
+		"pageSize": "1",
+	}
 
 	_, err := googlecloudfunctions.Listfunction(listfunction)
 

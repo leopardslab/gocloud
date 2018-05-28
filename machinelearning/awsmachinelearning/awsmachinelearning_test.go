@@ -8,74 +8,65 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
+func TestGetMLModel(t *testing.T) {
 
-    func TestGetMLModel(t *testing.T) {
+	var awsmachinelearning Awsmachinelearning
 
-      var awsmachinelearning Awsmachinelearning
+	getMLModel := map[string]interface{}{
+		"Region":    "us-east-1",
+		"MLModelId": "ml-EL5FRUNlk7p",
+	}
 
-      getMLModel := map[string]interface{}{
-        "Region":    "us-east-1",
-        "MLModelId": "ml-EL5FRUNlk7p",
-      }
+	resp, err := awsmachinelearning.GetMLModel(getMLModel)
 
-    	resp, err := awsmachinelearning.GetMLModel(getMLModel)
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
 
-    	if err != nil {
-    		t.Errorf("Test Fail")
-    	}
+	response := resp.(map[string]interface{})
 
-    	response := resp.(map[string]interface{})
-
-    	fmt.Println(response["body"])
-    }
-
-
-
-
+	fmt.Println(response["body"])
+}
 
 func TestDeleteMLModel(t *testing.T) {
 
-  var awsmachinelearning Awsmachinelearning
+	var awsmachinelearning Awsmachinelearning
 
-  deleteMLModel := map[string]interface{}{
-    "Region":    "us-east-1",
-    "MLModelId": "ds-Lf3D4KaPukx",
-  }
+	deleteMLModel := map[string]interface{}{
+		"Region":    "us-east-1",
+		"MLModelId": "ds-Lf3D4KaPukx",
+	}
 
-  resp, err := awsmachinelearning.DeleteMLModel(deleteMLModel)
+	resp, err := awsmachinelearning.DeleteMLModel(deleteMLModel)
 
-  if err != nil {
-    t.Errorf("Test Fail")
-  }
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
 
-  response := resp.(map[string]interface{})
+	response := resp.(map[string]interface{})
 
-  fmt.Println(response["body"])
+	fmt.Println(response["body"])
 }
-
-
 
 func TestUpdateMLModel(t *testing.T) {
 
-  var awsmachinelearning Awsmachinelearning
+	var awsmachinelearning Awsmachinelearning
 
-  updateMLModel := map[string]interface{}{
-    "Region":    "us-east-1",
-    "MLModelId": "ds-Lf3D4KaPukx",
-  }
+	updateMLModel := map[string]interface{}{
+		"Region":    "us-east-1",
+		"MLModelId": "ds-Lf3D4KaPukx",
+	}
 
-  resp, err := awsmachinelearning.UpdateMLModel(updateMLModel)
+	resp, err := awsmachinelearning.UpdateMLModel(updateMLModel)
 
-  if err != nil {
-    t.Errorf("Test Fail")
-  }
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
 
-  response := resp.(map[string]interface{})
+	response := resp.(map[string]interface{})
 
-  fmt.Println(response["body"])
+	fmt.Println(response["body"])
 }
-
-
 
 func TestCreateMLModel(t *testing.T) {
 

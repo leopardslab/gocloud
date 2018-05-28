@@ -2,8 +2,8 @@ package ecs
 
 import (
 	"github.com/cloudlibz/gocloud/aliauth"
-	"strconv"
 	"reflect"
+	"strconv"
 )
 
 // Startnode start ECS instances accept map[string]interface{}
@@ -251,7 +251,7 @@ func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (ecs *ECS) ListNodeType(request interface{}) (resp interface{}, err error)  {
+func (ecs *ECS) ListNodeType(request interface{}) (resp interface{}, err error) {
 	params := make(map[string]interface{})
 	response := make(map[string]interface{})
 	err = aliauth.ECSSignAndDoRequest("DescribeInstanceTypes", params, response)
