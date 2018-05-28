@@ -117,17 +117,20 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 
 		case "ProvisionedThroughput":
 			provisionedThroughputparam, _ := value.(map[string]interface{})
+
 			for provisionedThroughputparamkey, provisionedThroughputparamvalue := range provisionedThroughputparam {
 				switch provisionedThroughputparamkey {
-				case "StreamViewType":
-					createtable.provisionedThroughput.ReadCapacityUnits = provisionedThroughputparamvalue.(int)
+					case "ReadCapacityUnits":
+						ReadCapacityUnitsv, _ := provisionedThroughputparamvalue.(int)
+						createtable.provisionedThroughput.ReadCapacityUnits = ReadCapacityUnitsv
 
-				case "StreamEnabled":
-					createtable.provisionedThroughput.WriteCapacityUnits = provisionedThroughputparamvalue.(int)
+					case "WriteCapacityUnits":
+						createtable.provisionedThroughput.WriteCapacityUnits = provisionedThroughputparamvalue.(int)
+
+					}
 				}
-			}
 
-		case "keySchema":
+		case "KeySchema":
 			keySchemaparam, _ := value.([]map[string]interface{})
 			for i := 0; i < len(keySchemaparam); i++ {
 				var keySchema KeySchema
@@ -152,7 +155,7 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 					case "IndexName":
 						localSecondaryIndexes.IndexName = localSecondaryIndexesparamvalue.(string)
 
-					case "keySchema":
+					case "KeySchema":
 						keySchemaparam, _ := localSecondaryIndexesparamvalue.([]map[string]interface{})
 						for i := 0; i < len(keySchemaparam); i++ {
 							var keySchema KeySchema
@@ -227,10 +230,11 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 						provisionedThroughputparam, _ := globalSecondaryIndexesparamvalue.(map[string]interface{})
 						for provisionedThroughputparamkey, provisionedThroughputparamvalue := range provisionedThroughputparam {
 							switch provisionedThroughputparamkey {
-							case "StreamViewType":
+
+							case "ReadCapacityUnits":
 								createtable.provisionedThroughput.ReadCapacityUnits = provisionedThroughputparamvalue.(int)
 
-							case "StreamEnabled":
+							case "WriteCapacityUnits":
 								createtable.provisionedThroughput.WriteCapacityUnits = provisionedThroughputparamvalue.(int)
 							}
 						}
@@ -263,6 +267,13 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 
 	createtablejsonmap := map[string]interface{}{}
 
+
+	fmt.Println(createtable.provisionedThroughput)
+
+	preparecreatetablejsonmap(createtablejsonmap,createtable)
+
+	fmt.Println(createtablejsonmap["ProvisionedThroughput"])
+
 	response := make(map[string]interface{})
 	err = dynamodb.PrepareSignatureV4query(params, createtablejsonmap, response)
 	resp = response
@@ -289,8 +300,8 @@ func preparecreatetablejsonmap(createtablejsonmap map[string]interface{}, create
 	preparecreatetableProvisionedThroughputparams(createtablejsonmap, createtable)
 	preparekeySchemaparams(createtablejsonmap, createtable)
 	prepareAttributeDefinitionsparams(createtablejsonmap, createtable)
-	prepareAttributeDefinitionsparams(createtablejsonmap, createtable)
 	prepareGlobalSecondaryIndexesparams(createtablejsonmap, createtable)
+	//prepareLocalSecondaryIndexesparams(createtablejsonmap, createtable)
 }
 
 func preparecreatetableStreamSpecificationparams(createtablejsonmap map[string]interface{}, createtable Createtable) {
@@ -326,7 +337,7 @@ func preparecreatetableProvisionedThroughputparams(createtablejsonmap map[string
 			provisionedThroughputv["ReadCapacityUnits"] = createtable.provisionedThroughput.ReadCapacityUnits
 		}
 		if createtable.provisionedThroughput.WriteCapacityUnits != 0 {
-			provisionedThroughputv["ReadCapacityUnits"] = createtable.provisionedThroughput.WriteCapacityUnits
+			provisionedThroughputv["WriteCapacityUnits"] = createtable.provisionedThroughput.WriteCapacityUnits
 		}
 		createtablejsonmap["ProvisionedThroughput"] = provisionedThroughputv
 	}
@@ -455,27 +466,31 @@ func prepareLocalSecondaryIndexesparams(createtablejsonmap map[string]interface{
 			p := Projection{}
 
 			if createtable.localSecondaryIndexes[i].projection.ProjectionType == p.ProjectionType && len(createtable.localSecondaryIndexes[i].projection.NonKeyAttributes) == len(p.NonKeyAttributes) {
-
 				projectionv := make(map[string]interface{})
 				projectionv["ProjectionType"] = createtable.localSecondaryIndexes[i].projection.ProjectionType
 				projectionv["NonKeyAttributes"] = createtable.localSecondaryIndexes[i].projection.NonKeyAttributes
 				localSecondaryIndexesvjsonmap["Projection"] = projectionv
 			}
 
+
 			if len(createtable.localSecondaryIndexes[i].keySchema) != 0 {
+
+				lenv := len(createtable.localSecondaryIndexes[i].keySchema)
+
+				fmt.Println("i :",i)
+				fmt.Println("lenv", lenv)
 
 				keySchemavs := make([]map[string]interface{}, 0)
 
-				for i := 0; i < len(createtable.localSecondaryIndexes[i].keySchema); i++ {
+				for j := 0; j < lenv ; i++ {
 
 					keySchemav := make(map[string]interface{})
+						fmt.Println("j :",j)
+						fmt.Println("createtable.localSecondaryIndexes[i].keySchema[j].AttributeName : ",createtable.localSecondaryIndexes[i].keySchema[j].AttributeName)
+						keySchemav["AttributeName"] = createtable.localSecondaryIndexes[i].keySchema[j].AttributeName
 
-					if createtable.localSecondaryIndexes[i].keySchema[i].AttributeName != "" {
-						keySchemav["AttributeName"] = createtable.localSecondaryIndexes[i].keySchema[i].AttributeName
-					}
-
-					if createtable.localSecondaryIndexes[i].keySchema[i].KeyType != "" {
-						keySchemav["KeyType"] = createtable.localSecondaryIndexes[i].keySchema[i].KeyType
+					if createtable.localSecondaryIndexes[i].keySchema[j].KeyType != "" {
+						keySchemav["KeyType"] = createtable.localSecondaryIndexes[i].keySchema[j].KeyType
 					}
 
 					keySchemavs = append(keySchemavs, keySchemav)

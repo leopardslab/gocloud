@@ -2,11 +2,13 @@ package dynamodb
 
 import "testing"
 import awsAuth "github.com/cloudlibz/gocloud/auth"
+import "fmt"
 
 func init() {
 	awsAuth.LoadConfig()
 }
 
+/*
 func TestDescribetables(t *testing.T) {
 
 	var dynamodb Dynamodb
@@ -55,6 +57,7 @@ func TestDeletetables(t *testing.T) {
 	}
 }
 
+*/
 
 
 func TestCreatetables(t *testing.T) {
@@ -65,12 +68,12 @@ func TestCreatetables(t *testing.T) {
 	keySchema :=[]map[string]interface{}{
 		{
 					 "AttributeName": "ForumName",
-					 "KeyType": "HASH"
+					 "KeyType": "HASH",
 			 },
 			 {
 					 "AttributeName": "Subject",
-					 "KeyType": "RANGE"
-			 }
+					 "KeyType": "RANGE",
+			 },
 	}
 
 
@@ -78,27 +81,27 @@ func TestCreatetables(t *testing.T) {
 
 		{
             "AttributeName": "ForumName",
-            "AttributeType": "S"
+            "AttributeType": "S",
         },
         {
             "AttributeName": "Subject",
-            "AttributeType": "S"
+            "AttributeType": "S",
         },
         {
             "AttributeName": "LastPostDateTime",
-            "AttributeType": "S"
-        }
+            "AttributeType": "S",
+        },
 
 		}
 
 
 		projection := map[string]interface{}{
-					"ProjectionType": "KEYS_ONLY"
+					"ProjectionType": "KEYS_ONLY",
 		}
 
 		provisionedThroughput := map[string]interface{}{
         "ReadCapacityUnits": 5,
-        "WriteCapacityUnits": 5
+        "WriteCapacityUnits": 5,
     }
 
 	localSecondaryIndexes :=[]map[string]interface{}{
@@ -106,21 +109,25 @@ func TestCreatetables(t *testing.T) {
             "IndexName": "LastPostIndex",
             "KeySchema": keySchema ,
             "Projection": projection,
-
-					provisionedThroughput: provisionedThroughput,
-    }
+    },
 	}
+
 
 
 	createtables := map[string]interface{}{
 		"Region":    "us-east-1",
-		"TableName": "Thread",
+		"TableName" : "Thread",
 		"KeySchema" : keySchema,
 		"AttributeDefinitions" :attributeDefinitions ,
 		"LocalSecondaryIndexes" : localSecondaryIndexes,
+		"ProvisionedThroughput" : provisionedThroughput,
 	}
 
-	_, err := dynamodb.Createtables(createtables)
+	resp, err := dynamodb.Createtables(createtables)
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
 
 	if err != nil {
 		t.Errorf("Test Fail")
