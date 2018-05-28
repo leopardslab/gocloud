@@ -135,19 +135,17 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 			}
 
 		case "initialSplits":
-			/*
-				  initialSplitsparam := make([]map[string]interface{})
-					for i := 0; i < len(initialSplitsparam); i++ {
-							var initialSplits InitialSplits
-							for initialSplitsparam, initialSplitsparamvalue := range initialSplitsparam[i] {
-								switch initialSplitsparamkey {
-								    case "key":
-										    initialSplits.key = initialSplitsparamvalue.(string)
+			initialSplitsparam, _  := value.([]map[string]interface{})
+			for i := 0; i < len(initialSplitsparam); i++ {
+				var initialSplits InitialSplits
+				for initialSplitsparamkey, initialSplitsparamvalue := range initialSplitsparam[i] {
+				    switch initialSplitsparamkey {
+						     case "key":
+								     initialSplits.key = initialSplitsparamvalue.(string)
 								}
 							}
-							option.initialSplits = append(createtable.initialSplits, initialSplits)
+							option.initialSplits = append(option.initialSplits, initialSplits)
 						}
-			*/
 		}
 	}
 
@@ -161,15 +159,16 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 
 	Createbigtablejsonstring := string(Createbigtablejson)
 
-	fmt.Println(Createbigtablejsonstring)
+	fmt.Println(Createbigtablejsonstring,Createbigtablejsonstring)
 
 	//	byte(`{"tableId": "bokkkya","table": { "name": "bokkkya"}}`)
 
 	// []byte(`{"tableId": "bokkkya","table": { "name": "bokkkya"}}`)
 
-	//	var Createbigtablejsonstringbyte = []byte(Createbigtablejsonstring)
+	var Createbigtablejsonstringbyte = []byte(Createbigtablejsonstring)
 
-	var Createbigtablejsonstringbyte = []byte(`{"tableId": "bokkkya","table": { }}`)
+
+	//var Createbigtablejsonstringbyte = []byte(`{"tableId": "bokkkya","table": { }}`)
 
 	url := "https://bigtableadmin.googleapis.com/v2/" + parent + "/tables"
 
@@ -196,4 +195,9 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 
 func Createbigtabledictnoaryconvert(option Createbigtable, Createbigtablejsonmap map[string]interface{}) {
 
+	if option.tableId != ""{
+		Createbigtablejsonmap["tableId"] = option.tableId
+	}
+
+	Createbigtablejsonmap["table"] = option.table
 }

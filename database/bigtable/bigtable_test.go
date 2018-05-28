@@ -1,22 +1,37 @@
 package bigtable
 
 import "testing"
+import "fmt"
 
 func TestCreatetables(t *testing.T) {
 
 	var bigtable Bigtable
 
+	table := make(map[string]interface{})
+
+	initialSplits := make([]map[string]interface{},0)
+
 	createtables := map[string]interface{}{
 		"parent": "projects/adept-comfort-202709/instances/helloo",
+		"tableId" :"tableId",
+		"table"  : table,
+		"initialSplits" : initialSplits,
 	}
 
-	_, err := bigtable.Createtables(createtables)
+	resp, err := bigtable.Createtables(createtables)
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
+
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
+
+/*
 func TestDescribetables(t *testing.T) {
 
 	var bigtable Bigtable
@@ -63,3 +78,4 @@ func TestDeletetables(t *testing.T) {
 		t.Errorf("Test Fail")
 	}
 }
+*/

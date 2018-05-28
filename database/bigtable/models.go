@@ -16,6 +16,7 @@ type Createbigtable struct {
 	tableId       string
 	table         Table
 	initialSplits []InitialSplits
+	ClusterStates ClusterStates
 }
 
 type ClusterStates struct {
