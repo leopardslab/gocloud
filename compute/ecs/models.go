@@ -53,246 +53,246 @@ type DeleteNode struct {
 	InstanceID string
 }
 
-// CreateNode Builder pattern code
+// CreateNode builder pattern code
 type CreateNodeBuilder struct {
-	params *CreateNode
+	createNode *CreateNode
 }
 
 func NewCreateNodeBuilder() *CreateNodeBuilder {
 	createNode := &CreateNode{}
-	b := &CreateNodeBuilder{params: createNode}
+	b := &CreateNodeBuilder{createNode: createNode}
 	return b
 }
 
 func (b *CreateNodeBuilder) RegionID(regionID string) *CreateNodeBuilder {
-	b.params.RegionID = regionID
+	b.createNode.RegionID = regionID
 	return b
 }
 
 func (b *CreateNodeBuilder) ZoneID(zoneID string) *CreateNodeBuilder {
-	b.params.ZoneID = zoneID
+	b.createNode.ZoneID = zoneID
 	return b
 }
 
 func (b *CreateNodeBuilder) ImageID(imageID string) *CreateNodeBuilder {
-	b.params.ImageID = imageID
+	b.createNode.ImageID = imageID
 	return b
 }
 
 func (b *CreateNodeBuilder) InstanceType(instanceType string) *CreateNodeBuilder {
-	b.params.InstanceType = instanceType
+	b.createNode.InstanceType = instanceType
 	return b
 }
 
 func (b *CreateNodeBuilder) SecurityGroupID(securityGroupID string) *CreateNodeBuilder {
-	b.params.SecurityGroupID = securityGroupID
+	b.createNode.SecurityGroupID = securityGroupID
 	return b
 }
 
 func (b *CreateNodeBuilder) InstanceName(instanceName string) *CreateNodeBuilder {
-	b.params.InstanceName = instanceName
+	b.createNode.InstanceName = instanceName
 	return b
 }
 
 func (b *CreateNodeBuilder) Description(description string) *CreateNodeBuilder {
-	b.params.Description = description
+	b.createNode.Description = description
 	return b
 }
 
 func (b *CreateNodeBuilder) InternetChargeType(internetChargeType string) *CreateNodeBuilder {
-	b.params.InternetChargeType = internetChargeType
+	b.createNode.InternetChargeType = internetChargeType
 	return b
 }
 
 func (b *CreateNodeBuilder) InternetMaxBandwidthIn(internetMaxBandwidthIn int) *CreateNodeBuilder {
-	b.params.InternetMaxBandwidthIn = internetMaxBandwidthIn
+	b.createNode.InternetMaxBandwidthIn = internetMaxBandwidthIn
 	return b
 }
 
 func (b *CreateNodeBuilder) InternetMaxBandwidthOut(internetMaxBandwidthOut int) *CreateNodeBuilder {
-	b.params.InternetMaxBandwidthOut = internetMaxBandwidthOut
+	b.createNode.InternetMaxBandwidthOut = internetMaxBandwidthOut
 	return b
 }
 
 func (b *CreateNodeBuilder) HostName(hostName string) *CreateNodeBuilder {
-	b.params.HostName = hostName
+	b.createNode.HostName = hostName
 	return b
 }
 
 func (b *CreateNodeBuilder) Password(password string) *CreateNodeBuilder {
-	b.params.Password = password
+	b.createNode.Password = password
 	return b
 }
 
 func (b *CreateNodeBuilder) IoOptimized(ioOptimized string) *CreateNodeBuilder {
-	b.params.IoOptimized = ioOptimized
+	b.createNode.IoOptimized = ioOptimized
 	return b
 }
 
 func (b *CreateNodeBuilder) SystemDiskCategory(systemDiskCategory string) *CreateNodeBuilder {
-	b.params.SystemDiskCategory = systemDiskCategory
+	b.createNode.SystemDiskCategory = systemDiskCategory
 	return b
 }
 
 func (b *CreateNodeBuilder) SystemDiskSize(systemDiskSize string) *CreateNodeBuilder {
-	b.params.SystemDiskSize = systemDiskSize
+	b.createNode.SystemDiskSize = systemDiskSize
 	return b
 }
 
 func (b *CreateNodeBuilder) SystemDiskName(systemDiskName string) *CreateNodeBuilder {
-	b.params.SystemDiskName = systemDiskName
+	b.createNode.SystemDiskName = systemDiskName
 	return b
 }
 
 func (b *CreateNodeBuilder) SystemDiskDescription(systemDiskDescription string) *CreateNodeBuilder {
-	b.params.SystemDiskDescription = systemDiskDescription
+	b.createNode.SystemDiskDescription = systemDiskDescription
 	return b
 }
 
 func (b *CreateNodeBuilder) Build() (map[string]interface{}, error) {
-	if b.params.RegionID == "" {
+	if b.createNode.RegionID == "" {
 		return nil, errors.New(errCommon + "RegionID")
 	}
-	if b.params.ImageID == "" {
+	if b.createNode.ImageID == "" {
 		return nil, errors.New(errCommon + "ImageID")
 	}
-	if b.params.InstanceType == "" {
+	if b.createNode.InstanceType == "" {
 		return nil, errors.New(errCommon + "InstanceType")
 	}
-	if b.params.SecurityGroupID == "" {
+	if b.createNode.SecurityGroupID == "" {
 		return nil, errors.New(errCommon + "SecurityGroupID")
 	}
 	params := make(map[string]interface{})
 	// Put all of options into params
-	params = aliauth.PutStructIntoMap(b.params)
+	params = aliauth.PutStructIntoMap(b.createNode)
 	return params, nil
 }
 
-// StartNode Builder pattern code
+// StartNode builder pattern code
 type StartNodeBuilder struct {
-	params *StartNode
+	startNode *StartNode
 }
 
 func NewStartNodeBuilder() *StartNodeBuilder {
 	startNode := &StartNode{}
-	b := &StartNodeBuilder{params: startNode}
+	b := &StartNodeBuilder{startNode: startNode}
 	return b
 }
 
 func (b *StartNodeBuilder) InstanceID(instanceID string) *StartNodeBuilder {
-	b.params.InstanceID = instanceID
+	b.startNode.InstanceID = instanceID
 	return b
 }
 
 func (b *StartNodeBuilder) InitLocalDisk(initLocalDisk bool) *StartNodeBuilder {
-	b.params.InitLocalDisk = initLocalDisk
+	b.startNode.InitLocalDisk = initLocalDisk
 	return b
 }
 
 func (b *StartNodeBuilder) Build() (map[string]interface{}, error) {
-	if b.params.InstanceID == "" {
+	if b.startNode.InstanceID == "" {
 		return nil, errors.New(errCommon + "InstanceID")
 	}
 	params := make(map[string]interface{})
 	// Put all of options into params
-	params = aliauth.PutStructIntoMap(b.params)
+	params = aliauth.PutStructIntoMap(b.startNode)
 	return params, nil
 }
 
-// StopNode Builder pattern code
+// StopNode builder pattern code
 type StopNodeBuilder struct {
-	params *StopNode
+	stopNode *StopNode
 }
 
 func NewStopNodeBuilder() *StopNodeBuilder {
 	stopNode := &StopNode{}
-	b := &StopNodeBuilder{params: stopNode}
+	b := &StopNodeBuilder{stopNode: stopNode}
 	return b
 }
 
 func (b *StopNodeBuilder) InstanceID(instanceID string) *StopNodeBuilder {
-	b.params.InstanceID = instanceID
+	b.stopNode.InstanceID = instanceID
 	return b
 }
 
 func (b *StopNodeBuilder) ForceStop(forceStop bool) *StopNodeBuilder {
-	b.params.ForceStop = forceStop
+	b.stopNode.ForceStop = forceStop
 	return b
 }
 
 func (b *StopNodeBuilder) ConfirmStop(confirmStop bool) *StopNodeBuilder {
-	b.params.ConfirmStop = confirmStop
+	b.stopNode.ConfirmStop = confirmStop
 	return b
 }
 
 func (b *StopNodeBuilder) StoppedMode(stoppedMode string) *StopNodeBuilder {
-	b.params.StoppedMode = stoppedMode
+	b.stopNode.StoppedMode = stoppedMode
 	return b
 }
 
 func (b *StopNodeBuilder) Build() (map[string]interface{}, error) {
-	if b.params.InstanceID == "" {
+	if b.stopNode.InstanceID == "" {
 		return nil, errors.New(errCommon + "InstanceID")
 	}
 	params := make(map[string]interface{})
 	// Put all of options into params
-	params = aliauth.PutStructIntoMap(b.params)
+	params = aliauth.PutStructIntoMap(b.stopNode)
 	return params, nil
 }
 
-// RebootNode Builder pattern code
+// RebootNode builder pattern code
 type RebootNodeBuilder struct {
-	params *RebootNode
+	rebootNode *RebootNode
 }
 
 func NewRebootNodeBuilder() *RebootNodeBuilder {
 	rebootNode := &RebootNode{}
-	b := &RebootNodeBuilder{params: rebootNode}
+	b := &RebootNodeBuilder{rebootNode: rebootNode}
 	return b
 }
 
 func (b *RebootNodeBuilder) InstanceID(instanceID string) *RebootNodeBuilder {
-	b.params.InstanceID = instanceID
+	b.rebootNode.InstanceID = instanceID
 	return b
 }
 
 func (b *RebootNodeBuilder) ForceStop(forceStop bool) *RebootNodeBuilder {
-	b.params.ForceStop = forceStop
+	b.rebootNode.ForceStop = forceStop
 	return b
 }
 
 func (b *RebootNodeBuilder) Build() (map[string]interface{}, error) {
-	if b.params.InstanceID == "" {
+	if b.rebootNode.InstanceID == "" {
 		return nil, errors.New(errCommon + "InstanceID")
 	}
 	params := make(map[string]interface{})
 	// Put all of options into params
-	params = aliauth.PutStructIntoMap(b.params)
+	params = aliauth.PutStructIntoMap(b.rebootNode)
 	return params, nil
 }
 
-// DeleteNode Builder pattern code
+// DeleteNode builder pattern code
 type DeleteNodeBuilder struct {
-	params *DeleteNode
+	deleteNode *DeleteNode
 }
 
 func NewDeleteNodeBuilder() *DeleteNodeBuilder {
 	deleteNode := &DeleteNode{}
-	b := &DeleteNodeBuilder{params: deleteNode}
+	b := &DeleteNodeBuilder{deleteNode: deleteNode}
 	return b
 }
 
 func (b *DeleteNodeBuilder) InstanceID(instanceID string) *DeleteNodeBuilder {
-	b.params.InstanceID = instanceID
+	b.deleteNode.InstanceID = instanceID
 	return b
 }
 
 func (b *DeleteNodeBuilder) Build() (map[string]interface{}, error) {
-	if b.params.InstanceID == "" {
+	if b.deleteNode.InstanceID == "" {
 		return nil, errors.New(errCommon + "InstanceID")
 	}
 	params := make(map[string]interface{})
 	// Put all of options into params
-	params = aliauth.PutStructIntoMap(b.params)
+	params = aliauth.PutStructIntoMap(b.deleteNode)
 	return params, nil
 }

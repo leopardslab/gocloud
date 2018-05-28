@@ -19,6 +19,9 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 		case "InstanceId":
 			instanceID, _ := value.(string)
 			options.InstanceID = instanceID
+		case "InstanceID":
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
 		case "InitLocalDisk":
 			switch value.(type) {
 			case bool:
@@ -51,6 +54,9 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "InstanceId":
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
+		case "InstanceID":
 			instanceID, _ := value.(string)
 			options.InstanceID = instanceID
 		case "ForceStop":
@@ -96,6 +102,9 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 		case "InstanceId":
 			instanceID, _ := value.(string)
 			options.InstanceID = instanceID
+		case "InstanceID":
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
 		case "ForceStop":
 			switch value.(type) {
 			case bool:
@@ -128,6 +137,9 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	for key, value := range param {
 		switch key {
 		case "InstanceId":
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
+		case "InstanceID":
 			instanceID, _ := value.(string)
 			options.InstanceID = instanceID
 		}
@@ -248,7 +260,7 @@ func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (ecs *ECS) ListNodeType(request interface{}) (resp interface{}, err error)  {
+func (ecs *ECS) ListNodeType(request interface{}) (resp interface{}, err error) {
 	params := make(map[string]interface{})
 	response := make(map[string]interface{})
 	err = aliauth.ECSSignAndDoRequest("DescribeInstanceTypes", params, response)
