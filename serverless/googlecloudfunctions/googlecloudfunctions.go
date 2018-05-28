@@ -3,11 +3,11 @@ package googlecloudfunctions
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
 	"time"
-	"fmt"
 )
 
 const (
