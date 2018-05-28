@@ -7,54 +7,50 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-    func TestDescribetables(t *testing.T) {
+func TestDescribetables(t *testing.T) {
 
-      var dynamodb Dynamodb
+	var dynamodb Dynamodb
 
-      describetables := map[string]interface{}{
-        "Region":    "us-east-2",
-        "TableName": "hello",
-      }
+	describetables := map[string]interface{}{
+		"Region":    "us-east-2",
+		"TableName": "hello",
+	}
 
-    	_, err := bigtable.Describetables(describetables)
+	_, err := bigtable.Describetables(describetables)
 
-    	if err != nil {
-    		t.Errorf("Test Fail")
-    	}
-    }
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
+}
 
+func TestListtables(t *testing.T) {
 
+	var dynamodb Dynamodb
 
-		func TestListtables(t *testing.T) {
+	listtables := map[string]interface{}{
+		"Region":    "us-east-2",
+		"TableName": "hello",
+	}
 
-			var dynamodb Dynamodb
+	_, err := bigtable.Listtables(listtables)
 
-			listtables := map[string]interface{}{
-				"Region":    "us-east-2",
-				"TableName": "hello",
-			}
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
+}
 
-			_, err := bigtable.Listtables(listtables)
+func TestDeletetables(t *testing.T) {
 
-			if err != nil {
-				t.Errorf("Test Fail")
-			}
-		}
+	var dynamodb Dynamodb
 
+	deletetables := map[string]interface{}{
+		"Region":    "us-east-2",
+		"TableName": "hello",
+	}
 
+	_, err := dynamodb.Deletetables(deletetables)
 
-    func TestDeletetables(t *testing.T) {
-
-      var dynamodb Dynamodb
-
-      deletetables := map[string]interface{}{
-      "Region": "us-east-2",
-      "TableName" : "hello",
-      }
-
-      _, err := dynamodb.Deletetables(deletetables)
-
-      if err != nil {
-        t.Errorf("Test Fail")
-      }
-    }
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
+}
