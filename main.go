@@ -5,11 +5,9 @@ import (
 	"github.com/cloudlibz/gocloud/gocloud"
 )
 
-
 func main() {
 
 	googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
-
 
 	createtables := map[string]interface{}{
 		"parent": "projects/adept-comfort-202709/instances/helloo",
@@ -21,32 +19,28 @@ func main() {
 
 	fmt.Println(response["body"])
 
-
-/*
-	deletetables := map[string]string{
-		"name": "projects/adept-comfort-202709/instances/helloo/tables/hello",
-	}
-*/
-//	projects/adept-comfort-202709/instances//tables/<table>.
+	/*
+		deletetables := map[string]string{
+			"name": "projects/adept-comfort-202709/instances/helloo/tables/hello",
+		}
+	*/
+	//	projects/adept-comfort-202709/instances//tables/<table>.
 
 	describetables := map[string]string{
-	"name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
-//	"view" : "FULL",
-	//"pageToken" : "",
-}
+		"name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
+		//	"view" : "FULL",
+		//"pageToken" : "",
+	}
 	resp, _ = googlecloud.Describetables(describetables)
 
 	response = resp.(map[string]interface{})
 
 	fmt.Println(response["body"])
 
-
-
-
 	listtables := map[string]string{
-	"parent": "projects/adept-comfort-202709/instances/helloo",
-		"view" : "NAME_ONLY",
-	"pageToken" : "",
+		"parent":    "projects/adept-comfort-202709/instances/helloo",
+		"view":      "NAME_ONLY",
+		"pageToken": "",
 	}
 	resp, _ = googlecloud.Listtables(listtables)
 
@@ -54,8 +48,8 @@ func main() {
 
 	fmt.Println(response["body"])
 
-
 }
+
 /*
 func main() {
 

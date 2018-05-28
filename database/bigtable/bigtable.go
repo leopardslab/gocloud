@@ -121,33 +121,33 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 
 			for tablekey, tablevalue := range tableparam {
 
-			    switch tablekey {
+				switch tablekey {
 
-						case "name":
-									namev := tablevalue.(string)
-									option.table.name = namev
+				case "name":
+					namev := tablevalue.(string)
+					option.table.name = namev
 
-						case "granularity":
-								granularityv := tablevalue.(string)
-								option.table.granularity = granularityv
+				case "granularity":
+					granularityv := tablevalue.(string)
+					option.table.granularity = granularityv
 
 				}
 			}
 
 		case "initialSplits":
 			/*
-			  initialSplitsparam := make([]map[string]interface{})
-				for i := 0; i < len(initialSplitsparam); i++ {
-						var initialSplits InitialSplits
-						for initialSplitsparam, initialSplitsparamvalue := range initialSplitsparam[i] {
-							switch initialSplitsparamkey {
-							    case "key":
-									    initialSplits.key = initialSplitsparamvalue.(string)
+				  initialSplitsparam := make([]map[string]interface{})
+					for i := 0; i < len(initialSplitsparam); i++ {
+							var initialSplits InitialSplits
+							for initialSplitsparam, initialSplitsparamvalue := range initialSplitsparam[i] {
+								switch initialSplitsparamkey {
+								    case "key":
+										    initialSplits.key = initialSplitsparamvalue.(string)
+								}
 							}
+							option.initialSplits = append(createtable.initialSplits, initialSplits)
 						}
-						option.initialSplits = append(createtable.initialSplits, initialSplits)
-					}
-				*/
+			*/
 		}
 	}
 
@@ -163,11 +163,11 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 
 	fmt.Println(Createbigtablejsonstring)
 
-//	byte(`{"tableId": "bokkkya","table": { "name": "bokkkya"}}`)
+	//	byte(`{"tableId": "bokkkya","table": { "name": "bokkkya"}}`)
 
-// []byte(`{"tableId": "bokkkya","table": { "name": "bokkkya"}}`)
+	// []byte(`{"tableId": "bokkkya","table": { "name": "bokkkya"}}`)
 
-//	var Createbigtablejsonstringbyte = []byte(Createbigtablejsonstring)
+	//	var Createbigtablejsonstringbyte = []byte(Createbigtablejsonstring)
 
 	var Createbigtablejsonstringbyte = []byte(`{"tableId": "bokkkya","table": { }}`)
 
