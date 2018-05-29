@@ -31,7 +31,7 @@ func TestCreatetables(t *testing.T) {
 }
 
 
-/*
+
 func TestDescribetables(t *testing.T) {
 
 	var bigtable Bigtable
@@ -78,4 +78,3 @@ func TestDeletetables(t *testing.T) {
 		t.Errorf("Test Fail")
 	}
 }
-*/

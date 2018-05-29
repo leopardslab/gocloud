@@ -8,7 +8,7 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-/*
+
 func TestDescribetables(t *testing.T) {
 
 	var dynamodb Dynamodb
@@ -57,7 +57,7 @@ func TestDeletetables(t *testing.T) {
 	}
 }
 
-*/
+
 
 
 func TestCreatetables(t *testing.T) {
