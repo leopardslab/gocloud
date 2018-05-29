@@ -3,7 +3,7 @@ package googlecloudfunctions
 import "testing"
 import "fmt"
 
-/*
+
 func TestCallfunction(t *testing.T) {
 
 	var googlecloudfunctions Googlecloudfunctions
@@ -65,7 +65,7 @@ func TestListfunction(t *testing.T) {
 	}
 }
 
-*/
+
 
 func TestCreatefunction(t *testing.T) {
 
