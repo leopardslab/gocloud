@@ -1,9 +1,9 @@
 package vultrauth
 
 import (
-	"os"
 	"encoding/json"
 	"log"
+	"os"
 )
 
 //Configuration struct for representing Vultr API Key
