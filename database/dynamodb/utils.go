@@ -242,3 +242,26 @@ func prepareLocalSecondaryIndexesparams(createtablejsonmap map[string]interface{
 	}
 
 }
+
+func preparecreatetable(params map[string]string, Region string) {
+
+	if Region != "" {
+		params["Region"] = Region
+	}
+
+	params["amztarget"] = "DynamoDB_20120810.CreateTable"
+}
+
+func preparecreatetablejsonmap(createtablejsonmap map[string]interface{}, createtable Createtable) {
+
+	if createtable.TableName != "" {
+		createtablejsonmap["TableName"] = createtable.TableName
+	}
+
+	preparecreatetableStreamSpecificationparams(createtablejsonmap, createtable)
+	preparecreatetableSSESpecificationparams(createtablejsonmap, createtable)
+	preparecreatetableProvisionedThroughputparams(createtablejsonmap, createtable)
+	preparekeySchemaparams(createtablejsonmap, createtable)
+	prepareAttributeDefinitionsparams(createtablejsonmap, createtable)
+	prepareGlobalSecondaryIndexesparams(createtablejsonmap, createtable)
+}

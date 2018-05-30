@@ -262,39 +262,14 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 
 	createtablejsonmap := map[string]interface{}{}
 
-
-
 	preparecreatetablejsonmap(createtablejsonmap,createtable)
 
-	
 	response := make(map[string]interface{})
 	err = dynamodb.PrepareSignatureV4query(params, createtablejsonmap, response)
 	resp = response
 	return resp, err
 }
 
-func preparecreatetable(params map[string]string, Region string) {
-
-	if Region != "" {
-		params["Region"] = Region
-	}
-
-	params["amztarget"] = "DynamoDB_20120810.CreateTable"
-}
-
-func preparecreatetablejsonmap(createtablejsonmap map[string]interface{}, createtable Createtable) {
-
-	if createtable.TableName != "" {
-		createtablejsonmap["TableName"] = createtable.TableName
-	}
-
-	preparecreatetableStreamSpecificationparams(createtablejsonmap, createtable)
-	preparecreatetableSSESpecificationparams(createtablejsonmap, createtable)
-	preparecreatetableProvisionedThroughputparams(createtablejsonmap, createtable)
-	preparekeySchemaparams(createtablejsonmap, createtable)
-	prepareAttributeDefinitionsparams(createtablejsonmap, createtable)
-	prepareGlobalSecondaryIndexesparams(createtablejsonmap, createtable)
-}
 
 
 //Describe tables.
