@@ -1,9 +1,9 @@
 package ecs
 
 import (
+	"fmt"
 	"github.com/cloudlibz/gocloud/aliauth"
 	"testing"
-	"fmt"
 )
 
 func init() {
