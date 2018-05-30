@@ -2,7 +2,7 @@ package ec2
 
 import (
 	"encoding/xml"
-	)
+)
 
 //runinstance to store all attribute to create EC2 instance
 

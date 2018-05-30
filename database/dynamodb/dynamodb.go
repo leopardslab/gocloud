@@ -1,6 +1,5 @@
 package dynamodb
 
-
 //List tables.
 func (dynamodb *Dynamodb) Listtables(request interface{}) (resp interface{}, err error) {
 
@@ -115,15 +114,15 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 
 			for provisionedThroughputparamkey, provisionedThroughputparamvalue := range provisionedThroughputparam {
 				switch provisionedThroughputparamkey {
-					case "ReadCapacityUnits":
-						ReadCapacityUnitsv, _ := provisionedThroughputparamvalue.(int)
-						createtable.provisionedThroughput.ReadCapacityUnits = ReadCapacityUnitsv
+				case "ReadCapacityUnits":
+					ReadCapacityUnitsv, _ := provisionedThroughputparamvalue.(int)
+					createtable.provisionedThroughput.ReadCapacityUnits = ReadCapacityUnitsv
 
-					case "WriteCapacityUnits":
-						createtable.provisionedThroughput.WriteCapacityUnits = provisionedThroughputparamvalue.(int)
+				case "WriteCapacityUnits":
+					createtable.provisionedThroughput.WriteCapacityUnits = provisionedThroughputparamvalue.(int)
 
-					}
 				}
+			}
 
 		case "KeySchema":
 			keySchemaparam, _ := value.([]map[string]interface{})
@@ -262,15 +261,13 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 
 	createtablejsonmap := map[string]interface{}{}
 
-	preparecreatetablejsonmap(createtablejsonmap,createtable)
+	preparecreatetablejsonmap(createtablejsonmap, createtable)
 
 	response := make(map[string]interface{})
 	err = dynamodb.PrepareSignatureV4query(params, createtablejsonmap, response)
 	resp = response
 	return resp, err
 }
-
-
 
 //Describe tables.
 func (dynamodb *Dynamodb) Describetables(request interface{}) (resp interface{}, err error) {

@@ -1,8 +1,8 @@
 package digioceanstorage
 
 import (
-  "testing"
-  digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	"testing"
 )
 
 func init() {
@@ -11,14 +11,14 @@ func init() {
 
 func TestCreatedisk(t *testing.T) {
 
-  var digioceancloud Digioceanstorage
+	var digioceancloud Digioceanstorage
 
 	create := map[string]interface{}{
-    "Name": "example-01",
-    "Region": "nyc3",
-    "Description":  "Block store for examples",
-    "SizeGigaBytes":  1,
-    "SnapshotID": nil,
+		"Name":          "example-01",
+		"Region":        "nyc3",
+		"Description":   "Block store for examples",
+		"SizeGigaBytes": 1,
+		"SnapshotID":    nil,
 	}
 
 	_, err := digioceancloud.Createdisk(create)
@@ -30,11 +30,11 @@ func TestCreatedisk(t *testing.T) {
 
 func TestDeletedisk(t *testing.T) {
 
-  var digioceancloud Digioceanstorage
+	var digioceancloud Digioceanstorage
 
-  delete := map[string]string{
-    "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
-   }
+	delete := map[string]string{
+		"VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
+	}
 
 	_, err := digioceancloud.Deletedisk(delete)
 
@@ -45,11 +45,11 @@ func TestDeletedisk(t *testing.T) {
 
 func TestCreatesnapshot(t *testing.T) {
 
-  var digioceancloud Digioceanstorage
+	var digioceancloud Digioceanstorage
 
-  create := map[string]interface{}{
-    "VolumeID": "7724db7c-e098-11e5-b522-000f53304e5",
-    "SnapshotName": "big-data-snapshot1475261774",
+	create := map[string]interface{}{
+		"VolumeID":     "7724db7c-e098-11e5-b522-000f53304e5",
+		"SnapshotName": "big-data-snapshot1475261774",
 	}
 
 	_, err := digioceancloud.Createsnapshot(create)
@@ -61,11 +61,11 @@ func TestCreatesnapshot(t *testing.T) {
 
 func TestDeletesnapshot(t *testing.T) {
 
-  var digioceancloud Digioceanstorage
+	var digioceancloud Digioceanstorage
 
-  delete := map[string]string{
-    "SnapshotID": "7724db7c-e098-11e5-b522-000f53304e51",
-   }
+	delete := map[string]string{
+		"SnapshotID": "7724db7c-e098-11e5-b522-000f53304e51",
+	}
 
 	_, err := digioceancloud.Deletesnapshot(delete)
 
@@ -76,12 +76,12 @@ func TestDeletesnapshot(t *testing.T) {
 
 func TestAttachdisk(t *testing.T) {
 
-  var digioceancloud Digioceanstorage
+	var digioceancloud Digioceanstorage
 
-  create := map[string]interface{}{
-    "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
-    "DropletID": 9978454,
-    "Region":  "nyc3",
+	create := map[string]interface{}{
+		"VolumeID":  "7724db7c-e098-11e5-b522-000f53304e51",
+		"DropletID": 9978454,
+		"Region":    "nyc3",
 	}
 
 	_, err := digioceancloud.Attachdisk(create)
@@ -93,12 +93,12 @@ func TestAttachdisk(t *testing.T) {
 
 func TestDetachdisk(t *testing.T) {
 
-  var digioceancloud Digioceanstorage
+	var digioceancloud Digioceanstorage
 
-  delete := map[string]interface{}{
-    "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
-    "DropletID": 9978454,
-    "Region":  "nyc3",
+	delete := map[string]interface{}{
+		"VolumeID":  "7724db7c-e098-11e5-b522-000f53304e51",
+		"DropletID": 9978454,
+		"Region":    "nyc3",
 	}
 
 	_, err := digioceancloud.Detachdisk(delete)

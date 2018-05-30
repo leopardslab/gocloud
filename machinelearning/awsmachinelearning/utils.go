@@ -39,8 +39,6 @@ func preparecreateMLModel(params map[string]string, createMLModel CreateMLModel,
 	params["amztarget"] = "AmazonML_20141212.CreateMLModel"
 }
 
-
-
 func preparedeletemodel(params map[string]string, MLModelId string, Region string) {
 
 	if MLModelId != "" {

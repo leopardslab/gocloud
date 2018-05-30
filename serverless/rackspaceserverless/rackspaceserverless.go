@@ -1,6 +1,5 @@
 package rackspaceserverless
 
-
 //Getfunction  describe serverless function.
 func (rackspaceserverless *Rackspaceserverless) Getfunction(request interface{}) (resp interface{}, err error) {
 

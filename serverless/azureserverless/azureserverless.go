@@ -1,6 +1,5 @@
 package azureserverless
 
-
 //Getfunction  describe serverless function.
 func (azureserverless *Azureserverless) Getfunction(request interface{}) (resp interface{}, err error) {
 

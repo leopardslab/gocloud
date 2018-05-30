@@ -13,8 +13,8 @@ func TestCreatenode(t *testing.T) {
 
 	var digioceancloud Droplet
 
-  image := map[string]interface{}{
-    "Slug": "ubuntu-16-04-x64",
+	image := map[string]interface{}{
+		"Slug": "ubuntu-16-04-x64",
 	}
 
 	create := map[string]interface{}{
@@ -43,9 +43,9 @@ func TestStopnode(t *testing.T) {
 
 	var digioceancloud Droplet
 
-  stop := map[string]string{
-    "ID": "86407564",
-   }
+	stop := map[string]string{
+		"ID": "86407564",
+	}
 
 	_, err := digioceancloud.Stopnode(stop)
 
@@ -56,11 +56,11 @@ func TestStopnode(t *testing.T) {
 
 func TestStartnode(t *testing.T) {
 
-  var digioceancloud Droplet
+	var digioceancloud Droplet
 
-  start := map[string]string{
-    "ID": "86407564",
-   }
+	start := map[string]string{
+		"ID": "86407564",
+	}
 
 	_, err := digioceancloud.Startnode(start)
 	if err != nil {
@@ -70,11 +70,11 @@ func TestStartnode(t *testing.T) {
 
 func TestRebootnode(t *testing.T) {
 
-  var digioceancloud Droplet
+	var digioceancloud Droplet
 
-  reboot := map[string]string{
-    "ID": "86407564",
-   }
+	reboot := map[string]string{
+		"ID": "86407564",
+	}
 
 	_, err := digioceancloud.Rebootnode(reboot)
 
@@ -85,11 +85,11 @@ func TestRebootnode(t *testing.T) {
 
 func TestDeletnode(t *testing.T) {
 
-  var digioceancloud Droplet
+	var digioceancloud Droplet
 
-  delete := map[string]string{
-    "ID": "86407564",
-   }
+	delete := map[string]string{
+		"ID": "86407564",
+	}
 
 	digioceancloud.Deletenode(delete)
 }

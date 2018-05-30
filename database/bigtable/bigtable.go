@@ -101,7 +101,6 @@ func (bigtable *Bigtable) Describetables(request interface{}) (resp interface{},
 
 func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, err error) {
 
-
 	param := request.(map[string]interface{})
 
 	var parent string
@@ -137,20 +136,19 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 			}
 
 		case "initialSplits":
-			initialSplitsparam, _  := value.([]map[string]interface{})
+			initialSplitsparam, _ := value.([]map[string]interface{})
 			for i := 0; i < len(initialSplitsparam); i++ {
 				var initialSplits InitialSplits
 				for initialSplitsparamkey, initialSplitsparamvalue := range initialSplitsparam[i] {
-				    switch initialSplitsparamkey {
-						     case "key":
-								     initialSplits.key = initialSplitsparamvalue.(string)
-								}
-							}
-							option.initialSplits = append(option.initialSplits, initialSplits)
-						}
+					switch initialSplitsparamkey {
+					case "key":
+						initialSplits.key = initialSplitsparamvalue.(string)
+					}
+				}
+				option.initialSplits = append(option.initialSplits, initialSplits)
+			}
 		}
 	}
-
 
 	Createbigtablejsonmap := make(map[string]interface{})
 

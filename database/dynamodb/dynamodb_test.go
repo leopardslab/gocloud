@@ -7,7 +7,6 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-
 func TestDescribetables(t *testing.T) {
 
 	var dynamodb Dynamodb
@@ -56,70 +55,61 @@ func TestDeletetables(t *testing.T) {
 	}
 }
 
-
-
-
 func TestCreatetables(t *testing.T) {
 
 	var dynamodb Dynamodb
 
-
-	keySchema :=[]map[string]interface{}{
+	keySchema := []map[string]interface{}{
 		{
-					 "AttributeName": "ForumName",
-					 "KeyType": "HASH",
-			 },
-			 {
-					 "AttributeName": "Subject",
-					 "KeyType": "RANGE",
-			 },
+			"AttributeName": "ForumName",
+			"KeyType":       "HASH",
+		},
+		{
+			"AttributeName": "Subject",
+			"KeyType":       "RANGE",
+		},
 	}
-
 
 	attributeDefinitions := []map[string]interface{}{
 
 		{
-            "AttributeName": "ForumName",
-            "AttributeType": "S",
-        },
-        {
-            "AttributeName": "Subject",
-            "AttributeType": "S",
-        },
-        {
-            "AttributeName": "LastPostDateTime",
-            "AttributeType": "S",
-        },
-
-		}
-
-
-		projection := map[string]interface{}{
-					"ProjectionType": "KEYS_ONLY",
-		}
-
-		provisionedThroughput := map[string]interface{}{
-        "ReadCapacityUnits": 5,
-        "WriteCapacityUnits": 5,
-    }
-
-	localSecondaryIndexes :=[]map[string]interface{}{
+			"AttributeName": "ForumName",
+			"AttributeType": "S",
+		},
 		{
-            "IndexName": "LastPostIndex",
-            "KeySchema": keySchema ,
-            "Projection": projection,
-    },
+			"AttributeName": "Subject",
+			"AttributeType": "S",
+		},
+		{
+			"AttributeName": "LastPostDateTime",
+			"AttributeType": "S",
+		},
 	}
 
+	projection := map[string]interface{}{
+		"ProjectionType": "KEYS_ONLY",
+	}
 
+	provisionedThroughput := map[string]interface{}{
+		"ReadCapacityUnits":  5,
+		"WriteCapacityUnits": 5,
+	}
+
+	localSecondaryIndexes := []map[string]interface{}{
+		{
+			"IndexName":  "LastPostIndex",
+			"KeySchema":  keySchema,
+			"Projection": projection,
+		},
+	}
 
 	createtables := map[string]interface{}{
-		"Region":    "us-east-1",
-		"TableName" : "Thread",
-		"KeySchema" : keySchema,
-		"AttributeDefinitions" :attributeDefinitions ,
-		"LocalSecondaryIndexes" : localSecondaryIndexes,
-		"ProvisionedThroughput" : provisionedThroughput,
+		"Region":                "us-east-1",
+		"TableName":             "Thread",
+		"KeySchema":             keySchema,
+		"AttributeDefinitions":  attributeDefinitions,
+		"LocalSecondaryIndexes": localSecondaryIndexes,
+		"ProvisionedThroughput": provisionedThroughput,
 	}
 
 	_, err := dynamodb.Createtables(createtables)

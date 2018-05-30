@@ -10,7 +10,6 @@ import (
 	"time"
 )
 
-
 //Create  Create Google cloud function.
 func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interface{}) (resp interface{}, err error) {
 

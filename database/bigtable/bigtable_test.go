@@ -10,13 +10,13 @@ func TestCreatetables(t *testing.T) {
 
 	table := make(map[string]interface{})
 
-	initialSplits := make([]map[string]interface{},0)
+	initialSplits := make([]map[string]interface{}, 0)
 
 	createtables := map[string]interface{}{
-		"parent": "projects/adept-comfort-202709/instances/helloo",
-		"tableId" :"tableId",
-		"table"  : table,
-		"initialSplits" : initialSplits,
+		"parent":        "projects/adept-comfort-202709/instances/helloo",
+		"tableId":       "tableId",
+		"table":         table,
+		"initialSplits": initialSplits,
 	}
 
 	_, err := bigtable.Createtables(createtables)
@@ -25,8 +25,6 @@ func TestCreatetables(t *testing.T) {
 		t.Errorf("Test Fail")
 	}
 }
-
-
 
 func TestDescribetables(t *testing.T) {
 
