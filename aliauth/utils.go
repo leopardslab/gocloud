@@ -1,13 +1,13 @@
 package aliauth
 
 import (
-	"reflect"
 	"crypto/hmac"
+	srand "crypto/rand"
 	"crypto/sha1"
 	"encoding/base64"
-	"time"
-	srand "crypto/rand"
 	"math/rand"
+	"reflect"
+	"time"
 )
 
 // PutStructIntoMap puts key and value of struct into map[string]interface{}

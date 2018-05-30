@@ -1,6 +1,4 @@
 package cinder
 
-
-type Cinder struct{
-
+type Cinder struct {
 }
