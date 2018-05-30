@@ -11,7 +11,6 @@ import (
 	"strings"
 )
 
-
 //JWT struct reperesnts JWT json.
 type JWT struct {
 	Type                    string `json:"type"`

@@ -2,15 +2,15 @@ package gocloud
 
 import (
 	"fmt"
+	"github.com/cloudlibz/gocloud/ali"
+	aliauth "github.com/cloudlibz/gocloud/aliauth"
 	awsAuth "github.com/cloudlibz/gocloud/auth"
-	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
 	"github.com/cloudlibz/gocloud/aws"
-	"github.com/cloudlibz/gocloud/google"
-	"github.com/cloudlibz/gocloud/openstack"
 	"github.com/cloudlibz/gocloud/azure"
 	"github.com/cloudlibz/gocloud/digiocean"
-	"github.com/cloudlibz/gocloud/aliauth"
-	"github.com/cloudlibz/gocloud/ali"
+	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	"github.com/cloudlibz/gocloud/google"
+	"github.com/cloudlibz/gocloud/openstack"
 	"github.com/cloudlibz/gocloud/rackspace"
 )
 
@@ -43,6 +43,15 @@ type Gocloud interface {
 	Createdns(request interface{}) (resp interface{}, err error)
 	Deletedns(request interface{}) (resp interface{}, err error)
 	ListResourcednsRecordSets(request interface{}) (resp interface{}, err error)
+	Getfunction(request interface{}) (resp interface{}, err error)
+	Createfunction(request interface{}) (resp interface{}, err error)
+	Callfunction(request interface{}) (resp interface{}, err error)
+	Listfunction(request interface{}) (resp interface{}, err error)
+	Deletefunction(request interface{}) (resp interface{}, err error)
+	Listtables(request interface{}) (resp interface{}, err error)
+	Deletetables(request interface{}) (resp interface{}, err error)
+	Describetables(request interface{}) (resp interface{}, err error)
+	Createtables(request interface{}) (resp interface{}, err error)
 }
 
 const (
