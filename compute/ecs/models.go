@@ -7,7 +7,7 @@ import (
 
 const errCommon = "miss required parameter: "
 
-// CreateInstance to store all attribute to create Ali-cloud ECS instance
+// CreateInstance to store all attributes to create Ali-cloud ECS instance.
 type CreateInstance struct {
 	RegionID                string
 	ZoneID                  string
@@ -28,13 +28,13 @@ type CreateInstance struct {
 	SystemDiskDescription   string
 }
 
-// StartInstance to store all attribute to start Ali-cloud ECS instance
+// StartInstance to store all attributes to start Ali-cloud ECS instance.
 type StartInstance struct {
 	InstanceID    string
 	InitLocalDisk bool
 }
 
-// StopInstance to store all attribute to Stop Ali-cloud ECS instance
+// StopInstance to store all attributes to stop Ali-cloud ECS instance.
 type StopInstance struct {
 	InstanceID  string
 	ForceStop   bool
@@ -42,13 +42,13 @@ type StopInstance struct {
 	StoppedMode string
 }
 
-// RebootInstance to store all attribute to Reboot Ali-cloud ECS instance
+// RebootInstance to store all attributes to reboot Ali-cloud ECS instance.
 type RebootInstance struct {
 	InstanceID string
 	ForceStop  bool
 }
 
-// DeleteInstance to store all attribute to Delete Ali-cloud ECS instance
+// DeleteInstance to store all attributes to Delete Ali-cloud ECS instance.
 type DeleteInstance struct {
 	InstanceID string
 }

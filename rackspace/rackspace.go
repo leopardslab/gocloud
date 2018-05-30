@@ -8,7 +8,7 @@ import (
 	rackspacedns "github.com/cloudlibz/gocloud/dns/rackspacedns"
 )
 
-// rackspace  struct represents rackspace cloud provider.
+// Rackspace  struct represents Rackspace cloud provider.
 type Rackspace struct {
 	rackspacecompute.Rackspacecompute
 	rackspacestorage.Rackspacestorage

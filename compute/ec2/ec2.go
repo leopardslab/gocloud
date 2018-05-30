@@ -6,7 +6,6 @@ const (
 	vpcAPIVersion = "2013-10-15"
 )
 
-
 // EC2 struct
 type EC2 struct {
 }

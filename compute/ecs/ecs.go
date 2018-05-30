@@ -1,6 +1,6 @@
 package ecs
 
-//Ali ECS struct
+// ECS struct
 type ECS struct {
 }
 

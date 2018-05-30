@@ -2,7 +2,7 @@
 
 ## Configure Google Cloud credentials.
 
-Download your service account credentials file from Google Cloud and save it as `googlecloudinfo.json` in your <b>HOME</b> directory.
+Download your service account credentials file from Google Cloud and save it as `googlecloudinfo.json` in your <b>HOME/.gocloud</b> directory.
 
 You can also set the credentials as environment variables:
 ```js
@@ -37,7 +37,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
    "Instances": []string{"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-central1-b/instances/instance-1"},
 	}
 
-  resp, err := googlecloud.Creatloadbalancer(creatloadbalancer)
+  resp, err := googlecloud.Createloadbalancer(creatloadbalancer)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
