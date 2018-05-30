@@ -9,6 +9,7 @@ import (
 	"net/http"
 )
 
+//CreateMLModel creates model.
 func (awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
@@ -67,45 +68,8 @@ func (awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{})
 	return resp, err
 }
 
-func preparecreateMLModelparamsdict(createMLModeljsonmap map[string]interface{}, createMLModel CreateMLModel) {
 
-	if createMLModel.MLModelID != "" {
-		createMLModeljsonmap["MLModelId"] = createMLModel.MLModelID
-	}
-	if createMLModel.MLModelName != "" {
-		createMLModeljsonmap["MLModelName"] = createMLModel.MLModelName
-	}
-
-	if createMLModel.MLModelType != "" {
-		createMLModeljsonmap["MLModelType"] = createMLModel.MLModelType
-	}
-	if createMLModel.Recipe != "" {
-		createMLModeljsonmap["Recipe"] = createMLModel.Recipe
-	}
-
-	if createMLModel.RecipeURI != "" {
-		createMLModeljsonmap["RecipeURI"] = createMLModel.RecipeURI
-	}
-
-	if createMLModel.TrainingDataSourceID != "" {
-		createMLModeljsonmap["TrainingDataSourceID"] = createMLModel.TrainingDataSourceID
-	}
-
-	if createMLModel.parameters.String != "" {
-		parameters := make(map[string]string)
-		parameters["string"] = createMLModel.parameters.String
-		createMLModeljsonmap["parameters"] = parameters
-	}
-
-}
-
-func preparecreateMLModel(params map[string]string, createMLModel CreateMLModel, Region string) {
-	if Region != "" {
-		params["Region"] = Region
-	}
-	params["amztarget"] = "AmazonML_20141212.CreateMLModel"
-}
-
+//DeleteMLModel delete model.
 func (awsmachinelearning *Awsmachinelearning) DeleteMLModel(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
@@ -138,83 +102,8 @@ func (awsmachinelearning *Awsmachinelearning) DeleteMLModel(request interface{})
 	return resp, err
 }
 
-func preparedeletemodel(params map[string]string, MLModelId string, Region string) {
 
-	if MLModelId != "" {
-		params["MLModelId"] = MLModelId
-	}
-
-	if Region != "" {
-		params["Region"] = Region
-	}
-
-	params["amztarget"] = "AmazonML_20141212.DeleteMLModel"
-}
-
-func preparegetmodel(params map[string]string, MLModelId string, Verbose string, Region string) {
-
-	if MLModelId != "" {
-		params["MLModelId"] = MLModelId
-	}
-
-	if Verbose != "" {
-		params["Verbose"] = Verbose
-	}
-
-	if Region != "" {
-		params["Region"] = Region
-	}
-
-	params["amztarget"] = "AmazonML_20141212.GetMLModel"
-}
-
-func prepareupdatemodel(params map[string]string, MLModelId string, ScoreThreshold string, MLModelName string, Region string) {
-
-	if MLModelId != "" {
-		params["MLModelId"] = MLModelId
-	}
-
-	if MLModelName != "" {
-		params["MLModelName"] = MLModelName
-	}
-
-	if ScoreThreshold != "" {
-		params["ScoreThreshold"] = ScoreThreshold
-	}
-
-	if Region != "" {
-		params["Region"] = Region
-	}
-
-	params["amztarget"] = "AmazonML_20141212.UpdateMLModel"
-}
-
-//PrepareSignatureV4query creates PrepareSignatureV4 for request.
-func (awsmachinelearning *Awsmachinelearning) PrepareSignatureV4query(params map[string]string, paramsmap map[string]interface{}, response map[string]interface{}) error {
-	ECSEndpoint := "https://machinelearning." + params["Region"] + ".amazonaws.com"
-	fmt.Println("ECSEndpoint : ", ECSEndpoint)
-	service := "machinelearning"
-	method := "POST"
-	host := service + "." + params["Region"] + ".amazonaws.com"
-	fmt.Println("host : ", host)
-	ContentType := "application/x-amz-json-1.1"
-	signedheaders := "content-type;host;x-amz-date;x-amz-target"
-	amztarget := params["amztarget"]
-
-	requestparametersjson, _ := json.Marshal(paramsmap)
-	requestparametersjsonstring := string(requestparametersjson)
-	requestparametersjsonstringbyte := []byte(requestparametersjsonstring)
-	client := new(http.Client)
-	request, _ := http.NewRequest("POST", ECSEndpoint, bytes.NewBuffer(requestparametersjsonstringbyte))
-	request = awsauth.SignatureV4(request, requestparametersjsonstringbyte, amztarget, method, params["Region"], service, host, ContentType, signedheaders)
-	resp, err := client.Do(request)
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	response["body"] = string(body)
-	response["status"] = resp.StatusCode
-	return err
-}
-
+//GetMLModel describe model.
 func (awsmachinelearning *Awsmachinelearning) GetMLModel(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
@@ -252,6 +141,7 @@ func (awsmachinelearning *Awsmachinelearning) GetMLModel(request interface{}) (r
 	return resp, err
 }
 
+//UpdateMLModel update model.
 func (awsmachinelearning *Awsmachinelearning) UpdateMLModel(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})

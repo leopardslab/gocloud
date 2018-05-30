@@ -3,6 +3,7 @@ package bigtable
 import "testing"
 import "fmt"
 
+//create bigtable Createtable
 func TestCreatetables(t *testing.T) {
 
 	var bigtable Bigtable
@@ -18,12 +19,7 @@ func TestCreatetables(t *testing.T) {
 		"initialSplits" : initialSplits,
 	}
 
-	resp, err := bigtable.Createtables(createtables)
-
-	response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
-
+	_, err := bigtable.Createtables(createtables)
 
 	if err != nil {
 		t.Errorf("Test Fail")

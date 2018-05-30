@@ -3,12 +3,12 @@ package bigtable
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
 )
 
+//List list tables.
 func (bigtable *Bigtable) Listtables(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -33,8 +33,6 @@ func (bigtable *Bigtable) Listtables(request interface{}) (resp interface{}, err
 
 	listbigtableresp, err := client.Do(listbigtablerequest)
 
-	fmt.Println(err)
-
 	defer listbigtableresp.Body.Close()
 
 	body, err := ioutil.ReadAll(listbigtableresp.Body)
@@ -45,6 +43,8 @@ func (bigtable *Bigtable) Listtables(request interface{}) (resp interface{}, err
 	resp = listbigtableresponse
 	return resp, err
 }
+
+//Delete delete tables.
 
 func (bigtable *Bigtable) Deletetables(request interface{}) (resp interface{}, err error) {
 
@@ -71,6 +71,7 @@ func (bigtable *Bigtable) Deletetables(request interface{}) (resp interface{}, e
 	return resp, err
 }
 
+//describe describe tables.
 func (bigtable *Bigtable) Describetables(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -96,9 +97,10 @@ func (bigtable *Bigtable) Describetables(request interface{}) (resp interface{},
 	return resp, err
 }
 
+//Create Create tables.
+
 func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, err error) {
 
-	//POST https://bigtableadmin.googleapis.com/v2/{parent=projects/*/instances/*}/tables
 
 	param := request.(map[string]interface{})
 
@@ -149,7 +151,6 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 		}
 	}
 
-	fmt.Println(parent)
 
 	Createbigtablejsonmap := make(map[string]interface{})
 
@@ -159,20 +160,9 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 
 	Createbigtablejsonstring := string(Createbigtablejson)
 
-	fmt.Println(Createbigtablejsonstring,Createbigtablejsonstring)
-
-	//	byte(`{"tableId": "bokkkya","table": { "name": "bokkkya"}}`)
-
-	// []byte(`{"tableId": "bokkkya","table": { "name": "bokkkya"}}`)
-
 	var Createbigtablejsonstringbyte = []byte(Createbigtablejsonstring)
 
-
-	//var Createbigtablejsonstringbyte = []byte(`{"tableId": "bokkkya","table": { }}`)
-
 	url := "https://bigtableadmin.googleapis.com/v2/" + parent + "/tables"
-
-	//url := https://bigtableadmin.googleapis.com/v2/{parent=projects/*}/instances
 
 	client := googleauth.SignJWT()
 
@@ -191,13 +181,4 @@ func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, e
 	Createbigtableresponse["body"] = string(body)
 	resp = Createbigtableresponse
 	return resp, err
-}
-
-func Createbigtabledictnoaryconvert(option Createbigtable, Createbigtablejsonmap map[string]interface{}) {
-
-	if option.tableId != ""{
-		Createbigtablejsonmap["tableId"] = option.tableId
-	}
-
-	Createbigtablejsonmap["table"] = option.table
 }
