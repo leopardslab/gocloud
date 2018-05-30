@@ -10,36 +10,8 @@ import (
 	"time"
 )
 
-const (
-	UnixDate = "Mon Jan _2 15:04:05 MST 2006"
-	RFC3339  = "2006-01-02T15:04:05Z07:00"
-)
 
-type Googlecloudfunctions struct {
-}
-
-type CreateGooglecloudfunction struct {
-	Name                string       `json:"name"`
-	Status              string       `json:"status"`
-	EntryPoint          string       `json:"entryPoint"`
-	Timeout             string       `json:"timeout"`
-	AvailableMemoryMb   int          `json:"availableMemoryMb"`
-	ServiceAccountEmail string       `json:"serviceAccountEmail"`
-	UpdateTime          string       `json:"updateTime"`
-	VersionID           string       `json:"versionId"`
-	SourceUploadURL     string       `json:"sourceUploadUrl"`
-	Labels              labels       `json:"labels"`
-	HTTPSTrigger        httpstrigger `json:"httpsTrigger"`
-}
-
-type labels struct {
-	DeploymentTool string `json:"deployment-tool"`
-}
-
-type httpstrigger struct {
-	URL string `json:"url"`
-}
-
+//Create  Create Google cloud function.
 func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
@@ -133,80 +105,7 @@ func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interfa
 	return resp, err
 }
 
-/*
-{
-  "name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
-  "httpsTrigger": {
-    "url": "https://us-central1-adept-comfort-202709.cloudfunctions.net/function-1"
-  },
-  "status": "ACTIVE",
-  "entryPoint": "helloWorld",
-  "timeout": "60s",
-  "availableMemoryMb": 256,
-  "serviceAccountEmail": "adept-comfort-202709@appspot.gserviceaccount.com",
-  "updateTime": "2018-05-11T18:20:33Z",
-  "versionId": "1",
-  "labels": {
-    "deployment-tool": "console-cloud"
-  },
-  "sourceUploadUrl": "https://storage.googleapis.com/gcf-upload-us-central1-f24bda97-6cd1-46cc-b37d-1f60eac4210a/8548b011-9626-42c1-86ed-6190892b328e.zip?GoogleAccessId=126778294088@cloudservices.gserviceaccount.com&Expires=1526064618&Signature=nB%2FI6cwIap0DF5T0Uo9eYCnlmi3HLqvoRW4MfodzVI%2FXuC7HU%2BE9SwduVQKYeTRddo5iFNdm4VDmBu4A4fGQvZ5PaCuoKG4i7jZXRJgq1B4NIpocaFnHmY6ZWaCS0Av%2Bus29FHs2nTYIqp9zHWHHORSQC%2BPF8GP2mRToDOShpodkQFkxP6wsXUnkk8tDUf5mvTRkeqtgf0rX0huidbEVl7ZtGkcQiusDcS9Nhe3dwqOdsJ7xs2khl2D%2FOmch6jgrZ11MtXum3G5XnFLqMYupS0pvB%2BQiy7g7eLfIw%2BdvtRTEuEFyxWP49lCHUG8wWad0hNEVf29oAHS2x%2B4Q%2FaIGbA%3D%3D",
-  "runtime": "nodejs6"
-}
-
-*/
-
-func CreateGooglecloudfunctionedictnoaryconvert(option CreateGooglecloudfunction, CreateGooglecloudfunctionjsonmap map[string]interface{}) {
-
-	if option.AvailableMemoryMb != 0 {
-		CreateGooglecloudfunctionjsonmap["availableMemoryMb"] = option.AvailableMemoryMb
-	}
-
-	if option.Name != "" {
-		CreateGooglecloudfunctionjsonmap["name"] = option.Name
-	}
-
-	if option.Status != "" {
-		CreateGooglecloudfunctionjsonmap["status"] = option.Status
-	}
-
-	if option.EntryPoint != "" {
-		CreateGooglecloudfunctionjsonmap["entryPoint"] = option.EntryPoint
-	}
-
-	if option.Timeout != "" {
-		CreateGooglecloudfunctionjsonmap["timeout"] = option.Timeout
-	}
-
-	if option.ServiceAccountEmail != "" {
-		CreateGooglecloudfunctionjsonmap["serviceAccountEmail"] = option.ServiceAccountEmail
-	}
-
-	if option.UpdateTime != "" {
-		CreateGooglecloudfunctionjsonmap["updateTime"] = option.UpdateTime
-	}
-
-	if option.VersionID != "" {
-		CreateGooglecloudfunctionjsonmap["versionId"] = option.VersionID
-	}
-
-	if option.ServiceAccountEmail != "" {
-		CreateGooglecloudfunctionjsonmap["sourceUploadUrl"] = option.SourceUploadURL
-	}
-
-	if option.Labels.DeploymentTool != "" {
-		labels := make(map[string]string)
-		labels["deployment-tool"] = option.Labels.DeploymentTool
-		CreateGooglecloudfunctionjsonmap["labels"] = labels
-	}
-
-	if option.HTTPSTrigger.URL != "" {
-		labels := make(map[string]string)
-		labels["url"] = option.HTTPSTrigger.URL
-		CreateGooglecloudfunctionjsonmap["httpsTrigger"] = labels
-	}
-
-}
-
+//Delete delete function.
 func (googlecloudfunctions *Googlecloudfunctions) Deletefunction(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -232,6 +131,7 @@ func (googlecloudfunctions *Googlecloudfunctions) Deletefunction(request interfa
 	return resp, err
 }
 
+//Getfunction get function.
 func (googlecloudfunctions *Googlecloudfunctions) Getfunction(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -258,6 +158,7 @@ func (googlecloudfunctions *Googlecloudfunctions) Getfunction(request interface{
 
 }
 
+//Listfunction list function.
 func (googlecloudfunctions *Googlecloudfunctions) Listfunction(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -295,6 +196,7 @@ func (googlecloudfunctions *Googlecloudfunctions) Listfunction(request interface
 	return resp, err
 }
 
+//Callfunction call function.
 func (googlecloudfunctions *Googlecloudfunctions) Callfunction(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -329,7 +231,3 @@ func (googlecloudfunctions *Googlecloudfunctions) Callfunction(request interface
 	resp = callGooglecloudfunctionresponse
 	return resp, err
 }
-
-//projects/adept-comfort-202709/locations/us-central1/functions/function-1
-
-//projects/adept-comfort-202709/locations/us-central1/functions/function-1
