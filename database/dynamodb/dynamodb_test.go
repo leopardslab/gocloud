@@ -2,7 +2,6 @@ package dynamodb
 
 import "testing"
 import awsAuth "github.com/cloudlibz/gocloud/auth"
-import "fmt"
 
 func init() {
 	awsAuth.LoadConfig()
@@ -123,11 +122,7 @@ func TestCreatetables(t *testing.T) {
 		"ProvisionedThroughput" : provisionedThroughput,
 	}
 
-	resp, err := dynamodb.Createtables(createtables)
-
-	response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
+	_, err := dynamodb.Createtables(createtables)
 
 	if err != nil {
 		t.Errorf("Test Fail")
