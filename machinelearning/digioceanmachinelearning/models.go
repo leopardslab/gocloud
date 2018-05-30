@@ -1,4 +1,6 @@
-package awsmachinelearning
+package digioceanmachinelearning
 
-type Awsmachinelearning struct {
+
+//digioceanmachinelearning struct reperesnts digiocean machine learning service.
+type Digioceanmachinelearning struct {
 }
