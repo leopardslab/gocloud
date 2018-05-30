@@ -1,5 +1,6 @@
 package digioceanserverless
 
+
 func (digioceanserverless *Digioceanserverless) Getfunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
