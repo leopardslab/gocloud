@@ -3,7 +3,7 @@ package bigtable
 //Createbigtable json formation.
 func Createbigtabledictnoaryconvert(option Createbigtable, Createbigtablejsonmap map[string]interface{}) {
 
-	if option.tableId != ""{
+	if option.tableId != "" {
 		Createbigtablejsonmap["tableId"] = option.tableId
 	}
 

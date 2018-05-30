@@ -1,6 +1,5 @@
 package openstackserverless
 
-
 //Getfunction  describe serverless function.
 func (openstackserverless *Openstackserverless) Getfunction(request interface{}) (resp interface{}, err error) {
 

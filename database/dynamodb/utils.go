@@ -1,6 +1,5 @@
 package dynamodb
 
-
 func preparedescribetables(params map[string]string, TableName string, Region string) {
 
 	if TableName != "" {
@@ -41,9 +40,6 @@ func preparelisttables(params map[string]string, ExclusiveStartTableName string,
 	}
 	params["amztarget"] = "DynamoDB_20120810.ListTables"
 }
-
-
-
 
 func preparecreatetableStreamSpecificationparams(createtablejsonmap map[string]interface{}, createtable Createtable) {
 
@@ -213,18 +209,16 @@ func prepareLocalSecondaryIndexesparams(createtablejsonmap map[string]interface{
 				localSecondaryIndexesvjsonmap["Projection"] = projectionv
 			}
 
-
 			if len(createtable.localSecondaryIndexes[i].keySchema) != 0 {
 
 				lenv := len(createtable.localSecondaryIndexes[i].keySchema)
 
-
 				keySchemavs := make([]map[string]interface{}, 0)
 
-				for j := 0; j < lenv ; i++ {
+				for j := 0; j < lenv; i++ {
 
 					keySchemav := make(map[string]interface{})
-						keySchemav["AttributeName"] = createtable.localSecondaryIndexes[i].keySchema[j].AttributeName
+					keySchemav["AttributeName"] = createtable.localSecondaryIndexes[i].keySchema[j].AttributeName
 
 					if createtable.localSecondaryIndexes[i].keySchema[j].KeyType != "" {
 						keySchemav["KeyType"] = createtable.localSecondaryIndexes[i].keySchema[j].KeyType

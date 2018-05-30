@@ -68,7 +68,6 @@ func (awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{})
 	return resp, err
 }
 
-
 //DeleteMLModel delete model.
 func (awsmachinelearning *Awsmachinelearning) DeleteMLModel(request interface{}) (resp interface{}, err error) {
 
@@ -101,7 +100,6 @@ func (awsmachinelearning *Awsmachinelearning) DeleteMLModel(request interface{})
 	resp = response
 	return resp, err
 }
-
 
 //GetMLModel describe model.
 func (awsmachinelearning *Awsmachinelearning) GetMLModel(request interface{}) (resp interface{}, err error) {

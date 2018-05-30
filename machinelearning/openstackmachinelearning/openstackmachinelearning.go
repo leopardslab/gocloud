@@ -1,6 +1,5 @@
 package openstackmachinelearning
 
-
 //CreateMLModel creates model.
 func (openstackmachinelearning *Openstackmachinelearning) CreateMLModel(request interface{}) (resp interface{}, err error) {
 

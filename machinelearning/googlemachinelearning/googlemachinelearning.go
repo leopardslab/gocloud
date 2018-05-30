@@ -1,6 +1,5 @@
 package googlemachinelearning
 
-
 //CreateMLModel creates model.
 func (googlemachinelearning *Googlemachinelearning) CreateMLModel(request interface{}) (resp interface{}, err error) {
 
