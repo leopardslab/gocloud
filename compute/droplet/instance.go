@@ -7,7 +7,10 @@ import (
   "io/ioutil"
 	"net/http"
 	"strconv"
+  "encoding/json"
+  "errors"
 )
+
 
 // dropletBasePath is the endpoint URL for digitalocean API.
 const dropletBasePath = "https://api.digitalocean.com/v2/droplets"
