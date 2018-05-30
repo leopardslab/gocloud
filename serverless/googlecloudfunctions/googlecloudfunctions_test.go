@@ -93,11 +93,8 @@ func TestCreatefunction(t *testing.T) {
 		"Labels":              labels,
 	}
 
-	resp, err := googlecloudfunctions.Createfunction(createfunction)
+	_, err := googlecloudfunctions.Createfunction(createfunction)
 
-	response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
 
 	if err != nil {
 		t.Errorf("Test Fail")

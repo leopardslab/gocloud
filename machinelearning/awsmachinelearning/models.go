@@ -1,8 +1,10 @@
 package awsmachinelearning
 
+//Awsmachinelearning struct reperesnts aws machine learning service.
 type Awsmachinelearning struct {
 }
 
+//CreateMLModel struct reperesnts aws machine learning service CreateMLModel.
 type CreateMLModel struct {
 	MLModelID            string     `json:"MLModelId"`
 	MLModelName          string     `json:"MLModelName"`
@@ -13,6 +15,7 @@ type CreateMLModel struct {
 	TrainingDataSourceID string     `json:"TrainingDataSourceId"`
 }
 
+//Parameters struct reperesnts CreateMLModel parameters.
 type Parameters struct {
 	String string `json:"string"`
 }
