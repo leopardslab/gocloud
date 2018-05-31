@@ -1,7 +1,20 @@
 package vultrcompute
 
+import (
+	"github.com/cloudlibz/gocloud/vultrauth"
+	"net/http"
+)
+
 // Createnode function creates a new VultrCompute instance.
 func (vultrCompute *VultrCompute) Createnode(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
+	param = request.(map[string]interface{})
+
+	response := make(map[string]interface{})
+
+	err = vultrauth.SignAndDoRequest(http.MethodPost, "/v1/server/create", param, response)
+
+	resp = response
 	return resp, err
 }
 
