@@ -35,5 +35,23 @@ func (vultrCompute *VultrCompute) Rebootnode(request interface{}) (resp interfac
 
 // Deletenode function deletes a VultrCompute instance.
 func (vultrCompute *VultrCompute) Deletenode(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
+	param = request.(map[string]interface{})
+
+	response := make(map[string]interface{})
+
+	err = vultrauth.SignAndDoRequest(http.MethodPost, "/v1/server/destroy", param, response)
+
+	resp = response
+	return resp, err
+}
+
+// ListNode function lists VultrCompute instances.
+func (vultrCompute *VultrCompute) ListNode() (resp interface{}, err error) {
+	response := make(map[string]interface{})
+
+	err = vultrauth.SignAndDoRequest(http.MethodGet, "/v1/server/list", nil, response)
+
+	resp = response
 	return resp, err
 }
