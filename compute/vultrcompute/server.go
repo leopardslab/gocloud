@@ -20,6 +20,14 @@ func (vultrCompute *VultrCompute) Createnode(request interface{}) (resp interfac
 
 // Startnode function starts a VultrCompute instance.
 func (vultrCompute *VultrCompute) Startnode(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
+	param = request.(map[string]interface{})
+
+	response := make(map[string]interface{})
+
+	err = vultrauth.SignAndDoRequest(http.MethodPost, "/v1/server/start", param, response)
+
+	resp = response
 	return resp, err
 }
 
