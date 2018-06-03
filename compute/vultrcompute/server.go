@@ -3,6 +3,7 @@ package vultrcompute
 import (
 	"github.com/cloudlibz/gocloud/vultrauth"
 	"net/http"
+	"fmt"
 )
 
 // Createnode function creates a new VultrCompute instance.
@@ -33,6 +34,7 @@ func (vultrCompute *VultrCompute) Startnode(request interface{}) (resp interface
 
 // Stopnode function stops a VultrCompute instance.
 func (vultrCompute *VultrCompute) Stopnode(request interface{}) (resp interface{}, err error) {
+	fmt.Println("\nThis API is not provided by Vultr cloud")
 	return resp, err
 }
 
