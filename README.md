@@ -44,10 +44,9 @@ GoCloud is a golang library which hides the difference between different APIs pr
 ### DigitalOcean
 
 * DigitalOcean Droplet [Link to example](examples/compute/droplet/droplet.md)
-* DigitalOcean LoadBalancer [Link to example](examples/loadbalancer/digiocean_loadbalancer/digioceanloadbalancer.md)
+* DigitalOcean LoadBalancer [Link to example](examples/loadbalancer/digiocean_loadbalancer/digiocean_loadbalancer.md)
 * DigitalOcean Storage [Link to example](examples/storage/digiocean_storage/digiocean_storage.md)
-
-Currently, implementations for other cloud providers are being worked on.
+* DigitalOcean DNS [Link to example](examples/dns/digioceandns/digioceandns.md)
 
 ### Ali-cloud
 
@@ -56,6 +55,8 @@ Currently, implementations for other cloud providers are being worked on.
 * Alibaba Cloud DNS [Link to example](examples/dns/alidns/alidns.md)
 * Server Load Balancer [Link to example](examples/loadbalancer/aliloadbalancer/aliloadbalancer.md)
 * Container Service [Link to example](examples/container/ali container/alicontainer.md)
+
+Currently, implementations for other cloud providers are being worked on.
 
 ## Installation instructions for Linux (Ubuntu)
 1. Install golang.  
