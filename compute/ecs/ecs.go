@@ -4,6 +4,7 @@ package ecs
 type ECS struct {
 }
 
+// Endpoint of Ali ecs
 const (
 	DefaultRegion = "ecs.aliyuncs.com"
 	Zhangjiakou   = "ecs.cn-zhangjiakou.aliyuncs.com"

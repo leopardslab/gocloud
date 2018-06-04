@@ -10,7 +10,7 @@ import (
 func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 	var options StartNode
 
-	param = make(map[string]interface{})
+	param := make(map[string]interface{})
 
 	param = request.(map[string]interface{})
 
@@ -47,7 +47,7 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 	var options StopNode
 
-	param = make(map[string]interface{})
+	param := make(map[string]interface{})
 
 	param = request.(map[string]interface{})
 
@@ -93,7 +93,7 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	var options RebootNode
 
-	param = make(map[string]interface{})
+	param := make(map[string]interface{})
 
 	param = request.(map[string]interface{})
 
@@ -130,7 +130,7 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	var options DeleteNode
 
-	param = make(map[string]interface{})
+	param := make(map[string]interface{})
 
 	param = request.(map[string]interface{})
 
