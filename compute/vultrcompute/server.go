@@ -40,6 +40,14 @@ func (vultrCompute *VultrCompute) Stopnode(request interface{}) (resp interface{
 
 // Rebootnode function reboots a VultrCompute instance.
 func (vultrCompute *VultrCompute) Rebootnode(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
+	param = request.(map[string]interface{})
+
+	response := make(map[string]interface{})
+
+	err = vultrauth.SignAndDoRequest(http.MethodPost, "/v1/server/reboot", param, response)
+
+	resp = response
 	return resp, err
 }
 

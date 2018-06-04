@@ -47,6 +47,24 @@ func TestVultrCompute_Startnode(t *testing.T) {
 	t.Logf("Vultr node is started successfully.")
 }
 
+func TestVultrCompute_Rebootnode(t *testing.T) {
+	var vultrServer VultrCompute
+	reboot := map[string]interface{}{
+		"SUBID": 6492936,
+	}
+	resp, err := vultrServer.Rebootnode(reboot)
+	if err != nil {
+		t.Errorf("Rebootnode Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr node is rebooted successfully.")
+}
+
 func TestVultrCompute_Deletenode(t *testing.T) {
 	var vultrServer VultrCompute
 	destroy := map[string]interface{}{
