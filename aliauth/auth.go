@@ -1,9 +1,9 @@
 package aliauth
 
 import (
-	"os"
 	"encoding/json"
 	"log"
+	"os"
 )
 
 //Configuration struct for representing Ali-cloud credentials

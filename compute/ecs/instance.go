@@ -83,6 +83,7 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 
 	// Put all of options into params
 	params = aliauth.PutStructIntoMap(&options)
+
 	response := make(map[string]interface{})
 	err = aliauth.ECSSignAndDoRequest("StopInstance", params, response)
 	resp = response

@@ -1,12 +1,12 @@
 package aliloadbalancer
 
 import (
-	"strconv"
 	"github.com/cloudlibz/gocloud/aliauth"
+	"strconv"
 )
 
 // Creatloadbalancer creates ali loadbalancer
-func (aliloadbalancer *Aliloadbalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
+func (aliloadbalancer *Aliloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
 	var options CreateLoadBalancer
 
 	param := make(map[string]interface{})
