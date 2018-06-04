@@ -2,18 +2,18 @@ package gocloud
 
 import (
 	"fmt"
+	"github.com/cloudlibz/gocloud/ali"
 	aliAuth "github.com/cloudlibz/gocloud/aliauth"
 	awsAuth "github.com/cloudlibz/gocloud/auth"
-	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
 	"github.com/cloudlibz/gocloud/aws"
-	"github.com/cloudlibz/gocloud/google"
-	"github.com/cloudlibz/gocloud/openstack"
 	"github.com/cloudlibz/gocloud/azure"
 	"github.com/cloudlibz/gocloud/digiocean"
-	"github.com/cloudlibz/gocloud/aliauth"
-	"github.com/cloudlibz/gocloud/ali"
+	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	"github.com/cloudlibz/gocloud/google"
+	"github.com/cloudlibz/gocloud/openstack"
 	"github.com/cloudlibz/gocloud/rackspace"
-	"github.com/cloudlibz/gocloud/ali"
+	"github.com/cloudlibz/gocloud/vultr"
+	"github.com/cloudlibz/gocloud/vultrauth"
 )
 
 // Gocloud is a interface which hides the difference between different cloud providers.
@@ -68,6 +68,9 @@ const (
 
 	// Rackspaceprovider reperents rackspace cloud.
 	Rackspaceprovider = "rackspace"
+
+	// Rackspaceprovider reperents rackspace cloud.
+	Vultrprovider = "vultr"
 )
 
 // CloudProvider returns the instance of respective cloud and maps it to
@@ -101,6 +104,10 @@ func CloudProvider(provider string) (Gocloud, error) {
 
 	case Rackspaceprovider:
 		return new(rackspace.Rackspace), nil
+
+	case Vultrprovider:
+		vultrauth.LoadConfig()
+		return new(vultr.Vultr), nil
 
 	default:
 		return nil, fmt.Errorf("provider %s not recognized", provider)
