@@ -39,3 +39,8 @@ Createdns function creates a new DNS record.
 ```
 func (digioceandns *Digioceandns) Createdns(request interface{}) (resp interface{}, err error)
 ```
+
+Listdns function lists DNS records.
+```
+func (digioceandns *Digioceandns) Listdns(request interface{}) (resp interface{}, err error)
+```

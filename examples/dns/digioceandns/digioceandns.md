@@ -44,7 +44,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
  fmt.Println(response["body"])
 ```
 
-### Delete instance
+### Delete DNS record
 
 ```js
   delete1 := map[string]string{
@@ -53,6 +53,18 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
   }
 
   resp, err := digioceancloud.Deletedns(delete1)
+  response := resp.(map[string]interface{})
+  fmt.Println(response["body"])
+```
+
+### List DNS records
+
+```js
+  listRecords := map[string]string{
+    "DomainName": "example.com",
+  }
+
+  resp, err := digioceancloud.Listdns(listRecords)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```

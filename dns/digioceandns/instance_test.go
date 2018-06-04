@@ -48,3 +48,18 @@ func TestDeletedns(t *testing.T) {
 		t.Errorf("Test to delete DigitalOcean DNS record failed.")
 	}
 }
+
+func TestListdns(t *testing.T) {
+
+	var digioceancloud Digioceandns
+
+	listRecords := map[string]string{
+		"DomainName": "example.com",
+	}
+
+	_, err := digioceancloud.Listdns(listRecords)
+
+	if err != nil {
+		t.Errorf("Test to list DigitalOcean DNS record failed.")
+	}
+}
