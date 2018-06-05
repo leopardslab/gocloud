@@ -1,5 +1,6 @@
 package vultrcompute
 
+// VultrCompute struct
 type VultrCompute struct {
 }
 

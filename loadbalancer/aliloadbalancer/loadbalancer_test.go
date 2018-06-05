@@ -18,7 +18,7 @@ func TestCreateLoadBalancer(t *testing.T) {
 		"AddressType":        "internet",
 		"InternetChargeType": "paybytraffic",
 	}
-	_, err := alilb.Creatloadbalancer(create)
+	_, err := alilb.Createloadbalancer(create)
 	if err != nil {
 		t.Errorf("CreateLoadBalancer Test Fail: %s", err)
 		return

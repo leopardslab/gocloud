@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// SignAndDoRequest sign and do request by action parameter and specific parameters
 func SignAndDoRequest(method string, path string, params map[string]interface{}, response map[string]interface{}) error {
 
 	requestURL := "https://api.vultr.com" + path

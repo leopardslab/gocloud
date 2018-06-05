@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-// Creatloadbalancer creates ali loadbalancer
+// Createloadbalancer creates ali loadbalancer
 func (aliloadbalancer *Aliloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
 	var options CreateLoadBalancer
 
