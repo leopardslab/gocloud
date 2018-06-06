@@ -1,9 +1,9 @@
 package vultrcompute
 
 import (
+	"fmt"
 	"github.com/cloudlibz/gocloud/vultrauth"
 	"net/http"
-	"fmt"
 )
 
 // Createnode function creates a new VultrCompute instance.
