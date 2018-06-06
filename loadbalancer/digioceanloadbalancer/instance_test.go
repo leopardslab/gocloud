@@ -1,8 +1,8 @@
 package digioceanloadbalancer
 
 import (
-  "testing"
-  digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
+	"testing"
 )
 
 func init() {
@@ -11,42 +11,42 @@ func init() {
 
 func TestCreateloadbalancer(t *testing.T) {
 
-  var digioceancloud LoadBalancer
+	var digioceancloud LoadBalancer
 
-  forwardingrules := []map[string]interface{}{
-      {
-        "EntryProtocol":  "https",
-        "EntryPort":  444,
-        "TargetProtocol": "https",
-        "TargetPort": 443,
-        "TLSPassthrough": true,
-      },
-  }
-
-  healthcheck := map[string]interface{}{
-    "Protocol": "http",
-    "Port": 80,
-    "Path": "/",
-    "CheckIntervalSeconds": 10,
-    "ResponseTimeoutSeconds": 5,
-    "HealthyThreshold": 5,
-    "UnhealthyThreshold": 3,
+	forwardingrules := []map[string]interface{}{
+		{
+			"EntryProtocol":  "https",
+			"EntryPort":      444,
+			"TargetProtocol": "https",
+			"TargetPort":     443,
+			"TLSPassthrough": true,
+		},
 	}
 
-  stickysessions := map[string]interface{}{
-    "Type": "none",
-  }
+	healthcheck := map[string]interface{}{
+		"Protocol":               "http",
+		"Port":                   80,
+		"Path":                   "/",
+		"CheckIntervalSeconds":   10,
+		"ResponseTimeoutSeconds": 5,
+		"HealthyThreshold":       5,
+		"UnhealthyThreshold":     3,
+	}
+
+	stickysessions := map[string]interface{}{
+		"Type": "none",
+	}
 
 	create := map[string]interface{}{
-    "Name": "example-01",
-    "Algorithm":  "round_robin",
-    "Region": "nyc3",
-    "ForwardingRules":  forwardingrules,
-    "HealthCheck":  healthcheck,
-    "StickySessions": stickysessions,
-    "DropletIDs":  []int{3164444, 3164445},
-    "Tag":  nil,
-    "RedirectHTTPToHTTPS": false,
+		"Name":            "example-01",
+		"Algorithm":       "round_robin",
+		"Region":          "nyc3",
+		"ForwardingRules": forwardingrules,
+		"HealthCheck":     healthcheck,
+		"StickySessions":  stickysessions,
+		"DropletIDs":      []int{3164444, 3164445},
+		"Tag":             nil,
+		"RedirectHTTPToHTTPS": false,
 	}
 
 	_, err := digioceancloud.Createloadbalancer(create)
@@ -58,11 +58,11 @@ func TestCreateloadbalancer(t *testing.T) {
 
 func TestDeleteloadbalancer(t *testing.T) {
 
-  var digioceancloud LoadBalancer
+	var digioceancloud LoadBalancer
 
-  delete := map[string]string{
-    "ID": "86407564",
-   }
+	delete := map[string]string{
+		"ID": "86407564",
+	}
 
 	_, err := digioceancloud.Deleteloadbalancer(delete)
 
@@ -73,7 +73,7 @@ func TestDeleteloadbalancer(t *testing.T) {
 
 func TestListloadbalancer(t *testing.T) {
 
-  var digioceancloud LoadBalancer
+	var digioceancloud LoadBalancer
 
 	_, err := digioceancloud.Listloadbalancer(nil)
 
@@ -84,14 +84,14 @@ func TestListloadbalancer(t *testing.T) {
 
 func TestAttachnodewithloadbalancer(t *testing.T) {
 
-  var digioceancloud LoadBalancer
+	var digioceancloud LoadBalancer
 
-  attachnodewithloadbalancer := map[string]interface{}{
-    "LoadBalancerID":   "my-load-balancer",
-    "DropletIDs":        []int{31331, 31313},
+	attachnodewithloadbalancer := map[string]interface{}{
+		"LoadBalancerID": "my-load-balancer",
+		"DropletIDs":     []int{31331, 31313},
 	}
 
-  _, err := digioceancloud.Attachnodewithloadbalancer(attachnodewithloadbalancer)
+	_, err := digioceancloud.Attachnodewithloadbalancer(attachnodewithloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test to attach Droplets to DigitalOcean LoadBalancer failed")
@@ -100,14 +100,14 @@ func TestAttachnodewithloadbalancer(t *testing.T) {
 
 func TestDetachnodewithloadbalancer(t *testing.T) {
 
-  var digioceancloud LoadBalancer
+	var digioceancloud LoadBalancer
 
-  detachnodewithloadbalancer := map[string]interface{}{
-    "LoadBalancerID":   "my-load-balancer",
-    "DropletIDs":        []int{31331, 31313},
+	detachnodewithloadbalancer := map[string]interface{}{
+		"LoadBalancerID": "my-load-balancer",
+		"DropletIDs":     []int{31331, 31313},
 	}
 
-  _, err := digioceancloud.Detachnodewithloadbalancer(detachnodewithloadbalancer)
+	_, err := digioceancloud.Detachnodewithloadbalancer(detachnodewithloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test to detach Droplets from DigitalOcean LoadBalancer failed")

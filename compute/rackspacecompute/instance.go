@@ -2,12 +2,12 @@ package rackspacecompute
 
 // Createnode function creates a new rackspacecompute instance.
 func (rackspacecompute *Rackspacecompute) Createnode(request interface{}) (resp interface{}, err error) {
-  return resp, err
+	return resp, err
 }
 
 // Startnode function starts a rackspacecompute instance.
 func (rackspacecompute *Rackspacecompute) Startnode(request interface{}) (resp interface{}, err error) {
-  	return resp, err
+	return resp, err
 }
 
 // Stopnode function stops a rackspacecompute instance.

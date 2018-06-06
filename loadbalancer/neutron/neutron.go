@@ -1,5 +1,4 @@
 package neutron
 
-type Neutron struct{
-
+type Neutron struct {
 }

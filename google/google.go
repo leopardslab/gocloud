@@ -3,8 +3,10 @@ package google
 import (
 	gce "github.com/cloudlibz/gocloud/compute/gce"
 	googlecontainer "github.com/cloudlibz/gocloud/container/googlecontainer"
+	bigtable "github.com/cloudlibz/gocloud/database/bigtable"
 	googledns "github.com/cloudlibz/gocloud/dns/googledns"
 	googleloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/googleloadbalancer"
+	googlecloudfunctions "github.com/cloudlibz/gocloud/serverless/googlecloudfunctions"
 	googlestorage "github.com/cloudlibz/gocloud/storage/googlestorage"
 )
 
@@ -15,4 +17,6 @@ type Google struct {
 	googleloadbalancer.Googleloadbalancer
 	googlecontainer.Googlecontainer
 	googledns.Googledns
+	googlecloudfunctions.Googlecloudfunctions
+	bigtable.Bigtable
 }

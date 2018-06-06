@@ -3,8 +3,10 @@ package openstack
 import (
 	nova "github.com/cloudlibz/gocloud/compute/nova"
 	magnum "github.com/cloudlibz/gocloud/container/magnum"
+	openstacknosql "github.com/cloudlibz/gocloud/database/openstacknosql"
 	designate "github.com/cloudlibz/gocloud/dns/designate"
 	neutron "github.com/cloudlibz/gocloud/loadbalancer/neutron"
+	openstackserverless "github.com/cloudlibz/gocloud/serverless/openstackserverless"
 	cinder "github.com/cloudlibz/gocloud/storage/cinder"
 )
 
@@ -15,4 +17,6 @@ type Openstack struct {
 	designate.Designate
 	magnum.Magnum
 	neutron.Neutron
+	openstackserverless.Openstackserverless
+	openstacknosql.Openstacknosql
 }

@@ -1,14 +1,14 @@
 package digioceanauth
 
 import (
-  "encoding/json"
+	"encoding/json"
 	"log"
 	"os"
 )
 
 // TokenSource struct for representing DigiOcean credentials.
 type TokenSource struct {
-    DigiOceanAccessToken string
+	DigiOceanAccessToken string
 }
 
 // Token is a variable of type TokenSource.
@@ -30,7 +30,7 @@ func LoadConfig() {
 	_ = decoder.Decode(&Token)
 
 	if Token.DigiOceanAccessToken == "" {
-// If digioceancloudconfig.json doesn't exist, look for credentials as environment variables.
+		// If digioceancloudconfig.json doesn't exist, look for credentials as environment variables.
 
 		Token.DigiOceanAccessToken = os.Getenv("DigiOceanAccessToken")
 		if Token.DigiOceanAccessToken == "" {

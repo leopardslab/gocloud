@@ -1,17 +1,17 @@
 package aliauth
 
 import (
+	"bytes"
 	"crypto/md5"
 	"encoding/base64"
 	"encoding/json"
-	"sort"
-	"net/url"
 	"io"
-	"bytes"
-	"net/http"
-	"time"
 	"io/ioutil"
+	"net/http"
+	"net/url"
+	"sort"
 	"strings"
+	"time"
 )
 
 func ContainerTaskSignAndDoRequest() {
