@@ -1,7 +1,7 @@
 package vultrloadbalancer
 
-// Creatloadbalancer function creates a new load balancer.
-func (vultrLoadBalancer *VultrLoadBalancer) Creatloadbalancer(request interface{}) (resp interface{}, err error) {
+// Createloadbalancer function creates a new load balancer.
+func (vultrLoadBalancer *VultrLoadBalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 

@@ -1,5 +1,6 @@
 package vultrcompute
 
+// VultrCompute struct
 type VultrCompute struct {
 }
 
@@ -25,4 +26,8 @@ type CreateNode struct {
 	hostname               string   // (optional) The hostname to assign to this server.
 	tag                    string   // (optional) The tag to assign to this server.
 	FIREWALLGROUPID        string   // (optional) The firewall group to assign to this server. See /v1/firewall/group_list.
+}
+
+type DeleteNode struct {
+	SUBID int // Unique identifier for this subscription.  These can be found using the v1/server/list call.
 }
