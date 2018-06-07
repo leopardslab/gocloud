@@ -8,13 +8,14 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
+
 func TestGetMLModel(t *testing.T) {
 
 	var awsmachinelearning Awsmachinelearning
 
 	getMLModel := map[string]interface{}{
 		"Region":    "us-east-1",
-		"MLModelId": "ml-EL5FRUNlk7p",
+		"MLModelId": "ml-EL5FRUNlk72",
 	}
 
 	resp, err := awsmachinelearning.GetMLModel(getMLModel)
@@ -28,13 +29,14 @@ func TestGetMLModel(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
+/*
 func TestDeleteMLModel(t *testing.T) {
 
 	var awsmachinelearning Awsmachinelearning
 
 	deleteMLModel := map[string]interface{}{
 		"Region":    "us-east-1",
-		"MLModelId": "ds-Lf3D4KaPukx",
+		"MLModelId": "ml-EL5FRUNlk73",
 	}
 
 	resp, err := awsmachinelearning.DeleteMLModel(deleteMLModel)
@@ -47,6 +49,8 @@ func TestDeleteMLModel(t *testing.T) {
 
 	fmt.Println(response["body"])
 }
+*/
+
 
 func TestUpdateMLModel(t *testing.T) {
 
@@ -54,7 +58,7 @@ func TestUpdateMLModel(t *testing.T) {
 
 	updateMLModel := map[string]interface{}{
 		"Region":    "us-east-1",
-		"MLModelId": "ds-Lf3D4KaPukx",
+		"MLModelId": "ml-EL5FRUNlk72",
 	}
 
 	resp, err := awsmachinelearning.UpdateMLModel(updateMLModel)
@@ -68,17 +72,19 @@ func TestUpdateMLModel(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
+
+
 func TestCreateMLModel(t *testing.T) {
 
 	var awsmachinelearning Awsmachinelearning
 
 	createMLModel := map[string]interface{}{
 		"Region":      "us-east-1",
-		"MLModelName": "EXAMPLE",
-		"MLModelId":   "ml-EL5FRUNlk7p",
+		"MLModelName": "EXAMPLE2",
+		"MLModelId":   "ml-EL5FRUNlk73",
 		"MLModelType": "REGRESSION",
-		"RecipeUri": "	s3://bokya/census.csv",
-		"TrainingDataSourceId": "ds-Lf3D4KaPukx",
+		"RecipeUri": "s3://bokya/census.csv",
+		"TrainingDataSourceId": "ds-ydIch00SVNu",
 	}
 
 	resp, err := awsmachinelearning.CreateMLModel(createMLModel)
