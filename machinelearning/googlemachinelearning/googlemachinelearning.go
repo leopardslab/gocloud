@@ -416,7 +416,7 @@ func (googlemachinelearning *Googlemachinelearning) UpdateMLModel(request interf
 
 	var updateMLModeljsonstringbyte = []byte(updateMLModeljsonstring)
 
-	url := "https://ml.googleapis.com/v1/" + Parent + "/models"
+	url := "https://ml.googleapis.com/v1/" + Parent
 
 	client := googleauth.SignJWT()
 
