@@ -26,7 +26,7 @@ func TestDeleteMLModel(t *testing.T) {
 	var googlemachinelearning Googlemachinelearning
 
 	deleteMLModel := map[string]string{
-		"name": "projects/adept-comfort-202709/models/hello",
+		"name": "projects/adept-comfort-202709/models/hi",
 	}
 
 	resp, err := googlemachinelearning.DeleteMLModel(deleteMLModel)
