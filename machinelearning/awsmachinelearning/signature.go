@@ -28,6 +28,7 @@ func (awsmachinelearning *Awsmachinelearning) PrepareSignatureV4query(params map
 	request, _ := http.NewRequest("POST", ECSEndpoint, bytes.NewBuffer(requestparametersjsonstringbyte))
 	request = awsauth.SignatureV4(request, requestparametersjsonstringbyte, amztarget, method, params["Region"], service, host, ContentType, signedheaders)
 	resp, err := client.Do(request)
+	fmt.Println(err)
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	response["body"] = string(body)

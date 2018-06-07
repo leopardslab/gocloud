@@ -17,11 +17,11 @@ func preparecreateMLModelparamsdict(createMLModeljsonmap map[string]interface{},
 	}
 
 	if createMLModel.RecipeURI != "" {
-		createMLModeljsonmap["RecipeURI"] = createMLModel.RecipeURI
+		createMLModeljsonmap["RecipeUri"] = createMLModel.RecipeURI
 	}
 
 	if createMLModel.TrainingDataSourceID != "" {
-		createMLModeljsonmap["TrainingDataSourceID"] = createMLModel.TrainingDataSourceID
+		createMLModeljsonmap["TrainingDataSourceId"] = createMLModel.TrainingDataSourceID
 	}
 
 	if createMLModel.parameters.String != "" {
@@ -68,19 +68,24 @@ func preparegetmodel(params map[string]string, MLModelId string, Verbose string,
 	params["amztarget"] = "AmazonML_20141212.GetMLModel"
 }
 
-func prepareupdatemodel(params map[string]string, MLModelId string, ScoreThreshold string, MLModelName string, Region string) {
 
-	if MLModelId != "" {
-		params["MLModelId"] = MLModelId
-	}
+func prepareupdatemodelparamsdict(updatemodeljsonmap map[string]interface{} , MLModelId string, ScoreThreshold int, MLModelName string){
 
-	if MLModelName != "" {
-		params["MLModelName"] = MLModelName
-	}
+		if MLModelId != "" {
+			updatemodeljsonmap["MLModelId"] = MLModelId
+		}
 
-	if ScoreThreshold != "" {
-		params["ScoreThreshold"] = ScoreThreshold
-	}
+		if MLModelName != "" {
+			updatemodeljsonmap["MLModelName"] = MLModelName
+		}
+
+		if ScoreThreshold != 0 {
+			updatemodeljsonmap["ScoreThreshold"] = ScoreThreshold
+		}
+}
+
+func prepareupdatemodel(params map[string]string ,Region string) {
+
 
 	if Region != "" {
 		params["Region"] = Region
