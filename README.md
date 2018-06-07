@@ -51,10 +51,10 @@ GoCloud is a golang library which hides the difference between different APIs pr
 ### Ali-cloud
 
 * ECS Compute [Link to example](examples/compute/ecs/ecs.md)
-* ECS Storage [Link to example](examples/storage/alistorage/alistorage.md)
-* Alibaba Cloud DNS [Link to example](examples/dns/alidns/alidns.md)
-* Server Load Balancer [Link to example](examples/loadbalancer/aliloadbalancer/aliloadbalancer.md)
-* Container Service [Link to example](examples/container/alicontainer/alicontainer.md)
+* ECS Storage [Link to example](examples/storage/ali_storage/ali_storage.md)
+* Alibaba Cloud DNS [Link to example](examples/dns/ali_dns/ali_dns.md)
+* Server Load Balancer [Link to example](examples/loadbalancer/ali_loadbalancer/ali_loadbalancer.md)
+* Container Service [Link to example](examples/container/ali_container/ali_container.md)
 
 Currently, implementations for other cloud providers are being worked on.
 
