@@ -8,6 +8,7 @@ import (
 	neutron "github.com/cloudlibz/gocloud/loadbalancer/neutron"
 	openstackserverless "github.com/cloudlibz/gocloud/serverless/openstackserverless"
 	cinder "github.com/cloudlibz/gocloud/storage/cinder"
+	openstackmachinelearning "github.com/cloudlibz/gocloud/machinelearning/openstackmachinelearning"
 )
 
 //openstack  struct represents openstack cloud provider.
@@ -19,4 +20,5 @@ type Openstack struct {
 	neutron.Neutron
 	openstackserverless.Openstackserverless
 	openstacknosql.Openstacknosql
+	openstackmachinelearning.Openstackmachinelearning
 }
