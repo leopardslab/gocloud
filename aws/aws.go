@@ -10,6 +10,7 @@ import (
 	"github.com/cloudlibz/gocloud/machinelearning/awsmachinelearning"
 	lambda "github.com/cloudlibz/gocloud/serverless/lambda"
 	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
+	awsmachinelearning "github.com/cloudlibz/gocloud/machinelearning/awsmachinelearning"
 )
 
 //AWS struct reperents amazon cloud provider.
@@ -21,6 +22,7 @@ type AWS struct {
 	awsdns.Awsdns
 	lambda.Lambda
 	dynamodb.Dynamodb
+	awsmachinelearning.Awsmachinelearning
 }
 
 func (*AWS) Compute() gocloudinterface.Compute {

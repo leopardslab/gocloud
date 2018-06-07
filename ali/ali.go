@@ -9,6 +9,7 @@ import (
 	"github.com/cloudlibz/gocloud/loadbalancer/aliloadbalancer"
 	"github.com/cloudlibz/gocloud/serverless/aliserverless"
 	"github.com/cloudlibz/gocloud/storage/alistorage"
+	alimachinelearning "github.com/cloudlibz/gocloud/machinelearning/alimachinelearning"
 )
 
 //Ali struct represents Ali-cloud provider.
@@ -20,6 +21,7 @@ type Ali struct {
 	alidns.Alidns
 	aliserverless.Aliserverless
 	alinosql.Alinosql
+	alimachinelearning.Alimachinelearning
 }
 
 func (*Ali) Compute() gocloudinterface.Compute {
