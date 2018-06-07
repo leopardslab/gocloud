@@ -4,6 +4,9 @@ import (
 	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
+	"time"
+	"encoding/json"
+	"bytes"
 )
 
 const (
@@ -60,20 +63,17 @@ func (googlemachinelearning *Googlemachinelearning) CreateMLModel(request interf
 					option.defaultVersion.isDefault = isDefaultv
 
 				case "DeploymentUri":
-					deploymentUriv, _ = defaultVersionparamvalue.(string)
+					deploymentUriv, _ := defaultVersionparamvalue.(string)
 					option.defaultVersion.deploymentUri = deploymentUriv
 
 				case "CreateTime":
-					createTimev, _ = time.Now().UTC().Format(time.RFC3339)
+					createTimev := time.Now().UTC().Format(time.RFC3339)
 					option.defaultVersion.createTime = createTimev
 
 				case "LastUseTime":
-					lastUseTimev, _ = defaultVersionparamvalue.(string)
+					lastUseTimev, _ := defaultVersionparamvalue.(string)
 					option.defaultVersion.lastUseTime = lastUseTimev
 
-				case "RuntimeVersion":
-					runtimeVersionv, _ := defaultVersionparamvalue.(string)
-					option.defaultVersion.runtimeVersion = runtimeVersionv
 
 				case "RuntimeVersion":
 					runtimeVersionv, _ := defaultVersionparamvalue.(string)
@@ -88,7 +88,7 @@ func (googlemachinelearning *Googlemachinelearning) CreateMLModel(request interf
 					option.defaultVersion.errorMessage = errorMessagev
 
 				case "Framework":
-					frameworkv, _ = defaultVersionparamvalue.(string)
+					frameworkv, _ := defaultVersionparamvalue.(string)
 					option.defaultVersion.framework = frameworkv
 
 				case "PythonVersion":
@@ -96,22 +96,22 @@ func (googlemachinelearning *Googlemachinelearning) CreateMLModel(request interf
 					option.defaultVersion.pythonVersion = pythonVersionv
 
 				case "AutoScaling":
-					autoScalingparam, _ = defaultVersionparamvalue.(map[string]interface{})
+					autoScalingparam, _ := defaultVersionparamvalue.(map[string]interface{})
 					for autoScalingparamkey, autoScalingparamvalue := range autoScalingparam {
 						switch autoScalingparamkey {
 						case "MinNodes":
 							minNodesv, _ := autoScalingparamvalue.(string)
-							option.defaultVersion.autoScaling.minNodes = namev
+							option.defaultVersion.autoScaling.minNodes = minNodesv
 						}
 					}
 
 				case "ManualScaling":
-					manualScalingparam, _ = defaultVersionparamvalue.(map[string]interface{})
+					manualScalingparam, _ := defaultVersionparamvalue.(map[string]interface{})
 					for manualScalingparamkey, manualScalingparamvalue := range manualScalingparam {
 						switch manualScalingparamkey {
 						case "Nodes":
 							nodesv, _ := manualScalingparamvalue.(string)
-							option.defaultVersion.manualScaling.nodes = namev
+							option.defaultVersion.manualScaling.nodes = nodesv
 						}
 					}
 				}
@@ -141,14 +141,19 @@ func (googlemachinelearning *Googlemachinelearning) CreateMLModel(request interf
 
 	defer createMLModelresp.Body.Close()
 
-	body, err := ioutil.ReadAll(createMLModelrresp.Body)
+	body, err := ioutil.ReadAll(createMLModelresp.Body)
 
 	createMLModelresponse := make(map[string]interface{})
-	createMLModelresponse["status"] = createMLModelrresp.StatusCode
+	createMLModelresponse["status"] = createMLModelresp.StatusCode
 	createMLModelresponse["body"] = string(body)
 	resp = createMLModelresponse
 	return resp, err
 }
+
+func createMLModeldictnoaryconvert(option CreateMLModel, createMLModeljsonmap map[string]interface{}){
+
+}
+
 
 //DeleteMLModel delete model.
 func (googlemachinelearning *Googlemachinelearning) DeleteMLModel(request interface{}) (resp interface{}, err error) {
@@ -258,22 +263,18 @@ func (googlemachinelearning *Googlemachinelearning) UpdateMLModel(request interf
 					option.defaultVersion.isDefault = isDefaultv
 
 				case "DeploymentUri":
-					deploymentUriv, _ = defaultVersionparamvalue.(string)
+					deploymentUriv, _ := defaultVersionparamvalue.(string)
 					option.defaultVersion.deploymentUri = deploymentUriv
 
 				case "CreateTime":
-					createTimev, _ = time.Now().UTC().Format(time.RFC3339)
+					createTimev := time.Now().UTC().Format(time.RFC3339)
 					option.defaultVersion.createTime = createTimev
 
 				case "LastUseTime":
-					lastUseTimev, _ = defaultVersionparamvalue.(string)
+					lastUseTimev, _ := defaultVersionparamvalue.(string)
 					option.defaultVersion.lastUseTime = lastUseTimev
 
-				case "RuntimeVersion":
-					runtimeVersionv, _ := defaultVersionparamvalue.(string)
-					option.defaultVersion.runtimeVersion = runtimeVersionv
-
-				case "RuntimeVersion":
+			case "RuntimeVersion":
 					runtimeVersionv, _ := defaultVersionparamvalue.(string)
 					option.defaultVersion.runtimeVersion = runtimeVersionv
 
@@ -286,7 +287,7 @@ func (googlemachinelearning *Googlemachinelearning) UpdateMLModel(request interf
 					option.defaultVersion.errorMessage = errorMessagev
 
 				case "Framework":
-					frameworkv, _ = defaultVersionparamvalue.(string)
+					frameworkv, _ := defaultVersionparamvalue.(string)
 					option.defaultVersion.framework = frameworkv
 
 				case "PythonVersion":
@@ -294,22 +295,22 @@ func (googlemachinelearning *Googlemachinelearning) UpdateMLModel(request interf
 					option.defaultVersion.pythonVersion = pythonVersionv
 
 				case "AutoScaling":
-					autoScalingparam, _ = defaultVersionparamvalue.(map[string]interface{})
+					autoScalingparam, _ := defaultVersionparamvalue.(map[string]interface{})
 					for autoScalingparamkey, autoScalingparamvalue := range autoScalingparam {
 						switch autoScalingparamkey {
 						case "MinNodes":
 							minNodesv, _ := autoScalingparamvalue.(string)
-							option.defaultVersion.autoScaling.minNodes = namev
+							option.defaultVersion.autoScaling.minNodes = minNodesv
 						}
 					}
 
 				case "ManualScaling":
-					manualScalingparam, _ = defaultVersionparamvalue.(map[string]interface{})
+					manualScalingparam, _ := defaultVersionparamvalue.(map[string]interface{})
 					for manualScalingparamkey, manualScalingparamvalue := range manualScalingparam {
 						switch manualScalingparamkey {
 						case "Nodes":
 							nodesv, _ := manualScalingparamvalue.(string)
-							option.defaultVersion.manualScaling.nodes = namev
+							option.defaultVersion.manualScaling.nodes = nodesv
 						}
 					}
 				}
@@ -319,13 +320,13 @@ func (googlemachinelearning *Googlemachinelearning) UpdateMLModel(request interf
 
 	updateMLModeljsonmap := make(map[string]interface{})
 
-	updateMLModeldictnoaryconvert(option, updateMLModeljsonmap)
+	createMLModeldictnoaryconvert(option, updateMLModeljsonmap)
 
 	updateMLModeljson, _ := json.Marshal(updateMLModeljsonmap)
 
 	updateMLModeljsonstring := string(updateMLModeljson)
 
-	var createMLModeljsonstringbyte = []byte(createMLModeljsonstring)
+	var updateMLModeljsonstringbyte = []byte(updateMLModeljsonstring)
 
 	url := "https://ml.googleapis.com/v1/" + Parent + "/models"
 
@@ -335,8 +336,8 @@ func (googlemachinelearning *Googlemachinelearning) UpdateMLModel(request interf
 
 	updateMLModelparam := updateMLModelrequest.URL.Query()
 
-	if updateMask != "" {
-		updateMLModelsparam.Add("updateMask", UpdateMask)
+	if UpdateMask != "" {
+		updateMLModelparam.Add("updateMask", UpdateMask)
 	}
 
 	updateMLModelrequest.URL.RawQuery = updateMLModelparam.Encode()
