@@ -7,7 +7,7 @@ type Googlemachinelearning struct {
 type CreateMLModel struct{
   name string
   description string
-  onlinePredictionLogging string
+  onlinePredictionLogging bool
   regions []string
   defaultVersion DefaultVersion
 }
