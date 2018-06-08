@@ -1,6 +1,6 @@
 PACKAGE DOCUMENTATION
 
-package awsloadbalancer
+package awsmachinelearning
     import "github.com/cloudlibz/gocloud/machinelearning/awsmachinelearning"
 
 
@@ -42,5 +42,3 @@ type Parameters struct {
     String string `json:"string"`
 }
     Parameters struct reperesnts CreateMLModel parameters.
-
-
