@@ -12,8 +12,8 @@ import (
 	"github.com/cloudlibz/gocloud/google"
 	"github.com/cloudlibz/gocloud/openstack"
 	"github.com/cloudlibz/gocloud/rackspace"
-	//	"github.com/cloudlibz/gocloud/vultr"
-	//	"github.com/cloudlibz/gocloud/vultrauth"
+		"github.com/cloudlibz/gocloud/vultr"
+		"github.com/cloudlibz/gocloud/vultrauth"
 )
 
 // Gocloud is a interface which hides the difference between different cloud providers.
@@ -114,9 +114,9 @@ func CloudProvider(provider string) (Gocloud, error) {
 	case Rackspaceprovider:
 		return new(rackspace.Rackspace), nil
 
-	//case Vultrprovider:
-	//	vultrauth.LoadConfig()
-	//	return new(vultr.Vultr), nil
+	case Vultrprovider:
+		vultrauth.LoadConfig()
+		return new(vultr.Vultr), nil
 
 	default:
 		return nil, fmt.Errorf("provider %s not recognized", provider)
