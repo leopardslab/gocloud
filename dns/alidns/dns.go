@@ -3,11 +3,18 @@ package alidns
 import (
 	"github.com/cloudlibz/gocloud/aliauth"
 	"strconv"
+	"fmt"
 )
 
 // ListResourcednsRecordSets list resource DNS record sets accept map[string]interface{}
 func (alidns *Alidns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error) {
-	var options ListResourceDNSRecordSets
+	fmt.Println("\nThis API is not provided by Alibaba cloud")
+	return resp, err
+}
+
+// Listdns list DNS record accept map[string]interface{}
+func (alidns *Alidns) Listdns(request interface{}) (resp interface{}, err error) {
+	var options ListDNS
 
 	param := make(map[string]interface{})
 
@@ -44,45 +51,6 @@ func (alidns *Alidns) ListResourcednsRecordSets(request interface{}) (resp inter
 
 	response := make(map[string]interface{})
 	err = aliauth.DNSSignAndDoRequest("DescribeDomainRecords", params, response)
-	resp = response
-	return resp, err
-}
-
-// Listdns list DNS record accept map[string]interface{}
-func (alidns *Alidns) Listdns(request interface{}) (resp interface{}, err error) {
-	var options ListDNS
-
-	param := make(map[string]interface{})
-
-	param = request.(map[string]interface{})
-
-	for key, value := range param {
-		switch key {
-		case "PageNumber":
-			switch value.(type) {
-			case int:
-				options.PageNumber = value.(int)
-			case string:
-				options.PageNumber, _ = strconv.Atoi(value.(string))
-			}
-		case "PageSize":
-			switch value.(type) {
-			case int:
-				options.PageSize = value.(int)
-			case string:
-				options.PageSize, _ = strconv.Atoi(value.(string))
-			}
-		case "KeyWord":
-			options.KeyWord = value.(string)
-		case "GroupId":
-			options.GroupId = value.(string)
-		}
-	}
-	// Put all of options into params
-	params := aliauth.PutStructIntoMap(&options)
-
-	response := make(map[string]interface{})
-	err = aliauth.DNSSignAndDoRequest("DescribeDomains", params, response)
 	resp = response
 	return resp, err
 }
