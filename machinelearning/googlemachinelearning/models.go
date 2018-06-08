@@ -4,6 +4,7 @@ package googlemachinelearning
 type Googlemachinelearning struct {
 }
 
+//CreateMLModel struct reperesnts CreateMLModel service api.
 type CreateMLModel struct{
   name string
   description string
@@ -12,6 +13,7 @@ type CreateMLModel struct{
   defaultVersion DefaultVersion
 }
 
+//DefaultVersion struct reperesnts CreateMLModel sub-struct.
 type DefaultVersion struct{
   name string
   description string
@@ -28,10 +30,12 @@ type DefaultVersion struct{
   manualScaling ManualScaling
 }
 
+//AutoScaling struct reperesnts DefaultVersion sub-struct.
 type AutoScaling struct{
   minNodes string
 }
 
+//ManualScaling struct reperesnts DefaultVersion sub-struct.
 type ManualScaling struct{
   nodes string
 }
