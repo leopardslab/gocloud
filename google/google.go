@@ -7,9 +7,9 @@ import (
 	googledns "github.com/cloudlibz/gocloud/dns/googledns"
 	"github.com/cloudlibz/gocloud/gocloudinterface"
 	googleloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/googleloadbalancer"
+	googlemachinelearning "github.com/cloudlibz/gocloud/machinelearning/googlemachinelearning"
 	googlecloudfunctions "github.com/cloudlibz/gocloud/serverless/googlecloudfunctions"
 	googlestorage "github.com/cloudlibz/gocloud/storage/googlestorage"
-	googlemachinelearning "github.com/cloudlibz/gocloud/machinelearning/googlemachinelearning"
 )
 
 // Google  struct represents Google Cloud provider.

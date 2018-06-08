@@ -68,24 +68,22 @@ func preparegetmodel(params map[string]string, MLModelId string, Verbose string,
 	params["amztarget"] = "AmazonML_20141212.GetMLModel"
 }
 
+func prepareupdatemodelparamsdict(updatemodeljsonmap map[string]interface{}, MLModelId string, ScoreThreshold int, MLModelName string) {
 
-func prepareupdatemodelparamsdict(updatemodeljsonmap map[string]interface{} , MLModelId string, ScoreThreshold int, MLModelName string){
+	if MLModelId != "" {
+		updatemodeljsonmap["MLModelId"] = MLModelId
+	}
 
-		if MLModelId != "" {
-			updatemodeljsonmap["MLModelId"] = MLModelId
-		}
+	if MLModelName != "" {
+		updatemodeljsonmap["MLModelName"] = MLModelName
+	}
 
-		if MLModelName != "" {
-			updatemodeljsonmap["MLModelName"] = MLModelName
-		}
-
-		if ScoreThreshold != 0 {
-			updatemodeljsonmap["ScoreThreshold"] = ScoreThreshold
-		}
+	if ScoreThreshold != 0 {
+		updatemodeljsonmap["ScoreThreshold"] = ScoreThreshold
+	}
 }
 
-func prepareupdatemodel(params map[string]string ,Region string) {
-
+func prepareupdatemodel(params map[string]string, Region string) {
 
 	if Region != "" {
 		params["Region"] = Region

@@ -163,7 +163,6 @@ func (awsmachinelearning *Awsmachinelearning) UpdateMLModel(request interface{})
 
 	prepareupdatemodel(params, Region)
 
-
 	updatemodeljsonmap := make(map[string]interface{})
 
 	prepareupdatemodelparamsdict(updatemodeljsonmap, MLModelId, ScoreThreshold, MLModelName)

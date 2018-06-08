@@ -3,7 +3,6 @@ package googlecloudfunctions
 import "testing"
 import "fmt"
 
-
 func TestCallfunction(t *testing.T) {
 
 	var googlecloudfunctions Googlecloudfunctions
@@ -17,7 +16,6 @@ func TestCallfunction(t *testing.T) {
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
 
 	response := resp.(map[string]interface{})
 
@@ -85,7 +83,6 @@ func TestListFunction(t *testing.T) {
 
 }
 
-
 func TestCreatefunction(t *testing.T) {
 
 	var googlecloudfunctions Googlecloudfunctions
@@ -107,12 +104,10 @@ func TestCreatefunction(t *testing.T) {
 		"ServiceAccountEmail": "adept-comfort-202709@appspot.gserviceaccount.com",
 		"UpdateTime":          "2018-05-11T18:20:33Z",
 		"Runtime":             "nodejs6",
-		"SourceUploadURL":
+		"SourceUploadURL":     "https://storage.googleapis.com/gcf-upload-us-central1-f24bda97-6cd1-46cc-b37d-1f60eac4210a/f306c974-23cd-4294-ad46-8361d26488fa.zip?GoogleAccessId=service-126778294088@gcf-admin-robot.iam.gserviceaccount.com&Expires=1528366301&Signature=XcRaGgJXw71brq0eXcyQ1Dw8PVOT5Eu5E6xFzsa1uu87jd3irQr24pD48nm0PATjDD%2FttG2pRdyDTG0MpeUKUdtib8ohTWPcfM684LWvW0qQqv9q3k5DEa4DW74%2F9K2iMbda9P0oXvNEodVjToxezRGxY6BqAfNd5qqzA%2FbpL2LRlgOolg9d65vyyJy6ebewhYXlwEZHGhRHPuu3evnWLxTGxdLp4mbs1C%2FymzVsw4%2BS5Byl9GE0OWxjSNUt6YmL98l1QguLxefTERJdOU8qZvVDNnvtT4xMjIb1bju1zxPXEle7oQb2eM7sPoKYVYI5EheeIJpUvObFaklLr5qJ2Q%3D%3D",
 
-		"https://storage.googleapis.com/gcf-upload-us-central1-f24bda97-6cd1-46cc-b37d-1f60eac4210a/f306c974-23cd-4294-ad46-8361d26488fa.zip?GoogleAccessId=service-126778294088@gcf-admin-robot.iam.gserviceaccount.com&Expires=1528366301&Signature=XcRaGgJXw71brq0eXcyQ1Dw8PVOT5Eu5E6xFzsa1uu87jd3irQr24pD48nm0PATjDD%2FttG2pRdyDTG0MpeUKUdtib8ohTWPcfM684LWvW0qQqv9q3k5DEa4DW74%2F9K2iMbda9P0oXvNEodVjToxezRGxY6BqAfNd5qqzA%2FbpL2LRlgOolg9d65vyyJy6ebewhYXlwEZHGhRHPuu3evnWLxTGxdLp4mbs1C%2FymzVsw4%2BS5Byl9GE0OWxjSNUt6YmL98l1QguLxefTERJdOU8qZvVDNnvtT4xMjIb1bju1zxPXEle7oQb2eM7sPoKYVYI5EheeIJpUvObFaklLr5qJ2Q%3D%3D",
-
-		 	"VersionID":           "1",
-		"Labels":              labels,
+		"VersionID": "1",
+		"Labels":    labels,
 	}
 
 	resp, err := googlecloudfunctions.Createfunction(createfunction)

@@ -3,8 +3,6 @@ package googlemachinelearning
 import "testing"
 import "fmt"
 
-
-
 func TestUpdateMLModel(t *testing.T) {
 
 	var googlemachinelearning Googlemachinelearning
@@ -14,10 +12,10 @@ func TestUpdateMLModel(t *testing.T) {
 	defaultVersion["Name"] = "bokkya"
 
 	updateMLModel := map[string]interface{}{
-		"Parent": "projects/adept-comfort-202709/models/pratik",
-		"Name"  :"pratik",
-		"DefaultVersion" :defaultVersion,
-		"UpdateMask" : "description",
+		"Parent":         "projects/adept-comfort-202709/models/pratik",
+		"Name":           "pratik",
+		"DefaultVersion": defaultVersion,
+		"UpdateMask":     "description",
 	}
 
 	resp, err := googlemachinelearning.UpdateMLModel(updateMLModel)
@@ -29,7 +27,6 @@ func TestUpdateMLModel(t *testing.T) {
 	response := resp.(map[string]interface{})
 	fmt.Println(response["body"])
 }
-
 
 /*
 func TestCreateMLModel(t *testing.T) {

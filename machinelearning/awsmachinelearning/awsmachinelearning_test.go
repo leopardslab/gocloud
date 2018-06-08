@@ -8,7 +8,6 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-
 func TestGetMLModel(t *testing.T) {
 
 	var awsmachinelearning Awsmachinelearning
@@ -51,7 +50,6 @@ func TestDeleteMLModel(t *testing.T) {
 }
 */
 
-
 func TestUpdateMLModel(t *testing.T) {
 
 	var awsmachinelearning Awsmachinelearning
@@ -72,18 +70,16 @@ func TestUpdateMLModel(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-
-
 func TestCreateMLModel(t *testing.T) {
 
 	var awsmachinelearning Awsmachinelearning
 
 	createMLModel := map[string]interface{}{
-		"Region":      "us-east-1",
-		"MLModelName": "EXAMPLE2",
-		"MLModelId":   "ml-EL5FRUNlk73",
-		"MLModelType": "REGRESSION",
-		"RecipeUri": "s3://bokya/census.csv",
+		"Region":               "us-east-1",
+		"MLModelName":          "EXAMPLE2",
+		"MLModelId":            "ml-EL5FRUNlk73",
+		"MLModelType":          "REGRESSION",
+		"RecipeUri":            "s3://bokya/census.csv",
 		"TrainingDataSourceId": "ds-ydIch00SVNu",
 	}
 
