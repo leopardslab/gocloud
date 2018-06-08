@@ -11,11 +11,16 @@ func TestCallfunction(t *testing.T) {
 		"name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
 	}
 
-	_, err := googlecloudfunctions.Callfunction(callfunction)
+	resp, err := googlecloudfunctions.Callfunction(callfunction)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
+
 }
 
 func TestDeletefunction(t *testing.T) {
@@ -23,14 +28,19 @@ func TestDeletefunction(t *testing.T) {
 	var googlecloudfunctions Googlecloudfunctions
 
 	deletefunction := map[string]string{
-		"name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
+		"name": "projects/adept-comfort-202709/locations/us-central1/functions/function-6",
 	}
 
-	_, err := googlecloudfunctions.Deletefunction(deletefunction)
+	resp, err := googlecloudfunctions.Deletefunction(deletefunction)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
+
 }
 
 func TestGetfunction(t *testing.T) {
@@ -41,11 +51,15 @@ func TestGetfunction(t *testing.T) {
 		"name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
 	}
 
-	_, err := googlecloudfunctions.Getfunction(getfunction)
+	resp, err := googlecloudfunctions.Getfunction(getfunction)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
 }
 
 func TestListfunction(t *testing.T) {
@@ -57,11 +71,16 @@ func TestListfunction(t *testing.T) {
 		"pageSize": "1",
 	}
 
-	_, err := googlecloudfunctions.Listfunction(listfunction)
+	resp, err := googlecloudfunctions.Listfunction(listfunction)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
+
 }
 
 func TestCreatefunction(t *testing.T) {
@@ -76,7 +95,7 @@ func TestCreatefunction(t *testing.T) {
 
 	createfunction := map[string]interface{}{
 		"Location":            "projects/adept-comfort-202709/locations/us-central1",
-		"Name":                "projects/adept-comfort-202709/locations/us-central1/functions/function-2",
+		"Name":                "projects/adept-comfort-202709/locations/us-central1/functions/function-3",
 		"Status":              "ACTIVE",
 		"HTTPSTrigger":        httpsTrigger,
 		"EntryPoint":          "helloWorld",
@@ -85,14 +104,20 @@ func TestCreatefunction(t *testing.T) {
 		"ServiceAccountEmail": "adept-comfort-202709@appspot.gserviceaccount.com",
 		"UpdateTime":          "2018-05-11T18:20:33Z",
 		"Runtime":             "nodejs6",
-		"SourceUploadURL":     "https://storage.googleapis.com/gcf-upload-us-central1-f24bda97-6cd1-46cc-b37d-1f60eac4210a/8548b011-9626-42c1-86ed-6190892b328e.zip?GoogleAccessId=126778294088@cloudservices.gserviceaccount.com&Expires=1526064618&Signature=nB%2FI6cwIap0DF5T0Uo9eYCnlmi3HLqvoRW4MfodzVI%2FXuC7HU%2BE9SwduVQKYeTRddo5iFNdm4VDmBu4A4fGQvZ5PaCuoKG4i7jZXRJgq1B4NIpocaFnHmY6ZWaCS0Av%2Bus29FHs2nTYIqp9zHWHHORSQC%2BPF8GP2mRToDOShpodkQFkxP6wsXUnkk8tDUf5mvTRkeqtgf0rX0huidbEVl7ZtGkcQiusDcS9Nhe3dwqOdsJ7xs2khl2D%2FOmch6jgrZ11MtXum3G5XnFLqMYupS0pvB%2BQiy7g7eLfIw%2BdvtRTEuEFyxWP49lCHUG8wWad0hNEVf29oAHS2x%2B4Q%2FaIGbA%3D%3D",
-		"VersionID":           "1",
-		"Labels":              labels,
+		"SourceUploadURL":     "https://storage.googleapis.com/gcf-upload-us-central1-f24bda97-6cd1-46cc-b37d-1f60eac4210a/f306c974-23cd-4294-ad46-8361d26488fa.zip?GoogleAccessId=service-126778294088@gcf-admin-robot.iam.gserviceaccount.com&Expires=1528366301&Signature=XcRaGgJXw71brq0eXcyQ1Dw8PVOT5Eu5E6xFzsa1uu87jd3irQr24pD48nm0PATjDD%2FttG2pRdyDTG0MpeUKUdtib8ohTWPcfM684LWvW0qQqv9q3k5DEa4DW74%2F9K2iMbda9P0oXvNEodVjToxezRGxY6BqAfNd5qqzA%2FbpL2LRlgOolg9d65vyyJy6ebewhYXlwEZHGhRHPuu3evnWLxTGxdLp4mbs1C%2FymzVsw4%2BS5Byl9GE0OWxjSNUt6YmL98l1QguLxefTERJdOU8qZvVDNnvtT4xMjIb1bju1zxPXEle7oQb2eM7sPoKYVYI5EheeIJpUvObFaklLr5qJ2Q%3D%3D",
+
+		"VersionID": "1",
+		"Labels":    labels,
 	}
 
-	_, err := googlecloudfunctions.Createfunction(createfunction)
+	resp, err := googlecloudfunctions.Createfunction(createfunction)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
+
 }

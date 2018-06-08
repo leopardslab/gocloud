@@ -19,7 +19,7 @@ func (digioceanmachinelearning *Digioceanmachinelearning) GetMLModel(request int
 }
 
 //UpdateMLModel  Update model.
-func (awsmachinelearning *Awsmachinelearning) UpdateMLModel(request interface{}) (resp interface{}, err error) {
+func (digioceanmachinelearning *Digioceanmachinelearning) UpdateMLModel(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }

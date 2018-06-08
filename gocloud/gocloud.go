@@ -12,8 +12,8 @@ import (
 	"github.com/cloudlibz/gocloud/google"
 	"github.com/cloudlibz/gocloud/openstack"
 	"github.com/cloudlibz/gocloud/rackspace"
-	"github.com/cloudlibz/gocloud/vultr"
-	"github.com/cloudlibz/gocloud/vultrauth"
+		"github.com/cloudlibz/gocloud/vultr"
+		"github.com/cloudlibz/gocloud/vultrauth"
 )
 
 // Gocloud is a interface which hides the difference between different cloud providers.
@@ -54,6 +54,10 @@ type Gocloud interface {
 	Deletetables(request interface{}) (resp interface{}, err error)
 	Describetables(request interface{}) (resp interface{}, err error)
 	Createtables(request interface{}) (resp interface{}, err error)
+	GetMLModel(request interface{}) (resp interface{}, err error)
+	DeleteMLModel(request interface{}) (resp interface{}, err error)
+	CreateMLModel(request interface{}) (resp interface{}, err error)
+	UpdateMLModel(request interface{}) (resp interface{}, err error)
 }
 
 const (

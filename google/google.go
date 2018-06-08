@@ -6,6 +6,7 @@ import (
 	bigtable "github.com/cloudlibz/gocloud/database/bigtable"
 	googledns "github.com/cloudlibz/gocloud/dns/googledns"
 	googleloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/googleloadbalancer"
+	googlemachinelearning "github.com/cloudlibz/gocloud/machinelearning/googlemachinelearning"
 	googlecloudfunctions "github.com/cloudlibz/gocloud/serverless/googlecloudfunctions"
 	googlestorage "github.com/cloudlibz/gocloud/storage/googlestorage"
 )
@@ -19,4 +20,5 @@ type Google struct {
 	googledns.Googledns
 	googlecloudfunctions.Googlecloudfunctions
 	bigtable.Bigtable
+	googlemachinelearning.Googlemachinelearning
 }
