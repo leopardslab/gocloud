@@ -18,7 +18,13 @@ func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{},
 		case "RegionId":
 			regionID, _ := value.(string)
 			options.RegionID = regionID
+		case "RegionID":
+			regionID, _ := value.(string)
+			options.RegionID = regionID
 		case "ZoneId":
+			zoneID, _ := value.(string)
+			options.ZoneID = zoneID
+		case "ZoneID":
 			zoneID, _ := value.(string)
 			options.ZoneID = zoneID
 		case "DiskName":
@@ -45,6 +51,9 @@ func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{},
 				options.Size, _ = strconv.Atoi(value.(string))
 			}
 		case "SnapshotId":
+			snapshotID, _ := value.(string)
+			options.SnapshotID = snapshotID
+		case "SnapshotID":
 			snapshotID, _ := value.(string)
 			options.SnapshotID = snapshotID
 		case "ClientToken":
@@ -75,6 +84,9 @@ func (aliStorage *Alistorage) Deletedisk(request interface{}) (resp interface{},
 		case "DiskId":
 			diskID, _ := value.(string)
 			options.DiskID = diskID
+		case "DiskID":
+			diskID, _ := value.(string)
+			options.DiskID = diskID
 		}
 	}
 	// Put all of options into params
@@ -97,6 +109,9 @@ func (aliStorage *Alistorage) Createsnapshot(request interface{}) (resp interfac
 	for key, value := range param {
 		switch key {
 		case "DiskId":
+			diskID, _ := value.(string)
+			options.DiskID = diskID
+		case "DiskID":
 			diskID, _ := value.(string)
 			options.DiskID = diskID
 		case "SnapshotName":
@@ -132,6 +147,9 @@ func (aliStorage *Alistorage) Deletesnapshot(request interface{}) (resp interfac
 		case "SnapshotId":
 			snapshotID, _ := value.(string)
 			options.SnapshotID = snapshotID
+		case "SnapshotID":
+			snapshotID, _ := value.(string)
+			options.SnapshotID = snapshotID
 		}
 	}
 	// Put all of options into params
@@ -156,7 +174,13 @@ func (aliStorage *Alistorage) Attachdisk(request interface{}) (resp interface{},
 		case "InstanceId":
 			instanceID, _ := value.(string)
 			options.InstanceID = instanceID
+		case "InstanceID":
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
 		case "DiskId":
+			diskID, _ := value.(string)
+			options.DiskID = diskID
+		case "DiskID":
 			diskID, _ := value.(string)
 			options.DiskID = diskID
 		case "DeleteWithInstance":
@@ -190,7 +214,13 @@ func (aliStorage *Alistorage) Detachdisk(request interface{}) (resp interface{},
 		case "InstanceId":
 			instanceID, _ := value.(string)
 			options.InstanceID = instanceID
+		case "InstanceID":
+			instanceID, _ := value.(string)
+			options.InstanceID = instanceID
 		case "DiskId":
+			diskID, _ := value.(string)
+			options.DiskID = diskID
+		case "DiskID":
 			diskID, _ := value.(string)
 			options.DiskID = diskID
 		}

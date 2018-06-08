@@ -10,6 +10,8 @@ import (
 	"time"
 )
 
+const StrMissRequired = "miss required parameter: "
+
 // PutStructIntoMap puts key and value of struct into map[string]interface{}
 // if value is string and not empty -> put
 // if value is bool                 -> put   NOTE: the default value of origin Ali API 's parameter must be false, if not ,do not use this function
