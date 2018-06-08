@@ -31,15 +31,14 @@ func TestDescribetables(t *testing.T) {
 }
 */
 
-
 func TestListtables(t *testing.T) {
 
 	var dynamodb Dynamodb
 
 	listtables := map[string]interface{}{
-		"Region":    "us-east-1",
+		"Region":                  "us-east-1",
 		"ExclusiveStartTableName": "Thread",
-		 "Limit" : 1,
+		"Limit":                   1,
 	}
 
 	resp, err := dynamodb.Listtables(listtables)
@@ -52,7 +51,6 @@ func TestListtables(t *testing.T) {
 
 	fmt.Println(response["body"])
 }
-
 
 func TestDeletetables(t *testing.T) {
 
@@ -73,7 +71,6 @@ func TestDeletetables(t *testing.T) {
 
 	fmt.Println(response["body"])
 }
-
 
 /*
 func TestCreatetables(t *testing.T) {

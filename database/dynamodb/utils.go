@@ -34,7 +34,7 @@ func preparelisttables(params map[string]string, Region string) {
 	params["amztarget"] = "DynamoDB_20120810.ListTables"
 }
 
-func preparelisttablesparamsdict( listtablesjsonmap map[string]interface{},ExclusiveStartTableName string, Limit int){
+func preparelisttablesparamsdict(listtablesjsonmap map[string]interface{}, ExclusiveStartTableName string, Limit int) {
 
 	if ExclusiveStartTableName != "" {
 		listtablesjsonmap["ExclusiveStartTableName"] = ExclusiveStartTableName
@@ -44,8 +44,6 @@ func preparelisttablesparamsdict( listtablesjsonmap map[string]interface{},Exclu
 		listtablesjsonmap["Limit"] = Limit
 	}
 }
-
-
 
 func preparecreatetableStreamSpecificationparams(createtablejsonmap map[string]interface{}, createtable Createtable) {
 

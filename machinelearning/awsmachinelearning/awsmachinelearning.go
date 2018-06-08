@@ -1,6 +1,8 @@
 package awsmachinelearning
 
-import("fmt")
+import (
+	"fmt"
+)
 
 //CreateMLModel creates model.
 func (awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{}) (resp interface{}, err error) {
@@ -164,7 +166,6 @@ func (awsmachinelearning *Awsmachinelearning) UpdateMLModel(request interface{})
 	params := make(map[string]string)
 
 	prepareupdatemodel(params, Region)
-
 
 	updatemodeljsonmap := make(map[string]interface{})
 

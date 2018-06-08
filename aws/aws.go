@@ -6,9 +6,9 @@ import (
 	dynamodb "github.com/cloudlibz/gocloud/database/dynamodb"
 	awsdns "github.com/cloudlibz/gocloud/dns/awsdns"
 	awsloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/awsloadbalancer"
+	awsmachinelearning "github.com/cloudlibz/gocloud/machinelearning/awsmachinelearning"
 	lambda "github.com/cloudlibz/gocloud/serverless/lambda"
 	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
-	awsmachinelearning "github.com/cloudlibz/gocloud/machinelearning/awsmachinelearning"
 )
 
 //AWS struct reperents amazon cloud provider.

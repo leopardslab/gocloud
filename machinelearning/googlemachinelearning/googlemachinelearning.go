@@ -1,12 +1,12 @@
 package googlemachinelearning
 
 import (
+	"bytes"
+	"encoding/json"
 	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
 	"time"
-	"encoding/json"
-	"bytes"
 )
 
 const (
@@ -73,7 +73,6 @@ func (googlemachinelearning *Googlemachinelearning) CreateMLModel(request interf
 				case "LastUseTime":
 					lastUseTimev, _ := defaultVersionparamvalue.(string)
 					option.defaultVersion.lastUseTime = lastUseTimev
-
 
 				case "RuntimeVersion":
 					runtimeVersionv, _ := defaultVersionparamvalue.(string)
@@ -149,8 +148,6 @@ func (googlemachinelearning *Googlemachinelearning) CreateMLModel(request interf
 	resp = createMLModelresponse
 	return resp, err
 }
-
-
 
 //DeleteMLModel delete model.
 func (googlemachinelearning *Googlemachinelearning) DeleteMLModel(request interface{}) (resp interface{}, err error) {
@@ -271,7 +268,7 @@ func (googlemachinelearning *Googlemachinelearning) UpdateMLModel(request interf
 					lastUseTimev, _ := defaultVersionparamvalue.(string)
 					option.defaultVersion.lastUseTime = lastUseTimev
 
-			case "RuntimeVersion":
+				case "RuntimeVersion":
 					runtimeVersionv, _ := defaultVersionparamvalue.(string)
 					option.defaultVersion.runtimeVersion = runtimeVersionv
 

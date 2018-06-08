@@ -6,9 +6,9 @@ import (
 	openstacknosql "github.com/cloudlibz/gocloud/database/openstacknosql"
 	designate "github.com/cloudlibz/gocloud/dns/designate"
 	neutron "github.com/cloudlibz/gocloud/loadbalancer/neutron"
+	openstackmachinelearning "github.com/cloudlibz/gocloud/machinelearning/openstackmachinelearning"
 	openstackserverless "github.com/cloudlibz/gocloud/serverless/openstackserverless"
 	cinder "github.com/cloudlibz/gocloud/storage/cinder"
-	openstackmachinelearning "github.com/cloudlibz/gocloud/machinelearning/openstackmachinelearning"
 )
 
 //openstack  struct represents openstack cloud provider.
