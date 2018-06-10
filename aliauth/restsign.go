@@ -14,10 +14,6 @@ import (
 	"time"
 )
 
-func ContainerTaskSignAndDoRequest() {
-
-}
-
 func ContainerSignAndDoRequest(region string, method string, path string, query map[string]interface{}, args interface{}, response map[string]interface{}) error {
 	var reqBody []byte
 	var err error
