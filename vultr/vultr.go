@@ -8,9 +8,9 @@ import (
 	"github.com/cloudlibz/gocloud/dns/vultrdns"
 	"github.com/cloudlibz/gocloud/gocloudinterface"
 	"github.com/cloudlibz/gocloud/loadbalancer/vultrloadbalancer"
+	"github.com/cloudlibz/gocloud/machinelearning/vultrmachinelearning"
 	"github.com/cloudlibz/gocloud/serverless/vultrserverless"
 	"github.com/cloudlibz/gocloud/storage/vultrstorage"
-	"github.com/cloudlibz/gocloud/machinelearning/vultrmachinelearning"
 )
 
 // Vultr struct represents Vultr cloud provider.

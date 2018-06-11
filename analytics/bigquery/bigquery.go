@@ -9,12 +9,60 @@ func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{},
 //DeleteDatasets delete Datasets.
 func (bigquery *Bigquery) DeleteDatasets(request interface{}) (resp interface{}, err error) {
 
+	options := request.(map[string]string)
+
+	url := "https://www.googleapis.com/bigquery/v2/projects/" + options["projectId"] + "/datasets" + options["datasetId"]
+
+	client := googleauth.SignJWT()
+
+	deletedatasetsrequest, err := http.NewRequest("DELETE", url, nil)
+
+	deletedatasetsrequestparam := deletedatasetsrequest.URL.Query()
+
+	if options["deleteContents"] != "" {
+		deletedatasetsrequestparam.Add("deleteContents", options["deleteContents"])
+	}
+
+	deletedatasetsrequest.URL.RawQuery = deletedatasetsrequestparam.Encode()
+
+	deletedatasetsrequest.Header.Set("Content-Type", "application/json")
+
+	deletedatasetsrequestresp, err := client.Do(deletedatasetsrequest)
+
+	defer deletedatasetsrequestresp.Body.Close()
+
+	body, err := ioutil.ReadAll(deletedatasetsrequestresp.Body)
+
+	deletedatasetsrequestrespresponse := make(map[string]interface{})
+	deletedatasetsrequestrespresponse["status"] = deletedatasetsrequestresp.StatusCode
+	deletedatasetsrequestrespresponse["body"] = string(body)
+	resp = deletedatasetsrequestrespresponse
 	return resp, err
 }
 
 //GetDatasets get Datasets.
 func (bigquery *Bigquery) GetDatasets(request interface{}) (resp interface{}, err error) {
 
+	options := request.(map[string]string)
+
+	url := "https://www.googleapis.com/bigquery/v2/projects/" + options["projectId"] + "/datasets" + options["datasetId"]
+
+	client := googleauth.SignJWT()
+
+	getdatasetsrequest, err := http.NewRequest("GET", url, nil)
+
+	getdatasetsrequest.Header.Set("Content-Type", "application/json")
+
+	getdatasetsrequestresp, err := client.Do(getdatasetsrequest)
+
+	defer getdatasetsrequestresp.Body.Close()
+
+	body, err := ioutil.ReadAll(getdatasetsrequestresp.Body)
+
+	getdatasetsrequestrespresponse := make(map[string]interface{})
+	getdatasetsrequestrespresponse["status"] = getdatasetsrequestresp.StatusCode
+	getdatasetsrequestrespresponse["body"] = string(body)
+	resp = getdatasetsrequestrespresponse
 	return resp, err
 }
 
@@ -24,9 +72,8 @@ func (bigquery *Bigquery) UpdateDatasets(request interface{}) (resp interface{},
 	return resp, err
 }
 
-
 //ListDatasets  list Datasets.
-func (vultralianalytics *Vultralianalytics) ListDatasets(request interface{}) (resp interface{}, err error) {
+func (bigquery *Bigquery) ListDatasets(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
