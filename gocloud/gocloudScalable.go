@@ -43,7 +43,7 @@ type awsProvider interface {
 	MachineLearning() gocloudinterface.MachineLearning
 }
 
-func AWSProvider() awsProvider {
+func AmazonProvider() awsProvider {
 	awsAuth.LoadConfig()
 	return new(aws.AWS)
 }
