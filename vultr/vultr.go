@@ -8,6 +8,7 @@ import (
 	"github.com/cloudlibz/gocloud/loadbalancer/vultrloadbalancer"
 	"github.com/cloudlibz/gocloud/serverless/vultrserverless"
 	"github.com/cloudlibz/gocloud/storage/vultrstorage"
+	"github.com/cloudlibz/gocloud/gocloudinterface"
 )
 
 // Vultr struct represents Vultr cloud provider.
@@ -19,4 +20,8 @@ type Vultr struct {
 	vultrdns.VultrDNS
 	vultrserverless.Vultrserverless
 	vultrnosql.Vultrnosql
+}
+
+func (*Vultr) Compute() gocloudinterface.Compute {
+	return &vultrcompute.VultrCompute{}
 }

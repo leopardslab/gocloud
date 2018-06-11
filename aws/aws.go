@@ -1,13 +1,15 @@
 package aws
 
 import (
-	ec2 "github.com/cloudlibz/gocloud/compute/ec2"
-	awscontainer "github.com/cloudlibz/gocloud/container/awscontainer"
-	dynamodb "github.com/cloudlibz/gocloud/database/dynamodb"
-	awsdns "github.com/cloudlibz/gocloud/dns/awsdns"
-	awsloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/awsloadbalancer"
-	lambda "github.com/cloudlibz/gocloud/serverless/lambda"
-	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
+	"github.com/cloudlibz/gocloud/compute/ec2"
+	"github.com/cloudlibz/gocloud/container/awscontainer"
+	"github.com/cloudlibz/gocloud/database/dynamodb"
+	"github.com/cloudlibz/gocloud/dns/awsdns"
+	"github.com/cloudlibz/gocloud/loadbalancer/awsloadbalancer"
+	"github.com/cloudlibz/gocloud/serverless/lambda"
+	"github.com/cloudlibz/gocloud/storage/amazonstorage"
+	"github.com/cloudlibz/gocloud/gocloudinterface"
+	"github.com/cloudlibz/gocloud/machinelearning/awsmachinelearning"
 )
 
 //AWS struct reperents amazon cloud provider.
@@ -19,4 +21,36 @@ type AWS struct {
 	awsdns.Awsdns
 	lambda.Lambda
 	dynamodb.Dynamodb
+}
+
+func (*AWS) Compute() gocloudinterface.Compute {
+	return &ec2.EC2{}
+}
+
+func (*AWS) Storage() gocloudinterface.Storage {
+	return &amazonstorage.Amazonstorage{}
+}
+
+func (*AWS) LoadBalancer() gocloudinterface.LoadBalancer {
+	return &awsloadbalancer.Awsloadbalancer{}
+}
+
+func (*AWS) Container() gocloudinterface.Container {
+	return &awscontainer.Ecscontainer{}
+}
+
+func (*AWS) DNS() gocloudinterface.DNS {
+	return &awsdns.Awsdns{}
+}
+
+func (*AWS) Serverless() gocloudinterface.Serverless {
+	return &lambda.Lambda{}
+}
+
+func (*AWS) Database() gocloudinterface.Database {
+	return &dynamodb.Dynamodb{}
+}
+
+func (*AWS) MachineLearning() gocloudinterface.MachineLearning {
+	return &awsmachinelearning.Awsmachinelearning{}
 }
