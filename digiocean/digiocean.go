@@ -1,14 +1,14 @@
 package digiocean
 
 import (
-	"github.com/cloudlibz/gocloud/compute/droplet"
-	"github.com/cloudlibz/gocloud/container/digioceancontainer"
-	"github.com/cloudlibz/gocloud/database/digioceannosql"
-	"github.com/cloudlibz/gocloud/dns/digioceandns"
+	droplet "github.com/cloudlibz/gocloud/compute/droplet"
+	digioceancontainer "github.com/cloudlibz/gocloud/container/digioceancontainer"
+	digioceannosql "github.com/cloudlibz/gocloud/database/digioceannosql"
+	digioceandns "github.com/cloudlibz/gocloud/dns/digioceandns"
 	"github.com/cloudlibz/gocloud/gocloudinterface"
-	"github.com/cloudlibz/gocloud/loadbalancer/digioceanloadbalancer"
-	"github.com/cloudlibz/gocloud/serverless/digioceanserverless"
-	"github.com/cloudlibz/gocloud/storage/digioceanstorage"
+	digioceanloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/digioceanloadbalancer"
+	digioceanserverless "github.com/cloudlibz/gocloud/serverless/digioceanserverless"
+	digioceanstorage "github.com/cloudlibz/gocloud/storage/digioceanstorage"
 )
 
 // DigitalOcean struct represents DigitalOcean cloud provider.
