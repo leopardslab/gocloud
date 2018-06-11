@@ -23,3 +23,9 @@ func (vultralianalytics *Vultralianalytics) UpdateDatasets(request interface{}) 
 
 	return resp, err
 }
+
+//ListDatasets  list Datasets.
+func (vultralianalytics *Vultralianalytics) ListDatasets(request interface{}) (resp interface{}, err error) {
+
+	return resp, err
+}
