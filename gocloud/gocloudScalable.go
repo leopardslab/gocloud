@@ -1,14 +1,14 @@
 package gocloud
 
 import (
-	"github.com/cloudlibz/gocloud/gocloudinterface"
-	"github.com/cloudlibz/gocloud/aws"
-	awsAuth "github.com/cloudlibz/gocloud/auth"
-	"github.com/cloudlibz/gocloud/google"
-	"github.com/cloudlibz/gocloud/digiocean"
-	"github.com/cloudlibz/gocloud/digioceanauth"
 	"github.com/cloudlibz/gocloud/ali"
 	"github.com/cloudlibz/gocloud/aliauth"
+	awsAuth "github.com/cloudlibz/gocloud/auth"
+	"github.com/cloudlibz/gocloud/aws"
+	"github.com/cloudlibz/gocloud/digiocean"
+	"github.com/cloudlibz/gocloud/digioceanauth"
+	"github.com/cloudlibz/gocloud/gocloudinterface"
+	"github.com/cloudlibz/gocloud/google"
 	"github.com/cloudlibz/gocloud/vultr"
 )
 

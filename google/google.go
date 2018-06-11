@@ -5,10 +5,10 @@ import (
 	"github.com/cloudlibz/gocloud/container/googlecontainer"
 	"github.com/cloudlibz/gocloud/database/bigtable"
 	"github.com/cloudlibz/gocloud/dns/googledns"
+	"github.com/cloudlibz/gocloud/gocloudinterface"
 	"github.com/cloudlibz/gocloud/loadbalancer/googleloadbalancer"
 	"github.com/cloudlibz/gocloud/serverless/googlecloudfunctions"
 	"github.com/cloudlibz/gocloud/storage/googlestorage"
-	"github.com/cloudlibz/gocloud/gocloudinterface"
 )
 
 // Google  struct represents Google Cloud provider.
