@@ -12,6 +12,10 @@ import (
 	"github.com/cloudlibz/gocloud/vultr"
 )
 
+/**
+goCloudCommon contains unified API of compute, storage, load balancer, container, DNS module
+goCloudCommon also contains interface returning each module 's API. So users can do that for example awsProvider.Compute().CreateNode()
+*/
 type goCloudCommon interface {
 	gocloudinterface.Compute
 	Compute() gocloudinterface.Compute
@@ -29,7 +33,10 @@ type goCloudCommon interface {
 	DNS() gocloudinterface.DNS
 }
 
-// AWS
+/**
+awsProvider provides users with AWS API
+AWS API contains common module API and particular module API
+*/
 type awsProvider interface {
 	goCloudCommon
 
@@ -43,12 +50,16 @@ type awsProvider interface {
 	MachineLearning() gocloudinterface.MachineLearning
 }
 
+// AmazonProvider return AWS API to users
 func AmazonProvider() awsProvider {
 	awsAuth.LoadConfig()
 	return new(aws.AWS)
 }
 
-// Google
+/**
+googleProvider provides users with Google cloud API
+Google cloud API contains common module API and particular module API
+*/
 type googleProvider interface {
 	goCloudCommon
 
@@ -59,11 +70,12 @@ type googleProvider interface {
 	Database() gocloudinterface.Database
 }
 
+// GoogleProvider return Google cloud API to users
 func GoogleProvider() googleProvider {
 	return new(google.Google)
 }
 
-// Digital Ocean
+// digitalOceanProvider contains compute, storage, load balancer, DNS module etc. which Digital Ocean supports
 type digitalOceanProvider interface {
 	gocloudinterface.Compute
 	Compute() gocloudinterface.Compute
@@ -80,27 +92,36 @@ type digitalOceanProvider interface {
 	//no container service
 }
 
+// DigitalOceanProvider return Digital Ocean API to users
 func DigitalOceanProvider() digitalOceanProvider {
 	digioceanauth.LoadConfig()
 	return new(digiocean.DigitalOcean)
 }
 
-// Alibaba
+/**
+aliProvider provides users with Alibaba cloud API
+Ali-cloud API contains common module API
+*/
 type aliProvider interface {
 	goCloudCommon
 }
 
+// AliCloudProvider return Ali-cloud API to users
 func AliCloudProvider() aliProvider {
 	aliauth.LoadConfig()
 	return new(ali.Ali)
 }
 
-//Vultr
+/**
+vultrProvider provides users with Vultr API
+Vultr API contains API which GoCloud implemented now
+*/
 type vultrProvider interface {
 	gocloudinterface.Compute
 	Compute() gocloudinterface.Compute
 }
 
+// VultrProvider return Vultr API to users
 func VultrProvider() vultrProvider {
 	return new(vultr.Vultr)
 }
