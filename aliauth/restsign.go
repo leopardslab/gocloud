@@ -114,41 +114,27 @@ func signRequest(request *http.Request) {
 	accept := headers.Get("Accept")
 	date := headers.Get("Date")
 
+	// CanonicalizedHeaders
+	var canonicalizedHeadersSlice []string
+	for k, _ := range headers {
+		kLower := strings.ToLower(k)
+		if strings.HasPrefix(kLower, "x-acs-") {
+			canonicalizedHeadersSlice = append(canonicalizedHeadersSlice, kLower)
+		}
+	}
+	sort.Strings(canonicalizedHeadersSlice)
+	var canonicalizedHeaders string
+	for _, k := range canonicalizedHeadersSlice {
+		if len(headers[k]) > 0 {
+			canonicalizedHeaders += k + ":" + headers[k][0] + "\n"
+		}
+	}
+
+	// CanonicalizedResource
 	canonicalizedResource := request.URL.RequestURI()
 
-	_, canonicalizedHeader := canonicalizeHeader(headers)
-
-	stringToSign := request.Method + "\n" + accept + "\n" + contentMd5 + "\n" + contentType + "\n" + date + "\n" + canonicalizedHeader + canonicalizedResource
+	stringToSign := request.Method + "\n" + accept + "\n" + contentMd5 + "\n" + contentType + "\n" + date + "\n" + canonicalizedHeaders + canonicalizedResource
 
 	signature := createSignature(stringToSign, Config.AliAccessKeySecret)
 	headers.Set("Authorization", "acs "+Config.AliAccessKeyID+":"+signature)
-}
-
-// Have to break the abstraction to append keys with lower case.
-func canonicalizeHeader(headers http.Header) (newHeaders http.Header, result string) {
-	var canonicalizedHeaders []string
-	newHeaders = http.Header{}
-
-	for k, v := range headers {
-		if lower := strings.ToLower(k); strings.HasPrefix(lower, "x-acs-") {
-			newHeaders[lower] = v
-			canonicalizedHeaders = append(canonicalizedHeaders, lower)
-		} else {
-			newHeaders[k] = v
-		}
-	}
-
-	sort.Strings(canonicalizedHeaders)
-
-	var canonicalizedHeader string
-
-	for _, k := range canonicalizedHeaders {
-		v := ""
-		if len(headers[k]) > 0 {
-			v = headers[k][0]
-		}
-		canonicalizedHeader += k + ":" + v + "\n"
-	}
-
-	return newHeaders, canonicalizedHeader
 }
