@@ -3,6 +3,112 @@ package bigquery
 //CreateDatasets Create Datasets.
 func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{}, err error) {
 
+	param := request.(map[string]interface{})
+	var projectId string
+	var option CreateDatasets
+
+	for key, value := range param {
+		switch key {
+
+		case "projectId":
+			ProjectIdV, _ := value.(string)
+			ProjectId = ProjectIdV
+
+		case "creationTime":
+			CreationTimeV, _ := value.(string)
+			option.CreationTime = CreationTimeV
+			option.CreationTime = time.Now().UTC().Format(time.RFC3339)
+
+		case "defaultTableExpirationMs":
+			defaultTableExpirationMsV, _ := value.(string)
+			option.defaultTableExpirationMs = defaultTableExpirationMsV
+
+		case "description":
+			descriptionV, _ := value.(string)
+			option.description = descriptionV
+
+		case "etag":
+			etagV, _ := value.(string)
+			option.etag = etagV
+
+		case "friendlyName":
+			friendlyNameV, _ := value.(string)
+			option.friendlyName = friendlyNameV
+
+		case "id":
+			idV, _ := value.(string)
+			option.id = idV
+
+		case "kind":
+			kindV, _ := value.(string)
+			option.kind = kindV
+
+		case "lastModifiedTime":
+			lastModifiedTimeV, _ := value.(string)
+			option.lastModifiedTime = lastModifiedTimeV
+
+		case "location":
+			locationV, _ := value.(string)
+			option.location = locationV
+
+		case "selfLink":
+			selfLinkV, _ := value.(string)
+			option.selfLink = selfLinkV
+
+		case "datasetReference":
+			datasetReferenceV, _ := value.(map[string]string)
+			option.datasetReference.DatasetID = datasetReferenceV["DatasetID"]
+			option.datasetReference.ProjectID = datasetReferenceV["ProjectID"]
+
+		case "datasetReference":
+			datasetReferenceV, _ := value.(map[string]string)
+			option.datasetReference.DatasetID = datasetReferenceV["DatasetID"]
+			option.datasetReference.ProjectID = datasetReferenceV["ProjectID"]
+
+		case "access":
+			accessparam, _ := value.(map[string]interface{})
+
+			for accessparamkey, accessparamvalue := range accessparam {
+				switch accessparamkey {
+					case "MLModelId":
+						MLModelIdV, _ := value.(string)
+						MLModelId = MLModelIdV
+
+				case "Region":
+						RegionV, _ := value.(string)
+						Region = RegionV
+				}
+		}
+	}
+
+	createdatasetsjsonmap := make(map[string]interface{})
+
+	createdatasetsdictnoaryconvert(option, createdatasetsjsonmap)
+
+	createdatasetsjson, _ := json.Marshal(createdatasetsjsonmap)
+
+	createdatasetsjsonstring := string(createdatasetsjson)
+
+	var createdatasetsjsonstringbyte = []byte(createdatasetsjsonstring)
+
+	url := "https://www.googleapis.com/dns/v1/projects/" + Project + "/managedZones"
+
+	client := googleauth.SignJWT()
+
+	createdatasetsrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(createdatasetsjsonstringbyte))
+
+	createdatasetsrequest.Header.Set("Content-Type", "application/json")
+
+	createdatasetsrresp, err := client.Do(createdatasetsrequest)
+
+	defer createdatasetsresp.Body.Close()
+
+	body, err := ioutil.ReadAll(createdatasetsresp.Body)
+
+	createdatasetsresponse := make(map[string]interface{})
+	createdatasetsresponse["status"] = createdatasetsresp.StatusCode
+	createdatasetsresponse["body"] = string(body)
+	resp = createdatasetsresponse
 	return resp, err
 }
 
