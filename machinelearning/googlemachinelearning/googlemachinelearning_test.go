@@ -28,7 +28,6 @@ func TestUpdateMLModel(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-/*
 func TestCreateMLModel(t *testing.T) {
 
 	var googlemachinelearning Googlemachinelearning
@@ -92,4 +91,3 @@ func TestDeleteMLModel(t *testing.T) {
 	response := resp.(map[string]interface{})
 	fmt.Println(response["body"])
 }
-*/
