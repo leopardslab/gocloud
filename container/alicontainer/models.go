@@ -80,6 +80,11 @@ func NewCreateClusterBuilder() *CreateClusterBuilder {
 	return b
 }
 
+func (b *CreateClusterBuilder) RegionID(regionID string) *CreateClusterBuilder {
+	b.createCluster.RegionID = regionID
+	return b
+}
+
 func (b *CreateClusterBuilder) Name(name string) *CreateClusterBuilder {
 	b.createCluster.Name = name
 	return b
