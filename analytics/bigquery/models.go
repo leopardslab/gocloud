@@ -5,23 +5,23 @@ type Bigquery struct {
 }
 
 type View struct {
-	DatasetID string `json:"datasetId"`
-	ProjectID string `json:"projectId"`
-	TableID   string `json:"tableId"`
+	datasetID string `json:"datasetId"`
+	projectID string `json:"projectId"`
+	tableID   string `json:"tableId"`
 }
 
 type Access struct {
-	Domain       string `json:"domain"`
-	GroupByEmail string `json:"groupByEmail"`
-	Role         string `json:"role"`
-	SpecialGroup string `json:"specialGroup"`
-	UserByEmail  string `json:"userByEmail"`
+	domain       string `json:"domain"`
+	groupByEmail string `json:"groupByEmail"`
+	role         string `json:"role"`
+	specialGroup string `json:"specialGroup"`
+	userByEmail  string `json:"userByEmail"`
 	view         View   `json:"view"`
 }
 
 type DatasetReference struct {
-	DatasetID string `json:"datasetId"`
-	ProjectID string `json:"projectId"`
+	datasetID string `json:"datasetId"`
+	projectID string `json:"projectId"`
 }
 
 type CreateDatasets struct {

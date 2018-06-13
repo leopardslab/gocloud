@@ -7,6 +7,39 @@ func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{},
 	var projectId string
 	var option CreateDatasets
 
+	createdatasetsjsonmap := make(map[string]interface{})
+
+	createdatasetsdictnoaryconvert(option, createdatasetsjsonmap)
+
+	createdatasetsjson, _ := json.Marshal(createdatasetsjsonmap)
+
+	createdatasetsjsonstring := string(createdatasetsjson)
+
+	var createdatasetsjsonstringbyte = []byte(createdatasetsjsonstring)
+
+	url := "https://www.googleapis.com/dns/v1/projects/" + Project + "/managedZones"
+
+	client := googleauth.SignJWT()
+
+	createdatasetsrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(createdatasetsjsonstringbyte))
+
+	createdatasetsrequest.Header.Set("Content-Type", "application/json")
+
+	createdatasetsresp, err := client.Do(createdatasetsrequest)
+
+	defer createdatasetsresp.Body.Close()
+
+	body, err := ioutil.ReadAll(createdatasetsresp.Body)
+
+	createdatasetsresponse := make(map[string]interface{})
+	createdatasetsresponse["status"] = createdatasetsresp.StatusCode
+	createdatasetsresponse["body"] = string(body)
+	resp = createdatasetsresponse
+	return resp, err
+}
+
+func createdatasetsstruct(option Createdatasets, param map[string]interface{}) {
+
 	for key, value := range param {
 		switch key {
 
@@ -103,35 +136,6 @@ func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{},
 		}
 	}
 
-	createdatasetsjsonmap := make(map[string]interface{})
-
-	createdatasetsdictnoaryconvert(option, createdatasetsjsonmap)
-
-	createdatasetsjson, _ := json.Marshal(createdatasetsjsonmap)
-
-	createdatasetsjsonstring := string(createdatasetsjson)
-
-	var createdatasetsjsonstringbyte = []byte(createdatasetsjsonstring)
-
-	url := "https://www.googleapis.com/dns/v1/projects/" + Project + "/managedZones"
-
-	client := googleauth.SignJWT()
-
-	createdatasetsrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(createdatasetsjsonstringbyte))
-
-	createdatasetsrequest.Header.Set("Content-Type", "application/json")
-
-	createdatasetsresp, err := client.Do(createdatasetsrequest)
-
-	defer createdatasetsresp.Body.Close()
-
-	body, err := ioutil.ReadAll(createdatasetsresp.Body)
-
-	createdatasetsresponse := make(map[string]interface{})
-	createdatasetsresponse["status"] = createdatasetsresp.StatusCode
-	createdatasetsresponse["body"] = string(body)
-	resp = createdatasetsresponse
-	return resp, err
 }
 
 func createdatasetsdictnoaryconvert(option Createdatasets, createdatasetsjsonmap map[string]interface{}) {
@@ -176,6 +180,81 @@ func createdatasetsdictnoaryconvert(option Createdatasets, createdatasetsjsonmap
 		createdatasetsjsonmap["selfLink"] = option.selfLink
 	}
 
+	preparedatasetReferenceparam(option, createdatasetsjsonmap)
+	prepareAccessparam(option, createdatasetsjsonmap)
+}
+
+func preparedatasetReferenceparam(option Createdatasets, createdatasetsjsonmap map[string]interface{}) {
+
+	datasetReferencejsonmap := make(map[string]interface{})
+
+	if option.datasetReference.projectID != "" {
+		datasetReferencejsonmap["projectId"] = option.datasetReference.projectID
+	}
+
+	if option.datasetReference.datasetID != "" {
+		datasetReferencejsonmap["datasetId"] = option.datasetReference.datasetID
+	}
+
+	createdatasetsjsonmap["datasetReference"] = datasetReferencejsonmap
+
+}
+
+func prepareAccessparam(option Createdatasets, createdatasetsjsonmap map[string]interface{}) {
+
+	if len(option.access) != 0 {
+
+		accessarrayjsonmap := make([]map[string]interface{})
+
+		for i := 0; i < len(option.access); i++ {
+
+			accessjsonmap := make([]map[string]interface{})
+
+			if option.access[i].domain != "" {
+				accessjsonmap["domain"] = option.access[i].domain
+			}
+
+			if option.access[i].groupByEmail != "" {
+				accessjsonmap["groupByEmail"] = option.access[i].groupByEmail
+			}
+
+			if option.access[i].role != "" {
+				accessjsonmap["role"] = option.access[i].role
+			}
+
+			if option.access[i].specialGroup != "" {
+				accessjsonmap["specialGroup"] = option.access[i].specialGroup
+			}
+
+			if option.access[i].userByEmail != "" {
+				accessjsonmap["userByEmail"] = option.access[i].userByEmail
+			}
+
+			v := View{}
+
+			if option.access[i].view != v {
+
+				viewjsonmap := make(map[string]interface{})
+
+				if option.access[i].view.datasetID != "" {
+					viewjsonmap["datasetID"] = option.access[i].view.datasetID
+				}
+
+				if option.access[i].view.projectID != "" {
+					viewjsonmap["projectID"] = option.access[i].view.projectID
+				}
+
+				if option.access[i].view.tableID != "" {
+					viewjsonmap["tableID"] = option.access[i].view.tableID
+				}
+
+				accessjsonmap["view"] = viewjsonmap
+			}
+
+			accessarrayjsonmap = append(accessarrayjsonmap, accessjsonmap)
+		}
+		createdatasetsjsonmap["access"] = accessarrayjsonmap
+	}
 }
 
 //DeleteDatasets delete Datasets.
