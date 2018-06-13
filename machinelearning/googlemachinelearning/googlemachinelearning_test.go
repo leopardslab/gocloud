@@ -38,9 +38,9 @@ func TestCreateMLModel(t *testing.T) {
 	defaultVersion["DeploymentUri"] = "gs:bokkya"
 
 	createMLModel := map[string]interface{}{
-		"Parent": "projects/adept-comfort-202709",
-		"Name"  :"pratik",
-		"DefaultVersion" :defaultVersion,
+		"Parent":         "projects/adept-comfort-202709",
+		"Name":           "pratik",
+		"DefaultVersion": defaultVersion,
 	}
 
 	resp, err := googlemachinelearning.CreateMLModel(createMLModel)
@@ -52,7 +52,6 @@ func TestCreateMLModel(t *testing.T) {
 	response := resp.(map[string]interface{})
 	fmt.Println(response["body"])
 }
-
 
 func TestGetMLModel(t *testing.T) {
 
@@ -71,8 +70,6 @@ func TestGetMLModel(t *testing.T) {
 	response := resp.(map[string]interface{})
 	fmt.Println(response["body"])
 }
-
-
 
 func TestDeleteMLModel(t *testing.T) {
 

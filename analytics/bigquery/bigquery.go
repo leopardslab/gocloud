@@ -10,74 +10,96 @@ func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{},
 	for key, value := range param {
 		switch key {
 
-		case "projectId":
+		case "ProjectId":
 			ProjectIdV, _ := value.(string)
 			ProjectId = ProjectIdV
 
-		case "creationTime":
+		case "CreationTime":
 			CreationTimeV, _ := value.(string)
 			option.CreationTime = CreationTimeV
 			option.CreationTime = time.Now().UTC().Format(time.RFC3339)
 
-		case "defaultTableExpirationMs":
+		case "DefaultTableExpirationMs":
 			defaultTableExpirationMsV, _ := value.(string)
 			option.defaultTableExpirationMs = defaultTableExpirationMsV
 
-		case "description":
+		case "Description":
 			descriptionV, _ := value.(string)
 			option.description = descriptionV
 
-		case "etag":
+		case "Etag":
 			etagV, _ := value.(string)
 			option.etag = etagV
 
-		case "friendlyName":
+		case "FriendlyName":
 			friendlyNameV, _ := value.(string)
 			option.friendlyName = friendlyNameV
 
-		case "id":
+		case "Id":
 			idV, _ := value.(string)
 			option.id = idV
 
-		case "kind":
+		case "Kind":
 			kindV, _ := value.(string)
 			option.kind = kindV
 
-		case "lastModifiedTime":
+		case "LastModifiedTime":
 			lastModifiedTimeV, _ := value.(string)
 			option.lastModifiedTime = lastModifiedTimeV
 
-		case "location":
+		case "Location":
 			locationV, _ := value.(string)
 			option.location = locationV
 
-		case "selfLink":
+		case "SelfLink":
 			selfLinkV, _ := value.(string)
 			option.selfLink = selfLinkV
 
-		case "datasetReference":
+		case "DatasetReference":
 			datasetReferenceV, _ := value.(map[string]string)
-			option.datasetReference.DatasetID = datasetReferenceV["DatasetID"]
-			option.datasetReference.ProjectID = datasetReferenceV["ProjectID"]
+			option.datasetReference.datasetID = datasetReferenceV["DatasetID"]
+			option.datasetReference.projectID = datasetReferenceV["ProjectID"]
 
-		case "datasetReference":
-			datasetReferenceV, _ := value.(map[string]string)
-			option.datasetReference.DatasetID = datasetReferenceV["DatasetID"]
-			option.datasetReference.ProjectID = datasetReferenceV["ProjectID"]
+		case "Access":
+			accessparam, _ := value.([]map[string]interface{})
+			for i = 0; i < len(accessparam); i++ {
+				var access Access
+				for accessparamkey, accessparamvalue := range accessparam[i] {
+					switch accessparamkey {
+					case "Domain":
+						DomainV, _ := value.(string)
+						access.Domain = DomainV
 
-		case "access":
-			accessparam, _ := value.(map[string]interface{})
+					case "GroupByEmail":
+						GroupByEmailV, _ := value.(string)
+						access.GroupByEmail = GroupByEmailV
 
-			for accessparamkey, accessparamvalue := range accessparam {
-				switch accessparamkey {
-					case "MLModelId":
-						MLModelIdV, _ := value.(string)
-						MLModelId = MLModelIdV
+					case "Role":
+						RoleV, _ := value.(string)
+						access.Role = RoleV
 
-				case "Region":
-						RegionV, _ := value.(string)
-						Region = RegionV
+					case "SpecialGroup":
+						SpecialGroupV, _ := value.(string)
+						access.SpecialGroup = SpecialGroupV
+
+					case "SpecialGroup":
+						SpecialGroupV, _ := value.(string)
+						access.SpecialGroup = SpecialGroupV
+
+					case "UserByEmail":
+						UserByEmailV, _ := value.(string)
+						access.UserByEmail = UserByEmailV
+
+					case "View":
+						ViewV, _ := value.(map[string]interface{})
+						access.view.projectID = ViewV["ProjectID"]
+						access.view.datasetID = ViewV["DatasetID"]
+						access.view.tableID = ViewV["TableID"]
+
+					}
 				}
+				options.access = append(options.access, access)
+			}
 		}
 	}
 
@@ -99,7 +121,7 @@ func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{},
 
 	createdatasetsrequest.Header.Set("Content-Type", "application/json")
 
-	createdatasetsrresp, err := client.Do(createdatasetsrequest)
+	createdatasetsresp, err := client.Do(createdatasetsrequest)
 
 	defer createdatasetsresp.Body.Close()
 
@@ -110,6 +132,50 @@ func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{},
 	createdatasetsresponse["body"] = string(body)
 	resp = createdatasetsresponse
 	return resp, err
+}
+
+func createdatasetsdictnoaryconvert(option Createdatasets, createdatasetsjsonmap map[string]interface{}) {
+
+	if option.defaultTableExpirationMs != "" {
+		createdatasetsjsonmap["defaultTableExpirationMs"] = option.defaultTableExpirationMs
+	}
+
+	if option.defaultTableExpirationMs != "" {
+		createdatasetsjsonmap["defaultTableExpirationMs"] = option.defaultTableExpirationMs
+	}
+
+	if option.defaultTableExpirationMs != "" {
+		createdatasetsjsonmap["description"] = option.description
+	}
+
+	if option.etag != "" {
+		createdatasetsjsonmap["etag"] = option.etag
+	}
+
+	if option.id != "" {
+		createdatasetsjsonmap["id"] = option.id
+	}
+
+	if option.friendlyName != "" {
+		createdatasetsjsonmap["friendlyName"] = option.friendlyName
+	}
+
+	if option.kind != "" {
+		createdatasetsjsonmap["kind"] = option.kind
+	}
+
+	if option.lastModifiedTime != "" {
+		createdatasetsjsonmap["lastModifiedTime"] = option.lastModifiedTime
+	}
+
+	if option.location != "" {
+		createdatasetsjsonmap["location"] = option.location
+	}
+
+	if option.selfLink != "" {
+		createdatasetsjsonmap["selfLink"] = option.selfLink
+	}
+
 }
 
 //DeleteDatasets delete Datasets.
