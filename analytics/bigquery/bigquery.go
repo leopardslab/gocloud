@@ -1,5 +1,14 @@
 package bigquery
 
+import (
+	"bytes"
+	"encoding/json"
+	googleauth "github.com/cloudlibz/gocloud/googleauth"
+	"io/ioutil"
+	"net/http"
+	"fmt"
+)
+
 //CreateDatasets Create Datasets.
 func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{}, err error) {
 
@@ -164,9 +173,38 @@ func (bigquery *Bigquery) UpdateDatasets(request interface{}) (resp interface{},
 //ListDatasets  list Datasets.
 func (bigquery *Bigquery) ListDatasets(request interface{}) (resp interface{}, err error) {
 
-	options := request.(map[string]string)
+	options := request.(map[string]interface{})
 
-	url := "https://www.googleapis.com/bigquery/v2/projects/" + options["projectId"] + "/datasets"
+	var projectId , pageToken, filter string
+	var all bool
+	var maxResults int
+
+
+	for key, value := range options {
+		switch key {
+		case "ProjectId":
+			projectIdV, _ := value.(string)
+			projectId = projectIdV
+
+		case "All":
+			allV, _ := value.(bool)
+			all = allV
+
+		case "Filter":
+			filterV, _ := value.(string)
+			filter = filterV
+
+		case "PageToken":
+			pageTokenV, _ := value.(string)
+			pageToken = pageTokenV
+
+		case "MaxResults":
+			maxResultsV, _ := value.(int)
+			maxResults = maxResultsV
+		}
+	}
+
+	url := "https://www.googleapis.com/bigquery/v2/projects/" + projectId + "/datasets"
 
 	client := googleauth.SignJWT()
 
@@ -174,16 +212,20 @@ func (bigquery *Bigquery) ListDatasets(request interface{}) (resp interface{}, e
 
 	listdatasetsrequestparam := listdatasetsrequest.URL.Query()
 
-	if options["filter"] != "" {
-		listdatasetsrequestparam.Add("filter", options["filter"])
+	if all != false {
+		listdatasetsrequestparam.Add("all", "true")
 	}
 
-	if options["maxResults"] != "" {
-		listdatasetsrequestparam.Add("maxResults", options["maxResults"])
+	if filter != "" {
+		listdatasetsrequestparam.Add("filter", filter)
 	}
 
-	if options["pageToken"] != "" {
-		listdatasetsrequestparam.Add("pageToken", options["pageToken"])
+	if maxResults != 0 {
+		listdatasetsrequestparam.Add("maxResults", "1")
+	}
+
+	if pageToken != "" {
+		listdatasetsrequestparam.Add("pageToken", pageToken)
 	}
 
 	listdatasetsrequest.URL.RawQuery = listdatasetsrequestparam.Encode()
@@ -191,6 +233,11 @@ func (bigquery *Bigquery) ListDatasets(request interface{}) (resp interface{}, e
 	listdatasetsrequest.Header.Set("Content-Type", "application/json")
 
 	listdatasetsrequestresp, err := client.Do(listdatasetsrequest)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
 
 	defer listdatasetsrequestresp.Body.Close()
 

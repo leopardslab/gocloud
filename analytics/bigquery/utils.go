@@ -1,14 +1,21 @@
 package bigquery
 
-func createdatasetsstruct(option Createdatasets, param map[string]interface{}) {
+import("time")
+
+const (
+	UnixDate = "Mon Jan _2 15:04:05 MST 2006"
+	RFC3339  = "2006-01-02T15:04:05Z07:00"
+)
+
+
+func createdatasetsstruct(option CreateDatasets, param map[string]interface{}) {
 
 	for key, value := range param {
 		switch key {
 
 		case "CreationTime":
-			CreationTimeV, _ := value.(string)
-			option.CreationTime = CreationTimeV
-			option.CreationTime = time.Now().UTC().Format(time.RFC3339)
+			creationTime := time.Now().UTC().Format(time.RFC3339)
+			option.creationTime = creationTime
 
 		case "DefaultTableExpirationMs":
 			defaultTableExpirationMsV, _ := value.(string)
@@ -53,50 +60,57 @@ func createdatasetsstruct(option Createdatasets, param map[string]interface{}) {
 
 		case "Access":
 			accessparam, _ := value.([]map[string]interface{})
-			for i = 0; i < len(accessparam); i++ {
+			for i := 0; i < len(accessparam); i++ {
 				var access Access
 				for accessparamkey, accessparamvalue := range accessparam[i] {
 					switch accessparamkey {
 					case "Domain":
-						DomainV, _ := value.(string)
-						access.Domain = DomainV
+						DomainV, _ := accessparamvalue.(string)
+						access.domain = DomainV
 
 					case "GroupByEmail":
-						GroupByEmailV, _ := value.(string)
-						access.GroupByEmail = GroupByEmailV
+						GroupByEmailV, _ := accessparamvalue.(string)
+						access.groupByEmail = GroupByEmailV
 
 					case "Role":
-						RoleV, _ := value.(string)
-						access.Role = RoleV
+						RoleV, _ := accessparamvalue.(string)
+						access.role = RoleV
 
 					case "SpecialGroup":
-						SpecialGroupV, _ := value.(string)
-						access.SpecialGroup = SpecialGroupV
-
-					case "SpecialGroup":
-						SpecialGroupV, _ := value.(string)
-						access.SpecialGroup = SpecialGroupV
+						SpecialGroupV, _ := accessparamvalue.(string)
+						access.specialGroup = SpecialGroupV
 
 					case "UserByEmail":
-						UserByEmailV, _ := value.(string)
-						access.UserByEmail = UserByEmailV
+						UserByEmailV, _ := accessparamvalue.(string)
+						access.userByEmail = UserByEmailV
 
 					case "View":
-						ViewV, _ := value.(map[string]interface{})
-						access.view.projectID = ViewV["ProjectID"]
-						access.view.datasetID = ViewV["DatasetID"]
-						access.view.tableID = ViewV["TableID"]
+						viewparam, _ := value.(map[string]interface{})
+						for viewparamkey, viewparamvalue := range viewparam {
+							switch viewparamkey {
+							case "ProjectID":
+								projectIDV, _ := viewparamvalue.(string)
+								access.view.projectID = projectIDV
 
+							case "DatasetID":
+								datasetIDV, _ := viewparamvalue.(string)
+								access.view.datasetID = datasetIDV
+
+							case "TableID":
+								tableIDV, _ := viewparamvalue.(string)
+								access.view.tableID = tableIDV
+						}
 					}
 				}
-				options.access = append(options.access, access)
+				option.access = append(option.access, access)
 			}
 		}
 	}
 
 }
 
-func createdatasetsdictnoaryconvert(option Createdatasets, createdatasetsjsonmap map[string]interface{}) {
+}
+func createdatasetsdictnoaryconvert(option CreateDatasets, createdatasetsjsonmap map[string]interface{}){
 
 	if option.defaultTableExpirationMs != "" {
 		createdatasetsjsonmap["defaultTableExpirationMs"] = option.defaultTableExpirationMs
@@ -142,7 +156,7 @@ func createdatasetsdictnoaryconvert(option Createdatasets, createdatasetsjsonmap
 	prepareAccessparam(option, createdatasetsjsonmap)
 }
 
-func preparedatasetReferenceparam(option Createdatasets, createdatasetsjsonmap map[string]interface{}) {
+func preparedatasetReferenceparam(option CreateDatasets, createdatasetsjsonmap map[string]interface{}) {
 
 	datasetReferencejsonmap := make(map[string]interface{})
 
@@ -158,15 +172,15 @@ func preparedatasetReferenceparam(option Createdatasets, createdatasetsjsonmap m
 
 }
 
-func prepareAccessparam(option Createdatasets, createdatasetsjsonmap map[string]interface{}) {
+func prepareAccessparam(option CreateDatasets, createdatasetsjsonmap map[string]interface{}) {
 
 	if len(option.access) != 0 {
 
-		accessarrayjsonmap := make([]map[string]interface{})
+		accessarrayjsonmap := make([]map[string]interface{},0)
 
 		for i := 0; i < len(option.access); i++ {
 
-			accessjsonmap := make([]map[string]interface{})
+			accessjsonmap := make(map[string]interface{})
 
 			if option.access[i].domain != "" {
 				accessjsonmap["domain"] = option.access[i].domain
