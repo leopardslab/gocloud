@@ -1,5 +1,10 @@
 package vultrstorage
 
+import (
+	"github.com/cloudlibz/gocloud/vultrauth"
+	"net/http"
+)
+
 // Createdisk function creates a new disk.
 func (vultrStorage *VultrStorage) Createdisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
@@ -12,11 +17,27 @@ func (vultrStorage *VultrStorage) Deletedisk(request interface{}) (resp interfac
 
 // Createsnapshot function creates a new snapshot.
 func (vultrStorage *VultrStorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
+	param = request.(map[string]interface{})
+
+	response := make(map[string]interface{})
+
+	err = vultrauth.SignAndDoRequest(http.MethodPost, "/v1/snapshot/create", param, response)
+
+	resp = response
 	return resp, err
 }
 
 // Deletesnapshot function deletes a snapshot.
 func (vultrStorage *VultrStorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
+	param = request.(map[string]interface{})
+
+	response := make(map[string]interface{})
+
+	err = vultrauth.SignAndDoRequest(http.MethodPost, "/v1/snapshot/destroy", param, response)
+
+	resp = response
 	return resp, err
 }
 
