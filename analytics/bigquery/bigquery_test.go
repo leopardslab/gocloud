@@ -3,59 +3,8 @@ package bigquery
 import "testing"
 import "fmt"
 
+
 /*
-func TestUpdateMLModel(t *testing.T) {
-
-	var googlemachinelearning Googlemachinelearning
-
-	defaultVersion := make(map[string]interface{})
-
-	defaultVersion["Name"] = "bokkya"
-
-	updateMLModel := map[string]interface{}{
-		"Parent":         "projects/adept-comfort-202709/models/pratik",
-		"Name":           "pratik",
-		"DefaultVersion": defaultVersion,
-		"UpdateMask":     "description",
-	}
-
-	resp, err := googlemachinelearning.UpdateMLModel(updateMLModel)
-
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
-
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
-}
-
-func TestCreateMLModel(t *testing.T) {
-
-	var googlemachinelearning Googlemachinelearning
-
-	defaultVersion := make(map[string]interface{})
-
-	defaultVersion["Name"] = "bokkya"
-	defaultVersion["DeploymentUri"] = "gs:bokkya"
-
-	createMLModel := map[string]interface{}{
-		"Parent":         "projects/adept-comfort-202709",
-		"Name":           "pratik",
-		"DefaultVersion": defaultVersion,
-	}
-
-	resp, err := googlemachinelearning.CreateMLModel(createMLModel)
-
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
-
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
-}
-
-*/
-
 func TestListDatasets(t *testing.T) {
 
 	var bigquery Bigquery
@@ -78,25 +27,12 @@ func TestListDatasets(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-func TestGetDatasets(t *testing.T) {
+*/
 
-	var bigquery Bigquery
 
-	getDatasets := map[string]string{
-		"ProjectId": "gocloud-206919",
-		"DatasetId" : "getd",
-	}
+/*
 
-	resp, err := bigquery.GetDatasets(getDatasets)
-
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
-
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
-}
-
+/*
 func TestDeleteDatasets(t *testing.T) {
 
 	var bigquery Bigquery
@@ -116,18 +52,60 @@ func TestDeleteDatasets(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
+*/
+
 
 
 /*
-func TestDeleteMLModel(t *testing.T) {
+{
+ "kind": "bigquery#dataset",
+ "etag": "wJ6J76UJduYf9EzfNz0gJw==",
+ "id": "gocloud-206919:gocloudv3",
+ "selfLink": "https://www.googleapis.com/bigquery/v2/projects/gocloud-206919/datasets/gocloudv3",
 
-	var googlemachinelearning Googlemachinelearning
+ "access": [
+  {
+   "role": "WRITER",
+   "specialGroup": "projectWriters"
+  },
+  {
+   "role": "OWNER",
+   "specialGroup": "projectOwners"
+  },
+  {
+   "role": "OWNER",
+   "userByEmail": "i.divenire@gmail.com"
+  },
+  {
+   "role": "READER",
+   "specialGroup": "projectReaders"
+  }
+ ],
+ }
+*/
 
-	deleteMLModel := map[string]string{
-		"name": "projects/adept-comfort-202709/models/hi",
+/*
+func TestCreateDatasets(t *testing.T) {
+
+	var bigquery Bigquery
+
+	datasetReference := map[string]string {
+	 "DatasetId": "gocloudv4",
+	 "ProjectId": "gocloud-206919",
 	}
 
-	resp, err := googlemachinelearning.DeleteMLModel(deleteMLModel)
+	createDatasets := map[string]interface{}{
+		"ProjectId": "gocloud-206919",
+		"Description" : "gocloudv4 created",
+		"Kind": "bigquery#dataset",
+		"Etag": "wJ6J76UJduYf9EzfNz0gJw==",
+		"SelfLink": "https://www.googleapis.com/bigquery/v2/projects/gocloud-206919/datasets/gocloudv3",
+		 "Id": "gocloud-206919:gocloudv4",
+		"Location": "US",
+		"DatasetReference" : datasetReference,
+	}
+
+	resp, err := bigquery.CreateDatasets(createDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
@@ -136,4 +114,54 @@ func TestDeleteMLModel(t *testing.T) {
 	response := resp.(map[string]interface{})
 	fmt.Println(response["body"])
 }
+
 */
+func TestUpdateDatasets(t *testing.T) {
+
+	var bigquery Bigquery
+
+	datasetReference := map[string]string {
+	 "DatasetId": "gocloudv3",
+	 "ProjectId": "gocloud-206919",
+	}
+
+	updateDatasets := map[string]interface{}{
+		"ProjectId": "gocloud-206919",
+		"Description" : "gocloudv3 created",
+		"Kind": "bigquery#dataset",
+		"Etag": "wJ6J76UJduYf9EzfNz0gJw==",
+		"SelfLink": "https://www.googleapis.com/bigquery/v2/projects/gocloud-206919/datasets/gocloudv3",
+		 "Id": "gocloud-206919:gocloudv3",
+		"Location": "US",
+		"DatasetReference" : datasetReference,
+		 "DatasetId": "gocloudv3",
+	}
+
+	resp, err := bigquery.UpdateDatasets(updateDatasets)
+
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
+
+	response := resp.(map[string]interface{})
+	fmt.Println(response["body"])
+}
+
+func TestGetDatasets(t *testing.T) {
+
+	var bigquery Bigquery
+
+	getDatasets := map[string]string{
+		"ProjectId": "gocloud-206919",
+		"DatasetId" : "gocloudv3",
+	}
+
+	resp, err := bigquery.GetDatasets(getDatasets)
+
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
+
+	response := resp.(map[string]interface{})
+	fmt.Println(response["body"])
+}

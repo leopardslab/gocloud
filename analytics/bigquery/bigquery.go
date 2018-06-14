@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"fmt"
+	"time"
 )
 
 //CreateDatasets Create Datasets.
@@ -22,10 +23,105 @@ func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{},
 		case "ProjectId":
 			ProjectIdV, _ := value.(string)
 			projectId = ProjectIdV
+
+		case "CreationTime":
+			creationTime := time.Now().UTC().Format(time.RFC3339)
+			option.creationTime = creationTime
+
+		case "DefaultTableExpirationMs":
+			defaultTableExpirationMsV, _ := value.(string)
+			option.defaultTableExpirationMs = defaultTableExpirationMsV
+
+		case "Description":
+			descriptionV, _ := value.(string)
+			option.description = descriptionV
+
+		case "Etag":
+			etagV, _ := value.(string)
+			option.etag = etagV
+
+		case "FriendlyName":
+			friendlyNameV, _ := value.(string)
+			option.friendlyName = friendlyNameV
+
+		case "Id":
+			idV, _ := value.(string)
+			option.id = idV
+
+		case "Kind":
+			kindV, _ := value.(string)
+			option.kind = kindV
+
+		case "LastModifiedTime":
+			lastModifiedTimeV, _ := value.(string)
+			option.lastModifiedTime = lastModifiedTimeV
+
+		case "Location":
+			locationV, _ := value.(string)
+			option.location = locationV
+
+		case "SelfLink":
+			selfLinkV, _ := value.(string)
+			option.selfLink = selfLinkV
+
+		case "DatasetReference":
+			datasetReferenceV, _ := value.(map[string]string)
+			option.datasetReference.datasetID = datasetReferenceV["DatasetID"]
+			option.datasetReference.projectID = datasetReferenceV["ProjectID"]
+
+		case "Access":
+			accessparam, _ := value.([]map[string]interface{})
+			for i := 0; i < len(accessparam); i++ {
+				var access Access
+				for accessparamkey, accessparamvalue := range accessparam[i] {
+					switch accessparamkey {
+					case "Domain":
+						DomainV, _ := accessparamvalue.(string)
+						access.domain = DomainV
+
+					case "GroupByEmail":
+						GroupByEmailV, _ := accessparamvalue.(string)
+						access.groupByEmail = GroupByEmailV
+
+					case "Role":
+						RoleV, _ := accessparamvalue.(string)
+						access.role = RoleV
+
+					case "SpecialGroup":
+						SpecialGroupV, _ := accessparamvalue.(string)
+						access.specialGroup = SpecialGroupV
+
+					case "UserByEmail":
+						UserByEmailV, _ := accessparamvalue.(string)
+						access.userByEmail = UserByEmailV
+
+					case "View":
+						viewparam, _ := value.(map[string]interface{})
+						for viewparamkey, viewparamvalue := range viewparam {
+							switch viewparamkey {
+							case "ProjectID":
+								projectIDV, _ := viewparamvalue.(string)
+								access.view.projectID = projectIDV
+
+							case "DatasetID":
+								datasetIDV, _ := viewparamvalue.(string)
+								access.view.datasetID = datasetIDV
+
+							case "TableID":
+								tableIDV, _ := viewparamvalue.(string)
+								access.view.tableID = tableIDV
+						}
+					}
+				}
+				option.access = append(option.access, access)
+			}
+		}
 		}
 	}
 
-	createdatasetsstruct(option, param)
+	fmt.Println(option)
+
+	//createdatasetsstruct(option, param)
 
 	createdatasetsjsonmap := make(map[string]interface{})
 
@@ -63,7 +159,7 @@ func (bigquery *Bigquery) DeleteDatasets(request interface{}) (resp interface{},
 
 	options := request.(map[string]string)
 
-	url := "https://www.googleapis.com/bigquery/v2/projects/" + options["projectId"] + "/datasets" + options["datasetId"]
+	url := "https://www.googleapis.com/bigquery/v2/projects/" + options["ProjectId"] + "/datasets/" + options["DatasetId"]
 
 	client := googleauth.SignJWT()
 
@@ -97,7 +193,7 @@ func (bigquery *Bigquery) GetDatasets(request interface{}) (resp interface{}, er
 
 	options := request.(map[string]string)
 
-	url := "https://www.googleapis.com/bigquery/v2/projects/" + options["projectId"] + "/datasets" + options["datasetId"]
+	url := "https://www.googleapis.com/bigquery/v2/projects/" + options["ProjectId"] + "/datasets/" + options["DatasetId"]
 
 	client := googleauth.SignJWT()
 
@@ -131,13 +227,109 @@ func (bigquery *Bigquery) UpdateDatasets(request interface{}) (resp interface{},
 			projectIdV, _ := value.(string)
 			projectId = projectIdV
 
-		case "datasetId":
+		case "DatasetId":
 			datasetIdV, _ := value.(string)
 			datasetId = datasetIdV
+
+		case "CreationTime":
+			creationTime := time.Now().UTC().Format(time.RFC3339)
+			option.creationTime = creationTime
+
+		case "DefaultTableExpirationMs":
+			defaultTableExpirationMsV, _ := value.(string)
+			option.defaultTableExpirationMs = defaultTableExpirationMsV
+
+		case "Description":
+			descriptionV, _ := value.(string)
+			option.description = descriptionV
+
+		case "Etag":
+			etagV, _ := value.(string)
+			option.etag = etagV
+
+		case "FriendlyName":
+			friendlyNameV, _ := value.(string)
+			option.friendlyName = friendlyNameV
+
+		case "Id":
+			idV, _ := value.(string)
+			option.id = idV
+
+		case "Kind":
+			kindV, _ := value.(string)
+			option.kind = kindV
+
+		case "LastModifiedTime":
+			lastModifiedTimeV, _ := value.(string)
+			option.lastModifiedTime = lastModifiedTimeV
+
+		case "Location":
+			locationV, _ := value.(string)
+			option.location = locationV
+
+		case "SelfLink":
+			selfLinkV, _ := value.(string)
+			option.selfLink = selfLinkV
+
+		case "DatasetReference":
+			datasetReferenceV, _ := value.(map[string]string)
+			option.datasetReference.datasetID = datasetReferenceV["DatasetID"]
+			option.datasetReference.projectID = datasetReferenceV["ProjectID"]
+
+		case "Access":
+			accessparam, _ := value.([]map[string]interface{})
+			for i := 0; i < len(accessparam); i++ {
+				var access Access
+				for accessparamkey, accessparamvalue := range accessparam[i] {
+					switch accessparamkey {
+					case "Domain":
+						DomainV, _ := accessparamvalue.(string)
+						access.domain = DomainV
+
+					case "GroupByEmail":
+						GroupByEmailV, _ := accessparamvalue.(string)
+						access.groupByEmail = GroupByEmailV
+
+					case "Role":
+						RoleV, _ := accessparamvalue.(string)
+						access.role = RoleV
+
+					case "SpecialGroup":
+						SpecialGroupV, _ := accessparamvalue.(string)
+						access.specialGroup = SpecialGroupV
+
+					case "UserByEmail":
+						UserByEmailV, _ := accessparamvalue.(string)
+						access.userByEmail = UserByEmailV
+
+					case "View":
+						viewparam, _ := value.(map[string]interface{})
+						for viewparamkey, viewparamvalue := range viewparam {
+							switch viewparamkey {
+							case "ProjectID":
+								projectIDV, _ := viewparamvalue.(string)
+								access.view.projectID = projectIDV
+
+							case "DatasetID":
+								datasetIDV, _ := viewparamvalue.(string)
+								access.view.datasetID = datasetIDV
+
+							case "TableID":
+								tableIDV, _ := viewparamvalue.(string)
+								access.view.tableID = tableIDV
+						}
+					}
+				}
+				option.access = append(option.access, access)
+			}
+		}
 		}
 	}
 
-	createdatasetsstruct(option, param)
+//	createdatasetsstruct(option, param)
+
+	fmt.Println(option)
+
 
 	createdatasetsjsonmap := make(map[string]interface{})
 
@@ -145,15 +337,19 @@ func (bigquery *Bigquery) UpdateDatasets(request interface{}) (resp interface{},
 
 	updatedatasetsjson, _ := json.Marshal(createdatasetsjsonmap)
 
+	fmt.Println("updatedatasetsjson\n", string(updatedatasetsjson))
+
 	updatedatasetsjsonstring := string(updatedatasetsjson)
 
 	var updatedatasetsjsonstringbyte = []byte(updatedatasetsjsonstring)
 
 	url := "https://www.googleapis.com/bigquery/v2/projects/" + projectId + "/datasets/" + datasetId
 
+	fmt.Println(url)
+
 	client := googleauth.SignJWT()
 
-	updatedatasetsrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(updatedatasetsjsonstringbyte))
+	updatedatasetsrequest, err := http.NewRequest("PUT", url, bytes.NewBuffer(updatedatasetsjsonstringbyte))
 
 	updatedatasetsrequest.Header.Set("Content-Type", "application/json")
 
