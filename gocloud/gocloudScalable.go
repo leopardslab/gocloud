@@ -106,8 +106,8 @@ type aliProvider interface {
 	goCloudCommon
 }
 
-// AliCloudProvider return Ali-cloud API to users
-func AliCloudProvider() aliProvider {
+// AlibabaCloudProvider return Ali-cloud API to users
+func AlibabaCloudProvider() aliProvider {
 	aliauth.LoadConfig()
 	return new(ali.Ali)
 }
