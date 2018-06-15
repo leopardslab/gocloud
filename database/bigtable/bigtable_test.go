@@ -14,16 +14,21 @@ func TestCreatetables(t *testing.T) {
 
 	createtables := map[string]interface{}{
 		"parent":        "projects/adept-comfort-202709/instances/helloo",
-		"tableId":       "tableId",
+		"tableId":       "tableId3",
 		"table":         table,
 		"initialSplits": initialSplits,
 	}
 
-	_, err := bigtable.Createtables(createtables)
+	resp, err := bigtable.Createtables(createtables)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
+
 }
 
 func TestDescribetables(t *testing.T) {
@@ -34,11 +39,16 @@ func TestDescribetables(t *testing.T) {
 		"name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
 	}
 
-	_, err := bigtable.Describetables(describetables)
+	resp, err := bigtable.Describetables(describetables)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
+
 }
 
 func TestListtables(t *testing.T) {
@@ -51,13 +61,18 @@ func TestListtables(t *testing.T) {
 		"pageToken": "",
 	}
 
-	_, err := bigtable.Listtables(listtables)
+	resp, err := bigtable.Listtables(listtables)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
 }
 
+/*
 func TestDeletetables(t *testing.T) {
 
 	var bigtable Bigtable
@@ -66,9 +81,14 @@ func TestDeletetables(t *testing.T) {
 		"name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
 	}
 
-	_, err := bigtable.Deletetables(deletetables)
+	response, err := bigtable.Deletetables(deletetables)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
 }
+*/

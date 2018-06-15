@@ -6,6 +6,7 @@ import (
 	digioceannosql "github.com/cloudlibz/gocloud/database/digioceannosql"
 	digioceandns "github.com/cloudlibz/gocloud/dns/digioceandns"
 	digioceanloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/digioceanloadbalancer"
+	digioceanmachinelearning "github.com/cloudlibz/gocloud/machinelearning/digioceanmachinelearning"
 	digioceanserverless "github.com/cloudlibz/gocloud/serverless/digioceanserverless"
 	digioceanstorage "github.com/cloudlibz/gocloud/storage/digioceanstorage"
 )
@@ -19,4 +20,5 @@ type DigitalOcean struct {
 	digioceancontainer.Digioceancontainer
 	digioceanserverless.Digioceanserverless
 	digioceannosql.Digioceannosql
+	digioceanmachinelearning.Digioceanmachinelearning
 }

@@ -26,19 +26,23 @@ func preparedeletetables(params map[string]string, TableName string, Region stri
 	params["amztarget"] = "DynamoDB_20120810.DeleteTable"
 }
 
-func preparelisttables(params map[string]string, ExclusiveStartTableName string, Limit string, Region string) {
-	if ExclusiveStartTableName != "" {
-		params["ExclusiveStartTableName"] = ExclusiveStartTableName
-	}
-
-	if Limit != "" {
-		params["Limit"] = Limit
-	}
+func preparelisttables(params map[string]string, Region string) {
 
 	if Region != "" {
 		params["Region"] = Region
 	}
 	params["amztarget"] = "DynamoDB_20120810.ListTables"
+}
+
+func preparelisttablesparamsdict(listtablesjsonmap map[string]interface{}, ExclusiveStartTableName string, Limit int) {
+
+	if ExclusiveStartTableName != "" {
+		listtablesjsonmap["ExclusiveStartTableName"] = ExclusiveStartTableName
+	}
+
+	if Limit != 0 {
+		listtablesjsonmap["Limit"] = Limit
+	}
 }
 
 func preparecreatetableStreamSpecificationparams(createtablejsonmap map[string]interface{}, createtable Createtable) {

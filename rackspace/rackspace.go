@@ -6,6 +6,7 @@ import (
 	rackspacenosql "github.com/cloudlibz/gocloud/database/rackspacenosql"
 	rackspacedns "github.com/cloudlibz/gocloud/dns/rackspacedns"
 	rackspaceloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/rackspaceloadbalancer"
+	rackspacemachinelearning "github.com/cloudlibz/gocloud/machinelearning/rackspacemachinelearning"
 	rackspaceserverless "github.com/cloudlibz/gocloud/serverless/rackspaceserverless"
 	rackspacestorage "github.com/cloudlibz/gocloud/storage/rackspacestorage"
 )
@@ -19,4 +20,5 @@ type Rackspace struct {
 	rackspacedns.Rackspacedns
 	rackspaceserverless.Rackspaceserverless
 	rackspacenosql.Rackspacenosql
+	rackspacemachinelearning.Rackspacemachinelearning
 }

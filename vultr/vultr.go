@@ -6,6 +6,7 @@ import (
 	"github.com/cloudlibz/gocloud/database/vultrnosql"
 	"github.com/cloudlibz/gocloud/dns/vultrdns"
 	"github.com/cloudlibz/gocloud/loadbalancer/vultrloadbalancer"
+	"github.com/cloudlibz/gocloud/machinelearning/vultrmachinelearning"
 	"github.com/cloudlibz/gocloud/serverless/vultrserverless"
 	"github.com/cloudlibz/gocloud/storage/vultrstorage"
 )
@@ -19,4 +20,5 @@ type Vultr struct {
 	vultrdns.VultrDNS
 	vultrserverless.Vultrserverless
 	vultrnosql.Vultrnosql
+	vultrmachinelearning.Vultrmachinelearning
 }

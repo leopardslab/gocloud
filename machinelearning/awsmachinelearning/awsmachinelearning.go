@@ -1,12 +1,7 @@
 package awsmachinelearning
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
-	awsauth "github.com/cloudlibz/gocloud/awsauth"
-	"io/ioutil"
-	"net/http"
 )
 
 //CreateMLModel creates model.
@@ -39,11 +34,11 @@ func (awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{})
 			RecipeV, _ := value.(string)
 			createMLModel.Recipe = RecipeV
 
-		case "RecipeURI":
+		case "RecipeUri":
 			RecipeURIV, _ := value.(string)
 			createMLModel.RecipeURI = RecipeURIV
 
-		case "TrainingDataSourceID":
+		case "TrainingDataSourceId":
 			TrainingDataSourceIDV, _ := value.(string)
 			createMLModel.TrainingDataSourceID = TrainingDataSourceIDV
 
@@ -60,6 +55,8 @@ func (awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{})
 	createMLModeljsonmap := make(map[string]interface{})
 
 	preparecreateMLModelparamsdict(createMLModeljsonmap, createMLModel)
+
+	fmt.Println(createMLModeljsonmap)
 
 	response := make(map[string]interface{})
 	err = awsmachinelearning.PrepareSignatureV4query(params, createMLModeljsonmap, response)
@@ -144,8 +141,8 @@ func (awsmachinelearning *Awsmachinelearning) UpdateMLModel(request interface{})
 
 	param := request.(map[string]interface{})
 
-	var MLModelId, MLModelName, ScoreThreshold, Region string
-
+	var MLModelId, MLModelName, Region string
+	var ScoreThreshold int
 	for key, value := range param {
 		switch key {
 		case "MLModelId":
@@ -157,7 +154,7 @@ func (awsmachinelearning *Awsmachinelearning) UpdateMLModel(request interface{})
 			MLModelName = MLModelNameV
 
 		case "ScoreThreshold":
-			ScoreThresholdV, _ := value.(string)
+			ScoreThresholdV, _ := value.(int)
 			ScoreThreshold = ScoreThresholdV
 
 		case "Region":
@@ -168,13 +165,11 @@ func (awsmachinelearning *Awsmachinelearning) UpdateMLModel(request interface{})
 
 	params := make(map[string]string)
 
-	prepareupdatemodel(params, MLModelId, ScoreThreshold, MLModelName, Region)
+	prepareupdatemodel(params, Region)
 
-	updatemodeljsonmap := map[string]interface{}{
-		"MLModelId":      MLModelId,
-		"MLModelName":    MLModelName,
-		"ScoreThreshold": ScoreThreshold,
-	}
+	updatemodeljsonmap := make(map[string]interface{})
+
+	prepareupdatemodelparamsdict(updatemodeljsonmap, MLModelId, ScoreThreshold, MLModelName)
 
 	response := make(map[string]interface{})
 	err = awsmachinelearning.PrepareSignatureV4query(params, updatemodeljsonmap, response)

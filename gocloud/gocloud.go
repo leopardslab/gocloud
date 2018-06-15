@@ -54,6 +54,10 @@ type Gocloud interface {
 	Deletetables(request interface{}) (resp interface{}, err error)
 	Describetables(request interface{}) (resp interface{}, err error)
 	Createtables(request interface{}) (resp interface{}, err error)
+	GetMLModel(request interface{}) (resp interface{}, err error)
+	DeleteMLModel(request interface{}) (resp interface{}, err error)
+	CreateMLModel(request interface{}) (resp interface{}, err error)
+	UpdateMLModel(request interface{}) (resp interface{}, err error)
 }
 
 const (
