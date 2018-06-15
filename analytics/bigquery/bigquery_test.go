@@ -4,7 +4,7 @@ import "testing"
 import "fmt"
 
 
-/*
+
 func TestListDatasets(t *testing.T) {
 
 	var bigquery Bigquery
@@ -27,12 +27,8 @@ func TestListDatasets(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-*/
 
 
-/*
-
-/*
 func TestDeleteDatasets(t *testing.T) {
 
 	var bigquery Bigquery
@@ -52,39 +48,7 @@ func TestDeleteDatasets(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-*/
 
-
-
-/*
-{
- "kind": "bigquery#dataset",
- "etag": "wJ6J76UJduYf9EzfNz0gJw==",
- "id": "gocloud-206919:gocloudv3",
- "selfLink": "https://www.googleapis.com/bigquery/v2/projects/gocloud-206919/datasets/gocloudv3",
-
- "access": [
-  {
-   "role": "WRITER",
-   "specialGroup": "projectWriters"
-  },
-  {
-   "role": "OWNER",
-   "specialGroup": "projectOwners"
-  },
-  {
-   "role": "OWNER",
-   "userByEmail": "i.divenire@gmail.com"
-  },
-  {
-   "role": "READER",
-   "specialGroup": "projectReaders"
-  }
- ],
- }
-*/
-
-/*
 func TestCreateDatasets(t *testing.T) {
 
 	var bigquery Bigquery
@@ -115,7 +79,7 @@ func TestCreateDatasets(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-*/
+
 func TestUpdateDatasets(t *testing.T) {
 
 	var bigquery Bigquery

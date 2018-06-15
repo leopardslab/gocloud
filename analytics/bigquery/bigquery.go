@@ -6,7 +6,6 @@ import (
 	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
-	"fmt"
 	"time"
 )
 
@@ -119,9 +118,6 @@ func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{},
 		}
 	}
 
-	fmt.Println(option)
-
-	//createdatasetsstruct(option, param)
 
 	createdatasetsjsonmap := make(map[string]interface{})
 
@@ -326,18 +322,11 @@ func (bigquery *Bigquery) UpdateDatasets(request interface{}) (resp interface{},
 		}
 	}
 
-//	createdatasetsstruct(option, param)
-
-	fmt.Println(option)
-
-
 	createdatasetsjsonmap := make(map[string]interface{})
 
 	createdatasetsdictnoaryconvert(option, createdatasetsjsonmap)
 
 	updatedatasetsjson, _ := json.Marshal(createdatasetsjsonmap)
-
-	fmt.Println("updatedatasetsjson\n", string(updatedatasetsjson))
 
 	updatedatasetsjsonstring := string(updatedatasetsjson)
 
@@ -345,7 +334,6 @@ func (bigquery *Bigquery) UpdateDatasets(request interface{}) (resp interface{},
 
 	url := "https://www.googleapis.com/bigquery/v2/projects/" + projectId + "/datasets/" + datasetId
 
-	fmt.Println(url)
 
 	client := googleauth.SignJWT()
 
@@ -429,10 +417,6 @@ func (bigquery *Bigquery) ListDatasets(request interface{}) (resp interface{}, e
 	listdatasetsrequest.Header.Set("Content-Type", "application/json")
 
 	listdatasetsrequestresp, err := client.Do(listdatasetsrequest)
-
-	if err != nil {
-		fmt.Println(err)
-	}
 
 
 	defer listdatasetsrequestresp.Body.Close()
