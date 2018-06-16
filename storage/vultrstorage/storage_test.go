@@ -1,8 +1,8 @@
 package vultrstorage
 
 import (
-	"testing"
 	"github.com/cloudlibz/gocloud/vultrauth"
+	"testing"
 )
 
 func init() {
@@ -43,4 +43,79 @@ func TestVultrStorage_Deletesnapshot(t *testing.T) {
 		return
 	}
 	t.Logf("Vultr snapshot is deleted successfully.")
+}
+
+func TestVultrStorage_Createdisk(t *testing.T) {
+	var vultrStorage VultrStorage
+	createDisk := map[string]interface{}{
+		"DCID":    1,
+		"size_gb": 50,
+		"label":   "test",
+	}
+	resp, err := vultrStorage.Createdisk(createDisk)
+	if err != nil {
+		t.Errorf("Createdisk Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr disk is created successfully.")
+}
+
+func TestVultrStorage_Deletedisk(t *testing.T) {
+	var vultrStorage VultrStorage
+	deleteDisk := map[string]interface{}{
+		"SUBID": 1313217,
+	}
+	resp, err := vultrStorage.Deletedisk(deleteDisk)
+	if err != nil {
+		t.Errorf("Deletedisk Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr disk is deleted successfully.")
+}
+
+func TestVultrStorage_Attachdisk(t *testing.T) {
+	var vultrStorage VultrStorage
+	attachDisk := map[string]interface{}{
+		"SUBID":           1313217,
+		"attach_to_SUBID": 1313207,
+	}
+	resp, err := vultrStorage.Attachdisk(attachDisk)
+	if err != nil {
+		t.Errorf("Attachdisk Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr disk is attached successfully.")
+}
+
+func TestVultrStorage_Detachdisk(t *testing.T) {
+	var vultrStorage VultrStorage
+	detachDisk := map[string]interface{}{
+		"SUBID": 1313217,
+	}
+	resp, err := vultrStorage.Detachdisk(detachDisk)
+	if err != nil {
+		t.Errorf("Detachdisk Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr disk is detached successfully.")
 }
