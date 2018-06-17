@@ -1,4 +1,4 @@
-# gocloud storage - ECS
+# gocloud storage - Ali
 
 ## Configure Ali-cloud credentials
 
