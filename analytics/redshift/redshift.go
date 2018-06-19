@@ -98,7 +98,7 @@ func prepareDescribeClusterspram(describeclusterspram map[string]string,describe
 
 	if len(describecluster.tagKeys) != 0 {
 
-		for i = 0 ;< len(describecluster.TagKeys); i++{
+		for i := 0 ;i< len(describecluster.tagKeys); i++{
 
 			n := strconv.Itoa(i)
 
@@ -111,7 +111,7 @@ func prepareDescribeClusterspram(describeclusterspram map[string]string,describe
 
 	if len(describecluster.tagValues) != 0 {
 
-		for i = 0 ;< len(describecluster.tagValues); i++{
+		for i := 0 ; i< len(describecluster.tagValues); i++{
 
 			n := strconv.Itoa(i)
 
