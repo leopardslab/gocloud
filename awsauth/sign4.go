@@ -42,17 +42,3 @@ func SignatureV4(request *http.Request, request_parameters []byte, amztarget str
 
 	return request
 }
-
-func hmacsignatureV4(signingKey []byte, stringToSign string) string {
-	return hex.EncodeToString(hmacSHA256(signingKey, stringToSign))
-}
-
-func hmacSHA256(key []byte, content string) []byte {
-	mac := hmac.New(sha256.New, key)
-	mac.Write([]byte(content))
-	return mac.Sum(nil)
-}
-
-func sha256Hasher(payload []byte) string {
-	return fmt.Sprintf("%x", sha256.Sum256(payload))
-}

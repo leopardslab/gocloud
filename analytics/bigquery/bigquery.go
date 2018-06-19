@@ -109,15 +109,14 @@ func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{},
 							case "TableID":
 								tableIDV, _ := viewparamvalue.(string)
 								access.view.tableID = tableIDV
+							}
 						}
 					}
+					option.access = append(option.access, access)
 				}
-				option.access = append(option.access, access)
 			}
 		}
-		}
 	}
-
 
 	createdatasetsjsonmap := make(map[string]interface{})
 
@@ -313,12 +312,12 @@ func (bigquery *Bigquery) UpdateDatasets(request interface{}) (resp interface{},
 							case "TableID":
 								tableIDV, _ := viewparamvalue.(string)
 								access.view.tableID = tableIDV
+							}
 						}
 					}
+					option.access = append(option.access, access)
 				}
-				option.access = append(option.access, access)
 			}
-		}
 		}
 	}
 
@@ -333,7 +332,6 @@ func (bigquery *Bigquery) UpdateDatasets(request interface{}) (resp interface{},
 	var updatedatasetsjsonstringbyte = []byte(updatedatasetsjsonstring)
 
 	url := "https://www.googleapis.com/bigquery/v2/projects/" + projectId + "/datasets/" + datasetId
-
 
 	client := googleauth.SignJWT()
 
@@ -359,10 +357,9 @@ func (bigquery *Bigquery) ListDatasets(request interface{}) (resp interface{}, e
 
 	options := request.(map[string]interface{})
 
-	var projectId , pageToken, filter string
+	var projectId, pageToken, filter string
 	var all bool
 	var maxResults int
-
 
 	for key, value := range options {
 		switch key {
@@ -417,7 +414,6 @@ func (bigquery *Bigquery) ListDatasets(request interface{}) (resp interface{}, e
 	listdatasetsrequest.Header.Set("Content-Type", "application/json")
 
 	listdatasetsrequestresp, err := client.Do(listdatasetsrequest)
-
 
 	defer listdatasetsrequestresp.Body.Close()
 

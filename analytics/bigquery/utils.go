@@ -1,13 +1,15 @@
 package bigquery
 
-import("time")
+import (
+	"time"
+)
 
 const (
 	UnixDate = "Mon Jan _2 15:04:05 MST 2006"
 	RFC3339  = "2006-01-02T15:04:05Z07:00"
 )
 
-func createdatasetsdictnoaryconvert(option CreateDatasets, createdatasetsjsonmap map[string]interface{}){
+func createdatasetsdictnoaryconvert(option CreateDatasets, createdatasetsjsonmap map[string]interface{}) {
 
 	if option.defaultTableExpirationMs != "" {
 		createdatasetsjsonmap["defaultTableExpirationMs"] = option.defaultTableExpirationMs
@@ -73,7 +75,7 @@ func prepareAccessparam(option CreateDatasets, createdatasetsjsonmap map[string]
 
 	if len(option.access) != 0 {
 
-		accessarrayjsonmap := make([]map[string]interface{},0)
+		accessarrayjsonmap := make([]map[string]interface{}, 0)
 
 		for i := 0; i < len(option.access); i++ {
 
