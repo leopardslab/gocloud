@@ -1,5 +1,15 @@
 package awsauth
 
+
+import("io/ioutil"
+"net/http"
+"crypto/hmac"
+"crypto/sha256"
+"fmt"
+"encoding/hex"
+"bytes"
+)
+
 func hmacsignatureV4(signingKey []byte, stringToSign string) string {
 	return hex.EncodeToString(hmacSHA256(signingKey, stringToSign))
 }

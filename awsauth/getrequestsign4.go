@@ -1,28 +1,25 @@
 package awsauth
 
 import (
-	"bytes"
-	"crypto/hmac"
-	"crypto/sha256"
 	"encoding/hex"
-	"fmt"
-	"io/ioutil"
 	"net/http"
 	"strings"
 	"time"
+auth	"github.com/cloudlibz/gocloud/auth"
+"fmt"
 )
 
-func getrequestsign4(request *http.Request) *http.Request {
+func Getrequestsign4(request *http.Request,region string,service string) *http.Request {
 
 	var algorithm string
 	var credentialScope string
 	var signedHeaders string
 	var date string
-	var region string
-	var service string
 
-	AccessKeyID := "AKIAIQJA5OUM2QYMAKUQ"
-	SecretAccessKey := "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"
+	AccessKeyID := auth.Config.AWSAccessKeyID
+	SecretAccessKey := auth.Config.AWSSecretKey
+
+	host := service + "." + region + ".amazonaws.com"
 
 	t := time.Now().UTC()
 
@@ -59,7 +56,6 @@ func getrequestsign4(request *http.Request) *http.Request {
 
 	ContentType := "application/x-www-form-urlencoded; charset=utf-8"
 
-	host := "redshift.us-east-1.amazonaws.com"
 
 	X_Amz_Date := request.Header.Get("X-Amz-Date")
 
@@ -82,8 +78,6 @@ func getrequestsign4(request *http.Request) *http.Request {
 	requestTs := request.Header.Get("X-Amz-Date")
 
 	algorithm = "AWS4-HMAC-SHA256"
-	service = "redshift"
-	region = "us-east-1"
 	date = date_stamp
 
 	credentialScope = date + "/" + region + "/" + service + "/" + "aws4_request"
@@ -107,6 +101,8 @@ func getrequestsign4(request *http.Request) *http.Request {
 		", Signature=" + signature
 
 	request.Header.Set("Authorization", header)
+
+	fmt.Println(request)
 
 	return request
 }

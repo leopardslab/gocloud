@@ -15,17 +15,17 @@ func TestGetDatasets(t *testing.T) {
 
 	getDatasets := map[string]interface{}{
 		"Region":    "us-east-1",
-		"TableName": "Thread2",
 	}
 
-	resp, err := redshift.GetDatasets(getDatasets)
+	_, err := redshift.GetDatasets(getDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-	response := resp.(map[string]interface{})
+	//response := resp.(map[string]interface{})
 
-	fmt.Println(response["body"])
+	//fmt.Println(response["body"])
 
-}  
+	fmt.Println("hi")
+}

@@ -1,10 +1,6 @@
 package awsauth
 
 import (
-	"crypto/hmac"
-	"crypto/sha256"
-	"encoding/hex"
-	"fmt"
 	auth "github.com/cloudlibz/gocloud/auth"
 	"net/http"
 	"time"
