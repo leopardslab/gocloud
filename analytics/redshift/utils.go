@@ -8,13 +8,7 @@ import (
 	"strconv"
 )
 
-type Describecluster struct {
-	clusterIdentifier string
-	marker            string
-	maxRecords        int
-	tagKeys           []string
-	tagValues         []string
-}
+
 
 func preparedefaultDescribeClusterspram(describeclusterspram map[string]string) {
 
@@ -23,9 +17,6 @@ func preparedefaultDescribeClusterspram(describeclusterspram map[string]string) 
 }
 
 func prepareDescribeClusterspram(describeclusterspram map[string]string, describecluster Describecluster) {
-
-	describeclusterspram["Action"] = "DescribeClusters"
-	describeclusterspram["Version"] = "2012-12-01"
 
 	if describecluster.clusterIdentifier != "" {
 		describeclusterspram["ClusterIdentifier"] = describecluster.clusterIdentifier
