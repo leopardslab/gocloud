@@ -3,6 +3,65 @@ package redshift
 //CreateDatasets Create Datasets.
 func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{}, err error) {
 
+	var region string
+
+	var createCluster CreateCluster
+
+	param := make(map[string]interface{})
+
+	param = request.(map[string]interface{})
+	for key, value := range param {
+		switch key {
+
+		case "Region":
+			regionV, _ := value.(string)
+			region = regionV
+
+		case "ClusterIdentifier":
+			clusterIdentifier, _ := value.(string)
+			createCluster.clusterIdentifier = clusterIdentifier
+
+		case "MasterUsername":
+			masterUsername, _ := value.(string)
+			createCluster.masterUsername = masterUsername
+
+		case "MasterUserPassword":
+			masterUserPassword, _ := value.(string)
+			createCluster.masterUserPassword = masterUserPassword
+
+		case "NodeType":
+			nodeType, _ := value.(string)
+			createCluster.nodeType = nodeType
+
+		case "AdditionalInfo":
+			additionalInfo, _ := value.(string)
+			createCluster.additionalInfo = additionalInfo
+
+		case "AllowVersionUpgrade":
+			allowVersionUpgrade, _ := value.(bool)
+			createCluster.allowVersionUpgrade = allowVersionUpgrade
+
+
+		case "AutomatedSnapshotRetentionPeriod":
+			automatedSnapshotRetentionPeriod, _ := value.(int)
+			createCluster.automatedSnapshotRetentionPeriod = automatedSnapshotRetentionPeriod
+
+		case "AvailabilityZone":
+			availabilityZone, _ := value.(string)
+			createCluster.availabilityZone = availabilityZone
+
+		}
+	}
+
+	deleteClusterpram := make(map[string]string)
+
+	preparedefaultDeleteClusterpram(deleteClusterpram)
+	prepareDeleteClusterpram(deleteClusterpram, deleteCluster)
+
+	response := make(map[string]interface{})
+
+	resp = PrepareSignaturequery(deleteClusterpram, region, response)
+
 	return resp, err
 }
 

@@ -18,3 +18,16 @@ type DeleteCluster struct{
   finalClusterSnapshotIdentifier string
   skipFinalClusterSnapshot bool
 }
+
+
+type CreateCluster struct{
+
+	clusterIdentifier string
+  masterUsername string
+	masterUserPassword string
+	nodeType string
+	additionalInfo string
+	AllowVersionUpgrade bool
+	automatedSnapshotRetentionPeriod string
+	availabilityZone string
+}
