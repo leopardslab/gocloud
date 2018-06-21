@@ -1,7 +1,5 @@
 package redshift
 
-
-
 //CreateDatasets Create Datasets.
 func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{}, err error) {
 
@@ -13,8 +11,6 @@ func (redshift *Redshift) DeleteDatasets(request interface{}) (resp interface{},
 
 	return resp, err
 }
-
-
 
 //GetDatasets get Datasets.
 func (redshift *Redshift) GetDatasets(request interface{}) (resp interface{}, err error) {
@@ -56,27 +52,23 @@ func (redshift *Redshift) GetDatasets(request interface{}) (resp interface{}, er
 		}
 	}
 
-
 	describeclusterspram := make(map[string]string)
 
 	preparedefaultDescribeClusterspram(describeclusterspram)
-	prepareDescribeClusterspram(describeclusterspram,describecluster)
+	prepareDescribeClusterspram(describeclusterspram, describecluster)
 
-	 response :=  make(map[string]interface{})
+	response := make(map[string]interface{})
 
-	resp = PrepareSignaturequery(describeclusterspram,region,response)
+	resp = PrepareSignaturequery(describeclusterspram, region, response)
 
- 	return resp, err
+	return resp, err
 }
-
-
 
 //UpdateDatasets  Update Datasets.
 func (redshift *Redshift) UpdateDatasets(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
-
 
 //ListDatasets  list Datasets.
 func (redshift *Redshift) ListDatasets(request interface{}) (resp interface{}, err error) {

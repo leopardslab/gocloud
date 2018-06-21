@@ -2,14 +2,14 @@ package awsauth
 
 import (
 	"encoding/hex"
+	"fmt"
+	auth "github.com/cloudlibz/gocloud/auth"
 	"net/http"
 	"strings"
 	"time"
-auth	"github.com/cloudlibz/gocloud/auth"
-"fmt"
 )
 
-func Getrequestsign4(request *http.Request,region string,service string) *http.Request {
+func Getrequestsign4(request *http.Request, region string, service string) *http.Request {
 
 	var algorithm string
 	var credentialScope string
@@ -56,7 +56,6 @@ func Getrequestsign4(request *http.Request,region string,service string) *http.R
 
 	ContentType := "application/x-www-form-urlencoded; charset=utf-8"
 
-
 	X_Amz_Date := request.Header.Get("X-Amz-Date")
 
 	canonical_headers := "content-type:" + ContentType + "\n" + "host:" + host + "\n" + "x-amz-content-sha256:" + payloadHash + "\n" + "x-amz-date:" + X_Amz_Date + "\n"
@@ -95,10 +94,7 @@ func Getrequestsign4(request *http.Request,region string,service string) *http.R
 
 	credential := AccessKeyID + "/" + credentialScope
 
-	header := algorithm +
-		" Credential=" + credential +
-		", SignedHeaders=" + signedHeaders +
-		", Signature=" + signature
+	header := algorithm + " Credential=" + credential + ", SignedHeaders=" + signedHeaders + ", Signature=" + signature
 
 	request.Header.Set("Authorization", header)
 

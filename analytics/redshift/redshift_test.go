@@ -8,13 +8,12 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-
 func TestGetDatasets(t *testing.T) {
 
 	var redshift Redshift
 
 	getDatasets := map[string]interface{}{
-		"Region":    "us-east-1",
+		"Region": "us-east-1",
 	}
 
 	_, err := redshift.GetDatasets(getDatasets)

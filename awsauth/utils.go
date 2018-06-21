@@ -1,13 +1,13 @@
 package awsauth
 
-
-import("io/ioutil"
-"net/http"
-"crypto/hmac"
-"crypto/sha256"
-"fmt"
-"encoding/hex"
-"bytes"
+import (
+	"bytes"
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/hex"
+	"fmt"
+	"io/ioutil"
+	"net/http"
 )
 
 func hmacsignatureV4(signingKey []byte, stringToSign string) string {
