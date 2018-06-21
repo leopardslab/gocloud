@@ -50,8 +50,96 @@ func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{},
 			availabilityZone, _ := value.(string)
 			createCluster.availabilityZone = availabilityZone
 
-		}
-	}
+
+		case "ClusterParameterGroupName":
+			clusterParameterGroupName, _ := value.(string)
+			createCluster.clusterParameterGroupName = clusterParameterGroupName
+
+
+		case "ClusterSecurityGroups":
+			clusterSecurityGroups, _ := value.([]string)
+			createCluster.clusterSecurityGroups = clusterSecurityGroups
+
+		case "ClusterType":
+			clusterType, _ := value.(string)
+			createCluster.clusterType = clusterType
+
+
+		case "ClusterVersion":
+			clusterVersion, _ := value.(string)
+			createCluster.clusterVersion = clusterVersion
+
+
+		case "DBName":
+			DBName, _ := value.(string)
+			createCluster.dBName = dBName
+
+
+		case "ElasticIp":
+						elasticIp, _ := value.(string)
+						createCluster.elasticIp = elasticIp
+
+					case "Encrypted":
+									encrypted, _ := value.(bool)
+									createCluster.encrypted = encrypted
+
+					case "EnhancedVpcRouting":
+							enhancedVpcRouting, _ := value.(bool)
+							createCluster.enhancedVpcRouting = enhancedVpcRouting
+
+						case "HsmClientCertificateIdentifier":
+								hsmClientCertificateIdentifier, _ := value.(string)
+								createCluster.hsmClientCertificateIdentifier = hsmClientCertificateIdentifier
+
+
+							case "HsmConfigurationIdentifier":
+									hsmConfigurationIdentifier, _ := value.(string)
+									createCluster.hsmConfigurationIdentifier = hsmConfigurationIdentifier
+
+
+
+						case "IamRoles":
+									iamRoles, _ := value.([]string)
+								  createCluster.iamRoles = iamRoles
+
+								case "KmsKeyId":
+										kmsKeyId, _ := value.(string)
+										createCluster.kmsKeyId = kmsKeyId
+
+
+									case "NumberOfNodes":
+											numberOfNodes, _ := value.(int)
+											createCluster.numberOfNodes = numberOfNodes
+
+										case "Port":
+												port, _ := value.(int)
+												createCluster.port = port
+
+
+											case "PreferredMaintenanceWindow":
+													preferredMaintenanceWindow, _ := value.(int)
+													createCluster.preferredMaintenanceWindow = preferredMaintenanceWindow
+
+												case "TagKeys":
+													tagKeys, _ := value.([]string)
+													describecluster.tagKeys = tagKeys
+
+												case "TagValues":
+													tagValues, _ := value.([]string)
+													describecluster.tagValues = tagValues
+
+
+				case "PubliclyAccessible":
+								publiclyAccessible, _ := value.(bool)
+								createCluster.publiclyAccessible = PubliclyAccessible
+
+
+				case "VpcSecurityGroupIds":
+					vpcSecurityGroupIds, _ := value.([]string)
+					createCluster.vpcSecurityGroupIds = vpcSecurityGroupIds
+
+}
+}
 
 	deleteClusterpram := make(map[string]string)
 

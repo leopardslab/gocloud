@@ -30,4 +30,10 @@ type CreateCluster struct{
 	AllowVersionUpgrade bool
 	automatedSnapshotRetentionPeriod string
 	availabilityZone string
+	clusterParameterGroupName string
+	clusterSecurityGroups []string
+	clusterType string
+	clusterVersion string
+	dBName string
+	elasticIp string
 }
