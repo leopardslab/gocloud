@@ -1,5 +1,7 @@
 package redshift
 
+import("strconv")
+
 //CreateDatasets Create Datasets.
 func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{}, err error) {
 
@@ -42,7 +44,7 @@ func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{},
 			createCluster.allowVersionUpgrade = allowVersionUpgrade
 
 		case "AutomatedSnapshotRetentionPeriod":
-			automatedSnapshotRetentionPeriod, _ := value.(int)
+			automatedSnapshotRetentionPeriod, _ := value.(string)
 			createCluster.automatedSnapshotRetentionPeriod = automatedSnapshotRetentionPeriod
 
 		case "AvailabilityZone":
@@ -66,7 +68,7 @@ func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{},
 			createCluster.clusterVersion = clusterVersion
 
 		case "DBName":
-			DBName, _ := value.(string)
+			dBName, _ := value.(string)
 			createCluster.dBName = dBName
 
 		case "ElasticIp":
@@ -111,15 +113,15 @@ func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{},
 
 		case "TagKeys":
 			tagKeys, _ := value.([]string)
-			describecluster.tagKeys = tagKeys
+			createCluster.tagKeys = tagKeys
 
 		case "TagValues":
 			tagValues, _ := value.([]string)
-			describecluster.tagValues = tagValues
+			createCluster.tagValues = tagValues
 
 		case "PubliclyAccessible":
 			publiclyAccessible, _ := value.(bool)
-			createCluster.publiclyAccessible = PubliclyAccessible
+			createCluster.publiclyAccessible = publiclyAccessible
 
 		case "VpcSecurityGroupIds":
 			vpcSecurityGroupIds, _ := value.([]string)
@@ -128,16 +130,19 @@ func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{},
 		}
 	}
 
-	deleteClusterpram := make(map[string]string)
 
-	preparedefaultDeleteClusterpram(deleteClusterpram)
-	prepareDeleteClusterpram(deleteClusterpram, deleteCluster)
 
+	createClusterpram := make(map[string]string)
+
+	preparedefaultCreateClusterpram(createClusterpram)
+	preparecreateClusterpram(createClusterpram, createCluster)
 	response := make(map[string]interface{})
 
-	resp = PrepareSignaturequery(deleteClusterpram, region, response)
+	resp = PrepareSignaturequery(createClusterpram, region, response)
 
 	return resp, err
+
+
 }
 
 //DeleteDatasets delete Datasets.
@@ -171,15 +176,18 @@ func (redshift *Redshift) DeleteDatasets(request interface{}) (resp interface{},
 		}
 	}
 
-	createClusterpram := make(map[string]string)
+	deleteClusterpram := make(map[string]string)
 
-	preparedefaultCreateClusterpram(createClusterpram)
-	preparecreateClusterpram(createClusterpram, createCluster)
+	preparedefaultDeleteClusterpram(deleteClusterpram)
+	prepareDeleteClusterpram(deleteClusterpram, deleteCluster)
+
 	response := make(map[string]interface{})
 
-	resp = PrepareSignaturequery(createClusterpram, region, response)
+	resp = PrepareSignaturequery(deleteClusterpram, region, response)
 
 	return resp, err
+
+
 }
 
 func preparedefaultCreateClusterpram(createClusterpram map[string]string) {
@@ -207,10 +215,10 @@ func preparecreateClusterpram(createClusterpram map[string]string, createCluster
 	}
 
 	if createCluster.additionalInfo != "" {
-		createClusterpram["AdditionalInfo"] = createCluster.AdditionalInfo
+		createClusterpram["AdditionalInfo"] = createCluster.additionalInfo
 	}
 
-	if createCluster.AllowVersionUpgrade == true {
+	if createCluster.allowVersionUpgrade == true {
 		createClusterpram["AllowVersionUpgrade"] = "true"
 	}
 
@@ -246,8 +254,8 @@ func preparecreateClusterpram(createClusterpram map[string]string, createCluster
 		createClusterpram["Encrypted"] = "true"
 	}
 
-	if createCluster.enhancedVpcRouting != "" {
-		createClusterpram["EnhancedVpcRouting"] = createCluster.enhancedVpcRouting
+	if createCluster.enhancedVpcRouting == true {
+		createClusterpram["EnhancedVpcRouting"] = "true"
 	}
 
 	if createCluster.hsmClientCertificateIdentifier != "" {
@@ -263,24 +271,24 @@ func preparecreateClusterpram(createClusterpram map[string]string, createCluster
 	}
 
 	if createCluster.numberOfNodes != 0 {
-		createClusterpram["NumberOfNodes"] = createCluster.numberOfNodes
+		createClusterpram["NumberOfNodes"] = strconv.Itoa(createCluster.numberOfNodes)
 	}
 
 	if createCluster.port != 0 {
-		createClusterpram["Port"] = createCluster.port
+		createClusterpram["Port"] =strconv.Itoa(createCluster.port)
 	}
 
 	if createCluster.preferredMaintenanceWindow != "" {
 		createClusterpram["PreferredMaintenanceWindow"] = createCluster.preferredMaintenanceWindow
 	}
 
-	if createCluster.publiclyAccessible != "" {
-		createClusterpram["PubliclyAccessible"] = createCluster.publiclyAccessible
+	if createCluster.publiclyAccessible != true {
+		createClusterpram["PubliclyAccessible"] = "true"
 	}
 
 	if len(createCluster.iamRoles) != 0 {
 
-		for i := 0; i < len(describecluster.iamRoles); i++ {
+		for i := 0; i < len(createCluster.iamRoles); i++ {
 
 			n := strconv.Itoa(i)
 
@@ -292,7 +300,7 @@ func preparecreateClusterpram(createClusterpram map[string]string, createCluster
 
 	if len(createCluster.clusterSecurityGroups) != 0 {
 
-		for i := 0; i < len(describecluster.clusterSecurityGroups); i++ {
+		for i := 0; i < len(createCluster.clusterSecurityGroups); i++ {
 
 			n := strconv.Itoa(i)
 
@@ -304,7 +312,7 @@ func preparecreateClusterpram(createClusterpram map[string]string, createCluster
 
 	if len(createCluster.vpcSecurityGroupIds) != 0 {
 
-		for i := 0; i < len(describecluster.vpcSecurityGroupIds); i++ {
+		for i := 0; i < len(createCluster.vpcSecurityGroupIds); i++ {
 
 			n := strconv.Itoa(i)
 

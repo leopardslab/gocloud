@@ -24,7 +24,7 @@ type CreateCluster struct {
 	masterUserPassword               string
 	nodeType                         string
 	additionalInfo                   string
-	AllowVersionUpgrade              bool
+	allowVersionUpgrade              bool
 	automatedSnapshotRetentionPeriod string
 	availabilityZone                 string
 	clusterParameterGroupName        string
@@ -33,14 +33,14 @@ type CreateCluster struct {
 	dBName                           string
 	elasticIp                        string
 	encrypted                        bool
-	enhancedVpcRouting               string
+	enhancedVpcRouting               bool
 	hsmClientCertificateIdentifier   string
 	hsmConfigurationIdentifier       string
 	kmsKeyId                         string
 	numberOfNodes                    int
 	port                             int
-	PreferredMaintenanceWindow       string
-	PubliclyAccessible               bool
+	preferredMaintenanceWindow       string
+	publiclyAccessible               bool
 	tagKeys                          []string
 	tagValues                        []string
 	iamRoles                         []string
