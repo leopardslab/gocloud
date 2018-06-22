@@ -1,9 +1,9 @@
 package vultrdns
 
 import (
+	"fmt"
 	"github.com/cloudlibz/gocloud/vultrauth"
 	"net/http"
-	"fmt"
 )
 
 // ListResourcednsRecordSets function lists DNS record sets.
@@ -36,6 +36,14 @@ func (vultrDNS *VultrDNS) Listdns(request interface{}) (resp interface{}, err er
 
 // Deletedns function deletes a DNS record.
 func (vultrDNS *VultrDNS) Deletedns(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
+	param = request.(map[string]interface{})
+
+	response := make(map[string]interface{})
+
+	err = vultrauth.SignAndDoRequest(http.MethodPost, "/v1/dns/delete_record", param, response)
+
+	resp = response
 	return resp, err
 }
 

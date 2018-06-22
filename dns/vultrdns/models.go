@@ -11,3 +11,7 @@ type CreateDNS struct {
 	ttl      int    // (optional) TTL of this record
 	priority int    // (only required for MX and SRV) Priority of this record (omit the priority from the data)
 }
+type DeleteDNS struct {
+	domain   string // Domain name to delete record from
+	RECORDID int    // ID of record to delete (see /dns/records)
+}
