@@ -8,7 +8,6 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-
 /*
 func TestGetDatasets(t *testing.T) {
 
@@ -35,17 +34,46 @@ func TestGetDatasets(t *testing.T) {
 
 */
 
+/*
 
 func TestDeleteDatasets(t *testing.T) {
 
 	var redshift Redshift
 
 	deleteDatasets := map[string]interface{}{
-		"Region": "us-east-1",
-		"ClusterIdentifier" : "test",
+		"Region":            "us-east-1",
+		"ClusterIdentifier": "test",
 	}
 
 	_, err := redshift.DeleteDatasets(deleteDatasets)
+
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
+
+	//response := resp.(map[string]interface{})
+
+	//fmt.Println(response["body"])
+
+	fmt.Println("hi")
+}
+
+*/
+
+func TestCreateDatasets(t *testing.T) {
+
+	var redshift Redshift
+
+	createDatasets := map[string]interface{}{
+		"Region":             "us-east-1",
+		"ClusterIdentifier":  "examplecluster",
+		"MasterUsername":     "masteruser",
+		"MasterUserPassword": "12345678Aa",
+		"NumberOfNodes":      "1",
+		"NodeType":           "ds2.xlarge",
+	}
+
+	_, err := redshift.CreateDatasets(createDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")

@@ -8,8 +8,6 @@ import (
 	"strconv"
 )
 
-
-
 func preparedefaultDescribeClusterspram(describeclusterspram map[string]string) {
 
 	describeclusterspram["Action"] = "DescribeClusters"
