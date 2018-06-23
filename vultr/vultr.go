@@ -5,6 +5,7 @@ import (
 	"github.com/cloudlibz/gocloud/container/vultrcontainer"
 	"github.com/cloudlibz/gocloud/database/vultrnosql"
 	"github.com/cloudlibz/gocloud/dns/vultrdns"
+	"github.com/cloudlibz/gocloud/gocloudinterface"
 	"github.com/cloudlibz/gocloud/loadbalancer/vultrloadbalancer"
 	"github.com/cloudlibz/gocloud/serverless/vultrserverless"
 	"github.com/cloudlibz/gocloud/storage/vultrstorage"
@@ -19,4 +20,8 @@ type Vultr struct {
 	vultrdns.VultrDNS
 	vultrserverless.Vultrserverless
 	vultrnosql.Vultrnosql
+}
+
+func (*Vultr) Compute() gocloudinterface.Compute {
+	return &vultrcompute.VultrCompute{}
 }

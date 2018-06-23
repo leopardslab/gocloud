@@ -1,7 +1,7 @@
 package digioceanloadbalancer
 
 // LoadBalancer represents the configuration to be applied to an existing or a new load balancer.
-type LoadBalancer struct {
+type DigioceanLoadBalancer struct {
 	Name                string           `json:"name,omitempty"`
 	Algorithm           string           `json:"algorithm,omitempty"`
 	Region              string           `json:"region,omitempty"`

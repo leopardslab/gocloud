@@ -1,14 +1,5 @@
 package awsmachinelearning
 
-import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-	awsauth "github.com/cloudlibz/gocloud/awsauth"
-	"io/ioutil"
-	"net/http"
-)
-
 //CreateMLModel creates model.
 func (awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{}) (resp interface{}, err error) {
 

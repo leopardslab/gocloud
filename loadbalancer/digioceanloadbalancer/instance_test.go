@@ -11,7 +11,7 @@ func init() {
 
 func TestCreateloadbalancer(t *testing.T) {
 
-	var digioceancloud LoadBalancer
+	var digioceancloud DigioceanLoadBalancer
 
 	forwardingrules := []map[string]interface{}{
 		{
@@ -58,7 +58,7 @@ func TestCreateloadbalancer(t *testing.T) {
 
 func TestDeleteloadbalancer(t *testing.T) {
 
-	var digioceancloud LoadBalancer
+	var digioceancloud DigioceanLoadBalancer
 
 	delete := map[string]string{
 		"ID": "86407564",
@@ -73,7 +73,7 @@ func TestDeleteloadbalancer(t *testing.T) {
 
 func TestListloadbalancer(t *testing.T) {
 
-	var digioceancloud LoadBalancer
+	var digioceancloud DigioceanLoadBalancer
 
 	_, err := digioceancloud.Listloadbalancer(nil)
 
@@ -84,7 +84,7 @@ func TestListloadbalancer(t *testing.T) {
 
 func TestAttachnodewithloadbalancer(t *testing.T) {
 
-	var digioceancloud LoadBalancer
+	var digioceancloud DigioceanLoadBalancer
 
 	attachnodewithloadbalancer := map[string]interface{}{
 		"LoadBalancerID": "my-load-balancer",
@@ -100,7 +100,7 @@ func TestAttachnodewithloadbalancer(t *testing.T) {
 
 func TestDetachnodewithloadbalancer(t *testing.T) {
 
-	var digioceancloud LoadBalancer
+	var digioceancloud DigioceanLoadBalancer
 
 	detachnodewithloadbalancer := map[string]interface{}{
 		"LoadBalancerID": "my-load-balancer",

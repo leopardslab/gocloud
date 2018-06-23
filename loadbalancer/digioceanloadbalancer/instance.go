@@ -13,9 +13,9 @@ import (
 const loadBalancerBasePath = "https://api.digitalocean.com/v2/load_balancers"
 
 // Createloadbalancer function creates a new load balancer.
-func (digioceanloadbalancer *LoadBalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
+func (digioceanloadbalancer *DigioceanLoadBalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
 
-	var loadBalancerInstance LoadBalancer                            // Initialize LoadBalancer struct
+	var loadBalancerInstance DigioceanLoadBalancer                   // Initialize LoadBalancer struct
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken // Fetch the DigiOceanAccessToken
 
 	param := make(map[string]interface{})
@@ -149,7 +149,7 @@ func (digioceanloadbalancer *LoadBalancer) Createloadbalancer(request interface{
 }
 
 // Deleteloadbalancer function deletes a load balancer.
-func (digioceanloadbalancer *LoadBalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
+func (digioceanloadbalancer *DigioceanLoadBalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -181,7 +181,7 @@ func (digioceanloadbalancer *LoadBalancer) Deleteloadbalancer(request interface{
 }
 
 // Listloadbalancer function lists load balancers.
-func (digioceanloadbalancer *LoadBalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
+func (digioceanloadbalancer *DigioceanLoadBalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken // Fetch the DigiOceanAccessToken
 
@@ -210,7 +210,7 @@ func (digioceanloadbalancer *LoadBalancer) Listloadbalancer(request interface{})
 }
 
 // Attachnodewithloadbalancer function attaches a load balancer to a droplet.
-func (digioceanloadbalancer *LoadBalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+func (digioceanloadbalancer *DigioceanLoadBalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken // Fetch the DigiOceanAccessToken
 
@@ -268,7 +268,7 @@ func (digioceanloadbalancer *LoadBalancer) Attachnodewithloadbalancer(request in
 }
 
 // Detachnodewithloadbalancer function detaches a load balancer from a droplet.
-func (digioceanloadbalancer *LoadBalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+func (digioceanloadbalancer *DigioceanLoadBalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
 
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken // Fetch the DigiOceanAccessToken
 
