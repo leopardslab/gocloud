@@ -20,16 +20,8 @@ type DeleteDNS struct {
 	RecordId string
 }
 
-// ListDNS to store all attribute to list Ali-cloud DNS
-type ListDNS struct {
-	PageNumber int
-	PageSize   int
-	KeyWord    string
-	GroupId    string
-}
-
 // ListResourceDNSRecordSets to store all attribute to list resource Ali-cloud DNS record sets
-type ListResourceDNSRecordSets struct {
+type ListDNS struct {
 	DomainName   string
 	PageNumber   int
 	PageSize     int

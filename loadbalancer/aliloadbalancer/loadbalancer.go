@@ -18,10 +18,19 @@ func (aliloadbalancer *Aliloadbalancer) Createloadbalancer(request interface{}) 
 		case "RegionId":
 			regionID, _ := value.(string)
 			options.RegionID = regionID
+		case "RegionID":
+			regionID, _ := value.(string)
+			options.RegionID = regionID
 		case "MasterZoneId":
 			masterZoneID, _ := value.(string)
 			options.MasterZoneID = masterZoneID
+		case "MasterZoneID":
+			masterZoneID, _ := value.(string)
+			options.MasterZoneID = masterZoneID
 		case "SlaveZoneId":
+			slaveZoneID, _ := value.(string)
+			options.SlaveZoneID = slaveZoneID
+		case "SlaveZoneID":
 			slaveZoneID, _ := value.(string)
 			options.SlaveZoneID = slaveZoneID
 		case "LoadBalancerName":
@@ -31,6 +40,9 @@ func (aliloadbalancer *Aliloadbalancer) Createloadbalancer(request interface{}) 
 			addressType, _ := value.(string)
 			options.AddressType = addressType
 		case "VSwitchId":
+			VSwitchID, _ := value.(string)
+			options.VSwitchID = VSwitchID
+		case "VSwitchID":
 			VSwitchID, _ := value.(string)
 			options.VSwitchID = VSwitchID
 		case "PayType":
@@ -62,6 +74,9 @@ func (aliloadbalancer *Aliloadbalancer) Createloadbalancer(request interface{}) 
 		case "ClientToken":
 			ClientToken, _ := value.(string)
 			options.ClientToken = ClientToken
+		case "ResourceGroupId":
+			ResourceGroupID, _ := value.(string)
+			options.ResourceGroupID = ResourceGroupID
 		case "ResourceGroupID":
 			ResourceGroupID, _ := value.(string)
 			options.ResourceGroupID = ResourceGroupID
@@ -90,7 +105,13 @@ func (aliloadbalancer *Aliloadbalancer) Deleteloadbalancer(request interface{}) 
 		case "RegionId":
 			regionID, _ := value.(string)
 			options.RegionID = regionID
+		case "RegionID":
+			regionID, _ := value.(string)
+			options.RegionID = regionID
 		case "LoadBalancerId":
+			LoadBalancerID, _ := value.(string)
+			options.LoadBalancerID = LoadBalancerID
+		case "LoadBalancerID":
 			LoadBalancerID, _ := value.(string)
 			options.LoadBalancerID = LoadBalancerID
 		}
@@ -119,7 +140,13 @@ func (aliloadbalancer *Aliloadbalancer) Listloadbalancer(request interface{}) (r
 		case "RegionId":
 			regionID, _ := value.(string)
 			options.RegionID = regionID
+		case "RegionID":
+			regionID, _ := value.(string)
+			options.RegionID = regionID
 		case "LoadBalancerId":
+			LoadBalancerID, _ := value.(string)
+			options.LoadBalancerID = LoadBalancerID
+		case "LoadBalancerID":
 			LoadBalancerID, _ := value.(string)
 			options.LoadBalancerID = LoadBalancerID
 		default:
@@ -156,7 +183,13 @@ func (aliloadbalancer *Aliloadbalancer) Detachnodewithloadbalancer(request inter
 		case "RegionId":
 			RegionID, _ := value.(string)
 			options.RegionID = RegionID
+		case "RegionID":
+			RegionID, _ := value.(string)
+			options.RegionID = RegionID
 		case "LoadBalancerId":
+			LoadBalancerID, _ := value.(string)
+			options.LoadBalancerID = LoadBalancerID
+		case "LoadBalancerID":
 			LoadBalancerID, _ := value.(string)
 			options.LoadBalancerID = LoadBalancerID
 		case "BackendServers":
@@ -185,6 +218,9 @@ func (aliloadbalancer *Aliloadbalancer) Attachnodewithloadbalancer(request inter
 	for key, value := range param {
 		switch key {
 		case "LoadBalancerId":
+			LoadBalancerID, _ := value.(string)
+			options.LoadBalancerID = LoadBalancerID
+		case "LoadBalancerID":
 			LoadBalancerID, _ := value.(string)
 			options.LoadBalancerID = LoadBalancerID
 		case "BackendServers":

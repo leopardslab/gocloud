@@ -17,6 +17,8 @@ func (alicontainer *Alicontainer) Createcluster(request interface{}) (resp inter
 
 	var regionID string
 
+	options.NeedSLB = true
+
 	for key, value := range param {
 		switch key {
 		case "region_id":

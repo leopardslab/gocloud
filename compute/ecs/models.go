@@ -5,8 +5,6 @@ import (
 	"github.com/cloudlibz/gocloud/aliauth"
 )
 
-const errCommon = "miss required parameter: "
-
 // CreateNode to store all attribute to create Ali-cloud ECS instance
 type CreateNode struct {
 	RegionID                string
@@ -151,16 +149,16 @@ func (b *CreateNodeBuilder) SystemDiskDescription(systemDiskDescription string) 
 
 func (b *CreateNodeBuilder) Build() (map[string]interface{}, error) {
 	if b.createNode.RegionID == "" {
-		return nil, errors.New(errCommon + "RegionID")
+		return nil, errors.New(aliauth.StrMissRequired + "RegionID")
 	}
 	if b.createNode.ImageID == "" {
-		return nil, errors.New(errCommon + "ImageID")
+		return nil, errors.New(aliauth.StrMissRequired + "ImageID")
 	}
 	if b.createNode.InstanceType == "" {
-		return nil, errors.New(errCommon + "InstanceType")
+		return nil, errors.New(aliauth.StrMissRequired + "InstanceType")
 	}
 	if b.createNode.SecurityGroupID == "" {
-		return nil, errors.New(errCommon + "SecurityGroupID")
+		return nil, errors.New(aliauth.StrMissRequired + "SecurityGroupID")
 	}
 	params := make(map[string]interface{})
 	// Put all of options into params
@@ -191,7 +189,7 @@ func (b *StartNodeBuilder) InitLocalDisk(initLocalDisk bool) *StartNodeBuilder {
 
 func (b *StartNodeBuilder) Build() (map[string]interface{}, error) {
 	if b.startNode.InstanceID == "" {
-		return nil, errors.New(errCommon + "InstanceID")
+		return nil, errors.New(aliauth.StrMissRequired + "InstanceID")
 	}
 	params := make(map[string]interface{})
 	// Put all of options into params
@@ -232,7 +230,7 @@ func (b *StopNodeBuilder) StoppedMode(stoppedMode string) *StopNodeBuilder {
 
 func (b *StopNodeBuilder) Build() (map[string]interface{}, error) {
 	if b.stopNode.InstanceID == "" {
-		return nil, errors.New(errCommon + "InstanceID")
+		return nil, errors.New(aliauth.StrMissRequired + "InstanceID")
 	}
 	params := make(map[string]interface{})
 	// Put all of options into params
@@ -263,7 +261,7 @@ func (b *RebootNodeBuilder) ForceStop(forceStop bool) *RebootNodeBuilder {
 
 func (b *RebootNodeBuilder) Build() (map[string]interface{}, error) {
 	if b.rebootNode.InstanceID == "" {
-		return nil, errors.New(errCommon + "InstanceID")
+		return nil, errors.New(aliauth.StrMissRequired + "InstanceID")
 	}
 	params := make(map[string]interface{})
 	// Put all of options into params
@@ -289,7 +287,7 @@ func (b *DeleteNodeBuilder) InstanceID(instanceID string) *DeleteNodeBuilder {
 
 func (b *DeleteNodeBuilder) Build() (map[string]interface{}, error) {
 	if b.deleteNode.InstanceID == "" {
-		return nil, errors.New(errCommon + "InstanceID")
+		return nil, errors.New(aliauth.StrMissRequired + "InstanceID")
 	}
 	params := make(map[string]interface{})
 	// Put all of options into params
