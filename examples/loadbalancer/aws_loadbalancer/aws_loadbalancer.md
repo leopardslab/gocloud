@@ -45,7 +45,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 	"Subnets":          Subnets,
  }
 
- resp, err := awsloadbalancer.Createloadbalancer(creatloadbalancer)
+ resp, err := awsloadbalancer.CreateLoadBalancer(creatloadbalancer)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -58,7 +58,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"LoadBalancerName": "my-load-balancer",
 	}
 
-  resp, err := awsloadbalancer.Deleteloadbalancer(deleteloadbalancer)
+  resp, err := awsloadbalancer.DeleteLoadBalancer(deleteloadbalancer)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -72,7 +72,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 	"LoadBalancerName": "my-load-balancer",
   }
 
-  resp, err := awsloadbalancer.Attachnodewithloadbalancer(attachnodewithloadbalancer)
+  resp, err := awsloadbalancer.AttachNodeWithLoadBalancer(attachnodewithloadbalancer)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -86,7 +86,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"LoadBalancerName": "my-load-balancer",
 	}
 
- resp, err := awsloadbalancer.Detachnodewithloadbalancer(detachnodewithloadbalancer)
+ resp, err := awsloadbalancer.DetachNodeWithLoadBalancer(detachnodewithloadbalancer)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -97,7 +97,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 
 ```js
 
- resp, err := awsloadbalancer.Listloadbalancer(nil)
+ resp, err := awsloadbalancer.ListLoadBalancer(nil)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])

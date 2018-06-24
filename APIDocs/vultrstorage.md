@@ -35,22 +35,22 @@ type DetachDisk struct {
 type VultrStorage struct {
 }
 
-func (vultrStorage *VultrStorage) Attachdisk(request interface{}) (resp interface{}, err error)
-    Attachdisk function function attaches a disk to a Vultr server.
+func (vultrStorage *VultrStorage) AttachDisk(request interface{}) (resp interface{}, err error)
+    AttachDisk function function attaches a disk to a Vultr server.
 
-func (vultrStorage *VultrStorage) Createdisk(request interface{}) (resp interface{}, err error)
-    Createdisk function creates a new disk.
+func (vultrStorage *VultrStorage) CreateDisk(request interface{}) (resp interface{}, err error)
+    CreateDisk function creates a new disk.
 
-func (vultrStorage *VultrStorage) Createsnapshot(request interface{}) (resp interface{}, err error)
-    Createsnapshot function creates a new snapshot.
+func (vultrStorage *VultrStorage) CreateSnapshot(request interface{}) (resp interface{}, err error)
+    CreateSnapshot function creates a new snapshot.
 
-func (vultrStorage *VultrStorage) Deletedisk(request interface{}) (resp interface{}, err error)
-    Deletedisk function deletes a disk.
+func (vultrStorage *VultrStorage) DeleteDisk(request interface{}) (resp interface{}, err error)
+    DeleteDisk function deletes a disk.
 
-func (vultrStorage *VultrStorage) Deletesnapshot(request interface{}) (resp interface{}, err error)
-    Deletesnapshot function deletes a snapshot.
+func (vultrStorage *VultrStorage) DeleteSnapshot(request interface{}) (resp interface{}, err error)
+    DeleteSnapshot function deletes a snapshot.
 
-func (vultrStorage *VultrStorage) Detachdisk(request interface{}) (resp interface{}, err error)
-    Detachdisk function function detaches a disk from a Vultr server.
+func (vultrStorage *VultrStorage) DetachDisk(request interface{}) (resp interface{}, err error)
+    DetachDisk function function detaches a disk from a Vultr server.
 
 ```

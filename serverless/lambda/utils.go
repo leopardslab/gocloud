@@ -1,6 +1,6 @@
 package lambda
 
-func preparedeleteserviceparams(params map[string]interface{}, deletefunction Deletefunction, Region string) {
+func preparedeleteserviceparams(params map[string]interface{}, deletefunction DeleteFunction, Region string) {
 	if Region != "" {
 		params["Region"] = Region
 	}

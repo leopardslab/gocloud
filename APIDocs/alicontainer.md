@@ -12,39 +12,39 @@ type Alicontainer struct {
 Alicontainer struct represents Alicontainer attribute and methods associates with it.
 
 ```
-func (alicontainer *Alicontainer) Createcluster(request interface{}) (resp interface{}, err error)
+func (alicontainer *Alicontainer) CreateCluster(request interface{}) (resp interface{}, err error)
 ```
-Createcluster creates container cluster
+CreateCluster creates container cluster
 
 ```
-func (alicontainer *Alicontainer) Createservice(request interface{}) (resp interface{}, err error)
+func (alicontainer *Alicontainer) CreateService(request interface{}) (resp interface{}, err error)
 ```
-Createservice Create service is not provided by Alibaba cloud
+CreateService Create service is not provided by Alibaba cloud
 
 ```
-func (alicontainer *Alicontainer) Deletecluster(request interface{}) (resp interface{}, err error)
+func (alicontainer *Alicontainer) DeleteCluster(request interface{}) (resp interface{}, err error)
 ```
-Deletecluster deletes container cluster
+DeleteCluster deletes container cluster
 
 ```
-func (alicontainer *Alicontainer) Deleteservice(request interface{}) (resp interface{}, err error)
+func (alicontainer *Alicontainer) DeleteService(request interface{}) (resp interface{}, err error)
 ```
-Deleteservice delete service is not provided by Alibaba cloud
+DeleteService delete service is not provided by Alibaba cloud
 
 ```
-func (alicontainer *Alicontainer) Runtask(request interface{}) (resp interface{}, err error)
+func (alicontainer *Alicontainer) RunTask(request interface{}) (resp interface{}, err error)
 ```
-Runtask creates project of container cluster
+RunTask creates project of container cluster
 
 ```
-func (alicontainer *Alicontainer) Starttask(request interface{}) (resp interface{}, err error)
+func (alicontainer *Alicontainer) StartTask(request interface{}) (resp interface{}, err error)
 ```
-Runtask starts project of container cluster
+RunTask starts project of container cluster
 
 ```
-func (alicontainer *Alicontainer) Stoptask(request interface{}) (resp interface{}, err error)
+func (alicontainer *Alicontainer) StopTask(request interface{}) (resp interface{}, err error)
 ```
-Runtask stops project of container cluster
+RunTask stops project of container cluster
 
 ```
 type CreateCluster struct {

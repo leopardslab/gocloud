@@ -1,22 +1,22 @@
 package rackspacenosql
 
-//Listtables list tables
-func (rackspacenosql *Rackspacenosql) Listtables(request interface{}) (resp interface{}, err error) {
+//ListTables list tables
+func (rackspacenosql *Rackspacenosql) ListTables(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Deletetables delete tables
-func (rackspacenosql *Rackspacenosql) Deletetables(request interface{}) (resp interface{}, err error) {
+//DeleteTables delete tables
+func (rackspacenosql *Rackspacenosql) DeleteTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Describetables Describe tables
-func (rackspacenosql *Rackspacenosql) Describetables(request interface{}) (resp interface{}, err error) {
+//DescribeTables Describe tables
+func (rackspacenosql *Rackspacenosql) DescribeTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Createtables create tables
-func (rackspacenosql *Rackspacenosql) Createtables(request interface{}) (resp interface{}, err error) {
+//CreateTables create tables
+func (rackspacenosql *Rackspacenosql) CreateTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

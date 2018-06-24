@@ -9,7 +9,7 @@ import (
 )
 
 //List list tables.
-func (bigtable *Bigtable) Listtables(request interface{}) (resp interface{}, err error) {
+func (bigtable *Bigtable) ListTables(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -46,7 +46,7 @@ func (bigtable *Bigtable) Listtables(request interface{}) (resp interface{}, err
 
 //Delete delete tables.
 
-func (bigtable *Bigtable) Deletetables(request interface{}) (resp interface{}, err error) {
+func (bigtable *Bigtable) DeleteTables(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -72,7 +72,7 @@ func (bigtable *Bigtable) Deletetables(request interface{}) (resp interface{}, e
 }
 
 //describe describe tables.
-func (bigtable *Bigtable) Describetables(request interface{}) (resp interface{}, err error) {
+func (bigtable *Bigtable) DescribeTables(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -99,7 +99,7 @@ func (bigtable *Bigtable) Describetables(request interface{}) (resp interface{},
 
 //Create Create tables.
 
-func (bigtable *Bigtable) Createtables(request interface{}) (resp interface{}, err error) {
+func (bigtable *Bigtable) CreateTables(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 

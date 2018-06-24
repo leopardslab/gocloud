@@ -4,13 +4,13 @@ package lambda
 type Lambda struct {
 }
 
-type Deletefunction struct {
+type DeleteFunction struct {
 	FunctionName string
 	Qualifier    string
 }
 
-//Createfunction struct represents aws serverless Create function.
-type Createfunction struct {
+//CreateFunction struct represents aws serverless Create function.
+type CreateFunction struct {
 	code Code `json:"Code"`
 
 	Description string `json:"Description"`
@@ -29,38 +29,38 @@ type Createfunction struct {
 	vpcConfig     VpcConfig     `json:"VpcConfig"`
 }
 
-//Tags struct represents Createfunction parameters.
+//Tags struct represents CreateFunction parameters.
 type Tags struct {
 	String string `json:"string"`
 }
 
-//TracingConfig struct represents Createfunction parameters.
+//TracingConfig struct represents CreateFunction parameters.
 type TracingConfig struct {
 	Mode string `json:"Mode"`
 }
 
-//VpcConfig struct represents Createfunction parameters.
+//VpcConfig struct represents CreateFunction parameters.
 type VpcConfig struct {
 	SecurityGroupIds []string `json:"SecurityGroupIds"`
 	SubnetIds        []string `json:"SubnetIds"`
 }
 
-//Variables struct represents Createfunction parameters.
+//Variables struct represents CreateFunction parameters.
 type Variables struct {
 	String string `json:"string"`
 }
 
-//Environment struct represents Createfunction parameters.
+//Environment struct represents CreateFunction parameters.
 type Environment struct {
 	variables Variables `json:"Variables"`
 }
 
-//DeadLetterConfig struct represents Createfunction parameters.
+//DeadLetterConfig struct represents CreateFunction parameters.
 type DeadLetterConfig struct {
 	TargetArn string `json:"TargetArn"`
 }
 
-//Code struct represents Createfunction parameters.
+//Code struct represents CreateFunction parameters.
 type Code struct {
 	S3Bucket        string `json:"S3Bucket"`
 	S3Key           string `json:"S3Key"`

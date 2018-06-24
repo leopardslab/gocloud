@@ -12,8 +12,8 @@ import (
 // storageBasePath is the endpoint URL for digitalocean API.
 const storageBasePath = "https://api.digitalocean.com/v2/volumes"
 
-// Createdisk function creates a new disk.
-func (digioceanstorage *Digioceanstorage) Createdisk(request interface{}) (resp interface{}, err error) {
+// CreateDisk function creates a new disk.
+func (digioceanstorage *Digioceanstorage) CreateDisk(request interface{}) (resp interface{}, err error) {
 
 	var storageInstance Digioceanstorage                             // Initialize LoadBalancer struct
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken // Fetch the DigiOceanAccessToken
@@ -76,8 +76,8 @@ func (digioceanstorage *Digioceanstorage) Createdisk(request interface{}) (resp 
 	return resp, err
 }
 
-// Deletedisk function deletes a disk.
-func (digioceanstorage *Digioceanstorage) Deletedisk(request interface{}) (resp interface{}, err error) {
+// DeleteDisk function deletes a disk.
+func (digioceanstorage *Digioceanstorage) DeleteDisk(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -107,8 +107,8 @@ func (digioceanstorage *Digioceanstorage) Deletedisk(request interface{}) (resp 
 	return resp, err
 }
 
-// Createsnapshot function creates a new snapshot.
-func (digioceanstorage *Digioceanstorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
+// CreateSnapshot function creates a new snapshot.
+func (digioceanstorage *Digioceanstorage) CreateSnapshot(request interface{}) (resp interface{}, err error) {
 
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken // Fetch the DigiOceanAccessToken
 
@@ -165,8 +165,8 @@ func (digioceanstorage *Digioceanstorage) Createsnapshot(request interface{}) (r
 	return resp, err
 }
 
-// Deletesnapshot function deletes a snapshot.
-func (digioceanstorage *Digioceanstorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
+// DeleteSnapshot function deletes a snapshot.
+func (digioceanstorage *Digioceanstorage) DeleteSnapshot(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -196,8 +196,8 @@ func (digioceanstorage *Digioceanstorage) Deletesnapshot(request interface{}) (r
 	return resp, err
 }
 
-// Attachdisk function function attaches a disk to a droplet.
-func (digioceanstorage *Digioceanstorage) Attachdisk(request interface{}) (resp interface{}, err error) {
+// AttachDisk function function attaches a disk to a droplet.
+func (digioceanstorage *Digioceanstorage) AttachDisk(request interface{}) (resp interface{}, err error) {
 
 	var volumeID string // To store the volumeID
 	var dropletID int   // To store the Droplet the volume will be attached to.
@@ -261,8 +261,8 @@ func (digioceanstorage *Digioceanstorage) Attachdisk(request interface{}) (resp 
 	return resp, err
 }
 
-// Detachdisk function function detaches a disk from a droplet.
-func (digioceanstorage *Digioceanstorage) Detachdisk(request interface{}) (resp interface{}, err error) {
+// DetachDisk function function detaches a disk from a droplet.
+func (digioceanstorage *Digioceanstorage) DetachDisk(request interface{}) (resp interface{}, err error) {
 
 	var volumeID string // To store the volumeID
 	var dropletID int   // To store the Droplet the volume will be attached to.

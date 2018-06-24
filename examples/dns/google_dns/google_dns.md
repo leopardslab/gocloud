@@ -38,7 +38,7 @@ createdns := map[string]interface{}{
 		"Name":        "gocloud",
 	}
 
-  resp, err := googlecloud.Createdns(createdns)
+  resp, err := googlecloud.CreateDns(createdns)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -52,7 +52,7 @@ createdns := map[string]interface{}{
 		"Project": "sheltermap-1493101612061",
 	}
 
-  resp, err := googlecloud.Listdns(listdns)
+  resp, err := googlecloud.ListDns(listdns)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -67,7 +67,7 @@ createdns := map[string]interface{}{
 		"managedZone": "gocloud3",
 	}
 
- resp, err := googlecloud.Deletedns(deletedns)
+ resp, err := googlecloud.DeleteDns(deletedns)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -81,7 +81,7 @@ createdns := map[string]interface{}{
 	"managedZone" : "gocloud3",
   }
 
-  resp, err := googlecloud.ListResourcednsRecordSets(listResourcednsRecordSets)
+  resp, err := googlecloud.ListResourceDnsRecordSets(listResourcednsRecordSets)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])

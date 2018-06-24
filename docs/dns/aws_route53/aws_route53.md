@@ -33,7 +33,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"hostedZoneConfig": "hostedZoneConfig",
 	}
 
- resp, err := awsdns.Createdns(createdns)
+ resp, err := awsdns.CreateDns(createdns)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -45,7 +45,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"ID": "ZOD7SUP0ZGGQQ",
 	}
 
- resp, err := awsdns.Deletedns(deletedns)
+ resp, err := awsdns.DeleteDns(deletedns)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -59,7 +59,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"maxItems": 2,
 	}
 
-  resp, err := awsdns.Listdns(listdns)
+  resp, err := awsdns.ListDns(listdns)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -73,7 +73,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 	"zone": "ZBNX5TIW033J2",
   }
 
- resp, err := awsdns.ListResourcednsRecordSets(listResourcednsRecordSets)
+ resp, err := awsdns.ListResourceDnsRecordSets(listResourcednsRecordSets)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])

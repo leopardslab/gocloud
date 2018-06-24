@@ -1,26 +1,26 @@
 package rackspaceloadbalancer
 
-// Createloadbalancer function creates a new load balancer.
-func (rackspaceloadbalancer *Rackspaceloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
+// CreateLoadBalancer function creates a new load balancer.
+func (rackspaceloadbalancer *Rackspaceloadbalancer) CreateLoadBalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deleteloadbalancer function deletes a load balancer.
-func (rackspaceloadbalancer *Rackspaceloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
+// DeleteLoadBalancer function deletes a load balancer.
+func (rackspaceloadbalancer *Rackspaceloadbalancer) DeleteLoadBalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Listloadbalancer function lists load balancers.
-func (rackspaceloadbalancer *Rackspaceloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
+// ListLoadBalancer function lists load balancers.
+func (rackspaceloadbalancer *Rackspaceloadbalancer) ListLoadBalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Detachnodewithloadbalancer function detaches a load balancer from a compute instance.
-func (rackspaceloadbalancer *Rackspaceloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+// DetachNodeWithLoadBalancer function detaches a load balancer from a compute instance.
+func (rackspaceloadbalancer *Rackspaceloadbalancer) DetachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Attachnodewithloadbalancer function attaches a load balancer to a compute instance.
-func (rackspaceloadbalancer *Rackspaceloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+// AttachNodeWithLoadBalancer function attaches a load balancer to a compute instance.
+func (rackspaceloadbalancer *Rackspaceloadbalancer) AttachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

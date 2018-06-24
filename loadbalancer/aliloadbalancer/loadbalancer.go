@@ -5,8 +5,8 @@ import (
 	"strconv"
 )
 
-// Createloadbalancer creates ali loadbalancer
-func (aliloadbalancer *Aliloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
+// CreateLoadBalancer creates ali loadbalancer
+func (aliloadbalancer *Aliloadbalancer) CreateLoadBalancer(request interface{}) (resp interface{}, err error) {
 	var options CreateLoadBalancer
 
 	param := make(map[string]interface{})
@@ -92,8 +92,8 @@ func (aliloadbalancer *Aliloadbalancer) Createloadbalancer(request interface{}) 
 	return resp, err
 }
 
-// Deleteloadbalancer deletes ali loadbalancer
-func (aliloadbalancer *Aliloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
+// DeleteLoadBalancer deletes ali loadbalancer
+func (aliloadbalancer *Aliloadbalancer) DeleteLoadBalancer(request interface{}) (resp interface{}, err error) {
 	var options DeleteLoadBalancer
 
 	param := make(map[string]interface{})
@@ -126,8 +126,8 @@ func (aliloadbalancer *Aliloadbalancer) Deleteloadbalancer(request interface{}) 
 	return resp, err
 }
 
-// Listloadbalancer lists ali loadbalancer
-func (aliloadbalancer *Aliloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
+// ListLoadBalancer lists ali loadbalancer
+func (aliloadbalancer *Aliloadbalancer) ListLoadBalancer(request interface{}) (resp interface{}, err error) {
 	var options ListLoadBalancer
 
 	param := make(map[string]interface{})
@@ -170,8 +170,8 @@ func (aliloadbalancer *Aliloadbalancer) Listloadbalancer(request interface{}) (r
 	return resp, err
 }
 
-// Detachnodewithloadbalancer detach ali ecs instance from ali loadbalancer
-func (aliloadbalancer *Aliloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+// DetachNodeWithLoadBalancer detach ali ecs instance from ali loadbalancer
+func (aliloadbalancer *Aliloadbalancer) DetachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error) {
 	var options DetachLoadBalancer
 
 	param := make(map[string]interface{})
@@ -207,8 +207,8 @@ func (aliloadbalancer *Aliloadbalancer) Detachnodewithloadbalancer(request inter
 	return resp, err
 }
 
-//Attachnodewithloadbalancer attach ali ecs instance to ali loadbalancer
-func (aliloadbalancer *Aliloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+//AttachNodeWithLoadBalancer attach ali ecs instance to ali loadbalancer
+func (aliloadbalancer *Aliloadbalancer) AttachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error) {
 	var options AttachLoadBalancer
 
 	param := make(map[string]interface{})

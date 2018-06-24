@@ -1,7 +1,7 @@
 package awsloadbalancer
 
-//Createloadbalancer creates classic loadbalancer.
-func (awsloadbalancer *Awsloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
+//CreateLoadBalancer creates classic loadbalancer.
+func (awsloadbalancer *Awsloadbalancer) CreateLoadBalancer(request interface{}) (resp interface{}, err error) {
 
 	var options CreateLoadBalancer
 
@@ -69,8 +69,8 @@ func (awsloadbalancer *Awsloadbalancer) Createloadbalancer(request interface{}) 
 	return resp, err
 }
 
-//Deleteloadbalancer Delete loadbalancer accept LoadBalancerName.
-func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
+//DeleteLoadBalancer Delete loadbalancer accept LoadBalancerName.
+func (awsloadbalancer *Awsloadbalancer) DeleteLoadBalancer(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]string)
 
@@ -84,8 +84,8 @@ func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) 
 	return resp, err
 }
 
-//Listloadbalancer List running loadbalancer.
-func (awsloadbalancer *Awsloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
+//ListLoadBalancer List running loadbalancer.
+func (awsloadbalancer *Awsloadbalancer) ListLoadBalancer(request interface{}) (resp interface{}, err error) {
 	params := makeParamsWithVersion("DescribeLoadBalancers")
 	if request != nil {
 		param := request.(map[string]string)
@@ -99,9 +99,9 @@ func (awsloadbalancer *Awsloadbalancer) Listloadbalancer(request interface{}) (r
 	return resp, err
 }
 
-//Detachnodewithloadbalancer Detach node with loadbalancer.
-func (awsloadbalancer *Awsloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
-	var options Attachnodewithloadbalancer
+//DetachNodeWithLoadBalancer Detach node with loadbalancer.
+func (awsloadbalancer *Awsloadbalancer) DetachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error) {
+	var options AttachNodeWithLoadBalancer
 
 	param := make(map[string]interface{})
 
@@ -134,10 +134,10 @@ func (awsloadbalancer *Awsloadbalancer) Detachnodewithloadbalancer(request inter
 	return resp, err
 }
 
-// Attachnodewithloadbalancer method Attach node with loadbalancer.
-func (awsloadbalancer *Awsloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+// AttachNodeWithLoadBalancer method Attach node with loadbalancer.
+func (awsloadbalancer *Awsloadbalancer) AttachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error) {
 
-	var options Attachnodewithloadbalancer
+	var options AttachNodeWithLoadBalancer
 
 	param := make(map[string]interface{})
 

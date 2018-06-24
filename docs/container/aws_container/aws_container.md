@@ -33,7 +33,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"Region":      "us-east-1",
 	}
 
- resp, err := ecscontainer.Createcluster(createcluster)
+ resp, err := ecscontainer.CreateCluster(createcluster)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -47,7 +47,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"Region":      "us-east-1",
 	}
 
-  resp, err := ecscontainer.Deletecluster(deletecluster)
+  resp, err := ecscontainer.DeleteCluster(deletecluster)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -73,7 +73,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"LoadBalancers":  LoadBalancers,
 	}
 
-  resp, err := ecscontainer.Createservice(createservice)
+  resp, err := ecscontainer.CreateService(createservice)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -88,7 +88,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 	"Region":  "us-east-1",
    }
 
-  resp, err := ecscontainer.Deleteservice(deleteservice)
+  resp, err := ecscontainer.DeleteService(deleteservice)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])

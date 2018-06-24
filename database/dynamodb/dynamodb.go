@@ -1,7 +1,7 @@
 package dynamodb
 
 //List tables.
-func (dynamodb *Dynamodb) Listtables(request interface{}) (resp interface{}, err error) {
+func (dynamodb *Dynamodb) ListTables(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 
@@ -40,7 +40,7 @@ func (dynamodb *Dynamodb) Listtables(request interface{}) (resp interface{}, err
 }
 
 //Delete tables.
-func (dynamodb *Dynamodb) Deletetables(request interface{}) (resp interface{}, err error) {
+func (dynamodb *Dynamodb) DeleteTables(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
 
 	var TableName, Region string
@@ -72,7 +72,7 @@ func (dynamodb *Dynamodb) Deletetables(request interface{}) (resp interface{}, e
 }
 
 //Create tables.
-func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, err error) {
+func (dynamodb *Dynamodb) CreateTables(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
 	var createtable Createtable
 	var Region string
@@ -270,7 +270,7 @@ func (dynamodb *Dynamodb) Createtables(request interface{}) (resp interface{}, e
 }
 
 //Describe tables.
-func (dynamodb *Dynamodb) Describetables(request interface{}) (resp interface{}, err error) {
+func (dynamodb *Dynamodb) DescribeTables(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 

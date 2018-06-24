@@ -1,31 +1,31 @@
 package openstackserverless
 
-//Getfunction  describe serverless function.
-func (openstackserverless *Openstackserverless) Getfunction(request interface{}) (resp interface{}, err error) {
+//GetFunction  describe serverless function.
+func (openstackserverless *Openstackserverless) GetFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Createfunction  create serverless function.
-func (openstackserverless *Openstackserverless) Createfunction(request interface{}) (resp interface{}, err error) {
+//CreateFunction  create serverless function.
+func (openstackserverless *Openstackserverless) CreateFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Callfunction  call serverless function.
-func (openstackserverless *Openstackserverless) Callfunction(request interface{}) (resp interface{}, err error) {
+//CallFunction  call serverless function.
+func (openstackserverless *Openstackserverless) CallFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Listfunction  list serverless function.
-func (openstackserverless *Openstackserverless) Listfunction(request interface{}) (resp interface{}, err error) {
+//ListFunction  list serverless function.
+func (openstackserverless *Openstackserverless) ListFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Deletefunction  delete serverless function.
-func (openstackserverless *Openstackserverless) Deletefunction(request interface{}) (resp interface{}, err error) {
+//DeleteFunction  delete serverless function.
+func (openstackserverless *Openstackserverless) DeleteFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }

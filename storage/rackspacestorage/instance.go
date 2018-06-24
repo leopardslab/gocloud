@@ -1,31 +1,31 @@
 package rackspacestorage
 
-// Createdisk function creates a new disk.
-func (rackspacestorage *Rackspacestorage) Createdisk(request interface{}) (resp interface{}, err error) {
+// CreateDisk function creates a new disk.
+func (rackspacestorage *Rackspacestorage) CreateDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deletedisk function deletes a disk.
-func (rackspacestorage *Rackspacestorage) Deletedisk(request interface{}) (resp interface{}, err error) {
+// DeleteDisk function deletes a disk.
+func (rackspacestorage *Rackspacestorage) DeleteDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Createsnapshot function creates a new snapshot.
-func (rackspacestorage *Rackspacestorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
+// CreateSnapshot function creates a new snapshot.
+func (rackspacestorage *Rackspacestorage) CreateSnapshot(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deletesnapshot function deletes a snapshot.
-func (rackspacestorage *Rackspacestorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
+// DeleteSnapshot function deletes a snapshot.
+func (rackspacestorage *Rackspacestorage) DeleteSnapshot(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Attachdisk function function attaches a disk to a droplet.
-func (rackspacestorage *Rackspacestorage) Attachdisk(request interface{}) (resp interface{}, err error) {
+// AttachDisk function function attaches a disk to a droplet.
+func (rackspacestorage *Rackspacestorage) AttachDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Detachdisk function function detaches a disk from a droplet.
-func (rackspacestorage *Rackspacestorage) Detachdisk(request interface{}) (resp interface{}, err error) {
+// DetachDisk function function detaches a disk from a droplet.
+func (rackspacestorage *Rackspacestorage) DetachDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

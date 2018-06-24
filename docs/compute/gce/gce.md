@@ -70,7 +70,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
     "NetworkInterfaces": NetworkInterfaces,
     }
 
-  resp, err := googlecloud.Createnode(createnode)
+  resp, err := googlecloud.CreateNode(createnode)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -86,7 +86,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"Zone":      "us-west1-c",
 	}
 
- resp , err := googlecloud.Stopnode(stopnode)
+ resp , err := googlecloud.StopNode(stopnode)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -102,7 +102,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 
 	   }
 
-  resp,err := googlecloud.Stopnode(stop)
+  resp,err := googlecloud.StopNode(stop)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -117,7 +117,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"Zone":      "us-west1-c",
 	}
 
-  resp, err := googlecloud.Rebootnode(reboot)
+  resp, err := googlecloud.RebootNode(reboot)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -132,7 +132,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"Zone":      "us-west1-c",
 	}
 
-  resp, err := googlecloud.Deletenode(deletenode)
+  resp, err := googlecloud.DeleteNode(deletenode)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])

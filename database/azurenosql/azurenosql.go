@@ -1,22 +1,22 @@
 package azurenosql
 
-//Listtables list tables
-func (azurenosql *Azurenosql) Listtables(request interface{}) (resp interface{}, err error) {
+//ListTables list tables
+func (azurenosql *Azurenosql) ListTables(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Deletetables delete tables
-func (azurenosql *Azurenosql) Deletetables(request interface{}) (resp interface{}, err error) {
+//DeleteTables delete tables
+func (azurenosql *Azurenosql) DeleteTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Describetables Describe tables
-func (azurenosql *Azurenosql) Describetables(request interface{}) (resp interface{}, err error) {
+//DescribeTables Describe tables
+func (azurenosql *Azurenosql) DescribeTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Createtables create tables
-func (azurenosql *Azurenosql) Createtables(request interface{}) (resp interface{}, err error) {
+//CreateTables create tables
+func (azurenosql *Azurenosql) CreateTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

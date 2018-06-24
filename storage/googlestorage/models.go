@@ -36,7 +36,7 @@ type SnapshotEncryptionKey struct {
 	Sha256 string `json:"sha256"`
 }
 
-type Attachdisk struct {
+type AttachDisk struct {
 	Source             string            `json:"source"`
 	DeviceName         string            `json:"deviceName"`
 	AutoDelete         bool              `json:"autoDelete"`

@@ -12,24 +12,24 @@ type Alidns struct {
 Alidns represents Alidns attribute and method associates with it.
 
 ```
-func (alidns *Alidns) Createdns(request interface{}) (resp interface{}, err error)
+func (alidns *Alidns) CreateDns(request interface{}) (resp interface{}, err error)
 ```
-Createdns add DNS record accept map[string]interface{}
+CreateDns add DNS record accept map[string]interface{}
 
 ```
-func (alidns *Alidns) Deletedns(request interface{}) (resp interface{}, err error)
+func (alidns *Alidns) DeleteDns(request interface{}) (resp interface{}, err error)
 ```
-Deletedns delete DNS record accept map[string]interface{}
+DeleteDns delete DNS record accept map[string]interface{}
 
 ```
-func (alidns *Alidns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error)
+func (alidns *Alidns) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error)
 ```
-ListResourcednsRecordSets list resource DNS record sets accept map[string]interface{}
+ListResourceDnsRecordSets list resource DNS record sets accept map[string]interface{}
 
 ```
-func (alidns *Alidns) Listdns(request interface{}) (resp interface{}, err error)
+func (alidns *Alidns) ListDns(request interface{}) (resp interface{}, err error)
 ```
-Listdns list DNS record accept map[string]interface{}
+ListDns list DNS record accept map[string]interface{}
 
 ```
 type CreateDNS struct {

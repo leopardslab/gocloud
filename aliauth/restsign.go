@@ -116,7 +116,7 @@ func signRequest(request *http.Request) {
 
 	// CanonicalizedHeaders
 	var canonicalizedHeadersSlice []string
-	for k, _ := range headers {
+	for k := range headers {
 		kLower := strings.ToLower(k)
 		if strings.HasPrefix(kLower, "x-acs-") {
 			canonicalizedHeadersSlice = append(canonicalizedHeadersSlice, kLower)

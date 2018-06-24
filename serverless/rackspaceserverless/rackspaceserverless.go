@@ -1,31 +1,31 @@
 package rackspaceserverless
 
-//Getfunction  describe serverless function.
-func (rackspaceserverless *Rackspaceserverless) Getfunction(request interface{}) (resp interface{}, err error) {
+//GetFunction  describe serverless function.
+func (rackspaceserverless *Rackspaceserverless) GetFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Createfunction  create serverless function.
-func (rackspaceserverless *Rackspaceserverless) Createfunction(request interface{}) (resp interface{}, err error) {
+//CreateFunction  create serverless function.
+func (rackspaceserverless *Rackspaceserverless) CreateFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Callfunction  call serverless function.
-func (rackspaceserverless *Rackspaceserverless) Callfunction(request interface{}) (resp interface{}, err error) {
+//CallFunction  call serverless function.
+func (rackspaceserverless *Rackspaceserverless) CallFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Listfunction  list serverless function.
-func (rackspaceserverless *Rackspaceserverless) Listfunction(request interface{}) (resp interface{}, err error) {
+//ListFunction  list serverless function.
+func (rackspaceserverless *Rackspaceserverless) ListFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Deletefunction  delete serverless function.
-func (rackspaceserverless *Rackspaceserverless) Deletefunction(request interface{}) (resp interface{}, err error) {
+//DeleteFunction  delete serverless function.
+func (rackspaceserverless *Rackspaceserverless) DeleteFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }

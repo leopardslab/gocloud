@@ -34,7 +34,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"Region":     "us-east-1",
 	}
 
-  resp, err := amazonstorage.Createdisk(createdisk)
+  resp, err := amazonstorage.CreateDisk(createdisk)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -47,7 +47,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"Region":   "us-east-1",
 	}
 
-  resp, err := amazonstorage.Deletedisk(deletedisk)
+  resp, err := amazonstorage.DeleteDisk(deletedisk)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -62,7 +62,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"Region":     "us-east-1",
 	}
 
-  resp, err := amazonstorage.Attachdisk(attachdisk)
+  resp, err := amazonstorage.AttachDisk(attachdisk)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -78,7 +78,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"Region":     "us-east-1",
 	}
 
-  resp, err := amazonstorage.Detachdisk(detachdisk)
+  resp, err := amazonstorage.DetachDisk(detachdisk)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -93,7 +93,7 @@ createsnapshot := map[string]string{
 		"Region":      "us-east-1",
 	}
 
-  resp, err := amazonstorage.Createsnapshot(createsnapshot)
+  resp, err := amazonstorage.CreateSnapshot(createsnapshot)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -106,7 +106,7 @@ createsnapshot := map[string]string{
 		"Region":     "us-east-1",
 	}
 
-  resp, err := amazonstorage.Deletesnapshot(deletesnapshot)
+  resp, err := amazonstorage.DeleteSnapshot(deletesnapshot)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```

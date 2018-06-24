@@ -9,7 +9,7 @@ func init() {
 	aliauth.LoadConfig()
 }
 
-func TestCreatedisk(t *testing.T) {
+func TestCreateDisk(t *testing.T) {
 	var alistorage Alistorage
 	createDisk := map[string]interface{}{
 		"RegionId":    "cn-qingdao",
@@ -18,7 +18,7 @@ func TestCreatedisk(t *testing.T) {
 		"DiskName":    "ThisIsDiskName",
 		"Description": "ThisIsDescription",
 	}
-	_, err := alistorage.Createdisk(createDisk)
+	_, err := alistorage.CreateDisk(createDisk)
 	if err != nil {
 		t.Errorf("CreateDisk Test Fail")
 		return
@@ -39,7 +39,7 @@ func TestCreateDiskBuilder(t *testing.T) {
 		t.Errorf("CreateDisk Test Fail: %s", err)
 		return
 	}
-	_, err = alistorage.Createdisk(createDisk)
+	_, err = alistorage.CreateDisk(createDisk)
 	if err != nil {
 		t.Errorf("CreateDisk Test Fail: %s", err)
 		return
@@ -47,12 +47,12 @@ func TestCreateDiskBuilder(t *testing.T) {
 	t.Logf("Ali disk is created successfully.")
 }
 
-func TestDeletedisk(t *testing.T) {
+func TestDeleteDisk(t *testing.T) {
 	var alistorage Alistorage
 	deleteDisk := map[string]interface{}{
 		"DiskId": "d-m5e2g66ws9m7r00ux87h",
 	}
-	_, err := alistorage.Deletedisk(deleteDisk)
+	_, err := alistorage.DeleteDisk(deleteDisk)
 	if err != nil {
 		t.Errorf("DeleteDisk Test Fail")
 		return
@@ -69,7 +69,7 @@ func TestDeleteDiskBuilder(t *testing.T) {
 		t.Errorf("DeleteDisk Test Fail: %s", err)
 		return
 	}
-	_, err = alistorage.Deletedisk(deleteDisk)
+	_, err = alistorage.DeleteDisk(deleteDisk)
 	if err != nil {
 		t.Errorf("DeleteDisk Test Fail: %s", err)
 		return
@@ -77,14 +77,14 @@ func TestDeleteDiskBuilder(t *testing.T) {
 	t.Logf("Ali disk is deleted successfully.")
 }
 
-func TestAttachdisk(t *testing.T) {
+func TestAttachDisk(t *testing.T) {
 	var alistorage Alistorage
 	attachDisk := map[string]interface{}{
 		"InstanceId":         "i-m5e1lploaf58bddf0gah",
 		"DiskId":             "d-m5edwiwlyyn7bwz6cdd4",
 		"DeleteWithInstance": false,
 	}
-	_, err := alistorage.Attachdisk(attachDisk)
+	_, err := alistorage.AttachDisk(attachDisk)
 	if err != nil {
 		t.Errorf("AttachDisk Test Fail")
 		return
@@ -103,7 +103,7 @@ func TestAttachDiskBuilder(t *testing.T) {
 		t.Errorf("AttachDisk Test Fail")
 		return
 	}
-	_, err = alistorage.Attachdisk(attachDisk)
+	_, err = alistorage.AttachDisk(attachDisk)
 	if err != nil {
 		t.Errorf("AttachDisk Test Fail")
 		return
@@ -111,13 +111,13 @@ func TestAttachDiskBuilder(t *testing.T) {
 	t.Logf("Ali disk is attached successfully.")
 }
 
-func TestDetachdisk(t *testing.T) {
+func TestDetachDisk(t *testing.T) {
 	var alistorage Alistorage
 	detachDisk := map[string]interface{}{
 		"InstanceId": "i-m5e1lploaf58bddf0gah",
 		"DiskId":     "d-m5edwiwlyyn7bwz6cdd4",
 	}
-	_, err := alistorage.Detachdisk(detachDisk)
+	_, err := alistorage.DetachDisk(detachDisk)
 	if err != nil {
 		t.Errorf("DetachDisk Test Fail")
 		return
@@ -135,7 +135,7 @@ func TestDetachDiskBuilder(t *testing.T) {
 		t.Errorf("DetachDisk Test Fail")
 		return
 	}
-	_, err = alistorage.Detachdisk(detachDisk)
+	_, err = alistorage.DetachDisk(detachDisk)
 	if err != nil {
 		t.Errorf("DetachDisk Test Fail")
 		return
@@ -143,13 +143,13 @@ func TestDetachDiskBuilder(t *testing.T) {
 	t.Logf("Ali disk is detached successfully.")
 }
 
-func TestCreatesnapshot(t *testing.T) {
+func TestCreateSnapshot(t *testing.T) {
 	var alistorage Alistorage
 	createsnapshot := map[string]interface{}{
 		"DiskId":       "d-m5e7k6ycnx8b5zzsm0yp",
 		"SnapshotName": "ThisIsSnapshotName",
 	}
-	_, err := alistorage.Createsnapshot(createsnapshot)
+	_, err := alistorage.CreateSnapshot(createsnapshot)
 	if err != nil {
 		t.Errorf("CreateSnapshot Test Fail: %s", err)
 		return
@@ -167,7 +167,7 @@ func TestCreateSnapshotBuilder(t *testing.T) {
 		t.Errorf("CreateSnapshot Test Fail: %s", err)
 		return
 	}
-	_, err = alistorage.Createsnapshot(createSnapshot)
+	_, err = alistorage.CreateSnapshot(createSnapshot)
 	if err != nil {
 		t.Errorf("CreateSnapshot Test Fail: %s", err)
 		return
@@ -175,12 +175,12 @@ func TestCreateSnapshotBuilder(t *testing.T) {
 	t.Logf("Ali disk snapshot is created successfully.")
 }
 
-func TestDeletesnapshot(t *testing.T) {
+func TestDeleteSnapshot(t *testing.T) {
 	var alistorage Alistorage
 	deletesnapshot := map[string]interface{}{
 		"SnapshotId": "s-m5eave3s6oufpctcxynu",
 	}
-	_, err := alistorage.Deletesnapshot(deletesnapshot)
+	_, err := alistorage.DeleteSnapshot(deletesnapshot)
 	if err != nil {
 		t.Errorf("DeleteSnapshot Test Fail: %s", err)
 		return
@@ -197,7 +197,7 @@ func TestDeleteSnapshotBuilder(t *testing.T) {
 		t.Errorf("DeleteSnapshot Test Fail: %s", err)
 		return
 	}
-	_, err = alistorage.Deletesnapshot(deleteSnapshot)
+	_, err = alistorage.DeleteSnapshot(deleteSnapshot)
 	if err != nil {
 		t.Errorf("DeleteSnapshot Test Fail: %s", err)
 		return

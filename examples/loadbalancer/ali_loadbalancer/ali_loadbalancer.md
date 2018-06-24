@@ -53,7 +53,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Createloadbalancer(create)
+    resp, err := alicloud.CreateLoadBalancer(create)
     if err != nil {
         fmt.Println(err)
         return
@@ -70,7 +70,7 @@ or
           "LoadBalancerId": "lb-m5eavuvgjh0pho3hm4ub5",
   }
 
-  resp, err := alicloud.Deleteloadbalancer(deleteLoadBalancer)
+  resp, err := alicloud.DeleteLoadBalancer(deleteLoadBalancer)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -86,7 +86,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Deleteloadbalancer(deleteLoadBalancer)
+    resp, err := alicloud.DeleteLoadBalancer(deleteLoadBalancer)
     if err != nil {
         fmt.Println(err)
         return
@@ -102,7 +102,7 @@ or
           "RegionId":       "cn-qingdao",
   }
 
-  resp, err := alicloud.Listloadbalancer(list)
+  resp, err := alicloud.ListLoadBalancer(list)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -117,7 +117,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Listloadbalancer(list)
+    resp, err := alicloud.ListLoadBalancer(list)
     if err != nil {
         fmt.Println(err)
         return
@@ -135,7 +135,7 @@ or
               "{'ServerId':'i-m5eahbbwqxawpj1opww9','Weight':'100','Type':'ecs'}]",
   }
 
-  resp, err := alicloud.Attachnodewithloadbalancer(attach)
+  resp, err := alicloud.AttachNodeWithLoadBalancer(attach)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -152,7 +152,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Attachnodewithloadbalancer(attach)
+    resp, err := alicloud.AttachNodeWithLoadBalancer(attach)
     if err != nil {
         fmt.Println(err)
         return
@@ -171,7 +171,7 @@ or
               "{'ServerId':'i-m5eahbbwqxawpj1opww9','Type':'ecs'}]",
   }
 
-  resp, err := alicloud.Detachnodewithloadbalancer(detach)
+  resp, err := alicloud.DetachNodeWithLoadBalancer(detach)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -189,7 +189,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Detachnodewithloadbalancer(detach)
+    resp, err := alicloud.DetachNodeWithLoadBalancer(detach)
     if err != nil {
         fmt.Println(err)
         return

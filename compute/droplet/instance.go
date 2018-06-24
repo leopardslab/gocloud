@@ -14,8 +14,8 @@ import (
 // dropletBasePath is the endpoint URL for digitalocean API.
 const dropletBasePath = "https://api.digitalocean.com/v2/droplets"
 
-// Createnode function creates a new droplet.
-func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err error) {
+// CreateNode function creates a new droplet.
+func (droplet *Droplet) CreateNode(request interface{}) (resp interface{}, err error) {
 
 	var DropletInstance Droplet                                      // Initialize Droplet struct
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken // Fetch the DigiOceanAccessToken
@@ -104,32 +104,32 @@ func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err e
 	dropletInstanceJSONString := string(dropletInstanceJSON)
 	var dropletInstanceJSONStringbyte = []byte(dropletInstanceJSONString)
 
-	Createnodereq, err := http.NewRequest("POST", dropletBasePath, bytes.NewBuffer(dropletInstanceJSONStringbyte))
+	CreateNodereq, err := http.NewRequest("POST", dropletBasePath, bytes.NewBuffer(dropletInstanceJSONStringbyte))
 	if err != nil {
 		fmt.Println(err)
 	}
-	Createnodereq.Header.Set("Content-Type", "application/json")
-	Createnodereq.Header.Set("Authorization", "Bearer "+DigiOceanAccessToken)
+	CreateNodereq.Header.Set("Content-Type", "application/json")
+	CreateNodereq.Header.Set("Authorization", "Bearer "+DigiOceanAccessToken)
 
-	Createnoderesp, err := http.DefaultClient.Do(Createnodereq)
+	CreateNoderesp, err := http.DefaultClient.Do(CreateNodereq)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	defer Createnoderesp.Body.Close()
+	defer CreateNoderesp.Body.Close()
 
-	responseBody, err := ioutil.ReadAll(Createnoderesp.Body)
-	Createnoderesponse := make(map[string]interface{})
-	Createnoderesponse["status"] = Createnoderesp.StatusCode
-	Createnoderesponse["body"] = string(responseBody)
-	resp = Createnoderesponse
+	responseBody, err := ioutil.ReadAll(CreateNoderesp.Body)
+	CreateNoderesponse := make(map[string]interface{})
+	CreateNoderesponse["status"] = CreateNoderesp.StatusCode
+	CreateNoderesponse["body"] = string(responseBody)
+	resp = CreateNoderesponse
 
 	return resp, err
 
 }
 
-// Startnode function starts a droplet.
-func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err error) {
+// StartNode function starts a droplet.
+func (droplet *Droplet) StartNode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 	inputID, err := strconv.Atoi(options["ID"])
@@ -147,30 +147,30 @@ func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err er
 	startRequestJSONString := string(startRequestJSON)
 	var startRequestJSONStringbyte = []byte(startRequestJSONString)
 
-	Startnodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(startRequestJSONStringbyte))
+	StartNodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(startRequestJSONStringbyte))
 	if err != nil {
 		fmt.Println(err)
 	}
-	Startnodereq.Header.Set("Content-Type", "application/json")
-	Startnodereq.Header.Set("Authorization", "Bearer "+DigiOceanAccessToken)
+	StartNodereq.Header.Set("Content-Type", "application/json")
+	StartNodereq.Header.Set("Authorization", "Bearer "+DigiOceanAccessToken)
 
-	Startnoderesp, err := http.DefaultClient.Do(Startnodereq)
+	StartNoderesp, err := http.DefaultClient.Do(StartNodereq)
 	if err != nil {
 		fmt.Println(err)
 	}
-	defer Startnoderesp.Body.Close()
+	defer StartNoderesp.Body.Close()
 
-	responseBody, err := ioutil.ReadAll(Startnoderesp.Body)
-	Startnoderesponse := make(map[string]interface{})
-	Startnoderesponse["body"] = string(responseBody)
-	resp = Startnoderesponse
+	responseBody, err := ioutil.ReadAll(StartNoderesp.Body)
+	StartNoderesponse := make(map[string]interface{})
+	StartNoderesponse["body"] = string(responseBody)
+	resp = StartNoderesponse
 
 	return resp, err
 
 }
 
-// Stopnode function stops a droplet.
-func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err error) {
+// StopNode function stops a droplet.
+func (droplet *Droplet) StopNode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 	inputID, err := strconv.Atoi(options["ID"])
@@ -188,30 +188,30 @@ func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err err
 	stopRequestJSONString := string(stopRequestJSON)
 	var stopRequestJSONStringbyte = []byte(stopRequestJSONString)
 
-	Stopnodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(stopRequestJSONStringbyte))
+	StopNodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(stopRequestJSONStringbyte))
 	if err != nil {
 		fmt.Println(err)
 	}
-	Stopnodereq.Header.Set("Content-Type", "application/json")
-	Stopnodereq.Header.Set("Authorization", "Bearer "+DigiOceanAccessToken)
+	StopNodereq.Header.Set("Content-Type", "application/json")
+	StopNodereq.Header.Set("Authorization", "Bearer "+DigiOceanAccessToken)
 
-	Stopnoderesp, err := http.DefaultClient.Do(Stopnodereq)
+	StopNoderesp, err := http.DefaultClient.Do(StopNodereq)
 	if err != nil {
 		fmt.Println(err)
 	}
-	defer Stopnoderesp.Body.Close()
+	defer StopNoderesp.Body.Close()
 
-	responseBody, err := ioutil.ReadAll(Stopnoderesp.Body)
-	Stopnoderesponse := make(map[string]interface{})
-	Stopnoderesponse["body"] = string(responseBody)
-	resp = Stopnoderesponse
+	responseBody, err := ioutil.ReadAll(StopNoderesp.Body)
+	StopNoderesponse := make(map[string]interface{})
+	StopNoderesponse["body"] = string(responseBody)
+	resp = StopNoderesponse
 
 	return resp, err
 
 }
 
-// Rebootnode function reboots a droplet.
-func (droplet *Droplet) Rebootnode(request interface{}) (resp interface{}, err error) {
+// RebootNode function reboots a droplet.
+func (droplet *Droplet) RebootNode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 	inputID, err := strconv.Atoi(options["ID"])
@@ -229,31 +229,31 @@ func (droplet *Droplet) Rebootnode(request interface{}) (resp interface{}, err e
 	rebootRequestJSONString := string(rebootRequestJSON)
 	var rebootRequestJSONStringbyte = []byte(rebootRequestJSONString)
 
-	Rebootnodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(rebootRequestJSONStringbyte))
+	RebootNodereq, err := http.NewRequest("POST", url, bytes.NewBuffer(rebootRequestJSONStringbyte))
 	if err != nil {
 		fmt.Println(err)
 	}
-	Rebootnodereq.Header.Set("Content-Type", "application/json")
-	Rebootnodereq.Header.Set("Authorization", "Bearer "+DigiOceanAccessToken)
+	RebootNodereq.Header.Set("Content-Type", "application/json")
+	RebootNodereq.Header.Set("Authorization", "Bearer "+DigiOceanAccessToken)
 
-	Rebootnoderesp, err := http.DefaultClient.Do(Rebootnodereq)
+	RebootNoderesp, err := http.DefaultClient.Do(RebootNodereq)
 	if err != nil {
 		fmt.Println(err)
 	}
-	defer Rebootnoderesp.Body.Close()
+	defer RebootNoderesp.Body.Close()
 
-	responseBody, err := ioutil.ReadAll(Rebootnoderesp.Body)
-	Rebootnoderesponse := make(map[string]interface{})
-	Rebootnoderesponse["status"] = Rebootnoderesp.StatusCode
-	Rebootnoderesponse["body"] = string(responseBody)
-	resp = Rebootnoderesponse
+	responseBody, err := ioutil.ReadAll(RebootNoderesp.Body)
+	RebootNoderesponse := make(map[string]interface{})
+	RebootNoderesponse["status"] = RebootNoderesp.StatusCode
+	RebootNoderesponse["body"] = string(responseBody)
+	resp = RebootNoderesponse
 
 	return resp, err
 
 }
 
-// Deletenode function deletes a droplet.
-func (droplet *Droplet) Deletenode(request interface{}) (resp interface{}, err error) {
+// DeleteNode function deletes a droplet.
+func (droplet *Droplet) DeleteNode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 	inputID, err := strconv.Atoi(options["ID"])
@@ -267,25 +267,25 @@ func (droplet *Droplet) Deletenode(request interface{}) (resp interface{}, err e
 	url := dropletBasePath + "/" + options["ID"]
 	DigiOceanAccessToken := digioceanAuth.Token.DigiOceanAccessToken // Fetch the DigiOceanAccessToken
 
-	Deletenoderequest, err := http.NewRequest("DELETE", url, nil)
+	DeleteNoderequest, err := http.NewRequest("DELETE", url, nil)
 	if err != nil {
 		fmt.Println(err)
 	}
-	Deletenoderequest.Header.Set("Content-Type", "application/json")
-	Deletenoderequest.Header.Set("Authorization", "Bearer "+DigiOceanAccessToken)
+	DeleteNoderequest.Header.Set("Content-Type", "application/json")
+	DeleteNoderequest.Header.Set("Authorization", "Bearer "+DigiOceanAccessToken)
 
-	Deletenoderesp, err := http.DefaultClient.Do(Deletenoderequest)
+	DeleteNoderesp, err := http.DefaultClient.Do(DeleteNoderequest)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	defer Deletenoderesp.Body.Close()
+	defer DeleteNoderesp.Body.Close()
 
-	responseBody, err := ioutil.ReadAll(Deletenoderesp.Body)
-	Deletenoderesponse := make(map[string]interface{})
-	Deletenoderesponse["status"] = Deletenoderesp.StatusCode
-	Deletenoderesponse["body"] = string(responseBody)
-	resp = Deletenoderesponse
+	responseBody, err := ioutil.ReadAll(DeleteNoderesp.Body)
+	DeleteNoderesponse := make(map[string]interface{})
+	DeleteNoderesponse["status"] = DeleteNoderesp.StatusCode
+	DeleteNoderesponse["body"] = string(responseBody)
+	resp = DeleteNoderesponse
 
 	return resp, err
 }

@@ -4,31 +4,31 @@ package awsloadbalancer
 
 TYPES
 
-type Attachnodewithloadbalancer struct {
+type AttachNodeWithLoadBalancer struct {
     Instances        []string
     LoadBalancerName string
 }
-    Attachnodewithloadbalancer represents Attachnodewithloadbalancer
+    AttachNodeWithLoadBalancer represents AttachNodeWithLoadBalancer
     attribute.
 
 type Awsloadbalancer struct {
 }
     Awsloadbalancer represents Awsloadbalancer struct.
 
-func (awsloadbalancer *Awsloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
-    Attachnodewithloadbalancer method Attach node with loadbalancer.
+func (awsloadbalancer *Awsloadbalancer) AttachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error)
+    AttachNodeWithLoadBalancer method Attach node with loadbalancer.
 
-func (awsloadbalancer *Awsloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error)
-    Createloadbalancer creates classic loadbalancer.
+func (awsloadbalancer *Awsloadbalancer) CreateLoadBalancer(request interface{}) (resp interface{}, err error)
+    CreateLoadBalancer creates classic loadbalancer.
 
-func (awsloadbalancer *Awsloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error)
-    Deleteloadbalancer Delete loadbalancer accept LoadBalancerName.
+func (awsloadbalancer *Awsloadbalancer) DeleteLoadBalancer(request interface{}) (resp interface{}, err error)
+    DeleteLoadBalancer Delete loadbalancer accept LoadBalancerName.
 
-func (awsloadbalancer *Awsloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
-    Detachnodewithloadbalancer Detach node with loadbalancer.
+func (awsloadbalancer *Awsloadbalancer) DetachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error)
+    DetachNodeWithLoadBalancer Detach node with loadbalancer.
 
-func (awsloadbalancer *Awsloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error)
-    Listloadbalancer List running loadbalancer.
+func (awsloadbalancer *Awsloadbalancer) ListLoadBalancer(request interface{}) (resp interface{}, err error)
+    ListLoadBalancer List running loadbalancer.
 
 func (awsloadbalancer *Awsloadbalancer) PrepareSignatureV2query(params map[string]string, response map[string]interface{}) error
     PrepareSignatureV2query for elasticloadbalancing.
@@ -44,11 +44,11 @@ type CreateLoadBalancer struct {
 }
     CreateLoadBalancer struct represents attribute of CreateLoadBalancer.
 
-type Detachnodewithloadbalancer struct {
+type DetachNodeWithLoadBalancer struct {
     Instances        []string
     LoadBalancerName string
 }
-    Detachnodewithloadbalancer represents Attachnodewithloadbalancer
+    DetachNodeWithLoadBalancer represents AttachNodeWithLoadBalancer
     attribute.
 
 type Listener struct {
@@ -58,7 +58,7 @@ type Listener struct {
     Protocol         string
     SSLCertificateId string
 }
-    Listener represents Listener attribute of Createloadbalancer.
+    Listener represents Listener attribute of CreateLoadBalancer.
 
 type Tag struct {
     Key   string `xml:"key"`

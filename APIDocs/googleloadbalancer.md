@@ -13,9 +13,9 @@ const (
 
 FUNCTIONS
 
-func Createloadbalancerdictnoaryconvert(option TargetPools, Createloadbalancerjsonmap map[string]interface{})
-    Createloadbalancerdictnoaryconvert creates a dictnoary for
-    Createloadbalancer api.
+func CreateLoadBalancerdictnoaryconvert(option TargetPools, CreateLoadBalancerjsonmap map[string]interface{})
+    CreateLoadBalancerdictnoaryconvert creates a dictnoary for
+    CreateLoadBalancer api.
 
 TYPES
 
@@ -23,22 +23,22 @@ type Googleloadbalancer struct {
 }
     Googleloadbalancer reperents google loadbalancer methods and attributes.
 
-func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
-    Attachnodewithloadbalancer attach new google compute instance to google
+func (googleloadbalancer *Googleloadbalancer) AttachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error)
+    AttachNodeWithLoadBalancer attach new google compute instance to google
     loadbalancer pool.
 
-func (googleloadbalancer *Googleloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error)
-    Createloadbalancer creates google loadbalancer pool.
+func (googleloadbalancer *Googleloadbalancer) CreateLoadBalancer(request interface{}) (resp interface{}, err error)
+    CreateLoadBalancer creates google loadbalancer pool.
 
-func (googleloadbalancer *Googleloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error)
-    Deleteloadbalancer deletes google loadbalancer pool.
+func (googleloadbalancer *Googleloadbalancer) DeleteLoadBalancer(request interface{}) (resp interface{}, err error)
+    DeleteLoadBalancer deletes google loadbalancer pool.
 
-func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
-    Detachnodewithloadbalancer Detach google compute instance from google
+func (googleloadbalancer *Googleloadbalancer) DetachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error)
+    DetachNodeWithLoadBalancer Detach google compute instance from google
     loadbalancer pool.
 
-func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error)
-    Listloadbalancer lists google loadbalancer pool.
+func (googleloadbalancer *Googleloadbalancer) ListLoadBalancer(request interface{}) (resp interface{}, err error)
+    ListLoadBalancer lists google loadbalancer pool.
 
 type TargetPools struct {
     BackupPool        string   `json:"backupPool"`

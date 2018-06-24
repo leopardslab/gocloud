@@ -20,16 +20,16 @@ type Awsdns struct {
 }
     Awsdns represents Awsdns attribute and method associates with it.
 
-func (awsdns *Awsdns) Createdns(request interface{}) (resp interface{}, err error)
-    Createdns creates awsdns.
+func (awsdns *Awsdns) CreateDns(request interface{}) (resp interface{}, err error)
+    CreateDns creates awsdns.
 
-func (awsdns *Awsdns) Deletedns(request interface{}) (resp interface{}, err error)
+func (awsdns *Awsdns) DeleteDns(request interface{}) (resp interface{}, err error)
 
-func (awsdns *Awsdns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error)
-    ListResourcednsRecordSets represents awsdns ListResourcednsRecordSets.
+func (awsdns *Awsdns) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error)
+    ListResourceDnsRecordSets represents awsdns ListResourceDnsRecordSets.
 
-func (awsdns *Awsdns) Listdns(request interface{}) (resp interface{}, err error)
-    Listdns Listdns awsdns.
+func (awsdns *Awsdns) ListDns(request interface{}) (resp interface{}, err error)
+    ListDns ListDns awsdns.
 
 func (awsdns *Awsdns) PrepareSignatureV4query(method, path string, req, resp interface{}, response map[string]interface{}) error
     PrepareSignatureV4query prepare signatue for awsdns.
@@ -113,13 +113,13 @@ type ListResourceRecordSetsResponse struct {
     ListResourceRecordSetsResponse represents
     ListResourceRecordSetsResponse.
 
-type ListResourcednsRecordSets struct {
+type ListResourceDnsRecordSets struct {
     Name       string
     Type       string
     Identifier string
     MaxItems   int
 }
-    ListResourcednsRecordSets represents ListResourcednsRecordSets.
+    ListResourceDnsRecordSets represents ListResourceDnsRecordSets.
 
 type ResourceRecordSet struct {
     Name          string       `xml:"Name"`

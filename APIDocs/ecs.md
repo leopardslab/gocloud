@@ -118,29 +118,29 @@ type ECS struct {
 ECS struct
 
 ```
-func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error)
+func (ecs *ECS) CreateNode(request interface{}) (resp interface{}, err error)
 ```
-Createnode create ECS instances accept map[string]interface{}
+CreateNode create ECS instances accept map[string]interface{}
 
 ```
-func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error)
+func (ecs *ECS) DeleteNode(request interface{}) (resp interface{}, err error)
 ```
-Deletenode delete ECS instances accept map[string]interface{}
+DeleteNode delete ECS instances accept map[string]interface{}
 
 ```
-func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error)
+func (ecs *ECS) RebootNode(request interface{}) (resp interface{}, err error)
 ```
-Rebootnode reboot ECS instances accept map[string]interface{}
+RebootNode reboot ECS instances accept map[string]interface{}
 
 ```
-func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error)
+func (ecs *ECS) StartNode(request interface{}) (resp interface{}, err error)
 ```
-Startnode start ECS instances accept map[string]interface{}
+StartNode start ECS instances accept map[string]interface{}
 
 ```
-func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error)
+func (ecs *ECS) StopNode(request interface{}) (resp interface{}, err error)
 ```
-Stopnode stop ECS instances accept map[string]interface{}
+StopNode stop ECS instances accept map[string]interface{}
 
 ```
 type RebootNode struct {

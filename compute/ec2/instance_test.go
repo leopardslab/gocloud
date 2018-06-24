@@ -7,7 +7,7 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-func TestCreatenode(t *testing.T) {
+func TestCreateNode(t *testing.T) {
 	var amazoncloud EC2
 	create := map[string]interface{}{
 		"ImageId":      "ami-ccf405a5",
@@ -15,45 +15,45 @@ func TestCreatenode(t *testing.T) {
 		"Region":       "us-east-1",
 	}
 
-	_, err := amazoncloud.Createnode(create)
+	_, err := amazoncloud.CreateNode(create)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestStopnode(t *testing.T) {
+func TestStopNode(t *testing.T) {
 	var amazoncloud EC2
 	stop := map[string]string{
 		"instance-id": "i-06d518ba15b68685c",
 		"Region":      "us-east-1",
 	}
-	_, err := amazoncloud.Stopnode(stop)
+	_, err := amazoncloud.StopNode(stop)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestStartnode(t *testing.T) {
+func TestStartNode(t *testing.T) {
 	var amazoncloud EC2
 	start := map[string]string{
 		"instance-id": "i-0174bd6f54178e89b",
 		"Region":      "us-east-1",
 	}
-	_, err := amazoncloud.Startnode(start)
+	_, err := amazoncloud.StartNode(start)
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestRebootnode(t *testing.T) {
+func TestRebootNode(t *testing.T) {
 	var amazoncloud EC2
 	Reboot := map[string]string{
 		"instance-id": "i-037a9fae81c33ac30",
 		"Region":      "us-east-1",
 	}
-	_, err := amazoncloud.Rebootnode(Reboot)
+	_, err := amazoncloud.RebootNode(Reboot)
 
 	if err != nil {
 		t.Errorf("Test Pass")
@@ -67,5 +67,5 @@ func TestDeletnode(t *testing.T) {
 		"Region":      "us-east-1",
 	}
 
-	amazoncloud.Deletenode(delete)
+	amazoncloud.DeleteNode(delete)
 }

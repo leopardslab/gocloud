@@ -2,7 +2,7 @@ package googledns
 
 import "testing"
 
-func TestCreatedns(t *testing.T) {
+func TestCreateDns(t *testing.T) {
 	var googledns Googledns
 
 	createdns := map[string]interface{}{
@@ -12,7 +12,7 @@ func TestCreatedns(t *testing.T) {
 		"DnsName":     "rootmonk.me.",
 		"Name":        "gocloud",
 	}
-	_, err := googledns.Createdns(createdns)
+	_, err := googledns.CreateDns(createdns)
 
 	if err != nil {
 		t.Errorf("Test Fail")
@@ -20,42 +20,42 @@ func TestCreatedns(t *testing.T) {
 
 }
 
-func TestListdns(t *testing.T) {
+func TestListDns(t *testing.T) {
 	var googledns Googledns
 
 	listdns := map[string]string{
 		"Project": "sheltermap-1493101612061",
 	}
 
-	_, err := googledns.Listdns(listdns)
+	_, err := googledns.ListDns(listdns)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestListResourcednsRecordSets(t *testing.T) {
+func TestListResourceDnsRecordSets(t *testing.T) {
 	var googledns Googledns
 
 	listResourcednsRecordSets := map[string]string{
 		"Project":     "sheltermap-1493101612061",
 		"managedZone": "gocloud3",
 	}
-	_, err := googledns.ListResourcednsRecordSets(listResourcednsRecordSets)
+	_, err := googledns.ListResourceDnsRecordSets(listResourcednsRecordSets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDeletedns(t *testing.T) {
+func TestDeleteDns(t *testing.T) {
 	var googledns Googledns
 
 	deletedns := map[string]string{
 		"Project":     "sheltermap-1493101612061",
 		"managedZone": "gocloud3",
 	}
-	_, err := googledns.Deletedns(deletedns)
+	_, err := googledns.DeleteDns(deletedns)
 
 	if err != nil {
 		t.Errorf("Test Fail")

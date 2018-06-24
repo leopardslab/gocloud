@@ -31,7 +31,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
         "size_gb": 50,
         "label":   "test",
     }
-    resp, err := vultr.Createdisk(create)
+    resp, err := vultr.CreateDisk(create)
     if err != nil {
         fmt.Println(err)
         return
@@ -46,7 +46,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
     deleteDisk := map[string]interface{}{
           "SUBID": 1313217,
       }
-      resp, err := vultr.Deletedisk(deleteDisk)
+      resp, err := vultr.DeleteDisk(deleteDisk)
       if err != nil {
           fmt.Println(err)
           return
@@ -62,7 +62,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
         "SUBID":           1313217,
         "attach_to_SUBID": 1313207,
     }
-    resp, err := vultr.Attachdisk(attachDisk)
+    resp, err := vultr.AttachDisk(attachDisk)
     if err != nil {
         fmt.Println(err)
         return
@@ -77,7 +77,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
      detachDisk := map[string]interface{}{
          "SUBID": 1313217,
      }
-     resp, err := vultr.Detachdisk(detachDisk)
+     resp, err := vultr.DetachDisk(detachDisk)
      if err != nil {
          fmt.Println(err)
          return
@@ -92,7 +92,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
     createSnapshot := map[string]interface{}{
           "SUBID": 1312965,
       }
-      resp, err := vultr.Createsnapshot(createSnapshot)
+      resp, err := vultr.CreateSnapshot(createSnapshot)
       if err != nil {
           fmt.Println(err)
           return
@@ -107,7 +107,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
     deleteSnapshot := map[string]interface{}{
           "SNAPSHOTID": "5359435d28b9a",
       }
-      resp, err := vultr.Deletesnapshot(deleteSnapshot)
+      resp, err := vultr.DeleteSnapshot(deleteSnapshot)
       if err != nil {
           fmt.Println(err)
           return

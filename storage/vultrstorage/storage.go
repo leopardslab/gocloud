@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-// Createdisk function creates a new disk.
-func (vultrStorage *VultrStorage) Createdisk(request interface{}) (resp interface{}, err error) {
+// CreateDisk function creates a new disk.
+func (vultrStorage *VultrStorage) CreateDisk(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
 
@@ -18,8 +18,8 @@ func (vultrStorage *VultrStorage) Createdisk(request interface{}) (resp interfac
 	return resp, err
 }
 
-// Deletedisk function deletes a disk.
-func (vultrStorage *VultrStorage) Deletedisk(request interface{}) (resp interface{}, err error) {
+// DeleteDisk function deletes a disk.
+func (vultrStorage *VultrStorage) DeleteDisk(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
 
@@ -31,8 +31,8 @@ func (vultrStorage *VultrStorage) Deletedisk(request interface{}) (resp interfac
 	return resp, err
 }
 
-// Createsnapshot function creates a new snapshot.
-func (vultrStorage *VultrStorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
+// CreateSnapshot function creates a new snapshot.
+func (vultrStorage *VultrStorage) CreateSnapshot(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
 
@@ -44,8 +44,8 @@ func (vultrStorage *VultrStorage) Createsnapshot(request interface{}) (resp inte
 	return resp, err
 }
 
-// Deletesnapshot function deletes a snapshot.
-func (vultrStorage *VultrStorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
+// DeleteSnapshot function deletes a snapshot.
+func (vultrStorage *VultrStorage) DeleteSnapshot(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
 
@@ -57,8 +57,8 @@ func (vultrStorage *VultrStorage) Deletesnapshot(request interface{}) (resp inte
 	return resp, err
 }
 
-// Attachdisk function function attaches a disk to a Vultr server.
-func (vultrStorage *VultrStorage) Attachdisk(request interface{}) (resp interface{}, err error) {
+// AttachDisk function function attaches a disk to a Vultr server.
+func (vultrStorage *VultrStorage) AttachDisk(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
 
@@ -70,8 +70,8 @@ func (vultrStorage *VultrStorage) Attachdisk(request interface{}) (resp interfac
 	return resp, err
 }
 
-// Detachdisk function function detaches a disk from a Vultr server.
-func (vultrStorage *VultrStorage) Detachdisk(request interface{}) (resp interface{}, err error) {
+// DetachDisk function function detaches a disk from a Vultr server.
+func (vultrStorage *VultrStorage) DetachDisk(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
 

@@ -12,29 +12,29 @@ type Aliloadbalancer struct {
 Aliloadbalancer represents Aliloadbalancer struct.
 
 ```
-func (aliloadbalancer *Aliloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
+func (aliloadbalancer *Aliloadbalancer) AttachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error)
 ```
-Attachnodewithloadbalancer attach ali ecs instance to ali loadbalancer
+AttachNodeWithLoadBalancer attach ali ecs instance to ali loadbalancer
 
 ```
-func (aliloadbalancer *Aliloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error)
+func (aliloadbalancer *Aliloadbalancer) CreateLoadBalancer(request interface{}) (resp interface{}, err error)
 ```
-Createloadbalancer creates ali loadbalancer
+CreateLoadBalancer creates ali loadbalancer
 
 ```
-func (aliloadbalancer *Aliloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error)
+func (aliloadbalancer *Aliloadbalancer) DeleteLoadBalancer(request interface{}) (resp interface{}, err error)
 ```
-Deleteloadbalancer deletes ali loadbalancer
+DeleteLoadBalancer deletes ali loadbalancer
 
 ```
-func (aliloadbalancer *Aliloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
+func (aliloadbalancer *Aliloadbalancer) DetachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error)
 ```
-Detachnodewithloadbalancer detach ali ecs instance from ali loadbalancer
+DetachNodeWithLoadBalancer detach ali ecs instance from ali loadbalancer
 
 ```
-func (aliloadbalancer *Aliloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error)
+func (aliloadbalancer *Aliloadbalancer) ListLoadBalancer(request interface{}) (resp interface{}, err error)
 ```
-Listloadbalancer lists ali loadbalancer
+ListLoadBalancer lists ali loadbalancer
 
 ```
 type AttachLoadBalancer struct {

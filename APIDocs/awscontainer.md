@@ -14,7 +14,7 @@ type ContainerOverride struct {
 }
     ContainerOverride struct represents ContainerOverride attributes.
 
-type Createservice struct {
+type CreateService struct {
     ServiceName              string
     TaskDefinition           string
     DesiredCount             int
@@ -26,13 +26,13 @@ type Createservice struct {
     PlacementConstraints     []Placementconstraint
     PlacementStrategys       []Placementstrategy
 }
-    Createservice struct represents Ecscontainer Createservice methods.
+    CreateService struct represents Ecscontainer CreateService methods.
 
-type Deleteservice struct {
+type DeleteService struct {
     Cluster string
     Service string
 }
-    Deleteservice struct represents Deleteservice attributes.
+    DeleteService struct represents DeleteService attributes.
 
 type DeploymentConfiguration struct {
     MaximumPercent        int
@@ -45,29 +45,29 @@ type Ecscontainer struct {
     Ecscontainer struct represents Ecscontainer attribute and methods
     associates with it.
 
-func (ecscontainer *Ecscontainer) Createcluster(request interface{}) (resp interface{}, err error)
-    Createcluster creates cluster.
+func (ecscontainer *Ecscontainer) CreateCluster(request interface{}) (resp interface{}, err error)
+    CreateCluster creates cluster.
 
-func (ecscontainer *Ecscontainer) Createservice(request interface{}) (resp interface{}, err error)
-    Createservice creates container service.
+func (ecscontainer *Ecscontainer) CreateService(request interface{}) (resp interface{}, err error)
+    CreateService creates container service.
 
-func (ecscontainer *Ecscontainer) Deletecluster(request interface{}) (resp interface{}, err error)
-    Deletecluster delete cluster.
+func (ecscontainer *Ecscontainer) DeleteCluster(request interface{}) (resp interface{}, err error)
+    DeleteCluster delete cluster.
 
-func (ecscontainer *Ecscontainer) Deleteservice(request interface{}) (resp interface{}, err error)
-    Deleteservice Delete container service.
+func (ecscontainer *Ecscontainer) DeleteService(request interface{}) (resp interface{}, err error)
+    DeleteService Delete container service.
 
 func (ecscontainer *Ecscontainer) PrepareSignatureV4query(params map[string]string, paramsmap map[string]interface{}, response map[string]interface{}) error
     PrepareSignatureV4query creates PrepareSignatureV4 for request.
 
-func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}, err error)
-    Runtask runs container.
+func (ecscontainer *Ecscontainer) RunTask(request interface{}) (resp interface{}, err error)
+    RunTask runs container.
 
-func (ecscontainer *Ecscontainer) Starttask(request interface{}) (resp interface{}, err error)
-    Starttask start container service.
+func (ecscontainer *Ecscontainer) StartTask(request interface{}) (resp interface{}, err error)
+    StartTask start container service.
 
-func (ecscontainer *Ecscontainer) Stoptask(request interface{}) (resp interface{}, err error)
-    Stoptask stops container.
+func (ecscontainer *Ecscontainer) StopTask(request interface{}) (resp interface{}, err error)
+    StopTask stops container.
 
 type Environment struct {
     Name  string
@@ -95,7 +95,7 @@ type Placementstrategy struct {
 }
     Placementstrategy struct represents Ecscontainer Placement strategy.
 
-type Runtask struct {
+type RunTask struct {
     PlacementConstraints []Placementconstraint
     PlacementStrategys   []Placementstrategy
     Cluster              string
@@ -105,9 +105,9 @@ type Runtask struct {
     TaskDefinition       string
     // contains filtered or unexported fields
 }
-    Runtask struct represents Runtask attributes.
+    RunTask struct represents RunTask attributes.
 
-type Starttask struct {
+type StartTask struct {
     Cluster            string
     ContainerInstances []string
     Group              string
@@ -115,13 +115,13 @@ type Starttask struct {
     TaskDefinition     string
     // contains filtered or unexported fields
 }
-    Starttask struct represents Starttask attributes.
+    StartTask struct represents StartTask attributes.
 
-type Stoptask struct {
+type StopTask struct {
     Cluster string
     Reason  string
     Task    string
 }
-    Stoptask struct represents Stoptask attributes.
+    StopTask struct represents StopTask attributes.
 
 

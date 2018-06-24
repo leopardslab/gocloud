@@ -9,16 +9,16 @@ func init() {
 	vultrauth.LoadConfig()
 }
 
-func TestVultrCompute_Createnode(t *testing.T) {
+func TestVultrCompute_CreateNode(t *testing.T) {
 	var vultrServer VultrCompute
 	create := map[string]interface{}{
 		"DCID":      1,
 		"VPSPLANID": 201,
 		"OSID":      127,
 	}
-	resp, err := vultrServer.Createnode(create)
+	resp, err := vultrServer.CreateNode(create)
 	if err != nil {
-		t.Errorf("Createnode Test Fail: %s", err)
+		t.Errorf("CreateNode Test Fail: %s", err)
 		return
 	}
 	response := resp.(map[string]interface{})
@@ -29,14 +29,14 @@ func TestVultrCompute_Createnode(t *testing.T) {
 	t.Logf("Vultr node is created successfully.")
 }
 
-func TestVultrCompute_Startnode(t *testing.T) {
+func TestVultrCompute_StartNode(t *testing.T) {
 	var vultrServer VultrCompute
 	start := map[string]interface{}{
 		"SUBID": 6492936,
 	}
-	resp, err := vultrServer.Startnode(start)
+	resp, err := vultrServer.StartNode(start)
 	if err != nil {
-		t.Errorf("Startnode Test Fail: %s", err)
+		t.Errorf("StartNode Test Fail: %s", err)
 		return
 	}
 	response := resp.(map[string]interface{})
@@ -47,14 +47,14 @@ func TestVultrCompute_Startnode(t *testing.T) {
 	t.Logf("Vultr node is started successfully.")
 }
 
-func TestVultrCompute_Rebootnode(t *testing.T) {
+func TestVultrCompute_RebootNode(t *testing.T) {
 	var vultrServer VultrCompute
 	reboot := map[string]interface{}{
 		"SUBID": 6492936,
 	}
-	resp, err := vultrServer.Rebootnode(reboot)
+	resp, err := vultrServer.RebootNode(reboot)
 	if err != nil {
-		t.Errorf("Rebootnode Test Fail: %s", err)
+		t.Errorf("RebootNode Test Fail: %s", err)
 		return
 	}
 	response := resp.(map[string]interface{})
@@ -65,14 +65,14 @@ func TestVultrCompute_Rebootnode(t *testing.T) {
 	t.Logf("Vultr node is rebooted successfully.")
 }
 
-func TestVultrCompute_Deletenode(t *testing.T) {
+func TestVultrCompute_DeleteNode(t *testing.T) {
 	var vultrServer VultrCompute
 	destroy := map[string]interface{}{
 		"SUBID": 6492936,
 	}
-	resp, err := vultrServer.Deletenode(destroy)
+	resp, err := vultrServer.DeleteNode(destroy)
 	if err != nil {
-		t.Errorf("Deletenode Test Fail: %s", err)
+		t.Errorf("DeleteNode Test Fail: %s", err)
 		return
 	}
 	response := resp.(map[string]interface{})

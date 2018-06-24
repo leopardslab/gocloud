@@ -1,11 +1,11 @@
 package awscontainer
 
-//Stoptask stops container.
-func (ecscontainer *Ecscontainer) Stoptask(request interface{}) (resp interface{}, err error) {
+//StopTask stops container.
+func (ecscontainer *Ecscontainer) StopTask(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 	var Region string
-	var stoptask Stoptask
+	var stoptask StopTask
 	for key, value := range param {
 		switch key {
 		case "cluster":
@@ -35,11 +35,11 @@ func (ecscontainer *Ecscontainer) Stoptask(request interface{}) (resp interface{
 	return resp, err
 }
 
-//Deleteservice Delete container service.
-func (ecscontainer *Ecscontainer) Deleteservice(request interface{}) (resp interface{}, err error) {
+//DeleteService Delete container service.
+func (ecscontainer *Ecscontainer) DeleteService(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
 	var Region string
-	var deleteservice Deleteservice
+	var deleteservice DeleteService
 	for key, value := range param {
 		switch key {
 		case "cluster":
@@ -65,10 +65,10 @@ func (ecscontainer *Ecscontainer) Deleteservice(request interface{}) (resp inter
 	return resp, err
 }
 
-//Starttask start container service.
-func (ecscontainer *Ecscontainer) Starttask(request interface{}) (resp interface{}, err error) {
+//StartTask start container service.
+func (ecscontainer *Ecscontainer) StartTask(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
-	var starttask Starttask
+	var starttask StartTask
 	var Region string
 	for key, value := range param {
 		switch key {
@@ -156,10 +156,10 @@ func (ecscontainer *Ecscontainer) Starttask(request interface{}) (resp interface
 	return resp, err
 }
 
-//Runtask runs container.
-func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}, err error) {
+//RunTask runs container.
+func (ecscontainer *Ecscontainer) RunTask(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
-	var runtask Runtask
+	var runtask RunTask
 	var Region string
 	for key, value := range param {
 		switch key {
@@ -276,10 +276,10 @@ func (ecscontainer *Ecscontainer) Runtask(request interface{}) (resp interface{}
 	return resp, err
 }
 
-//Createservice creates container service.
-func (ecscontainer *Ecscontainer) Createservice(request interface{}) (resp interface{}, err error) {
+//CreateService creates container service.
+func (ecscontainer *Ecscontainer) CreateService(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
-	var createservice Createservice
+	var createservice CreateService
 	var Region string
 	for key, value := range param {
 		switch key {
@@ -369,16 +369,16 @@ func (ecscontainer *Ecscontainer) Createservice(request interface{}) (resp inter
 	}
 	params := make(map[string]string)
 	preparecreateServiceparams(params, createservice, Region)
-	Createservicejsonmap := make(map[string]interface{})
-	preparecreateServiceparamsdict(Createservicejsonmap, createservice)
+	CreateServicejsonmap := make(map[string]interface{})
+	preparecreateServiceparamsdict(CreateServicejsonmap, createservice)
 	response := make(map[string]interface{})
-	err = ecscontainer.PrepareSignatureV4query(params, Createservicejsonmap, response)
+	err = ecscontainer.PrepareSignatureV4query(params, CreateServicejsonmap, response)
 	resp = response
 	return resp, err
 }
 
-//Createcluster creates cluster.
-func (ecscontainer *Ecscontainer) Createcluster(request interface{}) (resp interface{}, err error) {
+//CreateCluster creates cluster.
+func (ecscontainer *Ecscontainer) CreateCluster(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 	var clusterName, Region string
@@ -394,19 +394,19 @@ func (ecscontainer *Ecscontainer) Createcluster(request interface{}) (resp inter
 		}
 	}
 	params := make(map[string]string)
-	prepareCreateclusterrparams(params, clusterName, Region)
+	prepareCreateClusterrparams(params, clusterName, Region)
 
-	Createclusterjsonmap := map[string]interface{}{
+	CreateClusterjsonmap := map[string]interface{}{
 		"clusterName": params["clusterName"],
 	}
 	response := make(map[string]interface{})
-	err = ecscontainer.PrepareSignatureV4query(params, Createclusterjsonmap, response)
+	err = ecscontainer.PrepareSignatureV4query(params, CreateClusterjsonmap, response)
 	resp = response
 	return resp, err
 }
 
-//Deletecluster delete cluster.
-func (ecscontainer *Ecscontainer) Deletecluster(request interface{}) (resp interface{}, err error) {
+//DeleteCluster delete cluster.
+func (ecscontainer *Ecscontainer) DeleteCluster(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 	var clusterName, Region string
@@ -422,7 +422,7 @@ func (ecscontainer *Ecscontainer) Deletecluster(request interface{}) (resp inter
 		}
 	}
 	params := make(map[string]string)
-	prepareDeletecluster(params, clusterName, Region)
+	prepareDeleteCluster(params, clusterName, Region)
 
 	Deletecontainerjsonmap := map[string]interface{}{
 		"cluster": clusterName,

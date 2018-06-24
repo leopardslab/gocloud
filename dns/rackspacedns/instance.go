@@ -1,21 +1,21 @@
 package rackspacedns
 
-// ListResourcednsRecordSets function lists DNS record sets.
-func (rackspacedns *Rackspacedns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error) {
+// ListResourceDnsRecordSets function lists DNS record sets.
+func (rackspacedns *Rackspacedns) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Listdns function lists DNS records.
-func (rackspacedns *Rackspacedns) Listdns(request interface{}) (resp interface{}, err error) {
+// ListDns function lists DNS records.
+func (rackspacedns *Rackspacedns) ListDns(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deletedns function deletes a DNS record.
-func (rackspacedns *Rackspacedns) Deletedns(request interface{}) (resp interface{}, err error) {
+// DeleteDns function deletes a DNS record.
+func (rackspacedns *Rackspacedns) DeleteDns(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Createdns function creates a new DNS record.
-func (rackspacedns *Rackspacedns) Createdns(request interface{}) (resp interface{}, err error) {
+// CreateDns function creates a new DNS record.
+func (rackspacedns *Rackspacedns) CreateDns(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

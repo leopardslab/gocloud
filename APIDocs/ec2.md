@@ -36,17 +36,17 @@ type EC2 struct {
 func New2(auth Auth, region Region) *EC2
     Function return EC2 instance
 
-func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error)
+func (ec2 *EC2) CreateNode(request interface{}) (resp interface{}, err error)
 
-func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error)
+func (ec2 *EC2) DeleteNode(request interface{}) (resp interface{}, err error)
 
 func (ec2 *EC2) PrepareSignatureV2query(params map[string]string, Region string, response map[string]interface{}) error
 
-func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error)
+func (ec2 *EC2) RebootNode(request interface{}) (resp interface{}, err error)
 
-func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error)
+func (ec2 *EC2) StartNode(request interface{}) (resp interface{}, err error)
 
-func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error)
+func (ec2 *EC2) StopNode(request interface{}) (resp interface{}, err error)
 
 type Error struct {
     StatusCode int

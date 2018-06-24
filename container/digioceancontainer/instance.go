@@ -1,36 +1,36 @@
 package digioceancontainer
 
-// Createcluster function creates a new cluster.
-func (digioceancontainer *Digioceancontainer) Createcluster(request interface{}) (resp interface{}, err error) {
+// CreateCluster function creates a new cluster.
+func (digioceancontainer *Digioceancontainer) CreateCluster(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deletecluster function deletes a cluster.
-func (digioceancontainer *Digioceancontainer) Deletecluster(request interface{}) (resp interface{}, err error) {
+// DeleteCluster function deletes a cluster.
+func (digioceancontainer *Digioceancontainer) DeleteCluster(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Createservice function creates a new service.
-func (digioceancontainer *Digioceancontainer) Createservice(request interface{}) (resp interface{}, err error) {
+// CreateService function creates a new service.
+func (digioceancontainer *Digioceancontainer) CreateService(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Runtask function runs a task.
-func (digioceancontainer *Digioceancontainer) Runtask(request interface{}) (resp interface{}, err error) {
+// RunTask function runs a task.
+func (digioceancontainer *Digioceancontainer) RunTask(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Starttask function starts a task.
-func (digioceancontainer *Digioceancontainer) Starttask(request interface{}) (resp interface{}, err error) {
+// StartTask function starts a task.
+func (digioceancontainer *Digioceancontainer) StartTask(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deleteservice function deletes a service.
-func (digioceancontainer *Digioceancontainer) Deleteservice(request interface{}) (resp interface{}, err error) {
+// DeleteService function deletes a service.
+func (digioceancontainer *Digioceancontainer) DeleteService(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Stoptask function stops a task.
-func (digioceancontainer *Digioceancontainer) Stoptask(request interface{}) (resp interface{}, err error) {
+// StopTask function stops a task.
+func (digioceancontainer *Digioceancontainer) StopTask(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

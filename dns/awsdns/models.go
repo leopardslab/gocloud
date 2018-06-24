@@ -4,8 +4,8 @@ package awsdns
 type Awsdns struct {
 }
 
-//ListResourcednsRecordSets represents ListResourcednsRecordSets.
-type ListResourcednsRecordSets struct {
+//ListResourceDnsRecordSets represents ListResourceDnsRecordSets.
+type ListResourceDnsRecordSets struct {
 	Name       string
 	Type       string
 	Identifier string

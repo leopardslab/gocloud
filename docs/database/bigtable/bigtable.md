@@ -41,7 +41,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"initialSplits" : initialSplits,
 	}
 
-	resp, err := googlecloud.Createtables(createtables)
+	resp, err := googlecloud.CreateTables(createtables)
 
 	response := resp.(map[string]interface{})
 
@@ -57,7 +57,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
 	}
 
-	resp, err := googlecloud.Describetables(describetables)
+	resp, err := googlecloud.DescribeTables(describetables)
 
 	response := resp.(map[string]interface{})
 
@@ -73,7 +73,7 @@ deletetables := map[string]string{
 		"name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
 	}
 
-	resp, err := googlecloud.Deletetables(deletetables)
+	resp, err := googlecloud.DeleteTables(deletetables)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -88,7 +88,7 @@ listtables := map[string]string{
 		"pageToken": "",
 	}
 
-	resp, err := googlecloud.Listtables(listtables)
+	resp, err := googlecloud.ListTables(listtables)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])

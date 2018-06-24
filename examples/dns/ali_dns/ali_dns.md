@@ -37,7 +37,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
   		"Line":       "default",
   }
 
-  resp, err := alicloud.Createdns(createDNS)
+  resp, err := alicloud.CreateDns(createDNS)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -49,7 +49,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
   		"RecordId": "3888946862348288",
   }
 
-  resp, err := alicloud.Deletedns(deleteDNS)
+  resp, err := alicloud.DeleteDns(deleteDNS)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -62,7 +62,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
   		"PageSize":   20,
   }
 
-  resp, err := alicloud.Listdns(listDNS)
+  resp, err := alicloud.ListDns(listDNS)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -74,7 +74,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
   		"DomainName": "oddcn.cn",
   }
 
-  resp, err := alicloud.ListResourcednsRecordSets(listResourceDNSRecordSets)
+  resp, err := alicloud.ListResourceDnsRecordSets(listResourceDNSRecordSets)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```

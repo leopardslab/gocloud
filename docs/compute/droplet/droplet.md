@@ -45,7 +45,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "Tags": []string{"web"},
   }
 
- resp, err := digioceancloud.Createnode(create)
+ resp, err := digioceancloud.CreateNode(create)
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
@@ -57,7 +57,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "ID": "86407564",
   }
 
-  resp, err := digioceancloud.Stopnode(stop)
+  resp, err := digioceancloud.StopNode(stop)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -69,7 +69,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "ID": "86407564",
   }
 
-  resp, err := digioceancloud.Startnode(start)
+  resp, err := digioceancloud.StartNode(start)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -81,7 +81,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "ID": "86407564",
   }
 
-  resp, err := digioceancloud.Rebootnode(reboot)
+  resp, err := digioceancloud.RebootNode(reboot)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -93,7 +93,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "ID": "86406952",
   }
 
-  resp, err := digioceancloud.Deletenode(delete)
+  resp, err := digioceancloud.DeleteNode(delete)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```

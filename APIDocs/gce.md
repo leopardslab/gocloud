@@ -34,15 +34,15 @@ type GCE struct {
 }
     GCE struct reperesnts Google Compute Engine.
 
-func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error)
+func (gce *GCE) CreateNode(request interface{}) (resp interface{}, err error)
 
-func (gce *GCE) Deletenode(request interface{}) (resp interface{}, err error)
+func (gce *GCE) DeleteNode(request interface{}) (resp interface{}, err error)
 
-func (gce *GCE) Rebootnode(request interface{}) (resp interface{}, err error)
+func (gce *GCE) RebootNode(request interface{}) (resp interface{}, err error)
 
-func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error)
+func (gce *GCE) StartNode(request interface{}) (resp interface{}, err error)
 
-func (gce *GCE) Stopnode(request interface{}) (resp interface{}, err error)
+func (gce *GCE) StopNode(request interface{}) (resp interface{}, err error)
 
 type GCEResponse struct {
     Kind          string `json:"kind"`

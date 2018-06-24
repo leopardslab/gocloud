@@ -11,13 +11,13 @@ const (
 
 FUNCTIONS
 
-func Creatednsedictnoaryconvert(option Createdns, Creatednsjsonmap map[string]interface{})
-    Creatednsedictnoaryconvert convert Createdns parameters to Createdns
+func CreateDnsedictnoaryconvert(option CreateDns, CreateDnsjsonmap map[string]interface{})
+    CreateDnsedictnoaryconvert convert CreateDns parameters to CreateDns
     dictnoary.
 
 TYPES
 
-type Createdns struct {
+type CreateDns struct {
     CreationTime  string   `json:"creationTime"`
     Description   string   `json:"description"`
     DNSName       string   `json:"dnsName"`
@@ -27,23 +27,23 @@ type Createdns struct {
     NameServerSet string   `json:"nameServerSet"`
     NameServers   []string `json:"nameServers"`
 }
-    Createdns struct represents Createdns attribute.
+    CreateDns struct represents CreateDns attribute.
 
 type Googledns struct {
 }
     Googledns struct represents Googledns attribute and methods associates
     with it.
 
-func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, err error)
-    Createdns creates DNS.
+func (googledns *Googledns) CreateDns(request interface{}) (resp interface{}, err error)
+    CreateDns creates DNS.
 
-func (googledns *Googledns) Deletedns(request interface{}) (resp interface{}, err error)
-    Deletedns deletes DNS.
+func (googledns *Googledns) DeleteDns(request interface{}) (resp interface{}, err error)
+    DeleteDns deletes DNS.
 
-func (googledns *Googledns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error)
-    ListResourcednsRecordSets list ListResourcednsRecordSets.
+func (googledns *Googledns) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error)
+    ListResourceDnsRecordSets list ListResourceDnsRecordSets.
 
-func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err error)
-    Listdns lists DNS.
+func (googledns *Googledns) ListDns(request interface{}) (resp interface{}, err error)
+    ListDns lists DNS.
 
 

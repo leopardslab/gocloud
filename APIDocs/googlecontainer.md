@@ -4,34 +4,34 @@ package googlecontainer
 
 FUNCTIONS
 
-func CreateclusterLegacyAbacdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{})
-    CreateclusterLegacyAbacdictnoaryconvert create dictnoary for
-    Createcluster.
+func CreateClusterLegacyAbacdictnoaryconvert(option CreateCluster, CreateClusterjsonmap map[string]interface{})
+    CreateClusterLegacyAbacdictnoaryconvert create dictnoary for
+    CreateCluster.
 
-func CreateclusterMasterAuthdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{})
-    CreateclusterMasterAuthdictnoaryconvert create dictnoary for
-    Createcluster.
+func CreateClusterMasterAuthdictnoaryconvert(option CreateCluster, CreateClusterjsonmap map[string]interface{})
+    CreateClusterMasterAuthdictnoaryconvert create dictnoary for
+    CreateCluster.
 
-func CreateclusterNodePoolsdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{})
-    CreateclusterNodePoolsdictnoaryconvert create dictnoary for
-    Createcluster.
+func CreateClusterNodePoolsdictnoaryconvert(option CreateCluster, CreateClusterjsonmap map[string]interface{})
+    CreateClusterNodePoolsdictnoaryconvert create dictnoary for
+    CreateCluster.
 
-func Createclusterdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{})
-    Createclusterdictnoaryconvert create dictnoary for Createcluster.
+func CreateClusterdictnoaryconvert(option CreateCluster, CreateClusterjsonmap map[string]interface{})
+    CreateClusterdictnoaryconvert create dictnoary for CreateCluster.
 
-func CreateserviceAutoscalingdictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{})
-    CreateserviceAutoscalingdictnoaryconvert create dictnoary for
-    Createservice.
+func CreateServiceAutoscalingdictnoaryconvert(option nodepool, CreateServicejsonmap map[string]interface{})
+    CreateServiceAutoscalingdictnoaryconvert create dictnoary for
+    CreateService.
 
-func CreateserviceConfigdictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{})
-    CreateserviceConfigdictnoaryconvert create dictnoary for Createservice.
+func CreateServiceConfigdictnoaryconvert(option nodepool, CreateServicejsonmap map[string]interface{})
+    CreateServiceConfigdictnoaryconvert create dictnoary for CreateService.
 
-func CreateserviceManagementdictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{})
-    CreateserviceManagementdictnoaryconvert create dictnoary for
-    Createservice.
+func CreateServiceManagementdictnoaryconvert(option nodepool, CreateServicejsonmap map[string]interface{})
+    CreateServiceManagementdictnoaryconvert create dictnoary for
+    CreateService.
 
-func Createservicedictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{})
-    Createservicedictnoaryconvert create dictnoary for Createservice.
+func CreateServicedictnoaryconvert(option nodepool, CreateServicejsonmap map[string]interface{})
+    CreateServicedictnoaryconvert create dictnoary for CreateService.
 
 TYPES
 
@@ -41,7 +41,7 @@ type ClientCertificateConfigs struct {
     ClientCertificateConfigs struct represents ClientCertificateConfigs
     attributes of masterAuth.
 
-type Createcluster struct {
+type CreateCluster struct {
     Name                  string     `json:"name"`
     Zone                  string     `json:"zone"`
     Network               string     `json:"network"`
@@ -53,38 +53,38 @@ type Createcluster struct {
     MasterAuth            masterAuth `json:"masterAuth"`
     NodePools             []NodePool `json:"nodePools"`
 }
-    Createcluster struct represents Createcluster attributes.
+    CreateCluster struct represents CreateCluster attributes.
 
 type Googlecontainer struct {
 }
     Googlecontainer struct represents Googlecontainer attributes and
     methods.
 
-func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp interface{}, err error)
-    Createcluster creates cluster.
+func (googlecontainer *Googlecontainer) CreateCluster(request interface{}) (resp interface{}, err error)
+    CreateCluster creates cluster.
 
-func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp interface{}, err error)
-    Createservice crestes loadbalancer service.
+func (googlecontainer *Googlecontainer) CreateService(request interface{}) (resp interface{}, err error)
+    CreateService crestes loadbalancer service.
 
-func (googlecontainer *Googlecontainer) Deletecluster(request interface{}) (resp interface{}, err error)
-    Deletecluster deletes cluster.
+func (googlecontainer *Googlecontainer) DeleteCluster(request interface{}) (resp interface{}, err error)
+    DeleteCluster deletes cluster.
 
-func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp interface{}, err error)
-    Deleteservice crestes loadbalancer service.
+func (googlecontainer *Googlecontainer) DeleteService(request interface{}) (resp interface{}, err error)
+    DeleteService crestes loadbalancer service.
 
-func (googlecontainer *Googlecontainer) Runtask(request interface{}) (resp interface{}, err error)
+func (googlecontainer *Googlecontainer) RunTask(request interface{}) (resp interface{}, err error)
     runtask runs container.
 
-func (googlecontainer *Googlecontainer) Starttask(request interface{}) (resp interface{}, err error)
-    Starttask start container.
+func (googlecontainer *Googlecontainer) StartTask(request interface{}) (resp interface{}, err error)
+    StartTask start container.
 
-func (googlecontainer *Googlecontainer) Stoptask(request interface{}) (resp interface{}, err error)
-    Stoptask stops container.
+func (googlecontainer *Googlecontainer) StopTask(request interface{}) (resp interface{}, err error)
+    StopTask stops container.
 
 type LegacyAbac struct {
     Enabled bool `json:"enabled"`
 }
-    LegacyAbac struct represents LegacyAbac attributes of Createcluster.
+    LegacyAbac struct represents LegacyAbac attributes of CreateCluster.
 
 type NodePool struct {
     Name             string      `json:"name"`
@@ -93,6 +93,6 @@ type NodePool struct {
     Autoscaling      autoscaling `json:"autoscaling"`
     Management       management  `json:"management"`
 }
-    NodePool struct represents NodePool attributes of Createcluster.
+    NodePool struct represents NodePool attributes of CreateCluster.
 
 

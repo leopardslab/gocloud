@@ -1,22 +1,22 @@
 package openstacknosql
 
-//Listtables list tables
-func (openstacknosql *Openstacknosql) Listtables(request interface{}) (resp interface{}, err error) {
+//ListTables list tables
+func (openstacknosql *Openstacknosql) ListTables(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Deletetables delete tables
-func (openstacknosql *Openstacknosql) Deletetables(request interface{}) (resp interface{}, err error) {
+//DeleteTables delete tables
+func (openstacknosql *Openstacknosql) DeleteTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Describetables Describe tables
-func (openstacknosql *Openstacknosql) Describetables(request interface{}) (resp interface{}, err error) {
+//DescribeTables Describe tables
+func (openstacknosql *Openstacknosql) DescribeTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Createtables create tables
-func (openstacknosql *Openstacknosql) Createtables(request interface{}) (resp interface{}, err error) {
+//CreateTables create tables
+func (openstacknosql *Openstacknosql) CreateTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

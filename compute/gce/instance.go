@@ -11,7 +11,7 @@ import (
 
 //create gce instance
 
-func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
+func (gce *GCE) CreateNode(request interface{}) (resp interface{}, err error) {
 	var gceinstance GCE
 	var projectid string
 	var Zone string
@@ -138,40 +138,40 @@ func (gce *GCE) Createnode(request interface{}) (resp interface{}, err error) {
 
 	client := googleauth.SignJWT()
 	urlv := "https://www.googleapis.com/compute/v1/projects/" + projectid + "/zones/" + Zone + "/instances"
-	Createnoderequest, err := http.NewRequest("POST", urlv, bytes.NewBuffer(gceinstancejsonstringbyte))
-	Createnoderequest.Header.Set("Content-Type", "application/json")
+	CreateNoderequest, err := http.NewRequest("POST", urlv, bytes.NewBuffer(gceinstancejsonstringbyte))
+	CreateNoderequest.Header.Set("Content-Type", "application/json")
 
-	Createnoderesp, err := client.Do(Createnoderequest)
+	CreateNoderesp, err := client.Do(CreateNoderequest)
 	fmt.Println(err)
-	defer Createnoderesp.Body.Close()
+	defer CreateNoderesp.Body.Close()
 
-	body, err := ioutil.ReadAll(Createnoderesp.Body)
+	body, err := ioutil.ReadAll(CreateNoderesp.Body)
 
-	Createnoderesponse := make(map[string]interface{})
-	Createnoderesponse["status"] = Createnoderesp.StatusCode
-	Createnoderesponse["body"] = string(body)
-	resp = Createnoderesponse
+	CreateNoderesponse := make(map[string]interface{})
+	CreateNoderesponse["status"] = CreateNoderesp.StatusCode
+	CreateNoderesponse["body"] = string(body)
+	resp = CreateNoderesponse
 	return resp, err
 }
 
-func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
+func (gce *GCE) StartNode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/start"
 	client := googleauth.SignJWT()
 
-	Startnoderequest, err := http.NewRequest("POST", url, nil)
-	Startnoderequest.Header.Set("Content-Type", "application/json")
+	StartNoderequest, err := http.NewRequest("POST", url, nil)
+	StartNoderequest.Header.Set("Content-Type", "application/json")
 
-	Startnoderesp, err := client.Do(Startnoderequest)
+	StartNoderesp, err := client.Do(StartNoderequest)
 
-	defer Startnoderesp.Body.Close()
+	defer StartNoderesp.Body.Close()
 
-	body, err := ioutil.ReadAll(Startnoderesp.Body)
-	Startnoderesponse := make(map[string]interface{})
-	Startnoderesponse["status"] = Startnoderesp.StatusCode
-	Startnoderesponse["body"] = string(body)
-	resp = Startnoderesponse
+	body, err := ioutil.ReadAll(StartNoderesp.Body)
+	StartNoderesponse := make(map[string]interface{})
+	StartNoderesponse["status"] = StartNoderesp.StatusCode
+	StartNoderesponse["body"] = string(body)
+	resp = StartNoderesponse
 
 	return resp, err
 }
@@ -179,24 +179,24 @@ func (gce *GCE) Startnode(request interface{}) (resp interface{}, err error) {
 //stop gce instance currentnly running
 //accept projectid, zone, instance
 
-func (gce *GCE) Stopnode(request interface{}) (resp interface{}, err error) {
+func (gce *GCE) StopNode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/stop"
 	client := googleauth.SignJWT()
 
-	Stopnoderequest, err := http.NewRequest("POST", url, nil)
-	Stopnoderequest.Header.Set("Content-Type", "application/json")
+	StopNoderequest, err := http.NewRequest("POST", url, nil)
+	StopNoderequest.Header.Set("Content-Type", "application/json")
 
-	Stopnoderesp, err := client.Do(Stopnoderequest)
-	defer Stopnoderesp.Body.Close()
+	StopNoderesp, err := client.Do(StopNoderequest)
+	defer StopNoderesp.Body.Close()
 
-	body, err := ioutil.ReadAll(Stopnoderesp.Body)
+	body, err := ioutil.ReadAll(StopNoderesp.Body)
 
-	Stopnoderesponse := make(map[string]interface{})
-	Stopnoderesponse["status"] = Stopnoderesp.StatusCode
-	Stopnoderesponse["body"] = string(body)
-	resp = Stopnoderesponse
+	StopNoderesponse := make(map[string]interface{})
+	StopNoderesponse["status"] = StopNoderesp.StatusCode
+	StopNoderesponse["body"] = string(body)
+	resp = StopNoderesponse
 
 	return resp, err
 }
@@ -204,24 +204,24 @@ func (gce *GCE) Stopnode(request interface{}) (resp interface{}, err error) {
 //delete gce instance currentnly running
 //accept projectid, zone, instance
 
-func (gce *GCE) Deletenode(request interface{}) (resp interface{}, err error) {
+func (gce *GCE) DeleteNode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"]
 	client := googleauth.SignJWT()
 
-	Deletenoderequest, err := http.NewRequest("DELETE", url, nil)
-	Deletenoderequest.Header.Set("Content-Type", "application/json")
+	DeleteNoderequest, err := http.NewRequest("DELETE", url, nil)
+	DeleteNoderequest.Header.Set("Content-Type", "application/json")
 
-	Deletenoderesp, err := client.Do(Deletenoderequest)
+	DeleteNoderesp, err := client.Do(DeleteNoderequest)
 
-	defer Deletenoderesp.Body.Close()
-	body, err := ioutil.ReadAll(Deletenoderesp.Body)
+	defer DeleteNoderesp.Body.Close()
+	body, err := ioutil.ReadAll(DeleteNoderesp.Body)
 
-	Deletenoderesponse := make(map[string]interface{})
-	Deletenoderesponse["status"] = Deletenoderesp.StatusCode
-	Deletenoderesponse["body"] = string(body)
-	resp = Deletenoderesponse
+	DeleteNoderesponse := make(map[string]interface{})
+	DeleteNoderesponse["status"] = DeleteNoderesp.StatusCode
+	DeleteNoderesponse["body"] = string(body)
+	resp = DeleteNoderesponse
 
 	return resp, err
 }
@@ -229,25 +229,25 @@ func (gce *GCE) Deletenode(request interface{}) (resp interface{}, err error) {
 //reboot/reset gce instance currentnly ***running***
 //accept projectid, zone, instance
 
-func (gce *GCE) Rebootnode(request interface{}) (resp interface{}, err error) {
+func (gce *GCE) RebootNode(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 	url := "https://www.googleapis.com/compute/v1/projects/" + options["projectid"] + "/zones/" + options["Zone"] + "/instances/" + options["instance"] + "/reset"
 	client := googleauth.SignJWT()
 
-	Rebootnoderequest, err := http.NewRequest("POST", url, nil)
-	Rebootnoderequest.Header.Set("Content-Type", "application/json")
+	RebootNoderequest, err := http.NewRequest("POST", url, nil)
+	RebootNoderequest.Header.Set("Content-Type", "application/json")
 
-	Rebootnoderesp, err := client.Do(Rebootnoderequest)
+	RebootNoderesp, err := client.Do(RebootNoderequest)
 
-	defer Rebootnoderesp.Body.Close()
+	defer RebootNoderesp.Body.Close()
 
-	body, err := ioutil.ReadAll(Rebootnoderesp.Body)
+	body, err := ioutil.ReadAll(RebootNoderesp.Body)
 
-	Rebootnoderesponse := make(map[string]interface{})
-	Rebootnoderesponse["status"] = Rebootnoderesp.StatusCode
-	Rebootnoderesponse["body"] = string(body)
-	resp = Rebootnoderesponse
+	RebootNoderesponse := make(map[string]interface{})
+	RebootNoderesponse["status"] = RebootNoderesp.StatusCode
+	RebootNoderesponse["body"] = string(body)
+	resp = RebootNoderesponse
 
 	return resp, err
 }

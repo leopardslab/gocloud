@@ -25,7 +25,7 @@ type Tag struct {
 	Value string `xml:"value"`
 }
 
-//Listener represents Listener attribute of Createloadbalancer.
+//Listener represents Listener attribute of CreateLoadBalancer.
 type Listener struct {
 	InstancePort     string
 	InstanceProtocol string
@@ -34,14 +34,14 @@ type Listener struct {
 	SSLCertificateId string
 }
 
-//Attachnodewithloadbalancer represents Attachnodewithloadbalancer attribute.
-type Attachnodewithloadbalancer struct {
+//AttachNodeWithLoadBalancer represents AttachNodeWithLoadBalancer attribute.
+type AttachNodeWithLoadBalancer struct {
 	Instances        []string
 	LoadBalancerName string
 }
 
-//Detachnodewithloadbalancer represents Attachnodewithloadbalancer attribute.
-type Detachnodewithloadbalancer struct {
+//DetachNodeWithLoadBalancer represents AttachNodeWithLoadBalancer attribute.
+type DetachNodeWithLoadBalancer struct {
 	Instances        []string
 	LoadBalancerName string
 }

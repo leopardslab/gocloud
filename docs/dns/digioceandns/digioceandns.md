@@ -39,7 +39,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "Tag":        nil,
   }
 
- resp, err := digioceancloud.Createdns(create)
+ resp, err := digioceancloud.CreateDns(create)
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
@@ -52,7 +52,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "RecordID":   "28448433",
   }
 
-  resp, err := digioceancloud.Deletedns(delete1)
+  resp, err := digioceancloud.DeleteDns(delete1)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -64,7 +64,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "DomainName": "example.com",
   }
 
-  resp, err := digioceancloud.Listdns(listRecords)
+  resp, err := digioceancloud.ListDns(listRecords)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```

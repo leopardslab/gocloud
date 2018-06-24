@@ -4,53 +4,53 @@ import (
 	"reflect"
 )
 
-//Createclusterdictnoaryconvert create dictnoary for Createcluster.
-func Createclusterdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
+//CreateClusterdictnoaryconvert create dictnoary for CreateCluster.
+func CreateClusterdictnoaryconvert(option CreateCluster, CreateClusterjsonmap map[string]interface{}) {
 	if option.Name != "" {
-		Createclusterjsonmap["name"] = option.Name
+		CreateClusterjsonmap["name"] = option.Name
 	}
 	if option.Network != "" {
-		Createclusterjsonmap["network"] = option.Network
+		CreateClusterjsonmap["network"] = option.Network
 	}
 
 	if option.LoggingService != "" {
-		Createclusterjsonmap["loggingService"] = option.LoggingService
+		CreateClusterjsonmap["loggingService"] = option.LoggingService
 	}
 
 	if option.MonitoringService != "" {
-		Createclusterjsonmap["monitoringService"] = option.MonitoringService
+		CreateClusterjsonmap["monitoringService"] = option.MonitoringService
 	}
 
 	if option.InitialClusterVersion != "" {
-		Createclusterjsonmap["initialClusterVersion"] = option.InitialClusterVersion
+		CreateClusterjsonmap["initialClusterVersion"] = option.InitialClusterVersion
 	}
 
 	if option.Subnetwork != "" {
-		Createclusterjsonmap["subnetwork"] = option.Subnetwork
+		CreateClusterjsonmap["subnetwork"] = option.Subnetwork
 	}
 
 	if option.Zone != "" {
-		Createclusterjsonmap["zone"] = option.Zone
+		CreateClusterjsonmap["zone"] = option.Zone
 	}
 
-	CreateclusterLegacyAbacdictnoaryconvert(option, Createclusterjsonmap)
-	CreateclusterMasterAuthdictnoaryconvert(option, Createclusterjsonmap)
-	CreateclusterNodePoolsdictnoaryconvert(option, Createclusterjsonmap)
+	CreateClusterLegacyAbacdictnoaryconvert(option, CreateClusterjsonmap)
+	CreateClusterMasterAuthdictnoaryconvert(option, CreateClusterjsonmap)
+	CreateClusterNodePoolsdictnoaryconvert(option, CreateClusterjsonmap)
 }
 
-//CreateclusterLegacyAbacdictnoaryconvert create dictnoary for Createcluster.
-func CreateclusterLegacyAbacdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
+//CreateClusterLegacyAbacdictnoaryconvert create dictnoary for CreateCluster.
+func CreateClusterLegacyAbacdictnoaryconvert(option CreateCluster, CreateClusterjsonmap map[string]interface{}) {
 	legacyAbac := make(map[string]interface{})
 
 	if option.LegacyAbac.Enabled {
 		legacyAbac["Enabled"] = option.LegacyAbac.Enabled
 	}
 
-	Createclusterjsonmap["legacyAbac"] = legacyAbac
+	CreateClusterjsonmap["legacyAbac"] = legacyAbac
 }
 
-//CreateclusterMasterAuthdictnoaryconvert create dictnoary for Createcluster.
-func CreateclusterMasterAuthdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
+//CreateClusterMasterAuthdictnoaryconvert create dictnoary for CreateCluster.
+func CreateClusterMasterAuthdictnoaryconvert(option CreateCluster, CreateClusterjsonmap map[string]interface{}) {
 	masterAuth := make(map[string]interface{})
 
 	if option.MasterAuth.Username != "" {
@@ -65,7 +65,7 @@ func CreateclusterMasterAuthdictnoaryconvert(option Createcluster, Createcluster
 		masterAuth["clientCertificateConfig"] = clientCertificateConfigs
 	}
 
-	Createclusterjsonmap["legacyAbac"] = masterAuth
+	CreateClusterjsonmap["legacyAbac"] = masterAuth
 
 }
 
@@ -74,8 +74,8 @@ func (c config) IsEmpty() bool {
 	return reflect.DeepEqual(c, config{})
 }
 
-//CreateclusterNodePoolsdictnoaryconvert create dictnoary for Createcluster.
-func CreateclusterNodePoolsdictnoaryconvert(option Createcluster, Createclusterjsonmap map[string]interface{}) {
+//CreateClusterNodePoolsdictnoaryconvert create dictnoary for CreateCluster.
+func CreateClusterNodePoolsdictnoaryconvert(option CreateCluster, CreateClusterjsonmap map[string]interface{}) {
 	nodePools := make([]map[string]interface{}, 0)
 	if len(option.NodePools) != 0 {
 		for i := 0; i < len(option.NodePools); i++ {
@@ -132,41 +132,41 @@ func CreateclusterNodePoolsdictnoaryconvert(option Createcluster, Createclusterj
 			nodePools = append(nodePools, nodePool)
 		}
 	}
-	Createclusterjsonmap["nodePools"] = nodePools
+	CreateClusterjsonmap["nodePools"] = nodePools
 }
 
-//Createservicedictnoaryconvert create dictnoary for Createservice.
-func Createservicedictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{}) {
+//CreateServicedictnoaryconvert create dictnoary for CreateService.
+func CreateServicedictnoaryconvert(option nodepool, CreateServicejsonmap map[string]interface{}) {
 
 	if option.Name != "" {
-		Createservicejsonmap["name"] = option.Name
+		CreateServicejsonmap["name"] = option.Name
 	}
 
 	if option.StatusMessage != "" {
-		Createservicejsonmap["statusMessage"] = option.StatusMessage
+		CreateServicejsonmap["statusMessage"] = option.StatusMessage
 	}
 
 	if option.InitialNodeCount != 0 {
-		Createservicejsonmap["initialNodeCount"] = option.InitialNodeCount
+		CreateServicejsonmap["initialNodeCount"] = option.InitialNodeCount
 	}
 
 	if option.SelfLink != "" {
-		Createservicejsonmap["selfLink"] = option.SelfLink
+		CreateServicejsonmap["selfLink"] = option.SelfLink
 	}
 
 	if option.Version != "" {
-		Createservicejsonmap["version"] = option.Version
+		CreateServicejsonmap["version"] = option.Version
 	}
 
 	if option.Status != "" {
-		Createservicejsonmap["status"] = option.Status
+		CreateServicejsonmap["status"] = option.Status
 	}
-	CreateserviceConfigdictnoaryconvert(option, Createservicejsonmap)
-	CreateserviceAutoscalingdictnoaryconvert(option, Createservicejsonmap)
+	CreateServiceConfigdictnoaryconvert(option, CreateServicejsonmap)
+	CreateServiceAutoscalingdictnoaryconvert(option, CreateServicejsonmap)
 }
 
-//CreateserviceConfigdictnoaryconvert create dictnoary for Createservice.
-func CreateserviceConfigdictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{}) {
+//CreateServiceConfigdictnoaryconvert create dictnoary for CreateService.
+func CreateServiceConfigdictnoaryconvert(option nodepool, CreateServicejsonmap map[string]interface{}) {
 
 	config := make(map[string]interface{})
 
@@ -198,11 +198,11 @@ func CreateserviceConfigdictnoaryconvert(option nodepool, Createservicejsonmap m
 		config["localSsdCount"] = option.Config.LocalSsdCount
 	}
 
-	Createservicejsonmap["config"] = config
+	CreateServicejsonmap["config"] = config
 }
 
-//CreateserviceManagementdictnoaryconvert create dictnoary for Createservice.
-func CreateserviceManagementdictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{}) {
+//CreateServiceManagementdictnoaryconvert create dictnoary for CreateService.
+func CreateServiceManagementdictnoaryconvert(option nodepool, CreateServicejsonmap map[string]interface{}) {
 
 	management := make(map[string]interface{})
 
@@ -214,12 +214,12 @@ func CreateserviceManagementdictnoaryconvert(option nodepool, Createservicejsonm
 		management["autoUpgrade"] = option.Management.AutoUpgrade
 	}
 
-	Createservicejsonmap["management"] = management
+	CreateServicejsonmap["management"] = management
 
 }
 
-//CreateserviceAutoscalingdictnoaryconvert create dictnoary for Createservice.
-func CreateserviceAutoscalingdictnoaryconvert(option nodepool, Createservicejsonmap map[string]interface{}) {
+//CreateServiceAutoscalingdictnoaryconvert create dictnoary for CreateService.
+func CreateServiceAutoscalingdictnoaryconvert(option nodepool, CreateServicejsonmap map[string]interface{}) {
 	autoscaling := make(map[string]interface{})
 
 	if option.Autoscaling.MaxNodeCount != 0 {
@@ -234,5 +234,5 @@ func CreateserviceAutoscalingdictnoaryconvert(option nodepool, Createservicejson
 		autoscaling["enabled"] = option.Autoscaling.Enabled
 	}
 
-	Createservicejsonmap["autoscaling"] = autoscaling
+	CreateServicejsonmap["autoscaling"] = autoscaling
 }

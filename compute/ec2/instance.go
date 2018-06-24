@@ -7,7 +7,7 @@ import (
 
 // start ec2 instance accept array of instance-id
 
-func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
+func (ec2 *EC2) StartNode(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]string)
 	ids := []string{}
@@ -27,7 +27,7 @@ func (ec2 *EC2) Startnode(request interface{}) (resp interface{}, err error) {
 
 // stop ec2 instance accept array of instance-id
 
-func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
+func (ec2 *EC2) StopNode(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]string)
 	ids := []string{}
@@ -52,7 +52,7 @@ func (ec2 *EC2) Stopnode(request interface{}) (resp interface{}, err error) {
 
 // reboot ec2 instance accept array of instance-id
 
-func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
+func (ec2 *EC2) RebootNode(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]string)
 	ids := []string{}
@@ -74,7 +74,7 @@ func (ec2 *EC2) Rebootnode(request interface{}) (resp interface{}, err error) {
 
 // delete ec2 instance accept array of instance-id
 
-func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
+func (ec2 *EC2) DeleteNode(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]string)
 	instIds := []string{}
 	instIds = append(instIds, param["instance-id"])
@@ -94,7 +94,7 @@ func (ec2 *EC2) Deletenode(request interface{}) (resp interface{}, err error) {
 
 //create Ec2 instances accept map[string]interface{} with attribute Define in EC2 documentation
 
-func (ec2 *EC2) Createnode(request interface{}) (resp interface{}, err error) {
+func (ec2 *EC2) CreateNode(request interface{}) (resp interface{}, err error) {
 
 	var options RunInstances
 	var Region string

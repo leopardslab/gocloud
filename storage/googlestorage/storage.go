@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interface{}, err error) {
+func (googlestorage *GoogleStorage) CreateDisk(request interface{}) (resp interface{}, err error) {
 
 	var option Creatdisk
 
@@ -131,7 +131,7 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 
 	Creatdiskjsonmap := make(map[string]interface{})
 
-	Creatediskdictnoaryconvert(option, Creatdiskjsonmap)
+	CreateDiskdictnoaryconvert(option, Creatdiskjsonmap)
 
 	Creatdiskjson, _ := json.Marshal(Creatdiskjsonmap)
 
@@ -143,24 +143,24 @@ func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interf
 
 	client := googleauth.SignJWT()
 
-	Creatediskrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Creatdiskjsonstringbyte))
+	CreateDiskrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Creatdiskjsonstringbyte))
 
-	Creatediskrequest.Header.Set("Content-Type", "application/json")
+	CreateDiskrequest.Header.Set("Content-Type", "application/json")
 
-	Creatediskresp, err := client.Do(Creatediskrequest)
+	CreateDiskresp, err := client.Do(CreateDiskrequest)
 
-	defer Creatediskresp.Body.Close()
+	defer CreateDiskresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Creatediskresp.Body)
+	body, err := ioutil.ReadAll(CreateDiskresp.Body)
 
-	Creatediskresponse := make(map[string]interface{})
-	Creatediskresponse["status"] = Creatediskresp.StatusCode
-	Creatediskresponse["body"] = string(body)
-	resp = Creatediskresponse
+	CreateDiskresponse := make(map[string]interface{})
+	CreateDiskresponse["status"] = CreateDiskresp.StatusCode
+	CreateDiskresponse["body"] = string(body)
+	resp = CreateDiskresponse
 	return resp, err
 }
 
-func (googlestorage *GoogleStorage) Deletedisk(request interface{}) (resp interface{}, err error) {
+func (googlestorage *GoogleStorage) DeleteDisk(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -168,23 +168,23 @@ func (googlestorage *GoogleStorage) Deletedisk(request interface{}) (resp interf
 
 	client := googleauth.SignJWT()
 
-	Deletediskrequest, err := http.NewRequest("DELETE", url, nil)
-	Deletediskrequest.Header.Set("Content-Type", "application/json")
+	DeleteDiskrequest, err := http.NewRequest("DELETE", url, nil)
+	DeleteDiskrequest.Header.Set("Content-Type", "application/json")
 
-	Deletediskresp, err := client.Do(Deletediskrequest)
+	DeleteDiskresp, err := client.Do(DeleteDiskrequest)
 
-	defer Deletediskresp.Body.Close()
+	defer DeleteDiskresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Deletediskresp.Body)
+	body, err := ioutil.ReadAll(DeleteDiskresp.Body)
 
-	Deletediskrespresponse := make(map[string]interface{})
-	Deletediskrespresponse["status"] = Deletediskresp.StatusCode
-	Deletediskrespresponse["body"] = string(body)
-	resp = Deletediskrespresponse
+	DeleteDiskrespresponse := make(map[string]interface{})
+	DeleteDiskrespresponse["status"] = DeleteDiskresp.StatusCode
+	DeleteDiskrespresponse["body"] = string(body)
+	resp = DeleteDiskrespresponse
 	return resp, err
 }
 
-func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
+func (googlestorage *GoogleStorage) CreateSnapshot(request interface{}) (resp interface{}, err error) {
 
 	var snapshot Snapshot
 	var Projectid string
@@ -275,36 +275,36 @@ func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp in
 		}
 	}
 
-	Createsnapshotjsonmap := make(map[string]interface{})
+	CreateSnapshotjsonmap := make(map[string]interface{})
 
-	Createsnapshotdictnoaryconvert(snapshot, Createsnapshotjsonmap)
+	CreateSnapshotdictnoaryconvert(snapshot, CreateSnapshotjsonmap)
 
-	Createsnapshotjson, _ := json.Marshal(Createsnapshotjsonmap)
-	Createsnapshotstring := string(Createsnapshotjson)
+	CreateSnapshotjson, _ := json.Marshal(CreateSnapshotjsonmap)
+	CreateSnapshotstring := string(CreateSnapshotjson)
 
-	var Createsnapshotstringbyte = []byte(Createsnapshotstring)
+	var CreateSnapshotstringbyte = []byte(CreateSnapshotstring)
 
 	url := "https://www.googleapis.com/compute/v1/projects/" + Projectid + "/zones/" + Zone + "/disks/" + Disk + "/createSnapshot"
 
 	client := googleauth.SignJWT()
 
-	Createsnapshotrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Createsnapshotstringbyte))
-	Createsnapshotrequest.Header.Set("Content-Type", "application/json")
+	CreateSnapshotrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(CreateSnapshotstringbyte))
+	CreateSnapshotrequest.Header.Set("Content-Type", "application/json")
 
-	Createsnapshotresp, err := client.Do(Createsnapshotrequest)
+	CreateSnapshotresp, err := client.Do(CreateSnapshotrequest)
 
-	defer Createsnapshotresp.Body.Close()
+	defer CreateSnapshotresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Createsnapshotresp.Body)
+	body, err := ioutil.ReadAll(CreateSnapshotresp.Body)
 
-	Createsnapshotresponse := make(map[string]interface{})
-	Createsnapshotresponse["status"] = Createsnapshotresp.StatusCode
-	Createsnapshotresponse["body"] = string(body)
-	resp = Createsnapshotresponse
+	CreateSnapshotresponse := make(map[string]interface{})
+	CreateSnapshotresponse["status"] = CreateSnapshotresp.StatusCode
+	CreateSnapshotresponse["body"] = string(body)
+	resp = CreateSnapshotresponse
 	return resp, err
 }
 
-func (googlestorage *GoogleStorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
+func (googlestorage *GoogleStorage) DeleteSnapshot(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -312,24 +312,24 @@ func (googlestorage *GoogleStorage) Deletesnapshot(request interface{}) (resp in
 
 	client := googleauth.SignJWT()
 
-	Deletesnapshotrequest, err := http.NewRequest("DELETE", url, nil)
-	Deletesnapshotrequest.Header.Set("Content-Type", "application/json")
+	DeleteSnapshotrequest, err := http.NewRequest("DELETE", url, nil)
+	DeleteSnapshotrequest.Header.Set("Content-Type", "application/json")
 
-	Deletesnapshotresp, err := client.Do(Deletesnapshotrequest)
+	DeleteSnapshotresp, err := client.Do(DeleteSnapshotrequest)
 
-	defer Deletesnapshotresp.Body.Close()
-	body, err := ioutil.ReadAll(Deletesnapshotresp.Body)
+	defer DeleteSnapshotresp.Body.Close()
+	body, err := ioutil.ReadAll(DeleteSnapshotresp.Body)
 
-	Deletesnapshotresponse := make(map[string]interface{})
-	Deletesnapshotresponse["status"] = Deletesnapshotresp.StatusCode
-	Deletesnapshotresponse["body"] = string(body)
-	resp = Deletesnapshotresponse
+	DeleteSnapshotresponse := make(map[string]interface{})
+	DeleteSnapshotresponse["status"] = DeleteSnapshotresp.StatusCode
+	DeleteSnapshotresponse["body"] = string(body)
+	resp = DeleteSnapshotresponse
 	return resp, err
 }
 
-func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interface{}, err error) {
+func (googlestorage *GoogleStorage) AttachDisk(request interface{}) (resp interface{}, err error) {
 
-	var attachdisk Attachdisk
+	var attachdisk AttachDisk
 	var Projectid string
 	var Zone string
 	var Instance string
@@ -423,11 +423,11 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 		}
 	}
 
-	Attachdiskjsonmap := make(map[string]interface{})
+	AttachDiskjsonmap := make(map[string]interface{})
 
-	Attachdiskdictnoaryconvert(attachdisk, Attachdiskjsonmap)
+	AttachDiskdictnoaryconvert(attachdisk, AttachDiskjsonmap)
 
-	attachdiskjson, _ := json.Marshal(Attachdiskjsonmap)
+	attachdiskjson, _ := json.Marshal(AttachDiskjsonmap)
 
 	attachdiskjsonstring := string(attachdiskjson)
 
@@ -452,7 +452,7 @@ func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interf
 	return resp, err
 }
 
-func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interface{}, err error) {
+func (googlestorage *GoogleStorage) DetachDisk(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 

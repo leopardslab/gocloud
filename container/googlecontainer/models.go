@@ -4,8 +4,8 @@ package googlecontainer
 type Googlecontainer struct {
 }
 
-//Createcluster struct represents Createcluster attributes.
-type Createcluster struct {
+//CreateCluster struct represents CreateCluster attributes.
+type CreateCluster struct {
 	Name                  string     `json:"name"`
 	Zone                  string     `json:"zone"`
 	Network               string     `json:"network"`
@@ -18,12 +18,12 @@ type Createcluster struct {
 	NodePools             []NodePool `json:"nodePools"`
 }
 
-//legacyAbac struct represents legacyAbac attributes of Createcluster.
+//legacyAbac struct represents legacyAbac attributes of CreateCluster.
 type legacyAbac struct {
 	Enabled bool `json:"enabled"`
 }
 
-//masterAuth struct represents masterAuth attributes of Createcluster.
+//masterAuth struct represents masterAuth attributes of CreateCluster.
 type masterAuth struct {
 	Username                string                   `json:"username"`
 	ClientCertificateConfig ClientCertificateConfigs `json:"clientCertificateConfig"`
@@ -34,7 +34,7 @@ type ClientCertificateConfigs struct {
 	IssueClientCertificate bool `json:"issueClientCertificate"`
 }
 
-//LegacyAbac struct represents LegacyAbac attributes of Createcluster.
+//LegacyAbac struct represents LegacyAbac attributes of CreateCluster.
 type LegacyAbac struct {
 	Enabled bool `json:"enabled"`
 }
@@ -59,7 +59,7 @@ type management struct {
 	AutoRepair  bool `json:"autoRepair"`
 }
 
-//NodePool struct represents NodePool attributes of Createcluster.
+//NodePool struct represents NodePool attributes of CreateCluster.
 type NodePool struct {
 	Name             string      `json:"name"`
 	InitialNodeCount int         `json:"initialNodeCount"`
@@ -68,7 +68,7 @@ type NodePool struct {
 	Management       management  `json:"management"`
 }
 
-//NodePool struct represents NodePool attributes of Createservice.
+//NodePool struct represents NodePool attributes of CreateService.
 type nodepool struct {
 	Config struct {
 		MachineType    string   `json:"machineType"`

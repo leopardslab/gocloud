@@ -18,7 +18,7 @@ func TestCreateLoadBalancer(t *testing.T) {
 		"AddressType":        "internet",
 		"InternetChargeType": "paybytraffic",
 	}
-	_, err := alilb.Createloadbalancer(create)
+	_, err := alilb.CreateLoadBalancer(create)
 	if err != nil {
 		t.Errorf("CreateLoadBalancer Test Fail: %s", err)
 		return
@@ -38,7 +38,7 @@ func TestCreateLoadBalancerBuilder(t *testing.T) {
 		t.Errorf("CreateLoadBalancer Test Fail: %s", err)
 		return
 	}
-	_, err = alilb.Createloadbalancer(create)
+	_, err = alilb.CreateLoadBalancer(create)
 	if err != nil {
 		t.Errorf("CreateLoadBalancer Test Fail: %s", err)
 		return
@@ -52,7 +52,7 @@ func TestDeleteLoadBalancer(t *testing.T) {
 		"RegionId":       "cn-qingdao",
 		"LoadBalancerId": "lb-m5ehdbs3p10a7kmq344je",
 	}
-	_, err := alilb.Deleteloadbalancer(delete)
+	_, err := alilb.DeleteLoadBalancer(delete)
 	if err != nil {
 		t.Errorf("DeleteLoadBalancer Test Fail: %s", err)
 		return
@@ -70,7 +70,7 @@ func TestDeleteLoadBalancerBuilder(t *testing.T) {
 		t.Errorf("DeleteLoadBalancer Test Fail: %s", err)
 		return
 	}
-	_, err = alilb.Deleteloadbalancer(deleteLoadBalancer)
+	_, err = alilb.DeleteLoadBalancer(deleteLoadBalancer)
 	if err != nil {
 		t.Errorf("DeleteLoadBalancer Test Fail: %s", err)
 		return
@@ -83,7 +83,7 @@ func TestListLoadBalancer(t *testing.T) {
 	list := map[string]interface{}{
 		"RegionId": "cn-qingdao",
 	}
-	resp, err := alilb.Listloadbalancer(list)
+	resp, err := alilb.ListLoadBalancer(list)
 	if err != nil {
 		t.Errorf("ListLoadBalancer Test Fail: %s", err)
 		return
@@ -102,7 +102,7 @@ func TestListLoadBalancerBuilder(t *testing.T) {
 		t.Errorf("ListLoadBalancer Test Fail: %s", err)
 		return
 	}
-	resp, err := alilb.Listloadbalancer(list)
+	resp, err := alilb.ListLoadBalancer(list)
 	if err != nil {
 		t.Errorf("ListLoadBalancer Test Fail: %s", err)
 		return
@@ -119,9 +119,9 @@ func TestAttachLoadBalancer(t *testing.T) {
 		"BackendServers": "[{'ServerId':'i-m5ecx5g9m0cflv1k83zu','Weight':'100','Type':'ecs'}," +
 			"{'ServerId':'i-m5eahbbwqxawpj1opww9','Weight':'100','Type':'ecs'}]",
 	}
-	_, err := alilb.Attachnodewithloadbalancer(attach)
+	_, err := alilb.AttachNodeWithLoadBalancer(attach)
 	if err != nil {
-		t.Errorf("Attachnodewithloadbalancer Test Fail: %s", err)
+		t.Errorf("AttachNodeWithLoadBalancer Test Fail: %s", err)
 		return
 	}
 	t.Logf("Ali LoadBalancer is listed successfully.")
@@ -135,12 +135,12 @@ func TestAttachLoadBalancerBuilder(t *testing.T) {
 			"{'ServerId':'i-m5efh52hzdkyjoaafwc0','Weight':'100','Type':'ecs'}]").
 		Build()
 	if err != nil {
-		t.Errorf("Attachnodewithloadbalancer Test Fail: %s", err)
+		t.Errorf("AttachNodeWithLoadBalancer Test Fail: %s", err)
 		return
 	}
-	_, err = alilb.Attachnodewithloadbalancer(attach)
+	_, err = alilb.AttachNodeWithLoadBalancer(attach)
 	if err != nil {
-		t.Errorf("Attachnodewithloadbalancer Test Fail: %s", err)
+		t.Errorf("AttachNodeWithLoadBalancer Test Fail: %s", err)
 		return
 	}
 	t.Logf("Ali LoadBalancer is listed successfully.")
@@ -154,7 +154,7 @@ func TestDettachLoadBalancer(t *testing.T) {
 		"BackendServers": "[{'ServerId':'i-m5ecx5g9m0cflv1k83zu','Type':'ecs'}," +
 			"{'ServerId':'i-m5eahbbwqxawpj1opww9','Type':'ecs'}]",
 	}
-	_, err := alilb.Detachnodewithloadbalancer(dettach)
+	_, err := alilb.DetachNodeWithLoadBalancer(dettach)
 	if err != nil {
 		t.Errorf("DetachnodewithLoadBalancer Test Fail: %s", err)
 		return
@@ -174,7 +174,7 @@ func TestDetachLoadBalancerBuilder(t *testing.T) {
 		t.Errorf("DetachnodewithLoadBalancer Test Fail: %s", err)
 		return
 	}
-	_, err = alilb.Detachnodewithloadbalancer(detach)
+	_, err = alilb.DetachNodeWithLoadBalancer(detach)
 	if err != nil {
 		t.Errorf("DetachnodewithLoadBalancer Test Fail: %s", err)
 		return

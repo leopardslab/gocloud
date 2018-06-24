@@ -7,30 +7,30 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-func TestCreatedns(t *testing.T) {
+func TestCreateDns(t *testing.T) {
 	var awsdns Awsdns
 	createdns := map[string]interface{}{
 		"name":             "rootmonk.me",
 		"hostedZoneConfig": "hostedZoneConfig",
 	}
 
-	awsdns.Createdns(createdns)
+	awsdns.CreateDns(createdns)
 }
 
-func TestDeletedns(t *testing.T) {
+func TestDeleteDns(t *testing.T) {
 	var awsdns Awsdns
 	deletedns := map[string]string{
 		"ID": "ZOD7SUP0ZGGQQ",
 	}
 
-	_, err := awsdns.Deletedns(deletedns)
+	_, err := awsdns.DeleteDns(deletedns)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestListdns(t *testing.T) {
+func TestListDns(t *testing.T) {
 	var awsdns Awsdns
 
 	listdns := map[string]interface{}{
@@ -38,20 +38,20 @@ func TestListdns(t *testing.T) {
 		"maxItems": 2,
 	}
 
-	_, err := awsdns.Listdns(listdns)
+	_, err := awsdns.ListDns(listdns)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestListResourcednsRecordSets(t *testing.T) {
+func TestListResourceDnsRecordSets(t *testing.T) {
 	var awsdns Awsdns
 	listResourcednsRecordSets := map[string]interface{}{
 		"zone": "ZBNX5TIW033J2",
 	}
 
-	_, err := awsdns.ListResourcednsRecordSets(listResourcednsRecordSets)
+	_, err := awsdns.ListResourceDnsRecordSets(listResourcednsRecordSets)
 
 	if err != nil {
 		t.Errorf("Test Fail")

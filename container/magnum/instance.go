@@ -1,29 +1,29 @@
 package magnum
 
-func (magnum *Magnum) Createcluster(request interface{}) (resp interface{}, err error) {
+func (magnum *Magnum) CreateCluster(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (magnum *Magnum) Deletecluster(request interface{}) (resp interface{}, err error) {
+func (magnum *Magnum) DeleteCluster(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (magnum *Magnum) Createservice(request interface{}) (resp interface{}, err error) {
+func (magnum *Magnum) CreateService(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (magnum *Magnum) Runtask(request interface{}) (resp interface{}, err error) {
+func (magnum *Magnum) RunTask(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (magnum *Magnum) Starttask(request interface{}) (resp interface{}, err error) {
+func (magnum *Magnum) StartTask(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (magnum *Magnum) Deleteservice(request interface{}) (resp interface{}, err error) {
+func (magnum *Magnum) DeleteService(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (magnum *Magnum) Stoptask(request interface{}) (resp interface{}, err error) {
+func (magnum *Magnum) StopTask(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

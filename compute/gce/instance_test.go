@@ -2,17 +2,17 @@ package gce
 
 import "testing"
 
-func TestDeletenode(t *testing.T) {
+func TestDeleteNode(t *testing.T) {
 	var gce GCE
 	deletenode := map[string]string{
 		"projectid": "sheltermap-1493101612061",
 		"instance":  "testing-scorelab2",
 		"Zone":      "us-east4-c",
 	}
-	gce.Deletenode(deletenode)
+	gce.DeleteNode(deletenode)
 }
 
-func TestStopnode(t *testing.T) {
+func TestStopNode(t *testing.T) {
 	var gce GCE
 	stopnode := map[string]string{
 		"projectid": "sheltermap-1493101612061",
@@ -20,28 +20,28 @@ func TestStopnode(t *testing.T) {
 		"Zone":      "us-east4-c",
 	}
 
-	_, err := gce.Stopnode(stopnode)
+	_, err := gce.StopNode(stopnode)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestRebootnode(t *testing.T) {
+func TestRebootNode(t *testing.T) {
 	var gce GCE
 	reboot := map[string]string{
 		"projectid": "sheltermap-1493101612061",
 		"instance":  "testing-scorelab",
 		"Zone":      "us-east4-c",
 	}
-	_, err := gce.Rebootnode(reboot)
+	_, err := gce.RebootNode(reboot)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestCreatenode(t *testing.T) {
+func TestCreateNode(t *testing.T) {
 
 	var gce GCE
 
@@ -85,7 +85,7 @@ func TestCreatenode(t *testing.T) {
 		"NetworkInterfaces": NetworkInterfaces,
 	}
 
-	_, err := gce.Createnode(createnode)
+	_, err := gce.CreateNode(createnode)
 
 	if err != nil {
 		t.Errorf("Test Fail")

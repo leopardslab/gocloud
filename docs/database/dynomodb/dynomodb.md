@@ -86,7 +86,7 @@ createtables := map[string]interface{}{
   "ProvisionedThroughput" : provisionedThroughput,
 }
 
-resp, err := amazoncloud.Createtables(createtables)
+resp, err := amazoncloud.CreateTables(createtables)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -100,7 +100,7 @@ deletetables := map[string]interface{}{
   "TableName": "hello",
 }
 
-  resp, err := amazoncloud.Deletetables(deletetables)
+  resp, err := amazoncloud.DeleteTables(deletetables)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -114,7 +114,7 @@ listtables := map[string]interface{}{
   "TableName": "hello",
 }
 
-  resp, err := amazoncloud.Listtables(listtables)
+  resp, err := amazoncloud.ListTables(listtables)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -128,7 +128,7 @@ listtables := map[string]interface{}{
     "TableName": "hello",
   }
 
-  resp, err := amazoncloud.Describetables(describetables)
+  resp, err := amazoncloud.DescribeTables(describetables)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
