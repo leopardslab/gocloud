@@ -24,3 +24,13 @@ type MachineLearning interface {
 	GetMLModel(request interface{}) (resp interface{}, err error)
 	UpdateMLModel(request interface{}) (resp interface{}, err error)
 }
+
+// Bare Metal module unified API
+type BareMetal interface {
+	CreateBareMetal(request interface{}) (resp interface{}, err error)
+	DeleteBareMetal(request interface{}) (resp interface{}, err error)
+	RebootBareMetal(request interface{}) (resp interface{}, err error)
+	ReinstallBareMetal(request interface{}) (resp interface{}, err error)
+	HaltBareMetal(request interface{}) (resp interface{}, err error)
+	ListBareMetal(request interface{}) (resp interface{}, err error)
+}
