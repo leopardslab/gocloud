@@ -1,11 +1,17 @@
 package googlenotification
 
-
-func (googledns *Googledns) ListTopic(request interface{}) (resp interface{}, err error) {
+import (
+	"bytes"
+	"encoding/json"
+	googleauth "github.com/cloudlibz/gocloud/googleauth"
+	"io/ioutil"
+	"net/http"
+)
+func (googlenotification *Googlenotification) ListTopic(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
-	url := "https://pubsub.googleapis.com/v1/" + options["Project"] + "/subscriptions"
+	url := "https://pubsub.googleapis.com/v1/projects/" + options["Project"] + "/topics"
 
 	client := googleauth.SignJWT()
 
@@ -13,19 +19,19 @@ func (googledns *Googledns) ListTopic(request interface{}) (resp interface{}, er
 
 	listtopicrequestparam := listtopicrequest.URL.Query()
 
-	if options["pageSize"] != "" {
+	if options["PageSize"] != "" {
 		listtopicrequestparam.Add("pageSize", options["pageSize"])
 	}
 
-	if options["pageToken"] != "0" {
-		listtopicrequestparam.Add("pageToken", options["pageToken"])
+	if options["PageToken"] != "" {
+		listtopicrequestparam.Add("pageToken", options["PageToken"])
 	}
 
 	listtopicrequest.URL.RawQuery = listtopicrequestparam.Encode()
 
 	listtopicrequest.Header.Set("Content-Type", "application/json")
 
-	listtopicresp, err := client.Do(Listdnsrequest)
+	listtopicresp, err := client.Do(listtopicrequest)
 
 	defer listtopicresp.Body.Close()
 
@@ -39,11 +45,13 @@ func (googledns *Googledns) ListTopic(request interface{}) (resp interface{}, er
 }
 
 
-func (googledns *Googledns) GetTopic(request interface{}) (resp interface{}, err error) {
+func (googlenotification *Googlenotification) GetTopic(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
-	url := "https://pubsub.googleapis.com/" + options["Project"] + "/subscriptions/" + options["Subscription"]
+	url := "https://pubsub.googleapis.com/v1/projects/" +  options["Project"] + "/topics/" + options["Topic"]
+
+
 
 	client := googleauth.SignJWT()
 
@@ -64,15 +72,47 @@ func (googledns *Googledns) GetTopic(request interface{}) (resp interface{}, err
 
 
 
-func (googledns *Googledns) DeleteTopic(request interface{}) (resp interface{}, err error) {
+func (googlenotification *Googlenotification) DeleteTopic(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
-	url := "https://pubsub.googleapis.com/" + options["Project"] + "/subscriptions/" + options["Subscription"]
+	url := "https://pubsub.googleapis.com/v1/projects/" + options["Project"] + "/topics/" + options["Topic"]
 
 	client := googleauth.SignJWT()
 
 	gettopicrequest, err := http.NewRequest("DELETE", url, nil)
+
+	gettopicresp, err := client.Do(gettopicrequest)
+
+	defer gettopicresp.Body.Close()
+
+	body, err := ioutil.ReadAll(gettopicresp.Body)
+
+	gettopicresponse := make(map[string]interface{})
+	gettopicresponse["status"] = gettopicresp.StatusCode
+	gettopicresponse["body"] = string(body)
+	resp = gettopicresponse
+	return resp, err
+}
+
+
+func (googlenotification *Googlenotification) CreateTopic(request interface{}) (resp interface{}, err error) {
+
+	options := request.(map[string]string)
+
+	url := "https://pubsub.googleapis.com/v1/projects/" + options["Project"] + "/topics/" + options["Topic"]
+
+	client := googleauth.SignJWT()
+
+  createtopicjsonmap := make(map[string]interface{})
+
+	createtopicjson, _ := json.Marshal(createtopicjsonmap)
+
+	createtopicjsonstring := string(createtopicjson)
+
+	var createtopicjsonstringbyte = []byte(createtopicjsonstring)
+
+	gettopicrequest, err := http.NewRequest("PUT", url, bytes.NewBuffer(createtopicjsonstringbyte))
 
 	gettopicresp, err := client.Do(gettopicrequest)
 
