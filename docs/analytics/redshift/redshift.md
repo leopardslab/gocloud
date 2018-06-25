@@ -114,9 +114,6 @@ getDatasets := map[string]interface{}{
 
 _, err := amazoncloud.GetDatasets(getDatasets)
 
-if err != nil {
-  t.Errorf("Test Fail")
-}
 
 response := resp.(map[string]interface{})
 

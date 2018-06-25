@@ -63,9 +63,6 @@ fmt.Println(response["body"])
 
 	resp, err := amazoncloud.UpdateDatasets(updateDatasets)
 
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
 
 	response := resp.(map[string]interface{})
 
@@ -82,9 +79,6 @@ deleteDatasets := map[string]interface{}{
 
 resp, err := amazoncloud.DeleteDatasets(deleteDatasets)
 
-if err != nil {
-  t.Errorf("Test Fail")
-}
 
 response := resp.(map[string]interface{})
 
@@ -112,11 +106,8 @@ getDatasets := map[string]interface{}{
   "Region": "us-east-1",
 }
 
-_, err := amazoncloud.GetDatasets(getDatasets)
+resp, err := amazoncloud.GetDatasets(getDatasets)
 
-if err != nil {
-  t.Errorf("Test Fail")
-}
 
 response := resp.(map[string]interface{})
 
