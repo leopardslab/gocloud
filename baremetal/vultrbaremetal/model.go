@@ -22,3 +22,22 @@ type CreateBareMetal struct {
 type DeleteBareMetal struct {
 	SUBID int // Unique identifier for this subscription.
 }
+
+type RebootBareMetal struct {
+	SUBID int // Unique identifier for this subscription.
+}
+
+type ReinstallBareMetal struct {
+	SUBID int // Unique identifier for this subscription.
+}
+
+type HaltBareMetal struct {
+	SUBID int // Unique identifier for this subscription.
+}
+
+type ListBareMetal struct {
+	SUBID   int    // (optional) Unique identifier of a subscription. Only the subscription object will be returned.
+	tag     string // (optional) A tag string. Only subscription objects with this tag will be returned.
+	label   string // (optional) A text label string. Only subscription objects with this text label will be returned.
+	main_ip string // (optional) An IPv4 address. Only the subscription matching this IPv4 address will be returned.
+}
