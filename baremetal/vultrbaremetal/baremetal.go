@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+// CreateBareMetal function creates a new Vultr bare metal machine.
 func (*VultrBareMetal) CreateBareMetal(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
@@ -17,6 +18,7 @@ func (*VultrBareMetal) CreateBareMetal(request interface{}) (resp interface{}, e
 	return resp, err
 }
 
+// DeleteBareMetal function deletes a Vultr bare metal machine.
 func (*VultrBareMetal) DeleteBareMetal(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
@@ -29,6 +31,7 @@ func (*VultrBareMetal) DeleteBareMetal(request interface{}) (resp interface{}, e
 	return resp, err
 }
 
+// RebootBareMetal function reboots a Vultr bare metal machine.
 func (*VultrBareMetal) RebootBareMetal(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
@@ -41,6 +44,7 @@ func (*VultrBareMetal) RebootBareMetal(request interface{}) (resp interface{}, e
 	return resp, err
 }
 
+// ReinstallBareMetal function reinstall a Vultr bare metal machine.
 func (*VultrBareMetal) ReinstallBareMetal(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
@@ -53,6 +57,7 @@ func (*VultrBareMetal) ReinstallBareMetal(request interface{}) (resp interface{}
 	return resp, err
 }
 
+// HaltBareMetal function halt a Vultr bare metal machine.
 func (*VultrBareMetal) HaltBareMetal(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
@@ -65,6 +70,7 @@ func (*VultrBareMetal) HaltBareMetal(request interface{}) (resp interface{}, err
 	return resp, err
 }
 
+// ListBareMetal function list Vultr bare metal machines.
 func (*VultrBareMetal) ListBareMetal(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 
