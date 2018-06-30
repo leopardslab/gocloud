@@ -43,14 +43,21 @@ type VultrBareMetal struct {
 }
 
 func (*VultrBareMetal) CreateBareMetal(request interface{}) (resp interface{}, err error)
+    CreateBareMetal function creates a new Vultr bare metal machine.
 
 func (*VultrBareMetal) DeleteBareMetal(request interface{}) (resp interface{}, err error)
+    DeleteBareMetal function deletes a Vultr bare metal machine.
 
 func (*VultrBareMetal) HaltBareMetal(request interface{}) (resp interface{}, err error)
+    HaltBareMetal function halt a Vultr bare metal machine.
 
 func (*VultrBareMetal) ListBareMetal(request interface{}) (resp interface{}, err error)
+    ListBareMetal function list Vultr bare metal machines.
 
 func (*VultrBareMetal) RebootBareMetal(request interface{}) (resp interface{}, err error)
+    RebootBareMetal function reboots a Vultr bare metal machine.
 
 func (*VultrBareMetal) ReinstallBareMetal(request interface{}) (resp interface{}, err error)
+    ReinstallBareMetal function reinstall a Vultr bare metal machine.
+
 ```
