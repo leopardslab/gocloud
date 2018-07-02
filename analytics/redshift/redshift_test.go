@@ -104,15 +104,15 @@ func TestUpdateDatasets(t *testing.T) {
 		"PreferredMaintenanceWindow":           "wed:07:30-wed:08:00",
 	}
 
-	_, err := redshift.UpdateDatasets(updateDatasets)
+	resp, err := redshift.UpdateDatasets(updateDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-	//response := resp.(map[string]interface{})
+	response := resp.(map[string]interface{})
 
-	//fmt.Println(response["body"])
+	fmt.Println(response["body"])
 
 	fmt.Println("hi")
 }
