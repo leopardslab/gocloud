@@ -9,7 +9,7 @@ func init() {
 	digioceanAuth.LoadConfig()
 }
 
-func TestCreateloadbalancer(t *testing.T) {
+func TestCreateLoadBalancer(t *testing.T) {
 
 	var digioceancloud DigioceanLoadBalancer
 
@@ -49,14 +49,14 @@ func TestCreateloadbalancer(t *testing.T) {
 		"RedirectHTTPToHTTPS": false,
 	}
 
-	_, err := digioceancloud.Createloadbalancer(create)
+	_, err := digioceancloud.CreateLoadBalancer(create)
 
 	if err != nil {
 		t.Errorf("Test to create DigitalOcean LoadBalancer failed.")
 	}
 }
 
-func TestDeleteloadbalancer(t *testing.T) {
+func TestDeleteLoadBalancer(t *testing.T) {
 
 	var digioceancloud DigioceanLoadBalancer
 
@@ -64,25 +64,25 @@ func TestDeleteloadbalancer(t *testing.T) {
 		"ID": "86407564",
 	}
 
-	_, err := digioceancloud.Deleteloadbalancer(delete)
+	_, err := digioceancloud.DeleteLoadBalancer(delete)
 
 	if err != nil {
 		t.Errorf("Test to delete DigitalOcean LoadBalancer failed")
 	}
 }
 
-func TestListloadbalancer(t *testing.T) {
+func TestListLoadBalancer(t *testing.T) {
 
 	var digioceancloud DigioceanLoadBalancer
 
-	_, err := digioceancloud.Listloadbalancer(nil)
+	_, err := digioceancloud.ListLoadBalancer(nil)
 
 	if err != nil {
 		t.Errorf("Test to list DigitalOcean LoadBalancer failed")
 	}
 }
 
-func TestAttachnodewithloadbalancer(t *testing.T) {
+func TestAttachNodeWithLoadBalancer(t *testing.T) {
 
 	var digioceancloud DigioceanLoadBalancer
 
@@ -91,14 +91,14 @@ func TestAttachnodewithloadbalancer(t *testing.T) {
 		"DropletIDs":     []int{31331, 31313},
 	}
 
-	_, err := digioceancloud.Attachnodewithloadbalancer(attachnodewithloadbalancer)
+	_, err := digioceancloud.AttachNodeWithLoadBalancer(attachnodewithloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test to attach Droplets to DigitalOcean LoadBalancer failed")
 	}
 }
 
-func TestDetachnodewithloadbalancer(t *testing.T) {
+func TestDetachNodeWithLoadBalancer(t *testing.T) {
 
 	var digioceancloud DigioceanLoadBalancer
 
@@ -107,7 +107,7 @@ func TestDetachnodewithloadbalancer(t *testing.T) {
 		"DropletIDs":     []int{31331, 31313},
 	}
 
-	_, err := digioceancloud.Detachnodewithloadbalancer(detachnodewithloadbalancer)
+	_, err := digioceancloud.DetachNodeWithLoadBalancer(detachnodewithloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test to detach Droplets from DigitalOcean LoadBalancer failed")

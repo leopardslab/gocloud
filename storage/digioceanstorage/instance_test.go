@@ -9,7 +9,7 @@ func init() {
 	digioceanAuth.LoadConfig()
 }
 
-func TestCreatedisk(t *testing.T) {
+func TestCreateDisk(t *testing.T) {
 
 	var digioceancloud Digioceanstorage
 
@@ -21,14 +21,14 @@ func TestCreatedisk(t *testing.T) {
 		"SnapshotID":    nil,
 	}
 
-	_, err := digioceancloud.Createdisk(create)
+	_, err := digioceancloud.CreateDisk(create)
 
 	if err != nil {
 		t.Errorf("Test to create DigitalOcean Storage volume failed.")
 	}
 }
 
-func TestDeletedisk(t *testing.T) {
+func TestDeleteDisk(t *testing.T) {
 
 	var digioceancloud Digioceanstorage
 
@@ -36,14 +36,14 @@ func TestDeletedisk(t *testing.T) {
 		"VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
 	}
 
-	_, err := digioceancloud.Deletedisk(delete)
+	_, err := digioceancloud.DeleteDisk(delete)
 
 	if err != nil {
 		t.Errorf("Test to delete DigitalOcean Storage volume failed.")
 	}
 }
 
-func TestCreatesnapshot(t *testing.T) {
+func TestCreateSnapshot(t *testing.T) {
 
 	var digioceancloud Digioceanstorage
 
@@ -52,14 +52,14 @@ func TestCreatesnapshot(t *testing.T) {
 		"SnapshotName": "big-data-snapshot1475261774",
 	}
 
-	_, err := digioceancloud.Createsnapshot(create)
+	_, err := digioceancloud.CreateSnapshot(create)
 
 	if err != nil {
 		t.Errorf("Test to create DigitalOcean Snapshot failed.")
 	}
 }
 
-func TestDeletesnapshot(t *testing.T) {
+func TestDeleteSnapshot(t *testing.T) {
 
 	var digioceancloud Digioceanstorage
 
@@ -67,14 +67,14 @@ func TestDeletesnapshot(t *testing.T) {
 		"SnapshotID": "7724db7c-e098-11e5-b522-000f53304e51",
 	}
 
-	_, err := digioceancloud.Deletesnapshot(delete)
+	_, err := digioceancloud.DeleteSnapshot(delete)
 
 	if err != nil {
 		t.Errorf("Test to delete DigitalOcean Snapshot failed.")
 	}
 }
 
-func TestAttachdisk(t *testing.T) {
+func TestAttachDisk(t *testing.T) {
 
 	var digioceancloud Digioceanstorage
 
@@ -84,14 +84,14 @@ func TestAttachdisk(t *testing.T) {
 		"Region":    "nyc3",
 	}
 
-	_, err := digioceancloud.Attachdisk(create)
+	_, err := digioceancloud.AttachDisk(create)
 
 	if err != nil {
 		t.Errorf("Test to attach disk to DigitalOcean Droplet failed.")
 	}
 }
 
-func TestDetachdisk(t *testing.T) {
+func TestDetachDisk(t *testing.T) {
 
 	var digioceancloud Digioceanstorage
 
@@ -101,7 +101,7 @@ func TestDetachdisk(t *testing.T) {
 		"Region":    "nyc3",
 	}
 
-	_, err := digioceancloud.Detachdisk(delete)
+	_, err := digioceancloud.DetachDisk(delete)
 
 	if err != nil {
 		t.Errorf("Test to detach disk from DigitalOcean Droplet failed.")

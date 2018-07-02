@@ -6,8 +6,8 @@ import (
 	"net/http"
 )
 
-// Createnode function creates a new VultrCompute instance.
-func (vultrCompute *VultrCompute) Createnode(request interface{}) (resp interface{}, err error) {
+// CreateNode function creates a new VultrCompute instance.
+func (vultrCompute *VultrCompute) CreateNode(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
 
@@ -19,8 +19,8 @@ func (vultrCompute *VultrCompute) Createnode(request interface{}) (resp interfac
 	return resp, err
 }
 
-// Startnode function starts a VultrCompute instance.
-func (vultrCompute *VultrCompute) Startnode(request interface{}) (resp interface{}, err error) {
+// StartNode function starts a VultrCompute instance.
+func (vultrCompute *VultrCompute) StartNode(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
 
@@ -32,14 +32,14 @@ func (vultrCompute *VultrCompute) Startnode(request interface{}) (resp interface
 	return resp, err
 }
 
-// Stopnode function stops a VultrCompute instance.
-func (vultrCompute *VultrCompute) Stopnode(request interface{}) (resp interface{}, err error) {
+// StopNode function stops a VultrCompute instance.
+func (vultrCompute *VultrCompute) StopNode(request interface{}) (resp interface{}, err error) {
 	fmt.Println("\nThis API is not provided by Vultr cloud")
 	return resp, err
 }
 
-// Rebootnode function reboots a VultrCompute instance.
-func (vultrCompute *VultrCompute) Rebootnode(request interface{}) (resp interface{}, err error) {
+// RebootNode function reboots a VultrCompute instance.
+func (vultrCompute *VultrCompute) RebootNode(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
 
@@ -51,8 +51,8 @@ func (vultrCompute *VultrCompute) Rebootnode(request interface{}) (resp interfac
 	return resp, err
 }
 
-// Deletenode function deletes a VultrCompute instance.
-func (vultrCompute *VultrCompute) Deletenode(request interface{}) (resp interface{}, err error) {
+// DeleteNode function deletes a VultrCompute instance.
+func (vultrCompute *VultrCompute) DeleteNode(request interface{}) (resp interface{}, err error) {
 	param := make(map[string]interface{})
 	param = request.(map[string]interface{})
 

@@ -1,25 +1,25 @@
 package cinder
 
-func (cinder *Cinder) Createdisk(request interface{}) (resp interface{}, err error) {
+func (cinder *Cinder) CreateDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (cinder *Cinder) Deletedisk(request interface{}) (resp interface{}, err error) {
+func (cinder *Cinder) DeleteDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (cinder *Cinder) Createsnapshot(request interface{}) (resp interface{}, err error) {
+func (cinder *Cinder) CreateSnapshot(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (cinder *Cinder) Deletesnapshot(request interface{}) (resp interface{}, err error) {
+func (cinder *Cinder) DeleteSnapshot(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (cinder *Cinder) Attachdisk(request interface{}) (resp interface{}, err error) {
+func (cinder *Cinder) AttachDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (cinder *Cinder) Detachdisk(request interface{}) (resp interface{}, err error) {
+func (cinder *Cinder) DetachDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

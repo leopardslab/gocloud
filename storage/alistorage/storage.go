@@ -5,8 +5,8 @@ import (
 	"strconv"
 )
 
-// Createdisk create ECS-Disk accept map[string]interface{}
-func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{}, err error) {
+// CreateDisk create ECS-Disk accept map[string]interface{}
+func (aliStorage *Alistorage) CreateDisk(request interface{}) (resp interface{}, err error) {
 	var options CreateDisk
 
 	param := make(map[string]interface{})
@@ -71,8 +71,8 @@ func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{},
 	return resp, err
 }
 
-// Deletedisk delete ECS-Disk accept map[string]interface{}
-func (aliStorage *Alistorage) Deletedisk(request interface{}) (resp interface{}, err error) {
+// DeleteDisk delete ECS-Disk accept map[string]interface{}
+func (aliStorage *Alistorage) DeleteDisk(request interface{}) (resp interface{}, err error) {
 	var options DeleteDisk
 
 	param := make(map[string]interface{})
@@ -98,8 +98,8 @@ func (aliStorage *Alistorage) Deletedisk(request interface{}) (resp interface{},
 	return resp, err
 }
 
-// Createsnapshot create snapshot accept map[string]interface{}
-func (aliStorage *Alistorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
+// CreateSnapshot create snapshot accept map[string]interface{}
+func (aliStorage *Alistorage) CreateSnapshot(request interface{}) (resp interface{}, err error) {
 	var options CreateSnapshot
 
 	param := make(map[string]interface{})
@@ -134,8 +134,8 @@ func (aliStorage *Alistorage) Createsnapshot(request interface{}) (resp interfac
 	return resp, err
 }
 
-// Deletesnapshot delete snapshot accept map[string]interface{}
-func (aliStorage *Alistorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
+// DeleteSnapshot delete snapshot accept map[string]interface{}
+func (aliStorage *Alistorage) DeleteSnapshot(request interface{}) (resp interface{}, err error) {
 	var options DeleteSnapshot
 
 	param := make(map[string]interface{})
@@ -161,8 +161,8 @@ func (aliStorage *Alistorage) Deletesnapshot(request interface{}) (resp interfac
 	return resp, err
 }
 
-// Attachdisk attach ECS-Disk to ECS, accept map[string]interface{}
-func (aliStorage *Alistorage) Attachdisk(request interface{}) (resp interface{}, err error) {
+// AttachDisk attach ECS-Disk to ECS, accept map[string]interface{}
+func (aliStorage *Alistorage) AttachDisk(request interface{}) (resp interface{}, err error) {
 	var options AttachDisk
 
 	param := make(map[string]interface{})
@@ -201,8 +201,8 @@ func (aliStorage *Alistorage) Attachdisk(request interface{}) (resp interface{},
 	return resp, err
 }
 
-// Detachdisk detach ECS-Disk from ECS, accept map[string]interface{}
-func (aliStorage *Alistorage) Detachdisk(request interface{}) (resp interface{}, err error) {
+// DetachDisk detach ECS-Disk from ECS, accept map[string]interface{}
+func (aliStorage *Alistorage) DetachDisk(request interface{}) (resp interface{}, err error) {
 	var options AttachDisk
 
 	param := make(map[string]interface{})

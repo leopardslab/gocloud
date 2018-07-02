@@ -1,31 +1,31 @@
 package vultrserverless
 
-//Getfunction  describe serverless function.
-func (vultrserverless *Vultrserverless) Getfunction(request interface{}) (resp interface{}, err error) {
+//GetFunction  describe serverless function.
+func (vultrserverless *Vultrserverless) GetFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Createfunction  create serverless function.
-func (vultrserverless *Vultrserverless) Createfunction(request interface{}) (resp interface{}, err error) {
+//CreateFunction  create serverless function.
+func (vultrserverless *Vultrserverless) CreateFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Callfunction  call serverless function.
-func (vultrserverless *Vultrserverless) Callfunction(request interface{}) (resp interface{}, err error) {
+//CallFunction  call serverless function.
+func (vultrserverless *Vultrserverless) CallFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Listfunction  list serverless function.
-func (vultrserverless *Vultrserverless) Listfunction(request interface{}) (resp interface{}, err error) {
+//ListFunction  list serverless function.
+func (vultrserverless *Vultrserverless) ListFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Deletefunction  delete serverless function.
-func (vultrserverless *Vultrserverless) Deletefunction(request interface{}) (resp interface{}, err error) {
+//DeleteFunction  delete serverless function.
+func (vultrserverless *Vultrserverless) DeleteFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }

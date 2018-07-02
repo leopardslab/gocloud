@@ -5,24 +5,24 @@ import (
 )
 
 //WIP
-func (nova *Nova) Startnode(request interface{}) (resp interface{}, err error) {
+func (nova *Nova) StartNode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (nova *Nova) Stopnode(request interface{}) (resp interface{}, err error) {
+func (nova *Nova) StopNode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (nova *Nova) Rebootnode(request interface{}) (resp interface{}, err error) {
+func (nova *Nova) RebootNode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-func (nova *Nova) Deletenode(request interface{}) (resp interface{}, err error) {
+func (nova *Nova) DeleteNode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
 //WIP
-func (nova *Nova) Createnode(request interface{}) (resp interface{}, err error) {
+func (nova *Nova) CreateNode(request interface{}) (resp interface{}, err error) {
 	var options CreateServer
 
 	param := make(map[string]interface{})

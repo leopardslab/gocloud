@@ -6,8 +6,8 @@ import (
 	"strconv"
 )
 
-// Startnode start ECS instances accept map[string]interface{}
-func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
+// StartNode start ECS instances accept map[string]interface{}
+func (ecs *ECS) StartNode(request interface{}) (resp interface{}, err error) {
 	var options StartNode
 
 	param := make(map[string]interface{})
@@ -43,8 +43,8 @@ func (ecs *ECS) Startnode(request interface{}) (resp interface{}, err error) {
 
 }
 
-// Stopnode stop ECS instances accept map[string]interface{}
-func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
+// StopNode stop ECS instances accept map[string]interface{}
+func (ecs *ECS) StopNode(request interface{}) (resp interface{}, err error) {
 	var options StopNode
 
 	param := make(map[string]interface{})
@@ -90,8 +90,8 @@ func (ecs *ECS) Stopnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Rebootnode reboot ECS instances accept map[string]interface{}
-func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
+// RebootNode reboot ECS instances accept map[string]interface{}
+func (ecs *ECS) RebootNode(request interface{}) (resp interface{}, err error) {
 	var options RebootNode
 
 	param := make(map[string]interface{})
@@ -127,8 +127,8 @@ func (ecs *ECS) Rebootnode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deletenode delete ECS instances accept map[string]interface{}
-func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
+// DeleteNode delete ECS instances accept map[string]interface{}
+func (ecs *ECS) DeleteNode(request interface{}) (resp interface{}, err error) {
 	var options DeleteNode
 
 	param := make(map[string]interface{})
@@ -156,8 +156,8 @@ func (ecs *ECS) Deletenode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Createnode create ECS instances accept map[string]interface{}
-func (ecs *ECS) Createnode(request interface{}) (resp interface{}, err error) {
+// CreateNode create ECS instances accept map[string]interface{}
+func (ecs *ECS) CreateNode(request interface{}) (resp interface{}, err error) {
 	var options CreateNode
 
 	param := make(map[string]interface{})

@@ -7,7 +7,7 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-func TestCreatedisk(t *testing.T) {
+func TestCreateDisk(t *testing.T) {
 	var amazonstorage Amazonstorage
 
 	createdisk := map[string]interface{}{
@@ -15,7 +15,7 @@ func TestCreatedisk(t *testing.T) {
 		"VolumeSize": 100,
 		"Region":     "us-east-1",
 	}
-	_, err := amazonstorage.Createdisk(createdisk)
+	_, err := amazonstorage.CreateDisk(createdisk)
 
 	if err != nil {
 		t.Errorf("Test Fail")
@@ -23,21 +23,21 @@ func TestCreatedisk(t *testing.T) {
 
 }
 
-func TestDeletedisk(t *testing.T) {
+func TestDeleteDisk(t *testing.T) {
 	var amazonstorage Amazonstorage
 
 	deletedisk := map[string]string{
 		"VolumeId": "vol-0996a16ff8f032760",
 		"Region":   "us-east-1",
 	}
-	_, err := amazonstorage.Deletedisk(deletedisk)
+	_, err := amazonstorage.DeleteDisk(deletedisk)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestAttachdisk(t *testing.T) {
+func TestAttachDisk(t *testing.T) {
 	var amazonstorage Amazonstorage
 
 	attachdisk := map[string]string{
@@ -47,14 +47,14 @@ func TestAttachdisk(t *testing.T) {
 		"Region":     "us-east-1",
 	}
 
-	_, err := amazonstorage.Attachdisk(attachdisk)
+	_, err := amazonstorage.AttachDisk(attachdisk)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDetachdisk(t *testing.T) {
+func TestDetachDisk(t *testing.T) {
 	var amazonstorage Amazonstorage
 
 	detachdisk := map[string]string{
@@ -65,14 +65,14 @@ func TestDetachdisk(t *testing.T) {
 		"Region":     "us-east-1",
 	}
 
-	_, err := amazonstorage.Detachdisk(detachdisk)
+	_, err := amazonstorage.DetachDisk(detachdisk)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestCreatesnapshot(t *testing.T) {
+func TestCreateSnapshot(t *testing.T) {
 	var amazonstorage Amazonstorage
 
 	createsnapshot := map[string]string{
@@ -80,14 +80,14 @@ func TestCreatesnapshot(t *testing.T) {
 		"Description": "",
 		"Region":      "us-east-1",
 	}
-	_, err := amazonstorage.Createsnapshot(createsnapshot)
+	_, err := amazonstorage.CreateSnapshot(createsnapshot)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDeletesnapshot(t *testing.T) {
+func TestDeleteSnapshot(t *testing.T) {
 	var amazonstorage Amazonstorage
 
 	deletesnapshot := map[string]string{
@@ -95,7 +95,7 @@ func TestDeletesnapshot(t *testing.T) {
 		"Region":     "us-east-1",
 	}
 
-	_, err := amazonstorage.Deletesnapshot(deletesnapshot)
+	_, err := amazonstorage.DeleteSnapshot(deletesnapshot)
 
 	if err != nil {
 		t.Errorf("Test Fail")

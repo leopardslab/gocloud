@@ -37,7 +37,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
    "Instances": []string{"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-central1-b/instances/instance-1"},
 	}
 
-  resp, err := googlecloud.Createloadbalancer(creatloadbalancer)
+  resp, err := googlecloud.CreateLoadBalancer(creatloadbalancer)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -52,7 +52,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
      "Region":  "us-central1",
  }
 
- resp, err := googlecloud.Listloadbalancer(listloadbalancer)
+ resp, err := googlecloud.ListLoadBalancer(listloadbalancer)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -69,7 +69,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 	"Instances":  []string{"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-central1-b/instances/instance-2"},
 	}
 
- resp, err := googlecloud.Attachnodewithloadbalancer(attachnodewithloadbalancer)
+ resp, err := googlecloud.AttachNodeWithLoadBalancer(attachnodewithloadbalancer)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -85,7 +85,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
       "Instances":  []string{"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-central1-b/instances/instance-2"},
 	}
 
-  resp, err := googlecloud.Detachnodewithloadbalancer(detachnodewithloadbalancer)
+  resp, err := googlecloud.DetachNodeWithLoadBalancer(detachnodewithloadbalancer)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -99,7 +99,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"TargetPool": "google-loadbalancer",
 	}
 
- resp, err := googlecloud.Deleteloadbalancer(deleteloadbalancer)
+ resp, err := googlecloud.DeleteLoadBalancer(deleteloadbalancer)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])

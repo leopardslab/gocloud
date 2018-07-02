@@ -32,7 +32,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
         "type":   "A",
         "data":   "192.0.2.1",
     }
-    resp, err := vultr.Createdns(createDNS)
+    resp, err := vultr.CreateDns(createDNS)
     if err != nil {
         fmt.Println(err)
         return
@@ -48,7 +48,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
         "domain": "oddcn.cn",
         "RECORDID": 7065076,
     }
-    resp, err := vultr.Deletedns(deleteDNS)
+    resp, err := vultr.DeleteDns(deleteDNS)
     if err != nil {
         fmt.Println(err)
         return
@@ -63,7 +63,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
     listDNS := map[string]interface{}{
         "domain": "oddcn.cn",
     }
-    resp, err := vultr.Listdns(listDNS)
+    resp, err := vultr.ListDns(listDNS)
     if err != nil {
         fmt.Println(err)
         return

@@ -63,7 +63,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "RedirectHTTPToHTTPS": false,
   }
 
- resp, err := digioceancloud.Createloadbalancer(create)
+ resp, err := digioceancloud.CreateLoadBalancer(create)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -76,7 +76,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "ID": "86407564",
    }
 
-  resp, err := digioceancloud.Deleteloadbalancer(delete)
+  resp, err := digioceancloud.DeleteLoadBalancer(delete)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -90,7 +90,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "DropletIDs":        []int{31331, 31313},
   }
 
-  resp, err := digioceancloud.Attachnodewithloadbalancer(attachnodewithloadbalancer)
+  resp, err := digioceancloud.AttachNodeWithLoadBalancer(attachnodewithloadbalancer)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -104,7 +104,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "DropletIDs":        []int{31331, 31313},
   }
 
- resp, err := digioceancloud.Detachnodewithloadbalancer(detachnodewithloadbalancer)
+ resp, err := digioceancloud.DetachNodeWithLoadBalancer(detachnodewithloadbalancer)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -115,7 +115,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
 
 ```js
 
- resp, err := digioceancloud.Listloadbalancer(nil)
+ resp, err := digioceancloud.ListLoadBalancer(nil)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])

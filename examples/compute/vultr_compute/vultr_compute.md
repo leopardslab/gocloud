@@ -31,7 +31,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
         "VPSPLANID": 201,
         "OSID":      127,
     }
-    resp, err := vultrCloud.Createnode(create)
+    resp, err := vultrCloud.CreateNode(create)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```
@@ -42,7 +42,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
     start := map[string]interface{}{
         "SUBID":      16183500,
     }
-    resp, err := vultrCloud.Startnode(start)
+    resp, err := vultrCloud.StartNode(start)
     response := resp.(map[string]interface{})
     fmt.Println(response["status"])
     fmt.Println(response["body"])
@@ -60,7 +60,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
     reboot := map[string]interface{}{
         "SUBID": 16183500,
     }
-    resp, err := vultrCloud.Rebootnode(reboot)
+    resp, err := vultrCloud.RebootNode(reboot)
     response := resp.(map[string]interface{})
     fmt.Println(response["status"])
     fmt.Println(response["body"])
@@ -72,7 +72,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
     d := map[string]interface{}{
         "SUBID": 16183500,
     }
-    resp, err := vultrCloud.Deletenode(d)
+    resp, err := vultrCloud.DeleteNode(d)
     response := resp.(map[string]interface{})
     fmt.Println(response["status"])
     fmt.Println(response["body"])

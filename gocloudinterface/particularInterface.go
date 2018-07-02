@@ -2,19 +2,19 @@ package gocloudinterface
 
 // Serverless module unified API
 type Serverless interface {
-	Getfunction(request interface{}) (resp interface{}, err error)
-	Createfunction(request interface{}) (resp interface{}, err error)
-	Callfunction(request interface{}) (resp interface{}, err error)
-	Listfunction(request interface{}) (resp interface{}, err error)
-	Deletefunction(request interface{}) (resp interface{}, err error)
+	GetFunction(request interface{}) (resp interface{}, err error)
+	CreateFunction(request interface{}) (resp interface{}, err error)
+	CallFunction(request interface{}) (resp interface{}, err error)
+	ListFunction(request interface{}) (resp interface{}, err error)
+	DeleteFunction(request interface{}) (resp interface{}, err error)
 }
 
 // Database module unified API
 type Database interface {
-	Listtables(request interface{}) (resp interface{}, err error)
-	Deletetables(request interface{}) (resp interface{}, err error)
-	Describetables(request interface{}) (resp interface{}, err error)
-	Createtables(request interface{}) (resp interface{}, err error)
+	ListTables(request interface{}) (resp interface{}, err error)
+	DeleteTables(request interface{}) (resp interface{}, err error)
+	DescribeTables(request interface{}) (resp interface{}, err error)
+	CreateTables(request interface{}) (resp interface{}, err error)
 }
 
 // MachineLearning module unified API

@@ -1,31 +1,31 @@
 package lambda
 
-//Getfunction  describe lambda function.
-func (lambda *Lambda) Getfunction(request interface{}) (resp interface{}, err error) {
+//GetFunction  describe lambda function.
+func (lambda *Lambda) GetFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Createfunction  Create lambda function.
-func (lambda *Lambda) Createfunction(request interface{}) (resp interface{}, err error) {
+//CreateFunction  Create lambda function.
+func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Callfunction  call lambda function.
-func (lambda *Lambda) Callfunction(request interface{}) (resp interface{}, err error) {
+//CallFunction  call lambda function.
+func (lambda *Lambda) CallFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Listfunction  list lambda function.
-func (lambda *Lambda) Listfunction(request interface{}) (resp interface{}, err error) {
+//ListFunction  list lambda function.
+func (lambda *Lambda) ListFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Deletefunction  delete lambda function.
-func (lambda *Lambda) Deletefunction(request interface{}) (resp interface{}, err error) {
+//DeleteFunction  delete lambda function.
+func (lambda *Lambda) DeleteFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }

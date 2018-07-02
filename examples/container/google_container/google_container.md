@@ -44,7 +44,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
     "nodePools" : nodepools,
   }
 
-  resp, err := googlecloud.Createcluster(createcluster)
+  resp, err := googlecloud.CreateCluster(createcluster)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -60,7 +60,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"Zone":      "us-central1-a",
 	}
 
- resp , err := googlecloud.Deletecluster(deletecluster)
+ resp , err := googlecloud.DeleteCluster(deletecluster)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -76,7 +76,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 	"Name"      :   "nodepool",
 	}
 
-  resp, err := googlecloud.Createservice(createservice)
+  resp, err := googlecloud.CreateService(createservice)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -92,7 +92,7 @@ deleteservice := map[string]string{
 		"nodePoolId": "nodepool",
 	}
 
- resp, err := googlecloud.Deleteservice(deleteservice)
+ resp, err := googlecloud.DeleteService(deleteservice)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])

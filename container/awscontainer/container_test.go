@@ -7,7 +7,7 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-func TestCreatecluster(t *testing.T) {
+func TestCreateCluster(t *testing.T) {
 	var ecscontainer Ecscontainer
 
 	createcluster := map[string]interface{}{
@@ -15,10 +15,10 @@ func TestCreatecluster(t *testing.T) {
 		"Region":      "us-east-1",
 	}
 
-	ecscontainer.Createcluster(createcluster)
+	ecscontainer.CreateCluster(createcluster)
 }
 
-func TestDeletecluster(t *testing.T) {
+func TestDeleteCluster(t *testing.T) {
 	var ecscontainer Ecscontainer
 
 	deletecluster := map[string]interface{}{
@@ -26,14 +26,14 @@ func TestDeletecluster(t *testing.T) {
 		"Region":      "us-east-1",
 	}
 
-	_, err := ecscontainer.Deletecluster(deletecluster)
+	_, err := ecscontainer.DeleteCluster(deletecluster)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestStoptask(t *testing.T) {
+func TestStopTask(t *testing.T) {
 	var ecscontainer Ecscontainer
 	stoptask := map[string]interface{}{
 		"cluster": "cluster",
@@ -41,14 +41,14 @@ func TestStoptask(t *testing.T) {
 		"task":    "task",
 		"Region":  "us-east-1",
 	}
-	_, err := ecscontainer.Stoptask(stoptask)
+	_, err := ecscontainer.StopTask(stoptask)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestCreateservice(t *testing.T) {
+func TestCreateService(t *testing.T) {
 	var ecscontainer Ecscontainer
 	LoadBalancers := []map[string]interface{}{{
 		"containerName":    "rootmonk",
@@ -66,14 +66,14 @@ func TestCreateservice(t *testing.T) {
 		"LoadBalancers":  LoadBalancers,
 	}
 
-	_, err := ecscontainer.Createservice(createservice)
+	_, err := ecscontainer.CreateService(createservice)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDeleteservice(t *testing.T) {
+func TestDeleteService(t *testing.T) {
 	var ecscontainer Ecscontainer
 
 	deleteservice := map[string]interface{}{
@@ -81,7 +81,7 @@ func TestDeleteservice(t *testing.T) {
 		"service": "service",
 		"Region":  "us-east-1",
 	}
-	_, err := ecscontainer.Deleteservice(deleteservice)
+	_, err := ecscontainer.DeleteService(deleteservice)
 
 	if err != nil {
 		t.Errorf("Test Fail")

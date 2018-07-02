@@ -1,26 +1,26 @@
 package rackspacecompute
 
-// Createnode function creates a new rackspacecompute instance.
-func (rackspacecompute *Rackspacecompute) Createnode(request interface{}) (resp interface{}, err error) {
+// CreateNode function creates a new rackspacecompute instance.
+func (rackspacecompute *Rackspacecompute) CreateNode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Startnode function starts a rackspacecompute instance.
-func (rackspacecompute *Rackspacecompute) Startnode(request interface{}) (resp interface{}, err error) {
+// StartNode function starts a rackspacecompute instance.
+func (rackspacecompute *Rackspacecompute) StartNode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Stopnode function stops a rackspacecompute instance.
-func (rackspacecompute *Rackspacecompute) Stopnode(request interface{}) (resp interface{}, err error) {
+// StopNode function stops a rackspacecompute instance.
+func (rackspacecompute *Rackspacecompute) StopNode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Rebootnode function reboots a rackspacecompute instance.
-func (rackspacecompute *Rackspacecompute) Rebootnode(request interface{}) (resp interface{}, err error) {
+// RebootNode function reboots a rackspacecompute instance.
+func (rackspacecompute *Rackspacecompute) RebootNode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deletenode function deletes a rackspacecompute instance.
-func (rackspacecompute *Rackspacecompute) Deletenode(request interface{}) (resp interface{}, err error) {
+// DeleteNode function deletes a rackspacecompute instance.
+func (rackspacecompute *Rackspacecompute) DeleteNode(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

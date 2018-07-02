@@ -64,27 +64,27 @@ type StickySessions struct {
 
 ### FUNCTIONS
 
-Createloadbalancer function creates a new load balancer.
+CreateLoadBalancer function creates a new load balancer.
 ```
-func (digioceanloadbalancer *LoadBalancer) Createloadbalancer(request interface{}) (resp interface{}, err error)
-```
-
-Deleteloadbalancer function deletes a load balancer.
-```
-func (digioceanloadbalancer *LoadBalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error)
+func (digioceanloadbalancer *LoadBalancer) CreateLoadBalancer(request interface{}) (resp interface{}, err error)
 ```
 
-Listloadbalancer function lists load balancers.
+DeleteLoadBalancer function deletes a load balancer.
 ```
-func (digioceanloadbalancer *LoadBalancer) Listloadbalancer(request interface{}) (resp interface{}, err error)
-```
-
-Attachnodewithloadbalancer function attaches a load balancer to a droplet.
-```
-func (digioceanloadbalancer *LoadBalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
+func (digioceanloadbalancer *LoadBalancer) DeleteLoadBalancer(request interface{}) (resp interface{}, err error)
 ```
 
-Detachnodewithloadbalancer function detaches a load balancer from a droplet.
+ListLoadBalancer function lists load balancers.
 ```
-func (digioceanloadbalancer *LoadBalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error)
+func (digioceanloadbalancer *LoadBalancer) ListLoadBalancer(request interface{}) (resp interface{}, err error)
+```
+
+AttachNodeWithLoadBalancer function attaches a load balancer to a droplet.
+```
+func (digioceanloadbalancer *LoadBalancer) AttachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error)
+```
+
+DetachNodeWithLoadBalancer function detaches a load balancer from a droplet.
+```
+func (digioceanloadbalancer *LoadBalancer) DetachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error)
 ```

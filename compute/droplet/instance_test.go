@@ -9,7 +9,7 @@ func init() {
 	digioceanAuth.LoadConfig()
 }
 
-func TestCreatenode(t *testing.T) {
+func TestCreateNode(t *testing.T) {
 
 	var digioceancloud Droplet
 
@@ -32,14 +32,14 @@ func TestCreatenode(t *testing.T) {
 		"Tags":              []string{"web"},
 	}
 
-	_, err := digioceancloud.Createnode(create)
+	_, err := digioceancloud.CreateNode(create)
 
 	if err != nil {
 		t.Errorf("Test failed.")
 	}
 }
 
-func TestStopnode(t *testing.T) {
+func TestStopNode(t *testing.T) {
 
 	var digioceancloud Droplet
 
@@ -47,14 +47,14 @@ func TestStopnode(t *testing.T) {
 		"ID": "86407564",
 	}
 
-	_, err := digioceancloud.Stopnode(stop)
+	_, err := digioceancloud.StopNode(stop)
 
 	if err != nil {
 		t.Errorf("Test failed.")
 	}
 }
 
-func TestStartnode(t *testing.T) {
+func TestStartNode(t *testing.T) {
 
 	var digioceancloud Droplet
 
@@ -62,13 +62,13 @@ func TestStartnode(t *testing.T) {
 		"ID": "86407564",
 	}
 
-	_, err := digioceancloud.Startnode(start)
+	_, err := digioceancloud.StartNode(start)
 	if err != nil {
 		t.Errorf("Test failed.")
 	}
 }
 
-func TestRebootnode(t *testing.T) {
+func TestRebootNode(t *testing.T) {
 
 	var digioceancloud Droplet
 
@@ -76,7 +76,7 @@ func TestRebootnode(t *testing.T) {
 		"ID": "86407564",
 	}
 
-	_, err := digioceancloud.Rebootnode(reboot)
+	_, err := digioceancloud.RebootNode(reboot)
 
 	if err != nil {
 		t.Errorf("Test Pass")
@@ -91,5 +91,5 @@ func TestDeletnode(t *testing.T) {
 		"ID": "86407564",
 	}
 
-	digioceancloud.Deletenode(delete)
+	digioceancloud.DeleteNode(delete)
 }

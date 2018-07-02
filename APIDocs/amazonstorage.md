@@ -7,18 +7,18 @@ TYPES
 type Amazonstorage struct {
 }
 
-func (amazonstorage *Amazonstorage) Attachdisk(request interface{}) (resp interface{}, err error)
+func (amazonstorage *Amazonstorage) AttachDisk(request interface{}) (resp interface{}, err error)
 
-func (amazonstorage *Amazonstorage) Createdisk(request interface{}) (resp interface{}, err error)
+func (amazonstorage *Amazonstorage) CreateDisk(request interface{}) (resp interface{}, err error)
 
-func (amazonstorage *Amazonstorage) Createsnapshot(request interface{}) (resp interface{}, err error)
+func (amazonstorage *Amazonstorage) CreateSnapshot(request interface{}) (resp interface{}, err error)
     volumeId, description string
 
-func (amazonstorage *Amazonstorage) Deletedisk(request interface{}) (resp interface{}, err error)
+func (amazonstorage *Amazonstorage) DeleteDisk(request interface{}) (resp interface{}, err error)
 
-func (amazonstorage *Amazonstorage) Deletesnapshot(request interface{}) (resp interface{}, err error)
+func (amazonstorage *Amazonstorage) DeleteSnapshot(request interface{}) (resp interface{}, err error)
 
-func (amazonstorage *Amazonstorage) Detachdisk(request interface{}) (resp interface{}, err error)
+func (amazonstorage *Amazonstorage) DetachDisk(request interface{}) (resp interface{}, err error)
 
 func (amazonstorage *Amazonstorage) PrepareSignatureV2query(params map[string]string, Region string, response map[string]interface{}) error
 

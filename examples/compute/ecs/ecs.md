@@ -35,7 +35,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
         "SecurityGroupId": "sg-m5egbo9s5xb21kpu6nk2",
     }
 
-    resp, err := alicloud.Createnode(create)
+    resp, err := alicloud.CreateNode(create)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```
@@ -52,7 +52,7 @@ or
     if err != nil {
         //...
     }
-    resp, err := alicloud.Createnode(createNode)
+    resp, err := alicloud.CreateNode(createNode)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```
@@ -64,7 +64,7 @@ or
         "InstanceId": "i-m5e3ee3z8wdy8ktdq591",
     }
 
-    resp, err := alicloud.Startnode(start)
+    resp, err := alicloud.StartNode(start)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```
@@ -78,7 +78,7 @@ or
     if err != nil {
         //...
     }
-    resp, err := alicloud.Startnode(startNode)
+    resp, err := alicloud.StartNode(startNode)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```
@@ -91,7 +91,7 @@ or
         "ForceStop":  false,
     }
 
-    resp, err := alicloud.Stopnode(stop)
+    resp, err := alicloud.StopNode(stop)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```
@@ -106,7 +106,7 @@ or
     if err != nil {
         //...
     }
-    resp, err := alicloud.Stopnode(stopNode)
+    resp, err := alicloud.StopNode(stopNode)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```
@@ -119,7 +119,7 @@ or
         "ForceStop":  false,
     }
 
-    resp, err := alicloud.Rebootnode(reboot)
+    resp, err := alicloud.RebootNode(reboot)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```
@@ -134,7 +134,7 @@ or
     if err != nil {
         //...
     }
-    resp, err := alicloud.Rebootnode(rebootNode)
+    resp, err := alicloud.RebootNode(rebootNode)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```
@@ -146,7 +146,7 @@ or
         "InstanceId": "i-m5e3ee3z8wdy8ktdq591",
     }
 
-    resp, err := alicloud.Deletenode(delete)
+    resp, err := alicloud.DeleteNode(delete)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```
@@ -160,7 +160,7 @@ or
     if err != nil {
         //...
     }
-    resp, err := alicloud.Deletenode(deleteNode)
+    resp, err := alicloud.DeleteNode(deleteNode)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```

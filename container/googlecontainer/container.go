@@ -9,10 +9,10 @@ import (
 	"net/http"
 )
 
-//Createcluster creates cluster.
-func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp interface{}, err error) {
+//CreateCluster creates cluster.
+func (googlecontainer *Googlecontainer) CreateCluster(request interface{}) (resp interface{}, err error) {
 
-	var option Createcluster
+	var option CreateCluster
 
 	var Projectid string
 
@@ -147,44 +147,44 @@ func (googlecontainer *Googlecontainer) Createcluster(request interface{}) (resp
 	//zonevalue := "projects/" + Projectid + "/zones/" + Zone
 	option.Zone = Zone
 
-	Createclusterjsonmap := make(map[string]interface{})
+	CreateClusterjsonmap := make(map[string]interface{})
 
-	Createclusterdictnoaryconvert(option, Createclusterjsonmap)
+	CreateClusterdictnoaryconvert(option, CreateClusterjsonmap)
 
-	Createclusterdict := make(map[string]interface{})
+	CreateClusterdict := make(map[string]interface{})
 
-	Createclusterdict["cluster"] = Createclusterjsonmap
+	CreateClusterdict["cluster"] = CreateClusterjsonmap
 
-	Createclusterjson, _ := json.Marshal(Createclusterdict)
+	CreateClusterjson, _ := json.Marshal(CreateClusterdict)
 
-	Createclusterjsonstring := string(Createclusterjson)
+	CreateClusterjsonstring := string(CreateClusterjson)
 
-	var Createclusterjsonstringbyte = []byte(Createclusterjsonstring)
+	var CreateClusterjsonstringbyte = []byte(CreateClusterjsonstring)
 
 	url := "https://container.googleapis.com/v1/projects/" + Projectid + "/zones/" + Zone + "/clusters"
 
 	client := googleauth.SignJWT()
 
-	Createclusterrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Createclusterjsonstringbyte))
+	CreateClusterrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(CreateClusterjsonstringbyte))
 
-	Createclusterrequest.Header.Set("Content-Type", "application/json")
+	CreateClusterrequest.Header.Set("Content-Type", "application/json")
 
-	Createclusterresp, err := client.Do(Createclusterrequest)
+	CreateClusterresp, err := client.Do(CreateClusterrequest)
 
 	fmt.Println(err)
-	defer Createclusterresp.Body.Close()
+	defer CreateClusterresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Createclusterresp.Body)
+	body, err := ioutil.ReadAll(CreateClusterresp.Body)
 
-	Createclusteresponse := make(map[string]interface{})
-	Createclusteresponse["status"] = Createclusterresp.StatusCode
-	Createclusteresponse["body"] = string(body)
-	resp = Createclusteresponse
+	CreateClusteresponse := make(map[string]interface{})
+	CreateClusteresponse["status"] = CreateClusterresp.StatusCode
+	CreateClusteresponse["body"] = string(body)
+	resp = CreateClusteresponse
 	return resp, err
 }
 
-//Deletecluster deletes cluster.
-func (googlecontainer *Googlecontainer) Deletecluster(request interface{}) (resp interface{}, err error) {
+//DeleteCluster deletes cluster.
+func (googlecontainer *Googlecontainer) DeleteCluster(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -192,25 +192,25 @@ func (googlecontainer *Googlecontainer) Deletecluster(request interface{}) (resp
 
 	client := googleauth.SignJWT()
 
-	Deleteclusterrequest, err := http.NewRequest("DELETE", url, nil)
+	DeleteClusterrequest, err := http.NewRequest("DELETE", url, nil)
 
-	Deleteclusterrequest.Header.Set("Content-Type", "application/json")
+	DeleteClusterrequest.Header.Set("Content-Type", "application/json")
 
-	Deleteclusterresp, err := client.Do(Deleteclusterrequest)
+	DeleteClusterresp, err := client.Do(DeleteClusterrequest)
 
-	defer Deleteclusterresp.Body.Close()
+	defer DeleteClusterresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Deleteclusterresp.Body)
+	body, err := ioutil.ReadAll(DeleteClusterresp.Body)
 
-	Deleteclusterresponse := make(map[string]interface{})
-	Deleteclusterresponse["status"] = Deleteclusterresp.StatusCode
-	Deleteclusterresponse["body"] = string(body)
-	resp = Deleteclusterresponse
+	DeleteClusterresponse := make(map[string]interface{})
+	DeleteClusterresponse["status"] = DeleteClusterresp.StatusCode
+	DeleteClusterresponse["body"] = string(body)
+	resp = DeleteClusterresponse
 	return resp, err
 }
 
-//Createservice crestes loadbalancer service.
-func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp interface{}, err error) {
+//CreateService crestes loadbalancer service.
+func (googlecontainer *Googlecontainer) CreateService(request interface{}) (resp interface{}, err error) {
 
 	var option nodepool
 
@@ -333,55 +333,55 @@ func (googlecontainer *Googlecontainer) Createservice(request interface{}) (resp
 		}
 	}
 
-	Createservicejsonmap := make(map[string]interface{})
+	CreateServicejsonmap := make(map[string]interface{})
 
-	Createservicedictnoaryconvert(option, Createservicejsonmap)
+	CreateServicedictnoaryconvert(option, CreateServicejsonmap)
 
-	Createservicedict := make(map[string]interface{})
+	CreateServicedict := make(map[string]interface{})
 
-	Createservicedict["nodePool"] = Createservicejsonmap
+	CreateServicedict["nodePool"] = CreateServicejsonmap
 
-	Createservicejson, _ := json.Marshal(Createservicedict)
+	CreateServicejson, _ := json.Marshal(CreateServicedict)
 
-	Createservicejsonstring := string(Createservicejson)
+	CreateServicejsonstring := string(CreateServicejson)
 
-	var Createservicejsonstringbyte = []byte(Createservicejsonstring)
+	var CreateServicejsonstringbyte = []byte(CreateServicejsonstring)
 
 	url := "https://container.googleapis.com/v1/projects/" + Projectid + "/zones/" + Zone + "/clusters/" + ClusterId + "/nodePools"
 
 	client := googleauth.SignJWT()
 
-	Createservicerequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Createservicejsonstringbyte))
+	CreateServicerequest, err := http.NewRequest("POST", url, bytes.NewBuffer(CreateServicejsonstringbyte))
 
-	Createservicerequest.Header.Set("Content-Type", "application/json")
+	CreateServicerequest.Header.Set("Content-Type", "application/json")
 
-	Createservicerresp, err := client.Do(Createservicerequest)
+	CreateServicerresp, err := client.Do(CreateServicerequest)
 
-	defer Createservicerresp.Body.Close()
+	defer CreateServicerresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Createservicerresp.Body)
+	body, err := ioutil.ReadAll(CreateServicerresp.Body)
 
-	Createserviceresponse := make(map[string]interface{})
-	Createserviceresponse["status"] = Createservicerresp.StatusCode
-	Createserviceresponse["body"] = string(body)
-	resp = Createserviceresponse
+	CreateServiceresponse := make(map[string]interface{})
+	CreateServiceresponse["status"] = CreateServicerresp.StatusCode
+	CreateServiceresponse["body"] = string(body)
+	resp = CreateServiceresponse
 	return resp, err
 }
 
 //runtask runs container.
-func (googlecontainer *Googlecontainer) Runtask(request interface{}) (resp interface{}, err error) {
+func (googlecontainer *Googlecontainer) RunTask(request interface{}) (resp interface{}, err error) {
 	fmt.Println("\nThis API is not provided by Google cloud")
 	return
 }
 
-//Starttask start container.
-func (googlecontainer *Googlecontainer) Starttask(request interface{}) (resp interface{}, err error) {
+//StartTask start container.
+func (googlecontainer *Googlecontainer) StartTask(request interface{}) (resp interface{}, err error) {
 	fmt.Println("\nThis API is not provided by Google cloud")
 	return
 }
 
-//Deleteservice crestes loadbalancer service.
-func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp interface{}, err error) {
+//DeleteService crestes loadbalancer service.
+func (googlecontainer *Googlecontainer) DeleteService(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -389,42 +389,42 @@ func (googlecontainer *Googlecontainer) Deleteservice(request interface{}) (resp
 
 	client := googleauth.SignJWT()
 
-	Deleteservicerequest, err := http.NewRequest("DELETE", url, nil)
-	Deleteservicerequest.Header.Set("Content-Type", "application/json")
+	DeleteServicerequest, err := http.NewRequest("DELETE", url, nil)
+	DeleteServicerequest.Header.Set("Content-Type", "application/json")
 
-	Deleteserviceresp, err := client.Do(Deleteservicerequest)
+	DeleteServiceresp, err := client.Do(DeleteServicerequest)
 
-	defer Deleteserviceresp.Body.Close()
+	defer DeleteServiceresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Deleteserviceresp.Body)
+	body, err := ioutil.ReadAll(DeleteServiceresp.Body)
 
-	Deleteserviceresponse := make(map[string]interface{})
-	Deleteserviceresponse["status"] = Deleteserviceresp.StatusCode
-	Deleteserviceresponse["body"] = string(body)
-	resp = Deleteserviceresponse
+	DeleteServiceresponse := make(map[string]interface{})
+	DeleteServiceresponse["status"] = DeleteServiceresp.StatusCode
+	DeleteServiceresponse["body"] = string(body)
+	resp = DeleteServiceresponse
 	return resp, err
 }
 
-//Stoptask stops container.
-func (googlecontainer *Googlecontainer) Stoptask(request interface{}) (resp interface{}, err error) {
+//StopTask stops container.
+func (googlecontainer *Googlecontainer) StopTask(request interface{}) (resp interface{}, err error) {
 	options := request.(map[string]string)
 
 	url := "https://container.googleapis.com/v1/projects/" + options["Project"] + "/zones/" + options["Zone"] + "/operations/" + options["OperationId"] + ":cancel"
 
 	client := googleauth.SignJWT()
 
-	Stoptaskrequest, err := http.NewRequest("POST", url, nil)
-	Stoptaskrequest.Header.Set("Content-Type", "application/json")
+	StopTaskrequest, err := http.NewRequest("POST", url, nil)
+	StopTaskrequest.Header.Set("Content-Type", "application/json")
 
-	Stoptaskresp, err := client.Do(Stoptaskrequest)
+	StopTaskresp, err := client.Do(StopTaskrequest)
 
-	defer Stoptaskresp.Body.Close()
+	defer StopTaskresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Stoptaskresp.Body)
+	body, err := ioutil.ReadAll(StopTaskresp.Body)
 
-	Stoptaskrespresponse := make(map[string]interface{})
-	Stoptaskrespresponse["status"] = Stoptaskresp.StatusCode
-	Stoptaskrespresponse["body"] = string(body)
-	resp = Stoptaskrespresponse
+	StopTaskrespresponse := make(map[string]interface{})
+	StopTaskrespresponse["status"] = StopTaskresp.StatusCode
+	StopTaskrespresponse["body"] = string(body)
+	resp = StopTaskrespresponse
 	return resp, err
 }

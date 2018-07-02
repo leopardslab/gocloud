@@ -46,7 +46,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
         "release_eip_flag":   false,
     }
 
-    resp, err := alicloud.Createcluster(create)
+    resp, err := alicloud.CreateCluster(create)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
 ```
@@ -72,7 +72,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Createcluster(create)
+    resp, err := alicloud.CreateCluster(create)
     if err != nil {
         fmt.Println(err)
         return
@@ -89,7 +89,7 @@ or
           "cluster_id": "ce82a3a70d4ea4a71826ae877c5ee31f2",
   }
 
-  resp, err := alicloud.Deletecluster(delete)
+  resp, err := alicloud.DeleteCluster(delete)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -105,7 +105,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Deletecluster(deleteCluster)
+    resp, err := alicloud.DeleteCluster(deleteCluster)
     if err != nil {
         fmt.Println(err)
         return
@@ -127,7 +127,7 @@ or
           "environment": map[string]string{"USER": "abc", "PWD": "password",},
   }
 
-  resp, err := alicloud.Runtask(runTask)
+  resp, err := alicloud.RunTask(runTask)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -147,7 +147,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Runtask(runTask)
+    resp, err := alicloud.RunTask(runTask)
     if err != nil {
         fmt.Println(err)
         return
@@ -165,7 +165,7 @@ or
           "name":       "test",
   }
 
-  resp, err := alicloud.Starttask(startTask)
+  resp, err := alicloud.StartTask(startTask)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -181,7 +181,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Starttask(startTask)
+    resp, err := alicloud.StartTask(startTask)
     if err != nil {
         fmt.Println(err)
         return
@@ -200,7 +200,7 @@ or
           "timeout":    20,
   }
 
-  resp, err := alicloud.Stoptask(stopTask)
+  resp, err := alicloud.StopTask(stopTask)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -217,7 +217,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Stoptask(stopTask)
+    resp, err := alicloud.StopTask(stopTask)
     if err != nil {
         fmt.Println(err)
         return

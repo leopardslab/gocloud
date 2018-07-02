@@ -12,8 +12,8 @@ import (
 // dnsBasePath is the endpoint URL for digitalocean API.
 const dnsBasePath = "https://api.digitalocean.com/v2/domains"
 
-// Createdns function creates a new DNS record.
-func (digioceandns *Digioceandns) Createdns(request interface{}) (resp interface{}, err error) {
+// CreateDns function creates a new DNS record.
+func (digioceandns *Digioceandns) CreateDns(request interface{}) (resp interface{}, err error) {
 
 	var dnsInstance Digioceandns                                     // Initialize LoadBalancer struct
 	var domainName string                                            // To store domain name
@@ -99,8 +99,8 @@ func (digioceandns *Digioceandns) Createdns(request interface{}) (resp interface
 	return resp, err
 }
 
-// Deletedns function deletes a DNS record.
-func (digioceandns *Digioceandns) Deletedns(request interface{}) (resp interface{}, err error) {
+// DeleteDns function deletes a DNS record.
+func (digioceandns *Digioceandns) DeleteDns(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -130,8 +130,8 @@ func (digioceandns *Digioceandns) Deletedns(request interface{}) (resp interface
 	return resp, err
 }
 
-// Listdns function lists DNS records.
-func (digioceandns *Digioceandns) Listdns(request interface{}) (resp interface{}, err error) {
+// ListDns function lists DNS records.
+func (digioceandns *Digioceandns) ListDns(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -161,9 +161,9 @@ func (digioceandns *Digioceandns) Listdns(request interface{}) (resp interface{}
 	return resp, err
 }
 
-// ListResourcednsRecordSets function lists DNS record sets. DigitalOcean API
+// ListResourceDnsRecordSets function lists DNS record sets. DigitalOcean API
 // doesn't provide functionality to suppport this function.
-func (digioceandns *Digioceandns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error) {
+func (digioceandns *Digioceandns) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }

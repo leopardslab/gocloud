@@ -34,7 +34,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 	"Region":       "us-east-1",
   }
 
- resp, err := amazoncloud.Createnode(create)
+ resp, err := amazoncloud.CreateNode(create)
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
 ```
@@ -47,7 +47,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"Region":      "us-east-1",
 	}
 
-  resp, err := amazoncloud.Stopnode(stop)
+  resp, err := amazoncloud.StopNode(stop)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -60,7 +60,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 		"Region":      "us-east-1",
 	}
 
-  resp, err := amazoncloud.Startnode(start)
+  resp, err := amazoncloud.StartNode(start)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -74,7 +74,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
 	}
 
 
-  resp, err := amazoncloud.Rebootnode(Reboot)
+  resp, err := amazoncloud.RebootNode(Reboot)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -88,7 +88,7 @@ amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
    }
 
 
-  resp, err := amazoncloud.Deletenode(delete)
+  resp, err := amazoncloud.DeleteNode(delete)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```

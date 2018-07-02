@@ -26,32 +26,32 @@ type Digioceanstorage struct {
 
 ### FUNCTIONS
 
-Createdisk function creates a new disk.
+CreateDisk function creates a new disk.
 ```
-func (digioceanstorage *Digioceanstorage) Createdisk(request interface{}) (resp interface{}, err error)
-```
-
-Deletedisk function deletes a disk.
-```
-func (digioceanstorage *Digioceanstorage) Deletedisk(request interface{}) (resp interface{}, err error)
+func (digioceanstorage *Digioceanstorage) CreateDisk(request interface{}) (resp interface{}, err error)
 ```
 
-Createsnapshot function creates a new snapshot.
+DeleteDisk function deletes a disk.
 ```
-func (digioceanstorage *Digioceanstorage) Createsnapshot(request interface{}) (resp interface{}, err error)
-```
-
-Deletesnapshot function deletes a snapshot.
-```
-func (digioceanstorage *Digioceanstorage) Deletesnapshot(request interface{}) (resp interface{}, err error)
+func (digioceanstorage *Digioceanstorage) DeleteDisk(request interface{}) (resp interface{}, err error)
 ```
 
-Attachdisk function function attaches a disk to a droplet.
+CreateSnapshot function creates a new snapshot.
 ```
-func (digioceanstorage *Digioceanstorage) Attachdisk(request interface{}) (resp interface{}, err error)
+func (digioceanstorage *Digioceanstorage) CreateSnapshot(request interface{}) (resp interface{}, err error)
 ```
 
-Detachdisk function function detaches a disk from a droplet.
+DeleteSnapshot function deletes a snapshot.
 ```
-func (digioceanstorage *Digioceanstorage) Detachdisk(request interface{}) (resp interface{}, err error)
+func (digioceanstorage *Digioceanstorage) DeleteSnapshot(request interface{}) (resp interface{}, err error)
+```
+
+AttachDisk function function attaches a disk to a droplet.
+```
+func (digioceanstorage *Digioceanstorage) AttachDisk(request interface{}) (resp interface{}, err error)
+```
+
+DetachDisk function function detaches a disk from a droplet.
+```
+func (digioceanstorage *Digioceanstorage) DetachDisk(request interface{}) (resp interface{}, err error)
 ```

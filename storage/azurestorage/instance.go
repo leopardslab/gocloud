@@ -1,31 +1,31 @@
 package azurestorage
 
-// Createdisk function creates a new disk.
-func (azurestorage *Azurestorage) Createdisk(request interface{}) (resp interface{}, err error) {
+// CreateDisk function creates a new disk.
+func (azurestorage *Azurestorage) CreateDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deletedisk function deletes a disk.
-func (azurestorage *Azurestorage) Deletedisk(request interface{}) (resp interface{}, err error) {
+// DeleteDisk function deletes a disk.
+func (azurestorage *Azurestorage) DeleteDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Createsnapshot function creates a new snapshot.
-func (azurestorage *Azurestorage) Createsnapshot(request interface{}) (resp interface{}, err error) {
+// CreateSnapshot function creates a new snapshot.
+func (azurestorage *Azurestorage) CreateSnapshot(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deletesnapshot function deletes a snapshot.
-func (azurestorage *Azurestorage) Deletesnapshot(request interface{}) (resp interface{}, err error) {
+// DeleteSnapshot function deletes a snapshot.
+func (azurestorage *Azurestorage) DeleteSnapshot(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Attachdisk function function attaches a disk to a droplet.
-func (azurestorage *Azurestorage) Attachdisk(request interface{}) (resp interface{}, err error) {
+// AttachDisk function function attaches a disk to a droplet.
+func (azurestorage *Azurestorage) AttachDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Detachdisk function function detaches a disk from a droplet.
-func (azurestorage *Azurestorage) Detachdisk(request interface{}) (resp interface{}, err error) {
+// DetachDisk function function detaches a disk from a droplet.
+func (azurestorage *Azurestorage) DetachDisk(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

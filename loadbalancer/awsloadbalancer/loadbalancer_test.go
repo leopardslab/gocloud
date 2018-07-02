@@ -7,7 +7,7 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-func TestCreateloadbalancer(t *testing.T) {
+func TestCreateLoadBalancer(t *testing.T) {
 	var awsloadbalancer Awsloadbalancer
 	Listeners := []map[string]string{{
 		"InstancePort":     "80",
@@ -26,33 +26,33 @@ func TestCreateloadbalancer(t *testing.T) {
 		"Subnets":          Subnets,
 	}
 
-	awsloadbalancer.Createloadbalancer(creatloadbalancer)
+	awsloadbalancer.CreateLoadBalancer(creatloadbalancer)
 }
 
-func TestDeleteloadbalancer(t *testing.T) {
+func TestDeleteLoadBalancer(t *testing.T) {
 	var awsloadbalancer Awsloadbalancer
 
 	deleteloadbalancer := map[string]string{
 		"LoadBalancerName": "my-load-balancer",
 	}
-	_, err := awsloadbalancer.Deleteloadbalancer(deleteloadbalancer)
+	_, err := awsloadbalancer.DeleteLoadBalancer(deleteloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestListloadbalancer(t *testing.T) {
+func TestListLoadBalancer(t *testing.T) {
 	var awsloadbalancer Awsloadbalancer
 
-	_, err := awsloadbalancer.Listloadbalancer(nil)
+	_, err := awsloadbalancer.ListLoadBalancer(nil)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestAttachnodewithloadbalancer(t *testing.T) {
+func TestAttachNodeWithLoadBalancer(t *testing.T) {
 	var awsloadbalancer Awsloadbalancer
 
 	attachnodewithloadbalancer := map[string]interface{}{
@@ -60,21 +60,21 @@ func TestAttachnodewithloadbalancer(t *testing.T) {
 		"LoadBalancerName": "my-load-balancer",
 	}
 
-	_, err := awsloadbalancer.Attachnodewithloadbalancer(attachnodewithloadbalancer)
+	_, err := awsloadbalancer.AttachNodeWithLoadBalancer(attachnodewithloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDetachnodewithloadbalancer(t *testing.T) {
+func TestDetachNodeWithLoadBalancer(t *testing.T) {
 	var awsloadbalancer Awsloadbalancer
 
 	detachnodewithloadbalancer := map[string]interface{}{
 		"Instances":        []string{"i-05f4f2535c41b680b"},
 		"LoadBalancerName": "my-load-balancer",
 	}
-	_, err := awsloadbalancer.Detachnodewithloadbalancer(detachnodewithloadbalancer)
+	_, err := awsloadbalancer.DetachNodeWithLoadBalancer(detachnodewithloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test Fail")

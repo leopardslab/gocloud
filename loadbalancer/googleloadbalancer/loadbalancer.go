@@ -16,8 +16,8 @@ const (
 	RFC3339 = "2006-01-02T15:04:05Z07:00"
 )
 
-//Createloadbalancer creates google loadbalancer pool.
-func (googleloadbalancer *Googleloadbalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
+//CreateLoadBalancer creates google loadbalancer pool.
+func (googleloadbalancer *Googleloadbalancer) CreateLoadBalancer(request interface{}) (resp interface{}, err error) {
 
 	var option TargetPools
 	var Project string
@@ -85,39 +85,39 @@ func (googleloadbalancer *Googleloadbalancer) Createloadbalancer(request interfa
 
 	option.CreationTimestamp = time.Now().UTC().Format(time.RFC3339)
 
-	Createloadbalancerjsonmap := make(map[string]interface{})
+	CreateLoadBalancerjsonmap := make(map[string]interface{})
 
-	Createloadbalancerdictnoaryconvert(option, Createloadbalancerjsonmap)
+	CreateLoadBalancerdictnoaryconvert(option, CreateLoadBalancerjsonmap)
 
-	Createloadbalancerjson, _ := json.Marshal(Createloadbalancerjsonmap)
+	CreateLoadBalancerjson, _ := json.Marshal(CreateLoadBalancerjsonmap)
 
-	Createloadbalancerjsonstring := string(Createloadbalancerjson)
+	CreateLoadBalancerjsonstring := string(CreateLoadBalancerjson)
 
-	var Createloadbalancerstringbyte = []byte(Createloadbalancerjsonstring)
+	var CreateLoadBalancerstringbyte = []byte(CreateLoadBalancerjsonstring)
 
 	url := "https://www.googleapis.com/compute/beta/projects/" + Project + "/regions/" + Region + "/targetPools"
 
 	client := googleauth.SignJWT()
 
-	Createloadbalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Createloadbalancerstringbyte))
+	CreateLoadBalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(CreateLoadBalancerstringbyte))
 
-	Createloadbalancerrequest.Header.Set("Content-Type", "application/json")
+	CreateLoadBalancerrequest.Header.Set("Content-Type", "application/json")
 
-	Createloadbalancerresp, err := client.Do(Createloadbalancerrequest)
+	CreateLoadBalancerresp, err := client.Do(CreateLoadBalancerrequest)
 
-	defer Createloadbalancerresp.Body.Close()
+	defer CreateLoadBalancerresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Createloadbalancerresp.Body)
+	body, err := ioutil.ReadAll(CreateLoadBalancerresp.Body)
 
-	Createloadbalancerresponse := make(map[string]interface{})
-	Createloadbalancerresponse["status"] = Createloadbalancerresp.StatusCode
-	Createloadbalancerresponse["body"] = string(body)
-	resp = Createloadbalancerresponse
+	CreateLoadBalancerresponse := make(map[string]interface{})
+	CreateLoadBalancerresponse["status"] = CreateLoadBalancerresp.StatusCode
+	CreateLoadBalancerresponse["body"] = string(body)
+	resp = CreateLoadBalancerresponse
 	return resp, err
 }
 
-//Deleteloadbalancer deletes google loadbalancer pool.
-func (googleloadbalancer *Googleloadbalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
+//DeleteLoadBalancer deletes google loadbalancer pool.
+func (googleloadbalancer *Googleloadbalancer) DeleteLoadBalancer(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -125,24 +125,24 @@ func (googleloadbalancer *Googleloadbalancer) Deleteloadbalancer(request interfa
 
 	client := googleauth.SignJWT()
 
-	Deleteloadbalancerrequest, err := http.NewRequest("DELETE", url, nil)
-	Deleteloadbalancerrequest.Header.Set("Content-Type", "application/json")
+	DeleteLoadBalancerrequest, err := http.NewRequest("DELETE", url, nil)
+	DeleteLoadBalancerrequest.Header.Set("Content-Type", "application/json")
 
-	Deleteloadbalancerresp, err := client.Do(Deleteloadbalancerrequest)
+	DeleteLoadBalancerresp, err := client.Do(DeleteLoadBalancerrequest)
 
-	defer Deleteloadbalancerresp.Body.Close()
+	defer DeleteLoadBalancerresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Deleteloadbalancerresp.Body)
+	body, err := ioutil.ReadAll(DeleteLoadBalancerresp.Body)
 
-	Deleteloadbalancerresponse := make(map[string]interface{})
-	Deleteloadbalancerresponse["status"] = Deleteloadbalancerresp.StatusCode
-	Deleteloadbalancerresponse["body"] = string(body)
-	resp = Deleteloadbalancerresponse
+	DeleteLoadBalancerresponse := make(map[string]interface{})
+	DeleteLoadBalancerresponse["status"] = DeleteLoadBalancerresp.StatusCode
+	DeleteLoadBalancerresponse["body"] = string(body)
+	resp = DeleteLoadBalancerresponse
 	return resp, err
 }
 
-//Listloadbalancer lists google loadbalancer pool.
-func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
+//ListLoadBalancer lists google loadbalancer pool.
+func (googleloadbalancer *Googleloadbalancer) ListLoadBalancer(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -152,24 +152,24 @@ func (googleloadbalancer *Googleloadbalancer) Listloadbalancer(request interface
 
 	client := googleauth.SignJWT()
 
-	Listloadbalancerrequest, err := http.NewRequest("GET", url, nil)
-	Listloadbalancerrequest.Header.Set("Content-Type", "application/json")
+	ListLoadBalancerrequest, err := http.NewRequest("GET", url, nil)
+	ListLoadBalancerrequest.Header.Set("Content-Type", "application/json")
 
-	Listloadbalancerresp, err := client.Do(Listloadbalancerrequest)
+	ListLoadBalancerresp, err := client.Do(ListLoadBalancerrequest)
 
-	defer Listloadbalancerresp.Body.Close()
+	defer ListLoadBalancerresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Listloadbalancerresp.Body)
+	body, err := ioutil.ReadAll(ListLoadBalancerresp.Body)
 
-	Listloadbalancerresponse := make(map[string]interface{})
-	Listloadbalancerresponse["status"] = Listloadbalancerresp.StatusCode
-	Listloadbalancerresponse["body"] = string(body)
-	resp = Listloadbalancerresponse
+	ListLoadBalancerresponse := make(map[string]interface{})
+	ListLoadBalancerresponse["status"] = ListLoadBalancerresp.StatusCode
+	ListLoadBalancerresponse["body"] = string(body)
+	resp = ListLoadBalancerresponse
 	return resp, err
 }
 
-//Attachnodewithloadbalancer attach new google compute instance to google loadbalancer pool.
-func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+//AttachNodeWithLoadBalancer attach new google compute instance to google loadbalancer pool.
+func (googleloadbalancer *Googleloadbalancer) AttachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error) {
 
 	var TargetPool string
 
@@ -202,7 +202,7 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 	}
 	url := "https://www.googleapis.com/compute/beta/projects/" + Project + "/regions/" + Region + "/targetPools/" + TargetPool + "/addInstance"
 
-	Attachnodewithloadbalancerjsonmap := make(map[string]interface{})
+	AttachNodeWithLoadBalancerjsonmap := make(map[string]interface{})
 
 	if len(Instances) != 0 {
 		instance := []interface{}{}
@@ -211,36 +211,36 @@ func (googleloadbalancer *Googleloadbalancer) Attachnodewithloadbalancer(request
 			val["instance"] = Instances[i]
 			instance = append(instance, val)
 		}
-		Attachnodewithloadbalancerjsonmap["instances"] = instance
+		AttachNodeWithLoadBalancerjsonmap["instances"] = instance
 	}
 
-	Attachnodewithloadbalancerjson, _ := json.Marshal(Attachnodewithloadbalancerjsonmap)
+	AttachNodeWithLoadBalancerjson, _ := json.Marshal(AttachNodeWithLoadBalancerjsonmap)
 
-	Attachnodewithloadbalancerjsonstring := string(Attachnodewithloadbalancerjson)
+	AttachNodeWithLoadBalancerjsonstring := string(AttachNodeWithLoadBalancerjson)
 
-	var Attachnodewithloadbalancerstringbyte = []byte(Attachnodewithloadbalancerjsonstring)
+	var AttachNodeWithLoadBalancerstringbyte = []byte(AttachNodeWithLoadBalancerjsonstring)
 
 	client := googleauth.SignJWT()
 
-	Attachnodewithloadbalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Attachnodewithloadbalancerstringbyte))
+	AttachNodeWithLoadBalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(AttachNodeWithLoadBalancerstringbyte))
 
-	Attachnodewithloadbalancerrequest.Header.Set("Content-Type", "application/json")
+	AttachNodeWithLoadBalancerrequest.Header.Set("Content-Type", "application/json")
 
-	Attachnodewithloadbalancerresp, err := client.Do(Attachnodewithloadbalancerrequest)
+	AttachNodeWithLoadBalancerresp, err := client.Do(AttachNodeWithLoadBalancerrequest)
 
-	defer Attachnodewithloadbalancerresp.Body.Close()
+	defer AttachNodeWithLoadBalancerresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Attachnodewithloadbalancerresp.Body)
+	body, err := ioutil.ReadAll(AttachNodeWithLoadBalancerresp.Body)
 
-	Attachnodewithloadbalancerresponse := make(map[string]interface{})
-	Attachnodewithloadbalancerresponse["status"] = Attachnodewithloadbalancerresp.StatusCode
-	Attachnodewithloadbalancerresponse["body"] = string(body)
-	resp = Attachnodewithloadbalancerresponse
+	AttachNodeWithLoadBalancerresponse := make(map[string]interface{})
+	AttachNodeWithLoadBalancerresponse["status"] = AttachNodeWithLoadBalancerresp.StatusCode
+	AttachNodeWithLoadBalancerresponse["body"] = string(body)
+	resp = AttachNodeWithLoadBalancerresponse
 	return resp, err
 }
 
-//Detachnodewithloadbalancer Detach google compute instance from google loadbalancer pool.
-func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+//DetachNodeWithLoadBalancer Detach google compute instance from google loadbalancer pool.
+func (googleloadbalancer *Googleloadbalancer) DetachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error) {
 	var TargetPool string
 
 	var Project string
@@ -272,7 +272,7 @@ func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request
 	}
 	url := "https://www.googleapis.com/compute/beta/projects/" + Project + "/regions/" + Region + "/targetPools/" + TargetPool + "/removeInstance"
 
-	Detachnodewithloadbalancerjsonmap := make(map[string]interface{})
+	DetachNodeWithLoadBalancerjsonmap := make(map[string]interface{})
 
 	if len(Instances) != 0 {
 		instance := []interface{}{}
@@ -281,30 +281,30 @@ func (googleloadbalancer *Googleloadbalancer) Detachnodewithloadbalancer(request
 			val["instance"] = Instances[i]
 			instance = append(instance, val)
 		}
-		Detachnodewithloadbalancerjsonmap["instances"] = instance
+		DetachNodeWithLoadBalancerjsonmap["instances"] = instance
 	}
 
-	Detachnodewithloadbalancerjson, _ := json.Marshal(Detachnodewithloadbalancerjsonmap)
+	DetachNodeWithLoadBalancerjson, _ := json.Marshal(DetachNodeWithLoadBalancerjsonmap)
 
-	Detachnodewithloadbalancerjsonstring := string(Detachnodewithloadbalancerjson)
+	DetachNodeWithLoadBalancerjsonstring := string(DetachNodeWithLoadBalancerjson)
 
-	var Detachnodewithloadbalancerstringbyte = []byte(Detachnodewithloadbalancerjsonstring)
+	var DetachNodeWithLoadBalancerstringbyte = []byte(DetachNodeWithLoadBalancerjsonstring)
 
 	client := googleauth.SignJWT()
 
-	Detachnodewithloadbalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Detachnodewithloadbalancerstringbyte))
+	DetachNodeWithLoadBalancerrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(DetachNodeWithLoadBalancerstringbyte))
 
-	Detachnodewithloadbalancerrequest.Header.Set("Content-Type", "application/json")
+	DetachNodeWithLoadBalancerrequest.Header.Set("Content-Type", "application/json")
 
-	Detachnodewithloadbalancerresp, err := client.Do(Detachnodewithloadbalancerrequest)
+	DetachNodeWithLoadBalancerresp, err := client.Do(DetachNodeWithLoadBalancerrequest)
 
-	defer Detachnodewithloadbalancerresp.Body.Close()
+	defer DetachNodeWithLoadBalancerresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Detachnodewithloadbalancerresp.Body)
+	body, err := ioutil.ReadAll(DetachNodeWithLoadBalancerresp.Body)
 
-	Detachnodewithloadbalancerresponse := make(map[string]interface{})
-	Detachnodewithloadbalancerresponse["status"] = Detachnodewithloadbalancerresp.StatusCode
-	Detachnodewithloadbalancerresponse["body"] = string(body)
-	resp = Detachnodewithloadbalancerresponse
+	DetachNodeWithLoadBalancerresponse := make(map[string]interface{})
+	DetachNodeWithLoadBalancerresponse["status"] = DetachNodeWithLoadBalancerresp.StatusCode
+	DetachNodeWithLoadBalancerresponse["body"] = string(body)
+	resp = DetachNodeWithLoadBalancerresponse
 	return resp, err
 }

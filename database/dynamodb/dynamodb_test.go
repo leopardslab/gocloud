@@ -7,7 +7,7 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-func TestDescribetables(t *testing.T) {
+func TestDescribeTables(t *testing.T) {
 
 	var dynamodb Dynamodb
 
@@ -16,14 +16,14 @@ func TestDescribetables(t *testing.T) {
 		"TableName": "hello",
 	}
 
-	_, err := bigtable.Describetables(describetables)
+	_, err := bigtable.DescribeTables(describetables)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestListtables(t *testing.T) {
+func TestListTables(t *testing.T) {
 
 	var dynamodb Dynamodb
 
@@ -32,14 +32,14 @@ func TestListtables(t *testing.T) {
 		"TableName": "hello",
 	}
 
-	_, err := bigtable.Listtables(listtables)
+	_, err := bigtable.ListTables(listtables)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDeletetables(t *testing.T) {
+func TestDeleteTables(t *testing.T) {
 
 	var dynamodb Dynamodb
 
@@ -48,14 +48,14 @@ func TestDeletetables(t *testing.T) {
 		"TableName": "hello",
 	}
 
-	_, err := dynamodb.Deletetables(deletetables)
+	_, err := dynamodb.DeleteTables(deletetables)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestCreatetables(t *testing.T) {
+func TestCreateTables(t *testing.T) {
 
 	var dynamodb Dynamodb
 
@@ -112,7 +112,7 @@ func TestCreatetables(t *testing.T) {
 		"ProvisionedThroughput": provisionedThroughput,
 	}
 
-	_, err := dynamodb.Createtables(createtables)
+	_, err := dynamodb.CreateTables(createtables)
 
 	if err != nil {
 		t.Errorf("Test Fail")

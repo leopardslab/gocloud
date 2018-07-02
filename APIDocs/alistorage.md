@@ -12,34 +12,34 @@ type Alistorage struct {
 Alistorage struct represents Alistorage attribute and method associates with it.
 
 ```
-func (aliStorage *Alistorage) Attachdisk(request interface{}) (resp interface{}, err error)
+func (aliStorage *Alistorage) AttachDisk(request interface{}) (resp interface{}, err error)
 ```
-Attachdisk attach ECS-Disk to ECS, accept map[string]interface{}
+AttachDisk attach ECS-Disk to ECS, accept map[string]interface{}
 
 ```
-func (aliStorage *Alistorage) Createdisk(request interface{}) (resp interface{}, err error)
+func (aliStorage *Alistorage) CreateDisk(request interface{}) (resp interface{}, err error)
 ```
-Createdisk create ECS-Disk accept map[string]interface{}
+CreateDisk create ECS-Disk accept map[string]interface{}
 
 ```
-func (aliStorage *Alistorage) Createsnapshot(request interface{}) (resp interface{}, err error)
+func (aliStorage *Alistorage) CreateSnapshot(request interface{}) (resp interface{}, err error)
 ```
-Createsnapshot create snapshot accept map[string]interface{}
+CreateSnapshot create snapshot accept map[string]interface{}
 
 ```
-func (aliStorage *Alistorage) Deletedisk(request interface{}) (resp interface{}, err error)
+func (aliStorage *Alistorage) DeleteDisk(request interface{}) (resp interface{}, err error)
 ```
-Deletedisk delete ECS-Disk accept map[string]interface{}
+DeleteDisk delete ECS-Disk accept map[string]interface{}
 
 ```
-func (aliStorage *Alistorage) Deletesnapshot(request interface{}) (resp interface{}, err error)
+func (aliStorage *Alistorage) DeleteSnapshot(request interface{}) (resp interface{}, err error)
 ```
-Deletesnapshot delete snapshot accept map[string]interface{}
+DeleteSnapshot delete snapshot accept map[string]interface{}
 
 ```
-func (aliStorage *Alistorage) Detachdisk(request interface{}) (resp interface{}, err error)
+func (aliStorage *Alistorage) DetachDisk(request interface{}) (resp interface{}, err error)
 ```
-Detachdisk detach ECS-Disk from ECS, accept map[string]interface{}
+DetachDisk detach ECS-Disk from ECS, accept map[string]interface{}
 
 ```
 type AttachDisk struct {

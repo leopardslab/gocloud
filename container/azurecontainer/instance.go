@@ -1,36 +1,36 @@
 package azurecontainer
 
-// Createcluster function creates a new cluster.
-func (azurecontainer *Azurecontainer) Createcluster(request interface{}) (resp interface{}, err error) {
+// CreateCluster function creates a new cluster.
+func (azurecontainer *Azurecontainer) CreateCluster(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deletecluster function deletes a cluster.
-func (azurecontainer *Azurecontainer) Deletecluster(request interface{}) (resp interface{}, err error) {
+// DeleteCluster function deletes a cluster.
+func (azurecontainer *Azurecontainer) DeleteCluster(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Createservice function creates a new service.
-func (azurecontainer *Azurecontainer) Createservice(request interface{}) (resp interface{}, err error) {
+// CreateService function creates a new service.
+func (azurecontainer *Azurecontainer) CreateService(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Runtask function runs a task.
-func (azurecontainer *Azurecontainer) Runtask(request interface{}) (resp interface{}, err error) {
+// RunTask function runs a task.
+func (azurecontainer *Azurecontainer) RunTask(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Starttask function starts a task.
-func (azurecontainer *Azurecontainer) Starttask(request interface{}) (resp interface{}, err error) {
+// StartTask function starts a task.
+func (azurecontainer *Azurecontainer) StartTask(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deleteservice function deletes a service.
-func (azurecontainer *Azurecontainer) Deleteservice(request interface{}) (resp interface{}, err error) {
+// DeleteService function deletes a service.
+func (azurecontainer *Azurecontainer) DeleteService(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Stoptask function stops a task.
-func (azurecontainer *Azurecontainer) Stoptask(request interface{}) (resp interface{}, err error) {
+// StopTask function stops a task.
+func (azurecontainer *Azurecontainer) StopTask(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

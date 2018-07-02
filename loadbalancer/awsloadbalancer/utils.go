@@ -94,7 +94,7 @@ func prepareListeners(params map[string]string, Listeners []Listener) {
 	}
 }
 
-//prepareInstances prepare Instances attribute for Attachnodewithloadbalancer.
+//prepareInstances prepare Instances attribute for AttachNodeWithLoadBalancer.
 func prepareInstances(params map[string]string, Instances []string) {
 
 	for i := range Instances {

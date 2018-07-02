@@ -30,17 +30,17 @@ type Digioceandns struct {
 
 ### FUNCTIONS
 
-Deletedns function deletes a DNS record.
+DeleteDns function deletes a DNS record.
 ```
-func (digioceandns *Digioceandns) Deletedns(request interface{}) (resp interface{}, err error)
-```
-
-Createdns function creates a new DNS record.
-```
-func (digioceandns *Digioceandns) Createdns(request interface{}) (resp interface{}, err error)
+func (digioceandns *Digioceandns) DeleteDns(request interface{}) (resp interface{}, err error)
 ```
 
-Listdns function lists DNS records.
+CreateDns function creates a new DNS record.
 ```
-func (digioceandns *Digioceandns) Listdns(request interface{}) (resp interface{}, err error)
+func (digioceandns *Digioceandns) CreateDns(request interface{}) (resp interface{}, err error)
+```
+
+ListDns function lists DNS records.
+```
+func (digioceandns *Digioceandns) ListDns(request interface{}) (resp interface{}, err error)
 ```

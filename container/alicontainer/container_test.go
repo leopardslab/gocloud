@@ -28,7 +28,7 @@ func TestCreateCluster(t *testing.T) {
 		"io_optimized":       "true",
 		"release_eip_flag":   false,
 	}
-	_, err := aliContainer.Createcluster(create)
+	_, err := aliContainer.CreateCluster(create)
 	if err != nil {
 		t.Errorf("CreateCluster Test Fail: %s", err)
 		return
@@ -56,7 +56,7 @@ func TestCreateClusterBuilder(t *testing.T) {
 		t.Errorf("CreateCluster Test Fail: %s", err)
 		return
 	}
-	_, err = aliContainer.Createcluster(create)
+	_, err = aliContainer.CreateCluster(create)
 	if err != nil {
 		t.Errorf("CreateCluster Test Fail: %s", err)
 		return
@@ -70,7 +70,7 @@ func TestDeleteCluster(t *testing.T) {
 		"region_id":  "cn-beijing",
 		"cluster_id": "cf02b9dffa1fa45daac18cb436471ff2a",
 	}
-	_, err := aliContainer.Deletecluster(delete)
+	_, err := aliContainer.DeleteCluster(delete)
 	if err != nil {
 		t.Errorf("DeleteCluster Test Fail: %s", err)
 		return
@@ -88,7 +88,7 @@ func TestDeleteClusterBuilder(t *testing.T) {
 		t.Errorf("DeleteCluster Test Fail: %s", err)
 		return
 	}
-	_, err = aliContainer.Deletecluster(deleteCluster)
+	_, err = aliContainer.DeleteCluster(deleteCluster)
 	if err != nil {
 		t.Errorf("DeleteCluster Test Fail: %s", err)
 		return
@@ -106,14 +106,14 @@ func TestRunTask(t *testing.T) {
 		"version":     "1.0",
 		"environment": map[string]string{"USER": "abc", "PWD": "password"},
 	}
-	resp, err := aliContainer.Runtask(runTask)
+	resp, err := aliContainer.RunTask(runTask)
 	if err != nil {
-		t.Errorf("Runtask Test Fail: %s", err)
+		t.Errorf("RunTask Test Fail: %s", err)
 		return
 	}
 	response := resp.(map[string]interface{})
 	if response["status"] != 201 {
-		t.Errorf("Runtask Test Fail: %s", err)
+		t.Errorf("RunTask Test Fail: %s", err)
 		return
 	}
 	t.Logf("Ali container project is created successfully.")
@@ -130,17 +130,17 @@ func TestRunTaskBuilder(t *testing.T) {
 		Environment(map[string]string{"USER": "abc", "PWD": "password"}).
 		Build()
 	if err != nil {
-		t.Errorf("Runtask Test Fail: %s", err)
+		t.Errorf("RunTask Test Fail: %s", err)
 		return
 	}
-	resp, err := aliContainer.Runtask(runTask)
+	resp, err := aliContainer.RunTask(runTask)
 	if err != nil {
-		t.Errorf("Runtask Test Fail: %s", err)
+		t.Errorf("RunTask Test Fail: %s", err)
 		return
 	}
 	response := resp.(map[string]interface{})
 	if response["status"] != 201 {
-		t.Errorf("Runtask Test Fail: %s", err)
+		t.Errorf("RunTask Test Fail: %s", err)
 		return
 	}
 	t.Logf("Ali container project is created successfully.")
@@ -152,7 +152,7 @@ func TestStartTask(t *testing.T) {
 		"cluster_id": "c7adbebc81e9647618a4348b8d92eac2f",
 		"name":       "test",
 	}
-	_, err := aliContainer.Starttask(startTask)
+	_, err := aliContainer.StartTask(startTask)
 	if err != nil {
 		t.Errorf("StartTask Test Fail: %s", err)
 		return
@@ -170,7 +170,7 @@ func TestStartTaskBuilder(t *testing.T) {
 		t.Errorf("StartTask Test Fail: %s", err)
 		return
 	}
-	_, err = aliContainer.Starttask(startTask)
+	_, err = aliContainer.StartTask(startTask)
 	if err != nil {
 		t.Errorf("StartTask Test Fail: %s", err)
 		return
@@ -185,7 +185,7 @@ func TestStopTask(t *testing.T) {
 		"name":       "test",
 		"timeout":    20,
 	}
-	_, err := aliContainer.Stoptask(stopTask)
+	_, err := aliContainer.StopTask(stopTask)
 	if err != nil {
 		t.Errorf("StopTask Test Fail: %s", err)
 		return
@@ -204,7 +204,7 @@ func TestStopTaskBuilder(t *testing.T) {
 		t.Errorf("StopTask Test Fail: %s", err)
 		return
 	}
-	_, err = aliContainer.Stoptask(stopTask)
+	_, err = aliContainer.StopTask(stopTask)
 	if err != nil {
 		t.Errorf("StopTask Test Fail: %s", err)
 		return

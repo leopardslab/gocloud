@@ -36,7 +36,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
         "Description": "ThisIsDescription",
   }
 
-  resp, err := alicloud.Createdisk(createDisk)
+  resp, err := alicloud.CreateDisk(createDisk)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -55,7 +55,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Createdisk(create)
+    resp, err := alicloud.CreateDisk(create)
     if err != nil {
         fmt.Println(err)
         return
@@ -71,7 +71,7 @@ or
         "DiskId": "d-m5e2g66ws9m7r00ux87h",
   }
 
-  resp, err := alicloud.Deletedisk(deleteDisk)
+  resp, err := alicloud.DeleteDisk(deleteDisk)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -86,7 +86,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Deletedisk(deleteDisk)
+    resp, err := alicloud.DeleteDisk(deleteDisk)
     if err != nil {
         fmt.Println(err)
         return
@@ -104,7 +104,7 @@ or
         "DeleteWithInstance": false,
   }
 
-  resp, err := alicloud.Attachdisk(attachDisk)
+  resp, err := alicloud.AttachDisk(attachDisk)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -121,7 +121,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Attachdisk(attachDisk)
+    resp, err := alicloud.AttachDisk(attachDisk)
     if err != nil {
         fmt.Println(err)
         return
@@ -138,7 +138,7 @@ or
         "DiskId":     "d-m5edwiwlyyn7bwz6cdd4",
   }
 
-  resp, err := alicloud.Detachdisk(detachDisk)
+  resp, err := alicloud.DetachDisk(detachDisk)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -154,7 +154,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Detachdisk(detachDisk)
+    resp, err := alicloud.DetachDisk(detachDisk)
     if err != nil {
         fmt.Println(err)
         return
@@ -171,7 +171,7 @@ or
         "SnapshotName": "ThisIsSnapshotName",
   }
 
-  resp, err := alicloud.Createsnapshot(createsnapshot)
+  resp, err := alicloud.CreateSnapshot(createsnapshot)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -187,7 +187,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Createsnapshot(createSnapshot)
+    resp, err := alicloud.CreateSnapshot(createSnapshot)
     if err != nil {
         fmt.Println(err)
         return
@@ -203,7 +203,7 @@ or
         "SnapshotId": "s-m5eave3s6oufpctcxynu",
   }
 
-  resp, err := alicloud.Deletesnapshot(deletesnapshot)
+  resp, err := alicloud.DeleteSnapshot(deletesnapshot)
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
 ```
@@ -218,7 +218,7 @@ or
         fmt.Println(err)
         return
     }
-    resp, err := alicloud.Deletesnapshot(deleteSnapshot)
+    resp, err := alicloud.DeleteSnapshot(deleteSnapshot)
     if err != nil {
         fmt.Println(err)
         return

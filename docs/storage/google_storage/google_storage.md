@@ -37,7 +37,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"Zone":      "us-east4-c",
 	}
 
-  resp, err := googlecloud.Createdisk(createdisk)
+  resp, err := googlecloud.CreateDisk(createdisk)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -54,7 +54,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
     "deviceName": "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
  }
 
- resp, err := googlecloud.Attachdisk(attachdisk)
+ resp, err := googlecloud.AttachDisk(attachdisk)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -66,7 +66,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"VolumeId": "vol-05371175f10d2e6a4",
 	}
 
- resp, err := googlecloud.Deletedisk(deletedisk)
+ resp, err := googlecloud.DeleteDisk(deletedisk)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -82,7 +82,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 	"deviceName": "projects/sheltermap-1493101612061/zones/us-east4-c/disks/disk-12",
  }
 
- resp, err := googlecloud.Detachdisk(detachdisk)
+ resp, err := googlecloud.DetachDisk(detachdisk)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -98,7 +98,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"Name":      "disk-12",
 	}
 
-  resp, err := googlecloud.Createsnapshot(createsnapshot)
+  resp, err := googlecloud.CreateSnapshot(createsnapshot)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -112,7 +112,7 @@ googlecloud, _ := gocloud.CloudProvider(gocloud.Googleprovider)
 		"snapshot":  "disk-12",
 	}
 
-  resp, err := googlecloud.Deletesnapshot(deletesnapshot)
+  resp, err := googlecloud.DeleteSnapshot(deletesnapshot)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])

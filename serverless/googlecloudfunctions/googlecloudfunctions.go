@@ -11,7 +11,7 @@ import (
 )
 
 //Create  Create Google cloud function.
-func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interface{}) (resp interface{}, err error) {
+func (googlecloudfunctions *Googlecloudfunctions) CreateFunction(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 	var Location string
@@ -105,7 +105,7 @@ func (googlecloudfunctions *Googlecloudfunctions) Createfunction(request interfa
 }
 
 //Delete delete function.
-func (googlecloudfunctions *Googlecloudfunctions) Deletefunction(request interface{}) (resp interface{}, err error) {
+func (googlecloudfunctions *Googlecloudfunctions) DeleteFunction(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -130,8 +130,8 @@ func (googlecloudfunctions *Googlecloudfunctions) Deletefunction(request interfa
 	return resp, err
 }
 
-//Getfunction get function.
-func (googlecloudfunctions *Googlecloudfunctions) Getfunction(request interface{}) (resp interface{}, err error) {
+//GetFunction get function.
+func (googlecloudfunctions *Googlecloudfunctions) GetFunction(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -157,8 +157,8 @@ func (googlecloudfunctions *Googlecloudfunctions) Getfunction(request interface{
 
 }
 
-//Listfunction list function.
-func (googlecloudfunctions *Googlecloudfunctions) Listfunction(request interface{}) (resp interface{}, err error) {
+//ListFunction list function.
+func (googlecloudfunctions *Googlecloudfunctions) ListFunction(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -195,8 +195,8 @@ func (googlecloudfunctions *Googlecloudfunctions) Listfunction(request interface
 	return resp, err
 }
 
-//Callfunction call function.
-func (googlecloudfunctions *Googlecloudfunctions) Callfunction(request interface{}) (resp interface{}, err error) {
+//CallFunction call function.
+func (googlecloudfunctions *Googlecloudfunctions) CallFunction(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 

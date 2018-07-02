@@ -2,7 +2,7 @@ package googleloadbalancer
 
 import "testing"
 
-func TestCreateloadbalancer(t *testing.T) {
+func TestCreateLoadBalancer(t *testing.T) {
 
 	var googleloadbalancer Googleloadbalancer
 
@@ -13,14 +13,14 @@ func TestCreateloadbalancer(t *testing.T) {
 		"Instances": []string{"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-central1-b/instances/instance-1"},
 	}
 
-	_, err := googleloadbalancer.Createloadbalancer(creatloadbalancer)
+	_, err := googleloadbalancer.CreateLoadBalancer(creatloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestListloadbalancer(t *testing.T) {
+func TestListLoadBalancer(t *testing.T) {
 	var googleloadbalancer Googleloadbalancer
 
 	listloadbalancer := map[string]string{
@@ -28,14 +28,14 @@ func TestListloadbalancer(t *testing.T) {
 		"Region":  "us-central1",
 	}
 
-	_, err := googleloadbalancer.Listloadbalancer(listloadbalancer)
+	_, err := googleloadbalancer.ListLoadBalancer(listloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestAttachnodewithloadbalancer(t *testing.T) {
+func TestAttachNodeWithLoadBalancer(t *testing.T) {
 	var googleloadbalancer Googleloadbalancer
 
 	attachnodewithloadbalancer := map[string]interface{}{
@@ -45,14 +45,14 @@ func TestAttachnodewithloadbalancer(t *testing.T) {
 		"Instances":  []string{"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-central1-b/instances/instance-2"},
 	}
 
-	_, err := googleloadbalancer.Attachnodewithloadbalancer(attachnodewithloadbalancer)
+	_, err := googleloadbalancer.AttachNodeWithLoadBalancer(attachnodewithloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDetachnodewithloadbalancer(t *testing.T) {
+func TestDetachNodeWithLoadBalancer(t *testing.T) {
 	var googleloadbalancer Googleloadbalancer
 
 	detachnodewithloadbalancer := map[string]interface{}{
@@ -62,14 +62,14 @@ func TestDetachnodewithloadbalancer(t *testing.T) {
 		"Instances":  []string{"https://www.googleapis.com/compute/v1/projects/sheltermap-1493101612061/zones/us-central1-b/instances/instance-2"},
 	}
 
-	_, err := googleloadbalancer.Detachnodewithloadbalancer(detachnodewithloadbalancer)
+	_, err := googleloadbalancer.DetachNodeWithLoadBalancer(detachnodewithloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDeleteloadbalancer(t *testing.T) {
+func TestDeleteLoadBalancer(t *testing.T) {
 
 	var googleloadbalancer Googleloadbalancer
 
@@ -79,7 +79,7 @@ func TestDeleteloadbalancer(t *testing.T) {
 		"TargetPool": "google-loadbalancer",
 	}
 
-	_, err := googleloadbalancer.Deleteloadbalancer(deleteloadbalancer)
+	_, err := googleloadbalancer.DeleteLoadBalancer(deleteloadbalancer)
 
 	if err != nil {
 		t.Errorf("Test Fail")

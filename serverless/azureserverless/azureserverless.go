@@ -1,31 +1,31 @@
 package azureserverless
 
-//Getfunction  describe serverless function.
-func (azureserverless *Azureserverless) Getfunction(request interface{}) (resp interface{}, err error) {
+//GetFunction  describe serverless function.
+func (azureserverless *Azureserverless) GetFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Createfunction  create serverless function.
-func (azureserverless *Azureserverless) Createfunction(request interface{}) (resp interface{}, err error) {
+//CreateFunction  create serverless function.
+func (azureserverless *Azureserverless) CreateFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Callfunction  call serverless function.
-func (azureserverless *Azureserverless) Callfunction(request interface{}) (resp interface{}, err error) {
+//CallFunction  call serverless function.
+func (azureserverless *Azureserverless) CallFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Listfunction  list serverless function.
-func (azureserverless *Azureserverless) Listfunction(request interface{}) (resp interface{}, err error) {
+//ListFunction  list serverless function.
+func (azureserverless *Azureserverless) ListFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Deletefunction  delete serverless function.
-func (azureserverless *Azureserverless) Deletefunction(request interface{}) (resp interface{}, err error) {
+//DeleteFunction  delete serverless function.
+func (azureserverless *Azureserverless) DeleteFunction(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }

@@ -14,8 +14,8 @@ const (
 	RFC3339  = "2006-01-02T15:04:05Z07:00"
 )
 
-//ListResourcednsRecordSets list ListResourcednsRecordSets.
-func (googledns *Googledns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error) {
+//ListResourceDnsRecordSets list ListResourceDnsRecordSets.
+func (googledns *Googledns) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -23,49 +23,49 @@ func (googledns *Googledns) ListResourcednsRecordSets(request interface{}) (resp
 
 	client := googleauth.SignJWT()
 
-	ListResourcednsRecordSetsrequest, err := http.NewRequest("GET", url, nil)
+	ListResourceDnsRecordSetsrequest, err := http.NewRequest("GET", url, nil)
 
-	ListResourcednsRecordSetsparam := ListResourcednsRecordSetsrequest.URL.Query()
+	ListResourceDnsRecordSetsparam := ListResourceDnsRecordSetsrequest.URL.Query()
 
 	if options["maxResults"] != "" {
-		ListResourcednsRecordSetsparam.Add("deviceName", options["maxResults"])
+		ListResourceDnsRecordSetsparam.Add("deviceName", options["maxResults"])
 	}
 
 	if options["pageToken"] != "" {
-		ListResourcednsRecordSetsparam.Add("pageToken", options["pageToken"])
+		ListResourceDnsRecordSetsparam.Add("pageToken", options["pageToken"])
 	}
 
 	if options["sortBy"] != "" {
-		ListResourcednsRecordSetsparam.Add("sortBy", options["sortBy"])
+		ListResourceDnsRecordSetsparam.Add("sortBy", options["sortBy"])
 	}
 
 	if options["sortOrder"] != "" {
-		ListResourcednsRecordSetsparam.Add("sortOrder", options["sortOrder"])
+		ListResourceDnsRecordSetsparam.Add("sortOrder", options["sortOrder"])
 	}
 
-	ListResourcednsRecordSetsrequest.URL.RawQuery = ListResourcednsRecordSetsparam.Encode()
+	ListResourceDnsRecordSetsrequest.URL.RawQuery = ListResourceDnsRecordSetsparam.Encode()
 
-	ListResourcednsRecordSetsrequest.Header.Set("Content-Type", "application/json")
+	ListResourceDnsRecordSetsrequest.Header.Set("Content-Type", "application/json")
 
-	ListResourcednsRecordSetssresp, err := client.Do(ListResourcednsRecordSetsrequest)
+	ListResourceDnsRecordSetssresp, err := client.Do(ListResourceDnsRecordSetsrequest)
 
-	defer ListResourcednsRecordSetssresp.Body.Close()
+	defer ListResourceDnsRecordSetssresp.Body.Close()
 
-	body, err := ioutil.ReadAll(ListResourcednsRecordSetssresp.Body)
+	body, err := ioutil.ReadAll(ListResourceDnsRecordSetssresp.Body)
 
 	ListResourcednsRecordSetresponse := make(map[string]interface{})
-	ListResourcednsRecordSetresponse["status"] = ListResourcednsRecordSetssresp.StatusCode
+	ListResourcednsRecordSetresponse["status"] = ListResourceDnsRecordSetssresp.StatusCode
 	ListResourcednsRecordSetresponse["body"] = string(body)
 	resp = ListResourcednsRecordSetresponse
 	return resp, err
 }
 
-//Createdns creates DNS.
-func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, err error) {
+//CreateDns creates DNS.
+func (googledns *Googledns) CreateDns(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 	var Project string
-	var option Createdns
+	var option CreateDns
 
 	for key, value := range param {
 		switch key {
@@ -109,39 +109,39 @@ func (googledns *Googledns) Createdns(request interface{}) (resp interface{}, er
 		}
 	}
 
-	Creatednsjsonmap := make(map[string]interface{})
+	CreateDnsjsonmap := make(map[string]interface{})
 
-	Creatednsedictnoaryconvert(option, Creatednsjsonmap)
+	CreateDnsedictnoaryconvert(option, CreateDnsjsonmap)
 
-	Creatednsjson, _ := json.Marshal(Creatednsjsonmap)
+	CreateDnsjson, _ := json.Marshal(CreateDnsjsonmap)
 
-	Creatednsjsonstring := string(Creatednsjson)
+	CreateDnsjsonstring := string(CreateDnsjson)
 
-	var Creatednsjsonstringbyte = []byte(Creatednsjsonstring)
+	var CreateDnsjsonstringbyte = []byte(CreateDnsjsonstring)
 
 	url := "https://www.googleapis.com/dns/v1/projects/" + Project + "/managedZones"
 
 	client := googleauth.SignJWT()
 
-	Creatednsrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(Creatednsjsonstringbyte))
+	CreateDnsrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(CreateDnsjsonstringbyte))
 
-	Creatednsrequest.Header.Set("Content-Type", "application/json")
+	CreateDnsrequest.Header.Set("Content-Type", "application/json")
 
-	Creatednsrresp, err := client.Do(Creatednsrequest)
+	CreateDnsrresp, err := client.Do(CreateDnsrequest)
 
-	defer Creatednsrresp.Body.Close()
+	defer CreateDnsrresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Creatednsrresp.Body)
+	body, err := ioutil.ReadAll(CreateDnsrresp.Body)
 
-	Creatednsresponse := make(map[string]interface{})
-	Creatednsresponse["status"] = Creatednsrresp.StatusCode
-	Creatednsresponse["body"] = string(body)
-	resp = Creatednsresponse
+	CreateDnsresponse := make(map[string]interface{})
+	CreateDnsresponse["status"] = CreateDnsrresp.StatusCode
+	CreateDnsresponse["body"] = string(body)
+	resp = CreateDnsresponse
 	return resp, err
 }
 
-//Listdns lists DNS.
-func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err error) {
+//ListDns lists DNS.
+func (googledns *Googledns) ListDns(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -149,37 +149,37 @@ func (googledns *Googledns) Listdns(request interface{}) (resp interface{}, err 
 
 	client := googleauth.SignJWT()
 
-	Listdnsrequest, err := http.NewRequest("GET", url, nil)
+	ListDnsrequest, err := http.NewRequest("GET", url, nil)
 
-	Listdnsrequestparam := Listdnsrequest.URL.Query()
+	ListDnsrequestparam := ListDnsrequest.URL.Query()
 
 	if options["maxResults"] != "" {
-		Listdnsrequestparam.Add("deviceName", options["maxResults"])
+		ListDnsrequestparam.Add("deviceName", options["maxResults"])
 	}
 
 	if options["pageToken"] != "0" {
-		Listdnsrequestparam.Add("pageToken", options["pageToken"])
+		ListDnsrequestparam.Add("pageToken", options["pageToken"])
 	}
 
-	Listdnsrequest.URL.RawQuery = Listdnsrequestparam.Encode()
+	ListDnsrequest.URL.RawQuery = ListDnsrequestparam.Encode()
 
-	Listdnsrequest.Header.Set("Content-Type", "application/json")
+	ListDnsrequest.Header.Set("Content-Type", "application/json")
 
-	Listdnsresp, err := client.Do(Listdnsrequest)
+	ListDnsresp, err := client.Do(ListDnsrequest)
 
-	defer Listdnsresp.Body.Close()
+	defer ListDnsresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Listdnsresp.Body)
+	body, err := ioutil.ReadAll(ListDnsresp.Body)
 
-	Listdnsresponse := make(map[string]interface{})
-	Listdnsresponse["status"] = Listdnsresp.StatusCode
-	Listdnsresponse["body"] = string(body)
-	resp = Listdnsresponse
+	ListDnsresponse := make(map[string]interface{})
+	ListDnsresponse["status"] = ListDnsresp.StatusCode
+	ListDnsresponse["body"] = string(body)
+	resp = ListDnsresponse
 	return resp, err
 }
 
-//Deletedns deletes DNS.
-func (googledns *Googledns) Deletedns(request interface{}) (resp interface{}, err error) {
+//DeleteDns deletes DNS.
+func (googledns *Googledns) DeleteDns(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
@@ -187,19 +187,19 @@ func (googledns *Googledns) Deletedns(request interface{}) (resp interface{}, er
 
 	client := googleauth.SignJWT()
 
-	Deletednsrequest, err := http.NewRequest("DELETE", url, nil)
+	DeleteDnsrequest, err := http.NewRequest("DELETE", url, nil)
 
-	Deletednsrequest.Header.Set("Content-Type", "application/json")
+	DeleteDnsrequest.Header.Set("Content-Type", "application/json")
 
-	Deletednsresp, err := client.Do(Deletednsrequest)
+	DeleteDnsresp, err := client.Do(DeleteDnsrequest)
 
-	defer Deletednsresp.Body.Close()
+	defer DeleteDnsresp.Body.Close()
 
-	body, err := ioutil.ReadAll(Deletednsresp.Body)
+	body, err := ioutil.ReadAll(DeleteDnsresp.Body)
 
-	Deletednsresponse := make(map[string]interface{})
-	Deletednsresponse["status"] = Deletednsresp.StatusCode
-	Deletednsresponse["body"] = string(body)
-	resp = Deletednsresponse
+	DeleteDnsresponse := make(map[string]interface{})
+	DeleteDnsresponse["status"] = DeleteDnsresp.StatusCode
+	DeleteDnsresponse["body"] = string(body)
+	resp = DeleteDnsresponse
 	return resp, err
 }

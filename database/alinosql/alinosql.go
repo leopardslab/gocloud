@@ -1,22 +1,22 @@
 package alinosql
 
-//Listtables list tables
-func (alinosql *Alinosql) Listtables(request interface{}) (resp interface{}, err error) {
+//ListTables list tables
+func (alinosql *Alinosql) ListTables(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Deletetables delete tables
-func (alinosql *Alinosql) Deletetables(request interface{}) (resp interface{}, err error) {
+//DeleteTables delete tables
+func (alinosql *Alinosql) DeleteTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Describetables Describe tables
-func (alinosql *Alinosql) Describetables(request interface{}) (resp interface{}, err error) {
+//DescribeTables Describe tables
+func (alinosql *Alinosql) DescribeTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Createtables create tables
-func (alinosql *Alinosql) Createtables(request interface{}) (resp interface{}, err error) {
+//CreateTables create tables
+func (alinosql *Alinosql) CreateTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

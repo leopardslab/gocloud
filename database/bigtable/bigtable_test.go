@@ -4,7 +4,7 @@ import "testing"
 import "fmt"
 
 //create bigtable Createtable
-func TestCreatetables(t *testing.T) {
+func TestCreateTables(t *testing.T) {
 
 	var bigtable Bigtable
 
@@ -19,14 +19,14 @@ func TestCreatetables(t *testing.T) {
 		"initialSplits": initialSplits,
 	}
 
-	_, err := bigtable.Createtables(createtables)
+	_, err := bigtable.CreateTables(createtables)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDescribetables(t *testing.T) {
+func TestDescribeTables(t *testing.T) {
 
 	var bigtable Bigtable
 
@@ -34,14 +34,14 @@ func TestDescribetables(t *testing.T) {
 		"name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
 	}
 
-	_, err := bigtable.Describetables(describetables)
+	_, err := bigtable.DescribeTables(describetables)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestListtables(t *testing.T) {
+func TestListTables(t *testing.T) {
 
 	var bigtable Bigtable
 
@@ -51,14 +51,14 @@ func TestListtables(t *testing.T) {
 		"pageToken": "",
 	}
 
-	_, err := bigtable.Listtables(listtables)
+	_, err := bigtable.ListTables(listtables)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDeletetables(t *testing.T) {
+func TestDeleteTables(t *testing.T) {
 
 	var bigtable Bigtable
 
@@ -66,7 +66,7 @@ func TestDeletetables(t *testing.T) {
 		"name": "projects/adept-comfort-202709/instances/helloo/tables/bokkkya",
 	}
 
-	_, err := bigtable.Deletetables(deletetables)
+	_, err := bigtable.DeleteTables(deletetables)
 
 	if err != nil {
 		t.Errorf("Test Fail")

@@ -4,8 +4,8 @@ package awscontainer
 type Ecscontainer struct {
 }
 
-//Createservice struct represents Ecscontainer Createservice methods.
-type Createservice struct {
+//CreateService struct represents Ecscontainer CreateService methods.
+type CreateService struct {
 	ServiceName              string
 	TaskDefinition           string
 	DesiredCount             int
@@ -44,8 +44,8 @@ type DeploymentConfiguration struct {
 	MinimumHealthyPercent int
 }
 
-//Runtask struct represents Runtask attributes.
-type Runtask struct {
+//RunTask struct represents RunTask attributes.
+type RunTask struct {
 	PlacementConstraints []Placementconstraint
 	PlacementStrategys   []Placementstrategy
 	Cluster              string
@@ -56,8 +56,8 @@ type Runtask struct {
 	overrides            override
 }
 
-//Starttask struct represents Starttask attributes.
-type Starttask struct {
+//StartTask struct represents StartTask attributes.
+type StartTask struct {
 	Cluster            string
 	ContainerInstances []string
 	Group              string
@@ -88,14 +88,14 @@ type Environment struct {
 	Value string
 }
 
-//Deleteservice  struct represents Deleteservice attributes.
-type Deleteservice struct {
+//DeleteService  struct represents DeleteService attributes.
+type DeleteService struct {
 	Cluster string
 	Service string
 }
 
-//Stoptask  struct represents Stoptask attributes.
-type Stoptask struct {
+//StopTask  struct represents StopTask attributes.
+type StopTask struct {
 	Cluster string
 	Reason  string
 	Task    string

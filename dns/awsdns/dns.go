@@ -7,14 +7,14 @@ import (
 	"time"
 )
 
-//ListResourcednsRecordSets represents awsdns ListResourcednsRecordSets.
-func (awsdns *Awsdns) ListResourcednsRecordSets(request interface{}) (resp interface{}, err error) {
+//ListResourceDnsRecordSets represents awsdns ListResourceDnsRecordSets.
+func (awsdns *Awsdns) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 
 	var zone string
 
-	var option ListResourcednsRecordSets
+	var option ListResourceDnsRecordSets
 
 	for key, value := range param {
 		switch key {
@@ -75,8 +75,8 @@ func (awsdns *Awsdns) ListResourcednsRecordSets(request interface{}) (resp inter
 	return resp, nil
 }
 
-//Listdns Listdns awsdns.
-func (awsdns *Awsdns) Listdns(request interface{}) (resp interface{}, err error) {
+//ListDns ListDns awsdns.
+func (awsdns *Awsdns) ListDns(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
 	var marker string
 	var maxItems int
@@ -116,7 +116,7 @@ func (awsdns *Awsdns) Listdns(request interface{}) (resp interface{}, err error)
 
 }
 
-func (awsdns *Awsdns) Deletedns(request interface{}) (resp interface{}, err error) {
+func (awsdns *Awsdns) DeleteDns(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]string)
 
 	out := &DeleteHostedZoneResponse{}
@@ -130,8 +130,8 @@ func (awsdns *Awsdns) Deletedns(request interface{}) (resp interface{}, err erro
 	return resp, nil
 }
 
-//Createdns creates awsdns.
-func (awsdns *Awsdns) Createdns(request interface{}) (resp interface{}, err error) {
+//CreateDns creates awsdns.
+func (awsdns *Awsdns) CreateDns(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
 

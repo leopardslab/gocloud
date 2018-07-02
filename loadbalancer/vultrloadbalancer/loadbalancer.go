@@ -1,26 +1,26 @@
 package vultrloadbalancer
 
-// Createloadbalancer function creates a new load balancer.
-func (vultrLoadBalancer *VultrLoadBalancer) Createloadbalancer(request interface{}) (resp interface{}, err error) {
+// CreateLoadBalancer function creates a new load balancer.
+func (vultrLoadBalancer *VultrLoadBalancer) CreateLoadBalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Deleteloadbalancer function deletes a load balancer.
-func (vultrLoadBalancer *VultrLoadBalancer) Deleteloadbalancer(request interface{}) (resp interface{}, err error) {
+// DeleteLoadBalancer function deletes a load balancer.
+func (vultrLoadBalancer *VultrLoadBalancer) DeleteLoadBalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Listloadbalancer function lists load balancers.
-func (vultrLoadBalancer *VultrLoadBalancer) Listloadbalancer(request interface{}) (resp interface{}, err error) {
+// ListLoadBalancer function lists load balancers.
+func (vultrLoadBalancer *VultrLoadBalancer) ListLoadBalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Detachnodewithloadbalancer function detaches a load balancer from a compute instance.
-func (vultrLoadBalancer *VultrLoadBalancer) Detachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+// DetachNodeWithLoadBalancer function detaches a load balancer from a compute instance.
+func (vultrLoadBalancer *VultrLoadBalancer) DetachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-// Attachnodewithloadbalancer function attaches a load balancer to a compute instance.
-func (vultrLoadBalancer *VultrLoadBalancer) Attachnodewithloadbalancer(request interface{}) (resp interface{}, err error) {
+// AttachNodeWithLoadBalancer function attaches a load balancer to a compute instance.
+func (vultrLoadBalancer *VultrLoadBalancer) AttachNodeWithLoadBalancer(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

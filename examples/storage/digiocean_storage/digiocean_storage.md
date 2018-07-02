@@ -35,7 +35,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "SnapshotID": nil,
   }
 
- resp, err := digioceancloud.Createdisk(create)
+ resp, err := digioceancloud.CreateDisk(create)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -48,7 +48,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "VolumeID": "7724db7c-e098-11e5-b522-000f53304e51",
    }
 
-  resp, err := digioceancloud.Deletedisk(delete1)
+  resp, err := digioceancloud.DeleteDisk(delete1)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -62,7 +62,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "SnapshotName": "big-data-snapshot1475261774",
   }
 
-  resp, err := digioceancloud.Createsnapshot(create)
+  resp, err := digioceancloud.CreateSnapshot(create)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -75,7 +75,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "SnapshotID": "7724db7c-e098-11e5-b522-000f53304e51",
    }
 
-  resp, err := digioceancloud.Deletesnapshot(delete1)
+  resp, err := digioceancloud.DeleteSnapshot(delete1)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -90,7 +90,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "Region":  "nyc3",
   }
 
-  resp, err := digioceancloud.Attachdisk(create)
+  resp, err := digioceancloud.AttachDisk(create)
 
   response := resp.(map[string]interface{})
   fmt.Println(response["body"])
@@ -105,7 +105,7 @@ digioceancloud, _ := gocloud.CloudProvider(gocloud.Digioceanprovider)
     "Region":  "nyc3",
   }
 
- resp, err := digioceancloud.Detachdisk(delete1)
+ resp, err := digioceancloud.DetachDisk(delete1)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])

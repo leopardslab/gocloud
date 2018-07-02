@@ -4,15 +4,15 @@ package googlestorage
 
 FUNCTIONS
 
-func Attachdiskdictnoaryconvert(option Attachdisk, Attachdiskjsonmap map[string]interface{})
+func AttachDiskdictnoaryconvert(option AttachDisk, AttachDiskjsonmap map[string]interface{})
 
-func Creatediskdictnoaryconvert(option Creatdisk, Creatdiskjsonmap map[string]interface{})
+func CreateDiskdictnoaryconvert(option Creatdisk, Creatdiskjsonmap map[string]interface{})
 
-func Createsnapshotdictnoaryconvert(option Snapshot, Createsnapshotjsonmap map[string]interface{})
+func CreateSnapshotdictnoaryconvert(option Snapshot, CreateSnapshotjsonmap map[string]interface{})
 
 TYPES
 
-type Attachdisk struct {
+type AttachDisk struct {
     Source             string            `json:"source"`
     DeviceName         string            `json:"deviceName"`
     AutoDelete         bool              `json:"autoDelete"`
@@ -66,17 +66,17 @@ type GoogleStorage struct {
     SizeGb string `json:"sizeGb"`
 }
 
-func (googlestorage *GoogleStorage) Attachdisk(request interface{}) (resp interface{}, err error)
+func (googlestorage *GoogleStorage) AttachDisk(request interface{}) (resp interface{}, err error)
 
-func (googlestorage *GoogleStorage) Createdisk(request interface{}) (resp interface{}, err error)
+func (googlestorage *GoogleStorage) CreateDisk(request interface{}) (resp interface{}, err error)
 
-func (googlestorage *GoogleStorage) Createsnapshot(request interface{}) (resp interface{}, err error)
+func (googlestorage *GoogleStorage) CreateSnapshot(request interface{}) (resp interface{}, err error)
 
-func (googlestorage *GoogleStorage) Deletedisk(request interface{}) (resp interface{}, err error)
+func (googlestorage *GoogleStorage) DeleteDisk(request interface{}) (resp interface{}, err error)
 
-func (googlestorage *GoogleStorage) Deletesnapshot(request interface{}) (resp interface{}, err error)
+func (googlestorage *GoogleStorage) DeleteSnapshot(request interface{}) (resp interface{}, err error)
 
-func (googlestorage *GoogleStorage) Detachdisk(request interface{}) (resp interface{}, err error)
+func (googlestorage *GoogleStorage) DetachDisk(request interface{}) (resp interface{}, err error)
 
 type InitializeParams struct {
     DiskName                  string                   `json:"diskName"`

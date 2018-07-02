@@ -77,27 +77,27 @@ MarshalJSON returns an object with either the name or id of the volume. It retur
 func (d CreateVolume) MarshalJSON() ([]byte, error)
 ```
 
-Createnode function creates a new droplet.
+CreateNode function creates a new droplet.
 ```
-func (droplet *Droplet) Createnode(request interface{}) (resp interface{}, err error)
-```
-
-Startnode function starts a droplet.
-```
-func (droplet *Droplet) Startnode(request interface{}) (resp interface{}, err error)
+func (droplet *Droplet) CreateNode(request interface{}) (resp interface{}, err error)
 ```
 
-Stopnode function stops a droplet.
+StartNode function starts a droplet.
 ```
-func (droplet *Droplet) Stopnode(request interface{}) (resp interface{}, err error)
-```
-
-Rebootnode function reboots a droplet.
-```
-func (droplet *Droplet) Rebootnode(request interface{}) (resp interface{}, err error)
+func (droplet *Droplet) StartNode(request interface{}) (resp interface{}, err error)
 ```
 
-Deletenode function deletes a droplet.
+StopNode function stops a droplet.
 ```
-func (droplet *Droplet) Deletenode(request interface{}) (resp interface{}, err error)
+func (droplet *Droplet) StopNode(request interface{}) (resp interface{}, err error)
+```
+
+RebootNode function reboots a droplet.
+```
+func (droplet *Droplet) RebootNode(request interface{}) (resp interface{}, err error)
+```
+
+DeleteNode function deletes a droplet.
+```
+func (droplet *Droplet) DeleteNode(request interface{}) (resp interface{}, err error)
 ```

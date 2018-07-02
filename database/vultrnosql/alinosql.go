@@ -1,22 +1,22 @@
 package vultrnosql
 
-//Listtables list tables
-func (vultrnosql *Vultrnosql) Listtables(request interface{}) (resp interface{}, err error) {
+//ListTables list tables
+func (vultrnosql *Vultrnosql) ListTables(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//Deletetables delete tables
-func (vultrnosql *Vultrnosql) Deletetables(request interface{}) (resp interface{}, err error) {
+//DeleteTables delete tables
+func (vultrnosql *Vultrnosql) DeleteTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Describetables Describe tables
-func (vultrnosql *Vultrnosql) Describetables(request interface{}) (resp interface{}, err error) {
+//DescribeTables Describe tables
+func (vultrnosql *Vultrnosql) DescribeTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
 
-//Createtables create tables
-func (vultrnosql *Vultrnosql) Createtables(request interface{}) (resp interface{}, err error) {
+//CreateTables create tables
+func (vultrnosql *Vultrnosql) CreateTables(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }

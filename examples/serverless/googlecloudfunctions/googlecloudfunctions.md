@@ -52,7 +52,7 @@ createfunction := map[string]interface{}{
 	"Labels":              labels,
 }
 
-resp, err := googlecloud.Createfunction(createfunction)
+resp, err := googlecloud.CreateFunction(createfunction)
 
 response := resp.(map[string]interface{})
 
@@ -68,7 +68,7 @@ listfunction := map[string]string{
 	"pageSize": "1",
 }
 
-resp, err := googlecloud.Listfunction(listfunction)
+resp, err := googlecloud.ListFunction(listfunction)
 
 response := resp.(map[string]interface{})
 
@@ -84,7 +84,7 @@ deletefunction := map[string]string{
 	"name":"projects/adept-comfort-202709/locations/us-central1/functions/function-1",
 }
 
- resp, err := googlecloud.Deletefunction(deletefunction)
+ resp, err := googlecloud.DeleteFunction(deletefunction)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -97,7 +97,7 @@ callfunction := map[string]string{
 	"name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
 }
 
-resp, err := googlecloud.Callfunction(callfunction)
+resp, err := googlecloud.CallFunction(callfunction)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])
@@ -112,7 +112,7 @@ getfunction := map[string]string{
 		"name": "projects/adept-comfort-202709/locations/us-central1/functions/function-1",
 	}
 
-resp, err := googlecloudfunctions.Getfunction(getfunction)
+resp, err := googlecloudfunctions.GetFunction(getfunction)
 
  response := resp.(map[string]interface{})
  fmt.Println(response["body"])

@@ -26,23 +26,23 @@ func openstackauth() {
 
 	client := http.Client{}
 
-	Createnoderequest, err := http.NewRequest("POST", urlv, bytes.NewBuffer(byteValue))
+	CreateNoderequest, err := http.NewRequest("POST", urlv, bytes.NewBuffer(byteValue))
 
 	if err != nil {
-		fmt.Println("Createnoderequest error")
+		fmt.Println("CreateNoderequest error")
 		fmt.Println(err)
 	}
 
-	Createnoderequest.Header.Set("Content-Type", "application/json")
+	CreateNoderequest.Header.Set("Content-Type", "application/json")
 
-	Createnoderesp, err := client.Do(Createnoderequest)
+	CreateNoderesp, err := client.Do(CreateNoderequest)
 
 	if err != nil {
-		fmt.Println("Createnoderesp error")
+		fmt.Println("CreateNoderesp error")
 		fmt.Println(err)
 	}
 
-	defer Createnoderesp.Body.Close()
+	defer CreateNoderesp.Body.Close()
 
-	fmt.Println("response Headers:", Createnoderesp.Header["X-Subject-Token"])
+	fmt.Println("response Headers:", CreateNoderesp.Header["X-Subject-Token"])
 }

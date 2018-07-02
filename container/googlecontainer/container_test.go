@@ -2,7 +2,7 @@ package googlecontainer
 
 import "testing"
 
-func TestCreatecluster(t *testing.T) {
+func TestCreateCluster(t *testing.T) {
 	var googlecontainer Googlecontainer
 
 	nodepools := []map[string]interface{}{
@@ -17,14 +17,14 @@ func TestCreatecluster(t *testing.T) {
 		"Zone":      "us-central1-a",
 		"nodePools": nodepools,
 	}
-	_, err := googlecontainer.Createcluster(createcluster)
+	_, err := googlecontainer.CreateCluster(createcluster)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDeletecluster(t *testing.T) {
+func TestDeleteCluster(t *testing.T) {
 	var googlecontainer Googlecontainer
 
 	deletecluster := map[string]string{
@@ -33,14 +33,14 @@ func TestDeletecluster(t *testing.T) {
 		"Zone":      "us-central1-a",
 	}
 
-	_, err := googlecontainer.Deletecluster(deletecluster)
+	_, err := googlecontainer.DeleteCluster(deletecluster)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestCreateservice(t *testing.T) {
+func TestCreateService(t *testing.T) {
 	var googlecontainer Googlecontainer
 	createservice := map[string]interface{}{
 		"Project":   "sheltermap-1493101612061",
@@ -49,14 +49,14 @@ func TestCreateservice(t *testing.T) {
 		"Name":      "nodepool",
 	}
 
-	_, err := googlecontainer.Createservice(createservice)
+	_, err := googlecontainer.CreateService(createservice)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 }
 
-func TestDeleteservice(t *testing.T) {
+func TestDeleteService(t *testing.T) {
 	var googlecontainer Googlecontainer
 
 	deleteservice := map[string]string{
@@ -65,7 +65,7 @@ func TestDeleteservice(t *testing.T) {
 		"Zone":       "us-central1-a",
 		"nodePoolId": "nodepool",
 	}
-	_, err := googlecontainer.Deleteservice(deleteservice)
+	_, err := googlecontainer.DeleteService(deleteservice)
 
 	if err != nil {
 		t.Errorf("Test Fail")
