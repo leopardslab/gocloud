@@ -1,5 +1,11 @@
 package vultrbaremetal
 
+import (
+	"errors"
+	"github.com/cloudlibz/gocloud/aliauth"
+	"github.com/cloudlibz/gocloud/vultrauth"
+)
+
 type VultrBareMetal struct {
 }
 
@@ -40,4 +46,209 @@ type ListBareMetal struct {
 	tag     string // (optional) A tag string. Only subscription objects with this tag will be returned.
 	label   string // (optional) A text label string. Only subscription objects with this text label will be returned.
 	main_ip string // (optional) An IPv4 address. Only the subscription matching this IPv4 address will be returned.
+}
+
+// CreateBareMetal builder pattern code
+type CreateBareMetalBuilder struct {
+	createBareMetal *CreateBareMetal
+}
+
+func NewCreateBareMetalBuilder() *CreateBareMetalBuilder {
+	createBareMetal := &CreateBareMetal{}
+	b := &CreateBareMetalBuilder{createBareMetal: createBareMetal}
+	return b
+}
+
+func (b *CreateBareMetalBuilder) DCID(dCID int) *CreateBareMetalBuilder {
+	b.createBareMetal.DCID = dCID
+	return b
+}
+
+func (b *CreateBareMetalBuilder) METALPLANID(mETALPLANID int) *CreateBareMetalBuilder {
+	b.createBareMetal.METALPLANID = mETALPLANID
+	return b
+}
+
+func (b *CreateBareMetalBuilder) OSID(oSID int) *CreateBareMetalBuilder {
+	b.createBareMetal.OSID = oSID
+	return b
+}
+
+func (b *CreateBareMetalBuilder) SCRIPTID(sCRIPTID int) *CreateBareMetalBuilder {
+	b.createBareMetal.SCRIPTID = sCRIPTID
+	return b
+}
+
+func (b *CreateBareMetalBuilder) SNAPSHOTID(sNAPSHOTID string) *CreateBareMetalBuilder {
+	b.createBareMetal.SNAPSHOTID = sNAPSHOTID
+	return b
+}
+
+func (b *CreateBareMetalBuilder) EnableIpv6(enable_ipv6 string) *CreateBareMetalBuilder {
+	b.createBareMetal.enable_ipv6 = enable_ipv6
+	return b
+}
+
+func (b *CreateBareMetalBuilder) Label(label string) *CreateBareMetalBuilder {
+	b.createBareMetal.label = label
+	return b
+}
+
+func (b *CreateBareMetalBuilder) SSHKEYID(sSHKEYID string) *CreateBareMetalBuilder {
+	b.createBareMetal.SSHKEYID = sSHKEYID
+	return b
+}
+
+func (b *CreateBareMetalBuilder) APPID(aPPID int) *CreateBareMetalBuilder {
+	b.createBareMetal.APPID = aPPID
+	return b
+}
+
+func (b *CreateBareMetalBuilder) UserData(userdata string) *CreateBareMetalBuilder {
+	b.createBareMetal.userdata = userdata
+	return b
+}
+
+func (b *CreateBareMetalBuilder) NotifyActivate(notify_activate string) *CreateBareMetalBuilder {
+	b.createBareMetal.notify_activate = notify_activate
+	return b
+}
+
+func (b *CreateBareMetalBuilder) Hostname(hostname string) *CreateBareMetalBuilder {
+	b.createBareMetal.hostname = hostname
+	return b
+}
+
+func (b *CreateBareMetalBuilder) Tag(tag string) *CreateBareMetalBuilder {
+	b.createBareMetal.tag = tag
+	return b
+}
+
+func (b *CreateBareMetalBuilder) Build() (map[string]interface{}, error) {
+	if b.createBareMetal.DCID == 0 {
+		return nil, errors.New(aliauth.StrMissRequired + "DCID")
+	}
+	if b.createBareMetal.METALPLANID == 0 {
+		return nil, errors.New(aliauth.StrMissRequired + "METALPLANID")
+	}
+	if b.createBareMetal.OSID == 0 {
+		return nil, errors.New(aliauth.StrMissRequired + "OSID")
+	}
+	params := vultrauth.PutStructIntoMap(b.createBareMetal)
+	return params, nil
+}
+
+// DeleteBareMetal builder pattern code
+type DeleteBareMetalBuilder struct {
+	deleteBareMetal *DeleteBareMetal
+}
+
+func NewDeleteBareMetalBuilder() *DeleteBareMetalBuilder {
+	deleteBareMetal := &DeleteBareMetal{}
+	b := &DeleteBareMetalBuilder{deleteBareMetal: deleteBareMetal}
+	return b
+}
+
+func (b *DeleteBareMetalBuilder) SUBID(sUBID int) *DeleteBareMetalBuilder {
+	b.deleteBareMetal.SUBID = sUBID
+	return b
+}
+
+func (b *DeleteBareMetalBuilder) Build() (*DeleteBareMetal, error) {
+	return b.deleteBareMetal, nil
+}
+
+// RebootBareMetal builder pattern code
+type RebootBareMetalBuilder struct {
+	rebootBareMetal *RebootBareMetal
+}
+
+func NewRebootBareMetalBuilder() *RebootBareMetalBuilder {
+	rebootBareMetal := &RebootBareMetal{}
+	b := &RebootBareMetalBuilder{rebootBareMetal: rebootBareMetal}
+	return b
+}
+
+func (b *RebootBareMetalBuilder) SUBID(sUBID int) *RebootBareMetalBuilder {
+	b.rebootBareMetal.SUBID = sUBID
+	return b
+}
+
+func (b *RebootBareMetalBuilder) Build() (*RebootBareMetal, error) {
+	return b.rebootBareMetal, nil
+}
+
+// ReinstallBareMetal builder pattern code
+type ReinstallBareMetalBuilder struct {
+	reinstallBareMetal *ReinstallBareMetal
+}
+
+func NewReinstallBareMetalBuilder() *ReinstallBareMetalBuilder {
+	reinstallBareMetal := &ReinstallBareMetal{}
+	b := &ReinstallBareMetalBuilder{reinstallBareMetal: reinstallBareMetal}
+	return b
+}
+
+func (b *ReinstallBareMetalBuilder) SUBID(sUBID int) *ReinstallBareMetalBuilder {
+	b.reinstallBareMetal.SUBID = sUBID
+	return b
+}
+
+func (b *ReinstallBareMetalBuilder) Build() (*ReinstallBareMetal, error) {
+	return b.reinstallBareMetal, nil
+}
+
+// HaltBareMetal builder pattern code
+type HaltBareMetalBuilder struct {
+	haltBareMetal *HaltBareMetal
+}
+
+func NewHaltBareMetalBuilder() *HaltBareMetalBuilder {
+	haltBareMetal := &HaltBareMetal{}
+	b := &HaltBareMetalBuilder{haltBareMetal: haltBareMetal}
+	return b
+}
+
+func (b *HaltBareMetalBuilder) SUBID(sUBID int) *HaltBareMetalBuilder {
+	b.haltBareMetal.SUBID = sUBID
+	return b
+}
+
+func (b *HaltBareMetalBuilder) Build() (*HaltBareMetal, error) {
+	return b.haltBareMetal, nil
+}
+
+// ListBareMetal builder pattern code
+type ListBareMetalBuilder struct {
+	listBareMetal *ListBareMetal
+}
+
+func NewListBareMetalBuilder() *ListBareMetalBuilder {
+	listBareMetal := &ListBareMetal{}
+	b := &ListBareMetalBuilder{listBareMetal: listBareMetal}
+	return b
+}
+
+func (b *ListBareMetalBuilder) SUBID(sUBID int) *ListBareMetalBuilder {
+	b.listBareMetal.SUBID = sUBID
+	return b
+}
+
+func (b *ListBareMetalBuilder) Tag(tag string) *ListBareMetalBuilder {
+	b.listBareMetal.tag = tag
+	return b
+}
+
+func (b *ListBareMetalBuilder) Label(label string) *ListBareMetalBuilder {
+	b.listBareMetal.label = label
+	return b
+}
+
+func (b *ListBareMetalBuilder) MainIp(main_ip string) *ListBareMetalBuilder {
+	b.listBareMetal.main_ip = main_ip
+	return b
+}
+
+func (b *ListBareMetalBuilder) Build() (*ListBareMetal, error) {
+	return b.listBareMetal, nil
 }

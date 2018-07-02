@@ -29,6 +29,30 @@ func TestVultrBareMetal_CreateBareMetal(t *testing.T) {
 	t.Logf("Vultr BareMetal is created successfully.")
 }
 
+func TestCreateBareMetalBuilder(t *testing.T) {
+	var vultrBareMetal VultrBareMetal
+	createBareMetal, err := NewCreateBareMetalBuilder().
+		DCID(1).
+		METALPLANID(100).
+		OSID(127).
+		Build()
+	if err != nil {
+		t.Errorf("CreateBareMetal Test Fail: %s", err)
+		return
+	}
+	resp, err := vultrBareMetal.CreateBareMetal(createBareMetal)
+	if err != nil {
+		t.Errorf("CreateBareMetal Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr BareMetal is created successfully.")
+}
+
 func TestVultrBareMetal_DeleteBareMetal(t *testing.T) {
 	var vultrBareMetal VultrBareMetal
 	deleteBareMetal := map[string]interface{}{
