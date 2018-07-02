@@ -1,6 +1,7 @@
 package vultr
 
 import (
+	"github.com/cloudlibz/gocloud/baremetal/vultrbaremetal"
 	"github.com/cloudlibz/gocloud/compute/vultrcompute"
 	"github.com/cloudlibz/gocloud/container/vultrcontainer"
 	"github.com/cloudlibz/gocloud/database/vultrnosql"
@@ -24,4 +25,16 @@ type Vultr struct {
 
 func (*Vultr) Compute() gocloudinterface.Compute {
 	return &vultrcompute.VultrCompute{}
+}
+
+func (*Vultr) Storage() gocloudinterface.Storage {
+	return &vultrstorage.VultrStorage{}
+}
+
+func (*Vultr) DNS() gocloudinterface.DNS {
+	return &vultrdns.VultrDNS{}
+}
+
+func (*Vultr) BareMetal() gocloudinterface.BareMetal {
+	return &vultrbaremetal.VultrBareMetal{}
 }
