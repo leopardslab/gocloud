@@ -22,7 +22,8 @@ export AWSSecretKey = "xxxxxxxxxxxx"
 
 import "github.com/cloudlibz/gocloud/gocloud"
 
-amazoncloud, _ := gocloud.CloudProvider(gocloud.Amazonprovider)
+amazoncloud := gocloud.AmazonProvider()
+
 ```
 
 ### create Datasets
