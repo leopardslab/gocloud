@@ -8,6 +8,8 @@ import (
 	"time"
 )
 
+var timeNow = time.Now
+
 func (amazonsimplenotification *Amazonsimplenotification) PrepareSignatureV2query(params map[string]string, Region string, response map[string]interface{}) error {
 
 	EC2Endpoint := "https://sns." + Region + ".amazonaws.com"

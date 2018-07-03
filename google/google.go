@@ -56,14 +56,14 @@ func (*Google) Database() gocloudinterface.Database {
 	return &bigtable.Bigtable{}
 }
 
-func (*Google) analytics() gocloudinterface.Analytics {
+func (*Google) Analytics() gocloudinterface.Analytics {
 	return &bigquery.Bigquery{}
 }
 
-func (*Google) notification() gocloudinterface.Notification {
+func (*Google) Notification() gocloudinterface.Notification {
 	return &googlenotification.Googlenotification{}
 }
 
-func (*Google) machineLearning() gocloudinterface.MachineLearning {
+func (*Google) MachineLearning() gocloudinterface.MachineLearning {
 	return &googlemachinelearning.Googlemachinelearning{}
 }

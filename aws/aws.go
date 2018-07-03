@@ -60,10 +60,10 @@ func (*AWS) MachineLearning() gocloudinterface.MachineLearning {
 	return &awsmachinelearning.Awsmachinelearning{}
 }
 
-func (*AWS) analytics() gocloudinterface.Analytics {
+func (*AWS) Analytics() gocloudinterface.Analytics {
 	return &redshift.Redshift{}
 }
 
-func (*AWS) notification() gocloudinterface.Notification {
+func (*AWS) Notification() gocloudinterface.Notification {
 	return &amazonsimplenotification.Amazonsimplenotification{}
 }

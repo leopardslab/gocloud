@@ -52,8 +52,6 @@ func (awsmachinelearning *Awsmachinelearning) CreateMLModel(request interface{})
 
 	preparecreateMLModelparamsdict(createMLModeljsonmap, createMLModel)
 
-	fmt.Println(createMLModeljsonmap)
-
 	response := make(map[string]interface{})
 	err = awsmachinelearning.PrepareSignatureV4query(params, createMLModeljsonmap, response)
 	resp = response

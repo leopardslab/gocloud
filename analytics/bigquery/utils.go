@@ -1,8 +1,5 @@
 package bigquery
 
-import (
-	"time"
-)
 
 const (
 	UnixDate = "Mon Jan _2 15:04:05 MST 2006"
