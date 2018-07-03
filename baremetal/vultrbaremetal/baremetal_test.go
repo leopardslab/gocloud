@@ -72,10 +72,54 @@ func TestVultrBareMetal_DeleteBareMetal(t *testing.T) {
 	t.Logf("Vultr BareMetal is deleted successfully.")
 }
 
+func TestDeleteBareMetalBuilder(t *testing.T) {
+	var vultrBareMetal VultrBareMetal
+	deleteBareMetal, err := NewDeleteBareMetalBuilder().
+		SUBID(16917076).
+		Build()
+	if err != nil {
+		t.Errorf("DeleteBareMetal Test Fail: %s", err)
+		return
+	}
+	resp, err := vultrBareMetal.DeleteBareMetal(deleteBareMetal)
+	if err != nil {
+		t.Errorf("DeleteBareMetal Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr BareMetal is deleted successfully.")
+}
+
 func TestVultrBareMetal_RebootBareMetal(t *testing.T) {
 	var vultrBareMetal VultrBareMetal
 	rebootBareMetal := map[string]interface{}{
 		"SUBID": 900000,
+	}
+	resp, err := vultrBareMetal.RebootBareMetal(rebootBareMetal)
+	if err != nil {
+		t.Errorf("RebootBareMetal Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr BareMetal is rebooted successfully.")
+}
+
+func TestRebootBareMetalBuilder(t *testing.T) {
+	var vultrBareMetal VultrBareMetal
+	rebootBareMetal, err := NewRebootBareMetalBuilder().
+		SUBID(900000).
+		Build()
+	if err != nil {
+		t.Errorf("RebootBareMetal Test Fail: %s", err)
+		return
 	}
 	resp, err := vultrBareMetal.RebootBareMetal(rebootBareMetal)
 	if err != nil {
@@ -108,10 +152,54 @@ func TestVultrBareMetal_ReinstallBareMetal(t *testing.T) {
 	t.Logf("Vultr BareMetal is reinstalled successfully.")
 }
 
+func TestReinstallBareMetalBuilder(t *testing.T) {
+	var vultrBareMetal VultrBareMetal
+	reinstallBareMetal, err := NewReinstallBareMetalBuilder().
+		SUBID(900000).
+		Build()
+	if err != nil {
+		t.Errorf("ReinstallBareMetal Test Fail: %s", err)
+		return
+	}
+	resp, err := vultrBareMetal.ReinstallBareMetal(reinstallBareMetal)
+	if err != nil {
+		t.Errorf("ReinstallBareMetal Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr BareMetal is reinstalled successfully.")
+}
+
 func TestVultrBareMetal_HaltBareMetal(t *testing.T) {
 	var vultrBareMetal VultrBareMetal
 	haltBareMetal := map[string]interface{}{
 		"SUBID": 900000,
+	}
+	resp, err := vultrBareMetal.HaltBareMetal(haltBareMetal)
+	if err != nil {
+		t.Errorf("HaltBareMetal Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr BareMetal is halted successfully.")
+}
+
+func TestHaltBareMetalBuilder(t *testing.T) {
+	var vultrBareMetal VultrBareMetal
+	haltBareMetal, err := NewHaltBareMetalBuilder().
+		SUBID(900000).
+		Build()
+	if err != nil {
+		t.Errorf("HaltBareMetal Test Fail: %s", err)
+		return
 	}
 	resp, err := vultrBareMetal.HaltBareMetal(haltBareMetal)
 	if err != nil {
