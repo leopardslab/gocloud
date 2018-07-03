@@ -83,7 +83,6 @@ type googleProvider interface {
 
 	gocloudinterface.Notification
 	Notification() gocloudinterface.Notification
-
 }
 
 // GoogleProvider return Google cloud API to users

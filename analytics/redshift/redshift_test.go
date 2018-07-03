@@ -7,8 +7,6 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-
-
 func TestCreateDatasets(t *testing.T) {
 
 	var redshift Redshift
@@ -18,7 +16,7 @@ func TestCreateDatasets(t *testing.T) {
 		"ClusterIdentifier":  "examplecluster",
 		"MasterUsername":     "masteruser",
 		"MasterUserPassword": "12345678Aa",
-		"NumberOfNodes":      	3,
+		"NumberOfNodes":      3,
 		"NodeType":           "ds2.xlarge",
 	}
 
@@ -29,8 +27,6 @@ func TestCreateDatasets(t *testing.T) {
 	}
 
 }
-
-
 
 func TestGetDatasets(t *testing.T) {
 
@@ -53,12 +49,12 @@ func TestUpdateDatasets(t *testing.T) {
 	var redshift Redshift
 
 	updateDatasets := map[string]interface{}{
-		"Region":             "us-east-1",
-		"ClusterIdentifier":  "examplecluster",
-		"AutomatedSnapshotRetentionPeriod":     "2",
-		"AllowVersionUpgrade": true,
-		"ClusterParameterGroupName":      "parametergroup1",
-		"PreferredMaintenanceWindow":           "wed:07:30-wed:08:00",
+		"Region":                           "us-east-1",
+		"ClusterIdentifier":                "examplecluster",
+		"AutomatedSnapshotRetentionPeriod": "2",
+		"AllowVersionUpgrade":              true,
+		"ClusterParameterGroupName":        "parametergroup1",
+		"PreferredMaintenanceWindow":       "wed:07:30-wed:08:00",
 	}
 
 	resp, err := redshift.UpdateDatasets(updateDatasets)
@@ -69,16 +65,14 @@ func TestUpdateDatasets(t *testing.T) {
 
 }
 
-
-
 func TestDeleteDatasets(t *testing.T) {
 
 	var redshift Redshift
 
 	deleteDatasets := map[string]interface{}{
-		"Region":            "us-east-1",
-		"ClusterIdentifier": "examplecluster",
-		"SkipFinalClusterSnapshot" :true,
+		"Region":                   "us-east-1",
+		"ClusterIdentifier":        "examplecluster",
+		"SkipFinalClusterSnapshot": true,
 	}
 
 	resp, err := redshift.DeleteDatasets(deleteDatasets)

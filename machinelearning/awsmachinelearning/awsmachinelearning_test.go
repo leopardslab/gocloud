@@ -23,7 +23,6 @@ func TestGetMLModel(t *testing.T) {
 	}
 }
 
-
 func TestDeleteMLModel(t *testing.T) {
 
 	var awsmachinelearning Awsmachinelearning
@@ -40,7 +39,6 @@ func TestDeleteMLModel(t *testing.T) {
 	}
 
 }
-
 
 func TestUpdateMLModel(t *testing.T) {
 

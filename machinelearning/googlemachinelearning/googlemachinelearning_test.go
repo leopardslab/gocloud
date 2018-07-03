@@ -2,7 +2,6 @@ package googlemachinelearning
 
 import "testing"
 
-
 func TestUpdateMLModel(t *testing.T) {
 
 	var googlemachinelearning Googlemachinelearning
@@ -24,7 +23,7 @@ func TestUpdateMLModel(t *testing.T) {
 		t.Errorf("Test Fail")
 	}
 
-	}
+}
 
 func TestCreateMLModel(t *testing.T) {
 

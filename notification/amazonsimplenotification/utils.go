@@ -1,6 +1,5 @@
 package amazonsimplenotification
 
-
 import (
 	"github.com/cloudlibz/gocloud/auth"
 	awsAuth "github.com/cloudlibz/gocloud/awsauth"
@@ -8,7 +7,6 @@ import (
 	"net/http"
 	"time"
 )
-
 
 func (amazonsimplenotification *Amazonsimplenotification) PrepareSignatureV2query(params map[string]string, Region string, response map[string]interface{}) error {
 

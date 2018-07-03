@@ -62,7 +62,6 @@ func PrepareSignaturequery(describeclusterspram map[string]string, region string
 
 	req, err := http.NewRequest("GET", endpoint, nil)
 
-
 	// Add the params passed in to the query string
 	query := req.URL.Query()
 	for varName, varVal := range describeclusterspram {
@@ -70,7 +69,6 @@ func PrepareSignaturequery(describeclusterspram map[string]string, region string
 	}
 
 	req.URL.RawQuery = query.Encode()
-
 
 	awsAuth.Getrequestsign4(req, region, service)
 
@@ -92,9 +90,8 @@ func PrepareSignaturequery(describeclusterspram map[string]string, region string
 
 	response["status"] = r.StatusCode
 
-	return response,err
+	return response, err
 }
-
 
 func preparedefaultCreateClusterpram(createClusterpram map[string]string) {
 
@@ -181,7 +178,7 @@ func preparecreateClusterpram(createClusterpram map[string]string, createCluster
 	}
 
 	if createCluster.port != 0 {
-		createClusterpram["Port"] =strconv.Itoa(createCluster.port)
+		createClusterpram["Port"] = strconv.Itoa(createCluster.port)
 	}
 
 	if createCluster.preferredMaintenanceWindow != "" {
@@ -281,8 +278,8 @@ func prepareDeleteClusterpram(deleteClusterpram map[string]string, deleteCluster
 
 }
 
-func 	preparedefaultupdateClusterpram(createClusterpram map[string]string){
+func preparedefaultupdateClusterpram(createClusterpram map[string]string) {
 
-createClusterpram["Action"] = "ModifyCluster"
-createClusterpram["Version"] = "2012-12-01"
+	createClusterpram["Action"] = "ModifyCluster"
+	createClusterpram["Version"] = "2012-12-01"
 }

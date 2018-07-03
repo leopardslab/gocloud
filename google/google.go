@@ -1,6 +1,7 @@
 package google
 
 import (
+	bigquery "github.com/cloudlibz/gocloud/analytics/bigquery"
 	gce "github.com/cloudlibz/gocloud/compute/gce"
 	googlecontainer "github.com/cloudlibz/gocloud/container/googlecontainer"
 	bigtable "github.com/cloudlibz/gocloud/database/bigtable"
@@ -8,11 +9,9 @@ import (
 	"github.com/cloudlibz/gocloud/gocloudinterface"
 	googleloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/googleloadbalancer"
 	googlemachinelearning "github.com/cloudlibz/gocloud/machinelearning/googlemachinelearning"
+	googlenotification "github.com/cloudlibz/gocloud/notification/googlenotification"
 	googlecloudfunctions "github.com/cloudlibz/gocloud/serverless/googlecloudfunctions"
 	googlestorage "github.com/cloudlibz/gocloud/storage/googlestorage"
-	googlestorage "github.com/cloudlibz/gocloud/storage/googlestorage"
-	bigquery "github.com/cloudlibz/gocloud/analytics/bigquery"
-	googlenotification "github.com/cloudlibz/gocloud/notification/googlenotification"
 )
 
 // Google  struct represents Google Cloud provider.

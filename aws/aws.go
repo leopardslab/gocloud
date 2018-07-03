@@ -1,6 +1,7 @@
 package aws
 
 import (
+	redshift "github.com/cloudlibz/gocloud/analytics/redshift"
 	ec2 "github.com/cloudlibz/gocloud/compute/ec2"
 	awscontainer "github.com/cloudlibz/gocloud/container/awscontainer"
 	dynamodb "github.com/cloudlibz/gocloud/database/dynamodb"
@@ -8,10 +9,9 @@ import (
 	"github.com/cloudlibz/gocloud/gocloudinterface"
 	awsloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/awsloadbalancer"
 	"github.com/cloudlibz/gocloud/machinelearning/awsmachinelearning"
+	amazonsimplenotification "github.com/cloudlibz/gocloud/notification/amazonsimplenotification"
 	lambda "github.com/cloudlibz/gocloud/serverless/lambda"
 	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
-	amazonsimplenotification "github.com/cloudlibz/gocloud/notification/amazonsimplenotification"
-	redshift "github.com/cloudlibz/gocloud/analytics/redshift"
 )
 
 //AWS struct reperents amazon cloud provider.
@@ -59,7 +59,6 @@ func (*AWS) Database() gocloudinterface.Database {
 func (*AWS) MachineLearning() gocloudinterface.MachineLearning {
 	return &awsmachinelearning.Awsmachinelearning{}
 }
-
 
 func (*AWS) analytics() gocloudinterface.Analytics {
 	return &redshift.Redshift{}

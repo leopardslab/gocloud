@@ -35,7 +35,6 @@ type BareMetal interface {
 	ListBareMetal(request interface{}) (resp interface{}, err error)
 }
 
-
 // Analytics module unified API
 type Analytics interface {
 	UpdateDatasets(request interface{}) (resp interface{}, err error)

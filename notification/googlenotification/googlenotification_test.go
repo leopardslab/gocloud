@@ -2,14 +2,13 @@ package googlenotification
 
 import "testing"
 
-
 func TestListTopic(t *testing.T) {
 	var googlenotification Googlenotification
 
 	listtopic := map[string]string{
-		"Project": "gocloud-206919",
-    "PageSize" : "",
-    "PageToken": "",
+		"Project":   "gocloud-206919",
+		"PageSize":  "",
+		"PageToken": "",
 	}
 	_, err := googlenotification.ListTopic(listtopic)
 
@@ -18,13 +17,12 @@ func TestListTopic(t *testing.T) {
 	}
 }
 
-
 func TestGetTopic(t *testing.T) {
 	var googlenotification Googlenotification
 
 	gettopic := map[string]string{
 		"Project": "gocloud-206919",
-    "Topic" : "gocloud",
+		"Topic":   "gocloud",
 	}
 
 	_, err := googlenotification.GetTopic(gettopic)
@@ -34,14 +32,12 @@ func TestGetTopic(t *testing.T) {
 	}
 }
 
-
-
 func TestDeleteTopic(t *testing.T) {
 	var googlenotification Googlenotification
 
 	deletetopic := map[string]string{
 		"Project": "gocloud-206919",
-    "Topic" : "gocloud",
+		"Topic":   "gocloud",
 	}
 
 	_, err := googlenotification.DeleteTopic(deletetopic)
@@ -51,14 +47,12 @@ func TestDeleteTopic(t *testing.T) {
 	}
 }
 
-
-
 func TestCreateTopic(t *testing.T) {
 	var googlenotification Googlenotification
 
 	createtopic := map[string]string{
 		"Project": "gocloud-206919",
-    "Topic" : "gocloud3",
+		"Topic":   "gocloud3",
 	}
 
 	_, err := googlenotification.CreateTopic(createtopic)

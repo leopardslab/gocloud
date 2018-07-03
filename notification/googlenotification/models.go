@@ -1,6 +1,4 @@
 package googlenotification
 
-
-type Googlenotification struct{
-
+type Googlenotification struct {
 }

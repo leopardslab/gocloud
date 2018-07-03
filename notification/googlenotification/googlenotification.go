@@ -45,14 +45,11 @@ func (googlenotification *Googlenotification) ListTopic(request interface{}) (re
 	return resp, err
 }
 
-
 func (googlenotification *Googlenotification) GetTopic(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
 
-	url := "https://pubsub.googleapis.com/v1/projects/" +  options["Project"] + "/topics/" + options["Topic"]
-
-
+	url := "https://pubsub.googleapis.com/v1/projects/" + options["Project"] + "/topics/" + options["Topic"]
 
 	client := googleauth.SignJWT()
 
@@ -70,8 +67,6 @@ func (googlenotification *Googlenotification) GetTopic(request interface{}) (res
 	resp = gettopicresponse
 	return resp, err
 }
-
-
 
 func (googlenotification *Googlenotification) DeleteTopic(request interface{}) (resp interface{}, err error) {
 
@@ -96,7 +91,6 @@ func (googlenotification *Googlenotification) DeleteTopic(request interface{}) (
 	return resp, err
 }
 
-
 func (googlenotification *Googlenotification) CreateTopic(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -105,7 +99,7 @@ func (googlenotification *Googlenotification) CreateTopic(request interface{}) (
 
 	client := googleauth.SignJWT()
 
-  createtopicjsonmap := make(map[string]interface{})
+	createtopicjsonmap := make(map[string]interface{})
 
 	createtopicjson, _ := json.Marshal(createtopicjsonmap)
 

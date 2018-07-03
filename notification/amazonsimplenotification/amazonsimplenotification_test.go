@@ -8,13 +8,12 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-
 func TestCreateTopic(t *testing.T) {
 	var amazonsimplenotification Amazonsimplenotification
 
 	createtopic := map[string]string{
 		"Region": "us-east-1",
-		"Name": "Bokya",
+		"Name":   "Bokya",
 	}
 
 	_, err := amazonsimplenotification.CreateTopic(createtopic)
@@ -25,13 +24,12 @@ func TestCreateTopic(t *testing.T) {
 
 }
 
-
 func TestDeleteTopic(t *testing.T) {
 	var amazonsimplenotification Amazonsimplenotification
 
 	deletetopic := map[string]string{
-		"Region": "us-east-1",
-		"TopicArn" :"arn:aws:sns:us-east-1:478991680879:Bokya",
+		"Region":   "us-east-1",
+		"TopicArn": "arn:aws:sns:us-east-1:478991680879:Bokya",
 	}
 
 	_, err := amazonsimplenotification.DeleteTopic(deletetopic)
@@ -42,14 +40,11 @@ func TestDeleteTopic(t *testing.T) {
 
 }
 
-
-
 func TestListTopic(t *testing.T) {
 	var amazonsimplenotification Amazonsimplenotification
 
 	listtopic := map[string]string{
 		"Region": "us-east-1",
-
 	}
 
 	_, err := amazonsimplenotification.ListTopic(listtopic)

@@ -1,6 +1,5 @@
 package redshift
 
-
 //CreateDatasets Create Datasets.
 func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{}, err error) {
 
@@ -129,13 +128,12 @@ func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{},
 		}
 	}
 
-
 	createClusterpram := make(map[string]string)
 
 	preparedefaultCreateClusterpram(createClusterpram)
 	preparecreateClusterpram(createClusterpram, createCluster)
 
-	resp,err  = PrepareSignaturequery(createClusterpram, region)
+	resp, err = PrepareSignaturequery(createClusterpram, region)
 
 	return resp, err
 }
@@ -176,13 +174,11 @@ func (redshift *Redshift) DeleteDatasets(request interface{}) (resp interface{},
 	preparedefaultDeleteClusterpram(deleteClusterpram)
 	prepareDeleteClusterpram(deleteClusterpram, deleteCluster)
 
-	resp,err  = PrepareSignaturequery(deleteClusterpram, region)
+	resp, err = PrepareSignaturequery(deleteClusterpram, region)
 
 	return resp, err
 
 }
-
-
 
 //GetDatasets get Datasets.
 func (redshift *Redshift) GetDatasets(request interface{}) (resp interface{}, err error) {
@@ -229,12 +225,10 @@ func (redshift *Redshift) GetDatasets(request interface{}) (resp interface{}, er
 	preparedefaultDescribeClusterspram(describeclusterspram)
 	prepareDescribeClusterspram(describeclusterspram, describecluster)
 
-
-	resp,err  = PrepareSignaturequery(describeclusterspram, region)
+	resp, err = PrepareSignaturequery(describeclusterspram, region)
 
 	return resp, err
 }
-
 
 //UpdateDatasets  Update Datasets.
 func (redshift *Redshift) UpdateDatasets(request interface{}) (resp interface{}, err error) {
@@ -364,18 +358,15 @@ func (redshift *Redshift) UpdateDatasets(request interface{}) (resp interface{},
 		}
 	}
 
-
 	createClusterpram := make(map[string]string)
 
 	preparedefaultupdateClusterpram(createClusterpram)
 	preparecreateClusterpram(createClusterpram, createCluster)
 
-	resp,err  = PrepareSignaturequery(createClusterpram, region)
+	resp, err = PrepareSignaturequery(createClusterpram, region)
 
 	return resp, err
 }
-
-
 
 //ListDatasets  list Datasets.
 func (redshift *Redshift) ListDatasets(request interface{}) (resp interface{}, err error) {

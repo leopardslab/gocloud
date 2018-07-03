@@ -28,8 +28,6 @@ func TestDescribeTables(t *testing.T) {
 	fmt.Println(response["body"])
 
 }
-*/
-
 
 func TestListTables(t *testing.T) {
 

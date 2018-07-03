@@ -1,5 +1,4 @@
 package amazonsimplenotification
 
-type Amazonsimplenotification struct{
-
+type Amazonsimplenotification struct {
 }

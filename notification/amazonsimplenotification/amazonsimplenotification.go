@@ -1,63 +1,58 @@
 package amazonsimplenotification
 
-
 func (amazonsimplenotification *Amazonsimplenotification) GetTopic(request interface{}) (resp interface{}, err error) {
-  return resp, err
+	return resp, err
 }
-
-
 
 func (amazonsimplenotification *Amazonsimplenotification) ListTopic(request interface{}) (resp interface{}, err error) {
 
-  param := request.(map[string]string)
-  nextToken := param["NextToken"]
-  region := param["Region"]
+	param := request.(map[string]string)
+	nextToken := param["NextToken"]
+	region := param["Region"]
 
-  listtopicpram := make(map[string]string)
+	listtopicpram := make(map[string]string)
 
-  preparedefaultlisttopicpram(listtopicpram)
+	preparedefaultlisttopicpram(listtopicpram)
 
-  preparelisttopicpram(listtopicpram,nextToken)
+	preparelisttopicpram(listtopicpram, nextToken)
 
-  response := make(map[string]interface{})
+	response := make(map[string]interface{})
 
-  err = amazonsimplenotification.PrepareSignatureV2query(listtopicpram, region, response)
+	err = amazonsimplenotification.PrepareSignatureV2query(listtopicpram, region, response)
 
-  if err != nil {
-    return nil, err
-  }
+	if err != nil {
+		return nil, err
+	}
 
-  resp = response
+	resp = response
 
-  return resp, err
+	return resp, err
 }
-
 
 func (amazonsimplenotification *Amazonsimplenotification) CreateTopic(request interface{}) (resp interface{}, err error) {
 
-  param := request.(map[string]string)
-  name := param["Name"]
-  region := param["Region"]
+	param := request.(map[string]string)
+	name := param["Name"]
+	region := param["Region"]
 
-  createtopicpram := make(map[string]string)
+	createtopicpram := make(map[string]string)
 
-  preparedefaultcreatetopicpram(createtopicpram)
+	preparedefaultcreatetopicpram(createtopicpram)
 
-  preparecreatetopicpram(createtopicpram,name)
+	preparecreatetopicpram(createtopicpram, name)
 
-  response := make(map[string]interface{})
+	response := make(map[string]interface{})
 
-  err = amazonsimplenotification.PrepareSignatureV2query(createtopicpram, region, response)
+	err = amazonsimplenotification.PrepareSignatureV2query(createtopicpram, region, response)
 
-  if err != nil {
-    return nil, err
-  }
+	if err != nil {
+		return nil, err
+	}
 
-  resp = response
+	resp = response
 
-  return resp, err
+	return resp, err
 }
-
 
 func preparedefaultcreatetopicpram(createtopicpram map[string]string) {
 
@@ -71,8 +66,6 @@ func preparecreatetopicpram(createtopicpram map[string]string, name string) {
 	}
 }
 
-
-
 func preparedefaultlisttopicpram(listtopicpram map[string]string) {
 
 	listtopicpram["Action"] = "ListTopics"
@@ -85,33 +78,30 @@ func preparelisttopicpram(listtopicpram map[string]string, nextToken string) {
 	}
 }
 
-
 func (amazonsimplenotification *Amazonsimplenotification) DeleteTopic(request interface{}) (resp interface{}, err error) {
 
-  param := request.(map[string]string)
-  topicArn := param["TopicArn"]
-  region := param["Region"]
+	param := request.(map[string]string)
+	topicArn := param["TopicArn"]
+	region := param["Region"]
 
-  deletetopicpram := make(map[string]string)
+	deletetopicpram := make(map[string]string)
 
-  preparedefaultdeletetopicpram(deletetopicpram)
+	preparedefaultdeletetopicpram(deletetopicpram)
 
-  preparedeletetopicpram(deletetopicpram,topicArn)
+	preparedeletetopicpram(deletetopicpram, topicArn)
 
-  response := make(map[string]interface{})
+	response := make(map[string]interface{})
 
-  err = amazonsimplenotification.PrepareSignatureV2query(deletetopicpram, region, response)
+	err = amazonsimplenotification.PrepareSignatureV2query(deletetopicpram, region, response)
 
-  if err != nil {
-    return nil, err
-  }
+	if err != nil {
+		return nil, err
+	}
 
-  resp = response
+	resp = response
 
-  return resp, err
+	return resp, err
 }
-
-
 
 func preparedefaultdeletetopicpram(deletetopicpram map[string]string) {
 
