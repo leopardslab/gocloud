@@ -34,3 +34,21 @@ type BareMetal interface {
 	HaltBareMetal(request interface{}) (resp interface{}, err error)
 	ListBareMetal(request interface{}) (resp interface{}, err error)
 }
+
+
+// Analytics module unified API
+type Analytics interface {
+	UpdateDatasets(request interface{}) (resp interface{}, err error)
+	DeleteDatasets(request interface{}) (resp interface{}, err error)
+	CreateDatasets(request interface{}) (resp interface{}, err error)
+	ListDatasets(request interface{}) (resp interface{}, err error)
+	GetDatasets(request interface{}) (resp interface{}, err error)
+}
+
+// Bare Metal module unified API
+type Notification interface {
+	GetTopic(request interface{}) (resp interface{}, err error)
+	ListTopic(request interface{}) (resp interface{}, err error)
+	DeleteTopic(request interface{}) (resp interface{}, err error)
+	CreateTopic(request interface{}) (resp interface{}, err error)
+}

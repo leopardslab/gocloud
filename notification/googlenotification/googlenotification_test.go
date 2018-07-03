@@ -11,7 +11,7 @@ func TestListTopic(t *testing.T) {
     "PageSize" : "",
     "PageToken": "",
 	}
-	resp, err := googlenotification.ListTopic(listtopic)
+	_, err := googlenotification.ListTopic(listtopic)
 
 	if err != nil {
 		t.Errorf("Test Fail")
@@ -62,7 +62,6 @@ func TestCreateTopic(t *testing.T) {
 	}
 
 	_, err := googlenotification.CreateTopic(createtopic)
-
 
 	if err != nil {
 		t.Errorf("Test Fail")

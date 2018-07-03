@@ -10,6 +10,8 @@ import (
 	"github.com/cloudlibz/gocloud/machinelearning/awsmachinelearning"
 	lambda "github.com/cloudlibz/gocloud/serverless/lambda"
 	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
+	amazonsimplenotification "github.com/cloudlibz/gocloud/notification/amazonsimplenotification"
+	redshift "github.com/cloudlibz/gocloud/analytics/redshift"
 )
 
 //AWS struct reperents amazon cloud provider.
@@ -22,6 +24,8 @@ type AWS struct {
 	lambda.Lambda
 	dynamodb.Dynamodb
 	awsmachinelearning.Awsmachinelearning
+	amazonsimplenotification.Amazonsimplenotification
+	redshift.Redshift
 }
 
 func (*AWS) Compute() gocloudinterface.Compute {
@@ -54,4 +58,13 @@ func (*AWS) Database() gocloudinterface.Database {
 
 func (*AWS) MachineLearning() gocloudinterface.MachineLearning {
 	return &awsmachinelearning.Awsmachinelearning{}
+}
+
+
+func (*AWS) analytics() gocloudinterface.Analytics {
+	return &redshift.Redshift{}
+}
+
+func (*AWS) notification() gocloudinterface.Notification {
+	return &amazonsimplenotification.Amazonsimplenotification{}
 }
