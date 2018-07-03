@@ -134,7 +134,21 @@ func (b *CreateBareMetalBuilder) Build() (map[string]interface{}, error) {
 	if b.createBareMetal.OSID == 0 {
 		return nil, errors.New(aliauth.StrMissRequired + "OSID")
 	}
-	params := vultrauth.PutStructIntoMap(b.createBareMetal)
+	params := map[string]interface{}{
+		"DCID":            b.createBareMetal.DCID,
+		"METALPLANID":     b.createBareMetal.METALPLANID,
+		"OSID":            b.createBareMetal.OSID,
+		"SCRIPTID":        b.createBareMetal.SCRIPTID,
+		"SNAPSHOTID":      b.createBareMetal.SNAPSHOTID,
+		"enable_ipv6":     b.createBareMetal.enable_ipv6,
+		"label":           b.createBareMetal.label,
+		"SSHKEYID":        b.createBareMetal.SSHKEYID,
+		"APPID":           b.createBareMetal.APPID,
+		"userdata":        b.createBareMetal.userdata,
+		"notify_activate": b.createBareMetal.notify_activate,
+		"hostname":        b.createBareMetal.hostname,
+		"tag":             b.createBareMetal.tag,
+	}
 	return params, nil
 }
 
@@ -154,8 +168,12 @@ func (b *DeleteBareMetalBuilder) SUBID(sUBID int) *DeleteBareMetalBuilder {
 	return b
 }
 
-func (b *DeleteBareMetalBuilder) Build() (*DeleteBareMetal, error) {
-	return b.deleteBareMetal, nil
+func (b *DeleteBareMetalBuilder) Build() (map[string]interface{}, error) {
+	if b.deleteBareMetal.SUBID == 0 {
+		return nil, errors.New(aliauth.StrMissRequired + "SUBID")
+	}
+	params := vultrauth.PutStructIntoMap(b.deleteBareMetal)
+	return params, nil
 }
 
 // RebootBareMetal builder pattern code
@@ -174,8 +192,12 @@ func (b *RebootBareMetalBuilder) SUBID(sUBID int) *RebootBareMetalBuilder {
 	return b
 }
 
-func (b *RebootBareMetalBuilder) Build() (*RebootBareMetal, error) {
-	return b.rebootBareMetal, nil
+func (b *RebootBareMetalBuilder) Build() (map[string]interface{}, error) {
+	if b.rebootBareMetal.SUBID == 0 {
+		return nil, errors.New(aliauth.StrMissRequired + "SUBID")
+	}
+	params := vultrauth.PutStructIntoMap(b.rebootBareMetal)
+	return params, nil
 }
 
 // ReinstallBareMetal builder pattern code
@@ -194,8 +216,12 @@ func (b *ReinstallBareMetalBuilder) SUBID(sUBID int) *ReinstallBareMetalBuilder 
 	return b
 }
 
-func (b *ReinstallBareMetalBuilder) Build() (*ReinstallBareMetal, error) {
-	return b.reinstallBareMetal, nil
+func (b *ReinstallBareMetalBuilder) Build() (map[string]interface{}, error) {
+	if b.reinstallBareMetal.SUBID == 0 {
+		return nil, errors.New(aliauth.StrMissRequired + "SUBID")
+	}
+	params := vultrauth.PutStructIntoMap(b.reinstallBareMetal)
+	return params, nil
 }
 
 // HaltBareMetal builder pattern code
@@ -214,8 +240,12 @@ func (b *HaltBareMetalBuilder) SUBID(sUBID int) *HaltBareMetalBuilder {
 	return b
 }
 
-func (b *HaltBareMetalBuilder) Build() (*HaltBareMetal, error) {
-	return b.haltBareMetal, nil
+func (b *HaltBareMetalBuilder) Build() (map[string]interface{}, error) {
+	if b.haltBareMetal.SUBID == 0 {
+		return nil, errors.New(aliauth.StrMissRequired + "SUBID")
+	}
+	params := vultrauth.PutStructIntoMap(b.haltBareMetal)
+	return params, nil
 }
 
 // ListBareMetal builder pattern code
@@ -249,6 +279,31 @@ func (b *ListBareMetalBuilder) MainIp(main_ip string) *ListBareMetalBuilder {
 	return b
 }
 
-func (b *ListBareMetalBuilder) Build() (*ListBareMetal, error) {
-	return b.listBareMetal, nil
+func (b *ListBareMetalBuilder) Build() (map[string]interface{}, error) {
+	params := make(map[string]interface{})
+	if b.listBareMetal.SUBID != 0 {
+		params = map[string]interface{}{
+			"SUBID": b.listBareMetal.SUBID,
+		}
+		return params, nil
+	}
+	if b.listBareMetal.tag != "" {
+		params = map[string]interface{}{
+			"tag": b.listBareMetal.tag,
+		}
+		return params, nil
+	}
+	if b.listBareMetal.label != "" {
+		params = map[string]interface{}{
+			"label": b.listBareMetal.label,
+		}
+		return params, nil
+	}
+	if b.listBareMetal.main_ip != "" {
+		params = map[string]interface{}{
+			"main_ip": b.listBareMetal.main_ip,
+		}
+		return params, nil
+	}
+	return nil, nil
 }

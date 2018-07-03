@@ -1,6 +1,7 @@
 package vultrauth
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -19,6 +20,7 @@ func SignAndDoRequest(method string, path string, params map[string]interface{},
 		query.Add(key, getString(value))
 	}
 
+	fmt.Println(query.Encode())
 	httpReq, err := http.NewRequest(method, requestURL, strings.NewReader(query.Encode()))
 	if err != nil {
 		return err

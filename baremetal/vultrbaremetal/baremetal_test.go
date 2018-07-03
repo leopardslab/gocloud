@@ -35,6 +35,7 @@ func TestCreateBareMetalBuilder(t *testing.T) {
 		DCID(1).
 		METALPLANID(100).
 		OSID(127).
+		Label("gocloud").
 		Build()
 	if err != nil {
 		t.Errorf("CreateBareMetal Test Fail: %s", err)
@@ -169,6 +170,7 @@ func TestParseCreateBareMetalResp(t *testing.T) {
 func TestParseListBareMetalResp(t *testing.T) {
 	var vultrBareMetal VultrBareMetal
 	resp, err := vultrBareMetal.ListBareMetal(nil)
+
 	if err != nil {
 		t.Errorf("ListBareMetal Test Fail: %s", err)
 		return
@@ -179,6 +181,7 @@ func TestParseListBareMetalResp(t *testing.T) {
 		return
 	}
 	t.Logf("response body: %s\n", response["body"])
+
 	listBareMetalResp, err := ParseListBareMetalResp(response["body"])
 	if err != nil {
 		t.Errorf("CreateNode Test Fail: %s", err)
