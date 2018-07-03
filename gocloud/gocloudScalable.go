@@ -46,8 +46,14 @@ type awsProvider interface {
 	gocloudinterface.Database
 	Database() gocloudinterface.Database
 
-	//gocloudinterface.MachineLearning
+	gocloudinterface.MachineLearning
 	MachineLearning() gocloudinterface.MachineLearning
+
+	gocloudinterface.Analytics
+	Analytics() gocloudinterface.Analytics
+
+	gocloudinterface.Notification
+	Notification() gocloudinterface.Notification
 }
 
 // AmazonProvider return AWS API to users
@@ -68,6 +74,16 @@ type googleProvider interface {
 
 	gocloudinterface.Database
 	Database() gocloudinterface.Database
+
+	gocloudinterface.MachineLearning
+	MachineLearning() gocloudinterface.MachineLearning
+
+	gocloudinterface.Analytics
+	Analytics() gocloudinterface.Analytics
+
+	gocloudinterface.Notification
+	Notification() gocloudinterface.Notification
+
 }
 
 // GoogleProvider return Google cloud API to users

@@ -45,7 +45,7 @@ type Analytics interface {
 	GetDatasets(request interface{}) (resp interface{}, err error)
 }
 
-// Bare Metal module unified API
+// Notification module unified API
 type Notification interface {
 	GetTopic(request interface{}) (resp interface{}, err error)
 	ListTopic(request interface{}) (resp interface{}, err error)
