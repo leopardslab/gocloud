@@ -1,6 +1,5 @@
 package redshift
 
-import("strconv")
 
 //CreateDatasets Create Datasets.
 func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{}, err error) {
@@ -131,18 +130,14 @@ func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{},
 	}
 
 
-
 	createClusterpram := make(map[string]string)
 
 	preparedefaultCreateClusterpram(createClusterpram)
 	preparecreateClusterpram(createClusterpram, createCluster)
-	response := make(map[string]interface{})
 
-	resp = PrepareSignaturequery(createClusterpram, region, response)
+	resp,err  = PrepareSignaturequery(createClusterpram, region)
 
 	return resp, err
-
-
 }
 
 //DeleteDatasets delete Datasets.
@@ -181,199 +176,13 @@ func (redshift *Redshift) DeleteDatasets(request interface{}) (resp interface{},
 	preparedefaultDeleteClusterpram(deleteClusterpram)
 	prepareDeleteClusterpram(deleteClusterpram, deleteCluster)
 
-	response := make(map[string]interface{})
-
-	resp = PrepareSignaturequery(deleteClusterpram, region, response)
+	resp,err  = PrepareSignaturequery(deleteClusterpram, region)
 
 	return resp, err
 
-
 }
 
-func preparedefaultCreateClusterpram(createClusterpram map[string]string) {
 
-	createClusterpram["Action"] = "CreateCluster"
-	createClusterpram["Version"] = "2012-12-01"
-}
-
-func preparecreateClusterpram(createClusterpram map[string]string, createCluster CreateCluster) {
-
-	if createCluster.clusterIdentifier != "" {
-		createClusterpram["ClusterIdentifier"] = createCluster.clusterIdentifier
-	}
-
-	if createCluster.masterUsername != "" {
-		createClusterpram["MasterUsername"] = createCluster.masterUsername
-	}
-
-	if createCluster.masterUserPassword != "" {
-		createClusterpram["MasterUserPassword"] = createCluster.masterUserPassword
-	}
-
-	if createCluster.nodeType != "" {
-		createClusterpram["NodeType"] = createCluster.nodeType
-	}
-
-	if createCluster.additionalInfo != "" {
-		createClusterpram["AdditionalInfo"] = createCluster.additionalInfo
-	}
-
-	if createCluster.allowVersionUpgrade == true {
-		createClusterpram["AllowVersionUpgrade"] = "true"
-	}
-
-	if createCluster.automatedSnapshotRetentionPeriod != "" {
-		createClusterpram["AutomatedSnapshotRetentionPeriod"] = createCluster.automatedSnapshotRetentionPeriod
-	}
-
-	if createCluster.availabilityZone != "" {
-		createClusterpram["AvailabilityZone"] = createCluster.availabilityZone
-	}
-
-	if createCluster.clusterParameterGroupName != "" {
-		createClusterpram["ClusterParameterGroupName"] = createCluster.clusterParameterGroupName
-	}
-
-	if createCluster.clusterType != "" {
-		createClusterpram["ClusterType"] = createCluster.clusterType
-	}
-
-	if createCluster.clusterVersion != "" {
-		createClusterpram["ClusterVersion"] = createCluster.clusterVersion
-	}
-
-	if createCluster.dBName != "" {
-		createClusterpram["DBName"] = createCluster.dBName
-	}
-
-	if createCluster.elasticIp != "" {
-		createClusterpram["ElasticIp"] = createCluster.elasticIp
-	}
-
-	if createCluster.encrypted == true {
-		createClusterpram["Encrypted"] = "true"
-	}
-
-	if createCluster.enhancedVpcRouting == true {
-		createClusterpram["EnhancedVpcRouting"] = "true"
-	}
-
-	if createCluster.hsmClientCertificateIdentifier != "" {
-		createClusterpram["HsmClientCertificateIdentifier"] = createCluster.hsmClientCertificateIdentifier
-	}
-
-	if createCluster.hsmConfigurationIdentifier != "" {
-		createClusterpram["HsmConfigurationIdentifier"] = createCluster.hsmConfigurationIdentifier
-	}
-
-	if createCluster.kmsKeyId != "" {
-		createClusterpram["KmsKeyId"] = createCluster.kmsKeyId
-	}
-
-	if createCluster.numberOfNodes != 0 {
-		createClusterpram["NumberOfNodes"] = strconv.Itoa(createCluster.numberOfNodes)
-	}
-
-	if createCluster.port != 0 {
-		createClusterpram["Port"] =strconv.Itoa(createCluster.port)
-	}
-
-	if createCluster.preferredMaintenanceWindow != "" {
-		createClusterpram["PreferredMaintenanceWindow"] = createCluster.preferredMaintenanceWindow
-	}
-
-	if createCluster.publiclyAccessible != true {
-		createClusterpram["PubliclyAccessible"] = "true"
-	}
-
-	if len(createCluster.iamRoles) != 0 {
-
-		for i := 0; i < len(createCluster.iamRoles); i++ {
-
-			n := strconv.Itoa(i)
-
-			prefix := "IamRoles.IamRoleArn." + n
-
-			createClusterpram[prefix] = createCluster.iamRoles[i]
-		}
-	}
-
-	if len(createCluster.clusterSecurityGroups) != 0 {
-
-		for i := 0; i < len(createCluster.clusterSecurityGroups); i++ {
-
-			n := strconv.Itoa(i)
-
-			prefix := "ClusterSecurityGroups.ClusterSecurityGroupName." + n
-
-			createClusterpram[prefix] = createCluster.clusterSecurityGroups[i]
-		}
-	}
-
-	if len(createCluster.vpcSecurityGroupIds) != 0 {
-
-		for i := 0; i < len(createCluster.vpcSecurityGroupIds); i++ {
-
-			n := strconv.Itoa(i)
-
-			prefix := "VpcSecurityGroupIds.VpcSecurityGroupId." + n
-
-			createClusterpram[prefix] = createCluster.vpcSecurityGroupIds[i]
-		}
-	}
-
-	if len(createCluster.tagKeys) != 0 {
-
-		for i := 0; i < len(createCluster.tagKeys); i++ {
-
-			n := strconv.Itoa(i)
-
-			prefix := "TagKeys.TagKey." + n
-
-			createClusterpram[prefix] = createCluster.tagKeys[i]
-
-		}
-	}
-
-	if len(createCluster.tagValues) != 0 {
-
-		for i := 0; i < len(createCluster.tagValues); i++ {
-
-			n := strconv.Itoa(i)
-
-			prefix := "TagValues.TagValue." + n
-
-			createClusterpram[prefix] = createCluster.tagValues[i]
-		}
-	}
-
-}
-
-func preparedefaultDeleteClusterpram(deleteClusterpram map[string]string) {
-
-	deleteClusterpram["Action"] = "DeleteCluster"
-	deleteClusterpram["Version"] = "2012-12-01"
-}
-
-func prepareDeleteClusterpram(deleteClusterpram map[string]string, deleteCluster DeleteCluster) {
-
-	if deleteCluster.clusterIdentifier != "" {
-		deleteClusterpram["ClusterIdentifier"] = deleteCluster.clusterIdentifier
-	}
-
-	if deleteCluster.finalClusterSnapshotIdentifier != "" {
-		deleteClusterpram["finalClusterSnapshotIdentifier"] = deleteCluster.finalClusterSnapshotIdentifier
-	}
-
-	if deleteCluster.skipFinalClusterSnapshot == true {
-		deleteClusterpram["SkipFinalClusterSnapshot"] = "true"
-	}
-
-	if deleteCluster.skipFinalClusterSnapshot == false {
-		deleteClusterpram["SkipFinalClusterSnapshot"] = "false"
-	}
-
-}
 
 //GetDatasets get Datasets.
 func (redshift *Redshift) GetDatasets(request interface{}) (resp interface{}, err error) {
@@ -420,12 +229,12 @@ func (redshift *Redshift) GetDatasets(request interface{}) (resp interface{}, er
 	preparedefaultDescribeClusterspram(describeclusterspram)
 	prepareDescribeClusterspram(describeclusterspram, describecluster)
 
-	response := make(map[string]interface{})
 
-	resp = PrepareSignaturequery(describeclusterspram, region, response)
+	resp,err  = PrepareSignaturequery(describeclusterspram, region)
 
 	return resp, err
 }
+
 
 //UpdateDatasets  Update Datasets.
 func (redshift *Redshift) UpdateDatasets(request interface{}) (resp interface{}, err error) {
@@ -556,27 +365,20 @@ func (redshift *Redshift) UpdateDatasets(request interface{}) (resp interface{},
 	}
 
 
-
 	createClusterpram := make(map[string]string)
 
 	preparedefaultupdateClusterpram(createClusterpram)
 	preparecreateClusterpram(createClusterpram, createCluster)
-	response := make(map[string]interface{})
 
-	resp = PrepareSignaturequery(createClusterpram, region, response)
+	resp,err  = PrepareSignaturequery(createClusterpram, region)
 
 	return resp, err
 }
 
-func 	preparedefaultupdateClusterpram(createClusterpram map[string]string){
-
-createClusterpram["Action"] = "ModifyCluster"
-createClusterpram["Version"] = "2012-12-01"
-}
 
 
 //ListDatasets  list Datasets.
 func (redshift *Redshift) ListDatasets(request interface{}) (resp interface{}, err error) {
-	return resp, err
 
+	return resp, err
 }

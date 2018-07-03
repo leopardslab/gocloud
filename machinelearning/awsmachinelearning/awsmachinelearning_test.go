@@ -2,7 +2,6 @@ package awsmachinelearning
 
 import "testing"
 import awsAuth "github.com/cloudlibz/gocloud/auth"
-import "fmt"
 
 func init() {
 	awsAuth.LoadConfig()
@@ -17,18 +16,14 @@ func TestGetMLModel(t *testing.T) {
 		"MLModelId": "ml-EL5FRUNlk72",
 	}
 
-	resp, err := awsmachinelearning.GetMLModel(getMLModel)
+	_, err := awsmachinelearning.GetMLModel(getMLModel)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-	response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
 }
 
-/*
+
 func TestDeleteMLModel(t *testing.T) {
 
 	var awsmachinelearning Awsmachinelearning
@@ -38,17 +33,14 @@ func TestDeleteMLModel(t *testing.T) {
 		"MLModelId": "ml-EL5FRUNlk73",
 	}
 
-	resp, err := awsmachinelearning.DeleteMLModel(deleteMLModel)
+	_, err := awsmachinelearning.DeleteMLModel(deleteMLModel)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-	response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
 }
-*/
+
 
 func TestUpdateMLModel(t *testing.T) {
 
@@ -59,15 +51,12 @@ func TestUpdateMLModel(t *testing.T) {
 		"MLModelId": "ml-EL5FRUNlk72",
 	}
 
-	resp, err := awsmachinelearning.UpdateMLModel(updateMLModel)
+	_, err := awsmachinelearning.UpdateMLModel(updateMLModel)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-	response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
 }
 
 func TestCreateMLModel(t *testing.T) {
@@ -83,13 +72,9 @@ func TestCreateMLModel(t *testing.T) {
 		"TrainingDataSourceId": "ds-ydIch00SVNu",
 	}
 
-	resp, err := awsmachinelearning.CreateMLModel(createMLModel)
+	_, err := awsmachinelearning.CreateMLModel(createMLModel)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-	response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
 }

@@ -2,66 +2,13 @@ package redshift
 
 import "testing"
 import awsAuth "github.com/cloudlibz/gocloud/auth"
-import "fmt"
 
 func init() {
 	awsAuth.LoadConfig()
 }
 
-/*
-func TestGetDatasets(t *testing.T) {
-
-	var redshift Redshift
-
-	getDatasets := map[string]interface{}{
-		"Region": "us-east-1",
-	}
-
-	_, err := redshift.GetDatasets(getDatasets)
-
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
-
-	//response := resp.(map[string]interface{})
-
-	//fmt.Println(response["body"])
-
-	fmt.Println("hi")
-}
 
 
-
-*/
-
-/*
-
-func TestDeleteDatasets(t *testing.T) {
-
-	var redshift Redshift
-
-	deleteDatasets := map[string]interface{}{
-		"Region":            "us-east-1",
-		"ClusterIdentifier": "test",
-	}
-
-	_, err := redshift.DeleteDatasets(deleteDatasets)
-
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
-
-	//response := resp.(map[string]interface{})
-
-	//fmt.Println(response["body"])
-
-	fmt.Println("hi")
-}
-
-*/
-
-
-/*
 func TestCreateDatasets(t *testing.T) {
 
 	var redshift Redshift
@@ -71,25 +18,35 @@ func TestCreateDatasets(t *testing.T) {
 		"ClusterIdentifier":  "examplecluster",
 		"MasterUsername":     "masteruser",
 		"MasterUserPassword": "12345678Aa",
-		"NumberOfNodes":      "1",
+		"NumberOfNodes":      	3,
 		"NodeType":           "ds2.xlarge",
 	}
 
-	_, err := redshift.CreateDatasets(createDatasets)
+	resp, err := redshift.CreateDatasets(createDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-	//response := resp.(map[string]interface{})
-
-	//fmt.Println(response["body"])
-
-	fmt.Println("hi")
 }
 
-*/
 
+
+func TestGetDatasets(t *testing.T) {
+
+	var redshift Redshift
+
+	getDatasets := map[string]interface{}{
+		"Region": "us-east-1",
+	}
+
+	resp, err := redshift.GetDatasets(getDatasets)
+
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
+
+}
 
 func TestUpdateDatasets(t *testing.T) {
 
@@ -110,9 +67,23 @@ func TestUpdateDatasets(t *testing.T) {
 		t.Errorf("Test Fail")
 	}
 
-	response := resp.(map[string]interface{})
+}
 
-	fmt.Println(response["body"])
 
-	fmt.Println("hi")
+
+func TestDeleteDatasets(t *testing.T) {
+
+	var redshift Redshift
+
+	deleteDatasets := map[string]interface{}{
+		"Region":            "us-east-1",
+		"ClusterIdentifier": "examplecluster",
+		"SkipFinalClusterSnapshot" :true,
+	}
+
+	resp, err := redshift.DeleteDatasets(deleteDatasets)
+
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
 }

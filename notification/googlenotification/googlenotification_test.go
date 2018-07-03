@@ -1,9 +1,7 @@
 package googlenotification
 
 import "testing"
-import "fmt"
 
-/*
 
 func TestListTopic(t *testing.T) {
 	var googlenotification Googlenotification
@@ -18,10 +16,6 @@ func TestListTopic(t *testing.T) {
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-
-  response := resp.(map[string]interface{})
-  fmt.Println(response["body"])
 }
 
 
@@ -33,18 +27,12 @@ func TestGetTopic(t *testing.T) {
     "Topic" : "gocloud",
 	}
 
-	resp, err := googlenotification.GetTopic(gettopic)
+	_, err := googlenotification.GetTopic(gettopic)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-
-  response := resp.(map[string]interface{})
-  fmt.Println(response["body"])
 }
-
-
 
 
 
@@ -56,19 +44,13 @@ func TestDeleteTopic(t *testing.T) {
     "Topic" : "gocloud",
 	}
 
-	resp, err := googlenotification.DeleteTopic(deletetopic)
+	_, err := googlenotification.DeleteTopic(deletetopic)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-
-  response := resp.(map[string]interface{})
-  fmt.Println(response["body"])
 }
 
-
-*/
 
 
 func TestCreateTopic(t *testing.T) {
@@ -79,15 +61,10 @@ func TestCreateTopic(t *testing.T) {
     "Topic" : "gocloud3",
 	}
 
-	resp, err := googlenotification.CreateTopic(createtopic)
+	_, err := googlenotification.CreateTopic(createtopic)
 
-  fmt.Println("Hi")
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-
-  response := resp.(map[string]interface{})
-  fmt.Println(response["body"])
 }

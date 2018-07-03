@@ -1,7 +1,7 @@
 package googlemachinelearning
 
 import "testing"
-import "fmt"
+
 
 func TestUpdateMLModel(t *testing.T) {
 
@@ -18,15 +18,13 @@ func TestUpdateMLModel(t *testing.T) {
 		"UpdateMask":     "description",
 	}
 
-	resp, err := googlemachinelearning.UpdateMLModel(updateMLModel)
+	_, err := googlemachinelearning.UpdateMLModel(updateMLModel)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
-}
+	}
 
 func TestCreateMLModel(t *testing.T) {
 
@@ -43,14 +41,12 @@ func TestCreateMLModel(t *testing.T) {
 		"DefaultVersion": defaultVersion,
 	}
 
-	resp, err := googlemachinelearning.CreateMLModel(createMLModel)
+	_, err := googlemachinelearning.CreateMLModel(createMLModel)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
 }
 
 func TestGetMLModel(t *testing.T) {
@@ -67,8 +63,6 @@ func TestGetMLModel(t *testing.T) {
 		t.Errorf("Test Fail")
 	}
 
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
 }
 
 func TestDeleteMLModel(t *testing.T) {
@@ -79,12 +73,10 @@ func TestDeleteMLModel(t *testing.T) {
 		"name": "projects/adept-comfort-202709/models/hi",
 	}
 
-	resp, err := googlemachinelearning.DeleteMLModel(deleteMLModel)
+	_, err := googlemachinelearning.DeleteMLModel(deleteMLModel)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
 }

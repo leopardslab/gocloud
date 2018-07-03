@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 )
+
 func (googlenotification *Googlenotification) ListTopic(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)

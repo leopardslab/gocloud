@@ -54,7 +54,7 @@ func prepareDescribeClusterspram(describeclusterspram map[string]string, describ
 	}
 }
 
-func PrepareSignaturequery(describeclusterspram map[string]string, region string, response map[string]interface{}) error {
+func PrepareSignaturequery(describeclusterspram map[string]string, region string) (response map[string]interface{}, err error) {
 
 	service := "redshift"
 
@@ -62,9 +62,6 @@ func PrepareSignaturequery(describeclusterspram map[string]string, region string
 
 	req, err := http.NewRequest("GET", endpoint, nil)
 
-	if err != nil {
-		return err
-	}
 
 	// Add the params passed in to the query string
 	query := req.URL.Query()
@@ -74,7 +71,6 @@ func PrepareSignaturequery(describeclusterspram map[string]string, region string
 
 	req.URL.RawQuery = query.Encode()
 
-	fmt.Println(req.URL.RawQuery)
 
 	awsAuth.Getrequestsign4(req, region, service)
 
@@ -90,10 +86,203 @@ func PrepareSignaturequery(describeclusterspram map[string]string, region string
 		fmt.Println(err)
 	}
 
-	fmt.Println(string(body))
+	response = make(map[string]interface{})
 
 	response["body"] = string(body)
+
 	response["status"] = r.StatusCode
 
-	return err
+	return response,err
+}
+
+
+func preparedefaultCreateClusterpram(createClusterpram map[string]string) {
+
+	createClusterpram["Action"] = "CreateCluster"
+	createClusterpram["Version"] = "2012-12-01"
+}
+
+func preparecreateClusterpram(createClusterpram map[string]string, createCluster CreateCluster) {
+
+	if createCluster.clusterIdentifier != "" {
+		createClusterpram["ClusterIdentifier"] = createCluster.clusterIdentifier
+	}
+
+	if createCluster.masterUsername != "" {
+		createClusterpram["MasterUsername"] = createCluster.masterUsername
+	}
+
+	if createCluster.masterUserPassword != "" {
+		createClusterpram["MasterUserPassword"] = createCluster.masterUserPassword
+	}
+
+	if createCluster.nodeType != "" {
+		createClusterpram["NodeType"] = createCluster.nodeType
+	}
+
+	if createCluster.additionalInfo != "" {
+		createClusterpram["AdditionalInfo"] = createCluster.additionalInfo
+	}
+
+	if createCluster.allowVersionUpgrade == true {
+		createClusterpram["AllowVersionUpgrade"] = "true"
+	}
+
+	if createCluster.automatedSnapshotRetentionPeriod != "" {
+		createClusterpram["AutomatedSnapshotRetentionPeriod"] = createCluster.automatedSnapshotRetentionPeriod
+	}
+
+	if createCluster.availabilityZone != "" {
+		createClusterpram["AvailabilityZone"] = createCluster.availabilityZone
+	}
+
+	if createCluster.clusterParameterGroupName != "" {
+		createClusterpram["ClusterParameterGroupName"] = createCluster.clusterParameterGroupName
+	}
+
+	if createCluster.clusterType != "" {
+		createClusterpram["ClusterType"] = createCluster.clusterType
+	}
+
+	if createCluster.clusterVersion != "" {
+		createClusterpram["ClusterVersion"] = createCluster.clusterVersion
+	}
+
+	if createCluster.dBName != "" {
+		createClusterpram["DBName"] = createCluster.dBName
+	}
+
+	if createCluster.elasticIp != "" {
+		createClusterpram["ElasticIp"] = createCluster.elasticIp
+	}
+
+	if createCluster.encrypted == true {
+		createClusterpram["Encrypted"] = "true"
+	}
+
+	if createCluster.enhancedVpcRouting == true {
+		createClusterpram["EnhancedVpcRouting"] = "true"
+	}
+
+	if createCluster.hsmClientCertificateIdentifier != "" {
+		createClusterpram["HsmClientCertificateIdentifier"] = createCluster.hsmClientCertificateIdentifier
+	}
+
+	if createCluster.hsmConfigurationIdentifier != "" {
+		createClusterpram["HsmConfigurationIdentifier"] = createCluster.hsmConfigurationIdentifier
+	}
+
+	if createCluster.kmsKeyId != "" {
+		createClusterpram["KmsKeyId"] = createCluster.kmsKeyId
+	}
+
+	if createCluster.numberOfNodes > 0 {
+		createClusterpram["NumberOfNodes"] = strconv.Itoa(createCluster.numberOfNodes)
+	}
+
+	if createCluster.port != 0 {
+		createClusterpram["Port"] =strconv.Itoa(createCluster.port)
+	}
+
+	if createCluster.preferredMaintenanceWindow != "" {
+		createClusterpram["PreferredMaintenanceWindow"] = createCluster.preferredMaintenanceWindow
+	}
+
+	if createCluster.publiclyAccessible != true {
+		createClusterpram["PubliclyAccessible"] = "true"
+	}
+
+	if len(createCluster.iamRoles) != 0 {
+
+		for i := 0; i < len(createCluster.iamRoles); i++ {
+
+			n := strconv.Itoa(i)
+
+			prefix := "IamRoles.IamRoleArn." + n
+
+			createClusterpram[prefix] = createCluster.iamRoles[i]
+		}
+	}
+
+	if len(createCluster.clusterSecurityGroups) != 0 {
+
+		for i := 0; i < len(createCluster.clusterSecurityGroups); i++ {
+
+			n := strconv.Itoa(i)
+
+			prefix := "ClusterSecurityGroups.ClusterSecurityGroupName." + n
+
+			createClusterpram[prefix] = createCluster.clusterSecurityGroups[i]
+		}
+	}
+
+	if len(createCluster.vpcSecurityGroupIds) != 0 {
+
+		for i := 0; i < len(createCluster.vpcSecurityGroupIds); i++ {
+
+			n := strconv.Itoa(i)
+
+			prefix := "VpcSecurityGroupIds.VpcSecurityGroupId." + n
+
+			createClusterpram[prefix] = createCluster.vpcSecurityGroupIds[i]
+		}
+	}
+
+	if len(createCluster.tagKeys) != 0 {
+
+		for i := 0; i < len(createCluster.tagKeys); i++ {
+
+			n := strconv.Itoa(i)
+
+			prefix := "TagKeys.TagKey." + n
+
+			createClusterpram[prefix] = createCluster.tagKeys[i]
+
+		}
+	}
+
+	if len(createCluster.tagValues) != 0 {
+
+		for i := 0; i < len(createCluster.tagValues); i++ {
+
+			n := strconv.Itoa(i)
+
+			prefix := "TagValues.TagValue." + n
+
+			createClusterpram[prefix] = createCluster.tagValues[i]
+		}
+	}
+
+}
+
+func preparedefaultDeleteClusterpram(deleteClusterpram map[string]string) {
+
+	deleteClusterpram["Action"] = "DeleteCluster"
+	deleteClusterpram["Version"] = "2012-12-01"
+}
+
+func prepareDeleteClusterpram(deleteClusterpram map[string]string, deleteCluster DeleteCluster) {
+
+	if deleteCluster.clusterIdentifier != "" {
+		deleteClusterpram["ClusterIdentifier"] = deleteCluster.clusterIdentifier
+	}
+
+	if deleteCluster.finalClusterSnapshotIdentifier != "" {
+		deleteClusterpram["finalClusterSnapshotIdentifier"] = deleteCluster.finalClusterSnapshotIdentifier
+	}
+
+	if deleteCluster.skipFinalClusterSnapshot == true {
+		deleteClusterpram["SkipFinalClusterSnapshot"] = "true"
+	}
+
+	if deleteCluster.skipFinalClusterSnapshot == false {
+		deleteClusterpram["SkipFinalClusterSnapshot"] = "false"
+	}
+
+}
+
+func 	preparedefaultupdateClusterpram(createClusterpram map[string]string){
+
+createClusterpram["Action"] = "ModifyCluster"
+createClusterpram["Version"] = "2012-12-01"
 }

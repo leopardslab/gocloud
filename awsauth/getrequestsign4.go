@@ -2,7 +2,6 @@ package awsauth
 
 import (
 	"encoding/hex"
-	"fmt"
 	auth "github.com/cloudlibz/gocloud/auth"
 	"net/http"
 	"strings"
@@ -97,8 +96,6 @@ func Getrequestsign4(request *http.Request, region string, service string) *http
 	header := algorithm + " Credential=" + credential + ", SignedHeaders=" + signedHeaders + ", Signature=" + signature
 
 	request.Header.Set("Authorization", header)
-
-	fmt.Println(request)
 
 	return request
 }

@@ -8,55 +8,38 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-/*
 
 func TestCreateTopic(t *testing.T) {
 	var amazonsimplenotification Amazonsimplenotification
 
-	create := map[string]string{
+	createtopic := map[string]string{
 		"Region": "us-east-1",
 		"Name": "Bokya",
 	}
 
-	resp, err := amazonsimplenotification.CreateTopic(create)
+	_, err := amazonsimplenotification.CreateTopic(createtopic)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-
-  response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
-
-	fmt.Println("hi")
 }
-
-*/
-
-
 
 
 func TestDeleteTopic(t *testing.T) {
 	var amazonsimplenotification Amazonsimplenotification
 
-	create := map[string]string{
+	deletetopic := map[string]string{
 		"Region": "us-east-1",
 		"TopicArn" :"arn:aws:sns:us-east-1:478991680879:Bokya",
 	}
 
-	resp, err := amazonsimplenotification.DeleteTopic(create)
+	_, err := amazonsimplenotification.DeleteTopic(deletetopic)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-
-  response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
-
-	fmt.Println("hi")
 }
 
 
@@ -64,21 +47,14 @@ func TestDeleteTopic(t *testing.T) {
 func TestListTopic(t *testing.T) {
 	var amazonsimplenotification Amazonsimplenotification
 
-	create := map[string]string{
+	listtopic := map[string]string{
 		"Region": "us-east-1",
 
 	}
 
-	resp, err := amazonsimplenotification.ListTopic(create)
+	_, err := amazonsimplenotification.ListTopic(listtopic)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-
-  response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
-
-	fmt.Println("hi\n\n\n")
 }
