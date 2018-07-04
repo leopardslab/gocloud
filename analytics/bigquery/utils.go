@@ -65,7 +65,6 @@ func preparedatasetReferenceparam(option CreateDatasets, createdatasetsjsonmap m
 	}
 
 	createdatasetsjsonmap["datasetReference"] = datasetReferencejsonmap
-
 }
 
 func prepareAccessparam(option CreateDatasets, createdatasetsjsonmap map[string]interface{}) {

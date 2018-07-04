@@ -20,7 +20,7 @@ func TestCreateDatasets(t *testing.T) {
 		"NodeType":           "ds2.xlarge",
 	}
 
-	resp, err := redshift.CreateDatasets(createDatasets)
+	_, err := redshift.CreateDatasets(createDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
@@ -36,7 +36,7 @@ func TestGetDatasets(t *testing.T) {
 		"Region": "us-east-1",
 	}
 
-	resp, err := redshift.GetDatasets(getDatasets)
+	_, err := redshift.GetDatasets(getDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
@@ -57,7 +57,7 @@ func TestUpdateDatasets(t *testing.T) {
 		"PreferredMaintenanceWindow":       "wed:07:30-wed:08:00",
 	}
 
-	resp, err := redshift.UpdateDatasets(updateDatasets)
+	_, err := redshift.UpdateDatasets(updateDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
@@ -75,7 +75,7 @@ func TestDeleteDatasets(t *testing.T) {
 		"SkipFinalClusterSnapshot": true,
 	}
 
-	resp, err := redshift.DeleteDatasets(deleteDatasets)
+	_, err := redshift.DeleteDatasets(deleteDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")

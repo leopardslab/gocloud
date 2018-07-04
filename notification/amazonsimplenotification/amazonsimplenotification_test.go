@@ -2,7 +2,6 @@ package amazonsimplenotification
 
 import "testing"
 import awsAuth "github.com/cloudlibz/gocloud/auth"
-import "fmt"
 
 func init() {
 	awsAuth.LoadConfig()
@@ -21,7 +20,6 @@ func TestCreateTopic(t *testing.T) {
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
 }
 
 func TestDeleteTopic(t *testing.T) {

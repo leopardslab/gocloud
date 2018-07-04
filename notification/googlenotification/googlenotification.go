@@ -8,6 +8,7 @@ import (
 	"net/http"
 )
 
+//ListTopic list topic
 func (googlenotification *Googlenotification) ListTopic(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -29,11 +30,9 @@ func (googlenotification *Googlenotification) ListTopic(request interface{}) (re
 	}
 
 	listtopicrequest.URL.RawQuery = listtopicrequestparam.Encode()
-
 	listtopicrequest.Header.Set("Content-Type", "application/json")
 
 	listtopicresp, err := client.Do(listtopicrequest)
-
 	defer listtopicresp.Body.Close()
 
 	body, err := ioutil.ReadAll(listtopicresp.Body)
@@ -45,6 +44,7 @@ func (googlenotification *Googlenotification) ListTopic(request interface{}) (re
 	return resp, err
 }
 
+//GetTopic gets topic
 func (googlenotification *Googlenotification) GetTopic(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -56,7 +56,6 @@ func (googlenotification *Googlenotification) GetTopic(request interface{}) (res
 	gettopicrequest, err := http.NewRequest("GET", url, nil)
 
 	gettopicresp, err := client.Do(gettopicrequest)
-
 	defer gettopicresp.Body.Close()
 
 	body, err := ioutil.ReadAll(gettopicresp.Body)
@@ -68,6 +67,7 @@ func (googlenotification *Googlenotification) GetTopic(request interface{}) (res
 	return resp, err
 }
 
+//DeleteTopic delete topic
 func (googlenotification *Googlenotification) DeleteTopic(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -91,6 +91,7 @@ func (googlenotification *Googlenotification) DeleteTopic(request interface{}) (
 	return resp, err
 }
 
+//CreateTopic creates tpoic
 func (googlenotification *Googlenotification) CreateTopic(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)

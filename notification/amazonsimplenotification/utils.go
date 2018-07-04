@@ -46,3 +46,40 @@ func (amazonsimplenotification *Amazonsimplenotification) PrepareSignatureV2quer
 
 	return err
 }
+
+func preparedefaultcreatetopicpram(createtopicpram map[string]string) {
+
+	createtopicpram["Action"] = "CreateTopic"
+}
+
+func preparecreatetopicpram(createtopicpram map[string]string, name string) {
+
+	if name != "" {
+		createtopicpram["Name"] = name
+	}
+}
+
+func preparedefaultlisttopicpram(listtopicpram map[string]string) {
+
+	listtopicpram["Action"] = "ListTopics"
+}
+
+func preparelisttopicpram(listtopicpram map[string]string, nextToken string) {
+
+	if nextToken != "" {
+		listtopicpram["NextToken"] = nextToken
+	}
+}
+
+
+func preparedefaultdeletetopicpram(deletetopicpram map[string]string) {
+
+	deletetopicpram["Action"] = "DeleteTopic"
+}
+
+func preparedeletetopicpram(deletetopicpram map[string]string, topicArn string) {
+
+	if topicArn != "" {
+		deletetopicpram["TopicArn"] = topicArn
+	}
+}

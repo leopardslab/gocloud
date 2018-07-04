@@ -15,14 +15,11 @@ func TestListDatasets(t *testing.T) {
 		"PageToken":  "",
 	}
 
-	resp, err := bigquery.ListDatasets(listDatasets)
+	_, err := bigquery.ListDatasets(listDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
 }
 
 func TestDeleteDatasets(t *testing.T) {
@@ -34,14 +31,11 @@ func TestDeleteDatasets(t *testing.T) {
 		"DatasetId": "gocloudv2",
 	}
 
-	resp, err := bigquery.DeleteDatasets(deleteDatasets)
+	_, err := bigquery.DeleteDatasets(deleteDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
 }
 
 func TestCreateDatasets(t *testing.T) {
@@ -64,14 +58,11 @@ func TestCreateDatasets(t *testing.T) {
 		"DatasetReference": datasetReference,
 	}
 
-	resp, err := bigquery.CreateDatasets(createDatasets)
+	_, err := bigquery.CreateDatasets(createDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
 }
 
 func TestUpdateDatasets(t *testing.T) {
@@ -95,14 +86,12 @@ func TestUpdateDatasets(t *testing.T) {
 		"DatasetId":        "gocloudv3",
 	}
 
-	resp, err := bigquery.UpdateDatasets(updateDatasets)
+	_, err := bigquery.UpdateDatasets(updateDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
 }
 
 func TestGetDatasets(t *testing.T) {
@@ -114,12 +103,10 @@ func TestGetDatasets(t *testing.T) {
 		"DatasetId": "gocloudv3",
 	}
 
-	resp, err := bigquery.GetDatasets(getDatasets)
+	_, err := bigquery.GetDatasets(getDatasets)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
 
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
 }
