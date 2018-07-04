@@ -24,7 +24,7 @@ export ClientX509CertURL =  "xxxxxxxxxxxx"
 
 import "github.com/cloudlibz/gocloud/gocloud"
 
-googlecloud, _ := gocloud.GoogleProvider()
+googlecloud := gocloud.GoogleProvider()
 ```
 
 ### List Datasets
