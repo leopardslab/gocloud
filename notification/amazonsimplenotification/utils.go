@@ -71,7 +71,6 @@ func preparelisttopicpram(listtopicpram map[string]string, nextToken string) {
 	}
 }
 
-
 func preparedefaultdeletetopicpram(deletetopicpram map[string]string) {
 
 	deletetopicpram["Action"] = "DeleteTopic"

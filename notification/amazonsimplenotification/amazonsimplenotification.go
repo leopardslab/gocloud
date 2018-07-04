@@ -66,7 +66,6 @@ func (amazonsimplenotification *Amazonsimplenotification) DeleteTopic(request in
 	return resp, err
 }
 
-
 //GetTopic gettopic
 func (amazonsimplenotification *Amazonsimplenotification) GetTopic(request interface{}) (resp interface{}, err error) {
 
