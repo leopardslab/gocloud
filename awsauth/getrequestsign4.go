@@ -42,7 +42,6 @@ func Getrequestsign4(request *http.Request, region string, service string) *http
 	}
 
 	// TASK 1. http://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
-
 	payload := preparepayload(request)
 	payloadHash := sha256Hasher(payload)
 
