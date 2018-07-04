@@ -2,7 +2,6 @@ package vultrbaremetal
 
 import (
 	"errors"
-	"github.com/cloudlibz/gocloud/aliauth"
 	"github.com/cloudlibz/gocloud/vultrauth"
 )
 
@@ -126,28 +125,50 @@ func (b *CreateBareMetalBuilder) Tag(tag string) *CreateBareMetalBuilder {
 
 func (b *CreateBareMetalBuilder) Build() (map[string]interface{}, error) {
 	if b.createBareMetal.DCID == 0 {
-		return nil, errors.New(aliauth.StrMissRequired + "DCID")
+		return nil, errors.New(vultrauth.StrMissRequired + "DCID")
 	}
 	if b.createBareMetal.METALPLANID == 0 {
-		return nil, errors.New(aliauth.StrMissRequired + "METALPLANID")
+		return nil, errors.New(vultrauth.StrMissRequired + "METALPLANID")
 	}
 	if b.createBareMetal.OSID == 0 {
-		return nil, errors.New(aliauth.StrMissRequired + "OSID")
+		return nil, errors.New(vultrauth.StrMissRequired + "OSID")
 	}
-	params := map[string]interface{}{
-		"DCID":            b.createBareMetal.DCID,
-		"METALPLANID":     b.createBareMetal.METALPLANID,
-		"OSID":            b.createBareMetal.OSID,
-		"SCRIPTID":        b.createBareMetal.SCRIPTID,
-		"SNAPSHOTID":      b.createBareMetal.SNAPSHOTID,
-		"enable_ipv6":     b.createBareMetal.enable_ipv6,
-		"label":           b.createBareMetal.label,
-		"SSHKEYID":        b.createBareMetal.SSHKEYID,
-		"APPID":           b.createBareMetal.APPID,
-		"userdata":        b.createBareMetal.userdata,
-		"notify_activate": b.createBareMetal.notify_activate,
-		"hostname":        b.createBareMetal.hostname,
-		"tag":             b.createBareMetal.tag,
+
+	params := make(map[string]interface{})
+
+	params["DCID"] = b.createBareMetal.DCID
+	params["METALPLANID"] = b.createBareMetal.METALPLANID
+	params["OSID"] = b.createBareMetal.OSID
+
+	if b.createBareMetal.SCRIPTID != 0 {
+		params["SCRIPTID"] = b.createBareMetal.SCRIPTID
+	}
+	if b.createBareMetal.SNAPSHOTID != "" {
+		params["SNAPSHOTID"] = b.createBareMetal.SNAPSHOTID
+	}
+	if b.createBareMetal.enable_ipv6 != "" {
+		params["enable_ipv6"] = b.createBareMetal.enable_ipv6
+	}
+	if b.createBareMetal.label != "" {
+		params["label"] = b.createBareMetal.label
+	}
+	if b.createBareMetal.SSHKEYID != "" {
+		params["SSHKEYID"] = b.createBareMetal.SSHKEYID
+	}
+	if b.createBareMetal.APPID != 0 {
+		params["APPID"] = b.createBareMetal.APPID
+	}
+	if b.createBareMetal.userdata != "" {
+		params["userdata"] = b.createBareMetal.userdata
+	}
+	if b.createBareMetal.notify_activate != "" {
+		params["notify_activate"] = b.createBareMetal.notify_activate
+	}
+	if b.createBareMetal.hostname != "" {
+		params["hostname"] = b.createBareMetal.hostname
+	}
+	if b.createBareMetal.tag != "" {
+		params["tag"] = b.createBareMetal.tag
 	}
 	return params, nil
 }
@@ -170,7 +191,7 @@ func (b *DeleteBareMetalBuilder) SUBID(sUBID int) *DeleteBareMetalBuilder {
 
 func (b *DeleteBareMetalBuilder) Build() (map[string]interface{}, error) {
 	if b.deleteBareMetal.SUBID == 0 {
-		return nil, errors.New(aliauth.StrMissRequired + "SUBID")
+		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
 	}
 	params := vultrauth.PutStructIntoMap(b.deleteBareMetal)
 	return params, nil
@@ -194,7 +215,7 @@ func (b *RebootBareMetalBuilder) SUBID(sUBID int) *RebootBareMetalBuilder {
 
 func (b *RebootBareMetalBuilder) Build() (map[string]interface{}, error) {
 	if b.rebootBareMetal.SUBID == 0 {
-		return nil, errors.New(aliauth.StrMissRequired + "SUBID")
+		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
 	}
 	params := vultrauth.PutStructIntoMap(b.rebootBareMetal)
 	return params, nil
@@ -218,7 +239,7 @@ func (b *ReinstallBareMetalBuilder) SUBID(sUBID int) *ReinstallBareMetalBuilder 
 
 func (b *ReinstallBareMetalBuilder) Build() (map[string]interface{}, error) {
 	if b.reinstallBareMetal.SUBID == 0 {
-		return nil, errors.New(aliauth.StrMissRequired + "SUBID")
+		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
 	}
 	params := vultrauth.PutStructIntoMap(b.reinstallBareMetal)
 	return params, nil
@@ -242,7 +263,7 @@ func (b *HaltBareMetalBuilder) SUBID(sUBID int) *HaltBareMetalBuilder {
 
 func (b *HaltBareMetalBuilder) Build() (map[string]interface{}, error) {
 	if b.haltBareMetal.SUBID == 0 {
-		return nil, errors.New(aliauth.StrMissRequired + "SUBID")
+		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
 	}
 	params := vultrauth.PutStructIntoMap(b.haltBareMetal)
 	return params, nil

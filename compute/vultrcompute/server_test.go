@@ -29,6 +29,31 @@ func TestVultrCompute_CreateNode(t *testing.T) {
 	t.Logf("Vultr node is created successfully.")
 }
 
+func TestCreateNodeBuilder(t *testing.T) {
+	var vultrServer VultrCompute
+	create, err := NewCreateNodeBuilder().
+		DCID(1).
+		VPSPLANID(201).
+		OSID(127).
+		Tag("test").
+		Build()
+	if err != nil {
+		t.Errorf("CreateNode Test Fail: %s", err)
+		return
+	}
+	resp, err := vultrServer.CreateNode(create)
+	if err != nil {
+		t.Errorf("CreateNode Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr node is created successfully.")
+}
+
 func TestVultrCompute_StartNode(t *testing.T) {
 	var vultrServer VultrCompute
 	start := map[string]interface{}{
