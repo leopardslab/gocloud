@@ -47,6 +47,25 @@ vultr := gocloud.VultrProvider()
     fmt.Println(createBareMetalResp.SUBID)
 ```
 
+or
+
+```
+    createBareMetal, err := NewCreateBareMetalBuilder().
+        DCID(1).
+        METALPLANID(100).
+        OSID(127).
+        Label("gocloud").
+        Build()
+    resp, err := vultr.BareMetal().CreateBareMetal(create)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    response := resp.(map[string]interface{})
+    fmt.Println(response["status"])
+    fmt.Println(response["body"])
+```
+
 ### Delete
 
 ```
@@ -63,12 +82,44 @@ vultr := gocloud.VultrProvider()
     fmt.Println(response["body"])
 ```
 
+or
+
+```
+    deleteBareMetal, err := NewDeleteBareMetalBuilder().
+        SUBID(16917076).
+        Build()
+    resp, err := vultr.BareMetal().DeleteBareMetal(deleteBareMetal)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    response := resp.(map[string]interface{})
+    fmt.Println(response["status"])
+    fmt.Println(response["body"])
+```
+
 ### Halt
 
 ```
     haltBareMetal := map[string]interface{}{
         "SUBID": 900000,
     }
+    resp, err := vultr.BareMetal().HaltBareMetal(haltBareMetal)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    response := resp.(map[string]interface{})
+    fmt.Println(response["status"])
+    fmt.Println(response["body"])
+```
+
+or
+
+```
+    haltBareMetal, err := NewHaltBareMetalBuilder().
+        SUBID(900000).
+        Build()
     resp, err := vultr.BareMetal().HaltBareMetal(haltBareMetal)
     if err != nil {
         fmt.Println(err)
@@ -101,6 +152,21 @@ vultr := gocloud.VultrProvider()
     }
 ```
 
+or
+
+```
+    list, err := NewListBareMetalBuilder().
+        Build()
+    resp, err := vultr.BareMetal().ListBareMetal(list)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    response := resp.(map[string]interface{})
+    fmt.Println(response["status"])
+    fmt.Println(response["body"])
+```
+
 ### Reboot
 
 ```
@@ -117,12 +183,44 @@ vultr := gocloud.VultrProvider()
     fmt.Println(response["body"])
 ```
 
+or
+
+```
+    rebootBareMetal, err := NewRebootBareMetalBuilder().
+        SUBID(900000).
+        Build()
+    resp, err := vultr.BareMetal().RebootBareMetal(rebootBareMetal)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    response := resp.(map[string]interface{})
+    fmt.Println(response["status"])
+    fmt.Println(response["body"])
+```
+
 ### Reinstall
 
 ```
     reinstallBareMetal := map[string]interface{}{
         "SUBID": 900000,
     }
+    resp, err := vultr.BareMetal().ReinstallBareMetal(reinstallBareMetal)
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    response := resp.(map[string]interface{})
+    fmt.Println(response["status"])
+    fmt.Println(response["body"])
+```
+
+or
+
+```
+    reinstallBareMetal, err := NewReinstallBareMetalBuilder().
+        SUBID(900000).
+        Build()
     resp, err := vultr.BareMetal().ReinstallBareMetal(reinstallBareMetal)
     if err != nil {
         fmt.Println(err)
