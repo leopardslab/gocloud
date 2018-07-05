@@ -33,8 +33,23 @@ type CreateNode struct {
 	FIREWALLGROUPID        string   // (optional) The firewall group to assign to this server. See /v1/firewall/group_list.
 }
 
+type StartNode struct {
+	SUBID int
+}
+
+type RebootNode struct {
+	SUBID int
+}
+
 type DeleteNode struct {
 	SUBID int // Unique identifier for this subscription.  These can be found using the v1/server/list call.
+}
+
+type ListNode struct {
+	SUBID   int    // (optional) Unique identifier of a subscription. Only the subscription object will be returned.
+	tag     string // (optional) A tag string. Only subscription objects with this tag will be returned.
+	label   string // (optional) A text label string. Only subscription objects with this text label will be returned.
+	main_ip string // (optional) An IPv4 address. Only the subscription matching this IPv4 address will be returned.
 }
 
 // CreateNode builder pattern code
@@ -225,5 +240,131 @@ func (b *CreateNodeBuilder) Build() (map[string]interface{}, error) {
 		params["FIREWALLGROUPID"] = b.createNode.FIREWALLGROUPID
 	}
 
+	return params, nil
+}
+
+// StartNode builder pattern code
+type StartNodeBuilder struct {
+	startNode *StartNode
+}
+
+func NewStartNodeBuilder() *StartNodeBuilder {
+	startNode := &StartNode{}
+	b := &StartNodeBuilder{startNode: startNode}
+	return b
+}
+
+func (b *StartNodeBuilder) SUBID(sUBID int) *StartNodeBuilder {
+	b.startNode.SUBID = sUBID
+	return b
+}
+
+func (b *StartNodeBuilder) Build() (map[string]interface{}, error) {
+	if b.startNode.SUBID == 0 {
+		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
+	}
+	params := map[string]interface{}{
+		"SUBID": b.startNode.SUBID,
+	}
+	return params, nil
+}
+
+// RebootNode builder pattern code
+type RebootNodeBuilder struct {
+	rebootNode *RebootNode
+}
+
+func NewRebootNodeBuilder() *RebootNodeBuilder {
+	rebootNode := &RebootNode{}
+	b := &RebootNodeBuilder{rebootNode: rebootNode}
+	return b
+}
+
+func (b *RebootNodeBuilder) SUBID(sUBID int) *RebootNodeBuilder {
+	b.rebootNode.SUBID = sUBID
+	return b
+}
+
+func (b *RebootNodeBuilder) Build() (map[string]interface{}, error) {
+	if b.rebootNode.SUBID == 0 {
+		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
+	}
+	params := map[string]interface{}{
+		"SUBID": b.rebootNode.SUBID,
+	}
+	return params, nil
+}
+
+// DeleteNode builder pattern code
+type DeleteNodeBuilder struct {
+	deleteNode *DeleteNode
+}
+
+func NewDeleteNodeBuilder() *DeleteNodeBuilder {
+	deleteNode := &DeleteNode{}
+	b := &DeleteNodeBuilder{deleteNode: deleteNode}
+	return b
+}
+
+func (b *DeleteNodeBuilder) SUBID(sUBID int) *DeleteNodeBuilder {
+	b.deleteNode.SUBID = sUBID
+	return b
+}
+
+func (b *DeleteNodeBuilder) Build() (map[string]interface{}, error) {
+	if b.deleteNode.SUBID == 0 {
+		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
+	}
+	params := map[string]interface{}{
+		"SUBID": b.deleteNode.SUBID,
+	}
+	return params, nil
+}
+
+// ListNode builder pattern code
+type ListNodeBuilder struct {
+	listNode *ListNode
+}
+
+func NewListNodeBuilder() *ListNodeBuilder {
+	listNode := &ListNode{}
+	b := &ListNodeBuilder{listNode: listNode}
+	return b
+}
+
+func (b *ListNodeBuilder) SUBID(sUBID int) *ListNodeBuilder {
+	b.listNode.SUBID = sUBID
+	return b
+}
+
+func (b *ListNodeBuilder) tag(tag string) *ListNodeBuilder {
+	b.listNode.tag = tag
+	return b
+}
+
+func (b *ListNodeBuilder) label(label string) *ListNodeBuilder {
+	b.listNode.label = label
+	return b
+}
+
+func (b *ListNodeBuilder) main_ip(main_ip string) *ListNodeBuilder {
+	b.listNode.main_ip = main_ip
+	return b
+}
+
+func (b *ListNodeBuilder) Build() (map[string]interface{}, error) {
+	params := map[string]interface{}{}
+	if b.listNode.SUBID != 0 {
+		params["SUBID"] = b.listNode.SUBID
+	}
+	if b.listNode.tag != "" {
+		params["tag"] = b.listNode.tag
+	}
+	if b.listNode.label != "" {
+		params["label"] = b.listNode.label
+	}
+	if b.listNode.main_ip != "" {
+		params["main_ip"] = b.listNode.main_ip
+	}
 	return params, nil
 }

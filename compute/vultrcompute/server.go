@@ -65,10 +65,15 @@ func (vultrCompute *VultrCompute) DeleteNode(request interface{}) (resp interfac
 }
 
 // ListNode function lists VultrCompute instances.
-func (vultrCompute *VultrCompute) ListNode() (resp interface{}, err error) {
+func (vultrCompute *VultrCompute) ListNode(request interface{}) (resp interface{}, err error) {
+	param := make(map[string]interface{})
+	if request != nil {
+		param = request.(map[string]interface{})
+	}
+
 	response := make(map[string]interface{})
 
-	err = vultrauth.SignAndDoRequest(http.MethodGet, "/v1/server/list", nil, response)
+	err = vultrauth.SignAndDoRequest(http.MethodGet, "/v1/server/list", param, response)
 
 	resp = response
 	return resp, err
