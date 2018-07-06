@@ -56,6 +56,10 @@ or
         OSID(127).
         Label("gocloud").
         Build()
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
     resp, err := vultr.BareMetal().CreateBareMetal(create)
     if err != nil {
         fmt.Println(err)
@@ -88,6 +92,10 @@ or
     deleteBareMetal, err := NewDeleteBareMetalBuilder().
         SUBID(16917076).
         Build()
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
     resp, err := vultr.BareMetal().DeleteBareMetal(deleteBareMetal)
     if err != nil {
         fmt.Println(err)
@@ -120,6 +128,10 @@ or
     haltBareMetal, err := NewHaltBareMetalBuilder().
         SUBID(900000).
         Build()
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
     resp, err := vultr.BareMetal().HaltBareMetal(haltBareMetal)
     if err != nil {
         fmt.Println(err)
@@ -157,6 +169,10 @@ or
 ```
     list, err := NewListBareMetalBuilder().
         Build()
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
     resp, err := vultr.BareMetal().ListBareMetal(list)
     if err != nil {
         fmt.Println(err)
@@ -189,6 +205,10 @@ or
     rebootBareMetal, err := NewRebootBareMetalBuilder().
         SUBID(900000).
         Build()
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
     resp, err := vultr.BareMetal().RebootBareMetal(rebootBareMetal)
     if err != nil {
         fmt.Println(err)
@@ -221,6 +241,10 @@ or
     reinstallBareMetal, err := NewReinstallBareMetalBuilder().
         SUBID(900000).
         Build()
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
     resp, err := vultr.BareMetal().ReinstallBareMetal(reinstallBareMetal)
     if err != nil {
         fmt.Println(err)
