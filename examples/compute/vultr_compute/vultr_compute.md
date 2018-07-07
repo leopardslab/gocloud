@@ -45,7 +45,7 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
 or
 
 ```
-    create, err := NewCreateNodeBuilder().
+    create, err := vultrcompute.NewCreateNodeBuilder().
         DCID(1).
         VPSPLANID(201).
         OSID(127).
@@ -71,7 +71,7 @@ or
 or
 
 ```
-    start, err := NewStartNodeBuilder().
+    start, err := vultrcompute.NewStartNodeBuilder().
         SUBID(6492936).
         Build()
     resp, err := vultrCloud.StartNode(start)
@@ -101,7 +101,7 @@ or
 or
 
 ```
-    reboot, err := NewRebootNodeBuilder().
+    reboot, err := vultrcompute.NewRebootNodeBuilder().
         SUBID(6492936).
         Build()
     resp, err := vultrCloud.RebootNode(reboot)
@@ -125,7 +125,7 @@ or
 or
 
 ```
-    d, err := NewDeleteNodeBuilder().
+    d, err := vultrcompute.NewDeleteNodeBuilder().
         SUBID(6492936).
         Build()
     resp, err := vultrCloud.DeleteNode(d)

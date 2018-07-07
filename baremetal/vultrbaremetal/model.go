@@ -193,7 +193,9 @@ func (b *DeleteBareMetalBuilder) Build() (map[string]interface{}, error) {
 	if b.deleteBareMetal.SUBID == 0 {
 		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
 	}
-	params := vultrauth.PutStructIntoMap(b.deleteBareMetal)
+	params := map[string]interface{}{
+		"SUBID": b.deleteBareMetal.SUBID,
+	}
 	return params, nil
 }
 
@@ -217,7 +219,9 @@ func (b *RebootBareMetalBuilder) Build() (map[string]interface{}, error) {
 	if b.rebootBareMetal.SUBID == 0 {
 		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
 	}
-	params := vultrauth.PutStructIntoMap(b.rebootBareMetal)
+	params := map[string]interface{}{
+		"SUBID": b.rebootBareMetal.SUBID,
+	}
 	return params, nil
 }
 
@@ -241,7 +245,9 @@ func (b *ReinstallBareMetalBuilder) Build() (map[string]interface{}, error) {
 	if b.reinstallBareMetal.SUBID == 0 {
 		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
 	}
-	params := vultrauth.PutStructIntoMap(b.reinstallBareMetal)
+	params := map[string]interface{}{
+		"SUBID": b.reinstallBareMetal.SUBID,
+	}
 	return params, nil
 }
 
@@ -265,7 +271,9 @@ func (b *HaltBareMetalBuilder) Build() (map[string]interface{}, error) {
 	if b.haltBareMetal.SUBID == 0 {
 		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
 	}
-	params := vultrauth.PutStructIntoMap(b.haltBareMetal)
+	params := map[string]interface{}{
+		"SUBID": b.haltBareMetal.SUBID,
+	}
 	return params, nil
 }
 

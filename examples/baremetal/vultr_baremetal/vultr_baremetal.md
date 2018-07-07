@@ -50,7 +50,7 @@ vultr := gocloud.VultrProvider()
 or
 
 ```
-    createBareMetal, err := NewCreateBareMetalBuilder().
+    createBareMetal, err := vultrbaremetal.NewCreateBareMetalBuilder().
         DCID(1).
         METALPLANID(100).
         OSID(127).
@@ -89,7 +89,7 @@ or
 or
 
 ```
-    deleteBareMetal, err := NewDeleteBareMetalBuilder().
+    deleteBareMetal, err := vultrbaremetal.NewDeleteBareMetalBuilder().
         SUBID(16917076).
         Build()
     if err != nil {
@@ -125,7 +125,7 @@ or
 or
 
 ```
-    haltBareMetal, err := NewHaltBareMetalBuilder().
+    haltBareMetal, err := vultrbaremetal.NewHaltBareMetalBuilder().
         SUBID(900000).
         Build()
     if err != nil {
@@ -167,7 +167,7 @@ or
 or
 
 ```
-    list, err := NewListBareMetalBuilder().
+    list, err := vultrbaremetal.NewListBareMetalBuilder().
         Build()
     if err != nil {
         fmt.Println(err)
@@ -202,7 +202,7 @@ or
 or
 
 ```
-    rebootBareMetal, err := NewRebootBareMetalBuilder().
+    rebootBareMetal, err := vultrbaremetal.NewRebootBareMetalBuilder().
         SUBID(900000).
         Build()
     if err != nil {
@@ -238,7 +238,7 @@ or
 or
 
 ```
-    reinstallBareMetal, err := NewReinstallBareMetalBuilder().
+    reinstallBareMetal, err := vultrbaremetal.NewReinstallBareMetalBuilder().
         SUBID(900000).
         Build()
     if err != nil {

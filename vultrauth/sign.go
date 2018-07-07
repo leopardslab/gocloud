@@ -1,7 +1,6 @@
 package vultrauth
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
