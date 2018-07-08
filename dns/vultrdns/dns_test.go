@@ -33,10 +33,10 @@ func TestVultrDNS_CreateDns(t *testing.T) {
 func TestCreateDNSBuilder(t *testing.T) {
 	var vultrDNS VultrDNS
 	createDNS, err := NewCreateDNSBuilder().
-		domain("").
-		name("gocloud.test").
+		Domain("").
+		Name("gocloud.test").
 		Type("A").
-		data("192.0.2.1").
+		Data("192.0.2.1").
 		Build()
 	if err != nil {
 		t.Errorf("CreateDns Test Fail: %s", err)
@@ -76,7 +76,7 @@ func TestVultrDNS_ListDns(t *testing.T) {
 func TestListDNSBuilder(t *testing.T) {
 	var vultrDNS VultrDNS
 	listDNS, err := NewListDNSBuilder().
-		domain("oddcn.cn").
+		Domain("oddcn.cn").
 		Build()
 	if err != nil {
 		t.Errorf("ListDns Test Fail: %s", err)
@@ -117,7 +117,7 @@ func TestVultrDNS_DeleteDns(t *testing.T) {
 func TestDeleteDNSBuilder(t *testing.T) {
 	var vultrDNS VultrDNS
 	deleteDNS, err := NewDeleteDNSBuilder().
-		domain("oddcn.cn").
+		Domain("oddcn.cn").
 		RECORDID(7065075).
 		Build()
 	if err != nil {

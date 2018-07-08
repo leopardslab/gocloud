@@ -37,12 +37,12 @@ func NewCreateDNSBuilder() *CreateDNSBuilder {
 	return b
 }
 
-func (b *CreateDNSBuilder) domain(domain string) *CreateDNSBuilder {
+func (b *CreateDNSBuilder) Domain(domain string) *CreateDNSBuilder {
 	b.createDNS.domain = domain
 	return b
 }
 
-func (b *CreateDNSBuilder) name(name string) *CreateDNSBuilder {
+func (b *CreateDNSBuilder) Name(name string) *CreateDNSBuilder {
 	b.createDNS.name = name
 	return b
 }
@@ -52,17 +52,17 @@ func (b *CreateDNSBuilder) Type(typeV string) *CreateDNSBuilder {
 	return b
 }
 
-func (b *CreateDNSBuilder) data(data string) *CreateDNSBuilder {
+func (b *CreateDNSBuilder) Data(data string) *CreateDNSBuilder {
 	b.createDNS.data = data
 	return b
 }
 
-func (b *CreateDNSBuilder) ttl(ttl int) *CreateDNSBuilder {
+func (b *CreateDNSBuilder) Ttl(ttl int) *CreateDNSBuilder {
 	b.createDNS.ttl = ttl
 	return b
 }
 
-func (b *CreateDNSBuilder) priority(priority int) *CreateDNSBuilder {
+func (b *CreateDNSBuilder) Priority(priority int) *CreateDNSBuilder {
 	b.createDNS.priority = priority
 	return b
 }
@@ -108,7 +108,7 @@ func NewListDNSBuilder() *ListDNSBuilder {
 	return b
 }
 
-func (b *ListDNSBuilder) domain(domain string) *ListDNSBuilder {
+func (b *ListDNSBuilder) Domain(domain string) *ListDNSBuilder {
 	b.listDNS.domain = domain
 	return b
 }
@@ -134,7 +134,7 @@ func NewDeleteDNSBuilder() *DeleteDNSBuilder {
 	return b
 }
 
-func (b *DeleteDNSBuilder) domain(domain string) *DeleteDNSBuilder {
+func (b *DeleteDNSBuilder) Domain(domain string) *DeleteDNSBuilder {
 	b.deleteDNS.domain = domain
 	return b
 }
