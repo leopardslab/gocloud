@@ -110,6 +110,30 @@ func TestVultrStorage_CreateDisk(t *testing.T) {
 	t.Logf("Vultr disk is created successfully.")
 }
 
+func TestCreateDiskBuilder(t *testing.T) {
+	var vultrStorage VultrStorage
+	createDisk, err := NewCreateDiskBuilder().
+		DCID(1).
+		SizeGb(50).
+		Label("test").
+		Build()
+	if err != nil {
+		t.Errorf("CreateDisk Test Fail: %s", err)
+		return
+	}
+	resp, err := vultrStorage.CreateDisk(createDisk)
+	if err != nil {
+		t.Errorf("CreateDisk Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr disk is created successfully.")
+}
+
 func TestVultrStorage_DeleteDisk(t *testing.T) {
 	var vultrStorage VultrStorage
 	deleteDisk := map[string]interface{}{
@@ -133,6 +157,29 @@ func TestVultrStorage_AttachDisk(t *testing.T) {
 	attachDisk := map[string]interface{}{
 		"SUBID":           1313217,
 		"attach_to_SUBID": 1313207,
+	}
+	resp, err := vultrStorage.AttachDisk(attachDisk)
+	if err != nil {
+		t.Errorf("AttachDisk Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr disk is attached successfully.")
+}
+
+func TestAttachDiskBuilder(t *testing.T) {
+	var vultrStorage VultrStorage
+	attachDisk, err := NewAttachDiskBuilder().
+		SUBID(1313217).
+		AttachToSUBID(1313207).
+		Build()
+	if err != nil {
+		t.Errorf("AttachDisk Test Fail: %s", err)
+		return
 	}
 	resp, err := vultrStorage.AttachDisk(attachDisk)
 	if err != nil {

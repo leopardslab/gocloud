@@ -95,3 +95,79 @@ func (b *DeleteSnapshotBuilder) Build() (map[string]interface{}, error) {
 	}
 	return params, nil
 }
+
+// CreateDisk builder pattern code
+type CreateDiskBuilder struct {
+	createDisk *CreateDisk
+}
+
+func NewCreateDiskBuilder() *CreateDiskBuilder {
+	createDisk := &CreateDisk{}
+	b := &CreateDiskBuilder{createDisk: createDisk}
+	return b
+}
+
+func (b *CreateDiskBuilder) DCID(dCID int) *CreateDiskBuilder {
+	b.createDisk.DCID = dCID
+	return b
+}
+
+func (b *CreateDiskBuilder) SizeGb(size_gb int) *CreateDiskBuilder {
+	b.createDisk.size_gb = size_gb
+	return b
+}
+
+func (b *CreateDiskBuilder) Label(label string) *CreateDiskBuilder {
+	b.createDisk.label = label
+	return b
+}
+
+func (b *CreateDiskBuilder) Build() (map[string]interface{}, error) {
+	if b.createDisk.DCID == 0 {
+		return nil, errors.New(vultrauth.StrMissRequired + "DCID")
+	}
+	if b.createDisk.size_gb == 0 {
+		return nil, errors.New(vultrauth.StrMissRequired + "size_gb")
+	}
+	params := make(map[string]interface{})
+	params["DCID"] = b.createDisk.DCID
+	params["size_gb"] = b.createDisk.size_gb
+	if b.createDisk.label != "" {
+		params["label"] = b.createDisk.label
+	}
+	return params, nil
+}
+
+// AttachDisk builder pattern code
+type AttachDiskBuilder struct {
+	attachDisk *AttachDisk
+}
+
+func NewAttachDiskBuilder() *AttachDiskBuilder {
+	attachDisk := &AttachDisk{}
+	b := &AttachDiskBuilder{attachDisk: attachDisk}
+	return b
+}
+
+func (b *AttachDiskBuilder) SUBID(sUBID int) *AttachDiskBuilder {
+	b.attachDisk.SUBID = sUBID
+	return b
+}
+
+func (b *AttachDiskBuilder) AttachToSUBID(attach_to_SUBID int) *AttachDiskBuilder {
+	b.attachDisk.attach_to_SUBID = attach_to_SUBID
+	return b
+}
+
+func (b *AttachDiskBuilder) Build() (map[string]interface{}, error) {
+	if b.attachDisk.SUBID == 0 {
+		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
+	}
+	if b.attachDisk.attach_to_SUBID == 0 {
+		return nil, errors.New(vultrauth.StrMissRequired + "attach_to_SUBID")
+	}
+	params := make(map[string]interface{})
+	params["SUBID"] = b.attachDisk.SUBID
+	params["attach_to_SUBID"] = b.attachDisk.attach_to_SUBID
+	return params, nil
+}
