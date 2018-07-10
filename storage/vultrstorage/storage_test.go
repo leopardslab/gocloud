@@ -27,10 +27,55 @@ func TestVultrStorage_CreateSnapshot(t *testing.T) {
 	t.Logf("Vultr snapshot is created successfully.")
 }
 
+func TestCreateSnapshotBuilder(t *testing.T) {
+	var vultrStorage VultrStorage
+	create, err := NewCreateSnapshotBuilder().
+		SUBID(1312965).
+		Description("desc").
+		Build()
+	if err != nil {
+		t.Errorf("CreateSnapshot Test Fail: %s", err)
+		return
+	}
+	resp, err := vultrStorage.CreateSnapshot(create)
+	if err != nil {
+		t.Errorf("CreateSnapshot Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr snapshot is created successfully.")
+}
+
 func TestVultrStorage_DeleteSnapshot(t *testing.T) {
 	var vultrStorage VultrStorage
 	deleteSnapshot := map[string]interface{}{
 		"SNAPSHOTID": "5359435d28b9a",
+	}
+	resp, err := vultrStorage.DeleteSnapshot(deleteSnapshot)
+	if err != nil {
+		t.Errorf("DeleteSnapshot Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr snapshot is deleted successfully.")
+}
+
+func TestDeleteSnapshotBuilder(t *testing.T) {
+	var vultrStorage VultrStorage
+	deleteSnapshot, err := NewDeleteSnapshotBuilder().
+		SNAPSHOTID("5359435d28b9a").
+		Build()
+	if err != nil {
+		t.Errorf("DeleteSnapshot Test Fail: %s", err)
+		return
 	}
 	resp, err := vultrStorage.DeleteSnapshot(deleteSnapshot)
 	if err != nil {
