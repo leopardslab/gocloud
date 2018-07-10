@@ -11,7 +11,7 @@ import (
 )
 
 //DescribeStream Describe Stream
-func (googlenotification *Googlenotification) DescribeStream(request interface{}) (resp interface{}, err error) {
+func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp interface{}, err error) {
 
 
 	options := request.(map[string]string)
@@ -49,59 +49,8 @@ func (googlenotification *Googlenotification) DescribeStream(request interface{}
 	return resp, err
 }
 
-
-//ListTopic list topic
-func (googlenotification *Googlenotification) ListStream(request interface{}) (resp interface{}, err error) {
-
-
-	options := request.(map[string]string)
-
-	url := "https://dataflow.googleapis.com/v1b3/projects/" + options["Project"] + "/jobs"
-
-	client := googleauth.SignJWT()
-
-	liststreamrequest, err := http.NewRequest("GET", url, nil)
-
-	liststreamrequestparam := liststreamrequest.URL.Query()
-
-	if options["PageSize"] != "" {
-		liststreamrequestparam.Add("pageSize", options["pageSize"])
-	}
-
-	if options["PageToken"] != "" {
-		liststreamrequestparam.Add("pageToken", options["PageToken"])
-	}
-
-  if options["Filter"] != "" {
-    liststreamrequestparam.Add("filter", options["Filter"])
-  }
-
-  if options["View"] != "" {
-      liststreamrequestparam.Add("view", options["View"])
-    }
-
-  if options["Location"] != "" {
-    liststreamrequestparam.Add("location", options["Location"])
-  }
-
-
-	lliststreamrequest.URL.RawQuery = liststreamrequestparam.Encode()
-	liststreamrequest.Header.Set("Content-Type", "application/json")
-
-	liststreamresp, err := client.Do(liststreamrequest)
-	defer liststreamresp.Body.Close()
-
-	body, err := ioutil.ReadAll(liststreamresp.Body)
-
-	liststreamresponse := make(map[string]interface{})
-	liststreamresponse["status"] = liststreamresp.StatusCode
-	liststreamresponse["body"] = string(body)
-	resp = liststreamresponse
-	return resp, err
-}
-
 //ListStream ListStream
-func (googlenotification *Googlenotification) ListStream(request interface{}) (resp interface{}, err error) {
+func (clouddataflow *Clouddataflow) ListStream(request interface{}) (resp interface{}, err error) {
 
 
 	options := request.(map[string]string)
@@ -153,14 +102,14 @@ func (googlenotification *Googlenotification) ListStream(request interface{}) (r
 
 
 //DeleteStream Delete Stream
-func (googlenotification *Googlenotification) DeleteStream(request interface{}) (resp interface{}, err error) {
+func (clouddataflow *Clouddataflow) DeleteStream(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
 
 //CreateStream Create Stream
-func (googlenotification *Googlenotification) CreateStream(request interface{}) (resp interface{}, err error) {
+func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
