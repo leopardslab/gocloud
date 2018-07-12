@@ -171,3 +171,53 @@ func (b *AttachDiskBuilder) Build() (map[string]interface{}, error) {
 	params["attach_to_SUBID"] = b.attachDisk.attach_to_SUBID
 	return params, nil
 }
+
+// DetachDisk builder pattern code
+type DetachDiskBuilder struct {
+	detachDisk *DetachDisk
+}
+
+func NewDetachDiskBuilder() *DetachDiskBuilder {
+	detachDisk := &DetachDisk{}
+	b := &DetachDiskBuilder{detachDisk: detachDisk}
+	return b
+}
+
+func (b *DetachDiskBuilder) SUBID(sUBID int) *DetachDiskBuilder {
+	b.detachDisk.SUBID = sUBID
+	return b
+}
+
+func (b *DetachDiskBuilder) Build() (map[string]interface{}, error) {
+	if b.detachDisk.SUBID == 0 {
+		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
+	}
+	params := make(map[string]interface{})
+	params["SUBID"] = b.detachDisk.SUBID
+	return params, nil
+}
+
+// DeleteDisk builder pattern code
+type DeleteDiskBuilder struct {
+	deleteDisk *DeleteDisk
+}
+
+func NewDeleteDiskBuilder() *DeleteDiskBuilder {
+	deleteDisk := &DeleteDisk{}
+	b := &DeleteDiskBuilder{deleteDisk: deleteDisk}
+	return b
+}
+
+func (b *DeleteDiskBuilder) SUBID(sUBID int) *DeleteDiskBuilder {
+	b.deleteDisk.SUBID = sUBID
+	return b
+}
+
+func (b *DeleteDiskBuilder) Build() (map[string]interface{}, error) {
+	if b.deleteDisk.SUBID == 0 {
+		return nil, errors.New(vultrauth.StrMissRequired + "SUBID")
+	}
+	params := make(map[string]interface{})
+	params["SUBID"] = b.deleteDisk.SUBID
+	return params, nil
+}

@@ -152,6 +152,28 @@ func TestVultrStorage_DeleteDisk(t *testing.T) {
 	t.Logf("Vultr disk is deleted successfully.")
 }
 
+func TestDeleteDiskBuilder(t *testing.T) {
+	var vultrStorage VultrStorage
+	deleteDisk, err := NewDeleteDiskBuilder().
+		SUBID(1313217).
+		Build()
+	if err != nil {
+		t.Errorf("DeleteDisk Test Fail: %s", err)
+		return
+	}
+	resp, err := vultrStorage.DeleteDisk(deleteDisk)
+	if err != nil {
+		t.Errorf("DeleteDisk Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr disk is deleted successfully.")
+}
+
 func TestVultrStorage_AttachDisk(t *testing.T) {
 	var vultrStorage VultrStorage
 	attachDisk := map[string]interface{}{
@@ -198,6 +220,28 @@ func TestVultrStorage_DetachDisk(t *testing.T) {
 	var vultrStorage VultrStorage
 	detachDisk := map[string]interface{}{
 		"SUBID": 1313217,
+	}
+	resp, err := vultrStorage.DetachDisk(detachDisk)
+	if err != nil {
+		t.Errorf("DetachDisk Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("Vultr disk is detached successfully.")
+}
+
+func TestNewDetachDiskBuilder(t *testing.T) {
+	var vultrStorage VultrStorage
+	detachDisk, err := NewDetachDiskBuilder().
+		SUBID(1313217).
+		Build()
+	if err != nil {
+		t.Errorf("DetachDisk Test Fail: %s", err)
+		return
 	}
 	resp, err := vultrStorage.DetachDisk(detachDisk)
 	if err != nil {
