@@ -84,7 +84,7 @@ func (b *CreateDNSBuilder) Build() (map[string]interface{}, error) {
 	params := make(map[string]interface{})
 	params["domain"] = b.createDNS.domain
 	params["name"] = b.createDNS.name
-	params["Type"] = b.createDNS.Type
+	params["type"] = b.createDNS.Type
 	params["data"] = b.createDNS.data
 
 	if b.createDNS.ttl != 0 {
