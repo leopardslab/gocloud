@@ -43,11 +43,11 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
 or
 
 ```
-	createDisk, err := vultrstorage.NewCreateDiskBuilder().
-		DCID(1).
-		SizeGb(50).
-		Label("test").
-		Build()
+    createDisk, err := vultrstorage.NewCreateDiskBuilder().
+        DCID(1).
+        SizeGb(50).
+        Label("test").
+        Build()
     resp, err := vultr.CreateDisk(create)
     if err != nil {
         fmt.Println(err)
@@ -75,9 +75,9 @@ or
 or
 
 ```
-	deleteDisk, err := vultrstorage.NewDeleteDiskBuilder().
-		SUBID(1313217).
-		Build()
+    deleteDisk, err := vultrstorage.NewDeleteDiskBuilder().
+        SUBID(1313217).
+        Build()
     resp, err := vultr.DeleteDisk(deleteDisk)
     if err != nil {
         fmt.Println(err)
@@ -106,10 +106,10 @@ or
 or
 
 ```
-	attachDisk, err := vultrstorage.NewAttachDiskBuilder().
-		SUBID(1313217).
-		AttachToSUBID(1313207).
-		Build()
+    attachDisk, err := vultrstorage.NewAttachDiskBuilder().
+        SUBID(1313217).
+        AttachToSUBID(1313207).
+        Build()
     resp, err := vultr.AttachDisk(attachDisk)
     if err != nil {
         fmt.Println(err)
@@ -137,9 +137,9 @@ or
 or
 
 ```
-	detachDisk, err := vultrstorage.NewDetachDiskBuilder().
-		SUBID(1313217).
-		Build()
+    detachDisk, err := vultrstorage.NewDetachDiskBuilder().
+        SUBID(1313217).
+        Build()
     resp, err := vultr.DetachDisk(detachDisk)
     if err != nil {
         fmt.Println(err)
@@ -167,10 +167,10 @@ or
 or
 
 ```
-	createSnapshot, err := vultrstorage.NewCreateSnapshotBuilder().
-		SUBID(1312965).
-		Description("desc").
-		Build()
+    createSnapshot, err := vultrstorage.NewCreateSnapshotBuilder().
+        SUBID(1312965).
+        Description("desc").
+        Build()
     resp, err := vultr.CreateSnapshot(createSnapshot)
     if err != nil {
         fmt.Println(err)
@@ -198,9 +198,9 @@ or
 or
 
 ```
-	deleteSnapshot, err := vultrstorage.NewDeleteSnapshotBuilder().
-		SNAPSHOTID("5359435d28b9a").
-		Build()
+    deleteSnapshot, err := vultrstorage.NewDeleteSnapshotBuilder().
+        SNAPSHOTID("5359435d28b9a").
+        Build()
     resp, err := vultr.DeleteSnapshot(deleteSnapshot)
     if err != nil {
         fmt.Println(err)
