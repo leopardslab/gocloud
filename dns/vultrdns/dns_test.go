@@ -33,8 +33,8 @@ func TestVultrDNS_CreateDns(t *testing.T) {
 func TestCreateDNSBuilder(t *testing.T) {
 	var vultrDNS VultrDNS
 	createDNS, err := NewCreateDNSBuilder().
-		Domain("").
-		Name("gocloud.test").
+		Domain("oddcn.cn").
+		Name("gocloudtest1").
 		Type("A").
 		Data("192.0.2.1").
 		Build()
@@ -53,6 +53,7 @@ func TestCreateDNSBuilder(t *testing.T) {
 		return
 	}
 	t.Logf("Vultr DNS record is created successfully.")
+	t.Logf("status code: %d\n response body: %s\n", response["status"], response["body"])
 }
 
 func TestVultrDNS_ListDns(t *testing.T) {
@@ -135,4 +136,29 @@ func TestDeleteDNSBuilder(t *testing.T) {
 		return
 	}
 	t.Logf("Vultr DNS record is deleted")
+}
+
+func TestParseListDnsResp(t *testing.T) {
+	var vultrDNS VultrDNS
+	listDNS, err := NewListDNSBuilder().
+		Domain("oddcn.cn").
+		Build()
+	if err != nil {
+		t.Errorf("ListDns Test Fail: %s", err)
+		return
+	}
+	resp, err := vultrDNS.ListDns(listDNS)
+	if err != nil {
+		t.Errorf("ListDns Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	listDnsResp, err := ParseListDnsResp(response["body"])
+	for _, dns := range listDnsResp {
+		t.Logf("%+v\n", dns)
+	}
 }
