@@ -98,7 +98,7 @@ func TestVultrCompute_ListNode(t *testing.T) {
 	t.Logf("Vultr node list: %s", response["body"])
 }
 
-func TestParseCreateDiskResp(t *testing.T) {
+func TestParseCreateNodeResp(t *testing.T) {
 	var vultrServer VultrCompute
 	create := map[string]interface{}{
 		"DCID":      1,
