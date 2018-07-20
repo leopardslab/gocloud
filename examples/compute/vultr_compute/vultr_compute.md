@@ -34,6 +34,12 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
     resp, err := vultrCloud.CreateNode(create)
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
+ 
+    createNodeResp, err := vultrcompute.ParseCreateNodeResp(response["body"])
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(createNodeResp.SUBID)
 ```
 
 ### Start instance

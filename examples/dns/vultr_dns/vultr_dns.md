@@ -112,6 +112,15 @@ or
     }
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
+
+    listDnsResp, err := vultrdns.ParseListDnsResp(response["body"])
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    for _, dns := range listDnsResp {
+        fmt.Printf("%+v\n", dns)
+    }
 ```
 
 or
@@ -131,6 +140,15 @@ or
     }
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
+
+    listDnsResp, err := vultrdns.ParseListDnsResp(response["body"])
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    for _, dns := range listDnsResp {
+        fmt.Printf("%+v\n", dns)
+    }
 ```
 
 ### List resource DNS record sets
