@@ -5,9 +5,9 @@ import (
 )
 
 type V6Network struct {
-	V6Network     string `json:"v6_network"`
-	V6MainIP      string `json:"v6_main_ip"`
-	V6NetworkSize int    `json:"v6_network_size"`
+	V6Network     string  `json:"v6_network"`
+	V6MainIP      string  `json:"v6_main_ip"`
+	V6NetworkSize float64 `json:"v6_network_size"`
 }
 
 type BareMetalInfo struct {
@@ -30,6 +30,15 @@ type BareMetalInfo struct {
 	Tag             string      `json:"tag"`
 	OSID            string
 	APPID           string
+}
+
+type CreateBareMetalResp struct {
+	SUBID string
+}
+
+func ParseCreateBareMetalResp(body interface{}) (createBareMetalResp CreateBareMetalResp, err error) {
+	err = json.Unmarshal([]byte(body.(string)), &createBareMetalResp)
+	return
 }
 
 func ParseListBareMetalResp(body interface{}) (listBareMetalResp []BareMetalInfo, err error) {
@@ -92,6 +101,29 @@ func ParseListBareMetalResp(body interface{}) (listBareMetalResp []BareMetalInfo
 				break
 			case "APPID":
 				bareMetalInfo.APPID = value.(string)
+				break
+			case "v6_networks":
+				_, ok := value.([]map[string]interface{})
+				if !ok {
+					break
+				}
+				for _, v6NetworksMap := range value.([]map[string]interface{}) {
+					v6Network := &V6Network{}
+					for key, value := range v6NetworksMap {
+						switch key {
+						case "v6_network":
+							v6Network.V6Network = value.(string)
+							break
+						case "v6_main_ip":
+							v6Network.V6MainIP = value.(string)
+							break
+						case "v6_network_size":
+							v6Network.V6NetworkSize = value.(float64)
+							break
+						}
+					}
+					bareMetalInfo.V6Networks = append(bareMetalInfo.V6Networks, *v6Network)
+				}
 				break
 			}
 		}
