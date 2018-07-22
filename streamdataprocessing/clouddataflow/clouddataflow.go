@@ -1,7 +1,5 @@
 package clouddataflow
 
-
-
 import (
 	"bytes"
 	"encoding/json"
@@ -13,7 +11,6 @@ import (
 //DescribeStream Describe Stream
 func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp interface{}, err error) {
 
-
 	options := request.(map[string]string)
 
 	url := "https://dataflow.googleapis.com/v1b3/projects/" + options["Project"] + "/jobs/" + options["JobId"]
@@ -24,15 +21,13 @@ func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp in
 
 	describestreamrequestparam := liststreamrequest.URL.Query()
 
+	if options["View"] != "" {
+		describestreamrequestparam.Add("view", options["View"])
+	}
 
-  if options["View"] != "" {
-      describestreamrequestparam.Add("view", options["View"])
-    }
-
-  if options["Location"] != "" {
-    describestreamrequestparam.Add("location", options["Location"])
-  }
-
+	if options["Location"] != "" {
+		describestreamrequestparam.Add("location", options["Location"])
+	}
 
 	describestreamrequest.URL.RawQuery = describestreamrequestparam.Encode()
 	describestreamrequest.Header.Set("Content-Type", "application/json")
@@ -52,7 +47,6 @@ func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp in
 //ListStream ListStream
 func (clouddataflow *Clouddataflow) ListStream(request interface{}) (resp interface{}, err error) {
 
-
 	options := request.(map[string]string)
 
 	url := "https://dataflow.googleapis.com/v1b3/projects/" + options["Project"] + "/jobs"
@@ -71,18 +65,17 @@ func (clouddataflow *Clouddataflow) ListStream(request interface{}) (resp interf
 		liststreamrequestparam.Add("pageToken", options["PageToken"])
 	}
 
-  if options["Filter"] != "" {
-    liststreamrequestparam.Add("filter", options["Filter"])
-  }
+	if options["Filter"] != "" {
+		liststreamrequestparam.Add("filter", options["Filter"])
+	}
 
-  if options["View"] != "" {
-      liststreamrequestparam.Add("view", options["View"])
-    }
+	if options["View"] != "" {
+		liststreamrequestparam.Add("view", options["View"])
+	}
 
-  if options["Location"] != "" {
-    liststreamrequestparam.Add("location", options["Location"])
-  }
-
+	if options["Location"] != "" {
+		liststreamrequestparam.Add("location", options["Location"])
+	}
 
 	lliststreamrequest.URL.RawQuery = liststreamrequestparam.Encode()
 	liststreamrequest.Header.Set("Content-Type", "application/json")
@@ -99,14 +92,11 @@ func (clouddataflow *Clouddataflow) ListStream(request interface{}) (resp interf
 	return resp, err
 }
 
-
-
 //DeleteStream Delete Stream
 func (clouddataflow *Clouddataflow) DeleteStream(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
-
 
 //CreateStream Create Stream
 func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp interface{}, err error) {

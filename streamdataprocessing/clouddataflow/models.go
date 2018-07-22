@@ -1,9 +1,10 @@
 package clouddataflow
 
-type Clouddataflow struct{
+type Clouddataflow struct {
 }
 
-type createstream struct{
+/*
+type Createstream struct{
   id string,
  projectId string,
  name string,
@@ -12,5 +13,6 @@ type createstream struct{
  currentStateTime string,
  requestedState string,
  createTime string,
- replaceJobId string
+ replaceJobId string,
 }
+*/

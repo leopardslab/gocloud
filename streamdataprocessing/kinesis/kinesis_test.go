@@ -13,7 +13,7 @@ func TestListStream(t *testing.T) {
 	var kinesis Kinesis
 
 	liststream := map[string]interface{}{
-		"Region":    "us-east-1",
+		"Region": "us-east-1",
 	}
 
 	resp, err := kinesis.ListStream(liststream)
@@ -24,10 +24,13 @@ func TestListStream(t *testing.T) {
 
 	response := resp.(map[string]interface{})
 
+	fmt.Println("###################\n")
 	fmt.Println(response["body"])
+	fmt.Println("###################\n")
+
 }
 
-
+/*
 func TestCreateStream(t *testing.T) {
 
 	var kinesis Kinesis
@@ -49,14 +52,15 @@ func TestCreateStream(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
+*/
 
 func TestDescribeStream(t *testing.T) {
 
 	var kinesis Kinesis
 
 	describestream := map[string]interface{}{
-		"Region":    "us-east-1",
-		"StreamName" : "gocloud",
+		"Region":     "us-east-1",
+		"StreamName": "gocloud",
 	}
 
 	resp, err := kinesis.DescribeStream(describestream)
@@ -70,14 +74,13 @@ func TestDescribeStream(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-
 func TestDeleteStream(t *testing.T) {
 
 	var kinesis Kinesis
 
 	deletestream := map[string]interface{}{
-		"Region":    "us-east-1",
-		"StreamName" : "gocloud",
+		"Region":     "us-east-1",
+		"StreamName": "gocloud",
 	}
 
 	resp, err := kinesis.DeleteStream(deletestream)

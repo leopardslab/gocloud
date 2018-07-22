@@ -1,4 +1,4 @@
 package kinesis
 
-type Kinesis struct{
+type Kinesis struct {
 }
