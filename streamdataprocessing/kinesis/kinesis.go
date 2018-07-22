@@ -37,9 +37,6 @@ func preparedeletestreamdict(deletestreamjsonmap map[string]interface{},streamNa
 		deletestreamjsonmap["StreamName"] = streamName
 	}
 
-  if limit != "" {
-		deletestreamjsonmap["Limit"] = limit
-	}
 }
 
 func preparedeletestream(params map[string]string, Region string) {
@@ -93,7 +90,7 @@ func (kinesis *Kinesis) DescribeStream(request interface{}) (resp interface{}, e
 }
 
 
-func preparecreatestreamdict(describestreamjsonmap map[string]interface{},streamName string,limit string, exclusiveStartShardId string){
+func preparedescribestreamdict(describestreamjsonmap map[string]interface{},streamName string,limit string, exclusiveStartShardId string){
 
   if exclusiveStartShardId != "" {
 		describestreamjsonmap["ExclusiveStartShardId"] = exclusiveStartShardId
@@ -108,7 +105,7 @@ func preparecreatestreamdict(describestreamjsonmap map[string]interface{},stream
   }
 }
 
-func preparecreatestream(params map[string]string, Region string) {
+func preparedescribestream(params map[string]string, Region string) {
 
 	if Region != "" {
 		params["Region"] = Region
@@ -122,7 +119,7 @@ func preparecreatestream(params map[string]string, Region string) {
 func (kinesis *Kinesis) CreateStream(request interface{}) (resp interface{}, err error) {
   param := request.(map[string]interface{})
   var streamName, Region string
-
+  var shardCount int 
   for key, value := range param {
     switch key {
     case "StreamName":
@@ -132,26 +129,30 @@ func (kinesis *Kinesis) CreateStream(request interface{}) (resp interface{}, err
     case "Region":
       RegionV, _ := value.(string)
       Region = RegionV
+
+    case "ShardCount":
+      shardCountV, _ := value.(int)
+      shardCount = shardCountV
     }
   }
 
   params := make(map[string]string)
-  preparedeletestream(params, Region)
+  preparecreatestream(params, Region)
 
-  deletestreamjsonmap := make(map[string]interface{})
-  preparedeletestreamdict(deletestreamjsonmap,streamName)
+  createstreamjsonmap := make(map[string]interface{})
+  preparecreatestreamdict(createstreamjsonmap,streamName,shardCount)
 
   response := make(map[string]interface{})
-  err = kinesis.PrepareSignatureV4query(params, deletestreamjsonmap, response)
+  err = kinesis.PrepareSignatureV4query(params, createstreamjsonmap, response)
   resp = response
   return resp, err
 }
 
 
 
-func preparecreatestreamdict(liststreamjsonmap map[string]interface{},streamName string,shardCount string){
+func preparecreatestreamdict(createstreamjsonmap map[string]interface{},streamName string,shardCount int){
 
-  if shardCount != "" {
+  if shardCount > 0 {
 		createstreamjsonmap["ShardCount"] = shardCount
 	}
 
@@ -165,7 +166,7 @@ func preparecreatestream(params map[string]string, Region string) {
 	if Region != "" {
 		params["Region"] = Region
 	}
-	params["amztarget"] = "Kinesis_20131202.ListStreams"
+	params["amztarget"] = "Kinesis_20131202.CreateStream"
 }
 
 
