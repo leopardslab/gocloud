@@ -10,6 +10,7 @@ import (
 	"github.com/cloudlibz/gocloud/gocloudinterface"
 	"github.com/cloudlibz/gocloud/google"
 	"github.com/cloudlibz/gocloud/vultr"
+	"github.com/cloudlibz/gocloud/vultrauth"
 )
 
 /*
@@ -146,6 +147,7 @@ type vultrProvider interface {
 
 // VultrProvider return Vultr API to users
 func VultrProvider() vultrProvider {
+	vultrauth.LoadConfig()
 	return new(vultr.Vultr)
 }
 

@@ -38,6 +38,13 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
     }
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
+    
+    createDiskResp, err := vultrstorage.ParseCreateDiskResp(response["body"])
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    fmt.Printf(createDiskResp.SUBID)
 ```
 
 or
@@ -55,6 +62,13 @@ or
     }
     response := resp.(map[string]interface{})
     fmt.Println(response["body"])
+        
+    createDiskResp, err := vultrstorage.ParseCreateDiskResp(response["body"])
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    fmt.Printf(createDiskResp.SUBID)
 ```
 
 ### Delete disk

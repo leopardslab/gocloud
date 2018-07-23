@@ -255,3 +255,32 @@ func TestNewDetachDiskBuilder(t *testing.T) {
 	}
 	t.Logf("Vultr disk is detached successfully.")
 }
+
+func TestParseCreateDiskResp(t *testing.T) {
+	var vultrStorage VultrStorage
+	createDisk, err := NewCreateDiskBuilder().
+		DCID(1).
+		SizeGb(50).
+		Label("test").
+		Build()
+	if err != nil {
+		t.Errorf("CreateDisk Test Fail: %s", err)
+		return
+	}
+	resp, err := vultrStorage.CreateDisk(createDisk)
+	if err != nil {
+		t.Errorf("CreateDisk Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	createDiskResp, err := ParseCreateDiskResp(response["body"])
+	if err != nil {
+		t.Errorf("CreateDisk Test Fail: %s", err)
+		return
+	}
+	t.Logf("Vultr disk is created successfully.\n %+v", createDiskResp)
+}
