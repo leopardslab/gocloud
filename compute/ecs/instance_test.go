@@ -169,10 +169,36 @@ func TestListNodeType(t *testing.T) {
 	var aliEcs ECS
 	resp, err := aliEcs.ListNodeType(nil)
 	if err != nil {
-		t.Errorf("ListNodeType Test Fail")
+		t.Errorf("ListNodeType Test Fail, %s", err)
 		return
 	}
 	response := resp.(map[string]interface{})
 	fmt.Println(response["body"])
 	t.Logf("Ali node type is listed successfully.")
+}
+
+func TestParseCreateNodeResp(t *testing.T) {
+	var aliEcs ECS
+	createNode, err := NewCreateNodeBuilder().
+		RegionID("cn-qingdao").
+		ImageID("centos_7_04_64_20G_alibase_201701015.vhd").
+		InstanceType("ecs.xn4.small").
+		SecurityGroupID("sg-m5egbo9s5xb21kpu6nk2").
+		Build()
+	if err != nil {
+		t.Errorf("CreateNode Test Fail: %s", err)
+		return
+	}
+	resp, err := aliEcs.CreateNode(createNode)
+	if err != nil {
+		t.Errorf("CreateNode Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	createNodeResp, err := ParseCreateNodeResp(response["body"])
+	if err != nil {
+		t.Errorf("CreateNode Test Fail: %s", err)
+		return
+	}
+	t.Logf("Ali node is created successfully. %s", createNodeResp.InstanceId)
 }
