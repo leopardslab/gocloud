@@ -7,6 +7,7 @@ import (
 	digioceandns "github.com/cloudlibz/gocloud/dns/digioceandns"
 	"github.com/cloudlibz/gocloud/gocloudinterface"
 	digioceanloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/digioceanloadbalancer"
+	digioceanmachinelearning "github.com/cloudlibz/gocloud/machinelearning/digioceanmachinelearning"
 	digioceanserverless "github.com/cloudlibz/gocloud/serverless/digioceanserverless"
 	digioceanstorage "github.com/cloudlibz/gocloud/storage/digioceanstorage"
 )
@@ -20,6 +21,7 @@ type DigitalOcean struct {
 	digioceancontainer.Digioceancontainer
 	digioceanserverless.Digioceanserverless
 	digioceannosql.Digioceannosql
+	digioceanmachinelearning.Digioceanmachinelearning
 }
 
 func (*DigitalOcean) Compute() gocloudinterface.Compute {

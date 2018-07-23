@@ -6,6 +6,7 @@ import (
 	azurenosql "github.com/cloudlibz/gocloud/database/azurenosql"
 	azuredns "github.com/cloudlibz/gocloud/dns/azuredns"
 	azureloadbalancer "github.com/cloudlibz/gocloud/loadbalancer/azureloadbalancer"
+	azuremachinelearning "github.com/cloudlibz/gocloud/machinelearning/azuremachinelearning"
 	azureserverless "github.com/cloudlibz/gocloud/serverless/azureserverless"
 	azurestorage "github.com/cloudlibz/gocloud/storage/azurestorage"
 )
@@ -19,4 +20,5 @@ type Azure struct {
 	azuredns.Azuredns
 	azureserverless.Azureserverless
 	azurenosql.Azurenosql
+	azuremachinelearning.Azuremachinelearning
 }

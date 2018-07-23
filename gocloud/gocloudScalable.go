@@ -12,7 +12,7 @@ import (
 	"github.com/cloudlibz/gocloud/vultr"
 )
 
-/**
+/*
 goCloudCommon contains unified API of compute, storage, load balancer, container, DNS module
 goCloudCommon also contains interface returning each module 's API. So users can do that for example awsProvider.Compute().CreateNode()
 */
@@ -33,7 +33,7 @@ type goCloudCommon interface {
 	DNS() gocloudinterface.DNS
 }
 
-/**
+/*
 awsProvider provides users with AWS API
 AWS API contains common module API and particular module API
 */
@@ -46,8 +46,14 @@ type awsProvider interface {
 	gocloudinterface.Database
 	Database() gocloudinterface.Database
 
-	//gocloudinterface.MachineLearning
+	gocloudinterface.MachineLearning
 	MachineLearning() gocloudinterface.MachineLearning
+
+	gocloudinterface.Analytics
+	Analytics() gocloudinterface.Analytics
+
+	gocloudinterface.Notification
+	Notification() gocloudinterface.Notification
 }
 
 // AmazonProvider return AWS API to users
@@ -56,7 +62,7 @@ func AmazonProvider() awsProvider {
 	return new(aws.AWS)
 }
 
-/**
+/*
 googleProvider provides users with Google cloud API
 Google cloud API contains common module API and particular module API
 */
@@ -68,6 +74,15 @@ type googleProvider interface {
 
 	gocloudinterface.Database
 	Database() gocloudinterface.Database
+
+	gocloudinterface.MachineLearning
+	MachineLearning() gocloudinterface.MachineLearning
+
+	gocloudinterface.Analytics
+	Analytics() gocloudinterface.Analytics
+
+	gocloudinterface.Notification
+	Notification() gocloudinterface.Notification
 }
 
 // GoogleProvider return Google cloud API to users
@@ -98,7 +113,7 @@ func DigitalOceanProvider() digitalOceanProvider {
 	return new(digiocean.DigitalOcean)
 }
 
-/**
+/*
 aliProvider provides users with Alibaba cloud API
 Ali-cloud API contains common module API
 */

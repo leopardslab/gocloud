@@ -5,8 +5,8 @@ func (dynamodb *Dynamodb) ListTables(request interface{}) (resp interface{}, err
 
 	param := request.(map[string]interface{})
 
-	var ExclusiveStartTableName, Limit, Region string
-
+	var ExclusiveStartTableName, Region string
+	var Limit int
 	for key, value := range param {
 		switch key {
 		case "ExclusiveStartTableName":
@@ -14,7 +14,7 @@ func (dynamodb *Dynamodb) ListTables(request interface{}) (resp interface{}, err
 			ExclusiveStartTableName = ExclusiveStartTableNameV
 
 		case "Limit":
-			LimitV, _ := value.(string)
+			LimitV, _ := value.(int)
 			Limit = LimitV
 
 		case "Region":
@@ -25,13 +25,11 @@ func (dynamodb *Dynamodb) ListTables(request interface{}) (resp interface{}, err
 
 	params := make(map[string]string)
 
-	preparelisttables(params, ExclusiveStartTableName, Limit, Region)
+	preparelisttables(params, Region)
 
-	listtablesjsonmap := map[string]interface{}{}
+	listtablesjsonmap := make(map[string]interface{})
 
-	listtablesjsonmap["ExclusiveStartTableName"] = ExclusiveStartTableName
-	listtablesjsonmap["Limit"] = Limit
-
+	preparelisttablesparamsdict(listtablesjsonmap, ExclusiveStartTableName, Limit)
 	response := make(map[string]interface{})
 
 	err = dynamodb.PrepareSignatureV4query(params, listtablesjsonmap, response)
