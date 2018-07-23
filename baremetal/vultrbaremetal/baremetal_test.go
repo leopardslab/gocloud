@@ -230,6 +230,28 @@ func TestVultrBareMetal_ListBareMetal(t *testing.T) {
 	t.Logf("Vultr BareMetal is listed successfully.")
 }
 
+func TestListBareMetalBuilder(t *testing.T) {
+	var vultrBareMetal VultrBareMetal
+	list, err := NewListBareMetalBuilder().
+		Build()
+	if err != nil {
+		t.Errorf("ListBareMetal Test Fail: %s", err)
+		return
+	}
+	resp, err := vultrBareMetal.ListBareMetal(list)
+	if err != nil {
+		t.Errorf("ListBareMetal Test Fail: %s", err)
+		return
+	}
+	response := resp.(map[string]interface{})
+	if response["status"] != 200 {
+		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
+		return
+	}
+	t.Logf("response body: %s\n", response["body"])
+	t.Logf("Vultr BareMetal is listed successfully.")
+}
+
 func TestParseCreateBareMetalResp(t *testing.T) {
 	var vultrBareMetal VultrBareMetal
 	create := map[string]interface{}{
