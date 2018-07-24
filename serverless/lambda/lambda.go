@@ -26,7 +26,7 @@ func (lambda *Lambda) GetFunction(request interface{}) (resp interface{}, err er
 	preparegetfunctionqueryString(params, getfunction)
 
 	response := make(map[string]interface{})
-	err = Preparerequest(params,Region,response)
+	err = Preparegetrequest(params,Region,response)
 
 	resp = response
 	return resp, err
@@ -35,6 +35,14 @@ func (lambda *Lambda) GetFunction(request interface{}) (resp interface{}, err er
 //CreateFunction  Create lambda function.
 func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err error) {
 
+	region := "us-east-1"
+
+	params := make(map[string]interface{})
+
+	response := make(map[string]interface{})
+	err = PreparePostrequest(params,region ,response)
+
+	resp = response
 	return resp, err
 }
 
@@ -83,7 +91,7 @@ func (lambda *Lambda) ListFunction(request interface{}) (resp interface{}, err e
 	preparelistfunctionqueryString(params, listfunction)
 
 	response := make(map[string]interface{})
-		err = Preparerequest(params,Region,response)
+		err = Preparegetrequest(params,Region,response)
 
 	resp = response
 	return resp, err
@@ -116,7 +124,7 @@ func (lambda *Lambda) DeleteFunction(request interface{}) (resp interface{}, err
 	preparedeleteservicequeryString(params, deletefunction)
 
 	response := make(map[string]interface{})
-	err = Preparerequest(params,Region,response)
+	err = Preparegetrequest(params,Region,response)
 
 	resp = response
 	return resp, err

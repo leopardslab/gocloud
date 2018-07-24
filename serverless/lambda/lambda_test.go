@@ -9,6 +9,7 @@ func init() {
 }
 
 
+/*
 func TestDeleteFunction(t *testing.T) {
 
 	var lambda Lambda
@@ -20,6 +21,30 @@ func TestDeleteFunction(t *testing.T) {
 	}
 
 	resp, err := lambda.DeleteFunction(deletedunction)
+
+	if err != nil {
+		t.Errorf("Test Fail")
+	}
+
+	response := resp.(map[string]interface{})
+
+	fmt.Println(response["body"])
+}
+
+
+*/
+
+func TestCreateFunction(t *testing.T) {
+
+	var lambda Lambda
+
+	deletedunction := map[string]interface{}{
+		"Region":     "us-east-1",
+		"FunctionName": "gocloud",
+    "Qualifier" : "Qualifier",
+	}
+
+	resp, err := lambda.CreateFunction(deletedunction)
 
 	if err != nil {
 		t.Errorf("Test Fail")
