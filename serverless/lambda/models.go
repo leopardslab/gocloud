@@ -4,10 +4,29 @@ package lambda
 type Lambda struct {
 }
 
-type DeleteFunction struct {
+
+//Deletefunction struct represents aws serverless Delete function.
+type Deletefunction struct {
 	FunctionName string
 	Qualifier    string
 }
+
+//Getfunction struct represents aws serverless Get function.
+type Getfunction struct {
+	FunctionName string
+	Qualifier    string
+}
+
+
+//Listfunction struct represents aws serverless List function.
+ type Listfunction struct {
+	functionVersion string
+	marker    string
+	masterRegion string
+	maxItems string
+}
+
+
 
 //CreateFunction struct represents aws serverless Create function.
 type CreateFunction struct {
