@@ -8,25 +8,25 @@ func (lambda *Lambda) GetFunction(request interface{}) (resp interface{}, err er
 
 	for key, value := range param {
 		switch key {
-			case "FunctionName":
-				FunctionNameV, _ := value.(string)
-				getfunction.FunctionName = FunctionNameV
+		case "FunctionName":
+			FunctionNameV, _ := value.(string)
+			getfunction.FunctionName = FunctionNameV
 
-			case "Region":
-				RegionV, _ := value.(string)
-				Region = RegionV
+		case "Region":
+			RegionV, _ := value.(string)
+			Region = RegionV
 
-			case "Qualifier":
-				QualifierV, _ := value.(string)
-				getfunction.Qualifier = QualifierV
-			}
+		case "Qualifier":
+			QualifierV, _ := value.(string)
+			getfunction.Qualifier = QualifierV
+		}
 	}
 
 	params := make(map[string]string)
 	preparegetfunctionqueryString(params, getfunction)
 
 	response := make(map[string]interface{})
-	err = Preparegetrequest(params,Region,response)
+	err = Preparegetrequest(params, Region, response)
 
 	resp = response
 	return resp, err
@@ -40,7 +40,7 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 	params := make(map[string]interface{})
 
 	response := make(map[string]interface{})
-	err = PreparePostrequest(params,region ,response)
+	err = PreparePostrequest(params, region, response)
 
 	resp = response
 	return resp, err
@@ -51,8 +51,6 @@ func (lambda *Lambda) CallFunction(request interface{}) (resp interface{}, err e
 
 	return resp, err
 }
-
-
 
 //ListFunction  list lambda function.
 func (lambda *Lambda) ListFunction(request interface{}) (resp interface{}, err error) {
@@ -75,11 +73,9 @@ func (lambda *Lambda) ListFunction(request interface{}) (resp interface{}, err e
 			masterRegionv, _ := value.(string)
 			listfunction.masterRegion = masterRegionv
 
-
 		case "MaxItems":
 			maxItemsv, _ := value.(string)
 			listfunction.maxItems = maxItemsv
-
 
 		case "Region":
 			RegionV, _ := value.(string)
@@ -91,7 +87,7 @@ func (lambda *Lambda) ListFunction(request interface{}) (resp interface{}, err e
 	preparelistfunctionqueryString(params, listfunction)
 
 	response := make(map[string]interface{})
-		err = Preparegetrequest(params,Region,response)
+	err = Preparegetrequest(params, Region, response)
 
 	resp = response
 	return resp, err
@@ -124,7 +120,7 @@ func (lambda *Lambda) DeleteFunction(request interface{}) (resp interface{}, err
 	preparedeleteservicequeryString(params, deletefunction)
 
 	response := make(map[string]interface{})
-	err = Preparegetrequest(params,Region,response)
+	err = Preparegetrequest(params, Region, response)
 
 	resp = response
 	return resp, err

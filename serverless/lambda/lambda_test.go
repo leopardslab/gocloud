@@ -8,7 +8,6 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-
 /*
 func TestDeleteFunction(t *testing.T) {
 
@@ -39,9 +38,9 @@ func TestCreateFunction(t *testing.T) {
 	var lambda Lambda
 
 	deletedunction := map[string]interface{}{
-		"Region":     "us-east-1",
+		"Region":       "us-east-1",
 		"FunctionName": "gocloud",
-    "Qualifier" : "Qualifier",
+		"Qualifier":    "Qualifier",
 	}
 
 	resp, err := lambda.CreateFunction(deletedunction)

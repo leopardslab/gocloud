@@ -1,6 +1,5 @@
 package lambda
 
-
 func preparedeleteservicequeryString(params map[string]string, deletefunction Deletefunction) {
 
 	if deletefunction.FunctionName != "" {
@@ -23,7 +22,6 @@ func preparegetfunctionqueryString(params map[string]string, getfunction Getfunc
 		params["Qualifier"] = getfunction.Qualifier
 	}
 }
-
 
 func preparelistfunctionqueryString(params map[string]string, listfunction Listfunction) {
 
