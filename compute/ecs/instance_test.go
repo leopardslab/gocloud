@@ -202,15 +202,3 @@ func TestParseCreateNodeResp(t *testing.T) {
 	}
 	t.Logf("Ali node is created successfully. %s", createNodeResp.InstanceId)
 }
-
-func TestParseListNodeResp(t *testing.T) {
-	var aliEcs ECS
-	resp, err := aliEcs.ListNodeType(nil)
-	if err != nil {
-		t.Errorf("ListNodeType Test Fail, %s", err)
-		return
-	}
-	response := resp.(map[string]interface{})
-	fmt.Println(response["body"])
-	t.Logf("Ali node type is listed successfully.")
-}
