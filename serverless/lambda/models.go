@@ -25,23 +25,23 @@ type Listfunction struct {
 }
 
 //CreateFunction struct represents aws serverless Create function.
-type CreateFunction struct {
-	code Code `json:"Code"`
-
-	Description string `json:"Description"`
+type Createfunction struct {
+	functionName string `json:"FunctionName"`
+	handler      string `json:"Handler"`
+	kMSKeyArn    string `json:"KMSKeyArn"`
+	MemorySize   int    `json:"MemorySize"`
+	Publish      bool   `json:"Publish"`
+	role         string `json:"Role"`
+	runtime      string `json:"Runtime"`
+	tags         Tags   `json:"Tags"`
+	description  string `json:"Description"`
+	timeout      `json:"Timeout"`
 
 	deadLetterConfig DeadLetterConfig `json:"DeadLetterConfig"`
-
-	environment Environment `json:"Environment"`
-
-	FunctionName  string        `json:"FunctionName"`
-	Handler       string        `json:"Handler"`
-	KMSKeyArn     string        `json:"KMSKeyArn"`
-	Role          string        `json:"Role"`
-	Runtime       string        `json:"Runtime"`
-	tags          Tags          `json:"Tags"`
-	tracingConfig TracingConfig `json:"TracingConfig"`
-	vpcConfig     VpcConfig     `json:"VpcConfig"`
+	environment      Environment      `json:"Environment"`
+	tracingConfig    TracingConfig    `json:"TracingConfig"`
+	vpcConfig        VpcConfig        `json:"VpcConfig"`
+	code             Code             `json:"Code"`
 }
 
 //Tags struct represents CreateFunction parameters.
@@ -80,4 +80,5 @@ type Code struct {
 	S3Bucket        string `json:"S3Bucket"`
 	S3Key           string `json:"S3Key"`
 	S3ObjectVersion string `json:"S3ObjectVersion"`
+	ZipFile         string `json:"ZipFile"`
 }
