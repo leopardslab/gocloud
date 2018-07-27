@@ -1,12 +1,13 @@
 package clouddataflow
 
 import (
-	"bytes"
-	"encoding/json"
+	//"bytes"
+	//"encoding/json"
 	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
 )
+
 
 //DescribeStream Describe Stream
 func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp interface{}, err error) {
@@ -19,7 +20,7 @@ func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp in
 
 	describestreamrequest, err := http.NewRequest("GET", url, nil)
 
-	describestreamrequestparam := liststreamrequest.URL.Query()
+	describestreamrequestparam := describestreamrequest.URL.Query()
 
 	if options["View"] != "" {
 		describestreamrequestparam.Add("view", options["View"])
@@ -32,7 +33,7 @@ func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp in
 	describestreamrequest.URL.RawQuery = describestreamrequestparam.Encode()
 	describestreamrequest.Header.Set("Content-Type", "application/json")
 
-	liststreamresp, err := client.Do(describestreamrequest)
+	describestreamresp, err := client.Do(describestreamrequest)
 	defer describestreamresp.Body.Close()
 
 	body, err := ioutil.ReadAll(describestreamresp.Body)
@@ -43,6 +44,7 @@ func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp in
 	resp = describestreamresponse
 	return resp, err
 }
+
 
 //ListStream ListStream
 func (clouddataflow *Clouddataflow) ListStream(request interface{}) (resp interface{}, err error) {
@@ -77,7 +79,7 @@ func (clouddataflow *Clouddataflow) ListStream(request interface{}) (resp interf
 		liststreamrequestparam.Add("location", options["Location"])
 	}
 
-	lliststreamrequest.URL.RawQuery = liststreamrequestparam.Encode()
+	liststreamrequest.URL.RawQuery = liststreamrequestparam.Encode()
 	liststreamrequest.Header.Set("Content-Type", "application/json")
 
 	liststreamresp, err := client.Do(liststreamrequest)
@@ -92,22 +94,17 @@ func (clouddataflow *Clouddataflow) ListStream(request interface{}) (resp interf
 	return resp, err
 }
 
+
 //DeleteStream Delete Stream
 func (clouddataflow *Clouddataflow) DeleteStream(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
+/*
+
 //CreateStream Create Stream
 func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp interface{}, err error) {
-
-
-
-
-
-
- replaceJobId string,
-
 
  param := request.(map[string]interface{})
  var Project string
@@ -152,6 +149,11 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
 	 case "ReplaceJobId":
 		 replaceJobIdv, _ := value.(string)
 		 option.replaceJobId = replaceJobIdv
+
+	 case "Location":
+		 locationv, _ := value.(string)
+		 option.location = locationv
+
 	 }
  }
 
@@ -186,6 +188,56 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
  return resp, err
 }
 
-func createstreamdictnoaryconvert(option Createstream ,map[string]interface{} createstreamjsonmap){
+func createstreamdictnoaryconvert(option Createstream ,createstreamjsonmap map[string]interface{} ){
+
+	if option.id != "" {
+		createstreamjsonmap["id"] = option.id
+	}
+
+	if option.projectId != "" {
+		createstreamjsonmap["projectId"] = option.projectId
+	}
+
+	if option.name != "" {
+		createstreamjsonmap["name"] = option.name
+	}
+
+	if option.Type != "" {
+		createstreamjsonmap["type"] = option.Type
+	}
+
+	if option.currentState != "" {
+		createstreamjsonmap["currentState"] = option.currentState
+	}
+
+	if option.currentStateTime != "" {
+		createstreamjsonmap["currentStateTime"] = option.currentStateTime
+	}
+
+	if option.currentStateTime != "" {
+		createstreamjsonmap["currentStateTime"] = option.currentStateTime
+	}
+
+	if option.requestedState != "" {
+		createstreamjsonmap["requestedState"] = option.requestedState
+	}
+
+	if option.requestedState != "" {
+		createstreamjsonmap["requestedState"] = option.requestedState
+	}
+
+	if option.createTime != "" {
+		createstreamjsonmap["createTime"] = option.createTime
+	}
+
+	if option.replaceJobId != "" {
+		createstreamjsonmap["replaceJobId"] = option.replaceJobId
+	}
+
+	if option.location != "" {
+		createstreamjsonmap["location"] = option.location
+	}
 
 }
+
+*/
