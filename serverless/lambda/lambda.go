@@ -26,12 +26,13 @@ func (lambda *Lambda) GetFunction(request interface{}) (resp interface{}, err er
 	preparegetfunctionqueryString(params, getfunction)
 
 	response := make(map[string]interface{})
-	err = Preparegetrequest(params, Region, response)
+	err = Preparegetfnrequest(params, Region, response)
 
 	resp = response
 	return resp, err
 }
 
+/*
 //CreateFunction  Create lambda function.
 func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err error) {
 
@@ -166,6 +167,7 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 	return resp, err
 }
 
+
 func preparecreatefunctiondict(params map[string]interface{}, createfunction Createfunction) {
 
 	if createfunction.functionName != "" {
@@ -229,7 +231,7 @@ func preparecreatefunctiondict(params map[string]interface{}, createfunction Cre
 			params["TracingConfig"] = param
 		}
 
-		if (len(createfunction.vpcConfig.securityGroupIds > 0)  || (len(createfunction.vpcConfig.subnetIds) > 0) {
+		if (len(createfunction.vpcConfig.securityGroupIds) > 0)  || (len(createfunction.vpcConfig.subnetIds) > 0) {
 			param := request.(map[string]interface{})
 
 			if(len(createfunction.vpcConfig.securityGroupIds > 0))
@@ -273,6 +275,7 @@ func preparecode(params map[string]interface{}, createfunction Createfunction){
 		params["Code"] = param
 
 }
+*/
 
 //CallFunction  call lambda function.
 func (lambda *Lambda) CallFunction(request interface{}) (resp interface{}, err error) {
@@ -348,7 +351,7 @@ func (lambda *Lambda) DeleteFunction(request interface{}) (resp interface{}, err
 	preparedeleteservicequeryString(params, deletefunction)
 
 	response := make(map[string]interface{})
-	err = Preparegetrequest(params, Region, response)
+	err = Preparedeletefnrequest(params, Region, response)
 
 	resp = response
 	return resp, err

@@ -3,7 +3,7 @@ package clouddataflow
 type Clouddataflow struct {
 }
 
-/*
+
 type Createstream struct{
   id string,
  projectId string,
@@ -15,4 +15,9 @@ type Createstream struct{
  createTime string,
  replaceJobId string,
 }
-*/
+
+type
+executionStageName  string,
+ executionStageState string,
+ currentStateTime string,
+}

@@ -35,8 +35,7 @@ type Createfunction struct {
 	runtime      string `json:"Runtime"`
 	tags         Tags   `json:"Tags"`
 	description  string `json:"Description"`
-	timeout      `json:"Timeout"`
-
+	timeout      string `json:"Timeout"`
 	deadLetterConfig DeadLetterConfig `json:"DeadLetterConfig"`
 	environment      Environment      `json:"Environment"`
 	tracingConfig    TracingConfig    `json:"TracingConfig"`
