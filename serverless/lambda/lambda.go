@@ -1,4 +1,6 @@
 package lambda
+import "fmt"
+import "io/ioutil"
 
 //GetFunction  describe lambda function.
 func (lambda *Lambda) GetFunction(request interface{}) (resp interface{}, err error) {
@@ -32,7 +34,7 @@ func (lambda *Lambda) GetFunction(request interface{}) (resp interface{}, err er
 	return resp, err
 }
 
-/*
+
 //CreateFunction  Create lambda function.
 func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err error) {
 
@@ -48,8 +50,8 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 			region = regionv
 
 		case "FunctionName":
-			FunctionNameV, _ := value.(string)
-			createfunction.FunctionName = FunctionNameV
+			functionNamev, _ := value.(string)
+			createfunction.functionName = functionNamev
 
 		case "Handler":
 			handlerv, _ := value.(string)
@@ -57,18 +59,18 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 
 		case "KMSKeyArn":
 			kMSKeyArnv, _ := value.(string)
-			createfunction.kMSKeyArn = kMSKeyArn
+			createfunction.kMSKeyArn = kMSKeyArnv
 
 		case "MemorySize":
 			memorySizev, _ := value.(int)
-			createfunction.memorySizev = memorySizev
+			createfunction.memorySize = memorySizev
 
 		case "Role":
 			rolev, _ := value.(string)
 			createfunction.role = rolev
 
 		case "Publish":
-			publishv, _ := value.(string)
+			publishv, _ := value.(bool)
 			createfunction.publish = publishv
 
 		case "Runtime":
@@ -77,7 +79,7 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 
 		case "Tags":
 			tagsv, _ := value.(string)
-			createfunction.tags = tagsv
+			createfunction.tags.String = tagsv
 
 		case "Description":
 			descriptionv, _ := value.(string)
@@ -92,10 +94,10 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 
 			for deadLetterConfigparamkey, deadLetterConfigparamvalue := range deadLetterConfigparam {
 
-				switch deadLetterConfigparam {
-				case "TargetArn":
-					targetArnv, _ := deadLetterConfigparamvalue.(string)
-					createfunction.deadLetterConfig.targetArnv = targetArnv
+				switch deadLetterConfigparamkey {
+					case "TargetArn":
+						targetArnv := deadLetterConfigparamvalue
+						createfunction.deadLetterConfig.targetArn = targetArnv
 				}
 
 			}
@@ -104,26 +106,26 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 			tracingConfigparam, _ := value.(map[string]string)
 			for tracingConfigparamkey, tracingConfigparamvalue := range tracingConfigparam {
 
-				switch tracingConfigparam {
+				switch tracingConfigparamkey	 {
 				case "Mode":
-					modev, _ := tracingConfigparamvalue.(string)
-					createfunction.tracingConfig.Mode = modev
+					modev := tracingConfigparamvalue
+					createfunction.tracingConfig.mode = modev
 				}
 
 			}
 
 		case "VpcConfig":
-			vpcConfigparam, _ := value.(map[string]string)
+			vpcConfigparam, _ := value.(map[string][]string)
 			for vpcConfigparamkey, vpcConfigparamvalue := range vpcConfigparam {
 
-				switch vpcConfigparam {
+				switch vpcConfigparamkey {
 				case "SubnetIds":
-					subnetIdsv, _ := vpcConfigvalue.([]string)
+					subnetIdsv:= vpcConfigparamvalue
 					createfunction.vpcConfig.subnetIds = subnetIdsv
 
 				case "SecurityGroupIds":
-					securityGroupIdsv, _ := vpcConfigvalue.([]string)
-					createfunction.vpcConfig.securityGroupIds = securityGroupIds
+					securityGroupIdsv := vpcConfigparamvalue
+					createfunction.vpcConfig.securityGroupIds = securityGroupIdsv
 
 				}
 			}
@@ -147,8 +149,17 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 
 				case "ZipFile":
 					zipFilev, _ := codeparamvalue.(string)
-					createfunction.code.zipFile = zipFilev
+					fmt.Println(zipFilev)
+					contents,_ := ioutil.ReadFile(zipFilev + ".zip")
+					createfunction.code.zipFile = contents
 
+				case "Location":
+					locationv, _ := codeparamvalue.(string)
+					createfunction.code.location = locationv
+
+				case "RepositoryType":
+					repositoryTypev, _ := codeparamvalue.(string)
+					createfunction.code.repositoryType = repositoryTypev
 				}
 			}
 
@@ -160,6 +171,8 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 	preparecreatefunctiondict(params, createfunction)
 
 	response := make(map[string]interface{})
+
+	fmt.Println("params", params)
 
 	err = PreparePostrequest(params, region, response)
 
@@ -188,9 +201,6 @@ func preparecreatefunctiondict(params map[string]interface{}, createfunction Cre
 
 	params["Publish"] = createfunction.publish
 
-	if createfunction.role != 0 {
-		params["Role"] = createfunction.role
-	}
 
 	if createfunction.role != "" {
 		params["Role"] = createfunction.role
@@ -200,8 +210,8 @@ func preparecreatefunctiondict(params map[string]interface{}, createfunction Cre
 		params["Runtime"] = createfunction.runtime
 	}
 
-	if createfunction.tags != "" {
-		param["Tags"] = createfunction.tags
+	if createfunction.tags.String != "" {
+		params["Tags"] = createfunction.tags.String
 	}
 
 	if createfunction.description != "" {
@@ -213,34 +223,32 @@ func preparecreatefunctiondict(params map[string]interface{}, createfunction Cre
 	}
 
 	if createfunction.deadLetterConfig.targetArn != "" {
-		param := request.(map[string]interface{})
+		param := make(map[string]interface{})
 		param["TargetArn"] = createfunction.deadLetterConfig.targetArn
 		params["DeadLetterConfig"] = param
 	}
 
 
 		if createfunction.tracingConfig.mode != "" {
-			param := request.(map[string]interface{})
+			param := make(map[string]interface{})
 			param["Mode"] = createfunction.tracingConfig.mode
 			params["TracingConfig"] = param
 		}
 
 		if createfunction.tracingConfig.mode != "" {
-			param := request.(map[string]interface{})
+			param := make(map[string]interface{})
 			param["Mode"] = createfunction.tracingConfig.mode
 			params["TracingConfig"] = param
 		}
 
 		if (len(createfunction.vpcConfig.securityGroupIds) > 0)  || (len(createfunction.vpcConfig.subnetIds) > 0) {
-			param := request.(map[string]interface{})
+			param := make(map[string]interface{})
 
-			if(len(createfunction.vpcConfig.securityGroupIds > 0))
-			{
+			if len(createfunction.vpcConfig.securityGroupIds) > 0 {
 				param["SecurityGroupIds"] = createfunction.vpcConfig.securityGroupIds
 			}
 
-			if(len(createfunction.vpcConfig.subnetIds) > 0)
-			{
+			if len(createfunction.vpcConfig.subnetIds) > 0{
 				param["SubnetIds"] = createfunction.vpcConfig.subnetIds
 			}
 
@@ -253,14 +261,14 @@ func preparecreatefunctiondict(params map[string]interface{}, createfunction Cre
 
 func preparecode(params map[string]interface{}, createfunction Createfunction){
 
-	param := request.(map[string]interface{})
+	param := make(map[string]interface{})
 
 	if createfunction.code.s3Bucket != "" {
 		param["s3Bucket"] = createfunction.code.s3Bucket
 	}
 
 	if createfunction.code.s3Key != "" {
-		param["Handler"] = createfunction.code.handler
+		param["S3Key"] = createfunction.code.s3Key
 	}
 
 	if createfunction.code.s3ObjectVersion != "" {
@@ -268,14 +276,25 @@ func preparecode(params map[string]interface{}, createfunction Createfunction){
 	}
 
 
-		if createfunction.code.zipFile != "" {
+		if len(createfunction.code.zipFile) > 0  {
 			param["ZipFile"] = createfunction.code.zipFile
 		}
+
+
+
+		if createfunction.code.repositoryType != "" {
+			param["RepositoryType"] = createfunction.code.repositoryType
+		}
+
+
+			if createfunction.code.location != "" {
+				param["Location"] = createfunction.code.location
+			}
+
 
 		params["Code"] = param
 
 }
-*/
 
 //CallFunction  call lambda function.
 func (lambda *Lambda) CallFunction(request interface{}) (resp interface{}, err error) {

@@ -29,13 +29,13 @@ type Createfunction struct {
 	functionName string `json:"FunctionName"`
 	handler      string `json:"Handler"`
 	kMSKeyArn    string `json:"KMSKeyArn"`
-	MemorySize   int    `json:"MemorySize"`
-	Publish      bool   `json:"Publish"`
+	memorySize   int    `json:"MemorySize"`
+	publish      bool   `json:"Publish"`
 	role         string `json:"Role"`
 	runtime      string `json:"Runtime"`
 	tags         Tags   `json:"Tags"`
 	description  string `json:"Description"`
-	timeout      string `json:"Timeout"`
+	timeout      int `json:"Timeout"`
 	deadLetterConfig DeadLetterConfig `json:"DeadLetterConfig"`
 	environment      Environment      `json:"Environment"`
 	tracingConfig    TracingConfig    `json:"TracingConfig"`
@@ -50,13 +50,13 @@ type Tags struct {
 
 //TracingConfig struct represents CreateFunction parameters.
 type TracingConfig struct {
-	Mode string `json:"Mode"`
+	mode string `json:"Mode"`
 }
 
 //VpcConfig struct represents CreateFunction parameters.
 type VpcConfig struct {
-	SecurityGroupIds []string `json:"SecurityGroupIds"`
-	SubnetIds        []string `json:"SubnetIds"`
+	securityGroupIds []string `json:"SecurityGroupIds"`
+	subnetIds        []string `json:"SubnetIds"`
 }
 
 //Variables struct represents CreateFunction parameters.
@@ -71,13 +71,18 @@ type Environment struct {
 
 //DeadLetterConfig struct represents CreateFunction parameters.
 type DeadLetterConfig struct {
-	TargetArn string `json:"TargetArn"`
+	targetArn string `json:"TargetArn"`
 }
 
 //Code struct represents CreateFunction parameters.
 type Code struct {
-	S3Bucket        string `json:"S3Bucket"`
-	S3Key           string `json:"S3Key"`
-	S3ObjectVersion string `json:"S3ObjectVersion"`
-	ZipFile         string `json:"ZipFile"`
+	s3Bucket        string `json:"S3Bucket"`
+	s3Key           string `json:"S3Key"`
+	s3ObjectVersion string `json:"S3ObjectVersion"`
+	//zipFile         string `json:"ZipFile"`
+	repositoryType  string `json:"RepositoryType"`
+	location  string `json:"Location"`
+
+	zipFile []byte `type:"blob"`
+
 }

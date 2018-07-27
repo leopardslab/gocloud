@@ -56,7 +56,7 @@ func Preparedeletefnrequest(params map[string]string, region string, response ma
 
 	canonical_uri := "/2015-03-31/functions/" + params["FunctionName"]
 
-	request, _ := http.NewRequest("DELETE", endpoint + canonical_uri, nil)
+	request, _ := http.NewRequest("DELETE	", endpoint + canonical_uri, nil)
 
 	payload := preparepayload(request)
 	payloadHash := sha256Hasher(payload)
@@ -292,9 +292,10 @@ func PreparePostrequest(params map[string]interface{}, region string, response m
 	canonical_uri := "/2015-03-31/functions/"
 
 	requestparametersjson, _ := json.Marshal(params)
-	requestparametersjsonstring := string(requestparametersjson)
 
-	requestparametersjsonstring = "{}"
+	fmt.Println(string(requestparametersjson))
+
+	requestparametersjsonstring := string(requestparametersjson)
 
 	requestparametersjsonstringbyte := []byte(requestparametersjsonstring)
 
