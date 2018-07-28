@@ -1,4 +1,5 @@
 package lambda
+
 import "fmt"
 import "io/ioutil"
 
@@ -33,7 +34,6 @@ func (lambda *Lambda) GetFunction(request interface{}) (resp interface{}, err er
 	resp = response
 	return resp, err
 }
-
 
 //CreateFunction  Create lambda function.
 func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err error) {
@@ -95,9 +95,9 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 			for deadLetterConfigparamkey, deadLetterConfigparamvalue := range deadLetterConfigparam {
 
 				switch deadLetterConfigparamkey {
-					case "TargetArn":
-						targetArnv := deadLetterConfigparamvalue
-						createfunction.deadLetterConfig.targetArn = targetArnv
+				case "TargetArn":
+					targetArnv := deadLetterConfigparamvalue
+					createfunction.deadLetterConfig.targetArn = targetArnv
 				}
 
 			}
@@ -106,7 +106,7 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 			tracingConfigparam, _ := value.(map[string]string)
 			for tracingConfigparamkey, tracingConfigparamvalue := range tracingConfigparam {
 
-				switch tracingConfigparamkey	 {
+				switch tracingConfigparamkey {
 				case "Mode":
 					modev := tracingConfigparamvalue
 					createfunction.tracingConfig.mode = modev
@@ -120,7 +120,7 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 
 				switch vpcConfigparamkey {
 				case "SubnetIds":
-					subnetIdsv:= vpcConfigparamvalue
+					subnetIdsv := vpcConfigparamvalue
 					createfunction.vpcConfig.subnetIds = subnetIdsv
 
 				case "SecurityGroupIds":
@@ -150,7 +150,7 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 				case "ZipFile":
 					zipFilev, _ := codeparamvalue.(string)
 					fmt.Println(zipFilev)
-					contents,_ := ioutil.ReadFile(zipFilev + ".zip")
+					contents, _ := ioutil.ReadFile(zipFilev + ".zip")
 					createfunction.code.zipFile = contents
 
 				case "Location":
@@ -180,7 +180,6 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 	return resp, err
 }
 
-
 func preparecreatefunctiondict(params map[string]interface{}, createfunction Createfunction) {
 
 	if createfunction.functionName != "" {
@@ -200,7 +199,6 @@ func preparecreatefunctiondict(params map[string]interface{}, createfunction Cre
 	}
 
 	params["Publish"] = createfunction.publish
-
 
 	if createfunction.role != "" {
 		params["Role"] = createfunction.role
@@ -228,38 +226,37 @@ func preparecreatefunctiondict(params map[string]interface{}, createfunction Cre
 		params["DeadLetterConfig"] = param
 	}
 
+	if createfunction.tracingConfig.mode != "" {
+		param := make(map[string]interface{})
+		param["Mode"] = createfunction.tracingConfig.mode
+		params["TracingConfig"] = param
+	}
 
-		if createfunction.tracingConfig.mode != "" {
-			param := make(map[string]interface{})
-			param["Mode"] = createfunction.tracingConfig.mode
-			params["TracingConfig"] = param
+	if createfunction.tracingConfig.mode != "" {
+		param := make(map[string]interface{})
+		param["Mode"] = createfunction.tracingConfig.mode
+		params["TracingConfig"] = param
+	}
+
+	if (len(createfunction.vpcConfig.securityGroupIds) > 0) || (len(createfunction.vpcConfig.subnetIds) > 0) {
+		param := make(map[string]interface{})
+
+		if len(createfunction.vpcConfig.securityGroupIds) > 0 {
+			param["SecurityGroupIds"] = createfunction.vpcConfig.securityGroupIds
 		}
 
-		if createfunction.tracingConfig.mode != "" {
-			param := make(map[string]interface{})
-			param["Mode"] = createfunction.tracingConfig.mode
-			params["TracingConfig"] = param
+		if len(createfunction.vpcConfig.subnetIds) > 0 {
+			param["SubnetIds"] = createfunction.vpcConfig.subnetIds
 		}
 
-		if (len(createfunction.vpcConfig.securityGroupIds) > 0)  || (len(createfunction.vpcConfig.subnetIds) > 0) {
-			param := make(map[string]interface{})
+		params["VpcConfig"] = param
+	}
 
-			if len(createfunction.vpcConfig.securityGroupIds) > 0 {
-				param["SecurityGroupIds"] = createfunction.vpcConfig.securityGroupIds
-			}
-
-			if len(createfunction.vpcConfig.subnetIds) > 0{
-				param["SubnetIds"] = createfunction.vpcConfig.subnetIds
-			}
-
-			params["VpcConfig"] = param
-		}
-
-			preparecode(params ,createfunction)
+	preparecode(params, createfunction)
 
 }
 
-func preparecode(params map[string]interface{}, createfunction Createfunction){
+func preparecode(params map[string]interface{}, createfunction Createfunction) {
 
 	param := make(map[string]interface{})
 
@@ -275,24 +272,19 @@ func preparecode(params map[string]interface{}, createfunction Createfunction){
 		param["S3ObjectVersion"] = createfunction.code.s3ObjectVersion
 	}
 
+	if len(createfunction.code.zipFile) > 0 {
+		param["ZipFile"] = createfunction.code.zipFile
+	}
 
-		if len(createfunction.code.zipFile) > 0  {
-			param["ZipFile"] = createfunction.code.zipFile
-		}
+	if createfunction.code.repositoryType != "" {
+		param["RepositoryType"] = createfunction.code.repositoryType
+	}
 
+	if createfunction.code.location != "" {
+		param["Location"] = createfunction.code.location
+	}
 
-
-		if createfunction.code.repositoryType != "" {
-			param["RepositoryType"] = createfunction.code.repositoryType
-		}
-
-
-			if createfunction.code.location != "" {
-				param["Location"] = createfunction.code.location
-			}
-
-
-		params["Code"] = param
+	params["Code"] = param
 
 }
 

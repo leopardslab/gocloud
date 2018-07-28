@@ -56,21 +56,21 @@ func Preparedeletefnrequest(params map[string]string, region string, response ma
 
 	canonical_uri := "/2015-03-31/functions/" + params["FunctionName"]
 
-	request, _ := http.NewRequest("DELETE	", endpoint + canonical_uri, nil)
+	request, _ := http.NewRequest("DELETE	", endpoint+canonical_uri, nil)
 
 	payload := preparepayload(request)
 	payloadHash := sha256Hasher(payload)
 
-/*
-	requestparam := request.URL.Query()
+	/*
+		requestparam := request.URL.Query()
 
-	request.URL.RawQuery = requestparam.Encode()
+		request.URL.RawQuery = requestparam.Encode()
 
-	fmt.Println(request.URL)
+		fmt.Println(request.URL)
 
-	queryString := request.URL.RawQuery
+		queryString := request.URL.RawQuery
 
-*/
+	*/
 	queryString := ""
 
 	// Go encodes a space as '+' but Amazon requires '%20'. Luckily any '+' in the
@@ -115,7 +115,6 @@ func Preparedeletefnrequest(params map[string]string, region string, response ma
 	return
 }
 
-
 func Preparegetfnrequest(params map[string]string, region string, response map[string]interface{}) (err error) {
 	service := "lambda"
 	method := "GET"
@@ -134,21 +133,21 @@ func Preparegetfnrequest(params map[string]string, region string, response map[s
 
 	canonical_uri := "/2015-03-31/functions/" + params["FunctionName"]
 
-	request, _ := http.NewRequest("GET", endpoint + canonical_uri, nil)
+	request, _ := http.NewRequest("GET", endpoint+canonical_uri, nil)
 
 	payload := preparepayload(request)
 	payloadHash := sha256Hasher(payload)
 
-/*
-	requestparam := request.URL.Query()
+	/*
+		requestparam := request.URL.Query()
 
-	request.URL.RawQuery = requestparam.Encode()
+		request.URL.RawQuery = requestparam.Encode()
 
-	fmt.Println(request.URL)
+		fmt.Println(request.URL)
 
-	queryString := request.URL.RawQuery
+		queryString := request.URL.RawQuery
 
-*/
+	*/
 	queryString := ""
 
 	// Go encodes a space as '+' but Amazon requires '%20'. Luckily any '+' in the

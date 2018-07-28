@@ -26,16 +26,16 @@ type Listfunction struct {
 
 //CreateFunction struct represents aws serverless Create function.
 type Createfunction struct {
-	functionName string `json:"FunctionName"`
-	handler      string `json:"Handler"`
-	kMSKeyArn    string `json:"KMSKeyArn"`
-	memorySize   int    `json:"MemorySize"`
-	publish      bool   `json:"Publish"`
-	role         string `json:"Role"`
-	runtime      string `json:"Runtime"`
-	tags         Tags   `json:"Tags"`
-	description  string `json:"Description"`
-	timeout      int `json:"Timeout"`
+	functionName     string           `json:"FunctionName"`
+	handler          string           `json:"Handler"`
+	kMSKeyArn        string           `json:"KMSKeyArn"`
+	memorySize       int              `json:"MemorySize"`
+	publish          bool             `json:"Publish"`
+	role             string           `json:"Role"`
+	runtime          string           `json:"Runtime"`
+	tags             Tags             `json:"Tags"`
+	description      string           `json:"Description"`
+	timeout          int              `json:"Timeout"`
 	deadLetterConfig DeadLetterConfig `json:"DeadLetterConfig"`
 	environment      Environment      `json:"Environment"`
 	tracingConfig    TracingConfig    `json:"TracingConfig"`
@@ -80,9 +80,8 @@ type Code struct {
 	s3Key           string `json:"S3Key"`
 	s3ObjectVersion string `json:"S3ObjectVersion"`
 	//zipFile         string `json:"ZipFile"`
-	repositoryType  string `json:"RepositoryType"`
-	location  string `json:"Location"`
+	repositoryType string `json:"RepositoryType"`
+	location       string `json:"Location"`
 
 	zipFile []byte `type:"blob"`
-
 }
