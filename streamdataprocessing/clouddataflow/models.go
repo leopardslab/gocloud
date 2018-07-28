@@ -120,10 +120,15 @@ type Environment struct {
 }
 
 type UserAgent struct {
-	Name      string  `json:"name"`
-	support   Support `json:"support"`
-	BuildDate string  `json:"build.date"`
-	Version   string  `json:"version"`
+	Name string `json:"name"`
+	support Support `json:"support"`
+	BuildDate string `json:"build.date"`
+	Version   string `json:"version"`
+}
+
+type Support struct {
+	Status string `json:"status"`
+	URL    string `json:"url"`
 }
 
 type Version struct {
@@ -206,9 +211,4 @@ type WorkerPools struct {
 	TeardownPolicy              string              `json:"teardownPolicy"`
 	WorkerHarnessContainerImage string              `json:"workerHarnessContainerImage"`
 	Zone                        string              `json:"zone"`
-}
-
-type Support struct {
-	Status string `json:"status"`
-	URL    string `json:"url"`
 }
