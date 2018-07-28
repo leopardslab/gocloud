@@ -120,12 +120,10 @@ type Environment struct {
 }
 
 type UserAgent struct {
-	Name string `json:"name"`
-
-	support Support `json:"support"`
-
-	BuildDate string `json:"build.date"`
-	Version   string `json:"version"`
+	Name      string  `json:"name"`
+	support   Support `json:"support"`
+	BuildDate string  `json:"build.date"`
+	Version   string  `json:"version"`
 }
 
 type Version struct {
