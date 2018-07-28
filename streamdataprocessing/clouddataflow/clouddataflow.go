@@ -8,7 +8,6 @@ import (
 	"net/http"
 )
 
-
 //DescribeStream Describe Stream
 func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp interface{}, err error) {
 
@@ -44,7 +43,6 @@ func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp in
 	resp = describestreamresponse
 	return resp, err
 }
-
 
 //ListStream ListStream
 func (clouddataflow *Clouddataflow) ListStream(request interface{}) (resp interface{}, err error) {
@@ -94,150 +92,246 @@ func (clouddataflow *Clouddataflow) ListStream(request interface{}) (resp interf
 	return resp, err
 }
 
-
 //DeleteStream Delete Stream
 func (clouddataflow *Clouddataflow) DeleteStream(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-/*
-
 //CreateStream Create Stream
 func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp interface{}, err error) {
 
- param := request.(map[string]interface{})
- var Project string
- var option Createstream
+	param := request.(map[string]interface{})
+	var Project string
+	var option Createstream
 
- for key, value := range param {
-	 switch key {
+	for key, value := range param {
+		switch key {
 
-	 case "ProjectId":
-		 projectIdv, _ := value.(string)
-		 option.projectId = projectIdv
+		case "ProjectID":
+			projectIdv, _ := value.(string)
+			option.ProjectID = projectIdv
 
-	 case "Id":
-		 idv, _ := value.(string)
-		 option.id = idv
+		case "ClientRequestID":
+			clientRequestIDv, _ := value.(string)
+			option.ClientRequestID = clientRequestIDv
 
-	 case "Name":
-		 nameV, _ := value.(string)
-		 option.name = nameV
+		case "ID":
+			idv, _ := value.(string)
+			option.ID = idv
 
-	 case "Type":
-		 typev, _ := value.(string)
-		 option.type = typeV
+		case "Name":
+			nameV, _ := value.(string)
+			option.Name = nameV
 
-	 case "CurrentState":
-		 currentStatev, _ := value.([]string)
-		 option.currentState = currentStatev
+		case "Type":
+			typev, _ := value.(string)
+			option.Type = typeV
 
-	 case "CurrentStateTime":
-		 currentStateTimev, _ := value.(string)
-		 option.currentStateTime = currentStateTimev
+		case "CurrentState":
+			currentStatev, _ := value.(string)
+			option.CreateTime = currentStatev
 
-	 case "RequestedState":
-		 requestedStatev, _ := value.(string)
-		 option.requestedState = requestedStatev
+		case "CurrentStateTime":
+			currentStateTimev, _ := value.(string)
+			option.CurrentStateTime = currentStateTimev
 
-	 case "CreateTime":
-		 createTimev, _ := value.(string)
-		 option.createTimev = createTimev
-		 option.createTimev = createTimev
+		case "RequestedState":
+			requestedStatev, _ := value.(string)
+			option.RequestedState = requestedStatev
 
-	 case "ReplaceJobId":
-		 replaceJobIdv, _ := value.(string)
-		 option.replaceJobId = replaceJobIdv
+		case "CreateTime":
+			createTimev, _ := value.(string)
+			option.CreateTime = createTimev
+			option.CreateTime = createTimev
 
-	 case "Location":
-		 locationv, _ := value.(string)
-		 option.location = locationv
+		case "ReplaceJobId":
+			replaceJobIdv, _ := value.(string)
+			option.ReplaceJobId = replaceJobIdv
 
-	 }
- }
+		case "ReplacedByJobID":
+			replacedByJobIDv, _ := value.(string)
+			option.ReplacedByJobID = replacedByJobIDv
 
- createstreamjsonmap := make(map[string]interface{})
+		case "Location":
+			locationv, _ := value.(string)
+			option.Location = locationv
 
- createstreamdictnoaryconvert(option, createstreamjsonmap)
+		case "TempFiles":
+			tempFilesv, _ := value.([]string)
+			option.TempFiles = tempFilesv
 
- createstreamjson, _ := json.Marshal(createstreamjsonmap)
+		case "StageStates":
 
- createstreamjsonstring := string(createstreamjson)
+			stageStatesparam, _ := value.([]map[string]interface{})
 
- var createstreamjsonstringbyte = []byte(createstreamjsonstring)
+			for i := 0; i < len(stageStatesparam); i++ {
+				var stageState StageStates
+				for stageStatesparamkey, stageStatesparamvalue := range stageStatesparam[i] {
+					switch key {
 
- url := "https://www.googleapis.com/dns/v1/projects/" + Project + "/managedZones"
+					case "CurrentStateTime":
+						currentStateTimev, _ := stageStatesparamvalue.(string)
+						stageState.CurrentStateTime = currentStateTimev
 
- client := googleauth.SignJWT()
+					case "ExecutionStageName":
+						executionStageNamev, _ := stageStatesparamvalue.(string)
+						stageState.CurrentStateTime = executionStageNamev
 
- createstreamrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(createstreamjsonstringbyte))
+					case "ExecutionStageState":
+						executionStageStatev, _ := stageStatesparamvalue.(string)
+						stageState.ExecutionStageState = executionStageStatev
 
- createstreamrequest.Header.Set("Content-Type", "application/json")
+					}
 
- createstreamresp, err := client.Do(createstreamrequest)
+				}
+				option.stageStates = append(option.stageStates, stageState)
+			}
 
- defer createstreamresp.Body.Close()
+		case "Environment":
 
- body, err := ioutil.ReadAll(createstreamresp.Body)
+			environmentparam, _ := value.([]map[string]interface{})
 
- createstreamresponse := make(map[string]interface{})
- createstreamresponse["status"] = createstreamrresp.StatusCode
- createstreamresponse["body"] = string(body)
- resp = createstreamresponse
- return resp, err
+			for environmentparamkey, environmentparamvalue := range environmentparam {
+
+				switch environmentparamkey {
+
+				case "Version":
+
+					versionparam, _ := environmentparamvalue.([]map[string]interface{})
+
+					for versionparamkey, versionparamvalue := range versionparam {
+						switch versionparamkey {
+
+						case "Major":
+							majorv, _ := versionparamvalue.(string)
+							option.environment.version.Major = majorv
+
+						case "JobType":
+							jobTypev, _ := versionparamvalue.(string)
+							option.environment.version.JobType = jobTypev
+						}
+					}
+
+				case "UserAgent":
+
+					useragentparam, _ := environmentparamvalue.(map[string]interface{})
+
+					for useragentparamkey, useragentparamvalue := range useragentparam {
+
+						switch useragentparamkey {
+
+						case "Name":
+							namev, _ := useragentparamvalue.(string)
+							option.environment.userAgent.Name = namev
+
+						case "BuildDate":
+							buildDatev, _ := useragentparamvalue.(string)
+							option.environment.userAgent.BuildDate = buildDatev
+
+						case "Version":
+							versionv, _ := useragentparamvalue.(string)
+							option.environment.userAgent.Version = versionv
+
+						case "Support":
+							supportparam, _ := useragentparamvalue.(map[string]interface{})
+
+							for supportparamkey, supportparamvalue := range supportparam {
+
+								switch useragentparamkey {
+
+								case "Status":
+									statusv, _ := supportparamvalue.(string)
+									option.environment.userAgent.support.Status = statusv
+
+								case "URL":
+									urlv, _ := supportparamvalue.(string)
+									option.environment.userAgent.support.URL = urlv
+
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+
+			//end of switch key
+		}
+	} //end of parse
+
+	createstreamjsonmap := make(map[string]interface{})
+
+	createstreamdictnoaryconvert(option, createstreamjsonmap)
+
+	createstreamjson, _ := json.Marshal(createstreamjsonmap)
+
+	createstreamjsonstring := string(createstreamjson)
+
+	var createstreamjsonstringbyte = []byte(createstreamjsonstring)
+
+	url := "https://www.googleapis.com/dns/v1/projects/" + Project + "/managedZones"
+
+	client := googleauth.SignJWT()
+
+	createstreamrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(createstreamjsonstringbyte))
+
+	createstreamrequest.Header.Set("Content-Type", "application/json")
+
+	createstreamresp, err := client.Do(createstreamrequest)
+
+	defer createstreamresp.Body.Close()
+
+	body, err := ioutil.ReadAll(createstreamresp.Body)
+
+	createstreamresponse := make(map[string]interface{})
+	createstreamresponse["status"] = createstreamrresp.StatusCode
+	createstreamresponse["body"] = string(body)
+	resp = createstreamresponse
+	return resp, err
 }
 
-func createstreamdictnoaryconvert(option Createstream ,createstreamjsonmap map[string]interface{} ){
+func createstreamdictnoaryconvert(option Createstream, createstreamjsonmap map[string]interface{}) {
 
-	if option.id != "" {
-		createstreamjsonmap["id"] = option.id
+	if option.Id != "" {
+		createstreamjsonmap["id"] = option.Id
 	}
 
-	if option.projectId != "" {
-		createstreamjsonmap["projectId"] = option.projectId
+	if option.ProjectId != "" {
+		createstreamjsonmap["projectId"] = option.ProjectId
 	}
 
-	if option.name != "" {
-		createstreamjsonmap["name"] = option.name
+	if option.Name != "" {
+		createstreamjsonmap["name"] = option.Name
 	}
 
 	if option.Type != "" {
 		createstreamjsonmap["type"] = option.Type
 	}
 
-	if option.currentState != "" {
-		createstreamjsonmap["currentState"] = option.currentState
+	if option.CurrentState != "" {
+		createstreamjsonmap["currentState"] = option.CurrentState
 	}
 
-	if option.currentStateTime != "" {
-		createstreamjsonmap["currentStateTime"] = option.currentStateTime
+	if option.CurrentStateTime != "" {
+		createstreamjsonmap["currentStateTime"] = option.CurrentStateTime
 	}
 
-	if option.currentStateTime != "" {
-		createstreamjsonmap["currentStateTime"] = option.currentStateTime
+	if option.RequestedState != "" {
+		createstreamjsonmap["requestedState"] = option.RequestedState
 	}
 
-	if option.requestedState != "" {
-		createstreamjsonmap["requestedState"] = option.requestedState
+	if option.CreateTime != "" {
+		createstreamjsonmap["createTime"] = option.CreateTime
 	}
 
-	if option.requestedState != "" {
-		createstreamjsonmap["requestedState"] = option.requestedState
+	if option.ReplaceJobId != "" {
+		createstreamjsonmap["replaceJobId"] = option.ReplaceJobId
 	}
 
-	if option.createTime != "" {
-		createstreamjsonmap["createTime"] = option.createTime
-	}
-
-	if option.replaceJobId != "" {
-		createstreamjsonmap["replaceJobId"] = option.replaceJobId
-	}
-
-	if option.location != "" {
-		createstreamjsonmap["location"] = option.location
+	if option.Location != "" {
+		createstreamjsonmap["location"] = option.Location
 	}
 
 }
-
-*/
