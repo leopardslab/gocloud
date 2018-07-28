@@ -6,7 +6,15 @@ import (
 	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
+
+
+const (
+	UnixDate = "Mon Jan _2 15:04:05 MST 2006"
+	RFC3339  = "2006-01-02T15:04:05Z07:00"
+)
+
 
 //DescribeStream Describe Stream
 func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp interface{}, err error) {
@@ -102,7 +110,7 @@ func (clouddataflow *Clouddataflow) DeleteStream(request interface{}) (resp inte
 func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
-	var Project string
+	var View string
 	var option Createstream
 
 	for key, value := range param {
@@ -111,6 +119,10 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
 		case "ProjectID":
 			projectIdv, _ := value.(string)
 			option.ProjectID = projectIdv
+
+		case "View":
+			viewv, _ := value.(string)
+			View = viewv
 
 		case "ClientRequestID":
 			clientRequestIDv, _ := value.(string)
@@ -135,6 +147,7 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
 		case "CurrentStateTime":
 			currentStateTimev, _ := value.(string)
 			option.CurrentStateTime = currentStateTimev
+			option.CurrentStateTime = time.Now().UTC().Format(time.RFC3339)
 
 		case "RequestedState":
 			requestedStatev, _ := value.(string)
@@ -143,7 +156,7 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
 		case "CreateTime":
 			createTimev, _ := value.(string)
 			option.CreateTime = createTimev
-			option.CreateTime = createTimev
+			option.CreateTime = time.Now().UTC().Format(time.RFC3339)
 
 		case "ReplaceJobId":
 			replaceJobIdv, _ := value.(string)
@@ -267,15 +280,35 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
 
 	createstreamjson, _ := json.Marshal(createstreamjsonmap)
 
+	fmt.Println("Json : \n",string(createstreamjson))
+
 	createstreamjsonstring := string(createstreamjson)
 
 	var createstreamjsonstringbyte = []byte(createstreamjsonstring)
 
-	url := "https://www.googleapis.com/dns/v1/projects/" + Project + "/managedZones"
+	url := "https://dataflow.googleapis.com/v1b3/projects/" + option.ProjectID + "/jobs"
 
 	client := googleauth.SignJWT()
 
 	createstreamrequest, err := http.NewRequest("POST", url, bytes.NewBuffer(createstreamjsonstringbyte))
+
+
+	createstreamrequestparam := createstreamrequest.URL.Query()
+
+	if View != "" {
+		createstreamrequestparam.Add("view", View)
+	}
+
+	if option.Location != "" {
+		createstreamrequestparam.Add("location", option.Location)
+	}
+
+	if option.ReplaceJobId != "" {
+		createstreamrequestparam.Add("replaceJobId", option.ReplaceJobId)
+	}
+
+	createstreamrequest.URL.RawQuery = createstreamrequestparam.Encode()
+
 
 	createstreamrequest.Header.Set("Content-Type", "application/json")
 
@@ -338,17 +371,6 @@ func createstreamdictnoaryconvert(option Createstream, createstreamjsonmap map[s
 	prepareEnvironment(option, createstreamjsonmap)
 }
 
-type UserAgent struct {
-	Name      string  `json:"name"`
-	support   Support `json:"support"`
-	BuildDate string  `json:"build.date"`
-	Version   string  `json:"version"`
-}
-
-type Support struct {
-	Status string `json:"status"`
-	URL    string `json:"url"`
-}
 
 func prepareEnvironment(option Createstream, createstreamjsonmap map[string]interface{}) {
 
