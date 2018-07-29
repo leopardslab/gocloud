@@ -132,7 +132,7 @@ func TestAttachLoadBalancerBuilder(t *testing.T) {
 	attach, err := NewAttachLoadBalancerBuilder().
 		LoadBalancerID("lb-m5e7ldi4obgcya3bju3wu").
 		BackendServers("[{'ServerId':'i-m5e0cjxe9c7iulv9znvw','Weight':'100','Type':'ecs'}," +
-			"{'ServerId':'i-m5efh52hzdkyjoaafwc0','Weight':'100','Type':'ecs'}]").
+		"{'ServerId':'i-m5efh52hzdkyjoaafwc0','Weight':'100','Type':'ecs'}]").
 		Build()
 	if err != nil {
 		t.Errorf("AttachNodeWithLoadBalancer Test Fail: %s", err)
@@ -168,7 +168,7 @@ func TestDetachLoadBalancerBuilder(t *testing.T) {
 		RegionID("cn-qingdao").
 		LoadBalancerID("lb-m5eemmwmtmt4l6jf73d72").
 		BackendServers("[{'ServerId':'i-m5ecx5g9m0cflv1k83zu','Type':'ecs'}," +
-			"{'ServerId':'i-m5eahbbwqxawpj1opww9','Type':'ecs'}]").
+		"{'ServerId':'i-m5eahbbwqxawpj1opww9','Type':'ecs'}]").
 		Build()
 	if err != nil {
 		t.Errorf("DetachnodewithLoadBalancer Test Fail: %s", err)
@@ -180,4 +180,78 @@ func TestDetachLoadBalancerBuilder(t *testing.T) {
 		return
 	}
 	t.Logf("Ali LoadBalancer is detached with node successfully.")
+}
+
+func TestParseCreateLoadBalancerResp(t *testing.T) {
+	var alilb Aliloadbalancer
+	create, err := NewCreateLoadBalancerBuilder().
+		RegionID("cn-qingdao").
+		LoadBalancerName("abc").
+		AddressType("internet").
+		InternetChargeType("paybytraffic").
+		Build()
+	if err != nil {
+		t.Errorf("CreateLoadBalancer Test Fail: %s", err)
+		return
+	}
+	resp, err := alilb.CreateLoadBalancer(create)
+	if err != nil {
+		t.Errorf("CreateLoadBalancer Test Fail: %s", err)
+		return
+	}
+	createLoadBalancerResp, err := ParseCreateLoadBalancerResp(resp)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	t.Logf("%+v", createLoadBalancerResp)
+}
+
+func TestParseAttachLoadBalancerResp(t *testing.T) {
+	var alilb Aliloadbalancer
+	attach, err := NewAttachLoadBalancerBuilder().
+		LoadBalancerID("lb-m5eg5vvdshdzix98evkk0").
+		BackendServers("[{'ServerId':'i-m5eggpwhjezbnjuorqf5','Weight':'100','Type':'ecs'}," +
+		"{'ServerId':'i-m5e5nqgrrrhte615lmkl','Weight':'100','Type':'ecs'}]").
+		Build()
+	if err != nil {
+		t.Errorf("AttachNodeWithLoadBalancer Test Fail: %s", err)
+		return
+	}
+	resp, err := alilb.AttachNodeWithLoadBalancer(attach)
+	if err != nil {
+		t.Errorf("AttachNodeWithLoadBalancer Test Fail: %s", err)
+		return
+	}
+	attachLoadBalancerResp, err := ParseAttachLoadBalancerResp(resp)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	t.Logf("%+v", attachLoadBalancerResp)
+}
+
+func TestParseDetachLoadBalancerResp(t *testing.T) {
+	var alilb Aliloadbalancer
+	detach, err := NewDetachLoadBalancerBuilder().
+		RegionID("cn-qingdao").
+		LoadBalancerID("lb-m5eg5vvdshdzix98evkk0").
+		BackendServers("[{'ServerId':'i-m5eggpwhjezbnjuorqf5','Type':'ecs'}," +
+		"{'ServerId':'i-m5e5nqgrrrhte615lmkl','Type':'ecs'}]").
+		Build()
+	if err != nil {
+		t.Errorf("DetachnodewithLoadBalancer Test Fail: %s", err)
+		return
+	}
+	resp, err := alilb.DetachNodeWithLoadBalancer(detach)
+	if err != nil {
+		t.Errorf("DetachnodewithLoadBalancer Test Fail: %s", err)
+		return
+	}
+	detachLoadBalancerResp, err := ParseDetachLoadBalancerResp(resp)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	t.Logf("%+v", detachLoadBalancerResp)
 }

@@ -5,10 +5,13 @@ import (
 )
 
 type CreateNodeResp struct {
+	StatusCode int
 	InstanceId string
 }
 
-func ParseCreateNodeResp(body interface{}) (createNodeResp CreateNodeResp, err error) {
-	err = json.Unmarshal([]byte(body.(string)), &createNodeResp)
+func ParseCreateNodeResp(resp interface{}) (createNodeResp CreateNodeResp, err error) {
+	response := resp.(map[string]interface{})
+	err = json.Unmarshal([]byte(response["body"].(string)), &createNodeResp)
+	createNodeResp.StatusCode = response["status"].(int)
 	return
 }
