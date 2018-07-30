@@ -3,7 +3,7 @@ package clouddataflow
 import "testing"
 import "fmt"
 
-/*
+
 func TestListStream(t *testing.T) {
 	var clouddataflow Clouddataflow
 
@@ -24,12 +24,12 @@ func TestListStream(t *testing.T) {
 func TestDescribeStream(t *testing.T) {
 	var clouddataflow Clouddataflow
 
-	liststream := map[string]string{
+	describedtream := map[string]string{
 		"Project": "gocloud-206919",
 		"JobId":   "2018-07-27_08_37_46-11774589915372519551",
 	}
 
-	resp, err := clouddataflow.DescribeStream(liststream)
+	resp, err := clouddataflow.DescribeStream(describedtream)
 
 	if err != nil {
 		t.Errorf("Test Fail")
@@ -39,9 +39,9 @@ func TestDescribeStream(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-*/
 
-/*
+
+
 func TestCreateStream(t *testing.T) {
 	var clouddataflow Clouddataflow
 
@@ -130,7 +130,7 @@ func TestCreateStream(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-*/
+
 
 func TestUpdateStream(t *testing.T) {
 

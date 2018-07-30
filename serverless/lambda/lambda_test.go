@@ -8,7 +8,7 @@ func init() {
 	awsAuth.LoadConfig()
 }
 
-/*
+
 func TestDeleteFunction(t *testing.T) {
 
 	var lambda Lambda
@@ -31,7 +31,7 @@ func TestDeleteFunction(t *testing.T) {
 }
 
 
-*/
+
 
 func TestCreateFunction(t *testing.T) {
 
@@ -41,7 +41,7 @@ func TestCreateFunction(t *testing.T) {
 		"ZipFile": "gocloud-ecce2422-f215-4d44-83a8-8361b457c5d9",
 	}
 
-	deletedunction := map[string]interface{}{
+	createfunction := map[string]interface{}{
 		"Region":       "us-east-1",
 		"FunctionName": "gocloud3",
 		"Role":         "arn:aws:iam::478991680879:role/service-role/bokya",
@@ -50,7 +50,7 @@ func TestCreateFunction(t *testing.T) {
 		"Code":         code,
 	}
 
-	resp, err := lambda.CreateFunction(deletedunction)
+	resp, err := lambda.CreateFunction(createfunction)
 
 	if err != nil {
 		t.Errorf("Test Fail")
@@ -61,7 +61,7 @@ func TestCreateFunction(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-/*
+
 func TestListFunction(t *testing.T) {
 
 	var lambda Lambda
@@ -82,7 +82,7 @@ func TestListFunction(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-*/
+
 
 func TestGetFunction(t *testing.T) {
 
@@ -104,7 +104,7 @@ func TestGetFunction(t *testing.T) {
 	fmt.Println(response["body"])
 }
 
-/*
+
 func TestDeleteFunction(t *testing.T) {
 
 	var lambda Lambda
@@ -125,5 +125,3 @@ func TestDeleteFunction(t *testing.T) {
 
 	fmt.Println(response["body"])
 }
-
-*/

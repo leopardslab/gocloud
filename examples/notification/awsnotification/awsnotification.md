@@ -52,7 +52,7 @@ resp , err := amazoncloud.DeleteTopic(deletetopic)
   fmt.Println(response["body"])
 ```
 
-### Start instance
+### List Topic
 
 ```js
 
