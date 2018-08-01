@@ -211,3 +211,36 @@ func TestStopTaskBuilder(t *testing.T) {
 	}
 	t.Logf("Ali container task is stoped successfully.")
 }
+
+func TestParseCreateClusterResp(t *testing.T) {
+	var aliContainer Alicontainer
+	create, err := NewCreateClusterBuilder().
+		Password("TestPwd123").
+		RegionID("cn-beijing").
+		InstanceType("ecs.n1.small").
+		Name("my-test-cluster").
+		Size(1).NetworkMode("vpc").
+		VPCID("vpc-2ze578wokbm1ykyr7d8w6").
+		VSwitchID("vsw-2zeryg1zeofqj0u7o6buw").
+		SubnetCIDR("172.28.1.0/24").
+		DataDiskCategory("cloud_ssd").
+		DataDiskSize(40).NeedSLB(false).
+		ECSImageID("centos_7_04_64_20G_alibase_201701015").
+		IOOptimized("true").ReleaseEipFlag(false).
+		Build()
+	if err != nil {
+		t.Errorf("CreateCluster Test Fail: %s", err)
+		return
+	}
+	resp, err := aliContainer.CreateCluster(create)
+	if err != nil {
+		t.Errorf("CreateCluster Test Fail: %s", err)
+		return
+	}
+	createClusterResp, err := ParseCreateClusterResp(resp)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	t.Logf("%+v", createClusterResp)
+}
