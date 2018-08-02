@@ -129,12 +129,7 @@ func TestParseCreateBareMetalResp(t *testing.T) {
 		t.Errorf("CreateBareMetal Test Fail: %s", err)
 		return
 	}
-	response := resp.(map[string]interface{})
-	if response["status"] != 200 {
-		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
-		return
-	}
-	createBareMetalResp, err := ParseCreateBareMetalResp(response["body"])
+	createBareMetalResp, err := ParseCreateBareMetalResp(resp)
 	if err != nil {
 		t.Errorf("CreateBareMetal Test Fail: %s", err)
 		return
@@ -149,19 +144,13 @@ func TestParseListBareMetalResp(t *testing.T) {
 		t.Errorf("ListBareMetal Test Fail: %s", err)
 		return
 	}
-	response := resp.(map[string]interface{})
-	if response["status"] != 200 {
-		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
-		return
-	}
-	t.Logf("response body: %s\n", response["body"])
-	listBareMetalResp, err := ParseListBareMetalResp(response["body"])
+	listBareMetalResp, err := ParseListBareMetalResp(resp)
 	if err != nil {
 		t.Errorf("CreateNode Test Fail: %s", err)
 		return
 	}
 	t.Logf("Vultr BareMetal is listed successfully.")
-	for _, bareMetal := range listBareMetalResp {
+	for _, bareMetal := range listBareMetalResp.BareMetalSlice {
 		t.Logf("%+v", bareMetal)
 	}
 }

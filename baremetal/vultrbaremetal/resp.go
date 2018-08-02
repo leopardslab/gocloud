@@ -12,18 +12,18 @@ type V6Network struct {
 
 type BareMetalInfo struct {
 	SUBID           string
-	OS              string  `json:"os"`
-	RAM             string  `json:"ram"`
-	Disk            string  `json:"disk"`
-	MainIP          string  `json:"main_ip"`
-	CPUCount        float64 `json:"cpu_count"`
-	Location        string  `json:"location"`
+	OS              string      `json:"os"`
+	RAM             string      `json:"ram"`
+	Disk            string      `json:"disk"`
+	MainIP          string      `json:"main_ip"`
+	CPUCount        float64     `json:"cpu_count"`
+	Location        string      `json:"location"`
 	DCID            string
-	DefaultPassword string `json:"default_password"`
-	DateCreated     string `json:"date_created"`
-	Status          string `json:"status"`
-	NetmaskV4       string `json:"netmask_v4"`
-	GatewayV4       string `json:"gateway_v4"`
+	DefaultPassword string      `json:"default_password"`
+	DateCreated     string      `json:"date_created"`
+	Status          string      `json:"status"`
+	NetmaskV4       string      `json:"netmask_v4"`
+	GatewayV4       string      `json:"gateway_v4"`
 	METALPLANID     float64
 	V6Networks      []V6Network `json:"v6_networks"`
 	Label           string      `json:"label"`
@@ -33,17 +33,27 @@ type BareMetalInfo struct {
 }
 
 type CreateBareMetalResp struct {
-	SUBID string
+	StatusCode int
+	SUBID      string
 }
 
-func ParseCreateBareMetalResp(body interface{}) (createBareMetalResp CreateBareMetalResp, err error) {
-	err = json.Unmarshal([]byte(body.(string)), &createBareMetalResp)
+type ListBareMetalResp struct {
+	StatusCode     int
+	BareMetalSlice []BareMetalInfo
+}
+
+func ParseCreateBareMetalResp(resp interface{}) (createBareMetalResp CreateBareMetalResp, err error) {
+	response := resp.(map[string]interface{})
+	err = json.Unmarshal([]byte(response["body"].(string)), &createBareMetalResp)
+	createBareMetalResp.StatusCode = response["status"].(int)
 	return
 }
 
-func ParseListBareMetalResp(body interface{}) (listBareMetalResp []BareMetalInfo, err error) {
+func ParseListBareMetalResp(resp interface{}) (listBareMetalResp ListBareMetalResp, err error) {
+	response := resp.(map[string]interface{})
 	respMap := make(map[string]interface{})
-	err = json.Unmarshal([]byte(body.(string)), &respMap)
+	listBareMetalResp.StatusCode = response["status"].(int)
+	err = json.Unmarshal([]byte(response["body"].(string)), &respMap)
 	for _, bareMetal := range respMap {
 		bareMetalInfo := &BareMetalInfo{}
 		for key, value := range bareMetal.(map[string]interface{}) {
@@ -127,7 +137,7 @@ func ParseListBareMetalResp(body interface{}) (listBareMetalResp []BareMetalInfo
 				break
 			}
 		}
-		listBareMetalResp = append(listBareMetalResp, *bareMetalInfo)
+		listBareMetalResp.BareMetalSlice = append(listBareMetalResp.BareMetalSlice, *bareMetalInfo)
 	}
 	return
 }

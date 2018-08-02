@@ -272,12 +272,7 @@ func TestParseCreateDiskResp(t *testing.T) {
 		t.Errorf("CreateDisk Test Fail: %s", err)
 		return
 	}
-	response := resp.(map[string]interface{})
-	if response["status"] != 200 {
-		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
-		return
-	}
-	createDiskResp, err := ParseCreateDiskResp(response["body"])
+	createDiskResp, err := ParseCreateDiskResp(resp)
 	if err != nil {
 		t.Errorf("CreateDisk Test Fail: %s", err)
 		return

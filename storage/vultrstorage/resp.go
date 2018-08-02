@@ -3,10 +3,13 @@ package vultrstorage
 import "encoding/json"
 
 type CreateDiskResp struct {
-	SUBID string `json:"SUBID"`
+	StatusCode int
+	SUBID      string `json:"SUBID"`
 }
 
-func ParseCreateDiskResp(body interface{}) (createDiskResp CreateDiskResp, err error) {
-	err = json.Unmarshal([]byte(body.(string)), &createDiskResp)
+func ParseCreateDiskResp(resp interface{}) (createDiskResp CreateDiskResp, err error) {
+	response := resp.(map[string]interface{})
+	err = json.Unmarshal([]byte(response["body"].(string)), &createDiskResp)
+	createDiskResp.StatusCode = response["status"].(int)
 	return
 }

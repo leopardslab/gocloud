@@ -152,14 +152,8 @@ func TestParseListDnsResp(t *testing.T) {
 		t.Errorf("ListDns Test Fail: %s", err)
 		return
 	}
-	response := resp.(map[string]interface{})
-	if response["status"] != 200 {
-		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
-		return
-	}
-	t.Logf("response body: %s\n", response["body"])
-	listDnsResp, err := ParseListDnsResp(response["body"])
-	for _, dns := range listDnsResp {
+	listDnsResp, err := ParseListDnsResp(resp)
+	for _, dns := range listDnsResp.DnsSlice {
 		t.Logf("%+v\n", dns)
 	}
 }
