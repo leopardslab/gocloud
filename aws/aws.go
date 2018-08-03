@@ -12,6 +12,8 @@ import (
 	amazonsimplenotification "github.com/cloudlibz/gocloud/notification/amazonsimplenotification"
 	lambda "github.com/cloudlibz/gocloud/serverless/lambda"
 	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
+	kinesis "github.com/cloudlibz/gocloud/streamdataprocessing/kinesis"
+
 )
 
 //AWS struct reperents amazon cloud provider.
@@ -26,6 +28,7 @@ type AWS struct {
 	awsmachinelearning.Awsmachinelearning
 	amazonsimplenotification.Amazonsimplenotification
 	redshift.Redshift
+	kinesis.Kinesis
 }
 
 func (*AWS) Compute() gocloudinterface.Compute {
@@ -66,4 +69,8 @@ func (*AWS) Analytics() gocloudinterface.Analytics {
 
 func (*AWS) Notification() gocloudinterface.Notification {
 	return &amazonsimplenotification.Amazonsimplenotification{}
+}
+
+func (*AWS) Streamdataprocessing() gocloudinterface.Streamdataprocessing {
+	return &kinesis.Kinesis{}
 }
