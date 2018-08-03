@@ -34,7 +34,7 @@ func TestCreateFunction(t *testing.T) {
 		"ZipFile": "gocloud-ecce2422-f215-4d44-83a8-8361b457c5d9",
 	}
 
-	deletedunction := map[string]interface{}{
+	createfunction := map[string]interface{}{
 		"Region":       "us-east-1",
 		"FunctionName": "gocloud3",
 		"Role":         "arn:aws:iam::478991680879:role/service-role/bokya",
