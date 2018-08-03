@@ -149,7 +149,6 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 
 				case "ZipFile":
 					zipFilev, _ := codeparamvalue.(string)
-					fmt.Println(zipFilev)
 					contents, _ := ioutil.ReadFile(zipFilev + ".zip")
 					createfunction.code.zipFile = contents
 
@@ -171,8 +170,6 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 	preparecreatefunctiondict(params, createfunction)
 
 	response := make(map[string]interface{})
-
-	fmt.Println("params", params)
 
 	err = PreparePostrequest(params, region, response)
 

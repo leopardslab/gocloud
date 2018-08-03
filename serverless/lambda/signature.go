@@ -61,16 +61,6 @@ func Preparedeletefnrequest(params map[string]string, region string, response ma
 	payload := preparepayload(request)
 	payloadHash := sha256Hasher(payload)
 
-	/*
-		requestparam := request.URL.Query()
-
-		request.URL.RawQuery = requestparam.Encode()
-
-		fmt.Println(request.URL)
-
-		queryString := request.URL.RawQuery
-
-	*/
 	queryString := ""
 
 	// Go encodes a space as '+' but Amazon requires '%20'. Luckily any '+' in the
@@ -138,16 +128,6 @@ func Preparegetfnrequest(params map[string]string, region string, response map[s
 	payload := preparepayload(request)
 	payloadHash := sha256Hasher(payload)
 
-	/*
-		requestparam := request.URL.Query()
-
-		request.URL.RawQuery = requestparam.Encode()
-
-		fmt.Println(request.URL)
-
-		queryString := request.URL.RawQuery
-
-	*/
 	queryString := ""
 
 	// Go encodes a space as '+' but Amazon requires '%20'. Luckily any '+' in the
@@ -223,8 +203,6 @@ func Preparegetrequest(params map[string]string, region string, response map[str
 
 	request.URL.RawQuery = requestparam.Encode()
 
-	fmt.Println(request.URL)
-
 	queryString := request.URL.RawQuery
 
 	// Go encodes a space as '+' but Amazon requires '%20'. Luckily any '+' in the
@@ -291,11 +269,7 @@ func PreparePostrequest(params map[string]interface{}, region string, response m
 	canonical_uri := "/2015-03-31/functions/"
 
 	requestparametersjson, _ := json.Marshal(params)
-
-	fmt.Println(string(requestparametersjson))
-
 	requestparametersjsonstring := string(requestparametersjson)
-
 	requestparametersjsonstringbyte := []byte(requestparametersjsonstring)
 
 	request, _ := http.NewRequest("POST", endpoint+canonical_uri, bytes.NewBuffer(requestparametersjsonstringbyte))

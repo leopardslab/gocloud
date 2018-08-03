@@ -16,43 +16,29 @@ func TestListStream(t *testing.T) {
 		"Region": "us-east-1",
 	}
 
-	resp, err := kinesis.ListStream(liststream)
+	_, err := kinesis.ListStream(liststream)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-	response := resp.(map[string]interface{})
-
-	fmt.Println("###################\n")
-	fmt.Println(response["body"])
-	fmt.Println("###################\n")
-
 }
 
-/*
 func TestCreateStream(t *testing.T) {
 
 	var kinesis Kinesis
 
 	createstream := map[string]interface{}{
-		"Region":    "us-east-1",
-		"StreamName" : "gocloud",
-		"ShardCount" : 1,
+		"Region":     "us-east-1",
+		"StreamName": "gocloud",
+		"ShardCount": 1,
 	}
 
-	resp, err := kinesis.CreateStream(createstream)
+	_, err := kinesis.CreateStream(createstream)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-	response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
 }
-
-*/
 
 func TestDescribeStream(t *testing.T) {
 
@@ -63,15 +49,11 @@ func TestDescribeStream(t *testing.T) {
 		"StreamName": "gocloud",
 	}
 
-	resp, err := kinesis.DescribeStream(describestream)
+	_, err := kinesis.DescribeStream(describestream)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-	response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
 }
 
 func TestDeleteStream(t *testing.T) {
@@ -83,13 +65,9 @@ func TestDeleteStream(t *testing.T) {
 		"StreamName": "gocloud",
 	}
 
-	resp, err := kinesis.DeleteStream(deletestream)
+	_, err := kinesis.DeleteStream(deletestream)
 
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
-	response := resp.(map[string]interface{})
-
-	fmt.Println(response["body"])
 }

@@ -12,11 +12,9 @@ import (
 //PrepareSignatureV4query creates PrepareSignatureV4 for request.
 func (kinesis *Kinesis) PrepareSignatureV4query(params map[string]string, paramsmap map[string]interface{}, response map[string]interface{}) error {
 	ECSEndpoint := "https://kinesis." + params["Region"] + ".amazonaws.com"
-	fmt.Println("ECSEndpoint : ", ECSEndpoint)
 	service := "kinesis"
 	method := "POST"
 	host := service + "." + params["Region"] + ".amazonaws.com"
-	fmt.Println("host : ", host)
 	ContentType := "application/x-amz-json-1.1"
 	signedheaders := "content-type;host;x-amz-date;x-amz-target"
 	amztarget := params["amztarget"]
