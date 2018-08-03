@@ -166,11 +166,9 @@ func (lambda *Lambda) CreateFunction(request interface{}) (resp interface{}, err
 	}
 
 	params := make(map[string]interface{})
-
 	preparecreatefunctiondict(params, createfunction)
 
 	response := make(map[string]interface{})
-
 	err = PreparePostrequest(params, region, response)
 
 	resp = response
