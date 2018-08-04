@@ -3,6 +3,7 @@ package alidns
 import "encoding/json"
 
 type ListDnsResp struct {
+	StatusCode int
 	DomainRecords struct {
 		Record []RecordInfo
 	}
@@ -21,9 +22,9 @@ type RecordInfo struct {
 	Locked     bool
 }
 
-func ParseListDnsResp(body interface{}) (records []RecordInfo, err error) {
-	listDnsResp := &ListDnsResp{}
-	err = json.Unmarshal([]byte(body.(string)), &listDnsResp)
-	records = listDnsResp.DomainRecords.Record
+func ParseListDnsResp(resp interface{}) (listDnsResp ListDnsResp, err error) {
+	response := resp.(map[string]interface{})
+	err = json.Unmarshal([]byte(response["body"].(string)), &listDnsResp)
+	listDnsResp.StatusCode = response["status"].(int)
 	return
 }

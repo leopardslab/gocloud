@@ -41,7 +41,7 @@ func TestDeleteDns(t *testing.T) {
 
 func TestListDns(t *testing.T) {
 	var aliDNS Alidns
-	listDomain := map[string]interface{}{
+	list := map[string]interface{}{
 		"DomainName":   "oddcn.cn",
 		"PageNumber":   1,
 		"PageSize":     20,
@@ -49,7 +49,7 @@ func TestListDns(t *testing.T) {
 		"TypeKeyWord":  "MX",
 		"ValueKeyWord": "com",
 	}
-	resp, err := aliDNS.ListDns(listDomain)
+	resp, err := aliDNS.ListDns(list)
 	if err != nil {
 		t.Errorf("ListDns Test Fail: %s", err)
 		return
@@ -60,22 +60,21 @@ func TestListDns(t *testing.T) {
 
 func TestParseListDnsResp(t *testing.T) {
 	var aliDNS Alidns
-	listDomain := map[string]interface{}{
+	list := map[string]interface{}{
 		"DomainName": "oddcn.cn",
 		"PageNumber": 1,
 		"PageSize":   20,
 	}
-	resp, err := aliDNS.ListDns(listDomain)
+	resp, err := aliDNS.ListDns(list)
 	if err != nil {
 		t.Errorf("ListDns Test Fail: %s", err)
 		return
 	}
-	t.Logf("Ali DNS is listed successfully.")
-	records, err := ParseListDnsResp(resp.(map[string]interface{})["body"])
+	listDnsResp, err := ParseListDnsResp(resp)
 	if err != nil {
 		t.Errorf("ListDns Test Fail: %s", err)
 	}
-	for _, value := range records {
+	for _, value := range listDnsResp.DomainRecords.Record {
 		t.Logf("%+v\n", value)
 	}
 }
