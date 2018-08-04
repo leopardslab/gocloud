@@ -43,7 +43,7 @@ func TestCreateFunction(t *testing.T) {
 		"Code":         code,
 	}
 
-	_, err := lambda.CreateFunction(deletedunction)
+	_, err := lambda.CreateFunction(createfunction)
 
 	if err != nil {
 		t.Errorf("Test Fail")
