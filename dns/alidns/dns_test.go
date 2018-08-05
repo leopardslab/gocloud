@@ -26,12 +26,40 @@ func TestCreateDns(t *testing.T) {
 	t.Logf("Ali DNS is created successfully.")
 }
 
+func TestCreateDNSBuilder(t *testing.T) {
+	var aliDNS Alidns
+	createDNS, err := NewCreateDNSBuilder().
+		DomainName("oddcn.cn").
+		RR("gocloud.test").
+		Type("A").
+		Value("202.106.0.20").
+		TTL(600).
+		Build()
+	_, err = aliDNS.CreateDns(createDNS)
+	if err != nil {
+		t.Errorf("CreateDns Test Fail: %s", err)
+		return
+	}
+	t.Logf("Ali DNS is created successfully.")
+}
+
 func TestDeleteDns(t *testing.T) {
 	var aliDNS Alidns
 	deleteDNS := map[string]interface{}{
 		"RecordId": "9999985",
 	}
 	_, err := aliDNS.DeleteDns(deleteDNS)
+	if err != nil {
+		t.Errorf("DeleteDns Test Fail: %s", err)
+		return
+	}
+	t.Logf("Ali DNS is deleted successfully.")
+}
+
+func TestDeleteDNSBuilder(t *testing.T) {
+	var aliDNS Alidns
+	deleteDNS, err := NewDeleteDNSBuilder().RecordId("9999985").Build()
+	_, err = aliDNS.DeleteDns(deleteDNS)
 	if err != nil {
 		t.Errorf("DeleteDns Test Fail: %s", err)
 		return
@@ -49,6 +77,22 @@ func TestListDns(t *testing.T) {
 		"TypeKeyWord":  "MX",
 		"ValueKeyWord": "com",
 	}
+	resp, err := aliDNS.ListDns(list)
+	if err != nil {
+		t.Errorf("ListDns Test Fail: %s", err)
+		return
+	}
+	t.Logf("Ali DNS is listed successfully.")
+	t.Logf("%s", resp.(map[string]interface{})["body"])
+}
+
+func TestListDNSBuilder(t *testing.T) {
+	var aliDNS Alidns
+	list, err := NewListDNSBuilder().
+		DomainName("oddcn.cn").
+		PageNumber(1).
+		PageSize(20).
+		Build()
 	resp, err := aliDNS.ListDns(list)
 	if err != nil {
 		t.Errorf("ListDns Test Fail: %s", err)

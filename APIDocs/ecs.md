@@ -18,8 +18,8 @@ const (
     Dubai         = "ecs.me-east-1.aliyuncs.com"
     Frankfurt     = "ecs.eu-central-1.aliyuncs.com"
 )
+    Endpoint of Ali ecs
 ```
-Endpoint of Ali ecs
 
 ### TYPES
 
@@ -43,13 +43,12 @@ type CreateNode struct {
     SystemDiskName          string
     SystemDiskDescription   string
 }
-```
-CreateNode to store all attribute to create Ali-cloud ECS instance
+    CreateNode to store all attribute to create Ali-cloud ECS instance
 
-```
 type CreateNodeBuilder struct {
     // contains filtered or unexported fields
 }
+    CreateNode builder pattern code
 
 func NewCreateNodeBuilder() *CreateNodeBuilder
 
@@ -88,72 +87,61 @@ func (b *CreateNodeBuilder) SystemDiskName(systemDiskName string) *CreateNodeBui
 func (b *CreateNodeBuilder) SystemDiskSize(systemDiskSize string) *CreateNodeBuilder
 
 func (b *CreateNodeBuilder) ZoneID(zoneID string) *CreateNodeBuilder
-```
-CreateNode builder pattern code
 
-```
+type CreateNodeResp struct {
+    StatusCode int
+    InstanceId string
+}
+
+func ParseCreateNodeResp(resp interface{}) (createNodeResp CreateNodeResp, err error)
+
 type DeleteNode struct {
     InstanceID string
 }
-```
-DeleteNode to store all attribute to Delete Ali-cloud ECS instance
+    DeleteNode to store all attribute to Delete Ali-cloud ECS instance
 
-```
 type DeleteNodeBuilder struct {
     // contains filtered or unexported fields
 }
+    DeleteNode builder pattern code
 
 func NewDeleteNodeBuilder() *DeleteNodeBuilder
 
 func (b *DeleteNodeBuilder) Build() (map[string]interface{}, error)
 
 func (b *DeleteNodeBuilder) InstanceID(instanceID string) *DeleteNodeBuilder
-```
-DeleteNode builder pattern code
 
-```
 type ECS struct {
 }
-```
-ECS struct
+    ECS struct
 
-```
 func (ecs *ECS) CreateNode(request interface{}) (resp interface{}, err error)
-```
-CreateNode create ECS instances accept map[string]interface{}
+    CreateNode create ECS instances accept map[string]interface{}
 
-```
 func (ecs *ECS) DeleteNode(request interface{}) (resp interface{}, err error)
-```
-DeleteNode delete ECS instances accept map[string]interface{}
+    DeleteNode delete ECS instances accept map[string]interface{}
 
-```
+func (ecs *ECS) ListNodeType(request interface{}) (resp interface{}, err error)
+
 func (ecs *ECS) RebootNode(request interface{}) (resp interface{}, err error)
-```
-RebootNode reboot ECS instances accept map[string]interface{}
+    RebootNode reboot ECS instances accept map[string]interface{}
 
-```
 func (ecs *ECS) StartNode(request interface{}) (resp interface{}, err error)
-```
-StartNode start ECS instances accept map[string]interface{}
+    StartNode start ECS instances accept map[string]interface{}
 
-```
 func (ecs *ECS) StopNode(request interface{}) (resp interface{}, err error)
-```
-StopNode stop ECS instances accept map[string]interface{}
+    StopNode stop ECS instances accept map[string]interface{}
 
-```
 type RebootNode struct {
     InstanceID string
     ForceStop  bool
 }
-```
-RebootNode to store all attribute to Reboot Ali-cloud ECS instance
+    RebootNode to store all attribute to Reboot Ali-cloud ECS instance
 
-```
 type RebootNodeBuilder struct {
     // contains filtered or unexported fields
 }
+    RebootNode builder pattern code
 
 func NewRebootNodeBuilder() *RebootNodeBuilder
 
@@ -162,21 +150,17 @@ func (b *RebootNodeBuilder) Build() (map[string]interface{}, error)
 func (b *RebootNodeBuilder) ForceStop(forceStop bool) *RebootNodeBuilder
 
 func (b *RebootNodeBuilder) InstanceID(instanceID string) *RebootNodeBuilder
-```
-RebootNode builder pattern code
 
-```
 type StartNode struct {
     InstanceID    string
     InitLocalDisk bool
 }
-```
-StartNode to store all attribute to start Ali-cloud ECS instance
+    StartNode to store all attribute to start Ali-cloud ECS instance
 
-```
 type StartNodeBuilder struct {
     // contains filtered or unexported fields
 }
+    StartNode builder pattern code
 
 func NewStartNodeBuilder() *StartNodeBuilder
 
@@ -185,23 +169,19 @@ func (b *StartNodeBuilder) Build() (map[string]interface{}, error)
 func (b *StartNodeBuilder) InitLocalDisk(initLocalDisk bool) *StartNodeBuilder
 
 func (b *StartNodeBuilder) InstanceID(instanceID string) *StartNodeBuilder
-```
-StartNode builder pattern code
 
-```
 type StopNode struct {
     InstanceID  string
     ForceStop   bool
     ConfirmStop bool
     StoppedMode string
 }
-```
-StopNode to store all attribute to Stop Ali-cloud ECS instance
+    StopNode to store all attribute to Stop Ali-cloud ECS instance
 
-```
 type StopNodeBuilder struct {
     // contains filtered or unexported fields
 }
+    StopNode builder pattern code
 
 func NewStopNodeBuilder() *StopNodeBuilder
 
@@ -215,5 +195,3 @@ func (b *StopNodeBuilder) InstanceID(instanceID string) *StopNodeBuilder
 
 func (b *StopNodeBuilder) StoppedMode(stoppedMode string) *StopNodeBuilder
 ```
-StopNode builder pattern code
-

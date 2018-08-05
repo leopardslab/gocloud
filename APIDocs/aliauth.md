@@ -1,6 +1,6 @@
 ```
 package aliauth
-    import "/home/oddcn/Code/go/src/github.com/cloudlibz/gocloud/aliauth"
+    import "github.com/cloudlibz/gocloud/aliauth"
 ```
 
 ### FUNCTIONS

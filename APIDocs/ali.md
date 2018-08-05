@@ -1,6 +1,6 @@
 ```
 package ali
-    import "/home/oddcn/Code/go/src/github.com/cloudlibz/gocloud/ali"
+    import "github.com/cloudlibz/gocloud/ali"
 ```
 
 ### TYPES
