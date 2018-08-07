@@ -1,8 +1,8 @@
 package alidns
 
 import (
-	"github.com/cloudlibz/gocloud/aliauth"
 	"errors"
+	"github.com/cloudlibz/gocloud/aliauth"
 )
 
 //Alidns represents Alidns attribute and method associates with it.

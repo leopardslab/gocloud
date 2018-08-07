@@ -3,7 +3,7 @@ package alidns
 import "encoding/json"
 
 type ListDnsResp struct {
-	StatusCode int
+	StatusCode    int
 	DomainRecords struct {
 		Record []RecordInfo
 	}

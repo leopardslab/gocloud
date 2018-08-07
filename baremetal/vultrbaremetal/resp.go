@@ -12,18 +12,18 @@ type V6Network struct {
 
 type BareMetalInfo struct {
 	SUBID           string
-	OS              string      `json:"os"`
-	RAM             string      `json:"ram"`
-	Disk            string      `json:"disk"`
-	MainIP          string      `json:"main_ip"`
-	CPUCount        float64     `json:"cpu_count"`
-	Location        string      `json:"location"`
+	OS              string  `json:"os"`
+	RAM             string  `json:"ram"`
+	Disk            string  `json:"disk"`
+	MainIP          string  `json:"main_ip"`
+	CPUCount        float64 `json:"cpu_count"`
+	Location        string  `json:"location"`
 	DCID            string
-	DefaultPassword string      `json:"default_password"`
-	DateCreated     string      `json:"date_created"`
-	Status          string      `json:"status"`
-	NetmaskV4       string      `json:"netmask_v4"`
-	GatewayV4       string      `json:"gateway_v4"`
+	DefaultPassword string `json:"default_password"`
+	DateCreated     string `json:"date_created"`
+	Status          string `json:"status"`
+	NetmaskV4       string `json:"netmask_v4"`
+	GatewayV4       string `json:"gateway_v4"`
 	METALPLANID     float64
 	V6Networks      []V6Network `json:"v6_networks"`
 	Label           string      `json:"label"`
