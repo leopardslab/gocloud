@@ -56,6 +56,13 @@ GoCloud is a golang library which hides the difference between different APIs pr
 * Server Load Balancer [Link to example](examples/loadbalancer/ali_loadbalancer/ali_loadbalancer.md)
 * Container Service [Link to example](examples/container/ali_container/ali_container.md)
 
+### Vultr
+
+* Server [Link to example](examples/compute/vultr_compute/vultr_compute.md)
+* Bare Metal [Link to example](examples/baremetal/vultr_baremetal/vultr_baremetal.md)
+* Block Storage [Link to example](examples/storage/vultr_storage/vultr_storage.md)
+* DNS [Link to example](examples/dns/vultr_dns/vultr_dns.md)
+
 Currently, implementations for other cloud providers are being worked on.
 
 ## Installation instructions for Linux (Ubuntu)
@@ -115,6 +122,13 @@ $ go get cloud.google.com/go/compute/metadata
      "AliAccessKeySecret":"xxxxxxxxxxxx"
    }
    ```
+   #### Vultr:
+   Save your Vultr credentials in a file named *vultrconfig.json*.
+   ```
+   {
+     "VultrAPIKey":"xxxxxxxxxxxx"
+   }
+   ```
 
    You can also set your credentials as environment variables.  
    #### AWS:  
@@ -144,7 +158,10 @@ $ go get cloud.google.com/go/compute/metadata
    export AliAccessKeyID =  "xxxxxxxxxxxx"
    export AliAccessKeySecret =  "xxxxxxxxxxxx"
    ```
-
+   #### Vultr:
+   ```
+   export VultrAPIKey =  "xxxxxxxxxxxx"
+   ```
 
 6. You are all set to use gocloud! Check out the following YouTube videos for more information and usage examples:
 https://youtu.be/4LxsAeoonlY?list=PLOdfztY25UNnxK_0KRRHSngJIyVLDKZxq&t=3
