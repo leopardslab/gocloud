@@ -3,9 +3,31 @@ package vultrbaremetal
     import "github.com/cloudlibz/gocloud/baremetal/vultrbaremetal"
 ```
 
-TYPES
+### TYPES
 
 ```
+type BareMetalInfo struct {
+    SUBID           string
+    OS              string  `json:"os"`
+    RAM             string  `json:"ram"`
+    Disk            string  `json:"disk"`
+    MainIP          string  `json:"main_ip"`
+    CPUCount        float64 `json:"cpu_count"`
+    Location        string  `json:"location"`
+    DCID            string
+    DefaultPassword string `json:"default_password"`
+    DateCreated     string `json:"date_created"`
+    Status          string `json:"status"`
+    NetmaskV4       string `json:"netmask_v4"`
+    GatewayV4       string `json:"gateway_v4"`
+    METALPLANID     float64
+    V6Networks      []V6Network `json:"v6_networks"`
+    Label           string      `json:"label"`
+    Tag             string      `json:"tag"`
+    OSID            string
+    APPID           string
+}
+
 type CreateBareMetal struct {
     DCID        int    // Location in which to create the server. See v1/regions/list.
     METALPLANID int    // Plan to use when creating this server. See v1/plans/list_baremetal.
@@ -18,40 +40,12 @@ type CreateBareMetal struct {
     // contains filtered or unexported fields
 }
 
-type CreateBareMetalBuilder struct {
-    // contains filtered or unexported fields
+type CreateBareMetalResp struct {
+    StatusCode int
+    SUBID      string
 }
-    CreateBareMetal builder pattern code
 
-func NewCreateBareMetalBuilder() *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) APPID(aPPID int) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) Build() (map[string]interface{}, error)
-
-func (b *CreateBareMetalBuilder) DCID(dCID int) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) EnableIpv6(enable_ipv6 string) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) Hostname(hostname string) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) Label(label string) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) METALPLANID(mETALPLANID int) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) NotifyActivate(notify_activate string) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) OSID(oSID int) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) SCRIPTID(sCRIPTID int) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) SNAPSHOTID(sNAPSHOTID string) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) SSHKEYID(sSHKEYID string) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) Tag(tag string) *CreateBareMetalBuilder
-
-func (b *CreateBareMetalBuilder) UserData(userdata string) *CreateBareMetalBuilder
+func ParseCreateBareMetalResp(resp interface{}) (createBareMetalResp CreateBareMetalResp, err error)
 
 type DeleteBareMetal struct {
     SUBID int // Unique identifier for this subscription.
@@ -88,22 +82,13 @@ type ListBareMetal struct {
     // contains filtered or unexported fields
 }
 
-type ListBareMetalBuilder struct {
-    // contains filtered or unexported fields
+type ListBareMetalResp struct {
+    StatusCode     int
+    BareMetalSlice []BareMetalInfo
 }
-    ListBareMetal builder pattern code
 
-func NewListBareMetalBuilder() *ListBareMetalBuilder
+func ParseListBareMetalResp(resp interface{}) (listBareMetalResp ListBareMetalResp, err error)
 
-func (b *ListBareMetalBuilder) Build() (map[string]interface{}, error)
-
-func (b *ListBareMetalBuilder) Label(label string) *ListBareMetalBuilder
-
-func (b *ListBareMetalBuilder) MainIp(main_ip string) *ListBareMetalBuilder
-
-func (b *ListBareMetalBuilder) SUBID(sUBID int) *ListBareMetalBuilder
-
-func (b *ListBareMetalBuilder) Tag(tag string) *ListBareMetalBuilder
 
 type RebootBareMetal struct {
     SUBID int // Unique identifier for this subscription.
@@ -124,16 +109,11 @@ type ReinstallBareMetal struct {
     SUBID int // Unique identifier for this subscription.
 }
 
-type ReinstallBareMetalBuilder struct {
-    // contains filtered or unexported fields
+type V6Network struct {
+    V6Network     string  `json:"v6_network"`
+    V6MainIP      string  `json:"v6_main_ip"`
+    V6NetworkSize float64 `json:"v6_network_size"`
 }
-    ReinstallBareMetal builder pattern code
-
-func NewReinstallBareMetalBuilder() *ReinstallBareMetalBuilder
-
-func (b *ReinstallBareMetalBuilder) Build() (map[string]interface{}, error)
-
-func (b *ReinstallBareMetalBuilder) SUBID(sUBID int) *ReinstallBareMetalBuilder
 
 type VultrBareMetal struct {
 }
@@ -156,3 +136,4 @@ func (*VultrBareMetal) RebootBareMetal(request interface{}) (resp interface{}, e
 func (*VultrBareMetal) ReinstallBareMetal(request interface{}) (resp interface{}, err error)
     ReinstallBareMetal function reinstall a Vultr bare metal machine.
 ```
+
