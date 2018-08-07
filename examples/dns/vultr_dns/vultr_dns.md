@@ -110,17 +110,20 @@ or
         fmt.Println(err)
         return
     }
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
 
-    listDnsResp, err := vultrdns.ParseListDnsResp(response["body"])
+    listDnsResp, err := vultrdns.ParseListDnsResp(resp)
     if err != nil {
         fmt.Println(err)
         return
     }
-    for _, dns := range listDnsResp {
+    fmt.Printf("%+v\n", listDnsResp)
+    for _, dns := range listDnsResp.DnsSlice {
         fmt.Printf("%+v\n", dns)
     }
+    fmt.Println(listDnsResp.DnsSlice[0].Data)
+    fmt.Println(listDnsResp.DnsSlice[0].Name)
+    fmt.Println(listDnsResp.DnsSlice[0].Priority)
+    fmt.Println(listDnsResp.DnsSlice[0].RecordID)
 ```
 
 or
@@ -138,17 +141,20 @@ or
         fmt.Println(err)
         return
     }
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
 
-    listDnsResp, err := vultrdns.ParseListDnsResp(response["body"])
+    listDnsResp, err := vultrdns.ParseListDnsResp(resp)
     if err != nil {
         fmt.Println(err)
         return
     }
-    for _, dns := range listDnsResp {
+    fmt.Printf("%+v\n", listDnsResp)
+    for _, dns := range listDnsResp.DnsSlice {
         fmt.Printf("%+v\n", dns)
     }
+    fmt.Println(listDnsResp.DnsSlice[0].Data)
+    fmt.Println(listDnsResp.DnsSlice[0].Name)
+    fmt.Println(listDnsResp.DnsSlice[0].Priority)
+    fmt.Println(listDnsResp.DnsSlice[0].RecordID)
 ```
 
 ### List resource DNS record sets

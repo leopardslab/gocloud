@@ -36,10 +36,8 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
         fmt.Println(err)
         return
     }
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
-    
-    createDiskResp, err := vultrstorage.ParseCreateDiskResp(response["body"])
+
+    createDiskResp, err := vultrstorage.ParseCreateDiskResp(resp)
     if err != nil {
         fmt.Println(err)
         return
@@ -60,10 +58,8 @@ or
         fmt.Println(err)
         return
     }
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
-        
-    createDiskResp, err := vultrstorage.ParseCreateDiskResp(response["body"])
+
+    createDiskResp, err := vultrstorage.ParseCreateDiskResp(resp)
     if err != nil {
         fmt.Println(err)
         return
