@@ -4,6 +4,11 @@ import (
 	"encoding/json"
 )
 
+type ListBareMetalResp struct {
+	StatusCode     int
+	BareMetalSlice []BareMetalInfo
+}
+
 type V6Network struct {
 	V6Network     string  `json:"v6_network"`
 	V6MainIP      string  `json:"v6_main_ip"`
@@ -37,11 +42,6 @@ type CreateBareMetalResp struct {
 	SUBID      string
 }
 
-type ListBareMetalResp struct {
-	StatusCode     int
-	BareMetalSlice []BareMetalInfo
-}
-
 func ParseCreateBareMetalResp(resp interface{}) (createBareMetalResp CreateBareMetalResp, err error) {
 	response := resp.(map[string]interface{})
 	err = json.Unmarshal([]byte(response["body"].(string)), &createBareMetalResp)
@@ -52,7 +52,6 @@ func ParseCreateBareMetalResp(resp interface{}) (createBareMetalResp CreateBareM
 func ParseListBareMetalResp(resp interface{}) (listBareMetalResp ListBareMetalResp, err error) {
 	response := resp.(map[string]interface{})
 	respMap := make(map[string]interface{})
-	listBareMetalResp.StatusCode = response["status"].(int)
 	err = json.Unmarshal([]byte(response["body"].(string)), &respMap)
 	for _, bareMetal := range respMap {
 		bareMetalInfo := &BareMetalInfo{}
@@ -139,5 +138,6 @@ func ParseListBareMetalResp(resp interface{}) (listBareMetalResp ListBareMetalRe
 		}
 		listBareMetalResp.BareMetalSlice = append(listBareMetalResp.BareMetalSlice, *bareMetalInfo)
 	}
+	listBareMetalResp.StatusCode = response["status"].(int)
 	return
 }

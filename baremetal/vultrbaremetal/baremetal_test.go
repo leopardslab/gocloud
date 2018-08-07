@@ -280,7 +280,6 @@ func TestParseListBareMetalResp(t *testing.T) {
 		t.Errorf("ListBareMetal Test Fail: %s", err)
 		return
 	}
-
 	listBareMetalResp, err := ParseListBareMetalResp(resp)
 	if err != nil {
 		t.Errorf("CreateNode Test Fail: %s", err)
