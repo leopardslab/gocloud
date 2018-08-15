@@ -36,8 +36,9 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
   }
 
   resp, err := alicloud.Creatloadbalancer(createLoadBalancer)
-  response := resp.(map[string]interface{})
-  fmt.Println(response["body"])
+  createLoadBalancerResp, err := aliloadbalancer.ParseCreateLoadBalancerResp(resp)
+  fmt.Println(createLoadBalancerResp.StatusCode)
+  fmt.Println(createLoadBalancerResp.LoadBalancerId)
 ```
 
 or
@@ -58,8 +59,9 @@ or
         fmt.Println(err)
         return
     }
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
+    createLoadBalancerResp, err := aliloadbalancer.ParseCreateLoadBalancerResp(resp)
+    fmt.Println(createLoadBalancerResp.StatusCode)
+    fmt.Println(createLoadBalancerResp.LoadBalancerId)
 ```
 
 ### Delete loadbalancer
@@ -136,8 +138,8 @@ or
   }
 
   resp, err := alicloud.AttachNodeWithLoadBalancer(attach)
-  response := resp.(map[string]interface{})
-  fmt.Println(response["body"])
+  attachLoadBalancerResp, err := aliloadbalancer.ParseAttachLoadBalancerResp(resp)
+  fmt.Printf("%+v", attachLoadBalancerResp)
 ```
 
 or
@@ -157,8 +159,8 @@ or
         fmt.Println(err)
         return
     }
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
+    attachLoadBalancerResp, err := aliloadbalancer.ParseAttachLoadBalancerResp(resp)
+    fmt.Printf("%+v", attachLoadBalancerResp)
 ```
 
 ### Detach node with loadbalancer
@@ -172,8 +174,8 @@ or
   }
 
   resp, err := alicloud.DetachNodeWithLoadBalancer(detach)
-  response := resp.(map[string]interface{})
-  fmt.Println(response["body"])
+  detachLoadBalancerResp, err := aliloadbalancer.ParseDetachLoadBalancerResp(resp)
+  fmt.Printf("%+v", detachLoadBalancerResp)
 ```
 
 or
@@ -194,6 +196,6 @@ or
         fmt.Println(err)
         return
     }
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
+    detachLoadBalancerResp, err := aliloadbalancer.ParseDetachLoadBalancerResp(resp)
+    fmt.Printf("%+v", detachLoadBalancerResp)
 ```

@@ -29,12 +29,12 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
 
 ```
   createDNS := map[string]interface{}{
-  		"DomainName": "oddcn.cn",
-  		"RR":         "test.gocloud",
-  		"Type":       "A",
-  		"Value":      "202.106.0.20",
-  		"TTL":        600,
-  		"Line":       "default",
+          "DomainName": "oddcn.cn",
+          "RR":         "test.gocloud",
+          "Type":       "A",
+          "Value":      "202.106.0.20",
+          "TTL":        600,
+          "Line":       "default",
   }
 
   resp, err := alicloud.CreateDns(createDNS)
@@ -46,7 +46,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
 
 ```js
   deleteDNS := map[string]interface{}{
-  		"RecordId": "3888946862348288",
+          "RecordId": "3888946862348288",
   }
 
   resp, err := alicloud.DeleteDns(deleteDNS)
@@ -56,25 +56,13 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
 
 ### List DNS
 
-```js
-  listDNS := map[string]interface{}{
-  		"PageNumber": 1,
-  		"PageSize":   20,
-  }
-
-  resp, err := alicloud.ListDns(listDNS)
-  response := resp.(map[string]interface{})
-  fmt.Println(response["body"])
 ```
-
-### List resource DNS record sets
-
-```j
-  listResourceDNSRecordSets := map[string]interface{}{
-  		"DomainName": "oddcn.cn",
-  }
-
-  resp, err := alicloud.ListResourceDnsRecordSets(listResourceDNSRecordSets)
-  response := resp.(map[string]interface{})
-  fmt.Println(response["body"])
+    list := map[string]interface{}{
+        "DomainName": "oddcn.cn",
+        "PageNumber": 1,
+        "PageSize":   20,
+    }
+    resp, err := alicloud.ListDns(list)
+    listDnsResp, err := alidns.ParseListDnsResp(resp)
+    fmt.Printf("%+v", listDnsResp)
 ```

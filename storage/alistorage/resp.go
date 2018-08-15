@@ -1,10 +1,10 @@
-package vultrstorage
+package alistorage
 
 import "encoding/json"
 
 type CreateDiskResp struct {
 	StatusCode int
-	SUBID      string `json:"SUBID"`
+	DiskId     string
 }
 
 func ParseCreateDiskResp(resp interface{}) (createDiskResp CreateDiskResp, err error) {

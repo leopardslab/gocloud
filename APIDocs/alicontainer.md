@@ -8,77 +8,30 @@ package alicontainer
 ```
 type Alicontainer struct {
 }
-```
-Alicontainer struct represents Alicontainer attribute and methods associates with it.
+    Alicontainer struct represents Alicontainer attribute and methods
+    associates with it.
 
-```
 func (alicontainer *Alicontainer) CreateCluster(request interface{}) (resp interface{}, err error)
-```
-CreateCluster creates container cluster
+    CreateCluster creates container cluster
 
-```
 func (alicontainer *Alicontainer) CreateService(request interface{}) (resp interface{}, err error)
-```
-CreateService Create service is not provided by Alibaba cloud
+    CreateService Create service is not provided by Alibaba cloud
 
-```
 func (alicontainer *Alicontainer) DeleteCluster(request interface{}) (resp interface{}, err error)
-```
-DeleteCluster deletes container cluster
+    DeleteCluster deletes container cluster
 
-```
 func (alicontainer *Alicontainer) DeleteService(request interface{}) (resp interface{}, err error)
-```
-DeleteService delete service is not provided by Alibaba cloud
+    DeleteService delete service is not provided by Alibaba cloud
 
-```
 func (alicontainer *Alicontainer) RunTask(request interface{}) (resp interface{}, err error)
-```
-RunTask creates project of container cluster
+    RunTask creates project of container cluster
 
-```
 func (alicontainer *Alicontainer) StartTask(request interface{}) (resp interface{}, err error)
-```
-RunTask starts project of container cluster
+    RunTask starts project of container cluster
 
-```
 func (alicontainer *Alicontainer) StopTask(request interface{}) (resp interface{}, err error)
-```
-RunTask stops project of container cluster
+    RunTask stops project of container cluster
 
-```
-type CreateCluster struct {
-    Name             string `json:"name"`
-    Size             int64  `json:"size"`
-    InstanceType     string `json:"instance_type"`
-    NetworkMode      string `json:"network_mode"`
-    SubnetCIDR       string `json:"subnet_cidr,omitempty"`
-    VPCID            string `json:"vpc_id,omitempty"`
-    VSwitchID        string `json:"vswitch_id,omitempty"`
-    Password         string `json:"password"`
-    DataDiskCategory string `json:"data_disk_category"`
-    DataDiskSize     int64  `json:"data_disk_size"`
-    ECSImageID       string `json:"ecs_image_id,omitempty"`
-    IOOptimized      string `json:"io_optimized"`
-    NeedSLB          bool   `json:"need_slb"`
-    ReleaseEipFlag   bool   `json:"release_eip_flag"`
-}
-```
-CreateCluster struct represents create cluster attributes.
-
-```
-type RunTask struct {
-    Name        string            `json:"name"`
-    Description string            `json:"description"`
-    Template    string            `json:"template"`
-    Version     string            `json:"version"`
-    Environment map[string]string `json:"environment"`
-    LatestImage bool              `json:"latest_image"`
-}
-```
-RunTask struct represents create project of cluster attributes.
-
-```
 type CreateCluster struct {
     RegionID         string `json:"region_id"`
     Name             string `json:"name"`
@@ -136,6 +89,14 @@ func (b *CreateClusterBuilder) SubnetCIDR(subnetCIDR string) *CreateClusterBuild
 func (b *CreateClusterBuilder) VPCID(vPCID string) *CreateClusterBuilder
 
 func (b *CreateClusterBuilder) VSwitchID(vSwitchID string) *CreateClusterBuilder
+
+type CreateClusterResp struct {
+    StatusCode int
+    ClusterID  string `json:"cluster_id"`
+    TaskID     string `json:"task_id"`
+}
+
+func ParseCreateClusterResp(resp interface{}) (createClusterResp CreateClusterResp, err error)
 
 type DeleteCluster struct {
     RegionID  string `json:"region_id"`
@@ -231,3 +192,4 @@ func (b *StopTaskBuilder) Name(name string) *StopTaskBuilder
 
 func (b *StopTaskBuilder) Timeout(timeout int) *StopTaskBuilder
 ```
+

@@ -8,52 +8,38 @@ package alistorage
 ```
 type Alistorage struct {
 }
-```
-Alistorage struct represents Alistorage attribute and method associates with it.
+    Alistorage struct represents Alistorage attribute and method associates
+    with it.
 
-```
 func (aliStorage *Alistorage) AttachDisk(request interface{}) (resp interface{}, err error)
-```
-AttachDisk attach ECS-Disk to ECS, accept map[string]interface{}
+    AttachDisk attach ECS-Disk to ECS, accept map[string]interface{}
 
-```
 func (aliStorage *Alistorage) CreateDisk(request interface{}) (resp interface{}, err error)
-```
-CreateDisk create ECS-Disk accept map[string]interface{}
+    CreateDisk create ECS-Disk accept map[string]interface{}
 
-```
 func (aliStorage *Alistorage) CreateSnapshot(request interface{}) (resp interface{}, err error)
-```
-CreateSnapshot create snapshot accept map[string]interface{}
+    CreateSnapshot create snapshot accept map[string]interface{}
 
-```
 func (aliStorage *Alistorage) DeleteDisk(request interface{}) (resp interface{}, err error)
-```
-DeleteDisk delete ECS-Disk accept map[string]interface{}
+    DeleteDisk delete ECS-Disk accept map[string]interface{}
 
-```
 func (aliStorage *Alistorage) DeleteSnapshot(request interface{}) (resp interface{}, err error)
-```
-DeleteSnapshot delete snapshot accept map[string]interface{}
+    DeleteSnapshot delete snapshot accept map[string]interface{}
 
-```
 func (aliStorage *Alistorage) DetachDisk(request interface{}) (resp interface{}, err error)
-```
-DetachDisk detach ECS-Disk from ECS, accept map[string]interface{}
+    DetachDisk detach ECS-Disk from ECS, accept map[string]interface{}
 
-```
 type AttachDisk struct {
     InstanceID         string
     DiskID             string
     DeleteWithInstance bool
 }
-```
-AttachDisk to store all attribute of attach Ali-cloud ECS-Disk to ECS
+    AttachDisk to store all attribute of attach Ali-cloud ECS-Disk to ECS
 
-```
 type AttachDiskBuilder struct {
     // contains filtered or unexported fields
 }
+    AttachDisk builder pattern code
 
 func NewAttachDiskBuilder() *AttachDiskBuilder
 
@@ -64,10 +50,7 @@ func (b *AttachDiskBuilder) DeleteWithInstance(deleteWithInstance bool) *AttachD
 func (b *AttachDiskBuilder) DiskID(diskID string) *AttachDiskBuilder
 
 func (b *AttachDiskBuilder) InstanceID(instanceID string) *AttachDiskBuilder
-```
-AttachDisk builder pattern code
 
-```
 type CreateDisk struct {
     RegionID     string
     ZoneID       string
@@ -79,13 +62,12 @@ type CreateDisk struct {
     SnapshotID   string
     ClientToken  string
 }
-```
-CreateDisk to store all attribute to create Ali-cloud ECS-Disk
+    CreateDisk to store all attribute to create Ali-cloud ECS-Disk
 
-```
 type CreateDiskBuilder struct {
     // contains filtered or unexported fields
 }
+    CreateDisk builder pattern code
 
 func NewCreateDiskBuilder() *CreateDiskBuilder
 
@@ -108,23 +90,27 @@ func (b *CreateDiskBuilder) Size(size int) *CreateDiskBuilder
 func (b *CreateDiskBuilder) SnapshotID(snapshotID string) *CreateDiskBuilder
 
 func (b *CreateDiskBuilder) ZoneID(zoneID string) *CreateDiskBuilder
-```
-CreateDisk builder pattern code
 
-```
+type CreateDiskResp struct {
+    StatusCode int
+    DiskId     string
+}
+
+func ParseCreateDiskResp(resp interface{}) (createDiskResp CreateDiskResp, err error)
+
 type CreateSnapshot struct {
     DiskID       string
     SnapshotName string
     Description  string
     ClientToken  string
 }
-```
-CreateSnapshot to store all attribute of create Ali-cloud ECS-Disk 's Snapshot
+    CreateSnapshot to store all attribute of create Ali-cloud ECS-Disk 's
+    Snapshot
 
-```
 type CreateSnapshotBuilder struct {
     // contains filtered or unexported fields
 }
+    CreateSnapshot builder pattern code
 
 func NewCreateSnapshotBuilder() *CreateSnapshotBuilder
 
@@ -137,61 +123,50 @@ func (b *CreateSnapshotBuilder) Description(description string) *CreateSnapshotB
 func (b *CreateSnapshotBuilder) DiskID(diskID string) *CreateSnapshotBuilder
 
 func (b *CreateSnapshotBuilder) SnapshotName(snapshotName string) *CreateSnapshotBuilder
-```
-CreateSnapshot builder pattern code
 
-```
 type DeleteDisk struct {
     DiskID string
 }
-```
-DeleteDisk to store all attribute to delete Ali-cloud ECS-Disk
+    DeleteDisk to store all attribute to delete Ali-cloud ECS-Disk
 
-```
 type DeleteDiskBuilder struct {
     // contains filtered or unexported fields
 }
+    DeleteDisk builder pattern code
 
 func NewDeleteDiskBuilder() *DeleteDiskBuilder
 
 func (b *DeleteDiskBuilder) Build() (map[string]interface{}, error)
 
 func (b *DeleteDiskBuilder) DiskID(diskID string) *DeleteDiskBuilder
-```
-DeleteDisk builder pattern code
 
-```
 type DeleteSnapshot struct {
     SnapshotID string
 }
-```
-DeleteSnapshot to store all attribute of delete Ali-cloud ECS-Disk 's Snapshot
+    DeleteSnapshot to store all attribute of delete Ali-cloud ECS-Disk 's
+    Snapshot
 
-```
 type DeleteSnapshotBuilder struct {
     // contains filtered or unexported fields
 }
+    DeleteSnapshot builder pattern code
 
 func NewDeleteSnapshotBuilder() *DeleteSnapshotBuilder
 
 func (b *DeleteSnapshotBuilder) Build() (map[string]interface{}, error)
 
 func (b *DeleteSnapshotBuilder) SnapshotID(snapshotID string) *DeleteSnapshotBuilder
-```
-DeleteSnapshot builder pattern code
 
-```
 type DetachDisk struct {
     InstanceID string
     DiskID     string
 }
-```
-DetachDisk to store all attribute of detach Ali-cloud ECS-Disk from ECS
+    DetachDisk to store all attribute of detach Ali-cloud ECS-Disk from ECS
 
-```
 type DetachDiskBuilder struct {
     // contains filtered or unexported fields
 }
+    DetachDisk builder pattern code
 
 func NewDetachDiskBuilder() *DetachDiskBuilder
 
@@ -201,5 +176,3 @@ func (b *DetachDiskBuilder) DiskID(diskID string) *DetachDiskBuilder
 
 func (b *DetachDiskBuilder) InstanceID(instanceID string) *DetachDiskBuilder
 ```
-DetachDisk builder pattern code
-

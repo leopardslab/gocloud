@@ -1,10 +1,12 @@
-package vultrcompute
+package ecs
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type CreateNodeResp struct {
 	StatusCode int
-	SUBID      string
+	InstanceId string
 }
 
 func ParseCreateNodeResp(resp interface{}) (createNodeResp CreateNodeResp, err error) {

@@ -33,17 +33,27 @@ type BareMetalInfo struct {
 }
 
 type CreateBareMetalResp struct {
-	SUBID string
+	StatusCode int
+	SUBID      string
 }
 
-func ParseCreateBareMetalResp(body interface{}) (createBareMetalResp CreateBareMetalResp, err error) {
-	err = json.Unmarshal([]byte(body.(string)), &createBareMetalResp)
+type ListBareMetalResp struct {
+	StatusCode     int
+	BareMetalSlice []BareMetalInfo
+}
+
+func ParseCreateBareMetalResp(resp interface{}) (createBareMetalResp CreateBareMetalResp, err error) {
+	response := resp.(map[string]interface{})
+	err = json.Unmarshal([]byte(response["body"].(string)), &createBareMetalResp)
+	createBareMetalResp.StatusCode = response["status"].(int)
 	return
 }
 
-func ParseListBareMetalResp(body interface{}) (listBareMetalResp []BareMetalInfo, err error) {
+func ParseListBareMetalResp(resp interface{}) (listBareMetalResp ListBareMetalResp, err error) {
+	response := resp.(map[string]interface{})
 	respMap := make(map[string]interface{})
-	err = json.Unmarshal([]byte(body.(string)), &respMap)
+	listBareMetalResp.StatusCode = response["status"].(int)
+	err = json.Unmarshal([]byte(response["body"].(string)), &respMap)
 	for _, bareMetal := range respMap {
 		bareMetalInfo := &BareMetalInfo{}
 		for key, value := range bareMetal.(map[string]interface{}) {
@@ -127,7 +137,7 @@ func ParseListBareMetalResp(body interface{}) (listBareMetalResp []BareMetalInfo
 				break
 			}
 		}
-		listBareMetalResp = append(listBareMetalResp, *bareMetalInfo)
+		listBareMetalResp.BareMetalSlice = append(listBareMetalResp.BareMetalSlice, *bareMetalInfo)
 	}
 	return
 }

@@ -15,7 +15,7 @@ const formatISO8601 = "2006-01-02T15:04:05Z"
 func LoadBalancerSignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
 	// Add common params and action param
 	params["Action"] = action
-	params["Format"] = "XML"
+	params["Format"] = "json"
 	params["Version"] = "2014-05-15"
 	params["AccessKeyId"] = Config.AliAccessKeyID
 	params["Timestamp"] = time.Now().UTC().Format(formatISO8601)
@@ -43,7 +43,7 @@ func LoadBalancerSignAndDoRequest(action string, params map[string]interface{}, 
 func DNSSignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
 	// Add common params and action param
 	params["Action"] = action
-	params["Format"] = "XML"
+	params["Format"] = "json"
 	params["Version"] = "2015-01-09"
 	params["AccessKeyId"] = Config.AliAccessKeyID
 	params["Timestamp"] = time.Now().UTC().Format(formatISO8601)
@@ -58,7 +58,7 @@ func DNSSignAndDoRequest(action string, params map[string]interface{}, response 
 func ECSSignAndDoRequest(action string, params map[string]interface{}, response map[string]interface{}) error {
 	// Add common params and action param
 	params["Action"] = action
-	params["Format"] = "XML"
+	params["Format"] = "json"
 	params["Version"] = "2014-05-26"
 	params["AccessKeyId"] = Config.AliAccessKeyID
 	params["TimeStamp"] = time.Now().UTC().Format(formatISO8601)

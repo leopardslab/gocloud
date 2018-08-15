@@ -221,12 +221,7 @@ func TestParseCreateNodeResp(t *testing.T) {
 		t.Errorf("CreateNode Test Fail: %s", err)
 		return
 	}
-	response := resp.(map[string]interface{})
-	if response["status"] != 200 {
-		t.Errorf("status code: %d\n response body: %s\n", response["status"], response["body"])
-		return
-	}
-	createNodeResp, err := ParseCreateNodeResp(response["body"])
+	createNodeResp, err := ParseCreateNodeResp(resp)
 	if err != nil {
 		t.Errorf("CreateNode Test Fail: %s", err)
 		return

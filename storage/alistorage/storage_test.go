@@ -204,3 +204,28 @@ func TestDeleteSnapshotBuilder(t *testing.T) {
 	}
 	t.Logf("Ali disk snapshot is deleted successfully.")
 }
+
+func TestParseCreateDiskResp(t *testing.T) {
+	var alistorage Alistorage
+	createDisk, err := NewCreateDiskBuilder().
+		RegionID("cn-qingdao").
+		ZoneID("cn-qingdao-b").
+		Size(20).
+		DiskName("ThisIsDiskName").
+		Description("ThisIsDescription").
+		Build()
+	if err != nil {
+		t.Errorf("CreateDisk Test Fail: %s", err)
+		return
+	}
+	resp, err := alistorage.CreateDisk(createDisk)
+	if err != nil {
+		t.Errorf("CreateDisk Test Fail: %s", err)
+		return
+	}
+	createDiskResp, err := ParseCreateDiskResp(resp)
+	if err != nil {
+		t.Error(err)
+	}
+	t.Logf("%+v", createDiskResp)
+}

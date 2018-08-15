@@ -27,7 +27,7 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
 
 ### Create disk
 
-```js
+```
   createDisk := map[string]interface{}{
         "RegionId":    "cn-qingdao",
         "ZoneId":      "cn-qingdao-b",
@@ -37,8 +37,9 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
   }
 
   resp, err := alicloud.CreateDisk(createDisk)
-  response := resp.(map[string]interface{})
-  fmt.Println(response["body"])
+  createDiskResp, err := alistorage.ParseCreateDiskResp(resp)
+  fmt.Println(createDiskResp.StatusCode)
+  fmt.Println(createDiskResp.DiskId)
 ```
 
 or
@@ -60,8 +61,9 @@ or
         fmt.Println(err)
         return
     }
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
+    createDiskResp, err := alistorage.ParseCreateDiskResp(resp)
+    fmt.Println(createDiskResp.StatusCode)
+    fmt.Println(createDiskResp.DiskId)
 ```
 
 ### Delete disk

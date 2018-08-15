@@ -47,8 +47,9 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
     }
 
     resp, err := alicloud.CreateCluster(create)
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
+    createClusterResp, err := alicontainer.ParseCreateClusterResp(resp)
+    fmt.Println(createClusterResp.StatusCode)
+    fmt.Println(createClusterResp.ClusterID)
 ```
 
 or
@@ -77,8 +78,9 @@ or
         fmt.Println(err)
         return
     }
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
+    createClusterResp, err := alicontainer.ParseCreateClusterResp(resp)
+    fmt.Println(createClusterResp.StatusCode)
+    fmt.Println(createClusterResp.ClusterID)
 ```
 
 ### Delete cluster

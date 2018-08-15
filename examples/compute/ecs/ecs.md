@@ -36,8 +36,9 @@ alicloud, _ := gocloud.CloudProvider(gocloud.Aliprovider)
     }
 
     resp, err := alicloud.CreateNode(create)
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
+    createNodeResp, err := ecs.ParseCreateNodeResp(resp)
+    fmt.Println(createNodeResp.StatusCode)
+    fmt.Println(createNodeResp.InstanceId)
 ```
 
 or
@@ -53,8 +54,9 @@ or
         //...
     }
     resp, err := alicloud.CreateNode(createNode)
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
+    createNodeResp, err := ecs.ParseCreateNodeResp(resp)
+    fmt.Println(createNodeResp.StatusCode)
+    fmt.Println(createNodeResp.InstanceId)
 ```
 
 ### Start instance

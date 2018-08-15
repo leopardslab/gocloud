@@ -181,3 +181,77 @@ func TestDetachLoadBalancerBuilder(t *testing.T) {
 	}
 	t.Logf("Ali LoadBalancer is detached with node successfully.")
 }
+
+func TestParseCreateLoadBalancerResp(t *testing.T) {
+	var alilb Aliloadbalancer
+	create, err := NewCreateLoadBalancerBuilder().
+		RegionID("cn-qingdao").
+		LoadBalancerName("abc").
+		AddressType("internet").
+		InternetChargeType("paybytraffic").
+		Build()
+	if err != nil {
+		t.Errorf("CreateLoadBalancer Test Fail: %s", err)
+		return
+	}
+	resp, err := alilb.CreateLoadBalancer(create)
+	if err != nil {
+		t.Errorf("CreateLoadBalancer Test Fail: %s", err)
+		return
+	}
+	createLoadBalancerResp, err := ParseCreateLoadBalancerResp(resp)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	t.Logf("%+v", createLoadBalancerResp)
+}
+
+func TestParseAttachLoadBalancerResp(t *testing.T) {
+	var alilb Aliloadbalancer
+	attach, err := NewAttachLoadBalancerBuilder().
+		LoadBalancerID("lb-m5eg5vvdshdzix98evkk0").
+		BackendServers("[{'ServerId':'i-m5eggpwhjezbnjuorqf5','Weight':'100','Type':'ecs'}," +
+			"{'ServerId':'i-m5e5nqgrrrhte615lmkl','Weight':'100','Type':'ecs'}]").
+		Build()
+	if err != nil {
+		t.Errorf("AttachNodeWithLoadBalancer Test Fail: %s", err)
+		return
+	}
+	resp, err := alilb.AttachNodeWithLoadBalancer(attach)
+	if err != nil {
+		t.Errorf("AttachNodeWithLoadBalancer Test Fail: %s", err)
+		return
+	}
+	attachLoadBalancerResp, err := ParseAttachLoadBalancerResp(resp)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	t.Logf("%+v", attachLoadBalancerResp)
+}
+
+func TestParseDetachLoadBalancerResp(t *testing.T) {
+	var alilb Aliloadbalancer
+	detach, err := NewDetachLoadBalancerBuilder().
+		RegionID("cn-qingdao").
+		LoadBalancerID("lb-m5eg5vvdshdzix98evkk0").
+		BackendServers("[{'ServerId':'i-m5eggpwhjezbnjuorqf5','Type':'ecs'}," +
+			"{'ServerId':'i-m5e5nqgrrrhte615lmkl','Type':'ecs'}]").
+		Build()
+	if err != nil {
+		t.Errorf("DetachnodewithLoadBalancer Test Fail: %s", err)
+		return
+	}
+	resp, err := alilb.DetachNodeWithLoadBalancer(detach)
+	if err != nil {
+		t.Errorf("DetachnodewithLoadBalancer Test Fail: %s", err)
+		return
+	}
+	detachLoadBalancerResp, err := ParseDetachLoadBalancerResp(resp)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	t.Logf("%+v", detachLoadBalancerResp)
+}
