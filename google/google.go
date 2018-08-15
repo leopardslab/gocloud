@@ -12,6 +12,7 @@ import (
 	googlenotification "github.com/cloudlibz/gocloud/notification/googlenotification"
 	googlecloudfunctions "github.com/cloudlibz/gocloud/serverless/googlecloudfunctions"
 	googlestorage "github.com/cloudlibz/gocloud/storage/googlestorage"
+  clouddataflow "github.com/cloudlibz/gocloud/streamdataprocessing/clouddataflow"
 )
 
 // Google  struct represents Google Cloud provider.
@@ -26,6 +27,7 @@ type Google struct {
 	googlemachinelearning.Googlemachinelearning
 	bigquery.Bigquery
 	googlenotification.Googlenotification
+	clouddataflow.Clouddataflow
 }
 
 func (*Google) Compute() gocloudinterface.Compute {
@@ -66,4 +68,8 @@ func (*Google) Notification() gocloudinterface.Notification {
 
 func (*Google) MachineLearning() gocloudinterface.MachineLearning {
 	return &googlemachinelearning.Googlemachinelearning{}
+}
+
+func (*Google) Streamdataprocessing() gocloudinterface.Streamdataprocessing {
+	return &clouddataflow.Clouddataflow{}
 }
