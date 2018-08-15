@@ -13,7 +13,6 @@ import (
 	lambda "github.com/cloudlibz/gocloud/serverless/lambda"
 	amazonstorage "github.com/cloudlibz/gocloud/storage/amazonstorage"
 	kinesis "github.com/cloudlibz/gocloud/streamdataprocessing/kinesis"
-
 )
 
 //AWS struct reperents amazon cloud provider.

@@ -40,6 +40,41 @@ type CreateBareMetal struct {
     // contains filtered or unexported fields
 }
 
+type CreateBareMetalBuilder struct {
+    // contains filtered or unexported fields
+}
+    CreateBareMetal builder pattern code
+
+func NewCreateBareMetalBuilder() *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) APPID(aPPID int) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) Build() (map[string]interface{}, error)
+
+func (b *CreateBareMetalBuilder) DCID(dCID int) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) EnableIpv6(enable_ipv6 string) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) Hostname(hostname string) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) Label(label string) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) METALPLANID(mETALPLANID int) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) NotifyActivate(notify_activate string) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) OSID(oSID int) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) SCRIPTID(sCRIPTID int) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) SNAPSHOTID(sNAPSHOTID string) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) SSHKEYID(sSHKEYID string) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) Tag(tag string) *CreateBareMetalBuilder
+
+func (b *CreateBareMetalBuilder) UserData(userdata string) *CreateBareMetalBuilder
+
 type CreateBareMetalResp struct {
     StatusCode int
     SUBID      string
@@ -82,13 +117,29 @@ type ListBareMetal struct {
     // contains filtered or unexported fields
 }
 
+type ListBareMetalBuilder struct {
+    // contains filtered or unexported fields
+}
+    ListBareMetal builder pattern code
+
+func NewListBareMetalBuilder() *ListBareMetalBuilder
+
+func (b *ListBareMetalBuilder) Build() (map[string]interface{}, error)
+
+func (b *ListBareMetalBuilder) Label(label string) *ListBareMetalBuilder
+
+func (b *ListBareMetalBuilder) MainIp(main_ip string) *ListBareMetalBuilder
+
+func (b *ListBareMetalBuilder) SUBID(sUBID int) *ListBareMetalBuilder
+
+func (b *ListBareMetalBuilder) Tag(tag string) *ListBareMetalBuilder
+
 type ListBareMetalResp struct {
     StatusCode     int
     BareMetalSlice []BareMetalInfo
 }
 
 func ParseListBareMetalResp(resp interface{}) (listBareMetalResp ListBareMetalResp, err error)
-
 
 type RebootBareMetal struct {
     SUBID int // Unique identifier for this subscription.
@@ -108,6 +159,17 @@ func (b *RebootBareMetalBuilder) SUBID(sUBID int) *RebootBareMetalBuilder
 type ReinstallBareMetal struct {
     SUBID int // Unique identifier for this subscription.
 }
+
+type ReinstallBareMetalBuilder struct {
+    // contains filtered or unexported fields
+}
+    ReinstallBareMetal builder pattern code
+
+func NewReinstallBareMetalBuilder() *ReinstallBareMetalBuilder
+
+func (b *ReinstallBareMetalBuilder) Build() (map[string]interface{}, error)
+
+func (b *ReinstallBareMetalBuilder) SUBID(sUBID int) *ReinstallBareMetalBuilder
 
 type V6Network struct {
     V6Network     string  `json:"v6_network"`
@@ -135,5 +197,7 @@ func (*VultrBareMetal) RebootBareMetal(request interface{}) (resp interface{}, e
 
 func (*VultrBareMetal) ReinstallBareMetal(request interface{}) (resp interface{}, err error)
     ReinstallBareMetal function reinstall a Vultr bare metal machine.
+
+
 ```
 
