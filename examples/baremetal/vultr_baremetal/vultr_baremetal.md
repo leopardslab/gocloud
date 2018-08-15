@@ -36,11 +36,8 @@ vultr := gocloud.VultrProvider()
         fmt.Println(err)
         return
     }
-    response := resp.(map[string]interface{})
-    fmt.Println(response["status"])
-    fmt.Println(response["body"])
     
-    createBareMetalResp, err := vultrbaremetal.ParseCreateBareMetalResp(response["body"])
+    createBareMetalResp, err := vultrbaremetal.ParseCreateBareMetalResp(resp)
     if err != nil {
         fmt.Println(err)
     }
@@ -150,17 +147,13 @@ or
         fmt.Println(err)
         return
     }
-    response := resp.(map[string]interface{})
-    fmt.Println(response["status"])
-    fmt.Println(response["body"])
     
-    
-    listBareMetalResp, err := vultrbaremetal.ParseListBareMetalResp(response["body"])
+    listBareMetalResp, err := vultrbaremetal.ParseListBareMetalResp(resp)
     if err != nil {
         fmt.Println(err)
     }
-    for _, bareMetal := range listBareMetalResp {
-        fmt.Printf("%+v", bareMetal)
+    for _, value := range listBareMetalResp.BareMetalSlice {
+        fmt.Printf("%+v\n", value)
     }
 ```
 

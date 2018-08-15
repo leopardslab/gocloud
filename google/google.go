@@ -12,7 +12,7 @@ import (
 	googlenotification "github.com/cloudlibz/gocloud/notification/googlenotification"
 	googlecloudfunctions "github.com/cloudlibz/gocloud/serverless/googlecloudfunctions"
 	googlestorage "github.com/cloudlibz/gocloud/storage/googlestorage"
-  clouddataflow "github.com/cloudlibz/gocloud/streamdataprocessing/clouddataflow"
+	clouddataflow "github.com/cloudlibz/gocloud/streamdataprocessing/clouddataflow"
 )
 
 // Google  struct represents Google Cloud provider.

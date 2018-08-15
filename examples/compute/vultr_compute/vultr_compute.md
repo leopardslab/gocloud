@@ -32,10 +32,8 @@ vultr, _ := gocloud.CloudProvider(gocloud.Vultrprovider)
         "OSID":      127,
     }
     resp, err := vultrCloud.CreateNode(create)
-    response := resp.(map[string]interface{})
-    fmt.Println(response["body"])
- 
-    createNodeResp, err := vultrcompute.ParseCreateNodeResp(response["body"])
+    
+    createNodeResp, err := vultrcompute.ParseCreateNodeResp(resp)
     if err != nil {
         fmt.Println(err)
     }

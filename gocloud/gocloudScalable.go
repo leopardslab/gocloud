@@ -58,7 +58,6 @@ type awsProvider interface {
 
 	gocloudinterface.Streamdataprocessing
 	Streamdataprocessing() gocloudinterface.Streamdataprocessing
-
 }
 
 // AmazonProvider return AWS API to users
@@ -91,7 +90,6 @@ type googleProvider interface {
 
 	gocloudinterface.Streamdataprocessing
 	Streamdataprocessing() gocloudinterface.Streamdataprocessing
-
 }
 
 // GoogleProvider return Google cloud API to users

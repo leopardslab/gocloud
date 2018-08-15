@@ -50,6 +50,15 @@ func (b *DeleteDNSBuilder) Domain(domain string) *DeleteDNSBuilder
 
 func (b *DeleteDNSBuilder) RECORDID(rECORDID int) *DeleteDNSBuilder
 
+type DnsInfo struct {
+    Tpye     string `json:"tpye"`
+    Name     string `json:"name"`
+    Data     string `json:"data"`
+    Priority int    `json:"priority"`
+    RecordID int    `json:"RECORDID"`
+    Ttl      int    `json:"ttl"`
+}
+
 type ListDNS struct {
     // contains filtered or unexported fields
 }
@@ -64,6 +73,13 @@ func NewListDNSBuilder() *ListDNSBuilder
 func (b *ListDNSBuilder) Build() (map[string]interface{}, error)
 
 func (b *ListDNSBuilder) Domain(domain string) *ListDNSBuilder
+
+type ListDnsResp struct {
+    StatusCode int
+    DnsSlice   []DnsInfo
+}
+
+func ParseListDnsResp(resp interface{}) (listDnsResp ListDnsResp, err error)
 
 type VultrDNS struct {
 }
@@ -80,3 +96,4 @@ func (vultrDNS *VultrDNS) ListDns(request interface{}) (resp interface{}, err er
 func (vultrDNS *VultrDNS) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error)
     ListResourceDnsRecordSets function lists DNS record sets.
 ```
+

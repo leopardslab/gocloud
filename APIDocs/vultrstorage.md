@@ -44,6 +44,13 @@ func (b *CreateDiskBuilder) Label(label string) *CreateDiskBuilder
 
 func (b *CreateDiskBuilder) SizeGb(size_gb int) *CreateDiskBuilder
 
+type CreateDiskResp struct {
+    StatusCode int
+    SUBID      string `json:"SUBID"`
+}
+
+func ParseCreateDiskResp(resp interface{}) (createDiskResp CreateDiskResp, err error)
+
 type CreateSnapshot struct {
     SUBID int
     // contains filtered or unexported fields

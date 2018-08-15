@@ -6,42 +6,7 @@ package vultrcompute
 ### TYPES
 
 ```
-type VultrCompute struct {
-}
-```
-VultrCompute struct
 
-```
-func (vultrCompute *VultrCompute) CreateNode(request interface{}) (resp interface{}, err error)
-```
-CreateNode function creates a new VultrCompute instance.
-
-```
-func (vultrCompute *VultrCompute) DeleteNode(request interface{}) (resp interface{}, err error)
-```
-DeleteNode function deletes a VultrCompute instance.
-
-```
-func (vultrCompute *VultrCompute) ListNode() (resp interface{}, err error)
-```
-ListNode function lists VultrCompute instances.
-
-```
-func (vultrCompute *VultrCompute) RebootNode(request interface{}) (resp interface{}, err error)
-```
-RebootNode function reboots a VultrCompute instance.
-
-```
-func (vultrCompute *VultrCompute) StartNode(request interface{}) (resp interface{}, err error)
-```
-StartNode function starts a VultrCompute instance.
-
-```
-func (vultrCompute *VultrCompute) StopNode(request interface{}) (resp interface{}, err error)
-```
-StopNode function stops a VultrCompute instance.
-
-```
 type CreateNode struct {
     DCID      int // Location to create this virtual machine in.  See v1/regions/list
     VPSPLANID int // Plan to use when creating this virtual machine.  See v1/plans/list
@@ -112,6 +77,13 @@ func (b *CreateNodeBuilder) UserData(userdata string) *CreateNodeBuilder
 
 func (b *CreateNodeBuilder) VPSPLANID(vPSPLANID int) *CreateNodeBuilder
 
+type CreateNodeResp struct {
+    StatusCode int
+    SUBID      string
+}
+
+func ParseCreateNodeResp(resp interface{}) (createNodeResp CreateNodeResp, err error)
+
 type DeleteNode struct {
     SUBID int // Unique identifier for this subscription.  These can be found using the v1/server/list call.
 }
@@ -172,5 +144,29 @@ func NewStartNodeBuilder() *StartNodeBuilder
 func (b *StartNodeBuilder) Build() (map[string]interface{}, error)
 
 func (b *StartNodeBuilder) SUBID(sUBID int) *StartNodeBuilder
+
+type VultrCompute struct {
+}
+    VultrCompute struct
+
+func (vultrCompute *VultrCompute) CreateNode(request interface{}) (resp interface{}, err error)
+    CreateNode function creates a new VultrCompute instance.
+
+func (vultrCompute *VultrCompute) DeleteNode(request interface{}) (resp interface{}, err error)
+    DeleteNode function deletes a VultrCompute instance.
+
+func (vultrCompute *VultrCompute) ListNode(request interface{}) (resp interface{}, err error)
+    ListNode function lists VultrCompute instances.
+
+func (vultrCompute *VultrCompute) RebootNode(request interface{}) (resp interface{}, err error)
+    RebootNode function reboots a VultrCompute instance.
+
+func (vultrCompute *VultrCompute) StartNode(request interface{}) (resp interface{}, err error)
+    StartNode function starts a VultrCompute instance.
+
+func (vultrCompute *VultrCompute) StopNode(request interface{}) (resp interface{}, err error)
+    StopNode function stops a VultrCompute instance.
+
+
 
 ```
