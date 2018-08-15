@@ -51,3 +51,11 @@ type Notification interface {
 	DeleteTopic(request interface{}) (resp interface{}, err error)
 	CreateTopic(request interface{}) (resp interface{}, err error)
 }
+
+// Streamdataprocessing module unified API
+type Streamdataprocessing interface {
+	CreateStream(request interface{}) (resp interface{}, err error)
+	DeleteStream(request interface{}) (resp interface{}, err error)
+	ListStream(request interface{}) (resp interface{}, err error)
+	DescribeStream(request interface{}) (resp interface{}, err error)
+}

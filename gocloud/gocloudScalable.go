@@ -55,6 +55,10 @@ type awsProvider interface {
 
 	gocloudinterface.Notification
 	Notification() gocloudinterface.Notification
+
+	gocloudinterface.Streamdataprocessing
+	Streamdataprocessing() gocloudinterface.Streamdataprocessing
+
 }
 
 // AmazonProvider return AWS API to users
@@ -84,6 +88,10 @@ type googleProvider interface {
 
 	gocloudinterface.Notification
 	Notification() gocloudinterface.Notification
+
+	gocloudinterface.Streamdataprocessing
+	Streamdataprocessing() gocloudinterface.Streamdataprocessing
+
 }
 
 // GoogleProvider return Google cloud API to users
