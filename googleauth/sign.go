@@ -27,56 +27,41 @@ type JWT struct {
 
 //SignJWT reperesnts google service account authentication.
 func SignJWT() (client *http.Client) {
-
 	var home string = os.Getenv("HOME")
-
 	data, err := ioutil.ReadFile(home + "/.gocloud" + "/googlecloudconfig.json")
 
 	if err != nil {
 		jwt := JWT{}
-
 		jwt.PrivateKey = os.Getenv("PrivateKey")
-
 		jwt.Type = os.Getenv("Type")
-
 		jwt.ProjectID = os.Getenv("ProjectID")
-
 		jwt.PrivateKeyID = os.Getenv("PrivateKeyID")
-
 		jwt.ClientID = os.Getenv("ClientID")
-
 		jwt.ClientEmail = os.Getenv("ClientEmail")
-
 		jwt.AuthURI = os.Getenv("AuthURI")
-
 		jwt.TokenURI = os.Getenv("TokenURI")
-
 		jwt.AuthProviderX509CertURL = os.Getenv("AuthProviderX509CertURL")
-
 		jwt.ClientX509CertURL = os.Getenv("ClientX509CertURL")
-
 		jwtjson, _ := json.Marshal(jwt)
-
 		jwtjsonstring := string(jwtjson)
-
 		datastr := strings.NewReader(jwtjsonstring)
-
 		data, err = ioutil.ReadAll(datastr)
 		if err != nil {
 			log.Fatal(err)
 		}
 	}
-
+	
 	conf, err := google.JWTConfigFromJSON(data, "https://www.googleapis.com/auth/compute",
 		"https://www.googleapis.com/auth/devstorage.full_control",
 		"https://www.googleapis.com/auth/ndev.clouddns.readwrite",
 		"https://www.googleapis.com/auth/cloud-platform",
 		"https://www.googleapis.com/auth/ndev.clouddns.readonly",
 	)
+	
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	
 	client = conf.Client(oauth2.NoContext)
 	return client
 }
