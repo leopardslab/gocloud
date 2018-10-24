@@ -1,11 +1,7 @@
 package awsauth
 
 import (
-	"encoding/hex"
-	auth "github.com/cloudlibz/gocloud/auth"
-	"net/http"
-	"strings"
-	"time"
+	"encoding/hex", auth "github.com/cloudlibz/gocloud/auth", "net/http", "strings", "time"
 )
 
 func Getrequestsign4(request http.Request, region string, service string) http.Request {
@@ -27,8 +23,7 @@ func Getrequestsign4(request http.Request, region string, service string) http.R
 	date_stamp := t.Format("20060102")
 
 	defaultscontenttype := map[string]string {
-		"Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-		"X-Amz-Date": xamzdate,
+		"Content-Type": "application/x-www-form-urlencoded; charset=utf-8", "X-Amz-Date": xamzdate,
 	}
 
 	for header, value := range defaultscontenttype {
