@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func Getrequestsign4(request *http.Request, region string, service string) *http.Request {
+func Getrequestsign4(request http.Request, region string, service string) http.Request {
 
 	var algorithm string
 	var credentialScope string
@@ -26,18 +26,18 @@ func Getrequestsign4(request *http.Request, region string, service string) *http
 
 	date_stamp := t.Format("20060102")
 
-	defaultscontenttype := map[string]string{
+	defaultscontenttype := map[string]string {
 		"Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-		"X-Amz-Date":   xamzdate,
+		"X-Amz-Date": xamzdate,
 	}
 
 	for header, value := range defaultscontenttype {
-		if request.Header.Get(header) == "" {
+		if request.Header.Get(header) == " " {
 			request.Header.Set(header, value)
 		}
 	}
 
-	if request.URL.Path == "" {
+	if request.URL.Path == " " {
 		request.URL.Path += "/"
 	}
 
