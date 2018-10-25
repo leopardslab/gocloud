@@ -11,7 +11,6 @@ type TokenSource struct {
 	DigiOceanAccessToken string
 }
 
-// Token is a variable of type TokenSource.
 var Token TokenSource
 
 // LoadConfig loads the DigitalOcean credentials.
