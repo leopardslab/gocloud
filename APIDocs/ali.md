@@ -16,4 +16,3 @@ type Ali struct {
 ```
 
 Ali struct represents Ali-cloud provider.
-
