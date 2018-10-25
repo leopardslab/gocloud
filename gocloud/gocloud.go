@@ -15,7 +15,6 @@ import (
 	"github.com/cloudlibz/gocloud/vultr"
 	"github.com/cloudlibz/gocloud/vultrauth"
 )
-
 // Gocloud is a interface which hides the difference between different cloud providers.
 type Gocloud interface {
 	CreateNode(request interface{}) (resp interface{}, err error)
@@ -55,7 +54,6 @@ type Gocloud interface {
 	DescribeTables(request interface{}) (resp interface{}, err error)
 	CreateTables(request interface{}) (resp interface{}, err error)
 }
-
 const (
 	// Amazonprovider represents Amazon cloud.
 	Amazonprovider = "aws"
@@ -81,7 +79,6 @@ const (
 	// Rackspaceprovider reperents rackspace cloud.
 	Vultrprovider = "vultr"
 )
-
 // CloudProvider returns the instance of respective cloud and maps it to
 // Gocloud so that we can call the method like CreateNode on CloudProvider instance.
 // This is a delegation of CloudProvider.
