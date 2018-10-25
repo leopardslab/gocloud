@@ -1,24 +1,24 @@
 package alialianalytics
 
-//CreateDatasets Create Datasets.
+//CreateDatasets
 func (alialianalytics *Alialianalytics) CreateDatasets(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//DeleteDatasets delete Datasets.
+//DeleteDatasets
 func (alialianalytics *Alialianalytics) DeleteDatasets(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//GetDatasets get Datasets.
+//GetDatasets
 func (alialianalytics *Alialianalytics) GetDatasets(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
 }
 
-//UpdateDatasets  Update Datasets.
+//UpdateDatasets
 func (alialianalytics *Alialianalytics) UpdateDatasets(request interface{}) (resp interface{}, err error) {
 
 	return resp, err
