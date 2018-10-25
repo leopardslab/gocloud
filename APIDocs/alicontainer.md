@@ -192,4 +192,3 @@ func (b *StopTaskBuilder) Name(name string) *StopTaskBuilder
 
 func (b *StopTaskBuilder) Timeout(timeout int) *StopTaskBuilder
 ```
-
