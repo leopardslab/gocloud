@@ -7,7 +7,6 @@ import (
 	"time"
 )
 
-//ListResourceDnsRecordSets represents awsdns ListResourceDnsRecordSets.
 func (awsdns *Awsdns) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
@@ -75,7 +74,6 @@ func (awsdns *Awsdns) ListResourceDnsRecordSets(request interface{}) (resp inter
 	return resp, nil
 }
 
-//ListDns ListDns awsdns.
 func (awsdns *Awsdns) ListDns(request interface{}) (resp interface{}, err error) {
 	param := request.(map[string]interface{})
 	var marker string
@@ -130,7 +128,6 @@ func (awsdns *Awsdns) DeleteDns(request interface{}) (resp interface{}, err erro
 	return resp, nil
 }
 
-//CreateDns creates awsdns.
 func (awsdns *Awsdns) CreateDns(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})

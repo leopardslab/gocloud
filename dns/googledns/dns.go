@@ -14,7 +14,6 @@ const (
 	RFC3339  = "2006-01-02T15:04:05Z07:00"
 )
 
-//ListResourceDnsRecordSets list ListResourceDnsRecordSets.
 func (googledns *Googledns) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -60,7 +59,6 @@ func (googledns *Googledns) ListResourceDnsRecordSets(request interface{}) (resp
 	return resp, err
 }
 
-//CreateDns creates DNS.
 func (googledns *Googledns) CreateDns(request interface{}) (resp interface{}, err error) {
 
 	param := request.(map[string]interface{})
@@ -140,7 +138,6 @@ func (googledns *Googledns) CreateDns(request interface{}) (resp interface{}, er
 	return resp, err
 }
 
-//ListDns lists DNS.
 func (googledns *Googledns) ListDns(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -178,7 +175,6 @@ func (googledns *Googledns) ListDns(request interface{}) (resp interface{}, err 
 	return resp, err
 }
 
-//DeleteDns deletes DNS.
 func (googledns *Googledns) DeleteDns(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)

@@ -12,7 +12,6 @@ import (
 // dnsBasePath is the endpoint URL for digitalocean API.
 const dnsBasePath = "https://api.digitalocean.com/v2/domains"
 
-// CreateDns function creates a new DNS record.
 func (digioceandns *Digioceandns) CreateDns(request interface{}) (resp interface{}, err error) {
 
 	var dnsInstance Digioceandns                                     // Initialize LoadBalancer struct
@@ -66,9 +65,9 @@ func (digioceandns *Digioceandns) CreateDns(request interface{}) (resp interface
 			tag, _ := value.(string)
 			dnsInstance.Tag = tag
 
-		} // Closes switch-case
+		}
 
-	} // Closes for loop
+	} 
 
 	dnsInstanceJSON, _ := json.Marshal(dnsInstance)
 	dnsInstanceJSONString := string(dnsInstanceJSON)
@@ -99,7 +98,6 @@ func (digioceandns *Digioceandns) CreateDns(request interface{}) (resp interface
 	return resp, err
 }
 
-// DeleteDns function deletes a DNS record.
 func (digioceandns *Digioceandns) DeleteDns(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -130,7 +128,6 @@ func (digioceandns *Digioceandns) DeleteDns(request interface{}) (resp interface
 	return resp, err
 }
 
-// ListDns function lists DNS records.
 func (digioceandns *Digioceandns) ListDns(request interface{}) (resp interface{}, err error) {
 
 	options := request.(map[string]string)
@@ -161,7 +158,7 @@ func (digioceandns *Digioceandns) ListDns(request interface{}) (resp interface{}
 	return resp, err
 }
 
-// ListResourceDnsRecordSets function lists DNS record sets. DigitalOcean API
+// DigitalOcean API
 // doesn't provide functionality to suppport this function.
 func (digioceandns *Digioceandns) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error) {
 
