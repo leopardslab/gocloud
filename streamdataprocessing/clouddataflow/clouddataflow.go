@@ -3,7 +3,7 @@ package clouddataflow
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
+	_ "fmt"
 	googleauth "github.com/cloudlibz/gocloud/googleauth"
 	"io/ioutil"
 	"net/http"
