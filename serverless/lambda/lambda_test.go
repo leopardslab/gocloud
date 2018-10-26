@@ -2,7 +2,7 @@ package lambda
 
 import "testing"
 import awsAuth "github.com/cloudlibz/gocloud/auth"
-import "fmt"
+// import "fmt"
 
 func init() {
 	awsAuth.LoadConfig()
@@ -12,7 +12,7 @@ func TestDeleteFunction(t *testing.T) {
 
 	var lambda Lambda
 
-	deletedunction := map[string]interface{}{
+	deletefunction := map[string]interface{}{
 		"Region":       "us-east-1",
 		"FunctionName": "gocloud",
 		"Qualifier":    "Qualifier",
@@ -81,20 +81,4 @@ func TestGetFunction(t *testing.T) {
 		t.Errorf("Test Fail")
 	}
 
-}
-
-func TestDeleteFunction(t *testing.T) {
-
-	var lambda Lambda
-
-	deletefunction := map[string]interface{}{
-		"Region":       "us-east-1",
-		"FunctionName": "gocloud2",
-	}
-
-	_, err := lambda.DeleteFunction(deletefunction)
-
-	if err != nil {
-		t.Errorf("Test Fail")
-	}
-}
+} 
