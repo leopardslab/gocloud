@@ -1,9 +1,9 @@
 package digioceanalianalytics
+
 //CreateDatasets Create Datasets.
 func (digioceanalianalytics *Digioceanalianalytics) CreateDatasets(request interface{}) (resp interface{}, err error) {
 	return resp, err
 }
-
 //DeleteDatasets delete Datasets.
 func (digioceanalianalytics *Digioceanalianalytics) DeleteDatasets(request interface{}) (resp interface{}, err error) {
 	return resp, err
