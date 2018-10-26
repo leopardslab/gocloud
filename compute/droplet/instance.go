@@ -125,7 +125,6 @@ func (droplet *Droplet) CreateNode(request interface{}) (resp interface{}, err e
 	resp = CreateNoderesponse
 
 	return resp, err
-
 }
 
 // StartNode function starts a droplet.
@@ -166,7 +165,6 @@ func (droplet *Droplet) StartNode(request interface{}) (resp interface{}, err er
 	resp = StartNoderesponse
 
 	return resp, err
-
 }
 
 // StopNode function stops a droplet.
@@ -207,7 +205,6 @@ func (droplet *Droplet) StopNode(request interface{}) (resp interface{}, err err
 	resp = StopNoderesponse
 
 	return resp, err
-
 }
 
 // RebootNode function reboots a droplet.
@@ -249,7 +246,6 @@ func (droplet *Droplet) RebootNode(request interface{}) (resp interface{}, err e
 	resp = RebootNoderesponse
 
 	return resp, err
-
 }
 
 // DeleteNode function deletes a droplet.
