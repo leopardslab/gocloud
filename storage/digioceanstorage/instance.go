@@ -22,9 +22,8 @@ func (digioceanstorage *Digioceanstorage) CreateDisk(request interface{}) (resp 
 	param = request.(map[string]interface{})
 
 	for key, value := range param {
-
+		
 		switch key {
-
 		case "Name":
 			name, _ := value.(string)
 			storageInstance.Name = name
@@ -44,9 +43,8 @@ func (digioceanstorage *Digioceanstorage) CreateDisk(request interface{}) (resp 
 		case "SnapshotID":
 			snapshotID, _ := value.(string)
 			storageInstance.SnapshotID = snapshotID
-
 		} // Closes switch-case
-
+		
 	} // Closes for loop
 
 	storageInstanceJSON, _ := json.Marshal(storageInstance)
