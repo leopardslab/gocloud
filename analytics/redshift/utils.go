@@ -7,13 +7,11 @@ import (
 	"net/http"
 	"strconv"
 )
-
 func preparedefaultDescribeClusterspram(describeclusterspram map[string]string) {
 
 	describeclusterspram["Action"] = "DescribeClusters"
 	describeclusterspram["Version"] = "2012-12-01"
 }
-
 func prepareDescribeClusterspram(describeclusterspram map[string]string, describecluster Describecluster) {
 
 	if describecluster.clusterIdentifier != "" {
@@ -249,7 +247,6 @@ func preparecreateClusterpram(createClusterpram map[string]string, createCluster
 			createClusterpram[prefix] = createCluster.tagValues[i]
 		}
 	}
-
 }
 
 func preparedefaultDeleteClusterpram(deleteClusterpram map[string]string) {
@@ -275,7 +272,6 @@ func prepareDeleteClusterpram(deleteClusterpram map[string]string, deleteCluster
 	if deleteCluster.skipFinalClusterSnapshot == false {
 		deleteClusterpram["SkipFinalClusterSnapshot"] = "false"
 	}
-
 }
 
 func preparedefaultupdateClusterpram(createClusterpram map[string]string) {
