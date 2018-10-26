@@ -3,7 +3,6 @@ package redshift
 //redshift struct reperesnts aws alianalytics service.
 type Redshift struct {
 }
-
 type Describecluster struct {
 	clusterIdentifier string
 	marker            string
@@ -11,13 +10,11 @@ type Describecluster struct {
 	tagKeys           []string
 	tagValues         []string
 }
-
 type DeleteCluster struct {
 	clusterIdentifier              string
 	finalClusterSnapshotIdentifier string
 	skipFinalClusterSnapshot       bool
 }
-
 type CreateCluster struct {
 	clusterIdentifier                string
 	masterUsername                   string
