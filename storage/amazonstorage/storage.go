@@ -54,7 +54,6 @@ func (amazonstorage *Amazonstorage) CreateDisk(request interface{}) (resp interf
 	}
 	resp = response
 	return resp, nil
-
 }
 
 func (amazonstorage *Amazonstorage) DeleteDisk(request interface{}) (resp interface{}, err error) {
@@ -71,7 +70,6 @@ func (amazonstorage *Amazonstorage) DeleteDisk(request interface{}) (resp interf
 	}
 	resp = response
 	return resp, nil
-
 }
 
 //volumeId, description string
