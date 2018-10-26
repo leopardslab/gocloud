@@ -11,11 +11,8 @@ import (
 func (googlestorage *GoogleStorage) CreateDisk(request interface{}) (resp interface{}, err error) {
 
 	var option Creatdisk
-
 	var Projectid string
-
 	var Zone string
-
 	var Type string
 
 	param := request.(map[string]interface{})
