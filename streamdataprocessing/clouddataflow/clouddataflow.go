@@ -202,7 +202,6 @@ func (clouddataflow *Clouddataflow) UpdateStream(request interface{}) (resp inte
 			environmentparam, _ := value.(map[string]interface{})
 
 			for environmentparamkey, environmentparamvalue := range environmentparam {
-
 				switch environmentparamkey {
 
 				case "Version":
@@ -227,7 +226,6 @@ func (clouddataflow *Clouddataflow) UpdateStream(request interface{}) (resp inte
 					useragentparam, _ := environmentparamvalue.(map[string]interface{})
 
 					for useragentparamkey, useragentparamvalue := range useragentparam {
-
 						switch useragentparamkey {
 
 						case "Name":
@@ -259,13 +257,10 @@ func (clouddataflow *Clouddataflow) UpdateStream(request interface{}) (resp inte
 
 								}
 							}
-
 						}
 					}
-
 				}
 			}
-
 		}
 	}
 
@@ -298,7 +293,6 @@ func (clouddataflow *Clouddataflow) UpdateStream(request interface{}) (resp inte
 	updatestreamresponse["body"] = string(body)
 	resp = updatestreamresponse
 	return resp, err
-
 }
 
 //CreateStream Create Stream
@@ -401,7 +395,6 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
 			environmentparam, _ := value.(map[string]interface{})
 
 			for environmentparamkey, environmentparamvalue := range environmentparam {
-
 				switch environmentparamkey {
 
 				case "Version":
@@ -426,7 +419,6 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
 					useragentparam, _ := environmentparamvalue.(map[string]interface{})
 
 					for useragentparamkey, useragentparamvalue := range useragentparam {
-
 						switch useragentparamkey {
 
 						case "Name":
@@ -458,13 +450,10 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
 
 								}
 							}
-
 						}
 					}
-
 				}
 			}
-
 		}
 	}
 
