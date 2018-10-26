@@ -11,7 +11,6 @@ import (
 
 //CreateDatasets Create Datasets.
 func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{}, err error) {
-
 	param := request.(map[string]interface{})
 	var projectId string
 	var option CreateDatasets
@@ -151,7 +150,6 @@ func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{},
 
 //DeleteDatasets delete Datasets.
 func (bigquery *Bigquery) DeleteDatasets(request interface{}) (resp interface{}, err error) {
-
 	options := request.(map[string]string)
 
 	url := "https://www.googleapis.com/bigquery/v2/projects/" + options["ProjectId"] + "/datasets/" + options["DatasetId"]
@@ -211,7 +209,6 @@ func (bigquery *Bigquery) GetDatasets(request interface{}) (resp interface{}, er
 
 //UpdateDatasets  Update Datasets.
 func (bigquery *Bigquery) UpdateDatasets(request interface{}) (resp interface{}, err error) {
-
 	param := request.(map[string]interface{})
 	var projectId, datasetId string
 	var option CreateDatasets
