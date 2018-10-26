@@ -6,11 +6,10 @@ const (
 )
 
 func createdatasetsdictnoaryconvert(option CreateDatasets, createdatasetsjsonmap map[string]interface{}) {
-
 	if option.defaultTableExpirationMs != "" {
 		createdatasetsjsonmap["defaultTableExpirationMs"] = option.defaultTableExpirationMs
 	}
-
+	
 	if option.defaultTableExpirationMs != "" {
 		createdatasetsjsonmap["defaultTableExpirationMs"] = option.defaultTableExpirationMs
 	}
@@ -52,7 +51,6 @@ func createdatasetsdictnoaryconvert(option CreateDatasets, createdatasetsjsonmap
 }
 
 func preparedatasetReferenceparam(option CreateDatasets, createdatasetsjsonmap map[string]interface{}) {
-
 	datasetReferencejsonmap := make(map[string]interface{})
 
 	if option.datasetReference.projectID != "" {
@@ -67,13 +65,9 @@ func preparedatasetReferenceparam(option CreateDatasets, createdatasetsjsonmap m
 }
 
 func prepareAccessparam(option CreateDatasets, createdatasetsjsonmap map[string]interface{}) {
-
 	if len(option.access) != 0 {
-
 		accessarrayjsonmap := make([]map[string]interface{}, 0)
-
 		for i := 0; i < len(option.access); i++ {
-
 			accessjsonmap := make(map[string]interface{})
 
 			if option.access[i].domain != "" {
@@ -99,7 +93,6 @@ func prepareAccessparam(option CreateDatasets, createdatasetsjsonmap map[string]
 			v := View{}
 
 			if option.access[i].view != v {
-
 				viewjsonmap := make(map[string]interface{})
 
 				if option.access[i].view.datasetID != "" {
@@ -116,7 +109,6 @@ func prepareAccessparam(option CreateDatasets, createdatasetsjsonmap map[string]
 
 				accessjsonmap["view"] = viewjsonmap
 			}
-
 			accessarrayjsonmap = append(accessarrayjsonmap, accessjsonmap)
 		}
 		createdatasetsjsonmap["access"] = accessarrayjsonmap
