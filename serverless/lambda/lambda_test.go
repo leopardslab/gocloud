@@ -18,7 +18,7 @@ func TestDeleteFunction(t *testing.T) {
 		"Qualifier":    "Qualifier",
 	}
 
-	_, err := lambda.DeleteFunction(deletedunction)
+	_, err := lambda.DeleteFunction(deletefunction)
 
 	if err != nil {
 		t.Errorf("Test Fail")
