@@ -3,14 +3,12 @@ package bigquery
 //Bigquery struct reperesnts google analytics service.
 type Bigquery struct {
 }
-
 //View  struct reperesnts CreateDatasets internal struct.
 type View struct {
 	datasetID string `json:"datasetId"`
 	projectID string `json:"projectId"`
 	tableID   string `json:"tableId"`
 }
-
 //Access struct reperesnts CreateDatasets internal struct.
 type Access struct {
 	domain       string `json:"domain"`
@@ -20,13 +18,11 @@ type Access struct {
 	userByEmail  string `json:"userByEmail"`
 	view         View   `json:"view"`
 }
-
 //DatasetReference struct reperesnts CreateDatasets internal struct.
 type DatasetReference struct {
 	datasetID string `json:"datasetId"`
 	projectID string `json:"projectId"`
 }
-
 //CreateDatasets struct reperesnts google bigquery CreateDatasets service struct.
 type CreateDatasets struct {
 	access                   []Access         `json:"access"`
