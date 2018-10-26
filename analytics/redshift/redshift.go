@@ -370,6 +370,5 @@ func (redshift *Redshift) UpdateDatasets(request interface{}) (resp interface{},
 
 //ListDatasets  list Datasets.
 func (redshift *Redshift) ListDatasets(request interface{}) (resp interface{}, err error) {
-
 	return resp, err
 }
