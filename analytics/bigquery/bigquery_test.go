@@ -14,7 +14,6 @@ func TestListDatasets(t *testing.T) {
 		"MaxResults": 1,
 		"PageToken":  "",
 	}
-
 	_, err := bigquery.ListDatasets(listDatasets)
 
 	if err != nil {
@@ -30,7 +29,6 @@ func TestDeleteDatasets(t *testing.T) {
 		"ProjectId": "gocloud-206919",
 		"DatasetId": "gocloudv2",
 	}
-
 	_, err := bigquery.DeleteDatasets(deleteDatasets)
 
 	if err != nil {
@@ -46,7 +44,6 @@ func TestCreateDatasets(t *testing.T) {
 		"DatasetId": "gocloudv4",
 		"ProjectId": "gocloud-206919",
 	}
-
 	createDatasets := map[string]interface{}{
 		"ProjectId":        "gocloud-206919",
 		"Description":      "gocloudv4 created",
@@ -57,7 +54,6 @@ func TestCreateDatasets(t *testing.T) {
 		"Location":         "US",
 		"DatasetReference": datasetReference,
 	}
-
 	_, err := bigquery.CreateDatasets(createDatasets)
 
 	if err != nil {
@@ -73,7 +69,6 @@ func TestUpdateDatasets(t *testing.T) {
 		"DatasetId": "gocloudv3",
 		"ProjectId": "gocloud-206919",
 	}
-
 	updateDatasets := map[string]interface{}{
 		"ProjectId":        "gocloud-206919",
 		"Description":      "gocloudv3 created",
@@ -85,7 +80,6 @@ func TestUpdateDatasets(t *testing.T) {
 		"DatasetReference": datasetReference,
 		"DatasetId":        "gocloudv3",
 	}
-
 	_, err := bigquery.UpdateDatasets(updateDatasets)
 
 	if err != nil {
@@ -102,7 +96,6 @@ func TestGetDatasets(t *testing.T) {
 		"ProjectId": "gocloud-206919",
 		"DatasetId": "gocloudv3",
 	}
-
 	_, err := bigquery.GetDatasets(getDatasets)
 
 	if err != nil {
