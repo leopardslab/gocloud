@@ -35,7 +35,6 @@ func TestDeleteTopic(t *testing.T) {
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
 }
 
 func TestListTopic(t *testing.T) {
