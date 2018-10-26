@@ -1,7 +1,7 @@
 package clouddataflow
 
 import "testing"
-import "fmt"
+// import "fmt"
 
 func TestListStream(t *testing.T) {
 	var clouddataflow Clouddataflow
@@ -25,7 +25,7 @@ func TestDescribeStream(t *testing.T) {
 		"JobId":   "2018-07-27_08_37_46-11774589915372519551",
 	}
 
-	_, err := clouddataflow.DescribeStream(liststream)
+	_, err := clouddataflow.DescribeStream(describestream)
 
 	if err != nil {
 		t.Errorf("Test Fail")
