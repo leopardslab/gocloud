@@ -4,7 +4,6 @@ import "testing"
 import "fmt"
 
 func TestListDatasets(t *testing.T) {
-
 	var bigquery Bigquery
 
 	listDatasets := map[string]interface{}{
@@ -23,7 +22,6 @@ func TestListDatasets(t *testing.T) {
 }
 
 func TestDeleteDatasets(t *testing.T) {
-
 	var bigquery Bigquery
 
 	deleteDatasets := map[string]string{
@@ -39,7 +37,6 @@ func TestDeleteDatasets(t *testing.T) {
 }
 
 func TestCreateDatasets(t *testing.T) {
-
 	var bigquery Bigquery
 
 	datasetReference := map[string]string{
@@ -66,7 +63,6 @@ func TestCreateDatasets(t *testing.T) {
 }
 
 func TestUpdateDatasets(t *testing.T) {
-
 	var bigquery Bigquery
 
 	datasetReference := map[string]string{
@@ -95,7 +91,6 @@ func TestUpdateDatasets(t *testing.T) {
 }
 
 func TestGetDatasets(t *testing.T) {
-
 	var bigquery Bigquery
 
 	getDatasets := map[string]string{
@@ -108,5 +103,4 @@ func TestGetDatasets(t *testing.T) {
 	if err != nil {
 		t.Errorf("Test Fail")
 	}
-
 }
