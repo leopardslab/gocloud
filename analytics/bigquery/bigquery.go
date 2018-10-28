@@ -11,7 +11,6 @@ import (
 
 //CreateDatasets Create Datasets.
 func (bigquery *Bigquery) CreateDatasets(request interface{}) (resp interface{}, err error) {
-
 	param := request.(map[string]interface{})
 	var projectId string
 	var option CreateDatasets
@@ -354,7 +353,6 @@ func (bigquery *Bigquery) UpdateDatasets(request interface{}) (resp interface{},
 
 //ListDatasets  list Datasets.
 func (bigquery *Bigquery) ListDatasets(request interface{}) (resp interface{}, err error) {
-
 	options := request.(map[string]interface{})
 
 	var projectId, pageToken, filter string
