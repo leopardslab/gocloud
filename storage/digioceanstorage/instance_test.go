@@ -10,7 +10,6 @@ func init() {
 }
 
 func TestCreateDisk(t *testing.T) {
-
 	var digioceancloud Digioceanstorage
 
 	create := map[string]interface{}{
@@ -29,7 +28,6 @@ func TestCreateDisk(t *testing.T) {
 }
 
 func TestDeleteDisk(t *testing.T) {
-
 	var digioceancloud Digioceanstorage
 
 	delete := map[string]string{
@@ -60,7 +58,6 @@ func TestCreateSnapshot(t *testing.T) {
 }
 
 func TestDeleteSnapshot(t *testing.T) {
-
 	var digioceancloud Digioceanstorage
 
 	delete := map[string]string{
@@ -92,7 +89,6 @@ func TestAttachDisk(t *testing.T) {
 }
 
 func TestDetachDisk(t *testing.T) {
-
 	var digioceancloud Digioceanstorage
 
 	delete := map[string]interface{}{
