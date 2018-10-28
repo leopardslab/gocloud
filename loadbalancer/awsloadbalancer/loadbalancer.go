@@ -2,7 +2,6 @@ package awsloadbalancer
 
 //CreateLoadBalancer creates classic loadbalancer.
 func (awsloadbalancer *Awsloadbalancer) CreateLoadBalancer(request interface{}) (resp interface{}, err error) {
-
 	var options CreateLoadBalancer
 
 	param := make(map[string]interface{})
@@ -71,7 +70,6 @@ func (awsloadbalancer *Awsloadbalancer) CreateLoadBalancer(request interface{}) 
 
 //DeleteLoadBalancer Delete loadbalancer accept LoadBalancerName.
 func (awsloadbalancer *Awsloadbalancer) DeleteLoadBalancer(request interface{}) (resp interface{}, err error) {
-
 	param := request.(map[string]string)
 
 	params := makeParamsWithVersion("DeleteLoadBalancer")
