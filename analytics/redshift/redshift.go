@@ -2,7 +2,6 @@ package redshift
 
 //CreateDatasets Create Datasets.
 func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{}, err error) {
-
 	var region string
 
 	var createCluster CreateCluster
@@ -124,7 +123,6 @@ func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{},
 		case "VpcSecurityGroupIds":
 			vpcSecurityGroupIds, _ := value.([]string)
 			createCluster.vpcSecurityGroupIds = vpcSecurityGroupIds
-
 		}
 	}
 
@@ -140,7 +138,6 @@ func (redshift *Redshift) CreateDatasets(request interface{}) (resp interface{},
 
 //DeleteDatasets delete Datasets.
 func (redshift *Redshift) DeleteDatasets(request interface{}) (resp interface{}, err error) {
-
 	var region string
 
 	var deleteCluster DeleteCluster
@@ -177,12 +174,10 @@ func (redshift *Redshift) DeleteDatasets(request interface{}) (resp interface{},
 	resp, err = PrepareSignaturequery(deleteClusterpram, region)
 
 	return resp, err
-
 }
 
 //GetDatasets get Datasets.
 func (redshift *Redshift) GetDatasets(request interface{}) (resp interface{}, err error) {
-
 	var region string
 
 	var describecluster Describecluster
@@ -232,7 +227,6 @@ func (redshift *Redshift) GetDatasets(request interface{}) (resp interface{}, er
 
 //UpdateDatasets  Update Datasets.
 func (redshift *Redshift) UpdateDatasets(request interface{}) (resp interface{}, err error) {
-
 	var region string
 
 	var createCluster CreateCluster
@@ -370,6 +364,5 @@ func (redshift *Redshift) UpdateDatasets(request interface{}) (resp interface{},
 
 //ListDatasets  list Datasets.
 func (redshift *Redshift) ListDatasets(request interface{}) (resp interface{}, err error) {
-
 	return resp, err
 }
