@@ -16,7 +16,6 @@ const (
 
 //ListResourceDnsRecordSets list ListResourceDnsRecordSets.
 func (googledns *Googledns) ListResourceDnsRecordSets(request interface{}) (resp interface{}, err error) {
-
 	options := request.(map[string]string)
 
 	url := "https://www.googleapis.com/dns/v1/projects/" + options["project"] + "/managedZones/" + options["managedZone"] + "/rrsets"
@@ -62,7 +61,6 @@ func (googledns *Googledns) ListResourceDnsRecordSets(request interface{}) (resp
 
 //CreateDns creates DNS.
 func (googledns *Googledns) CreateDns(request interface{}) (resp interface{}, err error) {
-
 	param := request.(map[string]interface{})
 	var Project string
 	var option CreateDns
@@ -142,7 +140,6 @@ func (googledns *Googledns) CreateDns(request interface{}) (resp interface{}, er
 
 //ListDns lists DNS.
 func (googledns *Googledns) ListDns(request interface{}) (resp interface{}, err error) {
-
 	options := request.(map[string]string)
 
 	url := "https://www.googleapis.com/dns/v1/projects/" + options["Project"] + "/managedZones/"
@@ -180,7 +177,6 @@ func (googledns *Googledns) ListDns(request interface{}) (resp interface{}, err 
 
 //DeleteDns deletes DNS.
 func (googledns *Googledns) DeleteDns(request interface{}) (resp interface{}, err error) {
-
 	options := request.(map[string]string)
 
 	url := "https://www.googleapis.com/dns/v1/projects/" + options["Project"] + "/managedZones/" + options["managedZone"]
