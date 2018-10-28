@@ -17,7 +17,6 @@ const (
 
 //DescribeStream Describe Stream
 func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp interface{}, err error) {
-
 	options := request.(map[string]string)
 
 	url := "https://dataflow.googleapis.com/v1b3/projects/" + options["Project"] + "/jobs/" + options["JobId"]
@@ -51,7 +50,6 @@ func (clouddataflow *Clouddataflow) DescribeStream(request interface{}) (resp in
 
 //ListStream ListStream
 func (clouddataflow *Clouddataflow) ListStream(request interface{}) (resp interface{}, err error) {
-
 	options := request.(map[string]string)
 
 	url := "https://dataflow.googleapis.com/v1b3/projects/" + options["Project"] + "/jobs"
@@ -104,7 +102,6 @@ func (clouddataflow *Clouddataflow) DeleteStream(request interface{}) (resp inte
 
 //DescribeStream Describe Stream
 func (clouddataflow *Clouddataflow) UpdateStream(request interface{}) (resp interface{}, err error) {
-
 	param := request.(map[string]interface{})
 	var jobId string
 	var option Createstream
@@ -171,7 +168,6 @@ func (clouddataflow *Clouddataflow) UpdateStream(request interface{}) (resp inte
 			option.TempFiles = tempFilesv
 
 		case "StageStates":
-
 			stageStatesparam, _ := value.([]map[string]interface{})
 
 			for i := 0; i < len(stageStatesparam); i++ {
@@ -198,7 +194,6 @@ func (clouddataflow *Clouddataflow) UpdateStream(request interface{}) (resp inte
 			}
 
 		case "Environment":
-
 			environmentparam, _ := value.(map[string]interface{})
 
 			for environmentparamkey, environmentparamvalue := range environmentparam {
@@ -206,7 +201,6 @@ func (clouddataflow *Clouddataflow) UpdateStream(request interface{}) (resp inte
 				switch environmentparamkey {
 
 				case "Version":
-
 					versionparam, _ := environmentparamvalue.(map[string]interface{})
 
 					for versionparamkey, versionparamvalue := range versionparam {
@@ -223,7 +217,6 @@ func (clouddataflow *Clouddataflow) UpdateStream(request interface{}) (resp inte
 					}
 
 				case "UserAgent":
-
 					useragentparam, _ := environmentparamvalue.(map[string]interface{})
 
 					for useragentparamkey, useragentparamvalue := range useragentparam {
@@ -259,13 +252,10 @@ func (clouddataflow *Clouddataflow) UpdateStream(request interface{}) (resp inte
 
 								}
 							}
-
 						}
 					}
-
 				}
 			}
-
 		}
 	}
 
@@ -303,7 +293,6 @@ func (clouddataflow *Clouddataflow) UpdateStream(request interface{}) (resp inte
 
 //CreateStream Create Stream
 func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp interface{}, err error) {
-
 	param := request.(map[string]interface{})
 	var View string
 	var option Createstream
@@ -397,7 +386,6 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
 			}
 
 		case "Environment":
-
 			environmentparam, _ := value.(map[string]interface{})
 
 			for environmentparamkey, environmentparamvalue := range environmentparam {
@@ -422,7 +410,6 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
 					}
 
 				case "UserAgent":
-
 					useragentparam, _ := environmentparamvalue.(map[string]interface{})
 
 					for useragentparamkey, useragentparamvalue := range useragentparam {
@@ -458,13 +445,10 @@ func (clouddataflow *Clouddataflow) CreateStream(request interface{}) (resp inte
 
 								}
 							}
-
 						}
 					}
-
 				}
 			}
-
 		}
 	}
 
