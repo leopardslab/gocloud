@@ -2,6 +2,7 @@ package gocloud
 
 import (
 	"fmt"
+
 	"github.com/cloudlibz/gocloud/ali"
 	aliAuth "github.com/cloudlibz/gocloud/aliauth"
 	awsAuth "github.com/cloudlibz/gocloud/auth"
@@ -12,6 +13,7 @@ import (
 	"github.com/cloudlibz/gocloud/google"
 	"github.com/cloudlibz/gocloud/openstack"
 	"github.com/cloudlibz/gocloud/rackspace"
+	"github.com/cloudlibz/gocloud/rackspaceauth"
 	"github.com/cloudlibz/gocloud/vultr"
 	"github.com/cloudlibz/gocloud/vultrauth"
 )
@@ -112,6 +114,7 @@ func CloudProvider(provider string) (Gocloud, error) {
 		return new(ali.Ali), nil
 
 	case Rackspaceprovider:
+		rackspaceauth.LoadConfigAndAuthenticate()
 		return new(rackspace.Rackspace), nil
 
 	case Vultrprovider:
