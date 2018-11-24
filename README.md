@@ -5,11 +5,13 @@
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-ff006f.svg?style=flat-square)](https://gitter.im/cloudlibz/gocloud)
 [![docs](https://camo.githubusercontent.com/df8e028288079a740c10e6cfaad2fa0e0c96014d/687474703a2f2f696d672e736869656c64732e696f2f62616467652f446f63732d6c61746573742d677265656e2e737667)](docs)
 
-# gocloud: Cloud services library.
+# gocloud
 
 GoCloud is a golang library which hides the difference between different APIs provided by varied cloud providers (AWS, GCP, OpenStack etc.) and allows you to manage different cloud resources through a unified and easy to use API.
 
-<img src="assets/gocloudarchitecture_new.jpg" width="650">
+
+<img src="assets/gocloudarchitecture.png" style="align: center;">
+
 
 ## Service Types
 
@@ -65,7 +67,10 @@ GoCloud is a golang library which hides the difference between different APIs pr
 
 Currently, implementations for other cloud providers are being worked on.
 
-## Installation instructions for Linux (Ubuntu)
+## Install
+
+### Linux (Ubuntu)
+
 1. Install golang.  
    ```
    $ sudo apt-get update -y
