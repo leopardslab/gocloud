@@ -42,7 +42,7 @@ func LoadConfigAndAuthenticate() {
 		Token.RackSpaceAPIKey = os.Getenv("RackSpaceAPIKey")
 		Token.RackSpaceUsername = os.Getenv("RackSpaceUsername")
 		if Token.RackSpaceAPIKey == "" || Token.RackSpaceUsername == "" {
-			log.Fatalln("Cannot get access token for DigitalOcean.")
+			log.Fatalln("Cannot get access token for RackSpace.")
 		}
 	}
 
