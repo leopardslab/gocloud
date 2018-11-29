@@ -9,7 +9,13 @@
 
 GoCloud is a golang library which hides the difference between different APIs provided by varied cloud providers (AWS, GCP, OpenStack etc.) and allows you to manage different cloud resources through a unified and easy to use API.
 
-<img src="assets/gocloudarchitecture.png" style="align: center;">
+
+
+
+
+
+<img src="assets/gocloudarchitecture_new.jpg" width="650">
+
 
 ## Service Types
 
