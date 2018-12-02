@@ -65,12 +65,12 @@ func (rackspacecompute *Rackspacecompute) CreateNode(request interface{}) (resp 
 	createNodereq.Header.Set("Content-Type", "application/json")
 	createNodereq.Header.Set("X-Auth-Token", rackSpaceAuthToken)
 
-	createNoderesp, err := http.DefaultClient.Do(CreateNodereq)
+	createNoderesp, err := http.DefaultClient.Do(createNodereq)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	defer CreateNoderesp.Body.Close()
+	defer createNoderesp.Body.Close()
 
 	responseBody, err := ioutil.ReadAll(createNoderesp.Body)
 	createNoderesponse := make(map[string]interface{})
