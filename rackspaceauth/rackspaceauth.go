@@ -16,6 +16,13 @@ type TokenSource struct {
 	RackSpaceAuthToken  string
 	RackSpaceAPIKey     string
 	RackSpaceUsername   string
+	Endpoints           map[string][]Endpoint
+}
+
+// Endpoint represents the enpoint of a particular service
+type Endpoint struct {
+	URL    string `json:"publicURL"`
+	Region string `json:"region"`
 }
 
 // Token is a variable of type TokenSource.
@@ -86,6 +93,12 @@ func LoadConfigAndAuthenticate() {
 	}
 	accessJSON := respJSON["access"].(map[string]interface{})
 	tokenJSON := accessJSON["token"].(map[string]interface{})
+	serviceCatalogJSON := accessJSON["serviceCatalog"].([]map[string]interface{})
+	for _, service := range serviceCatalogJSON {
+		endpointsBytes, _ := json.Marshal(service["endpoints"].([]map[string]interface{}))
+		serviceName := service["name"].(string)
+		json.Unmarshal(endpointsBytes, Token.Endpoints[serviceName])
+	}
 	Token.RackSpaceAuthToken = tokenJSON["id"].(string)
 	tenantJSON := tokenJSON["tenant"].(map[string]interface{})
 	Token.RackSpaceTenantID = tenantJSON["id"].(string)
