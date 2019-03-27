@@ -5,10 +5,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
 	"io/ioutil"
 	"net/http"
 	"strconv"
+
+	digioceanAuth "github.com/cloudlibz/gocloud/digioceanauth"
 )
 
 // dropletBasePath is the endpoint URL for digitalocean API.
